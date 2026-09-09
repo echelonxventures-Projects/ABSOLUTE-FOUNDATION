@@ -260,3 +260,19 @@ def test_location_replay_command(capsys: pytest.CaptureFixture[str]) -> None:
     assert code == 0
     assert payload["fixed_point"] is True
     assert payload["drifted"] == []
+
+
+def test_evidence_writes_the_document_without_an_index_when_none_is_asked_for(
+    capsys: pytest.CaptureFixture[str], tmp_path
+) -> None:
+    """``--index-out`` is OPTIONAL, and the arm that skips it had never run — every existing
+    evidence test asks for both. A caller writing only the full document must not have an
+    index written beside it under a name they never supplied."""
+    out = tmp_path / "evidence.json"
+    code, payload = _run(capsys, "evidence", "--out", str(out))
+
+    assert code in (0, 1)
+    assert out.exists()
+    assert payload["wrote"] == str(out)
+    assert payload["index"]
+    assert not list(tmp_path.glob("index*.json"))

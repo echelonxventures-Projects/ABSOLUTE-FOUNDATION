@@ -8,10 +8,12 @@ the frozen corpus.
 
 from __future__ import annotations
 
+import dataclasses
 from pathlib import Path
 
 import pytest
 
+from engine.context import certification as certification_module
 from engine.context.certification import (
     CERTIFICATION_DIMENSIONS,
     VERDICT_CERTIFIED,
@@ -21,9 +23,11 @@ from engine.context.certification import (
     certify,
     require_certified,
 )
+from engine.context.composition import compose
 from engine.context.errors import ContextCertificationError, ContextEvidenceError
 from engine.context.evidence import (
     EVIDENCE_VERSION,
+    _assert_writable,
     build_evidence,
     evidence_index,
     evidence_json,
@@ -218,3 +222,102 @@ def test_write_evidence_refuses_the_frozen_corpus(universal_registry: ContextReg
         write_evidence(
             build_evidence(universal_registry), repo_root / "00-BOOK" / "context-evidence.json"
         )
+
+
+def test_the_determinism_dimension_names_each_seal_that_does_not_reproduce(
+    universal_registry: ContextRegistry, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A DOUBLE-BUILD IN MINIATURE, and every one of its four refusals was dead — because
+    this repository's seals ARE stable, which is the point of certifying them.
+
+    Four separate messages, because four different things can stop reproducing: the registry
+    seal, the graph seal, the composition seal, and the composition IDENTITY. The last two
+    are not the same claim — a composition can hash identically and be assigned a different
+    id, which would make two certificates point at one artifact under two names.
+    """
+
+    seals = iter(("first", "second"))
+    monkeypatch.setattr(type(universal_registry), "seal", lambda self: next(seals), raising=False)
+    stable, detail = certification_module._determinism(universal_registry, None)
+    assert not stable
+    assert "registry seal is not stable" in detail
+
+    graph_seals = iter(("g1", "g2"))
+
+    class _Unstable:
+        @staticmethod
+        def seal() -> str:
+            return next(graph_seals)
+
+    monkeypatch.setattr(type(universal_registry), "seal", lambda self: "steady", raising=False)
+    monkeypatch.setattr(certification_module, "build_context_graph", lambda _r: _Unstable())
+    stable, detail = certification_module._determinism(universal_registry, None)
+    assert not stable
+    assert "graph seal is not stable" in detail
+
+
+def test_the_determinism_dimension_separates_an_unstable_seal_from_an_unstable_identity(
+    universal_registry: ContextRegistry, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The composition half. Recomposing from the same members must yield the same bytes AND
+    the same identity; reporting one message for both would leave a reader unable to tell a
+    content drift from an identity drift, which are fixed in different places."""
+
+    composed = compose(universal_registry)
+
+    monkeypatch.setattr(
+        certification_module,
+        "compose",
+        lambda *a, **k: dataclasses.replace(composed, content_hash="0" * 64),
+    )
+    stable, detail = certification_module._determinism(universal_registry, composed)
+    assert not stable
+    assert "composition seal is not stable" in detail
+
+    monkeypatch.setattr(
+        certification_module,
+        "compose",
+        lambda *a, **k: dataclasses.replace(composed, composition_id="UCOS-CTXC-fabricated"),
+    )
+    stable, detail = certification_module._determinism(universal_registry, composed)
+    assert not stable
+    assert "composition identity is not stable" in detail
+
+
+def test_writing_evidence_inside_the_repository_but_outside_the_freeze_is_allowed() -> None:
+    """THE GUARD HAS TWO ANSWERS AND ONLY THE REFUSAL HAD A TEST.
+
+    Every other evidence test writes under ``tmp_path``, which takes the "outside the
+    repository entirely" early return — so the permitted in-repository case, which is what a
+    real invocation writing into the runtime directory takes, was never exercised. A guard
+    that refused every in-repository path would look correct from a suite that only ever
+    writes outside it.
+    """
+
+    repo_root = Path(__file__).resolve().parents[3]
+    _assert_writable(repo_root / ".runtime" / "context" / "evidence.json")
+
+    with pytest.raises(ContextEvidenceError, match="frozen corpus"):
+        _assert_writable(repo_root / "00-BOOK" / "evidence.json")
+
+
+def test_a_rehydrated_certificate_keeps_the_seal_it_was_given(
+    universal_registry: ContextRegistry,
+) -> None:
+    """A certificate is stored evidence. Resealing it on read would make it verify against
+    itself rather than against the context set it certified, which is the one comparison a
+    stored certificate exists to allow."""
+    built = certify(universal_registry)
+    assert built.content_hash
+
+    rehydrated = type(built)(
+        **{
+            **{
+                field: getattr(built, field)
+                for field in built.__dataclass_fields__
+                if field != "content_hash"
+            },
+            "content_hash": "0" * 64,
+        }
+    )
+    assert rehydrated.content_hash == "0" * 64, "the seal was recomputed on rehydration"

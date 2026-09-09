@@ -8,6 +8,8 @@ identity is deterministic so a runtime trace is comparable across runs.
 
 from __future__ import annotations
 
+import dataclasses
+
 import pytest
 
 from engine.context.composition import compose
@@ -22,6 +24,7 @@ from engine.context.graph import (
 from engine.context.registry import ContextRegistry
 from engine.context.runtime import (
     ContextRuntime,
+    _reachable_frames,
     activate,
     current,
     current_context,
@@ -276,3 +279,76 @@ def test_module_level_helpers(composed: object) -> None:
 
 def test_can_reference_without_an_active_context() -> None:
     assert ContextRuntime().can_reference("a", "b") is False
+
+
+def test_reachability_visits_a_shared_node_once_and_never_returns_to_its_origin(
+    universal_registry: ContextRegistry,
+) -> None:
+    """TWO GUARDS, TWO DIFFERENT LOOPS, and a well-formed context set trips neither.
+
+    ``current in seen`` is what stops a DIAMOND — two contexts depending on one shared
+    context — from being walked twice; ``current == start`` is what stops a CYCLE from
+    putting a context into its own blast radius, which would make every context in a cycle
+    report itself as something a change to itself would reach.
+    """
+    records = universal_registry.records()
+    top, left, right, shared = (r.context_id for r in records[:4])
+    for source, target in ((top, left), (top, right), (left, shared), (right, shared)):
+        universal_registry.relate(relation=ContextRelation.DEPENDS_ON, source=source, target=target)
+
+    graph = build_context_graph(universal_registry)
+    reached = graph.impact_of(shared)
+
+    assert set(reached) >= {top, left, right}
+    assert len(reached) == len(set(reached))
+    assert shared not in reached, "a context reached itself"
+
+
+def test_activating_a_composition_with_no_members_is_refused(
+    universal_registry: ContextRegistry,
+) -> None:
+    """AN EMPTY COMPOSITION ADMITS EVERYTHING. Every admissibility question below this one —
+    universal coverage, isolation, frame binding — is vacuously true over no members, so an
+    empty activation would report a fully covered runtime that carries no context at all."""
+
+    composed = compose(universal_registry)
+    empty = dataclasses.replace(composed, members=())
+
+    # ``activate`` is a context manager, so the refusal happens on entry; ``bind`` is the
+    # same admissibility check without the block, and both must refuse.
+    with pytest.raises(ContextRuntimeError, match="cannot activate an empty composition"):
+        ContextRuntime().bind(empty)
+    with pytest.raises(ContextRuntimeError, match="cannot activate an empty composition"):
+        with ContextRuntime().activate(empty):
+            pass
+
+
+def test_a_federated_target_outside_the_composition_widens_no_frame(
+    universal_registry: ContextRegistry,
+) -> None:
+    """A FEDERATION MAY ONLY WIDEN INTO A FRAME THE COMPOSITION ACTUALLY HOLDS.
+
+    ``_reachable_frames`` is what bounds where an active composition may narrow to, and it is
+    built by resolving each federated target to its frame. A target the composition does not
+    carry resolves to nothing, and adding that nothing would put ``None`` into the reachable
+    set — after which every frame comparison against it would be a comparison with a value
+    that is not a frame. The target is skipped, so the bound stays a set of real frames.
+    """
+
+    composed = compose(universal_registry)
+    frame = composed.reference_frames[0]
+    assert composed.frame_of("UCOS-CTX-not-in-this-composition") is None
+
+    widened = dataclasses.replace(
+        composed,
+        reference_frames=(
+            dataclasses.replace(
+                frame, federated=("UCOS-CTX-not-in-this-composition", frame.universe_id)
+            ),
+            *composed.reference_frames[1:],
+        ),
+    )
+    reachable = _reachable_frames(widened)
+
+    assert None not in reachable
+    assert frame.context_id in reachable

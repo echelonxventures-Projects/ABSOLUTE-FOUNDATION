@@ -12,14 +12,19 @@ the happy path is a test that will pass on the day the architecture stops workin
 
 from __future__ import annotations
 
+import inspect
+
 import pytest
 
+from engine.context import location
+from engine.context import location as location_module
 from engine.context.errors import ContextValidationError, TaxonomyError
 from engine.context.location import (
     AXIS_DERIVATION,
     AXIS_GRAPH,
     FRAME_NAMESPACE,
     LOCATION,
+    REALITY_CONTEXT_AXES,
     UNRESOLVED,
     FrameRegistry,
     LocationResolution,
@@ -41,10 +46,11 @@ from engine.context.location import (
     load_catalog,
     location_determined_axes,
     register_resolution,
+    require_reality_context,
     to_document,
 )
 from engine.context.taxonomy import UNIVERSAL_TAXONOMY, ContextAuthority
-from engine.registry.universal.identity import parse_kind_name
+from engine.registry.universal.identity import deterministic_id, is_well_formed, parse_kind_name
 
 
 @pytest.fixture
@@ -332,9 +338,6 @@ def test_a_new_frame_needs_no_code_change():
 
 def test_no_axis_value_appears_in_the_module_source():
     """AC-001, checked mechanically: every resolved value traces to the catalogue."""
-    import inspect
-
-    from engine.context import location
 
     source = inspect.getsource(location)
     catalog = build_frame_registry()
@@ -449,8 +452,6 @@ def test_two_frames_project_to_different_seals(frames: FrameRegistry):
 
 
 def test_every_assigned_identifier_parses_under_the_one_grammar(frames: FrameRegistry):
-    from engine.registry.universal.identity import deterministic_id, is_well_formed
-
     tuples = identity_tuples(frames)
     assert tuples
     for kind, namespace, natural_key in tuples:
@@ -459,16 +460,12 @@ def test_every_assigned_identifier_parses_under_the_one_grammar(frames: FrameReg
 
 
 def test_no_two_subjects_claim_one_identifier(frames: FrameRegistry):
-    from engine.registry.universal.identity import deterministic_id
-
     tuples = identity_tuples(frames)
     minted = [deterministic_id(*t) for t in tuples]
     assert len(set(minted)) == len(minted)
 
 
 def test_the_context_identity_agrees_with_the_registry(frames: FrameRegistry):
-    from engine.registry.universal.identity import deterministic_id
-
     registry = build_context_registry("planetary-a1", frames=frames)
     registered = {record.context_id for record in registry.records()}
     for kind, namespace, natural_key in identity_tuples(frames):
@@ -520,3 +517,123 @@ def test_declarations_carry_the_declared_authority(frames: FrameRegistry):
     assert declarations
     for declaration in declarations:
         assert declaration.authority is ContextAuthority.CONSTITUTIONAL
+
+
+# --------------------------------------------------------------------------- #
+# The registry's own guards, and the reality-context refusal                   #
+# --------------------------------------------------------------------------- #
+
+
+def test_a_frame_that_would_close_a_cycle_is_removed_again_before_the_refusal():
+    """REGISTRATION IS ATOMIC. The chain can only be walked once the frame is in the map, so
+    the frame is inserted, the chain is walked, and a cycle unwinds the insertion before the
+    error escapes. Without the rollback a refused registration would leave the cycle in the
+    registry, and every later chain walk — including ones about unrelated frames — would
+    raise for a frame the caller was told had not been registered.
+    """
+    registry = FrameRegistry(
+        [
+            ReferenceFrame(key="root", title="root", frame_kind="physical"),
+            ReferenceFrame(key="child", title="child", frame_kind="physical", parent="root"),
+        ]
+    )
+    # Close the loop by pointing the root at its own descendant.
+    registry._frames["root"] = ReferenceFrame(  # noqa: SLF001 - deliberate corruption
+        key="root", title="root", frame_kind="physical", parent="child"
+    )
+
+    with pytest.raises(ContextValidationError, match="cycle in the reference frame tree"):
+        registry.register(
+            ReferenceFrame(key="leaf", title="leaf", frame_kind="physical", parent="child")
+        )
+    assert not registry.has("leaf"), "the refused frame was left in the registry"
+    assert len(registry) == 2
+
+
+def test_frames_can_be_registered_in_one_call_and_membership_is_askable():
+    """``register_all`` is the bulk form every catalogue load takes, and ``has`` is how a
+    caller asks about a frame without provoking the refusal that ``frame`` raises. Only the
+    raising accessor had a test, which left "is this registered" answerable only by catching
+    an exception — the shape that makes callers write bare excepts."""
+    registry = FrameRegistry()
+    registered = registry.register_all(
+        [
+            ReferenceFrame(key="a", title="A", frame_kind="physical"),
+            ReferenceFrame(key="b", title="B", frame_kind="physical", parent="a"),
+        ]
+    )
+
+    assert [f.key for f in registered] == ["a", "b"]
+    assert registry.has("a") and registry.has("b")
+    assert not registry.has("never-registered")
+    assert len(registry) == 2
+
+
+def test_a_catalogue_that_is_not_a_frame_list_is_refused():
+    """The catalogue is DATA shipped as package data, and a payload that parses as JSON is
+    not automatically a catalogue. Accepting one without a ``frames`` list would build an
+    empty registry — and an empty frame registry resolves nothing while claiming to have
+    loaded successfully, which is the vacuity every guard in this module exists to refuse."""
+    for wrong in ({}, {"frames": {}}, {"frames": "planetary-a1"}):
+        with pytest.raises(ContextValidationError, match="must carry a 'frames' list"):
+            frames_from_catalog(wrong)
+
+    assert frames_from_catalog(load_catalog())
+
+
+def test_a_resolution_missing_any_reality_axis_may_not_be_interpreted(frames: FrameRegistry):
+    """NO VALUE MAY BE INTERPRETED BEFORE THE REALITY CONTEXT RESOLVES.
+
+    A measurement without an observer, a reality, a place and a time is a number with no
+    referent — the refusal is what stops one being read as though it had one. The gaps are
+    carried on the error rather than summarised, so the caller is told which of the five is
+    missing instead of being told to go and find out.
+    """
+    resolved = frames.resolve("planetary-a1-region-r7")
+    if not resolved.reality_context_gaps:
+        assert require_reality_context(resolved) is resolved
+
+    bare = FrameRegistry([ReferenceFrame(key="bare", title="bare", frame_kind="physical")])
+    unresolved = bare.resolve("bare")
+    assert unresolved.reality_context_gaps
+
+    with pytest.raises(ContextValidationError) as excinfo:
+        require_reality_context(unresolved)
+    assert excinfo.value.context["at"] == "bare"
+    assert set(excinfo.value.context["unresolved"]) == set(unresolved.reality_context_gaps)
+    assert excinfo.value.context["required"] == list(REALITY_CONTEXT_AXES)
+
+
+def test_an_axis_graph_that_declares_a_cycle_has_no_order(monkeypatch: pytest.MonkeyPatch):
+    """The axis order is DERIVED through the single ordering authority rather than written
+    down, which is what makes the derivation graph the only place the sequence lives. The
+    cost is that the graph could declare a cycle, and the refusal is what stops a cyclic
+    declaration from yielding a partial order that resolves some axes and silently drops
+    the rest — an order that is shorter than the axis set and never says so."""
+
+    monkeypatch.setattr(location_module, "AXIS_GRAPH", {"a": ("b",), "b": ("a",)})
+    with pytest.raises(ContextValidationError, match="contains a cycle"):
+        location_module.axis_order()
+
+
+def test_a_package_catalogue_that_is_not_a_frame_list_is_refused(monkeypatch: pytest.MonkeyPatch):
+    """The catalogue ships as PACKAGE DATA, so the guard is about a file that travelled with
+    the release rather than about caller input. A payload that parses as JSON and carries no
+    ``frames`` list would build an empty registry — and an empty frame registry resolves
+    nothing while reporting that it loaded successfully, which is the vacuity every guard in
+    this module exists to refuse."""
+
+    class _Payload:
+        def __init__(self, text: str) -> None:
+            self._text = text
+
+        def joinpath(self, *_parts: str) -> _Payload:
+            return self
+
+        def read_text(self, _encoding: str) -> str:
+            return self._text
+
+    for text in ('{"schema": "x"}', '{"frames": {}}', '["not", "a", "mapping"]'):
+        monkeypatch.setattr(location_module.resources, "files", lambda _p, _t=text: _Payload(_t))
+        with pytest.raises(ContextValidationError, match="must carry a 'frames' list"):
+            location_module.load_catalog()

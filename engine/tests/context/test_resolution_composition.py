@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import pytest
 
+from engine.compiler.partition import UnboundedMemberError
+from engine.context import composition as composition_module
 from engine.context.composition import (
     ComposedContext,
     Federation,
@@ -325,3 +327,45 @@ def test_frames_of_refuses_an_unbounded_binding() -> None:
     assert frames_of({"a": "frame"})[0].context_id == "frame"
     with pytest.raises(ContextCompositionError):
         frames_of({"a": ""})
+
+
+def test_a_member_bound_to_no_frame_is_refused_as_a_composition_error(
+    universal_registry: ContextRegistry, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """THE COMPILER'S ERROR IS TRANSLATED, NOT PROPAGATED.
+
+    Frame partitioning is `engine.compiler.partition`'s job, and an ``UnboundedMemberError``
+    is its vocabulary. Letting it escape would make a caller composing contexts catch an
+    error from a module it never called, and the message would name a partition rather than
+    the composition that asked for one. Both call sites translate it — partitioning and
+    frame resolution — because either can be the first to notice.
+
+    CXL-03 already refuses a registered context with no bounding frame, so a registry that
+    reaches this is one whose records were assembled some other way; the translation is what
+    keeps that a composition error rather than a compiler one.
+    """
+
+    def unbounded(_bindings):
+        raise UnboundedMemberError("member has no frame")
+
+    monkeypatch.setattr(composition_module, "resolve_partitions", unbounded)
+    with pytest.raises(ContextCompositionError, match="not bound to a frame") as excinfo:
+        compose(universal_registry)
+    assert "member has no frame" in excinfo.value.context["detail"]
+
+
+def test_a_frame_resolution_that_finds_an_unbounded_member_is_translated_too(
+    universal_registry: ContextRegistry, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The second call site. ``resolve_frames`` walks the edges as well as the bindings, so
+    it can find a member that partitioning did not — and the caller must see the same error
+    from both, or "not bound to a frame" would mean two different exception types depending
+    on which walk noticed first."""
+
+    def unbounded(*_args, **_kwargs):
+        raise UnboundedMemberError("edge names a member with no frame")
+
+    monkeypatch.setattr(composition_module, "resolve_frames", unbounded)
+    with pytest.raises(ContextCompositionError, match="not bound to a frame") as excinfo:
+        compose(universal_registry)
+    assert "edge names a member with no frame" in excinfo.value.context["detail"]

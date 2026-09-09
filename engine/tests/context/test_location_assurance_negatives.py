@@ -22,6 +22,8 @@ from typing import Any
 
 import pytest
 
+from engine.context import location_assurance
+from engine.context import location_assurance as assurance
 from engine.context.errors import ContextValidationError
 from engine.context.location import (
     FRAME_NAMESPACE,
@@ -148,8 +150,6 @@ def test_a_frame_declaring_an_unregistered_axis_is_reported():
 
 
 def test_a_derivation_graph_without_a_total_order_is_reported(monkeypatch):
-    from engine.context import location_assurance
-
     def no_order(**_kwargs: Any) -> list[str]:
         raise ContextValidationError("the axis derivation graph contains a cycle")
 
@@ -159,16 +159,12 @@ def test_a_derivation_graph_without_a_total_order_is_reported(monkeypatch):
 
 
 def test_a_short_axis_order_is_reported(monkeypatch):
-    from engine.context import location_assurance
-
     monkeypatch.setattr(location_assurance, "axis_order", lambda **_k: [LOCATION])
     findings = _check("LXV-02", _Frames(()))
     assert findings and "axes ordered" in findings[0]
 
 
 def test_an_axis_deriving_from_an_unknown_axis_is_reported(monkeypatch):
-    from engine.context import location_assurance
-
     monkeypatch.setattr(
         location_assurance, "AXIS_DERIVATION", ((LOCATION, ()), ("calendar", ("astrology",)))
     )
@@ -311,8 +307,6 @@ def test_an_unresolved_axis_carrying_a_value_or_a_source_is_reported():
 
 
 def test_a_malformed_assigned_identifier_is_reported(monkeypatch):
-    from engine.context import location_assurance
-
     monkeypatch.setattr(
         location_assurance, "identity_tuples", lambda _f: (("LOCATION", FRAME_NAMESPACE, "k"),)
     )
@@ -322,8 +316,6 @@ def test_a_malformed_assigned_identifier_is_reported(monkeypatch):
 
 
 def test_two_subjects_claiming_one_identifier_are_reported(monkeypatch):
-    from engine.context import location_assurance
-
     monkeypatch.setattr(
         location_assurance,
         "identity_tuples",
@@ -355,7 +347,6 @@ def test_a_resolution_that_is_not_a_fixed_point_is_reported():
 
 def test_an_unregistered_resolved_axis_fails_the_registration_gate(monkeypatch):
     """A projection that registered nothing must fail LXC-07, not pass vacuously."""
-    from engine.context import location_assurance
 
     real = build_frame_registry()
     monkeypatch.setattr(
@@ -372,3 +363,24 @@ def test_an_unregistered_resolved_axis_fails_the_registration_gate(monkeypatch):
 def test_every_rule_returns_a_list_over_the_declared_catalogue(rule: str):
     """No rule raises over real input, and every one returns a reportable list."""
     assert isinstance(LOCATION_RULE_CHECKS[rule](build_frame_registry()), list)
+
+
+def test_an_identifier_that_reproduces_but_is_malformed_is_still_reported(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A GUARD THE MINT MAKES UNREACHABLE, and that is why it is worth keeping.
+
+    The check first asks whether the frame's identifier REPRODUCES — whether minting it again
+    from the frame's key yields the same value. If it does, the identifier came from the mint,
+    and a minted identifier is well-formed by construction, so the second arm can never fire
+    today. It is the arm that would notice the day the mint's own output stopped satisfying
+    the identity authority's shape, which is a change nothing else in this module would catch.
+    """
+
+    registry = build_frame_registry()
+    monkeypatch.setattr(assurance, "is_well_formed", lambda _identifier: False)
+
+    findings = assurance._check_frame_identity(registry)
+    assert findings
+    assert all("identifier is not well-formed" in f for f in findings)
+    assert not any("does not reproduce" in f for f in findings)

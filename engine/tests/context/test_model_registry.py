@@ -25,6 +25,7 @@ from engine.context.errors import (
 )
 from engine.context.model import (
     ContextDeclaration,
+    ContextRecord,
     ContextRelationEdge,
     ContextValue,
     Observer,
@@ -37,6 +38,7 @@ from engine.context.registry import (
     ContextRegistry,
     declarations_from_mapping,
 )
+from engine.context.resolution import ContextRequest, resolve
 from engine.context.taxonomy import ContextAuthority, ContextKind, ContextLifecycle, ContextRelation
 from engine.tests.context.conftest import declaration, spatial_values
 
@@ -387,3 +389,87 @@ def test_declarations_from_mapping_requires_a_source() -> None:
     payload["contexts"][0].pop("source")
     with pytest.raises(ContextRegistrationError):
         declarations_from_mapping(payload)
+
+
+def test_an_audit_entry_whose_own_hash_does_not_reproduce_is_reported(
+    universal_registry: ContextRegistry,
+) -> None:
+    """THREE SEPARATE AUDIT DEFECTS, and only two had a test.
+
+    A wrong sequence is a journal with a gap; a broken previous-hash is a journal somebody
+    spliced; an entry hash that does not reproduce is an entry somebody EDITED IN PLACE while
+    keeping the chain intact around it. The third is the one a chain check alone would miss,
+    which is exactly why it is checked separately.
+    """
+    journal = universal_registry._audit  # noqa: SLF001 - deliberate corruption
+    original = journal[0]
+    object.__setattr__(original, "entry_hash", "0" * 64)
+
+    findings = universal_registry.verify_audit()
+    assert any("entry hash does not reproduce" in f for f in findings)
+
+
+def test_a_rehydrated_record_keeps_the_seal_it_was_given(
+    universal_registry: ContextRegistry,
+) -> None:
+    """A record seals itself when it is built and keeps the seal it is handed when it is read
+    back. Resealing on rehydration would make every stored record verify against itself
+    rather than against the state it was sealed over — and CXL-09, which compares the stored
+    seal with a recomputation, would then be unable to catch anything."""
+    genuine = universal_registry.records()[0]
+    assert genuine.content_hash == genuine.recomputed_hash()
+
+    rehydrated = ContextRecord(
+        context_id=genuine.context_id,
+        kind=genuine.kind,
+        taxon_id=genuine.taxon_id,
+        namespace=genuine.namespace,
+        natural_key=genuine.natural_key,
+        values=genuine.values,
+        authority=genuine.authority,
+        lifecycle=genuine.lifecycle,
+        boundary=genuine.boundary,
+        parent=genuine.parent,
+        description=genuine.description,
+        universal=genuine.universal,
+        content_hash="0" * 64,
+    )
+    assert rehydrated.content_hash == "0" * 64, "the seal was recomputed on rehydration"
+    assert rehydrated.recomputed_hash() == genuine.content_hash
+
+
+def test_a_declaration_renders_the_fields_a_registration_reads() -> None:
+    """``ContextDeclaration.to_dict`` is the wire form a registration is submitted in, and it
+    had no caller. A projection nothing reads can drop a field — and a dropped ``boundary``
+    or ``parent`` would register a context that is unbounded or detached, both of which the
+    constitution then reports as the declaration's fault rather than the projection's."""
+    declared = declaration(natural_key="rendered", boundary="frame-a", parent=None)
+    rendered = declared.to_dict()
+
+    assert rendered["kind"] == declared.kind
+    assert rendered["namespace"] == declared.namespace
+    assert rendered["natural_key"] == "rendered"
+    assert rendered["authority"] == declared.authority.value
+    assert rendered == declared.to_dict(), "the projection is not deterministic"
+
+
+def test_a_rehydrated_resolution_keeps_the_seal_it_was_given(
+    universal_registry: ContextRegistry,
+) -> None:
+    """The same rehydration discipline every sealed record in this package keeps: a stored
+    resolution verifies against the state it was taken over, never against itself."""
+
+    built = resolve(universal_registry, ContextRequest(kind="temporal"))
+    assert built.content_hash
+
+    rehydrated = type(built)(
+        **{
+            **{
+                field: getattr(built, field)
+                for field in built.__dataclass_fields__
+                if field != "content_hash"
+            },
+            "content_hash": "0" * 64,
+        }
+    )
+    assert rehydrated.content_hash == "0" * 64, "the seal was recomputed on rehydration"

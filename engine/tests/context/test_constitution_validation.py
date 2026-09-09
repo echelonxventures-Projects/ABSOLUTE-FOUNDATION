@@ -9,8 +9,11 @@ catch corruption the authority never accepted.
 
 from __future__ import annotations
 
+import dataclasses
+
 import pytest
 
+from engine.context.composition import compose
 from engine.context.constitution import (
     CONTEXT_CONSTITUTION,
     CONTEXT_LAWS,
@@ -38,7 +41,7 @@ from engine.context.validation import (
     ValidationRule,
     validate,
 )
-from engine.tests.context.conftest import declaration, spatial_values
+from engine.tests.context.conftest import declaration, future_taxon, spatial_values
 
 
 def _inject(registry: ContextRegistry, record: ContextRecord) -> None:
@@ -390,3 +393,326 @@ def test_superseded_context_is_reported_as_uncovered(universal_registry: Context
     report = validate(universal_registry)
     assert "CXV-11" in report.rules_failed()
     assert report.is_valid  # coverage is advisory, not a violation
+
+
+# ---------------------------------------------------------------------------------------
+# The law checks that only a MALFORMED ONTOLOGY or a BROKEN REGISTRY can reach
+# ---------------------------------------------------------------------------------------
+
+
+def _ontology_without(registry: ContextRegistry, kind: str):
+    """The registry's ontology with ``kind``'s shape removed, and nothing else changed."""
+
+    class _Narrowed:
+        def __init__(self, real) -> None:
+            self._real = real
+
+        def specifies(self, candidate: str) -> bool:
+            return candidate != kind and self._real.specifies(candidate)
+
+        def __getattr__(self, name: str):
+            return getattr(self._real, name)
+
+    return _Narrowed(registry.ontology)
+
+
+def test_law_01_catches_a_universal_kind_with_no_declared_shape(
+    universal_registry: ContextRegistry, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """REPRESENTABILITY IS A CLAIM ABOUT THE VOCABULARY, not only about the records.
+
+    A universal kind the ontology does not specify is a kind nothing could ever be declared
+    in: every declaration of it would fail value-checking for a reason that names the record
+    rather than the missing shape. The check exists so the gap is reported once, against the
+    vocabulary, and it cannot fire while the shipped ontology specifies all sixteen.
+    """
+    kind = universal_registry.taxonomy.universal_kinds()[0]
+    monkeypatch.setattr(
+        universal_registry, "_ontology", _ontology_without(universal_registry, kind)
+    )
+    assessment = CONTEXT_CONSTITUTION.assess(universal_registry)
+    law = assessment.law("CXL-01")
+
+    assert not law.compliant
+    assert any("no declared ontological shape" in f and kind in f for f in law.findings)
+
+
+def test_law_02_separates_an_unclassified_kind_from_an_unspecified_one(
+    universal_registry: ContextRegistry, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """TWO DIFFERENT GAPS, TWO DIFFERENT MESSAGES, and only the first had a test.
+
+    "Not classified by the taxonomy" means nothing says what this kind IS; "no declared
+    ontological shape" means the taxonomy classifies it and the ontology does not say what
+    it must carry. Bounded extension (CXL-02) requires both, and reporting one message for
+    both would send a reader to the wrong register.
+    """
+    registered = next(iter(universal_registry.kinds()))
+    monkeypatch.setattr(
+        universal_registry, "_ontology", _ontology_without(universal_registry, registered)
+    )
+    law = CONTEXT_CONSTITUTION.assess(universal_registry).law("CXL-02")
+
+    assert not law.compliant
+    assert any(
+        f"registered kind {registered!r} has no declared ontological shape" == f
+        for f in law.findings
+    )
+
+
+def test_law_02_catches_a_future_kind_admitted_without_a_shape(
+    empty_registry: ContextRegistry,
+) -> None:
+    """OPENNESS IS BOUNDED. A future taxon may be admitted at any time, and admitting one
+    whose shape nobody declared would make the classification grow faster than the ontology
+    — a kind that is classified, admissible, and impossible to declare a value in."""
+
+    extended = empty_registry.taxonomy.extend(future_taxon())
+    object.__setattr__(empty_registry, "_taxonomy", extended)
+
+    law = CONTEXT_CONSTITUTION.assess(empty_registry).law("CXL-02")
+    assert not law.compliant
+    assert any("was admitted without a declared shape" in f for f in law.findings)
+
+
+def test_law_04_skips_an_edge_whose_endpoint_the_registry_lost(
+    universal_registry: ContextRegistry,
+) -> None:
+    """A DANGLING EDGE IS CXL-11's FINDING, NOT CXL-04's.
+
+    Frame-crossing is a comparison between two records' boundaries, and an edge with a
+    missing endpoint has no second boundary to compare. Reporting it here would attribute a
+    referential-integrity defect to the federation law, and the reader would go looking for
+    a federation that was never the problem.
+    """
+    records = universal_registry.records()
+    universal_registry.relate(
+        relation=ContextRelation.DEPENDS_ON,
+        source=records[0].context_id,
+        target=records[1].context_id,
+    )
+    del universal_registry._records[records[1].context_id]  # noqa: SLF001 - deliberate corruption
+
+    law = CONTEXT_CONSTITUTION.assess(universal_registry).law("CXL-04")
+    assert law.compliant, law.findings
+
+
+def test_law_09_catches_a_relation_whose_identity_does_not_reproduce(
+    universal_registry: ContextRegistry,
+) -> None:
+    """A GUARD THAT THE EDGE TYPE MAKES UNREACHABLE, and that is worth stating.
+
+    An edge id is DERIVED from the relation and its two endpoints, and ``edge_id`` is a
+    computed property rather than a stored field — so the check recomputes it from the same
+    three values it already holds and the two can never disagree. Records were checked for a
+    fabricated seal because a record STORES its hash; an edge cannot carry one.
+
+    The branch is exercised with a stand-in edge answering a different id, because that is
+    what a rehydrated edge from a wire format would be: the moment ``edge_id`` becomes a
+    persisted field, this check is the thing that notices somebody wrote one by hand.
+    """
+    records = universal_registry.records()
+    universal_registry.relate(
+        relation=ContextRelation.DEPENDS_ON,
+        source=records[0].context_id,
+        target=records[1].context_id,
+    )
+    genuine = universal_registry.relations()[0]
+
+    class _FabricatedId:
+        relation = genuine.relation
+        source = genuine.source
+        target = genuine.target
+        note = genuine.note
+        edge_id = "UCOS-CTXREL-written-by-hand"
+
+    stored = universal_registry._relations  # noqa: SLF001 - deliberate corruption
+    stored[genuine.edge_id] = _FabricatedId()
+
+    law = CONTEXT_CONSTITUTION.assess(universal_registry).law("CXL-09")
+    assert not law.compliant
+    assert any("identity does not reproduce" in f for f in law.findings)
+
+
+def test_law_12_catches_a_supersession_whose_predecessor_was_destroyed(
+    universal_registry: ContextRegistry,
+) -> None:
+    """ZERO AUTHORITY TO DESTROY. A supersession edge is the record that history happened,
+    and the thing it supersedes must still be there — otherwise the edge asserts a past that
+    can no longer be read, which is deletion wearing the shape of an amendment."""
+    records = universal_registry.records()
+    universal_registry.relate(
+        relation=ContextRelation.SUPERSEDES,
+        source=records[0].context_id,
+        target=records[1].context_id,
+    )
+    # A SECOND supersession whose predecessor is intact, so the loop is shown to continue
+    # past a well-formed edge rather than reporting the first one it reaches.
+    universal_registry.relate(
+        relation=ContextRelation.SUPERSEDES,
+        source=records[2].context_id,
+        target=records[3].context_id,
+    )
+    del universal_registry._records[records[1].context_id]  # noqa: SLF001 - deliberate corruption
+
+    law = CONTEXT_CONSTITUTION.assess(universal_registry).law("CXL-12")
+    assert not law.compliant
+    assert any("history was destroyed" in f for f in law.findings)
+
+
+def test_the_constitution_lists_the_laws_it_holds() -> None:
+    """``laws()`` is the accessor a reader enumerates the constitution through. Only
+    ``law(id)`` had a caller, which leaves "how many laws are there, and which" answerable
+    only by asking for each one by a name you already had to know."""
+    listed = CONTEXT_CONSTITUTION.laws()
+
+    assert len(listed) == 12
+    assert [law.law_id for law in listed] == sorted(law.law_id for law in listed)
+    for law in listed:
+        assert CONTEXT_CONSTITUTION.law(law.law_id) is law
+
+
+# ---------------------------------------------------------------------------------------
+# The validation rules that only a corrupted registry reaches
+# ---------------------------------------------------------------------------------------
+
+
+def test_a_record_whose_taxon_is_unclassified_or_classifies_another_kind_is_reported(
+    universal_registry: ContextRegistry,
+) -> None:
+    """TWO CLASSIFICATION DEFECTS, TWO MESSAGES, and the second only reachable past the first.
+
+    A taxon the taxonomy does not hold means nothing says what this context is; a taxon that
+    holds and classifies a DIFFERENT kind means the record cites a classifier that describes
+    something else. Registration prevents both, so this rule reads a registry that was
+    assembled another way — and the `continue` is what stops the second check from being run
+    against a taxon that could not be fetched.
+    """
+    unclassified = _record(universal_registry, taxon_id="CTX-NOBODY-DECLARED")
+    _inject(universal_registry, unclassified)
+    details = [f.detail for f in validate(universal_registry).findings]
+    assert any("is not classified" in d for d in details)
+
+    fresh = ContextRegistry()
+    fresh.register(declaration())
+    mismatched = _record(fresh, taxon_id="CTX-SPATIAL")
+    _inject(fresh, mismatched)
+    details = [f.detail for f in validate(fresh).findings]
+    assert any("classifies 'spatial'" in d and "context is 'temporal'" in d for d in details)
+
+
+def test_a_relation_whose_endpoint_is_gone_is_reported_and_not_ontology_checked(
+    universal_registry: ContextRegistry,
+) -> None:
+    """AN EDGE WITH ONE END IS NOT AN EDGE.
+
+    The relation rule asks the ontology whether a source KIND may relate to a target KIND,
+    and a missing endpoint has no kind to ask about. Reporting the dangling endpoint and
+    stopping is what keeps the ontology answering a question it can answer — the alternative
+    is an `AttributeError` on `None.kind` inside a rule whose message would then name the
+    ontology rather than the missing record.
+    """
+    records = universal_registry.records()
+    universal_registry.relate(
+        relation=ContextRelation.DEPENDS_ON,
+        source=records[0].context_id,
+        target=records[1].context_id,
+    )
+    del universal_registry._records[records[1].context_id]  # noqa: SLF001 - deliberate corruption
+
+    details = [f.detail for f in validate(universal_registry).findings]
+    assert any("endpoint is not registered" in d for d in details)
+
+
+def test_the_validator_lists_the_rules_it_holds() -> None:
+    """``rules()`` is how a reader enumerates what validation actually checks. Without it,
+    "which rules exist" is answerable only by reading the source — and a rule that stopped
+    being registered would be invisible to every consumer that reports coverage of them."""
+    listed = ContextValidator(VALIDATION_RULES).rules()
+
+    assert listed
+    assert [r.rule_id for r in listed] == sorted(r.rule_id for r in listed)
+    assert len({r.rule_id for r in listed}) == len(listed)
+
+
+def test_a_rehydrated_assessment_keeps_the_seal_it_was_given() -> None:
+    """A SEAL IS EVIDENCE, NOT A CONVENIENCE. The report seals itself when it is built and
+    keeps the seal it is handed when it is read back — resealing on rehydration would make
+    every stored report verify against itself and never against the state it was taken over,
+    which is the one comparison a stored seal exists to allow.
+    """
+    built = validate(ContextRegistry())
+    assert built.content_hash
+
+    rehydrated = type(built)(
+        rules=built.rules,
+        findings=built.findings,
+        metrics=dict(built.metrics),
+        content_hash="0" * 64,
+    )
+    assert rehydrated.content_hash == "0" * 64, "the seal was recomputed on rehydration"
+    assert rehydrated.rules == built.rules
+
+
+def test_law_04_catches_a_frame_that_federates_into_itself(
+    universal_registry: ContextRegistry,
+) -> None:
+    """A FEDERATION INTO YOUR OWN FRAME IS NOT A FEDERATION.
+
+    Federation is what authorises a reference ACROSS a frame boundary. A frame naming a
+    target that resolves back into the same frame has authorised nothing — and worse, it
+    reads as authorisation, so a later cross-frame reference could point at it as its
+    warrant. Every composition this repository builds federates outward or not at all, which
+    is why the check had never fired.
+    """
+
+    composed = compose(universal_registry)
+    frame = composed.reference_frames[0]
+    # TWO federated targets: one that resolves back into this frame and one that does not,
+    # so the loop is shown to keep going past a legitimate outward federation rather than
+    # reporting the first target it looks at.
+    outward = (
+        next(
+            f.universe_id for f in composed.reference_frames[1:] if f.context_id != frame.context_id
+        )
+        if any(f.context_id != frame.context_id for f in composed.reference_frames[1:])
+        else "UCOS-CTX-not-in-this-composition"
+    )
+    inward = dataclasses.replace(frame, federated=(outward, frame.universe_id))
+    self_federating = dataclasses.replace(
+        composed, reference_frames=(inward, *composed.reference_frames[1:])
+    )
+    assert self_federating.frame_of(frame.universe_id) == frame.context_id
+
+    law = CONTEXT_CONSTITUTION.assess(universal_registry, composed=self_federating).law("CXL-04")
+    assert not law.compliant
+    assert any("federates into its own frame" in f for f in law.findings)
+
+
+def test_a_relation_between_two_registered_contexts_is_checked_against_the_ontology(
+    universal_registry: ContextRegistry,
+) -> None:
+    """The arm past the dangling-endpoint guard, which every intact edge takes. Only the
+    dangling case had a test, which left the ontology consultation — the part that decides
+    whether one KIND may relate to another — unexecuted by this rule."""
+    records = universal_registry.records()
+    universal_registry.relate(
+        relation=ContextRelation.DEPENDS_ON,
+        source=records[0].context_id,
+        target=records[1].context_id,
+    )
+
+    report = validate(universal_registry)
+    assert not any("endpoint is not registered" in f.detail for f in report.findings)
+
+
+def test_a_rehydrated_constitutional_assessment_keeps_the_seal_it_was_given() -> None:
+    """The same rehydration discipline the validation report keeps. An assessment is stored
+    evidence, and resealing it on read would make it verify against itself rather than
+    against the state it was taken over."""
+    built = CONTEXT_CONSTITUTION.assess(ContextRegistry())
+    assert built.content_hash
+
+    rehydrated = type(built)(laws=built.laws, content_hash="0" * 64)
+    assert rehydrated.content_hash == "0" * 64, "the seal was recomputed on rehydration"
+    assert rehydrated.laws == built.laws

@@ -22,6 +22,7 @@ from engine.context.ontology import (
 from engine.context.taxonomy import (
     ROOT_TAXON,
     UNIVERSAL_KINDS,
+    UNIVERSAL_TAXA,
     UNIVERSAL_TAXONOMY,
     ContextAuthority,
     ContextKind,
@@ -304,3 +305,140 @@ def test_ontology_serialises_deterministically() -> None:
     assert payload == UNIVERSAL_ONTOLOGY.to_dict()
     assert payload["unknown_sentinel"] == UNKNOWN
     assert len(payload["relations"]) == len(ContextRelation)
+
+
+# ---------------------------------------------------------------------------------------
+# The taxonomy's constructor refuses a malformed classification before it is ever consulted
+#
+# CXL-01 says the classification of all context has exactly one root and that every taxon
+# reaches it. That is asserted at CONSTRUCTION rather than by a separate validator, so the
+# refusals live in `__init__` — and because every existing test builds the universal
+# taxonomy or extends it lawfully, not one of them had run. A taxonomy that admitted a
+# cycle would make `_assert_reaches` loop, and one that admitted two roots would make
+# "the classification of all context" two classifications.
+# ---------------------------------------------------------------------------------------
+
+
+def _taxon(taxon_id: str, kind: str, parent: str | None = "CTX-ROOT") -> ContextTaxon:
+    return ContextTaxon(
+        taxon_id=taxon_id,
+        kind=kind,
+        title=f"Taxon {taxon_id}",
+        parent=parent,
+        description="A taxon declared for a refusal test.",
+    )
+
+
+def _root() -> ContextTaxon:
+    return _taxon("CTX-ROOT", "root", parent=None)
+
+
+def test_two_taxa_under_one_identifier_are_refused() -> None:
+    """An identifier is what every registration, relation and evidence record cites. Two
+    taxa sharing one would make every citation ambiguous, and the later declaration would
+    silently win — a redefinition that reads as a registration."""
+    with pytest.raises(TaxonomyError, match="duplicate taxon identifier") as excinfo:
+        ContextTaxonomy((_root(), _taxon("CTX-A", "alpha"), _taxon("CTX-A", "beta")))
+    assert excinfo.value.context["taxon"] == "CTX-A"
+
+
+def test_two_taxa_claiming_one_context_kind_are_refused() -> None:
+    """A KIND HAS EXACTLY ONE CLASSIFIER. Lookup by kind is how a declaration finds its
+    taxon, so two claimants would make that lookup answer arbitrarily — and a context would
+    be classified differently depending on which taxon happened to be indexed last."""
+    with pytest.raises(TaxonomyError, match="same context kind") as excinfo:
+        ContextTaxonomy((_root(), _taxon("CTX-A", "alpha"), _taxon("CTX-B", "alpha")))
+    assert excinfo.value.context["kind"] == "alpha"
+    assert excinfo.value.context["existing"] == "CTX-A"
+
+
+@pytest.mark.parametrize(
+    "taxa",
+    [
+        pytest.param((), id="no-root"),
+        pytest.param(
+            (_root(), ContextTaxon(taxon_id="CTX-OTHER", kind="other", title="t", parent=None)),
+            id="two-roots",
+        ),
+    ],
+)
+def test_a_classification_without_exactly_one_root_is_refused(taxa) -> None:
+    """Zero roots is a forest with no top; two is two classifications wearing one name. Both
+    make "the classification of ALL context" false, and the count is checked rather than the
+    first root being taken."""
+    with pytest.raises(TaxonomyError, match="exactly one root"):
+        ContextTaxonomy(taxa)
+
+
+def test_a_taxon_naming_a_parent_nobody_declared_is_refused() -> None:
+    """OPEN CLASSIFICATION IS NOT UNGROUNDED CLASSIFICATION. A future kind may be admitted
+    at any time, and it still has to attach somewhere — a taxon whose parent does not exist
+    is detached from the tree, so nothing above it governs it."""
+    with pytest.raises(TaxonomyError, match="parent is not a declared taxon") as excinfo:
+        ContextTaxonomy((_root(), _taxon("CTX-ORPHAN", "orphan", parent="CTX-GHOST")))
+    assert excinfo.value.context["parent"] == "CTX-GHOST"
+
+
+def test_a_taxon_that_cannot_reach_the_root_is_refused() -> None:
+    """Reachability is checked for EVERY taxon, not only for the ones just added.
+
+    A branch whose members all name each other satisfies "my parent is declared" and still
+    never reaches the root. It would be a second classification hiding inside the first, and
+    the walk that finds it is the same one every ancestry query uses.
+    """
+    detached = (
+        _root(),
+        _taxon("CTX-A", "alpha", parent="CTX-B"),
+        _taxon("CTX-B", "beta", parent="CTX-A"),
+    )
+    with pytest.raises(TaxonomyError) as excinfo:
+        ContextTaxonomy(detached)
+    assert "cycle in the classification tree" in str(excinfo.value)
+    assert excinfo.value.context["taxon"] in {"CTX-A", "CTX-B"}
+
+
+def test_the_taxonomy_exposes_the_taxa_it_holds() -> None:
+    """The accessor every consumer reads the classification through. A taxonomy whose
+    contents could only be reached one lookup at a time would make "is this classification
+    complete" a question nobody could ask."""
+    taxonomy = ContextTaxonomy()
+    listed = taxonomy.taxa()
+
+    assert len(listed) == len(UNIVERSAL_TAXA)
+    assert {t.taxon_id for t in listed} == {t.taxon_id for t in UNIVERSAL_TAXA}
+    assert listed == taxonomy.taxa(), "the listing is not stable"
+
+
+def test_the_taxonomy_lists_the_identifiers_it_holds() -> None:
+    """``taxon_ids`` is the cheap enumeration — the ids alone, for a consumer that only needs
+    to know what exists. Without it, "which taxa are declared" costs a full object list."""
+    taxonomy = ContextTaxonomy()
+
+    assert taxonomy.taxon_ids() == tuple(t.taxon_id for t in taxonomy.taxa())
+    assert ROOT_TAXON in taxonomy.taxon_ids()
+    assert len(taxonomy.taxon_ids()) == len(taxonomy)
+
+
+def test_a_taxon_whose_chain_ends_somewhere_other_than_the_root_is_refused() -> None:
+    """A WALK THAT ENDS WITHOUT REACHING THE ROOT AND WITHOUT REPEATING ITSELF.
+
+    Constructing that shape is impossible through the constructor — a chain terminating at a
+    parentless taxon means a SECOND root, and the one-root check refuses that first. So the
+    branch is reached by walking a taxonomy mutated after construction, which is the state a
+    caller reaching into ``_taxa`` produces. The two refusals are separate because they mean
+    different things: a cycle is a loop, and this is a detached branch.
+    """
+    taxonomy = ContextTaxonomy(
+        (
+            _root(),
+            _taxon("CTX-A", "alpha"),
+        )
+    )
+    detached = ContextTaxon(
+        taxon_id="CTX-A", kind="alpha", title="A", parent=None, description="detached"
+    )
+    taxonomy._taxa["CTX-A"] = detached  # noqa: SLF001 - deliberate corruption
+
+    with pytest.raises(TaxonomyError, match="does not reach the root") as excinfo:
+        taxonomy._assert_reaches("CTX-A", ROOT_TAXON)  # noqa: SLF001
+    assert excinfo.value.context["taxon"] == "CTX-A"
