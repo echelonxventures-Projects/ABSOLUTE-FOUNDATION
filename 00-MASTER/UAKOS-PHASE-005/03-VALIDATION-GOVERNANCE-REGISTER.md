@@ -21,4 +21,4 @@
 | POPULATE | V-PRE:registry-check \| V-POST:population-evidence |
 | RATIFY | V-PRE:freeze+specified-check \| V-POST:ratification-conformance |
 
-Units requiring in-execution test validation (IMPLEMENT): **46**.
+Units requiring in-execution test validation (IMPLEMENT): **127**.

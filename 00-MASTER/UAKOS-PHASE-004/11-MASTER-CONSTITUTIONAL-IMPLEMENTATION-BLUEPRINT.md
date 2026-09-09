@@ -6,46 +6,47 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-004/phase4_plan.py`.
 
-## WHAT — 109 implementation units
+## WHAT — 183 implementation units
 
 | Unit type | Units |
 |---|---|
 | CERTIFY | 21 |
-| IMPLEMENT | 46 |
+| IMPLEMENT | 127 |
 | POPULATE | 6 |
-| RATIFY | 36 |
+| RATIFY | 29 |
 
 ## WHY — gap + constitutional criticality
 
 | Criticality | Units |
 |---|---|
-| CRITICAL | 33 |
-| HIGH | 62 |
-| MEDIUM | 14 |
+| CRITICAL | 120 |
+| HIGH | 52 |
+| MEDIUM | 11 |
 | LOW | 0 |
 
 ## WHEN / ORDER — execution waves
 
 | Wave | Class | Units |
 |---|---|---|
-| 2 | CRITICAL / Realization | 31 |
-| 3 | CRITICAL / Certification | 2 |
-| 5 | HIGH / Realization | 43 |
-| 6 | HIGH / Certification | 19 |
-| 8 | MEDIUM / Realization | 14 |
+| 2 | CRITICAL / Realization | 117 |
+| 3 | CRITICAL / Certification | 3 |
+| 5 | HIGH / Realization | 34 |
+| 6 | HIGH / Certification | 18 |
+| 8 | MEDIUM / Realization | 11 |
 
 ## WHERE — by capability
 
 | Capability | Units | By type |
 |---|---|---|
-| Operational-Memory | 35 | IMPLEMENT:21; POPULATE:5; RATIFY:9 |
-| Governance/Constitutions | 33 | CERTIFY:4; IMPLEMENT:1; POPULATE:1; RATIFY:27 |
-| Platform | 14 | CERTIFY:3; IMPLEMENT:11 |
-| Applications | 7 | CERTIFY:2; IMPLEMENT:5 |
-| Runtime | 6 | CERTIFY:2; IMPLEMENT:4 |
-| Data | 5 | CERTIFY:4; IMPLEMENT:1 |
-| Infrastructure | 5 | CERTIFY:3; IMPLEMENT:2 |
+| Governance/Constitutions | 114 | CERTIFY:4; IMPLEMENT:87; POPULATE:1; RATIFY:22 |
+| Operational-Memory | 37 | CERTIFY:1; IMPLEMENT:24; POPULATE:5; RATIFY:7 |
+| Platform | 12 | CERTIFY:3; IMPLEMENT:9 |
+| Applications | 6 | CERTIFY:2; IMPLEMENT:4 |
+| Infrastructure | 4 | CERTIFY:3; IMPLEMENT:1 |
 | Services | 4 | CERTIFY:3; IMPLEMENT:1 |
+| Data | 4 | CERTIFY:4 |
+| Knowledge/Registries | 1 | IMPLEMENT:1 |
+| Runtime | 1 | CERTIFY:1 |
 
 ## HOW — per-unit validation + certification plans
 

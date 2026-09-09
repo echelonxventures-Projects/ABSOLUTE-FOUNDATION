@@ -159,7 +159,7 @@
       "kind": "knowledge-object",
       "name": "Canonical knowledge objects",
       "note": "Knowledge Once: extracted knowledge is registered here, never in a register this programme writes",
-      "objects": 158,
+      "objects": 159,
       "pointer": "objects",
       "provider": "PRV-KNOWLEDGE",
       "providers_matched": 1,
@@ -709,7 +709,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 4437,
+    "ckos_discovered": 4438,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -1611,7 +1611,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 4437
+      "value": 4438
     },
     {
       "id": "EK-05",
@@ -5669,7 +5669,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "521f1c0b8ffcab97673308e1c324cdb2d65b1bbae8d1bb18a8d83634eff3620a",
+  "graph_digest": "693444a72f15c70a5fbff224d26d902086b7b1fd4dedac07b00e006ba38c1b8b",
   "graphs": [
     {
       "composed": true,
@@ -7176,7 +7176,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 158,
+        "measure_value": 159,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7184,7 +7184,7 @@
       "invariant": "Universal Knowledge Registration",
       "measure": "count",
       "measure_source": "knowledge/canonical-knowledge.json",
-      "measure_value": 158,
+      "measure_value": 159,
       "ordinal": 280,
       "owner": "knowledge/canonical-knowledge.json",
       "properties": {
@@ -24153,7 +24153,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "2d026676208e38faab7badf2f55fe6560b96360ed0f5497d04b5ae89b775a9ad",
+  "seal_sha256": "aba6940f0a2daa8114e1cf6759adb5e6bd236961e0543573a1c4dd2d9925f073",
   "self_evolution": [
     {
       "anchor": "determination",

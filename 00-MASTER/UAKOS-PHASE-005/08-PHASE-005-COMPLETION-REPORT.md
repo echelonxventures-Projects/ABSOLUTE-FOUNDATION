@@ -10,27 +10,27 @@
 
 | Dimension | Value |
 |---|---|
-| Implementation units (FREEZE D) | 109 |
-| Execution authorizations | 109 (1:1) |
+| Implementation units (FREEZE D) | 183 |
+| Execution authorizations | 183 (1:1) |
 | Execution packages | 20 |
 | Execution waves | 5 |
 | Authorized executor roles | 4 |
-| Governance-release-gated (deferred) | 58 |
+| Governance-release-gated (deferred) | 133 |
 | CERTIFY dual-sign-off units | 21 |
-| FREEZE E seal (sha256) | `35e89e957913be88390b378e27aa2e6374e17e28df088f2d2d1036c36594819d` |
+| FREEZE E seal (sha256) | `2a9578bf3f7e0c7bdbe0eb62f1f73e032669f46936c6a7d5c9ad5d63744085b9` |
 
 ### Authorized executors
 
 | Authorized executor | Units |
 |---|---|
-| Certified Implementation Engine (EC-1) | 46 |
-| Constitutional Governance Authority | 36 |
+| Certified Implementation Engine (EC-1) | 127 |
+| Constitutional Governance Authority | 29 |
 | Constitutional Completeness Engine (CCE) + Certification Authority | 21 |
 | Knowledge Authority | 6 |
 
 ## Method
 
-Reproduced the 109 FREEZE-D units from the PHASE-003R realization model (FREEZE C2), issued one Execution Authorization per unit (executor role, prerequisites, approval/validation/certification gates, rollback), grouped units into immutable Execution Packages by wave × capability, and attached validation, certification, rollback, and risk governance. WHO/WHAT/WHEN/evidence/gates/rollback are all determined from certified evidence only. Nothing implemented; nothing modified.
+Reproduced the 183 FREEZE-D units from the PHASE-003R realization model (FREEZE C2), issued one Execution Authorization per unit (executor role, prerequisites, approval/validation/certification gates, rollback), grouped units into immutable Execution Packages by wave × capability, and attached validation, certification, rollback, and risk governance. WHO/WHAT/WHEN/evidence/gates/rollback are all determined from certified evidence only. Nothing implemented; nothing modified.
 
 ## Outputs (8)
 
@@ -59,6 +59,6 @@ Reproduced the 109 FREEZE-D units from the PHASE-003R realization model (FREEZE 
 
 ## FREEZE E — Implementation Execution Governance
 
-**FREEZE E is CERTIFIED and IMMUTABLE at seal `35e89e957913be88390b378e27aa2e6374e17e28df088f2d2d1036c36594819d`.** The governed execution model (execution authorizations, execution packages, validation/certification/rollback governance, execution readiness) is established. Implementation SHALL NOT begin until FREEZE A+B+C2+D+E are all certified — now satisfied. Every implementation commit SHALL reference its Implementation Unit, Execution Authorization, Execution Package, Validation Evidence, and Certification Evidence, and no implementation may bypass an Execution Authorization. **Controlled implementation execution may now begin.**
+**FREEZE E is CERTIFIED and IMMUTABLE at seal `2a9578bf3f7e0c7bdbe0eb62f1f73e032669f46936c6a7d5c9ad5d63744085b9`.** The governed execution model (execution authorizations, execution packages, validation/certification/rollback governance, execution readiness) is established. Implementation SHALL NOT begin until FREEZE A+B+C2+D+E are all certified — now satisfied. Every implementation commit SHALL reference its Implementation Unit, Execution Authorization, Execution Package, Validation Evidence, and Certification Evidence, and no implementation may bypass an Execution Authorization. **Controlled implementation execution may now begin.**
 
 _READ-ONLY: no implementation, code generation, repository modification, refactor, constitution change, or new knowledge objects were produced._

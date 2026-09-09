@@ -8,8 +8,8 @@
 
 | Freeze | Impact | Basis |
 |---|---|---|
-| FREEZE C (gap baseline) | REVISION REQUIRED | 141 objects change gap category; IMPLEMENTATION_GAP 109→46 |
-| FREEZE D (execution blueprint) | REGENERATION REQUIRED | units built from IMPLEMENTATION_GAP must be rebuilt on realization streams; 71 old impl-units reclassify to non-software |
+| FREEZE C (gap baseline) | REVISION REQUIRED | 136 objects change gap category; IMPLEMENTATION_GAP 173→127 |
+| FREEZE D (execution blueprint) | REGENERATION REQUIRED | units built from IMPLEMENTATION_GAP must be rebuilt on realization streams; 54 old impl-units reclassify to non-software |
 | FREEZE E (execution governance) | REGENERATION REQUIRED | authorizations/packages re-derive from corrected units + streams |
 | FREEZE F (execution authorization) | RE-CERTIFICATION REQUIRED | depends on C/D/E; must re-verify after regeneration |
 | FREEZE A (knowledge) | UNCHANGED | 431 objects unchanged; only realization model added |
@@ -34,10 +34,10 @@
 | UCOS-COMP-001010 | SOFTWARE_ENGINE | Software | IMPLEMENTATION_GAP | IMPLEMENTATION_GAP |
 | UCOS-COMP-009010 | SOFTWARE_ENGINE | Software | IMPLEMENTATION_GAP | IMPLEMENTATION_GAP |
 | UCOS-GOV-000 | GOVERNANCE_DETERMINATION | Governance | IMPLEMENTATION_GAP | RATIFICATION_GAP |
-| UCOS-GOV-001 | GOVERNANCE_DETERMINATION | Governance | IMPLEMENTATION_GAP | RATIFICATION_GAP |
-| UCOS-GOV-003 | GOVERNANCE_DETERMINATION | Governance | IMPLEMENTATION_GAP | RATIFICATION_GAP |
+| UCOS-GOV-001 | GOVERNANCE_DETERMINATION | Governance | NO_GAP | NO_GAP |
+| UCOS-GOV-003 | GOVERNANCE_DETERMINATION | Governance | NO_GAP | NO_GAP |
 | UCOS-GOV-005 | GOVERNANCE_DETERMINATION | Governance | NO_GAP | NO_GAP |
-| Ω∞-001 | CONSTITUTIONAL_LAW | Governance | IMPLEMENTATION_GAP | RATIFICATION_GAP |
+| Ω∞-001 | CONSTITUTIONAL_LAW | Governance | NO_GAP | NO_GAP |
 | Ω∞-002 | CONSTITUTIONAL_LAW | Governance | IMPLEMENTATION_GAP | RATIFICATION_GAP |
 | Ω∞-003 | CONSTITUTIONAL_LAW | Governance | IMPLEMENTATION_GAP | RATIFICATION_GAP |
 | Ω∞-004 | CONSTITUTIONAL_LAW | Governance | IMPLEMENTATION_GAP | RATIFICATION_GAP |

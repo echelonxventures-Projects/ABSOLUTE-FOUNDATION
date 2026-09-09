@@ -109,11 +109,11 @@
 
 | Substrate | Path | Kind | Tracked | Parses | Pointers | Records |
 |---|---|---|---|---|---|---|
-| `S-01` | `00-BOOK/DATA/artifacts.json` | registration projection | YES | YES | 2/2 | 3368 |
-| `S-02` | `00-BOOK/DATA/relationships.json` | graph projection | YES | YES | 2/2 | 27602 |
+| `S-01` | `00-BOOK/DATA/artifacts.json` | registration projection | YES | YES | 2/2 | 3374 |
+| `S-02` | `00-BOOK/DATA/relationships.json` | graph projection | YES | YES | 2/2 | 27614 |
 | `S-03` | `00-BOOK/DATA/control-tower.json` | portfolio projection | YES | YES | 3/3 | 201 |
 | `S-04` | `00-BOOK/DATA/certification.json` | certification projection | YES | YES | 5/5 | 45 |
-| `S-05` | `00-BOOK/DATA/id-ledger.json` | identity ledger | YES | YES | 2/2 | 1952 |
+| `S-05` | `00-BOOK/DATA/id-ledger.json` | identity ledger | YES | YES | 2/2 | 1955 |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | meta-constitutional registry | YES | YES | 9/9 | 166 |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | aggregate gate declaration | YES | YES | 5/5 | 112 |
 | `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | aggregate gate determination | YES | YES | 6/6 | 129 |

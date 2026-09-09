@@ -63,12 +63,12 @@ Catalogue, registry, ontology, taxonomy, API and interface owners.
 **`DV-01`** — Registered artifact records present in the registration projection.
 
 - **Primitive** — `record_count`
-- **Result** — 1684 records
+- **Result** — 1687 records
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records | 1684 |
+| records | 1687 |
 
 **`DV-54`** — Meta-constitutional artifacts under registry control.
 

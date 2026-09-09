@@ -10,7 +10,7 @@
 |---|---|---|---|---|---|---|---|---|
 | ADMISSION_GATE | 5 | · | ✓ | · | · | · | · | · |
 | APPLICATION | 21 | ✓ | · | · | · | ✓ | ✓ | ✓ |
-| ARCHITECTURE_SPECIFICATION | 22 | · | · | · | ✓ | · | · | · |
+| ARCHITECTURE_SPECIFICATION | 25 | · | · | · | ✓ | · | · | · |
 | CONSTITUTIONAL_EVIDENCE_PRINCIPLE | 12 | · | ✓ | · | · | · | · | · |
 | CONSTITUTIONAL_EVOLUTION_PROPOSAL | 12 | · | ✓ | · | · | · | · | · |
 | CONSTITUTIONAL_FOUNDATION | 6 | · | ✓ | · | · | · | ✓ | · |
@@ -23,14 +23,14 @@
 | LIFECYCLE_PHASE | 12 | · | · | · | ✓ | · | · | · |
 | MASTER_CONTEXT_PROTOCOL | 10 | · | · | ✓ | · | · | · | · |
 | META_MODEL | 91 | · | · | ✓ | · | · | · | · |
-| ONTOLOGY | 25 | · | · | ✓ | · | · | · | · |
+| ONTOLOGY | 33 | · | · | ✓ | · | · | · | · |
 | PLATFORM_COMPONENT | 19 | ✓ | · | · | · | ✓ | ✓ | ✓ |
 | PROGRAM_EPIC | 16 | · | · | · | ✓ | · | · | · |
 | RATIFICATION_DETERMINATION | 2 | · | ✓ | · | · | · | · | · |
 | RECONCILIATION_DETERMINATION | 5 | · | ✓ | · | · | · | · | · |
-| RUNTIME_COMPONENT | 16 | ✓ | · | · | · | ✓ | ✓ | ✓ |
+| RUNTIME_COMPONENT | 17 | ✓ | · | · | · | ✓ | ✓ | ✓ |
 | SERVICE | 19 | ✓ | · | · | · | ✓ | ✓ | ✓ |
-| SOFTWARE_ENGINE | 19 | ✓ | · | · | · | · | ✓ | ✓ |
+| SOFTWARE_ENGINE | 109 | ✓ | · | · | · | · | ✓ | ✓ |
 
-- Software-implementation-eligible types: APPLICATION, DATA_MODEL, INFRASTRUCTURE_COMPONENT, PLATFORM_COMPONENT, RUNTIME_COMPONENT, SERVICE, SOFTWARE_ENGINE (**133** objects).
+- Software-implementation-eligible types: APPLICATION, DATA_MODEL, INFRASTRUCTURE_COMPONENT, PLATFORM_COMPONENT, RUNTIME_COMPONENT, SERVICE, SOFTWARE_ENGINE (**224** objects).
 - All other types complete via ratification / population / documentation — **not** code.

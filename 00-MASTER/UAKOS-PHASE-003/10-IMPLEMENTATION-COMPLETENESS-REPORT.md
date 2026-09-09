@@ -8,11 +8,11 @@
 
 | Completeness dimension | Value | Evidence |
 |---|---|---|
-| Knowledge Completeness | 100.0% | 447/447 homed, orphans=0 |
-| Implementation Completeness | 52.1% | 233/447 IMPLEMENTED |
-| Validation Completeness | 100.0% | 447/447 carry validation evidence |
-| Certification Completeness | 53.9% | 241/447 certified |
+| Knowledge Completeness | 100.0% | 549/549 homed, orphans=0 |
+| Implementation Completeness | 42.4% | 233/549 IMPLEMENTED |
+| Validation Completeness | 100.0% | 549/549 carry validation evidence |
+| Certification Completeness | 43.9% | 241/549 certified |
 | Evidence Completeness | 100.0% | every object has repo evidence |
-| Dependency Completeness | CLOSED | 12821 edges, 0 missing targets |
+| Dependency Completeness | CLOSED | 13807 edges, 0 missing targets |
 | Repository Completeness | PROVEN | closure structural closure PROVEN; gap_total=0 |
-| Gap Completeness | 100.0% | 447/447 objects carry exactly one gap status; 257 NO_GAP |
+| Gap Completeness | 100.0% | 549/549 objects carry exactly one gap status; 283 NO_GAP |

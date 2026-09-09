@@ -11,11 +11,11 @@
 | Dimension | Value |
 |---|---|
 | Freeze seals verified (recompute==recorded) | 2/5 |
-| Execution authorizations valid | 190/190 |
-| Execution packages | 32 |
+| Execution authorizations valid | 266/266 |
+| Execution packages | 28 |
 | Dependency closure | CLOSED |
 | Execution Authorization | **NOT_AUTHORIZED** |
-| FREEZE F seal (sha256) | `1975aae86814b1b6470f6116dc8eb8dbf48f48f804749ea69601d8607396c98e` |
+| FREEZE F seal (sha256) | `25d015ad468facab2716ad330bd949b518e4851fd799f528741bfc8dd655b890` |
 
 ## Method
 
@@ -38,7 +38,7 @@ Each freeze seal A–E was INDEPENDENTLY RECOMPUTED from the certified inputs (c
 |---|---|
 | Step 1 — Freeze seals A–E recompute == recorded | **FAIL** |
 | Step 2 — Execution authorizations (1:1 with 186 units) | **FAIL** |
-| Step 3 — Execution package completeness (32 packages) | PASS |
+| Step 3 — Execution package completeness (32 packages) | **FAIL** |
 | Step 4 — Validation governance defined (pre/in/post) | PASS |
 | Step 5 — Certification governance defined (G1/G2/G5/G6/G8) | PASS |
 | Step 6 — Rollback governance defined (per package) | PASS |

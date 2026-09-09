@@ -1140,7 +1140,7 @@
     "scope_rules": 17,
     "scope_rules_bound": 17,
     "successions": 15,
-    "surfaces_scanned": 191,
+    "surfaces_scanned": 194,
     "tiers": 8,
     "tiers_corroborated": 7,
     "tiers_faithful": 8,
@@ -2436,7 +2436,7 @@
       "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter"
     }
   ],
-  "seal_sha256": "adbc878d3b436b3db99e4601bc4f757808130e7b63299cb64b618a2a5d986d16",
+  "seal_sha256": "41b025c4e8a97d686b081f68eeaa970687abdb203efcf874caa0c7b899567fa5",
   "source_token_registers": [
     {
       "id": "UCAF-TOK-01",
@@ -3089,7 +3089,7 @@
       "owner": "00-CEP/CEP-010-CONSTITUTIONAL-AUDIT-COMPLIANCE-ASSURANCE-CONSTITUTION.md"
     },
     {
-      "digest": "83fe5ce03b42b874",
+      "digest": "19d8602a8e1acb47",
       "owner": "00-CMG/CMG-REGISTRY.json"
     },
     {

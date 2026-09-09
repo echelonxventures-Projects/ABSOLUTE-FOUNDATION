@@ -13,9 +13,9 @@ The Phase-003 gap model applied a **single realization lifecycle** (specificatio
 ## Correction
 
 - **23 realization types** across **6 lifecycles** replace the single lifecycle. Each type has its own completion criteria and valid gap vocabulary (Registers 01–03).
-- `IMPLEMENTATION_GAP` is now valid **only** for the SOFTWARE lifecycle: **109 → 46** objects.
-- **71** objects previously mislabelled implementation-gaps are reclassified to ratification/enforcement/population/governance gaps.
-- Execution splits into constitutional streams (Register 05); only **133** objects are software-eligible.
+- `IMPLEMENTATION_GAP` is now valid **only** for the SOFTWARE lifecycle: **173 → 127** objects.
+- **54** objects previously mislabelled implementation-gaps are reclassified to ratification/enforcement/population/governance gaps.
+- Execution splits into constitutional streams (Register 05); only **224** objects are software-eligible.
 
 ## Consequence
 

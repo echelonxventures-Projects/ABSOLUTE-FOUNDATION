@@ -686,18 +686,18 @@
   ],
   "derivations": [
     {
-      "count": 1684,
+      "count": 1687,
       "evidence": [
         "S-01"
       ],
-      "headline": "1684 records",
+      "headline": "1687 records",
       "id": "DV-01",
       "primitive": "record_count",
       "purpose": "Registered artifact records present in the registration projection.",
       "rows": [
         [
           "records",
-          "1684"
+          "1687"
         ]
       ],
       "unknown": false
@@ -707,18 +707,18 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "declared 1684 · present 1684 · delta 0",
+      "headline": "declared 1687 · present 1687 · delta 0",
       "id": "DV-02",
       "primitive": "declared_vs_actual",
       "purpose": "Declared registration count against the records actually present.",
       "rows": [
         [
           "declared",
-          "1684"
+          "1687"
         ],
         [
           "present",
-          "1684"
+          "1687"
         ],
         [
           "delta",
@@ -733,18 +733,18 @@
         "S-01",
         "S-03"
       ],
-      "headline": "1684 vs 1684 · delta 0",
+      "headline": "1687 vs 1687 · delta 0",
       "id": "DV-03",
       "primitive": "cross_count_delta",
       "purpose": "Registration census against the portfolio rollup.",
       "rows": [
         [
           "`S-01` count",
-          "1684"
+          "1687"
         ],
         [
           "`S-03` portfolio.total_artifacts",
-          "1684"
+          "1687"
         ],
         [
           "delta",
@@ -754,27 +754,27 @@
       "unknown": false
     },
     {
-      "count": 5,
+      "count": 0,
       "evidence": [
         "S-01",
         "S-04"
       ],
-      "headline": "1684 vs 1679 · delta 5",
+      "headline": "1687 vs 1687 · delta 0",
       "id": "DV-04",
       "primitive": "cross_count_delta",
       "purpose": "Registration census against the certified scope.",
       "rows": [
         [
           "`S-01` count",
-          "1684"
+          "1687"
         ],
         [
           "`S-04` scope.artifacts",
-          "1679"
+          "1687"
         ],
         [
           "delta",
-          "5"
+          "0"
         ]
       ],
       "unknown": false
@@ -784,7 +784,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "2 value(s) shared by more than one record (over 1682 distinct value(s))",
+      "headline": "2 value(s) shared by more than one record (over 1685 distinct value(s))",
       "id": "DV-05",
       "primitive": "duplicate_field_values",
       "purpose": "Content identity: distinct artifacts sharing one content hash.",
@@ -805,7 +805,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "23 value(s) shared by more than one record (over 1213 distinct value(s))",
+      "headline": "23 value(s) shared by more than one record (over 1216 distinct value(s))",
       "id": "DV-06",
       "primitive": "duplicate_field_values",
       "purpose": "Name identity: distinct artifacts sharing one name.",
@@ -902,7 +902,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "0 value(s) shared by more than one record (over 1684 distinct value(s))",
+      "headline": "0 value(s) shared by more than one record (over 1687 distinct value(s))",
       "id": "DV-07",
       "primitive": "duplicate_field_values",
       "purpose": "Identity collision: one universal identifier claimed by more than one record.",
@@ -914,7 +914,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "0 value(s) shared by more than one record (over 1684 distinct value(s))",
+      "headline": "0 value(s) shared by more than one record (over 1687 distinct value(s))",
       "id": "DV-08",
       "primitive": "duplicate_field_values",
       "purpose": "Multi-home concepts: one path registered more than once.",
@@ -933,7 +933,7 @@
       "rows": [
         [
           "`ACTIVE`",
-          "1563"
+          "1566"
         ],
         [
           "`COMPLETE`",
@@ -971,7 +971,7 @@
       "rows": [
         [
           "`ACTIVE`",
-          "1563"
+          "1566"
         ],
         [
           "`COMPLETE`",
@@ -989,26 +989,26 @@
       "unknown": false
     },
     {
-      "count": 20098,
+      "count": 20134,
       "evidence": [
         "S-01"
       ],
-      "headline": "1794/21892 dimension slots populated (8.19%) · 1683/1684 record(s) carry at least one trace (99.94%) · 0 record(s) fully traced · 1 with none",
+      "headline": "1797/21931 dimension slots populated (8.19%) · 1686/1687 record(s) carry at least one trace (99.94%) · 0 record(s) fully traced · 1 with none",
       "id": "DV-11",
       "primitive": "subdict_fill_ratio",
       "purpose": "Traceability completeness across the thirteen traceability dimensions of every registered artifact.",
       "rows": [
         [
           "records measured",
-          "1684"
+          "1687"
         ],
         [
           "dimension slots",
-          "21892"
+          "21931"
         ],
         [
           "slots populated",
-          "1794"
+          "1797"
         ],
         [
           "populated share (%)",
@@ -1024,7 +1024,7 @@
         ],
         [
           "records with at least one trace",
-          "1683"
+          "1686"
         ],
         [
           "traced-record share (%)",
@@ -1032,72 +1032,72 @@
         ],
         [
           "dimension `architecture`",
-          "1683/1684"
+          "1686/1687"
         ],
         [
           "dimension `certification`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `deployment`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `design`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `functional_test`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `implementation`",
-          "17/1684"
+          "17/1687"
         ],
         [
           "dimension `integration_test`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `operations`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `production`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `requirement`",
-          "94/1684"
+          "94/1687"
         ],
         [
           "dimension `security_test`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `source_code`",
-          "0/1684"
+          "0/1687"
         ],
         [
           "dimension `unit_test`",
-          "0/1684"
+          "0/1687"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 13801,
+      "count": 13807,
       "evidence": [
         "S-02"
       ],
-      "headline": "13801 records",
+      "headline": "13807 records",
       "id": "DV-12",
       "primitive": "record_count",
       "purpose": "Graph edges present in the graph projection.",
       "rows": [
         [
           "records",
-          "13801"
+          "13807"
         ]
       ],
       "unknown": false
@@ -1108,18 +1108,18 @@
         "S-02",
         "S-03"
       ],
-      "headline": "13801 vs 13801 · delta 0",
+      "headline": "13807 vs 13807 · delta 0",
       "id": "DV-13",
       "primitive": "cross_count_delta",
       "purpose": "Edge census against the portfolio rollup.",
       "rows": [
         [
           "`S-02` count",
-          "13801"
+          "13807"
         ],
         [
           "`S-03` portfolio.total_edges",
-          "13801"
+          "13807"
         ],
         [
           "delta",
@@ -1129,27 +1129,27 @@
       "unknown": false
     },
     {
-      "count": 10,
+      "count": 0,
       "evidence": [
         "S-02",
         "S-04"
       ],
-      "headline": "13801 vs 13791 · delta 10",
+      "headline": "13807 vs 13807 · delta 0",
       "id": "DV-14",
       "primitive": "cross_count_delta",
       "purpose": "Edge census against the certified scope.",
       "rows": [
         [
           "`S-02` count",
-          "13801"
+          "13807"
         ],
         [
           "`S-04` scope.edges",
-          "13791"
+          "13807"
         ],
         [
           "delta",
-          "10"
+          "0"
         ]
       ],
       "unknown": false
@@ -1174,11 +1174,11 @@
         ],
         [
           "`Child`",
-          "1683"
+          "1686"
         ],
         [
           "`Parent`",
-          "1683"
+          "1686"
         ],
         [
           "`Consumed-By`",
@@ -1237,14 +1237,14 @@
         "S-01",
         "S-02"
       ],
-      "headline": "0 live dependency/dependencies on a superseded target (over 13801 edge(s); 0 endpoint(s) not registered)",
+      "headline": "0 live dependency/dependencies on a superseded target (over 13807 edge(s); 0 endpoint(s) not registered)",
       "id": "DV-16",
       "primitive": "edge_status_join",
       "purpose": "Live dependency on superseded truth: an edge whose target is superseded and whose source is not.",
       "rows": [
         [
           "edges examined",
-          "13801"
+          "13807"
         ],
         [
           "endpoints not registered",
@@ -2340,8 +2340,8 @@
           "YES",
           "YES",
           "2/2",
-          "3368",
-          "`627a678d1382`"
+          "3374",
+          "`ae9c1f6ad146`"
         ],
         [
           "`S-02`",
@@ -2350,8 +2350,8 @@
           "YES",
           "YES",
           "2/2",
-          "27602",
-          "`415afd51891b`"
+          "27614",
+          "`858485e06db6`"
         ],
         [
           "`S-03`",
@@ -2361,7 +2361,7 @@
           "YES",
           "3/3",
           "201",
-          "`d2c0d720b545`"
+          "`42f039e7f78b`"
         ],
         [
           "`S-04`",
@@ -2371,7 +2371,7 @@
           "YES",
           "5/5",
           "45",
-          "`acea9004a743`"
+          "`c51a5ecbc75d`"
         ],
         [
           "`S-05`",
@@ -2380,8 +2380,8 @@
           "YES",
           "YES",
           "2/2",
-          "1952",
-          "`3a9e80888a94`"
+          "1955",
+          "`2a078c64fa28`"
         ],
         [
           "`S-06`",
@@ -2391,7 +2391,7 @@
           "YES",
           "9/9",
           "166",
-          "`83fe5ce03b42`"
+          "`19d8602a8e1a`"
         ],
         [
           "`S-07`",
@@ -2401,7 +2401,7 @@
           "YES",
           "5/5",
           "112",
-          "`505ec5c77ee1`"
+          "`badb4ece1290`"
         ],
         [
           "`S-08`",
@@ -3388,7 +3388,7 @@
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
     {
-      "content_sha256": "627a678d1382144799bc2a0f39e5876748d60294782b3cf856718c51d9661876",
+      "content_sha256": "ae9c1f6ad146b351d181226eee163b54e23d049c17cb5cf02932e51aa00cf15f",
       "exists": true,
       "id": "S-01",
       "kind": "registration projection",
@@ -3404,12 +3404,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The registered artifact census: identity, status, content hash, traceability.",
-      "records": 3368,
+      "records": 3374,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "415afd51891b2d4182e555f426dcbf8040a991082450fd3d46908e121ddce4e3",
+      "content_sha256": "858485e06db6454b0439af1118c77ce339a660694b4ea0e5dc774629bc66f0af",
       "exists": true,
       "id": "S-02",
       "kind": "graph projection",
@@ -3425,12 +3425,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The knowledge-graph edge set.",
-      "records": 27602,
+      "records": 27614,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "d2c0d720b545d475a723d490ae1158fa3d09850a868625d6dd89e2edbe15410a",
+      "content_sha256": "42f039e7f78b728a212b4e1d95dd2db8d12b1486a1658973d0872b6b28c036d6",
       "exists": true,
       "id": "S-03",
       "kind": "portfolio projection",
@@ -3453,7 +3453,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "acea9004a7430f21bd2fbededaec0f3950438f6aa28e6c654c046a3a8133c48d",
+      "content_sha256": "c51a5ecbc75dbca8561d03fef31971205ef3176a18da41cfcabe1194c672c28d",
       "exists": true,
       "id": "S-04",
       "kind": "certification projection",
@@ -3480,7 +3480,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "3a9e80888a946413cabd1724d3297dcb7383ac2b5b70570dd545ff9a3c45f778",
+      "content_sha256": "2a078c64fa284ca735a970d5c36e675c3c484b605b23124339b26becf495cbd5",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3496,12 +3496,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Forward-only identity allocation ledger.",
-      "records": 1952,
+      "records": 1955,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "83fe5ce03b42b87465267ff6604d7b5a7ac6e7256908219852e4ddfd4feca879",
+      "content_sha256": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
       "exists": true,
       "id": "S-06",
       "kind": "meta-constitutional registry",
@@ -3536,7 +3536,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "505ec5c77ee17929f4b965dc6a35834382dcb8ab67c703e1a542e6c9ef2eefa7",
+      "content_sha256": "badb4ece1290fffecf06afe6d68c50ff98b21778c7f04c70116266d3031d78d5",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",

@@ -55,7 +55,7 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-05`** — Content identity: distinct artifacts sharing one content hash.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 2 value(s) shared by more than one record (over 1682 distinct value(s))
+- **Result** — 2 value(s) shared by more than one record (over 1685 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
@@ -73,7 +73,7 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-06`** — Name identity: distinct artifacts sharing one name.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 23 value(s) shared by more than one record (over 1213 distinct value(s))
+- **Result** — 23 value(s) shared by more than one record (over 1216 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
@@ -110,38 +110,38 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-02`** — Declared registration count against the records actually present.
 
 - **Primitive** — `declared_vs_actual`
-- **Result** — declared 1684 · present 1684 · delta 0
+- **Result** — declared 1687 · present 1687 · delta 0
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| declared | 1684 |
-| present | 1684 |
+| declared | 1687 |
+| present | 1687 |
 | delta | 0 |
 
 **`DV-03`** — Registration census against the portfolio rollup.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1684 vs 1684 · delta 0
+- **Result** — 1687 vs 1687 · delta 0
 - **Substrate evidence** — `S-01`, `S-03`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1684 |
-| `S-03` portfolio.total_artifacts | 1684 |
+| `S-01` count | 1687 |
+| `S-03` portfolio.total_artifacts | 1687 |
 | delta | 0 |
 
 **`DV-04`** — Registration census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1684 vs 1679 · delta 5
+- **Result** — 1687 vs 1687 · delta 0
 - **Substrate evidence** — `S-01`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1684 |
-| `S-04` scope.artifacts | 1679 |
-| delta | 5 |
+| `S-01` count | 1687 |
+| `S-04` scope.artifacts | 1687 |
+| delta | 0 |
 
 #### D-07 — Duplication — multi-home concepts
 
@@ -153,13 +153,13 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-07`** — Identity collision: one universal identifier claimed by more than one record.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 0 value(s) shared by more than one record (over 1684 distinct value(s))
+- **Result** — 0 value(s) shared by more than one record (over 1687 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 **`DV-08`** — Multi-home concepts: one path registered more than once.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 0 value(s) shared by more than one record (over 1684 distinct value(s))
+- **Result** — 0 value(s) shared by more than one record (over 1687 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 #### D-08 — Duplication — deliverable overlap

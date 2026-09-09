@@ -10,11 +10,11 @@
 |---|---|---|---|---|
 | Architectural | MEDIUM | 3 circular Depends-On nodes (knowledge graph) | atomic co-implementation + interface seam | Governance Authority |
 | Dependency | LOW | dependency closure CLOSED; wave-gated ordering | no wave starts before prior waves certified | CCE |
-| Operational | MEDIUM | 46 IMPLEMENT units touch code roots | package-atomic execution + rollback governance | Implementation Engine |
-| Validation | MEDIUM | 46 units require new test evidence | pre/in/post validation gates (Register 03) | CCE |
+| Operational | MEDIUM | 127 IMPLEMENT units touch code roots | package-atomic execution + rollback governance | Implementation Engine |
+| Validation | MEDIUM | 127 units require new test evidence | pre/in/post validation gates (Register 03) | CCE |
 | Certification | HIGH | 21 CERTIFY units + dual sign-off | gates G5/G6/G8 (Register 04) | Certification Authority |
 | Repository | LOW | read-only baseline; no state change before FREEZE E | no bypass of Execution Authorization | Governance Authority |
 | Rollback | MEDIUM | partial-package failure risk | package-atomic rollback (Register 05) | Governance Authority |
-| Governance | MEDIUM | 58 governance-deferred units | GOVERNANCE-RELEASE approval gate | Governance Authority |
+| Governance | MEDIUM | 133 governance-deferred units | GOVERNANCE-RELEASE approval gate | Governance Authority |
 
-**Highest-concentration control point:** 33 CRITICAL-tier units gate all downstream waves; their Execution Authorizations require Governance-Authority approval before any HIGH/MEDIUM package may start.
+**Highest-concentration control point:** 120 CRITICAL-tier units gate all downstream waves; their Execution Authorizations require Governance-Authority approval before any HIGH/MEDIUM package may start.

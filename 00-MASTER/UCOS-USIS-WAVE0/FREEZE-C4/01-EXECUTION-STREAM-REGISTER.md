@@ -8,12 +8,12 @@
 
 | Execution stream | Eligibility | Objects (current closure) | Origin |
 |---|---|---|---|
-| Documentation | not software | 50 | C2 |
+| Documentation | not software | 53 | C2 |
 | Governance | not software | 85 | C2 |
 | Infrastructure | software-eligible | 19 | C2 |
-| Knowledge | not software | 126 | C2 |
+| Knowledge | not software | 134 | C2 |
 | Registry | not software | 53 | C2 |
-| Software | software-eligible | 114 | C2 |
+| Software | software-eligible | 205 | C2 |
 | Universal Science & Intelligence | science-intelligence-eligible | 0 | NEW (C4) |
 
 - FREEZE C2 streams (6): Documentation, Governance, Infrastructure, Knowledge, Registry, Software

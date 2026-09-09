@@ -15,7 +15,7 @@
 |---|---|---|---|---|
 | ADMISSION_GATE | 5 | GOVERNANCE | Governance | no |
 | APPLICATION | 21 | SOFTWARE | Software | YES |
-| ARCHITECTURE_SPECIFICATION | 22 | SPECIFICATION | Documentation | no |
+| ARCHITECTURE_SPECIFICATION | 25 | SPECIFICATION | Documentation | no |
 | CONSTITUTIONAL_EVIDENCE_PRINCIPLE | 12 | CONSTITUTIONAL | Governance | no |
 | CONSTITUTIONAL_EVOLUTION_PROPOSAL | 12 | GOVERNANCE | Governance | no |
 | CONSTITUTIONAL_FOUNDATION | 6 | CONSTITUTIONAL | Governance | no |
@@ -28,14 +28,14 @@
 | LIFECYCLE_PHASE | 12 | SPECIFICATION | Documentation | no |
 | MASTER_CONTEXT_PROTOCOL | 10 | KNOWLEDGE | Knowledge | no |
 | META_MODEL | 91 | KNOWLEDGE | Knowledge | no |
-| ONTOLOGY | 25 | KNOWLEDGE | Knowledge | no |
+| ONTOLOGY | 33 | KNOWLEDGE | Knowledge | no |
 | PLATFORM_COMPONENT | 19 | SOFTWARE | Software | YES |
 | PROGRAM_EPIC | 16 | SPECIFICATION | Documentation | no |
 | RATIFICATION_DETERMINATION | 2 | GOVERNANCE | Governance | no |
 | RECONCILIATION_DETERMINATION | 5 | GOVERNANCE | Governance | no |
-| RUNTIME_COMPONENT | 16 | SOFTWARE | Software | YES |
+| RUNTIME_COMPONENT | 17 | SOFTWARE | Software | YES |
 | SERVICE | 19 | SOFTWARE | Software | YES |
-| SOFTWARE_ENGINE | 19 | SOFTWARE | Software | YES |
+| SOFTWARE_ENGINE | 109 | SOFTWARE | Software | YES |
 
 ### Family → realization type mapping (evidence anchor)
 

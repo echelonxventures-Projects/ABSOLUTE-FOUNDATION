@@ -8,7 +8,7 @@
 
 ### Resolution basis (disclosed)
 
-The 431 certified concept ids are disjoint from the knowledge dependency graph (1194 nodes / 12821 edges), so unit ordering is resolved by the certified **constitutional layering**: CRITICAL (laws/foundation/governance/metaclass) resolve before HIGH (arch/platform/runtime/data/service/application/infrastructure) before MEDIUM. Within a tier, the gap lifecycle resolves specification → implementation → certification. No unit is scheduled before its tier+lifecycle prerequisites.
+The 431 certified concept ids are disjoint from the knowledge dependency graph (1687 nodes / 13807 edges), so unit ordering is resolved by the certified **constitutional layering**: CRITICAL (laws/foundation/governance/metaclass) resolve before HIGH (arch/platform/runtime/data/service/application/infrastructure) before MEDIUM. Within a tier, the gap lifecycle resolves specification → implementation → certification. No unit is scheduled before its tier+lifecycle prerequisites.
 
 ### Dependencies to resolve first (Wave 1)
 
@@ -17,34 +17,63 @@ The 431 certified concept ids are disjoint from the knowledge dependency graph (
 | IU-0001 | CEP-011 | CRITICAL | RATIFY |
 | IU-0002 | GOV-008 | CRITICAL | RATIFY |
 | IU-0003 | GOV-009 | CRITICAL | RATIFY |
-| IU-0004 | Ω∞-001 | CRITICAL | RATIFY |
-| IU-0005 | Ω∞-002 | CRITICAL | RATIFY |
-| IU-0006 | Ω∞-003 | CRITICAL | RATIFY |
-| IU-0007 | Ω∞-004 | CRITICAL | RATIFY |
-| IU-0008 | Ω∞-005 | CRITICAL | RATIFY |
-| IU-0009 | Ω∞-006 | CRITICAL | RATIFY |
-| IU-0010 | Ω∞-007 | CRITICAL | RATIFY |
-| IU-0011 | Ω∞-008 | CRITICAL | RATIFY |
-| IU-0012 | Ω∞-009 | CRITICAL | RATIFY |
-| IU-0013 | Ω∞-010 | CRITICAL | RATIFY |
-| IU-0014 | Ω∞-011 | CRITICAL | RATIFY |
-| IU-0015 | Ω∞-012 | CRITICAL | RATIFY |
-| IU-0016 | Ω∞-013 | CRITICAL | RATIFY |
-| IU-0017 | Ω∞-014 | CRITICAL | RATIFY |
-| IU-0018 | Ω∞-015 | CRITICAL | RATIFY |
-| IU-0019 | Ω∞-016 | CRITICAL | RATIFY |
-| IU-0020 | Ω∞-017 | CRITICAL | RATIFY |
-| IU-0021 | Ω∞-018 | CRITICAL | RATIFY |
-| IU-0022 | Ω∞-019 | CRITICAL | RATIFY |
-| IU-0023 | Ω∞-020 | CRITICAL | RATIFY |
-| IU-0024 | UCOS-COMP-001000 | CRITICAL | IMPLEMENT |
-| IU-0025 | UCOS-COMP-001001 | CRITICAL | IMPLEMENT |
-| IU-0026 | UCOS-COMP-001010 | CRITICAL | IMPLEMENT |
-| IU-0027 | UCOS-COMP-009009 | CRITICAL | IMPLEMENT |
-| IU-0028 | UCOS-COMP-009010 | CRITICAL | IMPLEMENT |
-| IU-0029 | UCOS-GOV-000 | CRITICAL | RATIFY |
-| IU-0030 | UCOS-GOV-001 | CRITICAL | RATIFY |
-| IU-0031 | UCOS-GOV-003 | CRITICAL | RATIFY |
+| IU-0004 | Ω∞-002 | CRITICAL | RATIFY |
+| IU-0005 | Ω∞-003 | CRITICAL | RATIFY |
+| IU-0006 | Ω∞-004 | CRITICAL | RATIFY |
+| IU-0007 | Ω∞-005 | CRITICAL | RATIFY |
+| IU-0008 | Ω∞-006 | CRITICAL | RATIFY |
+| IU-0009 | Ω∞-007 | CRITICAL | RATIFY |
+| IU-0010 | Ω∞-008 | CRITICAL | RATIFY |
+| IU-0011 | Ω∞-009 | CRITICAL | RATIFY |
+| IU-0012 | Ω∞-010 | CRITICAL | RATIFY |
+| IU-0013 | Ω∞-011 | CRITICAL | RATIFY |
+| IU-0014 | Ω∞-012 | CRITICAL | RATIFY |
+| IU-0015 | Ω∞-013 | CRITICAL | RATIFY |
+| IU-0016 | Ω∞-014 | CRITICAL | RATIFY |
+| IU-0017 | Ω∞-015 | CRITICAL | RATIFY |
+| IU-0018 | Ω∞-016 | CRITICAL | RATIFY |
+| IU-0019 | Ω∞-017 | CRITICAL | RATIFY |
+| IU-0020 | Ω∞-018 | CRITICAL | RATIFY |
+| IU-0021 | Ω∞-019 | CRITICAL | RATIFY |
+| IU-0022 | Ω∞-020 | CRITICAL | RATIFY |
+| IU-0023 | UCOS-COMP-001000 | CRITICAL | IMPLEMENT |
+| IU-0024 | UCOS-COMP-001001 | CRITICAL | IMPLEMENT |
+| IU-0025 | UCOS-COMP-001002 | CRITICAL | IMPLEMENT |
+| IU-0026 | UCOS-COMP-001003 | CRITICAL | IMPLEMENT |
+| IU-0027 | UCOS-COMP-001004 | CRITICAL | IMPLEMENT |
+| IU-0028 | UCOS-COMP-001005 | CRITICAL | IMPLEMENT |
+| IU-0029 | UCOS-COMP-001006 | CRITICAL | IMPLEMENT |
+| IU-0030 | UCOS-COMP-001007 | CRITICAL | IMPLEMENT |
+| IU-0031 | UCOS-COMP-001008 | CRITICAL | IMPLEMENT |
+| IU-0032 | UCOS-COMP-001009 | CRITICAL | IMPLEMENT |
+| IU-0033 | UCOS-COMP-001010 | CRITICAL | IMPLEMENT |
+| IU-0034 | UCOS-COMP-002000 | CRITICAL | IMPLEMENT |
+| IU-0035 | UCOS-COMP-002001 | CRITICAL | IMPLEMENT |
+| IU-0036 | UCOS-COMP-002002 | CRITICAL | IMPLEMENT |
+| IU-0037 | UCOS-COMP-002003 | CRITICAL | IMPLEMENT |
+| IU-0038 | UCOS-COMP-002004 | CRITICAL | IMPLEMENT |
+| IU-0039 | UCOS-COMP-002005 | CRITICAL | IMPLEMENT |
+| IU-0040 | UCOS-COMP-002006 | CRITICAL | IMPLEMENT |
+| IU-0041 | UCOS-COMP-002007 | CRITICAL | IMPLEMENT |
+| IU-0042 | UCOS-COMP-002008 | CRITICAL | IMPLEMENT |
+| IU-0043 | UCOS-COMP-002009 | CRITICAL | IMPLEMENT |
+| IU-0044 | UCOS-COMP-003000 | CRITICAL | IMPLEMENT |
+| IU-0045 | UCOS-COMP-003001 | CRITICAL | IMPLEMENT |
+| IU-0046 | UCOS-COMP-003002 | CRITICAL | IMPLEMENT |
+| IU-0047 | UCOS-COMP-003003 | CRITICAL | IMPLEMENT |
+| IU-0048 | UCOS-COMP-003004 | CRITICAL | IMPLEMENT |
+| IU-0049 | UCOS-COMP-003005 | CRITICAL | IMPLEMENT |
+| IU-0050 | UCOS-COMP-003006 | CRITICAL | IMPLEMENT |
+| IU-0051 | UCOS-COMP-003007 | CRITICAL | IMPLEMENT |
+| IU-0052 | UCOS-COMP-003008 | CRITICAL | IMPLEMENT |
+| IU-0053 | UCOS-COMP-003009 | CRITICAL | IMPLEMENT |
+| IU-0054 | UCOS-COMP-004000 | CRITICAL | IMPLEMENT |
+| IU-0055 | UCOS-COMP-004001 | CRITICAL | IMPLEMENT |
+| IU-0056 | UCOS-COMP-004002 | CRITICAL | IMPLEMENT |
+| IU-0057 | UCOS-COMP-004003 | CRITICAL | IMPLEMENT |
+| IU-0058 | UCOS-COMP-004004 | CRITICAL | IMPLEMENT |
+| IU-0059 | UCOS-COMP-004005 | CRITICAL | IMPLEMENT |
+| IU-0060 | UCOS-COMP-004006 | CRITICAL | IMPLEMENT |
 
 ### Circular dependency resolution strategy
 

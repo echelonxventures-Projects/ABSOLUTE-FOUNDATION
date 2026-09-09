@@ -8,7 +8,7 @@
 
 | Readiness criterion | Status | Evidence |
 |---|---|---|
-| Every unit has an Execution Authorization | PASS | 109/109 |
+| Every unit has an Execution Authorization | PASS | 183/183 |
 | Every package has validation + certification gates | PASS | 20 packages |
 | Every package has rollback governance | PASS | 20 rollback specs |
 | Every execution dependency satisfied (wave-gated) | PASS | dependency closure CLOSED |
@@ -17,4 +17,4 @@
 | No repository modifications | PASS | READ-ONLY |
 | No implementation performed | PASS | READ-ONLY |
 
-**Governance Readiness: CERTIFIED.** 109 authorizations, 20 packages, 5 waves — all gated and rollback-governed.
+**Governance Readiness: CERTIFIED.** 183 authorizations, 20 packages, 5 waves — all gated and rollback-governed.

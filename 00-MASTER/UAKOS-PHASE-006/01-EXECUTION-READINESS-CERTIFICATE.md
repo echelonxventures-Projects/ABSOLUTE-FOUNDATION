@@ -10,15 +10,15 @@
 
 | Field | Value |
 |---|---|
-| Knowledge objects (FREEZE A) | 447 |
-| Implementation units (FREEZE D) | 190 |
-| Execution authorizations (FREEZE E) | 190 |
-| Execution packages | 32 |
+| Knowledge objects (FREEZE A) | 549 |
+| Implementation units (FREEZE D) | 266 |
+| Execution authorizations (FREEZE E) | 266 |
+| Execution packages | 28 |
 | Execution waves | 6 |
-| Dependency closure | CLOSED (1194 nodes / 12821 edges) |
+| Dependency closure | CLOSED (1687 nodes / 13807 edges) |
 | Freeze seals A–E valid | 2/5 |
 | Execution Authorization | **NOT_AUTHORIZED** |
-| FREEZE F seal (sha256) | `1975aae86814b1b6470f6116dc8eb8dbf48f48f804749ea69601d8607396c98e` |
+| FREEZE F seal (sha256) | `25d015ad468facab2716ad330bd949b518e4851fd799f528741bfc8dd655b890` |
 
 ## Evidence
 

@@ -12,13 +12,13 @@
 |---|---|
 | Predecessor (immutable) | FREEZE C2 `f966c8e0fd135cc5abf77012ced83a15f1b8135e59f18f1b6fd34e0e9794668f` |
 | Predecessor (immutable) | FREEZE C3 `89bda9d897c669b0c5d144e5727ca339e741bbd102e27379541c6f48932d0075` |
-| Certified knowledge objects (closure) | 447 |
+| Certified knowledge objects (closure) | 549 |
 | Execution streams | 6 → **7** (+1: Universal Science & Intelligence) |
 | Realization types | 24 → **29** (+1 +4 sub-types) |
 | Realization lifecycles | 6 → **7** (+1: SCIENCE_INTELLIGENCE) |
 | Objects reclassified into 7th stream | 0 (none — stream purity preserved) |
-| C2 object-distribution (recomputed, byte-identical basis) | `0d156091d62135906b727628170f82fb8b6ba12a976ff44790f5f4310a872718` |
-| **FREEZE C4 seal (sha256)** | **`a920561dc01e2b68bf0631cb53650afd05031bdfb1b6533cb1763fd7029beee9`** |
+| C2 object-distribution (recomputed, byte-identical basis) | `aefcf6003ea909339c60c7810199aa9b4f0d71939a178f6c9a589ca17315a421` |
+| **FREEZE C4 seal (sha256)** | **`ef503e496a4ba5acaa6908315a7b5c01bd074f07cc2867f67bb7a5cf791204b5`** |
 
 ### Method
 
@@ -40,6 +40,6 @@ Imported the certified FREEZE C2 model **verbatim** from `phase3r_engine.py` (no
 
 ## FREEZE C4 — Constitutional Execution-Stream Model (7 streams)
 
-**FREEZE C4 is CERTIFIED and IMMUTABLE at seal `a920561dc01e2b68bf0631cb53650afd05031bdfb1b6533cb1763fd7029beee9`.** It is the constitutional successor to FREEZE C2 (adds the 7th Universal Science & Intelligence stream, the SCIENCE_INTELLIGENCE_CAPABILITY type + sub-types, and the SCIENCE_INTELLIGENCE lifecycle + gap vocabulary). FREEZE C2/C3 remain immutable and unmodified. The 7-stream model is now the governing execution model for classifying USIS capabilities as they register in Wave 1+.
+**FREEZE C4 is CERTIFIED and IMMUTABLE at seal `ef503e496a4ba5acaa6908315a7b5c01bd074f07cc2867f67bb7a5cf791204b5`.** It is the constitutional successor to FREEZE C2 (adds the 7th Universal Science & Intelligence stream, the SCIENCE_INTELLIGENCE_CAPABILITY type + sub-types, and the SCIENCE_INTELLIGENCE lifecycle + gap vocabulary). FREEZE C2/C3 remain immutable and unmodified. The 7-stream model is now the governing execution model for classifying USIS capabilities as they register in Wave 1+.
 
 _READ-ONLY: no repository corpus/governed/frozen artifact modified; FREEZE C2/C3 untouched; no implementation performed; C4 register package is operational memory._

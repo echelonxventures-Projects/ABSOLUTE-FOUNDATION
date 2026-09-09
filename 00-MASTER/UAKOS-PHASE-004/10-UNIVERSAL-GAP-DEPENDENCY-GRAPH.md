@@ -10,11 +10,11 @@
 
 | Wave (node) | Class | Units |
 |---|---|---|
-| 2 | CRITICAL / Realization | 31 |
-| 3 | CRITICAL / Certification | 2 |
-| 5 | HIGH / Realization | 43 |
-| 6 | HIGH / Certification | 19 |
-| 8 | MEDIUM / Realization | 14 |
+| 2 | CRITICAL / Realization | 117 |
+| 3 | CRITICAL / Certification | 3 |
+| 5 | HIGH / Realization | 34 |
+| 6 | HIGH / Certification | 18 |
+| 8 | MEDIUM / Realization | 11 |
 
 ### Precedence edges (each wave gates the next)
 

@@ -6,12 +6,12 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-003/phase3_gap.py`.
 
-- Dependency graph nodes: **1194** · edges: **12821**
-- Depends-On edges: **4774** · nodes with dependencies: **296**
+- Dependency graph nodes: **1687** · edges: **13807**
+- Depends-On edges: **4776** · nodes with dependencies: **298**
 
 | Dependency dimension | Value |
 |---|---|
-| Satisfied dependencies (edge target present) | 12821 |
+| Satisfied dependencies (edge target present) | 13807 |
 | Unsatisfied / missing dependency targets | 0 |
 | Blocked dependencies | 0 |
 | Circular dependency nodes (Depends-On cycles) | 0 |
@@ -22,10 +22,10 @@
 
 | Edge type | Count |
 |---|---|
-| Depends-On | 4774 |
-| Required-By | 4697 |
-| Parent | 1195 |
-| Child | 1195 |
+| Depends-On | 4776 |
+| Required-By | 4699 |
+| Parent | 1686 |
+| Child | 1686 |
 | Consumes | 316 |
 | Consumed-By | 316 |
 | Authorized-By | 100 |
@@ -41,4 +41,4 @@
 
 ### Concept-level dependency evidence
 
-The 431 certified concept ids are disjoint from the 1194-node knowledge-artifact graph (separate id space). Concept-level dependency satisfaction is therefore evidenced by certified traceability rootedness: orphan concepts = **0**, in-repo-unhomed = **0**, not-homed = **0** → every concept's dependency chain is rooted (no unsatisfied concept-level dependency).
+The 431 certified concept ids are disjoint from the 1687-node knowledge-artifact graph (separate id space). Concept-level dependency satisfaction is therefore evidenced by certified traceability rootedness: orphan concepts = **0**, in-repo-unhomed = **0**, not-homed = **0** → every concept's dependency chain is rooted (no unsatisfied concept-level dependency).

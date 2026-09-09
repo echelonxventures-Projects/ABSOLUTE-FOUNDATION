@@ -10,10 +10,10 @@
 |---|---|---|---|
 | Architectural | MEDIUM | 0 circular Depends-On nodes in knowledge graph | atomic co-implementation + interface seam (Register 03) |
 | Dependency | LOW | dependency closure CLOSED (0 missing targets); disjoint concept ids | tier-layered sequencing |
-| Governance | MEDIUM | 58 units governance-deferred (WAITING_GOVERNANCE) | governance determination required before scheduling |
-| Validation | MEDIUM | 46 implement units need new tests | per-unit validation plan (Register 05) |
+| Governance | MEDIUM | 133 units governance-deferred (WAITING_GOVERNANCE) | governance determination required before scheduling |
+| Validation | MEDIUM | 127 implement units need new tests | per-unit validation plan (Register 05) |
 | Certification | HIGH | 21 units carry an unmet certification gap | certification gates G5/G6/G8 (Register 06) |
 | Runtime | LOW | runtime-capability units limited to Runtime/Services/Platform/Engine | runtime validation in validation plan |
 | Operational | LOW | read-only baseline; no live-system exposure at planning time | execution deferred to post-FREEZE-D |
 
-**Highest-risk concentration:** 5 CRITICAL-tier implementation units (Wave 2) — the constitutional foundation that gates all HIGH/MEDIUM work.
+**Highest-risk concentration:** 94 CRITICAL-tier implementation units (Wave 2) — the constitutional foundation that gates all HIGH/MEDIUM work.

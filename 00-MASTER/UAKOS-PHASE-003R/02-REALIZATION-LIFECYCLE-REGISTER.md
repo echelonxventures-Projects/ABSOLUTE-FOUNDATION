@@ -32,7 +32,7 @@
 - Valid gap categories: SPECIFICATION_GAP, REGISTRATION_GAP, POPULATION_GAP, DOCUMENTATION_GAP
 - Evidence requirement: definition + registry entry + populated store
 - Realization types: MASTER_CONTEXT_PROTOCOL, META_MODEL, ONTOLOGY
-- Objects: 126
+- Objects: 134
 
 ### REGISTRY lifecycle
 
@@ -50,7 +50,7 @@
 - Valid gap categories: SPECIFICATION_GAP, DOCUMENTATION_GAP, TRACEABILITY_GAP
 - Evidence requirement: specification document + traceability
 - Realization types: ARCHITECTURE_SPECIFICATION, LIFECYCLE_PHASE, PROGRAM_EPIC
-- Objects: 50
+- Objects: 53
 
 ### SOFTWARE lifecycle
 
@@ -59,4 +59,4 @@
 - Valid gap categories: SPECIFICATION_GAP, IMPLEMENTATION_GAP, VALIDATION_GAP, CERTIFICATION_GAP, DEPLOYMENT_GAP, CONFIGURATION_GAP, OPERATIONAL_GAP
 - Evidence requirement: code-root artifact + tests + certification evidence
 - Realization types: APPLICATION, DATA_MODEL, INFRASTRUCTURE_COMPONENT, PLATFORM_COMPONENT, RUNTIME_COMPONENT, SERVICE, SOFTWARE_ENGINE
-- Objects: 133
+- Objects: 224
