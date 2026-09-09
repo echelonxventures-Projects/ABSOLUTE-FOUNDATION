@@ -790,3 +790,842 @@ def test_measuring_does_not_mutate_the_declaration_it_reads(
     assert set(report["ratchet_best"]) == set(
         contract.RATCHETED
     ), "every measured law must report the bound it was held to"
+
+
+# ------------------------------------------------ the reader's remaining shapes and refusals
+
+
+def test_a_file_measuring_nothing_reports_a_hundred_percent_rather_than_a_division(
+    tmp_path: Path,
+) -> None:
+    """Zero statements is a real state — an empty ``__init__.py`` is fully covered — and the
+    alternative is a ZeroDivisionError inside the reader, which would take the measurement down
+    over a file with nothing in it."""
+    empty = coverage_data.FileCoverage("empty.py", frozenset(), frozenset())
+    assert empty.statements == 0
+    assert empty.percent == 100.0
+    assert _report({"a.py": ({1}, {2, 3})}).missing == 2
+
+
+def test_a_document_declaring_no_branches_reports_no_branch_percentage(tmp_path: Path) -> None:
+    """None rather than 100.0: a run measured without branch coverage has no branch figure, and
+    reporting one would put a number nobody measured next to the ones somebody did."""
+    assert _report({"a.py": ({1}, set())}).branch_percent is None
+
+
+def test_a_line_with_no_number_and_a_class_with_no_filename_are_skipped(tmp_path: Path) -> None:
+    """A row the reader cannot key contributes nothing rather than a partial entry. The totals
+    stay correct, which is the whole reason a rendering defect is reported and not raised."""
+    xml = tmp_path / "coverage.xml"
+    xml.write_text(
+        textwrap.dedent(
+            """\
+            <?xml version="1.0" ?>
+            <coverage branches-valid="0" branches-covered="0">
+              <sources><source>/nowhere</source></sources>
+              <packages><package><classes>
+                <class><lines><line number="1" hits="1"/></lines></class>
+                <class filename="a.py"><lines>
+                  <line hits="1"/><line number="2" hits="1"/>
+                </lines></class>
+              </classes></package></packages>
+            </coverage>
+            """
+        ),
+        encoding="utf-8",
+    )
+    report = coverage_data.parse(str(xml), repository=str(tmp_path))
+    assert set(report.files) == {"a.py"}
+    assert report.files["a.py"].hit == frozenset({2})
+
+
+def test_one_file_measured_under_two_source_roots_is_merged_rather_than_overwritten(
+    tmp_path: Path,
+) -> None:
+    """Merging by union rather than overwriting keeps a re-measured file from LOSING hits, which
+    would understate coverage and manufacture a drift finding out of a shard combination."""
+    xml = tmp_path / "coverage.xml"
+    xml.write_text(
+        textwrap.dedent(
+            """\
+            <?xml version="1.0" ?>
+            <coverage branches-valid="0" branches-covered="0">
+              <sources><source>/nowhere</source></sources>
+              <packages>
+                <package name="one"><classes>
+                  <class filename="a.py"><lines>
+                    <line number="1" hits="1"/><line number="2" hits="0"/>
+                  </lines></class>
+                </classes></package>
+                <package name="two"><classes>
+                  <class filename="a.py"><lines>
+                    <line number="1" hits="0"/><line number="2" hits="1"/>
+                  </lines></class>
+                </classes></package>
+              </packages>
+            </coverage>
+            """
+        ),
+        encoding="utf-8",
+    )
+    report = coverage_data.parse(str(xml), repository=str(tmp_path))
+    assert report.files["a.py"].hit == frozenset({1, 2})
+    assert report.files["a.py"].missed == frozenset()
+
+
+def test_an_absolute_filename_inside_and_outside_the_repository_both_resolve(
+    tmp_path: Path,
+) -> None:
+    """A path under the repository becomes relative to it, so the key is comparable across
+    machines. One outside is kept as it was given — inventing a relative form for a file the
+    repository does not contain would file it under a path that is not there."""
+    inside = tmp_path / "engine" / "a.py"
+    inside.parent.mkdir(parents=True)
+    inside.write_text("x = 1\n", encoding="utf-8")
+    xml = tmp_path / "coverage.xml"
+    xml.write_text(
+        f"""<?xml version="1.0" ?>
+        <coverage branches-valid="0" branches-covered="0">
+          <sources><source>{tmp_path}</source></sources>
+          <packages><package><classes>
+            <class filename="{inside}"><lines><line number="1" hits="1"/></lines></class>
+            <class filename="/elsewhere/b.py"><lines><line number="1" hits="1"/></lines></class>
+          </classes></package></packages>
+        </coverage>
+        """,
+        encoding="utf-8",
+    )
+    report = coverage_data.parse(str(xml), repository=str(tmp_path))
+    assert "engine/a.py" in report.files
+    assert "/elsewhere/b.py" in report.files
+
+
+def test_a_name_two_source_roots_both_carry_is_marked_ambiguous_or_resolved_by_its_package(
+    tmp_path: Path,
+) -> None:
+    """Guessing "the first root where a file of this name exists" produced a false drift finding
+    over 19 files whose per-file line sets were identical. So an ambiguous name resolves to a
+    STABLE, MARKED key — stable so two runs of one state still compare equal, marked so the
+    ambiguity is visible rather than silently attributed to one candidate. A package name that
+    picks out exactly one candidate resolves it instead."""
+    for package in ("one", "two"):
+        target = tmp_path / package / "shared.py"
+        target.parent.mkdir(parents=True)
+        target.write_text("x = 1\n", encoding="utf-8")
+
+    def _document(package_name: str) -> str:
+        return f"""<?xml version="1.0" ?>
+        <coverage branches-valid="0" branches-covered="0">
+          <sources><source>{tmp_path / "one"}</source><source>{tmp_path / "two"}</source></sources>
+          <packages><package name="{package_name}"><classes>
+            <class filename="shared.py"><lines><line number="1" hits="1"/></lines></class>
+          </classes></package></packages>
+        </coverage>
+        """
+
+    ambiguous = tmp_path / "ambiguous.xml"
+    ambiguous.write_text(_document(""), encoding="utf-8")
+    report = coverage_data.parse(str(ambiguous), repository=str(tmp_path))
+    assert report.ambiguous_files
+    assert all(name.startswith(coverage_data.AMBIGUOUS_PREFIX) for name in report.ambiguous_files)
+
+    hinted = tmp_path / "hinted.xml"
+    hinted.write_text(_document("one"), encoding="utf-8")
+    assert "one/shared.py" in coverage_data.parse(str(hinted), repository=str(tmp_path)).files
+
+    # A hint that picks out no candidate leaves the name ambiguous rather than resolving it to
+    # whichever root sorted first, which is the guess that manufactured the false drift finding.
+    unhelpful = tmp_path / "unhelpful.xml"
+    unhelpful.write_text(_document("three"), encoding="utf-8")
+    assert coverage_data.parse(str(unhelpful), repository=str(tmp_path)).ambiguous_files
+
+
+def test_a_name_no_source_root_carries_is_resolved_against_the_repository_root(
+    tmp_path: Path,
+) -> None:
+    """The last resort before keeping the declared name: a file the roots do not carry may still
+    be under the repository, and resolving it there is what keeps a key comparable rather than
+    synthesised."""
+    target = tmp_path / "top-level.py"
+    target.write_text("x = 1\n", encoding="utf-8")
+    xml = tmp_path / "coverage.xml"
+    xml.write_text(
+        f"""<?xml version="1.0" ?>
+        <coverage branches-valid="0" branches-covered="0">
+          <sources><source>{tmp_path / "absent"}</source></sources>
+          <packages><package><classes>
+            <class filename="top-level.py"><lines><line number="1" hits="1"/></lines></class>
+          </classes></package></packages>
+        </coverage>
+        """,
+        encoding="utf-8",
+    )
+    assert "top-level.py" in coverage_data.parse(str(xml), repository=str(tmp_path)).files
+
+
+# ---------------------------------------------------- the surface reader's faults and skips
+
+
+def test_a_pyproject_that_cannot_be_read_or_declares_no_policy_is_a_fault(tmp_path: Path) -> None:
+    """The denominator is DECLARED. An unreadable declaration is not an empty denominator, and
+    reading it as one would put every law into the empty-world state where no-violations is
+    true because nothing was measured."""
+    with pytest.raises(IntegrityError, match="undeclared or unparseable"):
+        surface.read_scope(str(tmp_path))
+    (tmp_path / "pyproject.toml").write_text("[tool.other]\nkey = 1\n", encoding="utf-8")
+    with pytest.raises(IntegrityError, match="no coverage report policy"):
+        surface.read_scope(str(tmp_path))
+
+
+def test_a_derivation_that_faults_is_reported_as_an_integrity_fault(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`OmegaError` is re-raised as `IntegrityError` so "discovery could not run" can never be
+    read as "discovery found nothing" — the empty-world state in which every no-violations claim
+    is true."""
+    from engine.universal_discovery import discovery as omega_discovery
+    from engine.universal_discovery.model import OmegaError
+
+    (tmp_path / "pyproject.toml").write_text(
+        "[tool.coverage.report]\nfail_under = 90\n", encoding="utf-8"
+    )
+
+    def _faulting(root: str):  # noqa: ANN202
+        raise OmegaError("the tracked population could not be derived")
+
+    monkeypatch.setattr(omega_discovery, "derived_scope", _faulting)
+    with pytest.raises(IntegrityError, match="denominator derivation failed"):
+        surface.read_scope(str(tmp_path))
+
+
+def test_a_tree_git_reports_as_empty_is_refused_rather_than_measured(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An empty world reports zero violations of everything. Refusing it is what keeps a
+    no-violations claim a claim about a population rather than about the absence of one."""
+    monkeypatch.setattr(surface.GitDiscoveryProvider, "enumerate", lambda self: (), raising=False)
+    with pytest.raises(IntegrityError, match="refusing to measure an empty world"):
+        surface.tracked_paths(str(tmp_path))
+
+
+def test_a_file_that_cannot_be_read_contributes_no_text(tmp_path: Path) -> None:
+    """Unreadable contributes nothing rather than raising: one undecodable file must not take
+    the whole surface measurement down."""
+    binary = tmp_path / "binary.py"
+    binary.write_bytes(b"\xff\xfe not utf-8 \x00")
+    assert surface.read_text(str(tmp_path), "binary.py") == ""
+    assert surface.read_text(str(tmp_path), "absent.py") == ""
+
+
+def test_a_module_that_does_not_parse_carries_no_executable_code_and_no_evidence(
+    tmp_path: Path,
+) -> None:
+    """Three readers, one rule: a file that does not parse contributes nothing rather than
+    contributing its raw text. Counting a docstring as evidence moved a sibling package's
+    untested-engine deficit by two files on prose alone."""
+    broken = tmp_path / "broken.py"
+    broken.write_text("def (:::\n", encoding="utf-8")
+    assert surface._has_executable_code(str(tmp_path), "broken.py") is False
+    assert surface._evidence("def (:::\n") == ""
+    assert (
+        surface._objects_for(
+            "broken.py",
+            root=str(tmp_path),
+            scope=surface.read_scope(str(REPO)),
+            report=None,
+            corpus={},
+            test_corpus={},
+            source_corpus={},
+        )
+        == []
+    )
+
+
+def test_a_pyproject_with_no_entry_points_declares_none(tmp_path: Path) -> None:
+    """An unreadable or absent pyproject declares no console script, which is different from a
+    fault: entry points are additive surface, and their absence is an ordinary state."""
+    assert surface._entry_points(str(tmp_path)) == {}
+
+
+def test_a_surface_projects_its_objects_by_kind() -> None:
+    """`by_kind` is how a per-kind reader consults the surface. A projection that returned the
+    whole population would make every such reader measure every kind."""
+    projected = surface.build(str(REPO))
+    kinds = {o.kind for o in projected.objects}
+    assert kinds
+    for kind in kinds:
+        selected = projected.by_kind(kind)
+        assert selected
+        assert all(o.kind == kind for o in selected)
+
+
+# ------------------------------------------- the contract's faults, its seal and its inventory
+
+
+def test_an_unparseable_declaration_is_a_fault(tmp_path: Path) -> None:
+    """Absent and unparseable are different failures with the same consequence: there is no
+    governed expectation to measure against, and neither may be read as "nothing is declared"."""
+    root = tmp_path / "repo"
+    (root / os.path.dirname(contract.DECLARATION_RELATIVE)).mkdir(parents=True)
+    (root / contract.DECLARATION_RELATIVE).write_text("{ not json", encoding="utf-8")
+    with pytest.raises(IntegrityError, match="is unparseable"):
+        contract.load_declaration(str(root))
+
+
+def test_an_orphan_ceiling_closes_the_gate_that_declares_it(monkeypatch: pytest.MonkeyPatch):
+    """The load-time check names the key; this is the MEASUREMENT-time refusal, which is the one
+    a gate run reports. A ratchet key measured by nothing is a declaration that looks like
+    enforcement and is not."""
+    real = contract.load_declaration
+
+    def _with_orphan(root: str) -> contract.Declaration:
+        declaration = real(root)
+        return replace_declaration(declaration)
+
+    def replace_declaration(declaration: contract.Declaration) -> contract.Declaration:
+        import dataclasses
+
+        return dataclasses.replace(
+            declaration,
+            ratchet={**declaration.ratchet, "invented_measurement": "CONVERGENT"},
+        )
+
+    monkeypatch.setattr(contract, "load_declaration", _with_orphan)
+    report = contract.measure(str(REPO))
+    assert report["status"] == contract.CLOSED
+    refusals = [law for law in report["laws"] if law["status"] == contract.REFUSED]
+    assert any("measured by nothing" in law["detail"] for law in refusals)
+
+
+def test_a_first_measurement_of_a_key_is_seeded_rather_than_refused(tmp_path: Path) -> None:
+    """SEEDED is the state a ratchet enters the first time a key is measured: every future run
+    is held to this value or better, with no number authored by hand. Refusing it would make a
+    new law unaddable without hand-writing the ceiling the whole design removes."""
+    from engine.universal_discovery import ratchet as ratchet_module
+
+    state = ratchet_module.load(str(tmp_path / "absent.json"))
+    key = sorted(contract.RATCHETED)[0]
+    law, measurement = contract.RATCHETED[key]
+    declaration = contract.load_declaration(str(REPO))
+    observation = state.observe(key, declaration.ratchet[key], 7.0, contract.LAWS[law].question)
+    assert observation.verdict == ratchet_module.SEEDED
+
+
+def test_sealing_advances_the_ratchet_from_a_measurement_and_writes_one_path(
+    built: inventory.Inventory, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Sealing is not a way to make a refusal pass: `sealed` only ever moves `best` DOWNWARD and
+    `assert_sealed_from_measurement` refuses a state looser than the run that wrote it. The write
+    is redirected here because this test measures the SEAL, not the repository's own state file."""
+    from engine.universal_discovery import ratchet as ratchet_module
+
+    written: dict[str, object] = {}
+    monkeypatch.setattr(inventory, "build", lambda root, coverage_xml=None: built)
+    monkeypatch.setattr(
+        ratchet_module,
+        "write",
+        lambda path, document: written.update({"path": path, "document": document}),
+    )
+    assert contract.seal_ratchet(str(REPO)) == contract.RATCHET_STATE_RELATIVE
+    assert written["path"].endswith(contract.RATCHET_STATE_RELATIVE)
+    assert written["document"]
+
+
+@pytest.mark.parametrize(
+    ("body", "expected"),
+    [(None, None), ("{ not xml", {"parseable": False})],
+    ids=["absent", "unparseable"],
+)
+def test_the_coverage_document_report_is_absent_or_marks_itself_unparseable(
+    tmp_path: Path, body: str | None, expected: object
+) -> None:
+    """Deliberately NOT a ratcheted law: the defect is in `coverage xml`'s rendering, not in this
+    repository's code. It is surfaced because it is invisible to every summary — the header
+    totals agree exactly while the body is missing 46% of the files."""
+    candidate = tmp_path / "coverage.xml"
+    if body is not None:
+        candidate.write_text(body, encoding="utf-8")
+    assert contract._coverage_document(str(tmp_path), str(candidate)) == expected
+
+
+def test_the_inventory_writes_one_document_and_returns_what_it_wrote(
+    built: inventory.Inventory, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """The written document is the one artifact this programme emits, and no law reads it back —
+    so regenerating it cannot turn a refusal into a pass."""
+    monkeypatch.setattr(inventory, "build", lambda root, coverage_xml=None: built)
+    destination = tmp_path / "nested" / "coverage_gap_inventory.json"
+    returned = inventory.write(str(REPO), str(destination))
+    assert returned is built
+    assert json.loads(destination.read_text(encoding="utf-8"))
+
+
+def test_a_test_module_is_classified_as_one_and_owned_by_the_scope_that_omits_it() -> None:
+    """A test file is not executable surface: it is the thing that exercises it. Classifying it
+    as executable would put every test module into the denominator it is measuring."""
+    from engine.certification_integrity.model import FILE_TEST
+
+    classification, rule_id, reason = inventory._classify(
+        "engine/tests/unit/test_x.py", text="", excluded_packages={}, is_test=True
+    )
+    assert classification == FILE_TEST
+    assert rule_id == "UCI-C-05"
+    assert reason is None
+    assert "omit list" in inventory._authority(
+        "engine/tests/unit/test_x.py", False, classification, rule_id
+    )
+
+
+def test_an_archived_file_is_owned_by_the_frozen_path_guard() -> None:
+    """DP-03 owns the frozen corpus. Reporting it as unowned would put the certified corpus into
+    the undeclared-surface finding, which is a governance claim about somebody else's decision."""
+    from engine.certification_integrity.model import FILE_ARCHIVED
+
+    assert "frozen-path guard" in inventory._authority(
+        "99-FREEZE/a.py", False, FILE_ARCHIVED, "UCI-C-04"
+    )
+
+
+def test_a_module_that_does_not_parse_counts_no_statements() -> None:
+    """The AST count is independent of any coverage measurement, and a file that does not parse
+    contributes zero rather than taking the inventory down."""
+    assert inventory._ast_statements("def (:::\n") == 0
+
+
+def test_the_shuffle_reorders_only_when_a_seed_is_present(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Inactive without a seed, so an ordinary run is not made non-deterministic by the plugin
+    that exists to detect order dependence — and active with one, so the permutation is
+    replayable from the header it prints."""
+    items = list(range(40))
+    monkeypatch.delenv(pytest_shuffle.SEED_VARIABLE, raising=False)
+    unchanged = list(items)
+    pytest_shuffle.pytest_collection_modifyitems(unchanged)
+    assert unchanged == items
+    assert "inactive" in pytest_shuffle.pytest_report_header()
+
+    monkeypatch.setenv(pytest_shuffle.SEED_VARIABLE, "7")
+    reordered = list(items)
+    pytest_shuffle.pytest_collection_modifyitems(reordered)
+    assert sorted(reordered) == items
+    assert reordered != items
+    assert "seed=7" in pytest_shuffle.pytest_report_header()
+
+
+def test_an_uncovered_line_carries_its_remedy_and_records_itself() -> None:
+    """The remedy is derived from the classification rather than written per line, so a
+    classification that changed meaning cannot leave a line carrying the previous remedy."""
+    from engine.certification_integrity.model import REMEDY, UncoveredLine
+
+    classification = sorted(REMEDY)[0]
+    line = UncoveredLine(
+        path="engine/a.py",
+        line=7,
+        owner="UCI-000001",
+        source="return 1",
+        classification=classification,
+        justification="measured",
+    )
+    assert line.remedy == REMEDY[classification]
+    assert line.as_record()["remedy"] == REMEDY[classification]
+    assert line.as_record()["line"] == 7
+
+
+# --------------------------------------------------- the frozen-run harness, without the cost
+
+
+def _tiny_repo(tmp_path: Path, name: str = "origin") -> Path:
+    """A real one-commit repository. The harness extracts through `git archive`, so nothing
+    smaller than a real repository exercises the path it actually takes."""
+    root = tmp_path / name
+    root.mkdir()
+    (root / "a.py").write_text("VALUE = 1\n", encoding="utf-8")
+    (root / "pyproject.toml").write_text("[project]\nname='x'\nversion='0'\n", encoding="utf-8")
+    for args in (
+        ["init", "-q", "--initial-branch=main"],
+        ["-c", "user.email=t@ucos", "-c", "user.name=Test", "add", "-A"],
+        [
+            "-c",
+            "user.email=t@ucos",
+            "-c",
+            "user.name=Test",
+            "commit",
+            "-q",
+            "--no-verify",
+            "-m",
+            "one",
+        ],
+    ):
+        subprocess.run(["git", *args], cwd=root, check=True, capture_output=True)  # noqa: S603,S607
+    return root
+
+
+def _frozen_run(**overrides: Any) -> immutable.FrozenRun:
+    fields = {
+        "sha": "a" * 40,
+        "command": ("true",),
+        "exit_code": 0,
+        "duration_seconds": 1.0,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "before": immutable.Fingerprint("a" * 40, "x", "y", 0),
+        "after": immutable.Fingerprint("a" * 40, "x", "y", 0),
+        "extraction": immutable.Extraction("a" * 40, "unused", "python", False, 0.0),
+    }
+    fields.update(overrides)
+    return immutable.FrozenRun(**fields)
+
+
+def test_a_frozen_run_records_every_fact_a_reader_would_need_to_reproduce_it() -> None:
+    """The record is what a certification cites. A field missing from it is a fact the citation
+    cannot carry, and `tree_stable` in particular is the difference between a measurement
+    attributable to a commit and one attributable to nothing."""
+    record = _frozen_run(artifacts={"coverage.xml": "/out/coverage.xml"}).as_record()
+    assert record["tree_stable"] is True
+    assert record["command"] == ["true"]
+    assert record["artifacts"] == {"coverage.xml": "/out/coverage.xml"}
+    assert record["extraction"]["source_sha"] == "a" * 40
+
+
+def test_a_run_whose_tree_did_not_move_is_accepted() -> None:
+    """The refusal is measured elsewhere. Without this, `require_stable` could refuse every run
+    and the suite would not notice."""
+    immutable.require_stable([_frozen_run()])
+
+
+def test_an_extraction_of_a_revision_that_does_not_exist_is_a_fault(tmp_path: Path) -> None:
+    """The archive step fails and the extraction is refused. Continuing with an empty
+    destination would produce a measurement attributed to a commit that was never extracted."""
+    root = _tiny_repo(tmp_path)
+    destination = tmp_path / "extraction"
+    destination.mkdir()
+    with pytest.raises(IntegrityError, match="git archive"):
+        immutable.extract(str(root), "0" * 40, str(destination))
+
+
+def test_an_extraction_whose_unpacking_fails_is_a_fault(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Two processes, two failure modes. The archive succeeding and the unpack failing leaves a
+    partial tree, and measuring one would attribute a partial extraction to a whole commit."""
+    root = _tiny_repo(tmp_path)
+    destination = tmp_path / "extraction"
+    destination.mkdir()
+    real = subprocess.Popen
+
+    def _tar_refuses(argv, **kwargs):  # noqa: ANN001, ANN202
+        if argv and argv[0] == "tar":
+            # Consumes the archive so `git archive` still succeeds, then refuses. Exiting
+            # without reading would break the pipe and fail the archive instead, which is the
+            # OTHER refusal and already measured.
+            return real(["sh", "-c", "cat >/dev/null; exit 3"], **kwargs)  # noqa: S607
+        return real(argv, **kwargs)
+
+    monkeypatch.setattr(immutable.subprocess, "Popen", _tar_refuses)
+    with pytest.raises(IntegrityError, match="extracting"):
+        immutable.extract(str(root), immutable.resolve_sha(str(root)), str(destination))
+
+
+def test_an_archive_process_that_offers_no_pipe_is_still_reaped(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`Popen` with `stdout=PIPE` always yields a pipe, so the guard that closes it has only
+    ever taken one branch. It is the one that keeps the close from raising on a process object
+    that did not give us one — and reaching it means handing the extractor exactly that.
+    """
+    root = _tiny_repo(tmp_path)
+    destination = tmp_path / "extraction"
+    destination.mkdir()
+    real = subprocess.Popen
+
+    class _NoPipe:
+        def __init__(self, process: object) -> None:
+            self._process = process
+
+        stdout = None
+
+        def __getattr__(self, name: str) -> object:
+            return getattr(self._process, name)
+
+    def _pipeless(argv, **kwargs):  # noqa: ANN001, ANN202
+        process = real(argv, **kwargs)
+        return _NoPipe(process) if argv[:2] == ["git", "archive"] else process
+
+    monkeypatch.setattr(immutable.subprocess, "Popen", _pipeless)
+    immutable.extract(str(root), immutable.resolve_sha(str(root)), str(destination))
+    # Nothing was piped, so nothing was unpacked — and the extractor reaped both processes and
+    # returned rather than raising on a pipe it was never given.
+    assert list(destination.iterdir()) == []
+
+
+def test_sealing_a_destination_git_refuses_is_a_fault(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The seal is what makes an extraction content-addressed. A seal that failed silently would
+    leave the extraction unsealed and every later fingerprint comparing an unsealed tree."""
+    real = subprocess.run
+
+    def _refusing(argv, **kwargs):  # noqa: ANN001, ANN202
+        if argv[:2] == ["git", "init"]:
+            return subprocess.CompletedProcess(argv, 1, "", "git declined to initialise")
+        return real(argv, **kwargs)
+
+    monkeypatch.setattr(immutable.subprocess, "run", _refusing)
+    target = tmp_path / "extraction"
+    target.mkdir()
+    with pytest.raises(IntegrityError, match="could not seal the extraction"):
+        immutable.seal(str(target))
+
+
+def test_a_readiness_marker_that_cannot_be_read_forces_a_fresh_extraction(
+    tmp_path: Path,
+) -> None:
+    """An unreadable marker is not a valid reuse claim. Reading it as one would reuse a tree
+    whose provenance nobody can state."""
+    root = _tiny_repo(tmp_path)
+    sha = immutable.resolve_sha(str(root))
+    workspace = tmp_path / "workspace"
+    destination = workspace / sha
+    destination.mkdir(parents=True)
+    (destination / immutable.READY_MARKER).write_text("{ not json", encoding="utf-8")
+    extraction = immutable.prepare(
+        str(root), sha, workspace=str(workspace), build_venv=False, reuse=True
+    )
+    assert extraction.reused is False
+    assert (Path(extraction.root) / "a.py").is_file()
+
+
+def test_a_marker_naming_the_same_content_is_reused_without_re_extracting(
+    tmp_path: Path,
+) -> None:
+    """Reuse is keyed on the commit AND the dependency digest, so an extraction prepared under
+    different dependencies is rebuilt rather than reused with the wrong environment."""
+    root = _tiny_repo(tmp_path)
+    sha = immutable.resolve_sha(str(root))
+    workspace = tmp_path / "workspace"
+    first = immutable.prepare(
+        str(root), sha, workspace=str(workspace), build_venv=False, reuse=True
+    )
+    assert first.reused is False
+    second = immutable.prepare(
+        str(root), sha, workspace=str(workspace), build_venv=False, reuse=True
+    )
+    assert second.reused is True
+    assert second.sealed_sha == first.sealed_sha
+
+
+def test_a_virtualenv_the_extraction_cannot_build_or_populate_is_a_fault(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Building an environment is not a measurement and must contribute nothing to one — which
+    is why it is scrubbed — but a build that FAILED must be a fault: a measurement taken inside
+    an extraction whose dependencies are not the extraction's own is attributable to nothing."""
+    real = subprocess.run
+
+    def _venv_fails(argv, **kwargs):  # noqa: ANN001, ANN202
+        if len(argv) > 2 and argv[1:3] == ["-m", "venv"]:
+            return subprocess.CompletedProcess(argv, 1, "", "no venv module")
+        return real(argv, **kwargs)
+
+    monkeypatch.setattr(immutable.subprocess, "run", _venv_fails)
+    with pytest.raises(IntegrityError, match="could not create a virtualenv"):
+        immutable._build_venv(str(tmp_path))
+
+    def _install_fails(argv, **kwargs):  # noqa: ANN001, ANN202
+        if len(argv) > 2 and argv[1:3] == ["-m", "venv"]:
+            venv = Path(argv[3])
+            (venv / "bin").mkdir(parents=True, exist_ok=True)
+            (venv / "bin" / "python").write_text("#!/bin/sh\n", encoding="utf-8")
+            return subprocess.CompletedProcess(argv, 0, "", "")
+        if "pip" in argv:
+            return subprocess.CompletedProcess(argv, 1, "", "no index")
+        return real(argv, **kwargs)
+
+    monkeypatch.setattr(immutable.subprocess, "run", _install_fails)
+    with pytest.raises(IntegrityError, match="dependencies could not be installed"):
+        immutable._build_venv(str(tmp_path))
+
+
+def test_a_frozen_run_inherits_the_declared_environment_and_collects_what_exists(
+    tmp_path: Path,
+) -> None:
+    """The extraction inherits no ambient measurement environment at all, and the caller's own
+    variables are applied on top of the scrubbed one. `collect` copies out only what the run
+    actually produced: naming an artifact that was not written must not manufacture one."""
+    root = _tiny_repo(tmp_path)
+    out = tmp_path / "collected.txt"
+    frozen = immutable.run(
+        str(root),
+        [
+            immutable.PYTHON_PLACEHOLDER,
+            "-c",
+            "import os, pathlib;"
+            "pathlib.Path('produced.txt').write_text(os.environ['UCI_PROBE'])",
+        ],
+        workspace=str(tmp_path / "workspace"),
+        env={"UCI_PROBE": "declared"},
+        collect={"produced.txt": str(out), "never-written.txt": str(tmp_path / "absent.txt")},
+        build_venv=False,
+        reuse=False,
+    )
+    assert frozen.exit_code == 0
+    assert out.read_text(encoding="utf-8") == "declared"
+    assert "never-written.txt" not in frozen.artifacts
+    assert not (tmp_path / "absent.txt").exists()
+
+
+def test_a_git_command_that_cannot_run_is_a_fault_naming_the_tree(tmp_path: Path) -> None:
+    """A tree git refuses to answer for has no resolvable revision, and inventing one would
+    attribute a measurement to a commit that does not exist."""
+    with pytest.raises(IntegrityError, match="failed in"):
+        immutable.resolve_sha(str(tmp_path))
+
+
+def test_a_virtualenv_that_builds_and_installs_returns_its_interpreter(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The success path, which the real one pays a `pip install -e .[dev]` for. Both subprocesses
+    are scrubbed of the ambient measurement environment for the reason `run_frozen` is: building
+    an environment is not a measurement and must contribute nothing to one."""
+    real = subprocess.run
+    seen: list[dict[str, object]] = []
+
+    def _succeeding(argv, **kwargs):  # noqa: ANN001, ANN202
+        seen.append({"argv": list(argv), "env": kwargs.get("env")})
+        if len(argv) > 2 and argv[1:3] == ["-m", "venv"]:
+            binaries = Path(argv[3]) / "bin"
+            binaries.mkdir(parents=True, exist_ok=True)
+            (binaries / "python").write_text("#!/bin/sh\n", encoding="utf-8")
+            return subprocess.CompletedProcess(argv, 0, "", "")
+        if "pip" in argv:
+            return subprocess.CompletedProcess(argv, 0, "", "")
+        return real(argv, **kwargs)
+
+    monkeypatch.setattr(immutable.subprocess, "run", _succeeding)
+    python = immutable._build_venv(str(tmp_path))
+    assert python.endswith("/bin/python")
+    assert Path(python).exists()
+    venv_call = next(call for call in seen if call["argv"][1:3] == ["-m", "venv"])
+    assert "COV_CORE_CONFIG" not in (venv_call["env"] or {})
+
+
+def test_an_extraction_prepared_with_an_interpreter_reuses_it_on_the_next_call(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Reuse is keyed on the commit, the dependency digest AND the interpreter still existing. An
+    extraction whose interpreter has gone is rebuilt, because a measurement taken with a missing
+    interpreter is attributable to nothing."""
+    root = _tiny_repo(tmp_path)
+    sha = immutable.resolve_sha(str(root))
+    workspace = tmp_path / "workspace"
+
+    def _fake_venv(destination: str) -> str:
+        binaries = Path(destination) / ".uci-venv" / "bin"
+        binaries.mkdir(parents=True, exist_ok=True)
+        interpreter = binaries / "python"
+        interpreter.write_text("#!/bin/sh\n", encoding="utf-8")
+        return str(interpreter)
+
+    monkeypatch.setattr(immutable, "_build_venv", _fake_venv)
+    first = immutable.prepare(str(root), sha, workspace=str(workspace), build_venv=True, reuse=True)
+    assert first.reused is False
+    assert Path(first.python).exists()
+
+    second = immutable.prepare(
+        str(root), sha, workspace=str(workspace), build_venv=True, reuse=True
+    )
+    assert second.reused is True
+    assert second.python == first.python
+
+
+def test_a_coverage_figure_records_what_it_is_a_figure_of() -> None:
+    """A percentage with no provenance is not reproducible even in principle: it does not say
+    which tree it measured, which interpreter ran it, or how many tests contributed."""
+    from engine.certification_integrity.model import Provenance
+
+    record = Provenance(
+        commit_sha="a" * 40,
+        dirty=False,
+        coverage_percent=98.5,
+        statements=100,
+        covered=98,
+        missing=2,
+        branch_percent=95.0,
+        test_count=19_000,
+        duration_seconds=3600.0,
+        environment_hash="b" * 16,
+        python_version="3.12.13",
+        platform="darwin",
+        inventory_digest="c" * 16,
+        coverage_digest="d" * 16,
+    ).as_record()
+    assert record["commit_sha"] == "a" * 40
+    assert record["dirty"] is False
+    assert record["test_count"] == 19_000
+    assert record["coverage_digest"] == "d" * 16
+
+
+def test_a_surface_built_with_no_coverage_document_reports_every_object_unmeasured(
+    tmp_path: Path,
+) -> None:
+    """Measured-and-zero is a coverage gap; unmeasured-and-zero is a governance gap, and they
+    have different remedies. A surface built where no report exists must say the second."""
+    built_without = surface.build(str(REPO), coverage_xml=str(tmp_path / "absent.xml"))
+    assert built_without.coverage is None
+    assert all(not o.measured or o.covered == 0 for o in built_without.objects)
+
+
+def test_a_module_is_not_evidence_of_its_own_invocation() -> None:
+    """A file that names an engine has invoked it — unless the file IS the engine, in which case
+    the mention is its own definition. Counting that would make every engine self-invoking, and
+    the untested-engine finding would collapse to zero without a single test being written."""
+    own = "engine/uci_probe.py"
+    assert (
+        surface._planes_for_needles((own,), {own: (surface.PLANE_CI, own)}, {own: own}, {}, own)
+        == set()
+    )
+    other = "engine/some_other.py"
+    assert surface._planes_for_needles(
+        (own,), {other: (surface.PLANE_CI, own)}, {other: own}, {other: own}, own
+    ) == {surface.PLANE_CI, surface.PLANE_PYTHON, surface.PLANE_TEST}
+
+
+def test_a_key_measured_for_the_first_time_is_seeded_rather_than_refused(
+    built: inventory.Inventory, declaration: contract.Declaration
+) -> None:
+    """SEEDED is the state a ratchet enters the first time a key is measured, and it must HOLD:
+    refusing it would make a new law unaddable without hand-writing the ceiling this whole design
+    exists to remove. Every future run is then held to the seeded value or better."""
+    from engine.universal_discovery import ratchet as ratchet_module
+
+    key = sorted(contract.RATCHETED)[0]
+    empty = ratchet_module.load("/nonexistent/uci-ratchet.json")
+    result = contract._ratcheted(built, declaration, key, empty)
+    assert result.holds
+    assert result.detail.startswith("SEEDED at ")
+
+
+def test_an_extraction_whose_interpreter_has_gone_is_rebuilt_rather_than_reused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Reuse is keyed on the commit, the dependency digest AND the interpreter still being
+    there. A measurement taken with an interpreter that no longer exists is attributable to
+    nothing, so its absence has to reopen the extraction rather than be read as a hit."""
+    root = _tiny_repo(tmp_path)
+    sha = immutable.resolve_sha(str(root))
+    workspace = tmp_path / "workspace"
+
+    def _fake_venv(destination: str) -> str:
+        binaries = Path(destination) / ".uci-venv" / "bin"
+        binaries.mkdir(parents=True, exist_ok=True)
+        interpreter = binaries / "python"
+        interpreter.write_text("#!/bin/sh\n", encoding="utf-8")
+        return str(interpreter)
+
+    monkeypatch.setattr(immutable, "_build_venv", _fake_venv)
+    first = immutable.prepare(str(root), sha, workspace=str(workspace), build_venv=True, reuse=True)
+    Path(first.python).unlink()
+    rebuilt = immutable.prepare(
+        str(root), sha, workspace=str(workspace), build_venv=True, reuse=True
+    )
+    assert rebuilt.reused is False
+    assert Path(rebuilt.python).exists()
