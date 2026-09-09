@@ -2058,3 +2058,133 @@ def test_an_unintelligible_construct_reaching_no_disposition_is_refused(declarat
     monkeypatch.setattr(bridge, "govern", ungoverned)
     problems = contract.representation_requires_no_understanding(_forge(declaration))
     assert any("reached no disposition" in p for p in problems), problems
+
+
+# --- URKE-L-22: the determinism refusals ---------------------------------------------------------
+
+
+def test_two_ledgers_seeded_identically_that_differ_are_refused(declaration, monkeypatch):
+    seen = {"n": 0}
+
+    def drifting_digest(self):
+        seen["n"] += 1
+        return f"digest-{seen['n']}"
+
+    monkeypatch.setattr(KnowledgeLedger, "digest", drifting_digest)
+    problems = contract.measurement_is_deterministic(_forge(declaration))
+    assert any("seeded from identical data differ" in p for p in problems), problems
+
+
+def test_two_summaries_of_identical_ledgers_that_differ_are_refused(declaration, monkeypatch):
+    seen = {"n": 0}
+
+    def drifting_summary(self):
+        seen["n"] += 1
+        return {"summary": seen["n"]}
+
+    monkeypatch.setattr(KnowledgeLedger, "summary", drifting_summary)
+    problems = contract.measurement_is_deterministic(_forge(declaration))
+    assert any("two summaries of identical ledgers differ" in p for p in problems), problems
+
+
+def test_a_report_embedding_a_clock_is_refused(declaration, monkeypatch):
+    # A timestamp in a report makes the report a function of when it ran rather than of the
+    # bytes it measured, and two identical states would then disagree.
+    monkeypatch.setattr(discovery, "report", lambda store: "measured at T00:00:00")
+    problems = contract.measurement_is_deterministic(_forge(declaration))
+    assert any("T00:'" in p or "T00:" in p for p in problems), problems
+
+
+def test_a_report_embedding_the_repository_path_is_refused(declaration, monkeypatch):
+    repo = repo_root()
+    monkeypatch.setattr(discovery, "report", lambda store: f"measured under {repo}")
+    problems = contract.measurement_is_deterministic(_forge(declaration))
+    assert any("so it is not a function of the bytes" in p for p in problems), problems
+
+
+def test_two_discovery_reports_over_identical_ledgers_that_differ_are_refused(
+    declaration, monkeypatch
+):
+    seen = {"n": 0}
+
+    def drifting_report(store):
+        seen["n"] += 1
+        return f"report-{seen['n']}"
+
+    monkeypatch.setattr(discovery, "report", drifting_report)
+    problems = contract.measurement_is_deterministic(_forge(declaration))
+    assert any("two discovery reports" in p for p in problems), problems
+
+
+# --- URKE-L-31: the eligibility refusals ---------------------------------------------------------
+
+
+def test_a_settled_state_that_stays_eligible_is_refused(declaration, monkeypatch):
+    # Eligibility comes from the lattice: a settled subject must not remain open to discovery,
+    # or "settled" means nothing.
+    monkeypatch.setattr(states, "eligible_for_discovery", lambda decl, entity: True)
+    problems = contract.unresolved_is_eligible_for_discovery(_forge(declaration))
+    assert any("is still eligible" in p for p in problems), problems
+
+
+def test_an_unsettled_state_that_is_not_eligible_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(states, "eligible_for_discovery", lambda decl, entity: False)
+    problems = contract.unresolved_is_eligible_for_discovery(_forge(declaration))
+    assert any("is not eligible for discovery" in p for p in problems), problems
+
+
+def test_declaring_every_state_settled_is_refused(declaration):
+    # If every state is settled nothing is ever eligible, and discovery has been switched off
+    # by declaration rather than by argument.
+    every = tuple(spec.identifier for spec in declaration.states)
+    problems = contract.unresolved_is_eligible_for_discovery(
+        _forge(declaration, settled_states=every)
+    )
+    assert any("every state is settled" in p for p in problems), problems
+
+
+# --- URKE-L-20: the context refusals ------------------------------------------------------
+
+
+def test_a_subject_naming_an_absent_context_is_refused(declaration):
+    real = KnowledgeLedger(declaration)
+    everything = real.all()
+    orphan = dataclasses.replace(everything[0], context="a-context-nobody-recorded")
+
+    class _Store:
+        root_context = real.root_context
+
+        def all(self):
+            return [orphan, *everything[1:]]
+
+        def has(self, identity):
+            return identity != "a-context-nobody-recorded" and real.has(identity)
+
+        def get(self, identity):
+            return real.get(identity)
+
+    probe = _ProbeWith(declaration, _Store())
+    probe._ledger = _Store()
+    problems = contract.no_subject_exists_outside_context(probe)
+    assert any("which is absent" in p for p in problems), problems
+
+
+def test_an_unrecorded_root_context_is_refused(declaration):
+    real = KnowledgeLedger(declaration)
+
+    class _Rootless:
+        root_context = ""
+
+        def all(self):
+            return real.all()
+
+        def has(self, identity):
+            return real.has(identity)
+
+        def get(self, identity):
+            return real.get(identity)
+
+    probe = _ProbeWith(declaration, _Rootless())
+    probe._ledger = _Rootless()
+    problems = contract.no_subject_exists_outside_context(probe)
+    assert any("root context is not recorded" in p for p in problems), problems
