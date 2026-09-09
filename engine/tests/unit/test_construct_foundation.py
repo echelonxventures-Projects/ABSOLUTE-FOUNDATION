@@ -2522,3 +2522,129 @@ def test_a_rejected_construct_leaving_no_record_is_refused(declaration):
     probe = _registry_probe(declaration, base=real, redispose=redispose, has=has)
     problems = contract.nothing_is_silently_ignored(probe)
     assert any("rejected construct left no record" in p for p in problems), problems
+
+
+# --- UCON-L-06: the first-class refusals ----------------------------------------------------
+
+
+def test_a_registered_unknown_absent_from_its_registry_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(views, "unknowns", lambda registry: ())
+    problems = contract.unknown_and_contradiction_are_first_class(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("unknown is absent from the unknown registry" in p for p in problems), problems
+
+
+def test_a_registered_contradiction_absent_from_its_registry_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(views, "contradictions", lambda registry: ())
+    problems = contract.unknown_and_contradiction_are_first_class(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("contradiction is absent from the contradiction registry" in p for p in problems)
+
+
+def test_a_promoted_research_object_absent_from_its_registry_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(views, "research_objects", lambda registry: ())
+    problems = contract.unknown_and_contradiction_are_first_class(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("research object is absent from the research registry" in p for p in problems)
+
+
+def test_promotion_that_is_not_idempotent_is_refused(declaration, monkeypatch):
+    """Promotion must be a function of the construct, not of how often it was asked for.
+
+    The law promotes the same construct twice and compares identities. A promotion that minted
+    a new object each time would grow the research registry on every measurement — the registry
+    would fill up with discoveries nobody made.
+    """
+    real = views.promote_to_research
+    calls = {"n": 0}
+
+    class _Elsewhere:
+        def __init__(self, identity):
+            self.identity = identity
+
+    def multiplying(registry, identity):
+        calls["n"] += 1
+        promoted = real(registry, identity)
+        if calls["n"] == 2:
+            return _Elsewhere(promoted.identity + "-a-second-object")
+        return promoted
+
+    monkeypatch.setattr(views, "promote_to_research", multiplying)
+    problems = contract.unknown_and_contradiction_are_first_class(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("promotion to research is not idempotent" in p for p in problems), problems
+
+
+def test_a_registered_discovery_absent_from_its_registry_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(views, "discovery_objects", lambda registry: ())
+    problems = contract.unknown_and_contradiction_are_first_class(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("discovery object is absent from the discovery registry" in p for p in problems)
+
+
+# --- UCON-L-09: the extension-point refusals -------------------------------------------------
+
+
+def test_an_extension_admitting_an_undeclared_disposition_is_refused(declaration, monkeypatch):
+    real = extension.exercise
+
+    def wrong_disposition(registry, point_id):
+        admitted = real(registry, point_id)
+        return dataclasses.replace(
+            admitted,
+            dispositions=(
+                dataclasses.replace(admitted.disposition, disposition="not-declared-anywhere"),
+            ),
+        )
+
+    monkeypatch.setattr(extension, "exercise", wrong_disposition)
+    problems = contract.extension_points_are_exercisable(Probe(declaration=declaration, repo=REPO))
+    assert any("carries no declared disposition" in p for p in problems), problems
+
+
+def test_an_exercise_key_without_the_probe_prefix_is_refused(declaration, monkeypatch):
+    # Without the declared prefix a probe is indistinguishable from a governed registration,
+    # and exercising an extension point would quietly add real constructs.
+    real = extension.exercise
+
+    def unprefixed(registry, point_id):
+        admitted = real(registry, point_id)
+        return dataclasses.replace(
+            admitted,
+            presentation=dataclasses.replace(
+                admitted.presentation, natural_key="looks-like-a-real-registration"
+            ),
+        )
+
+    monkeypatch.setattr(extension, "exercise", unprefixed)
+    problems = contract.extension_points_are_exercisable(Probe(declaration=declaration, repo=REPO))
+    assert any("does not carry the declared probe prefix" in p for p in problems), problems
+
+
+def test_an_extension_admitting_the_wrong_kind_is_refused(declaration, monkeypatch):
+    real = extension.exercise
+
+    def wrong_kind(registry, point_id):
+        admitted = real(registry, point_id)
+        return dataclasses.replace(
+            admitted,
+            presentation=dataclasses.replace(admitted.presentation, kind="a-different-kind"),
+        )
+
+    monkeypatch.setattr(extension, "exercise", wrong_kind)
+    problems = contract.extension_points_are_exercisable(Probe(declaration=declaration, repo=REPO))
+    assert any("but admitted" in p for p in problems), problems
+
+
+def test_a_declared_admission_that_fails_is_reported(declaration, monkeypatch):
+    def refuse(registry, point_id):
+        raise ConstructError("the declared admission refused for the test")
+
+    monkeypatch.setattr(extension, "exercise", refuse)
+    problems = contract.extension_points_are_exercisable(Probe(declaration=declaration, repo=REPO))
+    assert any("the declared admission failed" in p for p in problems), problems
