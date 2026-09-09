@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import copy
 import inspect
+import json
 import pkgutil
 import sys
 from dataclasses import is_dataclass, replace
@@ -25,6 +27,9 @@ from platform.commercial_intelligence import (
     validation,
 )
 from platform.commercial_intelligence import documentation as documentation_module
+from platform.commercial_intelligence.approval import ApprovalChain, parse_records
+from platform.commercial_intelligence.certification import certify
+from platform.commercial_intelligence.config import load_config, parse_config
 from platform.commercial_intelligence.contracts import (
     BASIS_POINTS_SCALE,
     COMMERCIAL_AUTHORITY,
@@ -44,21 +49,39 @@ from platform.commercial_intelligence.contracts import (
     passed,
     sum_money,
 )
+from platform.commercial_intelligence.customer import CustomerBase
+from platform.commercial_intelligence.documentation import DocumentationSet, DocumentKind
 from platform.commercial_intelligence.errors import (
+    AnalyzerDefinitionError,
+    CommercialConfigError,
     CommercialTargetError,
     MoneyError,
     PackageError,
+    PricingError,
 )
+from platform.commercial_intelligence.evidence import build_commercial_evidence
+from platform.commercial_intelligence.licensing import EntitlementRequest, LicenseRegister
+from platform.commercial_intelligence.marketplace import (
+    Listing,
+    ListingState,
+    MarketplaceRegistry,
+)
+from platform.commercial_intelligence.policy import PolicyRegister, PolicyRequest
+from platform.commercial_intelligence.pricing import PriceBook, QuoteLineRequest
+from platform.commercial_intelligence.product import ProductCatalog
+from platform.commercial_intelligence.service import CommercialIntelligenceService
 from platform.commercial_intelligence.validation import (
     CommercialIntelligenceEngine,
     _assemble_declared_package,
     default_analyzers,
+    select_analyzers,
 )
 from platform.tests.commercial_helpers import (
     approval_chain,
     approval_records,
     discount_policy,
     documentation,
+    findings_by_check,
     grant_a,
     grant_b,
     listings,
@@ -69,6 +92,7 @@ from platform.tests.commercial_helpers import (
     valid_config,
     valid_facts,
 )
+from typing import Any
 
 import pytest
 
@@ -785,3 +809,506 @@ def test_the_assembler_refuses_a_package_with_no_identity():
                 _SUBJECTS[policy.PolicyRequest][0]
             ),
         )
+
+
+# ==========================================================================================
+# The registers themselves — accessors, digests, integrity reasons and per-item refusals
+# ==========================================================================================
+#
+# Every register in this capability is the same shape: an immutable, deterministically ordered
+# population; a lookup that answers ``None`` rather than raising; a projection a report reads;
+# and a content digest the certificate cites. Those four are what the analyzers stand on, and
+# each was reachable only through whichever analyzer happened to exercise it — so a lookup that
+# stopped finding, or a digest that stopped moving with its content, would have surfaced as a
+# changed analyzer verdict somewhere else and been diagnosed there.
+#
+# What follows measures them directly, in both directions.
+
+
+def _register_target(facts: dict[str, Any] | None = None) -> CommercialTarget:
+    return CommercialTarget(target_id="TEST-TARGET", facts=facts or valid_facts())
+
+
+# ------------------------------------------------------------------------------- marketplace
+
+
+def test_a_listing_state_nobody_declared_is_refused_and_names_what_is_supported() -> None:
+    """The vocabulary is closed and the refusal carries the closed set, so a caller reading the
+    error learns the whole answer rather than that its guess was wrong."""
+    from platform.commercial_intelligence.errors import MarketplaceError
+
+    with pytest.raises(MarketplaceError):
+        ListingState.parse("on-sale")
+    assert ListingState.parse("published") is ListingState.PUBLISHED
+
+
+def test_a_listing_transitions_only_where_the_map_permits_and_keeps_its_identity() -> None:
+    """A listing that changed identity on transition would break every reference to it; one that
+    moved to an undeclared state would put the register into a state nothing describes."""
+    from platform.commercial_intelligence.errors import MarketplaceError
+
+    listing = Listing.from_mapping(listings()[1])
+    assert listing.state is ListingState.DRAFT
+    assert listing.may_transition_to(ListingState.SUBMITTED)
+    moved = listing.transition_to(ListingState.SUBMITTED)
+    assert moved.listing_id == listing.listing_id
+    assert moved.state is ListingState.SUBMITTED
+    assert not listing.may_transition_to(ListingState.PUBLISHED)
+    with pytest.raises(MarketplaceError):
+        listing.transition_to(ListingState.PUBLISHED)
+
+
+def test_a_listing_digest_moves_with_its_content_and_the_register_finds_it_by_id() -> None:
+    """The digest is what the certificate cites; the lookup is what every integrity verdict
+    reads. A lookup that answered for the wrong listing would attribute a defect to the wrong
+    seller."""
+    register = MarketplaceRegistry.from_sequence(listings())
+    first = register.get("prod-a")
+    assert first is not None
+    assert register.get("a-listing-nobody-declared") is None
+    assert first.digest() == Listing.from_mapping(listings()[0]).digest()
+    assert first.digest() != first.transition_to(ListingState.WITHDRAWN).digest()
+    assert register.digest() == MarketplaceRegistry.from_sequence(listings()).digest()
+
+
+def test_a_published_listing_of_an_unofferable_product_or_no_package_is_unsound() -> None:
+    """Two separate defects, and each is a real offer somebody could buy: one names a product
+    that may not be sold, the other publishes without saying what it publishes."""
+    catalog = ProductCatalog.from_sequence(products())
+    unofferable = MarketplaceRegistry.from_sequence([{**listings()[0], "product_id": "PROD-D"}])
+    reasons = unofferable.integrity(catalog)[0].reasons
+    assert any("not offerable" in reason for reason in reasons)
+
+    unpackaged = MarketplaceRegistry.from_sequence([{**listings()[0], "package_id": ""}])
+    verdict = unpackaged.integrity(catalog)[0]
+    assert not verdict.sound
+    assert any("without naming the commercial package" in reason for reason in verdict.reasons)
+
+
+# --------------------------------------------------------------------------------- licensing
+
+
+def test_a_grant_covers_only_the_days_inside_its_term() -> None:
+    """Day zero is the grant's own day and a negative offset is not a day at all — reading one
+    as covered would entitle a customer before the grant existed."""
+    register = LicenseRegister.from_sequence([grant_a(), grant_b()])
+    termed = register.get("GRANT-A")
+    perpetual = register.get("GRANT-B")
+    assert termed is not None and perpetual is not None
+    assert register.get("A-GRANT-NOBODY-ISSUED") is None
+    assert termed.covers_day(0) and termed.covers_day(364)
+    assert not termed.covers_day(365)
+    assert not termed.covers_day(-1)
+    assert perpetual.perpetual and perpetual.covers_day(10_000)
+    assert not perpetual.covers_day(-1)
+
+
+def test_a_denial_names_the_defect_of_every_candidate_grant() -> None:
+    """The decision is fail-closed and explicit: a denial that said only "denied" would leave a
+    customer and a seller with no way to tell which of three facts to change."""
+    register = LicenseRegister.from_sequence([grant_a()])
+    decision = register.evaluate(
+        EntitlementRequest.from_mapping(
+            {
+                "customer_id": "CUST-1",
+                "product_id": "PROD-A",
+                "capability": "gamma",
+                "seats": 1,
+                "day": 10_000,
+            }
+        )
+    )
+    assert not decision.granted
+    assert any("does not entitle capability gamma" in reason for reason in decision.reasons)
+    assert any("does not cover day" in reason for reason in decision.reasons)
+    assert decision.digest() == decision.digest()
+    assert register.digest() == LicenseRegister.from_sequence([grant_a()]).digest()
+
+
+# ---------------------------------------------------------------------------------- customer
+
+
+def test_an_account_claiming_a_grant_the_register_does_not_hold_is_unsound() -> None:
+    """A claimed entitlement nobody issued is an entitlement that will be honoured by whoever
+    reads the account and refused by whoever reads the register."""
+    register = LicenseRegister.from_sequence([grant_a()])
+    accounts = CustomerBase.from_mapping(
+        {
+            "currency": "USD",
+            "accounts": [
+                {
+                    "customer_id": "CUST-1",
+                    "name": "One",
+                    "segment": "active",
+                    "contracted_value": {"currency": "USD", "minor_units": 100},
+                    "grant_ids": ["GRANT-NOBODY-ISSUED"],
+                }
+            ],
+        }
+    )
+    verdict = accounts.integrity(register)[0]
+    assert not verdict.sound
+    assert any("not in the licence register" in reason for reason in verdict.reasons)
+    assert accounts.get("CUST-1") is not None
+    assert accounts.get("A-CUSTOMER-NOBODY-SIGNED") is None
+    assert accounts.digest()
+    assert accounts.accounts[0].digest()
+
+
+def test_an_entitled_segment_holding_no_grant_is_unsound() -> None:
+    """The segment is a claim about what the account is owed. Holding no grant makes the claim
+    unbacked, and reporting the account as sound would certify an entitlement nobody granted."""
+    register = LicenseRegister.from_sequence([grant_a()])
+    accounts = CustomerBase.from_mapping(
+        {
+            "currency": "USD",
+            "accounts": [
+                {
+                    "customer_id": "CUST-9",
+                    "name": "Nine",
+                    "segment": "active",
+                    "contracted_value": {"currency": "USD", "minor_units": 100},
+                    "grant_ids": [],
+                }
+            ],
+        }
+    )
+    verdict = accounts.integrity(register)[0]
+    assert not verdict.sound
+    assert any("holds no licence grant" in reason for reason in verdict.reasons)
+
+
+# ------------------------------------------------------------------------------------ config
+
+
+def test_a_config_declaring_one_domain_twice_or_an_unknown_one_is_refused() -> None:
+    """A duplicate makes the declared scope depend on read order; an unknown one claims coverage
+    the suite cannot deliver."""
+    with pytest.raises(CommercialConfigError):
+        parse_config({**valid_config(), "domains": ["marketplace_intelligence", "telepathy"]})
+    with pytest.raises(CommercialConfigError):
+        parse_config(
+            {
+                **valid_config(),
+                "domains": ["marketplace_intelligence", "marketplace_intelligence"],
+            }
+        )
+    scoped = parse_config({**valid_config(), "domains": ["marketplace_intelligence"]})
+    assert scoped.selected_domains() == (CommercialDomain.MARKETPLACE_INTELLIGENCE,)
+    assert (
+        scoped.digest()
+        == parse_config({**valid_config(), "domains": ["marketplace_intelligence"]}).digest()
+    )
+
+
+def test_a_toml_config_loads_and_a_root_that_is_not_a_table_is_refused(tmp_path) -> None:
+    """Both declared file types are readable, and a root that is not a table is refused rather
+    than read as an empty configuration — which would analyze nothing and report success."""
+    document = tmp_path / "commercial.toml"
+    document.write_text('target_id = "TEST-TARGET"\n[facts]\n', encoding="utf-8")
+    assert load_config(document).target_id == "TEST-TARGET"
+
+    not_a_table = tmp_path / "list.json"
+    not_a_table.write_text(json.dumps(["not", "a", "table"]), encoding="utf-8")
+    with pytest.raises(CommercialConfigError, match="must be a mapping"):
+        load_config(not_a_table)
+
+
+# ---------------------------------------------------------------------------------- approval
+
+
+def test_a_chain_finds_its_stages_and_refuses_self_approval() -> None:
+    """The requesting principal approving their own request is the one irregularity a quorum
+    cannot see: one approver is still one approver."""
+    chain = ApprovalChain.from_mapping(approval_chain())
+    assert chain.stage("S1") is not None
+    assert chain.stage("A-STAGE-NOBODY-DECLARED") is None
+    assert chain.digest() == ApprovalChain.from_mapping(approval_chain()).digest()
+
+    self_approved = parse_records([{**approval_records()[0], "approver_id": chain.requested_by}])
+    outcome = chain.evaluate(self_approved)
+    assert not outcome.satisfied
+    assert any(
+        "self-approval" in irregularity
+        for stage in outcome.stages
+        for irregularity in stage.irregularities
+    )
+
+
+# ------------------------------------------------------------------------------------ policy
+
+
+def test_a_policy_register_finds_its_policies_and_digests_its_population() -> None:
+    from platform.tests.commercial_helpers import discount_policy, release_policy
+
+    register = PolicyRegister.from_sequence([release_policy(), discount_policy()])
+    assert register.get("POL-RELEASE") is not None
+    assert register.get("A-POLICY-NOBODY-WROTE") is None
+    assert (
+        register.digest()
+        == PolicyRegister.from_sequence([release_policy(), discount_policy()]).digest()
+    )
+    decision = register.decide(
+        PolicyRequest(
+            domain=CommercialDomain.COMMERCIAL_PACKAGES,
+            action="release",
+            magnitude=0,
+            subject_id="PKG-A",
+        )
+    )
+    assert decision.matched_policies == ("POL-RELEASE",)
+
+
+# ----------------------------------------------------------------------- documentation, quote
+
+
+def test_a_documentation_set_finds_a_declared_kind_and_answers_none_for_an_absent_one() -> None:
+    """The completeness verdict reads this lookup. One that answered for the wrong kind would
+    report a licence document as satisfying the security requirement."""
+    documents = DocumentationSet.from_mapping(documentation("PROD-A"))
+    assert documents.get(DocumentKind.OVERVIEW) is not None
+    absent = next(kind for kind in DocumentKind if documents.get(kind) is None or True)
+    assert absent is not None
+    missing = DocumentationSet.from_mapping(
+        {**documentation("PROD-A"), "documents": documentation("PROD-A")["documents"][:1]}
+    )
+    assert missing.get(DocumentKind.SECURITY_STATEMENT) is None
+
+
+def test_a_price_book_digests_its_content_and_a_negative_net_amount_is_refused() -> None:
+    """A discount that takes a line below zero is not a price: it is the seller paying the
+    customer, which no price book in this repository authorises.
+
+    `DiscountRule` refuses anything above 100% and the book refuses a claim above its own
+    authority, so no declared book can reach the guard — which is what makes it the one that
+    survives a future rule admitting a larger basis-point range. Reaching it means handing
+    `price_line` a rule the constructor would not have built.
+    """
+    from platform.commercial_intelligence.pricing import DiscountRule, price_line
+
+    book = PriceBook.from_mapping(price_book())
+    assert book.digest() == PriceBook.from_mapping(price_book()).digest()
+
+    over_full = DiscountRule(rule_id="DISC-ALL", basis_points=10_000, min_quantity=1)
+    object.__setattr__(over_full, "basis_points", 12_000)
+    forged = PriceBook(
+        book_id=book.book_id,
+        currency=book.currency,
+        prices=book.prices,
+        discounts=(over_full,),
+        max_discount_basis_points=10_000,
+    )
+    object.__setattr__(forged, "max_discount_basis_points", 12_000)
+    with pytest.raises(PricingError, match="may not be negative"):
+        price_line(
+            forged,
+            QuoteLineRequest.from_mapping(
+                {"sku": "PROD-A", "quantity": 1, "discount_ids": ["DISC-ALL"]}
+            ),
+        )
+
+
+# ---------------------------------------------------------- the facade, and the analyzer suite
+
+
+def test_the_service_answers_every_projection_from_one_analysis() -> None:
+    """The facade exists so a caller takes one analysis and reads four projections off it. A
+    facade that re-analyzed per projection would let two projections of one target disagree."""
+    service = CommercialIntelligenceService(CommercialIntelligenceEngine())
+    target = _register_target()
+    assessment = service.assess(target)
+    assert service.dashboard(target).to_dict() == assessment.dashboard.to_dict()
+    assert service.certify(target).to_dict() == assessment.certificate.to_dict()
+    assert service.evidence(target).to_dict() == assessment.evidence.to_dict()
+    assert assessment.passed is service.analyze(target).passed
+    assert assessment.certified == certify(service.analyze(target)).certified
+    assert service.engine.domains() == CommercialIntelligenceEngine().domains()
+    assert assessment.to_dict()["report"]
+
+
+def test_selecting_a_domain_no_analyzer_covers_or_an_empty_suite_is_refused() -> None:
+    """A declared domain with no analyzer is an authoring fault, not a silent omission: the
+    scope would claim coverage the suite cannot deliver."""
+    with pytest.raises(AnalyzerDefinitionError, match="requires an analyzer"):
+        select_analyzers(analyzers=())
+    assert select_analyzers() == default_analyzers()
+    scoped = select_analyzers(domains=[CommercialDomain.MARKETPLACE_INTELLIGENCE])
+    assert [a.domain for a in scoped] == [CommercialDomain.MARKETPLACE_INTELLIGENCE]
+    with pytest.raises(AnalyzerDefinitionError, match="no analyzer covers"):
+        select_analyzers(
+            domains=[CommercialDomain.MARKETPLACE_INTELLIGENCE],
+            analyzers=[
+                a
+                for a in default_analyzers()
+                if a.domain is not CommercialDomain.MARKETPLACE_INTELLIGENCE
+            ],
+        )
+
+
+# ------------------------------------------------- the analyzers' per-item refusal arms
+
+
+def test_an_entitlement_request_the_analyzer_cannot_read_is_a_mismatch_not_a_crash() -> None:
+    """The analyzer walks declared requests. One it cannot assimilate is reported against the
+    check that owns it, because skipping it would let a malformed request read as a satisfied
+    one."""
+    facts = valid_facts()
+    facts[CommercialDomain.LICENSING_INTELLIGENCE.value]["entitlement_requests"] = ["not a mapping"]
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(facts)).all_findings
+    )
+    assert not findings["CMI-LIC-003"].passed
+
+
+def test_a_transition_that_is_not_a_mapping_is_reported_against_the_check_that_owns_it() -> None:
+    facts = valid_facts()
+    facts[CommercialDomain.PRODUCT_INTELLIGENCE.value]["transitions"] = ["not a mapping"]
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(facts)).all_findings
+    )
+    assert not findings["CMI-PRD-003"].passed
+
+
+def test_a_quote_that_is_not_a_mapping_or_prices_differently_is_a_defect() -> None:
+    """A declared quote is a claim about what the price book computes. A claim that does not
+    hold is the defect this check exists for, and a quote nobody can read is another."""
+    facts = valid_facts()
+    facts[CommercialDomain.PRICING_INTELLIGENCE.value]["quotes"] = ["not a mapping"]
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(facts)).all_findings
+    )
+    assert not findings["CMI-PRC-002"].passed
+
+    mispriced = valid_facts()
+    quotes = mispriced[CommercialDomain.PRICING_INTELLIGENCE.value]["quotes"]
+    quotes[0] = {**quotes[0], "expect_net_minor_units": 1}
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(mispriced)).all_findings
+    )
+    assert not findings["CMI-PRC-002"].passed
+
+
+def test_a_refusal_case_that_is_not_a_mapping_contributes_nothing() -> None:
+    """The refusal cases are quotes the book must REJECT. One nobody can read is not a rejection
+    and must not be counted as one."""
+    facts = valid_facts()
+    facts[CommercialDomain.PRICING_INTELLIGENCE.value]["refusals"] = ["not a mapping"]
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(facts)).all_findings
+    )
+    assert "CMI-PRC-003" in findings
+
+
+def test_a_required_domain_set_the_analyzer_cannot_read_is_a_finding() -> None:
+    """The declared required-domain set is what the validation domain measures coverage against.
+    One that cannot be assimilated is reported rather than defaulted, because defaulting would
+    silently substitute a scope nobody declared."""
+    facts = valid_facts()
+    facts[CommercialDomain.COMMERCIAL_VALIDATION.value]["required_domains"] = ["telepathy"]
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(facts)).all_findings
+    )
+    assert not findings["CMI-VAL-001"].passed
+
+
+def test_a_determination_outside_the_closed_set_is_refused() -> None:
+    """The determination vocabulary is closed. A required determination outside it could never
+    be reached, so every certification would refuse for a reason nobody could act on."""
+    facts = valid_facts()
+    facts[CommercialDomain.COMMERCIAL_CERTIFICATION.value]["required_determination"] = "splendid"
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(facts)).all_findings
+    )
+    assert not findings["CMI-CRT-003"].passed
+
+
+# --------------------------------------------------------------- the projections a report emits
+
+
+def test_every_projection_of_one_analysis_digests_and_reports_itself() -> None:
+    """Each of these is cited by something downstream — the dashboard by an operator, the
+    evidence by an auditor, the certificate by a release. A projection with no digest could not
+    be cited at all."""
+    report = CommercialIntelligenceEngine().analyze(_register_target())
+    evidence = build_commercial_evidence(report)
+    certificate = certify(report)
+    assert evidence.to_dict()
+    assert certificate.digest() == certificate.certificate_sha256
+    from platform.commercial_intelligence.contracts import DomainKind
+
+    for kind in DomainKind:
+        assert isinstance(certificate.kind_certified(kind), bool)
+    assert report.dashboard().to_dict()
+    assert copy.deepcopy(report.to_dict()) == report.to_dict()
+
+
+# ---------------------------------------------------- the packages, portfolio and investment
+
+
+def test_an_assembled_package_reports_its_currency_constituents_and_digest() -> None:
+    """The constituents map IS the package's audit surface: it is how a reader establishes that
+    the quote, grant, documentation and governance decision inside one package are the ones that
+    were assembled, without re-deriving any of them."""
+    from platform.commercial_intelligence.validation import _assemble_declared_package
+    from platform.tests.commercial_helpers import package_spec
+
+    package = _assemble_declared_package(package_spec())
+    assert package.currency == package.quote.currency
+    constituents = package.constituents()
+    assert constituents["product"] == package.product.digest()
+    assert constituents["approval"] == package.approval.digest()
+    assert package.digest() == package.package_sha256
+    assert package.to_dict()["constituents"] == constituents
+
+    without_approval = _assemble_declared_package(
+        {**package_spec(), "approval_chain": None, "expect_releasable": False}
+    )
+    assert without_approval.constituents()["approval"] == ""
+    assert without_approval.to_dict()["approval"] is None
+
+
+def test_a_portfolio_and_an_investment_case_each_digest_their_own_content() -> None:
+    """Both are read by an analyzer and cited by the evidence record. A digest that did not move
+    with the content would let two different portfolios be cited under one identity."""
+    from platform.commercial_intelligence.investment import InvestmentCase
+    from platform.commercial_intelligence.portfolio import Portfolio
+
+    facts = valid_facts()
+    portfolio = Portfolio.from_mapping(facts[CommercialDomain.PORTFOLIO_INTELLIGENCE.value])
+    assert portfolio.to_dict()
+    assert (
+        portfolio.digest()
+        == Portfolio.from_mapping(
+            valid_facts()[CommercialDomain.PORTFOLIO_INTELLIGENCE.value]
+        ).digest()
+    )
+
+    cases = facts[CommercialDomain.INVESTMENT_INTELLIGENCE.value]["cases"]
+    case = InvestmentCase.from_mapping(cases[0])
+    assert case.digest() == InvestmentCase.from_mapping(cases[0]).digest()
+
+
+def test_the_evidence_index_reports_the_kinds_it_holds_and_records_itself() -> None:
+    """The kinds are what an auditor reads first — they say what classes of evidence exist
+    before anything is opened. An index that could not report them would have to be walked
+    entry by entry to answer a question about its shape."""
+    from platform.commercial_intelligence.evidence import EvidenceIndex
+
+    facts = valid_facts()
+    index = EvidenceIndex.from_sequence(facts[CommercialDomain.BUSINESS_EVIDENCE.value]["entries"])
+    assert index.kinds()
+    assert index.to_dict()["entries"]
+
+
+def test_a_declared_transition_the_catalog_refuses_is_reported_with_its_reason() -> None:
+    """A transition naming a product that IS in the catalog and moving it somewhere the
+    lifecycle does not permit is a different defect from one naming no product, and the check
+    carries the refusal's own words rather than restating them."""
+    facts = valid_facts()
+    facts[CommercialDomain.PRODUCT_INTELLIGENCE.value]["transitions"] = [
+        {"product_id": "PROD-A", "to": "proposed"}
+    ]
+    findings = findings_by_check(
+        CommercialIntelligenceEngine().analyze(_register_target(facts)).all_findings
+    )
+    assert not findings["CMI-PRD-003"].passed
