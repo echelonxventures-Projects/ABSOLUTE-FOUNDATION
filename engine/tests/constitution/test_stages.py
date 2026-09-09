@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import pytest
 
-from engine.constitution import catalog, stages
+from engine.constitution import catalog, evolution, stages
 from engine.constitution.errors import ConstitutionalError
 from engine.constitution.metadata import Population
 from engine.nucleus import lifecycle as ucl
@@ -167,7 +167,6 @@ def test_the_faculty_set_is_addressable_and_open() -> None:
 
 def test_the_lifecycle_executes_every_stage_through_the_faculties(system: Population) -> None:
     """The composition point: UCL-000001 runs, discharged by measurement per stage."""
-    from engine.constitution import evolution
 
     execution = ucl.execute(
         "repository",
@@ -182,8 +181,6 @@ def test_the_lifecycle_executes_every_stage_through_the_faculties(system: Popula
 
 
 def test_a_broken_population_fails_stages_rather_than_skipping_them() -> None:
-    from engine.constitution import evolution
-
     execution = ucl.execute(
         "repository", stage_function=evolution.lifecycle_stage_function(_broken())
     )
@@ -198,3 +195,48 @@ def test_the_manifest_records_the_faculty_module_as_evidence() -> None:
     assert len(nodes) == len(ucl.STAGES)
     for node in nodes:
         assert "engine/constitution/stages.py" in node["evidence"], node["id"]
+
+
+def test_a_repository_missing_the_artifacts_a_faculty_reads_yields_nothing_not_a_crash(
+    monkeypatch: pytest.MonkeyPatch, tmp_path
+) -> None:
+    """THE FACULTIES READ REAL ARTIFACTS, and a clone that has not produced them yet is a
+    real state — a pristine checkout before the generators have run is exactly that.
+
+    An absent manifest yields no stages and an absent knowledge store yields no knowledge;
+    both are empty ANSWERS. Letting the read raise would make every stage in the run
+    unevaluable for a reason that has nothing to do with the stage, and the resulting
+    lifecycle report would say the constitution could not be measured when what actually
+    happened is that one file had not been generated.
+    """
+    monkeypatch.setattr(stages, "REPO", tmp_path)
+    context = stages.Context(population=population(declare("root")))
+
+    assert context.manifest == []
+    assert context.knowledge == {}
+
+
+def test_a_measurement_renders_its_evidence_and_the_digest_of_that_evidence() -> None:
+    """The evidence identity is a digest of the PAYLOAD and never of the stage name, so two
+    stages measuring the same thing carry the same evidence id and a stage measuring
+    something different cannot borrow another's. ``to_dict`` is how a lifecycle record reads
+    a measurement, and it had no caller — a projection nothing reads can drift from the
+    object it projects without any failure."""
+    measurement = stages.Measurement(
+        satisfied=True, detail="two subjects declared", evidence={"subjects": 2}
+    )
+    rendered = measurement.to_dict()
+
+    assert rendered["satisfied"] is True
+    assert rendered["detail"] == "two subjects declared"
+    assert rendered["evidence"] == {"subjects": 2}
+    assert rendered["evidence_digest"] == measurement.digest()
+    assert rendered["evidence_digest"].startswith(f"{stages.EVIDENCE_PREFIX}:")
+
+    same_payload = stages.Measurement(
+        satisfied=False, detail="a different sentence entirely", evidence={"subjects": 2}
+    )
+    assert same_payload.digest() == measurement.digest(), "the digest read the detail"
+
+    different = stages.Measurement(satisfied=True, detail="x", evidence={"subjects": 3})
+    assert different.digest() != measurement.digest()

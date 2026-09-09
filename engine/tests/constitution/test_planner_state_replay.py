@@ -9,6 +9,8 @@ system never takes and therefore the one most likely to be wrong.
 
 from __future__ import annotations
 
+import dataclasses
+
 import pytest
 
 from engine.constitution import planner, replay, state
@@ -188,3 +190,49 @@ def test_a_stable_failure_is_still_a_fixed_point(lawful: Population) -> None:
 def test_a_fixed_point_cannot_be_observed_in_one_round(lawful: Population) -> None:
     with pytest.raises(ReplayDivergence):
         replay.converge(lawful, max_rounds=1)
+
+
+def test_asking_for_the_position_of_a_subject_the_plan_did_not_place_returns_minus_one(
+    lawful: Population,
+) -> None:
+    """``-1`` and not an exception, because "not placed" is an ordinary answer.
+
+    A caller comparing two subjects' positions is asking about the derived order, and a
+    subject the plan could not place has no position in it. Raising would make every such
+    comparison need a guard; returning ``0`` would put an unplaceable subject first.
+    """
+    plan = planner.plan(lawful)
+
+    for subject in lawful.subjects():
+        assert plan.position(subject) >= 0
+    assert plan.position("never-declared") == -1
+    positions = [plan.position(s) for s in lawful.subjects()]
+    assert sorted(positions) == list(range(len(positions)))
+
+
+def test_a_replay_with_a_single_round_names_no_divergent_act() -> None:
+    """Divergence is a comparison BETWEEN two rounds, so one round can carry no verdict
+    about it. Returning an empty tuple is the honest answer; comparing a round with itself
+    would report perfect convergence for a replay that has not yet replayed anything."""
+    settled = replay.converge(population(declare("root")))
+    assert settled.fixed_point
+    assert settled.divergent_acts() == ()
+
+    one_round = dataclasses.replace(settled, rounds=settled.rounds[:1])
+    assert len(one_round.rounds) == 1
+    assert one_round.divergent_acts() == ()
+
+
+def test_an_opened_seal_is_the_same_state_marked_dirty(lawful: Population) -> None:
+    """``opened`` is what a mutation gateway holds while it works, and it must not re-derive
+    the digest: the seal has to keep pointing at the state it was taken over, or the gateway
+    would be holding a seal for a state that does not exist yet. Only ``committed`` moves."""
+    committed = state.commit(lawful, source="test")
+    assert committed.committed
+    assert not committed.dirty
+
+    opened = committed.opened()
+    assert opened.dirty
+    assert not opened.committed
+    assert opened.digest == committed.digest
+    assert opened.matches(lawful)

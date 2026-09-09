@@ -16,6 +16,7 @@ from __future__ import annotations
 import pytest
 
 from engine.constitution import acceptance, catalog, evolution, gateway, law
+from engine.constitution import stages as stage_faculties
 from engine.constitution.errors import AcceptanceFailure, ConstitutionalError
 from engine.constitution.metadata import Population
 from engine.nucleus import lifecycle as nucleus_lifecycle
@@ -270,3 +271,153 @@ def test_the_whole_system_is_deterministic() -> None:
     first = evolution.run(system, evolution.Goal("replay me", authority="ext:a"))
     second = evolution.run(system, evolution.Goal("replay me", authority="ext:a"))
     assert first.digest() == second.digest()
+
+
+def test_a_cycle_declaring_a_cycle_among_its_phases_has_no_order() -> None:
+    """The evolution engine derives its own phase order through CEL-02 rather than reading
+    it off ``PHASES``, which is what makes it subject to the ordering law like everything
+    else. The cost is that its declaration could be cyclic, and the refusal is what stops a
+    cyclic declaration from yielding a partial order that quietly runs some phases."""
+    cyclic = (
+        evolution.Phase(
+            name="a", statement="a", depends_on=("b",), run=lambda c: (True, "", {}, c)
+        ),
+        evolution.Phase(
+            name="b", statement="b", depends_on=("a",), run=lambda c: (True, "", {}, c)
+        ),
+    )
+    with pytest.raises(ConstitutionalError) as excinfo:
+        evolution.phase_order(cyclic)
+    assert "declares a cycle" in str(excinfo.value)
+    assert set(excinfo.value.detail["unresolved"]) == {"a", "b"}
+
+
+def test_a_phase_that_cannot_be_evaluated_is_a_failed_phase_and_not_a_crash(
+    lawful: Population,
+) -> None:
+    """AN EXCEPTION OUT OF A PHASE IS STILL A VERDICT — the same discipline the mutation
+    pipeline keeps for its stages. Letting it escape would abandon the cycle with no record
+    of which phase was being evaluated, and the record is the only thing a later reader has.
+    """
+
+    def explode(_cycle):
+        raise RuntimeError("the observation surface is unavailable")
+
+    phases = tuple(
+        evolution.Phase(
+            name=phase.name,
+            statement=phase.statement,
+            run=explode if phase.name == evolution.PHASES[0].name else phase.run,
+            depends_on=phase.depends_on,
+        )
+        for phase in evolution.PHASES
+    )
+    record = evolution.run(lawful, evolution.Goal("measure only"), phases=phases)
+
+    assert not record.complete
+    failed = next(o for o in record.outcomes if not o.satisfied)
+    assert "phase could not be evaluated" in failed.detail
+    assert "the observation surface is unavailable" in failed.detail
+
+
+def test_converging_runs_again_only_while_the_population_keeps_moving(
+    lawful: Population,
+) -> None:
+    """THE STOPPING CONDITION IS A FIXED POINT, NOT A COUNT.
+
+    A cycle that leaves the population digest unchanged has found a fixed point of the
+    repository's own constitution, and running again would produce the same record — so the
+    loop stops. It also stops on an incomplete cycle, because re-running a refused cycle
+    would re-refuse it. The ``current = record.population`` line is the only way the loop
+    ever continues, and it had never run: every fixture settles on its first cycle, which is
+    the correct outcome and also why the continuation was dead.
+    """
+    goal = evolution.Goal("measure only")
+
+    settled = evolution.converge_cycles(lawful, goal)
+    assert len(settled) == 1, "the fixture no longer settles on its first cycle"
+
+    calls: list[int] = []
+
+    class _Record:
+        def __init__(self, population):
+            self.complete = True
+            self.population = population
+
+    def advancing(population, _goal, **_kwargs):
+        calls.append(len(calls))
+        if len(calls) < 3:
+            return _Record(population.with_records([declare(f"grown{len(calls)}")]))
+        return _Record(population)
+
+    original = evolution.run
+    try:
+        evolution.run = advancing
+        records = evolution.converge_cycles(lawful, goal, max_cycles=10)
+    finally:
+        evolution.run = original
+
+    assert len(records) == 3, "the loop did not continue while the population was moving"
+    assert records[-1].population.digest() == records[-2].population.digest()
+
+    # AND THE BOUND IS REAL. A population that never stops moving would loop forever, so
+    # `max_cycles` is what makes convergence terminate on a repository that does not
+    # converge — the answer is then "these cycles ran and it had not settled", which is a
+    # result a reader can act on rather than a hang.
+    calls.clear()
+    never_settles = 0
+
+    def always_moving(population, _goal, **_kwargs):
+        nonlocal never_settles
+        never_settles += 1
+        return _Record(population.with_records([declare(f"more{never_settles}")]))
+
+    try:
+        evolution.run = always_moving
+        bounded = evolution.converge_cycles(lawful, goal, max_cycles=2)
+    finally:
+        evolution.run = original
+
+    assert len(bounded) == 2, "the bound did not stop a population that never settles"
+    assert bounded[-1].population.digest() != bounded[-2].population.digest()
+
+
+def test_a_stage_with_no_registered_faculty_is_unclaimed_rather_than_satisfied(
+    lawful: Population,
+) -> None:
+    """NOT_APPLICABLE, never SATISFIED. A stage nobody measures is honestly unclaimed;
+    reporting it satisfied would let a lifecycle stage be discharged by the ABSENCE of a
+    measurement, which is the same defect as a declaration asserting itself."""
+    stage_function = evolution.lifecycle_stage_function(lawful)
+    unregistered = nucleus_lifecycle.Stage(
+        stage_id="no-such-stage", name="unclaimed", ordinal=999, group="none"
+    )
+    status, _evidence_id, detail = stage_function("root", unregistered)
+
+    assert status is nucleus_lifecycle.StageStatus.NOT_APPLICABLE
+    assert detail["reason"] == "no faculty for this stage"
+    assert detail["subject"] == "root"
+
+
+def test_a_faculty_that_raises_fails_its_stage_and_names_the_error(
+    lawful: Population, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The same "an exception is still a verdict" discipline, at the composition point where
+    this engine's faculties are handed to UCL-000001. A raising faculty must fail its own
+    stage rather than abort the lifecycle run, and the error type and text are carried into
+    the evidence so the failure is diagnosable from the record."""
+
+    stage_id = next(iter(stage_faculties.FACULTIES))
+
+    def explode(_context):
+        raise RuntimeError("the manifest is unreadable")
+
+    monkeypatch.setitem(stage_faculties.FACULTIES, stage_id, explode)
+    stage_function = evolution.lifecycle_stage_function(lawful)
+    declared = nucleus_lifecycle.Stage(stage_id=stage_id, name="declared", ordinal=1, group="any")
+    status, evidence_id, detail = stage_function("root", declared)
+
+    assert status is nucleus_lifecycle.StageStatus.FAILED
+    assert evidence_id.endswith(":unevaluable")
+    assert "RuntimeError" in detail["error"]
+    assert "the manifest is unreadable" in detail["error"]
