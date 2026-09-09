@@ -1235,3 +1235,114 @@ def test_every_law_check_is_named_by_this_suite() -> None:
     source = Path(__file__).read_text(encoding="utf-8")
     unnamed = sorted(name for name in contract.LAW_CHECKS if name not in source)
     assert not unnamed, f"law checks this suite never names: {unnamed}"
+
+
+# --- the refusal branches of the bound laws -------------------------------------------------
+#
+# Every law below holds on the live declaration, so only its "holds" path ran and its REFUSAL
+# path was measured by nothing. UEC-L-05 states the principle these tests answer: a detector
+# with no failing case is a detector nobody has shown can fail. Each test therefore drives one
+# violation and asserts the message that violation produces, rather than asserting that some
+# problem was reported — a test that accepted any problem would pass on the wrong one.
+
+
+def _forge(declaration, **changes):
+    """The declaration with one field replaced, probed against the real repository."""
+    return contract.Probe(declaration=dataclasses.replace(declaration, **changes), repo=repo_root())
+
+
+def test_a_primitive_count_over_its_bound_is_refused(declaration):
+    problems = contract.expressiveness_is_preserved_within_bounds(
+        _forge(declaration, primitive_bound=1)
+    )
+    assert any("primitives exceed the bound of 1" in p for p in problems), problems
+
+
+def test_an_entity_class_count_over_its_bound_is_refused(declaration):
+    problems = contract.expressiveness_is_preserved_within_bounds(
+        _forge(declaration, entity_class_bound=1)
+    )
+    assert any("entity classes exceed the bound of 1" in p for p in problems), problems
+
+
+def test_a_state_count_over_its_bound_is_refused(declaration):
+    problems = contract.expressiveness_is_preserved_within_bounds(
+        _forge(declaration, state_bound=1)
+    )
+    assert any("states exceed the bound of 1" in p for p in problems), problems
+
+
+def test_a_catalogue_expressing_no_more_than_its_primitives_is_refused(declaration):
+    # The catalogue must compose MORE conditions than it has primitives, or it has added
+    # vocabulary without adding expressiveness.
+    problems = contract.expressiveness_is_preserved_within_bounds(
+        _forge(declaration, conditions=declaration.conditions[:1])
+    )
+    assert any("no more conditions than there are primitives" in p for p in problems), problems
+
+
+def test_a_residual_relation_the_declaration_does_not_carry_is_refused(declaration):
+    problems = contract.residual_is_representable(
+        _forge(declaration, residual_relation="not-a-declared-relation")
+    )
+    assert any("residual relation is not declared" in p for p in problems), problems
+
+
+def test_an_undeclared_residual_context_kind_refuses_at_ledger_construction(declaration):
+    """The law's own guard for this is unreachable, and the reason is worth recording.
+
+    `residual_is_representable` ends with `if declaration.residual_context_kind not in
+    set(declaration.context_kind_ids)`, but `probe.fresh_ledger()` runs FIRST and composes
+    with that kind, so any declaration that could satisfy the guard raises before the guard
+    is read. The behaviour is still correct — an undeclared residual context kind is refused,
+    loudly — but it is refused as a CompositionError rather than reported as a problem, and
+    that branch of the law is defensive rather than live. Asserting the real behaviour is
+    worth more than a test contorted to reach a line, and more honest than a pragma.
+    """
+    kept = tuple(
+        k for k in declaration.context_kinds if k.identifier != declaration.residual_context_kind
+    )
+    forged = _forge(declaration, context_kinds=kept)
+    with pytest.raises(RecursiveKnowledgeError, match="not a declared context kind"):
+        contract.residual_is_representable(forged)
+
+
+def test_a_law_selector_matching_nothing_is_a_fault(declaration):
+    # adr/0041's shape: `--law NOT-A-REAL-LAW` used to select an empty set and exit 0, so a
+    # workflow written that way was green because it measured nothing.
+    with pytest.raises(contract.ContractError, match="no declared law matches"):
+        contract.measure(laws=["NOT-A-REAL-LAW"])
+
+
+def test_a_law_selector_naming_a_check_rather_than_a_law_is_a_fault(declaration):
+    # The more dangerous half: check names look like law selectors and silently matched none.
+    a_check_name = declaration.laws[0].check
+    with pytest.raises(contract.ContractError, match="no declared law matches"):
+        contract.measure(laws=[a_check_name])
+
+
+def test_selecting_one_law_measures_only_that_law(declaration):
+    only = declaration.laws[0].law_id
+    report = contract.measure(laws=[only])
+    assert [row["law_id"] for row in report["laws"]] == [only]
+
+
+def test_an_undeclared_residual_domain_refuses_at_ledger_construction(declaration):
+    """Second of the same shape as the context kind, and the pattern is the point.
+
+    `residual_is_representable` wraps its `express` call in `except RecursiveKnowledgeError`,
+    and DeclarationError IS one, so the handler would catch it. It never gets the chance:
+    `probe.fresh_ledger()` runs first and resolves the same field, so the declaration raises
+    during ledger construction. The refusal is real and correct; the law's own handler for it
+    is defensive rather than live.
+    """
+    forged = _forge(declaration, residual_domain="not-a-declared-domain")
+    with pytest.raises(RecursiveKnowledgeError, match="not a declared"):
+        contract.residual_is_representable(forged)
+
+
+def test_an_inadmissible_residual_gap_class_is_reported(declaration):
+    problems = contract.residual_is_representable(
+        _forge(declaration, residual_gap_class="not-a-declared-gap-class")
+    )
+    assert any("residual gap class cannot be admitted" in p for p in problems), problems
