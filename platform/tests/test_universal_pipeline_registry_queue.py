@@ -480,3 +480,94 @@ def test_queue_evidence_is_deterministic() -> None:
     assert rendered["admitted"] == 2
     assert rendered["ready_queue"] == ["a"]
     assert [e["unit_id"] for e in rendered["entries"]] == ["a", "b"]
+
+
+def test_a_capability_graph_lists_each_provider_once(monkeypatch) -> None:
+    """THE CAPABILITY GRAPH IS A SET OF PROVIDERS, NOT A COUNT OF DECLARATIONS.
+
+    A pipeline appearing twice on one side of a capability would make the graph report two
+    providers for a capability with one owner — exactly the shape an unsatisfied- or
+    duplicated-capability check is meant to detect. It cannot happen today:
+    ``PipelineDefinition`` refuses a duplicate declaration and ``pipeline_ids`` is a set, so
+    each id is visited once. The guard is what keeps that true if either stops being.
+    """
+    registry = PipelineRegistry()
+    registry.register(
+        PipelineDefinition(
+            pipeline_id="test.provider",
+            pipeline_type="implementation",
+            version="1.0.0",
+            stages=(StageDefinition(stage_id="a", handler="uapf.record"),),
+            capabilities=(PipelineCapability("cap.x", ContractRef("c.x"), "provides"),),
+        )
+    )
+    assert registry.capability_graph()["cap.x"]["provided_by"] == ["test.provider"]
+
+    monkeypatch.setattr(
+        type(registry),
+        "pipeline_ids",
+        property(lambda _self: ("test.provider", "test.provider")),
+    )
+    assert registry.capability_graph()["cap.x"]["provided_by"] == ["test.provider"]
+
+
+def test_a_registry_entry_whose_plan_no_longer_follows_from_its_declaration_is_refused() -> None:
+    """A PLAN IS DERIVED, so a stored one that does not re-derive was written by hand.
+
+    ``register`` computes the plan from the definition, which is why the integrity check has
+    never fired: every admitted entry re-plans to what it holds. It is the check for an entry
+    constructed directly — and a plan that does not follow from its declaration would execute
+    stages the pipeline never declared, in an order nothing derived.
+    """
+    registry = PipelineRegistry()
+    registry.register(
+        PipelineDefinition(
+            pipeline_id="test.replanned",
+            pipeline_type="implementation",
+            version="1.0.0",
+            stages=(
+                StageDefinition(stage_id="a", handler="uapf.record"),
+                StageDefinition(stage_id="b", handler="uapf.record", requires=("a",)),
+            ),
+        )
+    )
+    registry.require_intact()
+
+    entry = registry.entries[0]
+    forged = dataclasses.replace(
+        entry, plan=dataclasses.replace(entry.plan, waves=((0, "b"), (1, "a")))
+    )
+    registry._entries[0] = forged  # noqa: SLF001 - deliberate corruption
+
+    with pytest.raises(PipelineRegistryError, match="does not match its declaration"):
+        registry.require_intact()
+
+
+def test_an_excluded_sentinel_that_is_also_an_active_unit_is_refused() -> None:
+    """EXCLUSION AND ACTIVITY ARE MUTUALLY EXCLUSIVE CLAIMS.
+
+    A unit cannot both be excluded from the run and be in a queue the run is working
+    through: whichever the orchestrator consulted first would decide, and the other claim
+    would be silently ignored. The refusal names the overlapping units so the contradiction
+    can be resolved rather than merely detected.
+    """
+    manager = PipelineQueueManager()
+    manager.enqueue(QueueEntry(unit_id="live", pipeline_id="p", version="1.0.0"))
+    manager.require_invariants()
+
+    # An entry that is BOTH excluded and still in an active queue: `exclude` moves the
+    # unit out, so this state is reached by putting the excluded sentinel back.
+    manager.exclude("live", reason="deliberate")
+    excluded = manager.entry("live")
+
+    # An entry that is BOTH excluded and active cannot arise through the queue: every
+    # active-queue accessor filters on ``excluded is False``, and one unit has one flag.
+    # The state is reached with a SECOND record under the same unit id — which is what a
+    # rehydrated or hand-assembled queue would hold — so the check is exercised on the
+    # contradiction it exists to name.
+    manager._entries["live-active"] = dataclasses.replace(  # noqa: SLF001 - deliberate
+        excluded, state="READY", excluded=False
+    )
+
+    with pytest.raises(PipelineQueueError, match="disjoint from every active queue"):
+        manager.require_invariants()

@@ -253,3 +253,53 @@ def test_closure_validates_its_own_shape() -> None:
         DependencyClosure(node_id="", direct=(), transitive=(), order=(), depth=0)
     with pytest.raises(PipelineDependencyError, match="depth must be non-negative"):
         DependencyClosure(node_id="a", direct=(), transitive=(), order=(), depth=-1)
+
+
+def test_a_mutated_event_makes_the_bus_refuse_rather_than_report_a_boolean() -> None:
+    """RECORDED TRUTH IS TAMPER-EVIDENT, and the bus has two ways of saying so.
+
+    ``verify()`` answers a boolean and had a test; ``require_intact()`` is the fail-closed
+    form and its translation arm had none. The canonical ledger raises ``DagLedgerError``,
+    which names the DAG rather than the framework — so it is re-raised as a
+    ``PipelineEventError`` carrying the ledger's own reason, and a caller catching UAPF's
+    error class does not have to also know which substrate happens to be underneath.
+
+    The mutation is made directly on the recorded event because no API can make it: every
+    write path recomputes the Merkle hash, which is exactly the property under test.
+    """
+    bus = PipelineEventBus()
+    bus.emit(CATEGORY, "subject-a", payload={"declared": True})
+    bus.emit(OTHER, "subject-b")
+
+    assert bus.verify() is True
+    bus.require_intact()
+
+    recorded = bus.events[0]
+    object.__setattr__(recorded, "payload", {"declared": False})
+
+    assert bus.verify() is False
+    with pytest.raises(PipelineEventError, match="recorded event history is not intact") as excinfo:
+        bus.require_intact()
+    assert "integrity check failed" in excinfo.value.context["reason"]
+
+
+def test_depth_terminates_on_a_graph_that_closure_would_refuse() -> None:
+    """DECLARATION ORDER INDEPENDENCE MEANS A CYCLE CAN BE DECLARED, and ``_depth`` is the
+    one traversal in this module written by hand rather than delegated.
+
+    ``closure`` validates before measuring depth, so on every path a caller can take the
+    recursion guard is unreachable — which is precisely why it had never run. It is what
+    stops a directly measured cyclic node from recursing until the interpreter's stack is
+    gone: re-entering a node already on the current path contributes no new chain, so the
+    walk returns 0 for it and the answer stays finite.
+    """
+    manager = DependencyManager()
+    manager.declare("a", ["b"])
+    manager.declare("b", ["a"])
+
+    assert manager.has_cycle() is True
+    with pytest.raises(PipelineDependencyError):
+        manager.closure("a")
+
+    # The chain a → b → (a, already visiting) is two edges long and then stops.
+    assert manager._depth("a") == 2

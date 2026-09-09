@@ -360,8 +360,19 @@ def test_plan_derivation_fails_closed_on_a_cycle_and_an_unknown_strategy() -> No
 
 
 def test_plan_validates_its_own_shape() -> None:
+    """FOUR FIELDS, FOUR REFUSALS — and the version's was the one never taken.
+
+    A plan carries the version it was derived FOR, and ``derive`` always supplies the
+    definition's own, so the check only ever answers about a plan built by hand or
+    rehydrated. An unversioned plan is the dangerous one: it names a pipeline, orders its
+    stages and says nothing about which version of that pipeline it orders, so it would be
+    executed against whatever version happened to be resolved.
+    """
     with pytest.raises(PipelinePlanError, match="plan pipeline id is required"):
         PipelinePlan(pipeline_id="", version="1.0.0", strategy="s", waves=((0, "a"),))
+    with pytest.raises(PipelinePlanError, match="plan version is required") as raised:
+        PipelinePlan(pipeline_id="p", version="", strategy="s", waves=((0, "a"),))
+    assert raised.value.context["pipeline_id"] == "p"
     with pytest.raises(PipelinePlanError, match="plan strategy is required"):
         PipelinePlan(pipeline_id="p", version="1.0.0", strategy="", waves=((0, "a"),))
     with pytest.raises(PipelinePlanError, match="at least one stage"):

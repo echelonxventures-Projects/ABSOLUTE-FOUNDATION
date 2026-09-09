@@ -19,7 +19,17 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from platform.universal_pipeline import cli
+from platform.universal_pipeline import (
+    GovernanceVerdict,
+    PipelineAssurance,
+    PipelineGovernance,
+    PipelineQueueManager,
+    PipelineRuntime,
+    QueueEntry,
+    RecoveryPoint,
+    UniversalPipelineGateway,
+    cli,
+)
 from platform.universal_pipeline.contracts import (
     PipelineDefinition,
     PipelineGateSpec,
@@ -36,10 +46,12 @@ from platform.universal_pipeline.discovery import (
 from platform.universal_pipeline.errors import (
     PipelineDiscoveryError,
     PipelineExceptionEscalation,
+    PipelineGovernanceError,
     PipelineOrchestrationError,
     PipelinePlatformError,
     PipelineRegistryError,
     PipelineStateError,
+    UniversalPipelineError,
 )
 from platform.universal_pipeline.events import PipelineEventBus
 from platform.universal_pipeline.orchestrator import (
@@ -47,6 +59,7 @@ from platform.universal_pipeline.orchestrator import (
     OrchestrationTick,
     ReadinessContext,
     UniversalWorkOrchestrator,
+    _handlers_resolvable,
     evaluate_readiness,
     readiness_predicate_names,
     register_readiness_predicate,
@@ -675,3 +688,389 @@ def test_the_cli_security_declaration_is_honoured_by_the_gate(tmp_path: Path) ->
         encoding="utf-8",
     )
     assert cli.main(["--catalog", str(catalog), "--gate"]) == cli.EXIT_OPEN
+
+
+# -------------------------------------------------------------- orchestration evidence
+
+
+def test_orchestration_history_is_readable_and_fingerprints_deterministically() -> None:
+    """THE TICK LOG IS THE EVIDENCE THAT AUTONOMY WAS GOVERNED.
+
+    ``ticks`` is how a reader replays what the orchestrator decided and ``fingerprint`` is
+    what an external gate compares against a sealed expectation. Neither had a caller, so a
+    history could have gone empty, gone unordered, or stopped hashing deterministically with
+    no failure — and the whole claim of self-correcting orchestration rests on being able to
+    read back what it corrected.
+    """
+    platform_instance = _platform()
+    platform_instance.admit_unit("first", "test.orchestrated", wave=1)
+    platform_instance.run()
+
+    orchestrator = platform_instance.orchestrator
+    assert orchestrator.ticks
+    assert [tick.index for tick in orchestrator.ticks] == list(range(len(orchestrator.ticks)))
+    assert orchestrator.to_dict()["tick_count"] == len(orchestrator.ticks)
+
+    assert orchestrator.fingerprint() == orchestrator.fingerprint()
+    assert len(orchestrator.fingerprint()) == 64
+
+
+def test_the_handler_predicate_short_circuits_on_an_unregistered_pipeline() -> None:
+    """P4 ASKS ABOUT HANDLERS, AND A UNIT WITH NO PIPELINE HAS NO STAGES TO ASK ABOUT.
+
+    The predicate short-circuits on registration rather than looking the pipeline up and
+    raising. ``admit_unit`` refuses an unregistered pipeline outright, so this state arises
+    from a registry that lost the definition after admission — and without the short-circuit
+    a readiness question would become a registry error, aborting the tick instead of
+    reporting the unit as blocked.
+    """
+
+    platform_instance = _platform()
+    platform_instance.admit_unit("admitted", "test.orchestrated")
+    entry = platform_instance.queue.entry("admitted")
+
+    class _Forgetful:
+        """A registry that holds nothing. Membership is asked with ``in``, so that is
+        the one operator the stand-in has to answer."""
+
+        @staticmethod
+        def __contains__(_key: object) -> bool:
+            return False
+
+        def __getattr__(self, name: str):
+            return getattr(platform_instance.registry, name)
+
+    context = ReadinessContext(entry=entry, registry=_Forgetful())
+    assert _handlers_resolvable(context) is False
+
+
+def test_a_failed_unit_is_retried_only_while_its_budget_and_readiness_both_hold() -> None:
+    """TWO GUARDS ON RETRY, and each skips a different unit.
+
+    R1–R3: a unit that has exhausted its attempts is not retried, or a permanently failing
+    unit would be re-queued forever and the run would never stop making "progress". A unit
+    still within budget but no longer READY is not retried either — re-queueing it would put
+    a unit into the ready set that the readiness predicates have just refused.
+    """
+    platform_instance = _platform(max_retry=1)
+    platform_instance.admit_unit("exhausted", "test.orchestrated")
+    platform_instance.admit_unit("unready", "test.orchestrated", depends_on=("never-admitted",))
+
+    queue = platform_instance.queue
+    for unit_id in ("exhausted", "unready"):
+        queue.promote(unit_id)
+        queue.advance(unit_id, "EXECUTING")
+        queue.fail(unit_id, reason="deliberate")
+
+    # Spend the retry budget so the FIRST guard refuses this one.
+    queue.retry("exhausted")
+    queue.advance("exhausted", "EXECUTING")
+    queue.fail("exhausted", reason="deliberate again")
+    assert queue.entry("exhausted").attempts >= 1
+
+    tick = platform_instance.tick()
+
+    # "exhausted" is out of budget; "unready" is within it and fails readiness.
+    assert "exhausted" not in tick.retried
+    assert "unready" not in tick.retried
+
+
+# ------------------------------------------------------------------- governance evidence
+
+
+def test_a_governance_verdict_mints_its_own_identity_from_its_own_content() -> None:
+    """A VERDICT IS EVIDENCE, so it carries an identity derived from what it decided.
+
+    The fingerprint hashes the subject, the outcome and the obligations considered and
+    discharged — not the findings prose, which is why two verdicts that decided the same
+    thing for the same subject are one artifact. Neither the identity nor the fingerprint had
+    a caller, so an identity that stopped being a function of the decision would have gone
+    unnoticed by everything that stores one.
+    """
+
+    verdict = GovernanceVerdict(
+        subject="unit",
+        approved=True,
+        considered=("o1", "o2"),
+        discharged=("o1", "o2"),
+        undischarged=(),
+        findings=(),
+    )
+    same = GovernanceVerdict(
+        subject="unit",
+        approved=True,
+        considered=("o1", "o2"),
+        discharged=("o1", "o2"),
+        undischarged=(),
+        findings=(),
+    )
+    other = GovernanceVerdict(
+        subject="other",
+        approved=True,
+        considered=("o1", "o2"),
+        discharged=("o1", "o2"),
+        undischarged=(),
+        findings=(),
+    )
+
+    assert verdict.fingerprint() == same.fingerprint()
+    assert verdict.fingerprint() != other.fingerprint()
+    assert verdict.identity.value
+    assert verdict.identity.value == same.identity.value
+    assert verdict.identity.value != other.identity.value
+
+
+def test_a_recovery_point_must_name_the_subject_it_recovers() -> None:
+    """A recovery point with no subject is a resumption target attached to nothing — it
+    would be recorded, found by nothing, and the recovery it promises could never be run."""
+
+    for nameless in ("", None, 7):
+        with pytest.raises(PipelineGovernanceError, match="subject is required"):
+            RecoveryPoint(subject=nameless, state="READY", checkpoint="h", ordinal=0)
+
+
+def test_the_governance_ledger_lists_the_recovery_points_it_holds() -> None:
+    """``recovery_points`` is the audit trail a reader replays a recovery from, and it had no
+    caller — so "which points exist" was answerable only by asking for the latest one by
+    subject, which cannot tell you what other subjects were recorded."""
+
+    governance = PipelineGovernance()
+    governance.record_recovery_point("first", "READY", detail={"stage": "a"})
+    governance.record_recovery_point("second", "EXECUTING", detail={"stage": "b"})
+
+    points = governance.recovery_points
+    assert [p.subject for p in points] == ["first", "second"]
+    assert [p.ordinal for p in points] == [0, 1]
+    assert governance.latest_recovery_point("first").detail["stage"] == "a"
+
+
+def test_the_orchestrator_runs_without_a_bus_governance_or_observability() -> None:
+    """THE THREE OPTIONAL COLLABORATORS ARE OPTIONAL, and the platform supplies all three —
+    which is why every ``is not None`` arm was tested on only one side.
+
+    An orchestrator composed without them must still promote, execute, certify and record
+    ticks: the event bus, the governance ledger and the observability sink are places a run
+    is REPORTED to, not things a run depends on. If any of them were load-bearing, a caller
+    composing a minimal orchestrator would get an AttributeError instead of a run.
+    """
+
+    registry = PipelineRegistry()
+    registry.register(
+        PipelineDefinition(
+            pipeline_id="test.bare",
+            pipeline_type="implementation",
+            version="1.0.0",
+            stages=(StageDefinition(stage_id="a", handler="uapf.record"),),
+        )
+    )
+    queue = PipelineQueueManager()
+    assurance = PipelineAssurance()
+    gateway = UniversalPipelineGateway(registry)
+    runtime = PipelineRuntime(registry, queue=queue)
+    orchestrator = UniversalWorkOrchestrator(registry, queue, gateway, runtime, assurance)
+
+    queue.enqueue(QueueEntry(unit_id="bare-unit", pipeline_id="test.bare", version="1.0.0"))
+
+    tick = orchestrator.tick()
+
+    assert "bare-unit" in tick.promoted
+    assert orchestrator.ticks
+    assert orchestrator.fingerprint()
+
+
+def test_a_unit_that_executes_but_does_not_certify_is_implemented_and_not_certified() -> None:
+    """IMPLEMENTED AND CERTIFIED ARE TWO FACTS, and the tick reports them separately.
+
+    A unit whose stages ran is implemented; a unit whose assurance chain completed is
+    certified. They normally move together, which is why the loop's "implemented but not
+    certified" arm was dead — and treating them as one would let a tick report a unit as
+    certified because its stages happened to run, which is the whole thing certification is
+    supposed to be independent of.
+    """
+
+    registry = PipelineRegistry()
+    registry.register(
+        PipelineDefinition(
+            pipeline_id="test.uncertified",
+            pipeline_type="implementation",
+            version="1.0.0",
+            stages=(StageDefinition(stage_id="a", handler="uapf.record"),),
+        )
+    )
+    queue = PipelineQueueManager()
+
+    class _NeverCertified(PipelineAssurance):
+        def is_certified(self, subject: str) -> bool:
+            return False
+
+    assurance = _NeverCertified()
+    orchestrator = UniversalWorkOrchestrator(
+        registry,
+        queue,
+        UniversalPipelineGateway(registry),
+        PipelineRuntime(registry, queue=queue),
+        assurance,
+    )
+    queue.enqueue(
+        QueueEntry(unit_id="uncertified", pipeline_id="test.uncertified", version="1.0.0")
+    )
+
+    ticks = [orchestrator.tick(), orchestrator.tick()]
+    implemented = [t for t in ticks if t.implemented]
+
+    assert implemented, [t.to_dict() for t in ticks]
+    assert "uncertified" in implemented[0].implemented
+    assert "uncertified" not in implemented[0].certified
+
+
+def test_a_declaration_the_registry_refuses_is_reported_and_the_rest_are_admitted() -> None:
+    """ONE BAD DECLARATION MUST NOT LOSE THE OTHERS — the same discipline the catalogue
+    parser already keeps, applied one layer down at REGISTRATION.
+
+    The parser refuses a malformed declaration; this is the arm for a declaration that
+    parses and the registry still refuses — a version collision, an unsatisfiable capability.
+    It is recorded in ``refused`` with the registry's own code and message, and discovery
+    continues, so one collision does not cost a whole catalogue.
+    """
+
+    registry = PipelineRegistry()
+
+    # `PipelineDiscovery` type-checks its registry and `PipelineRegistry` is slotted, so
+    # the refusal is installed on the CLASS for the duration of the call.
+    def refusing(_self, _definition):
+        raise PipelineRegistryError("the registry refuses this one", pipeline_id="x")
+
+    discovery = PipelineDiscovery(registry)
+    original = PipelineRegistry.register
+    try:
+        PipelineRegistry.register = refusing  # type: ignore[method-assign]
+        report = discovery.discover(_catalog(_declaration("test.refused")))
+    finally:
+        PipelineRegistry.register = original  # type: ignore[method-assign]
+
+    assert report.admitted == ()
+    assert report.refused
+    assert "the registry refuses this one" in report.refused[0][1]
+
+
+def test_the_platform_reports_an_integrity_fault_as_a_named_failure() -> None:
+    """THE CLI TURNS EVERY REFUSAL INTO A LINE, INCLUDING THE ONE FROM ITS OWN INTEGRITY
+    CHECK.
+
+    ``require_intact`` raises; the report must not. A caller reading the CLI's failure list
+    is looking for everything wrong with the catalogue at once, and an exception escaping
+    from the integrity step would end the report at that point with the remaining checks
+    unrun — the same partial-answer problem the refusal list exists to avoid.
+    """
+
+    platform_instance = _platform()
+
+    class _Broken:
+        @staticmethod
+        def require_intact() -> None:
+            raise UniversalPipelineError("recorded history is not intact")
+
+        def __getattr__(self, name: str):
+            return getattr(platform_instance, name)
+
+    report = platform_instance.discover(_catalog(_declaration("test.integrity")))
+    failures = cli.gate(_Broken(), report)
+    assert any("integrity:" in line for line in failures)
+    assert any("recorded history is not intact" in line for line in failures)
+
+
+def _bare_orchestrator(
+    pipeline: PipelineDefinition, *, bind_queue: bool = True, **kwargs: object
+) -> tuple[UniversalWorkOrchestrator, object]:
+    """An orchestrator composed WITHOUT a bus and over a queue-less runtime.
+
+    Every other orchestration test here goes through :class:`UniversalPipelinePlatform`,
+    which always composes a bus and always binds the runtime to the queue — so the optional
+    arms of both are never taken by the suite even though they are the documented default
+    for a runtime used in isolation.
+    """
+
+    registry = PipelineRegistry()
+    registry.register(pipeline)
+    queue = PipelineQueueManager()
+    orchestrator = UniversalWorkOrchestrator(
+        registry,
+        queue,
+        UniversalPipelineGateway(registry),
+        PipelineRuntime(registry, queue=queue if bind_queue else None),
+        PipelineAssurance(),
+        bus=None,
+        **kwargs,  # type: ignore[arg-type]
+    )
+    return orchestrator, queue
+
+
+def test_the_orchestrator_makes_the_implemented_transition_a_queue_less_runtime_never_made() -> (
+    None
+):
+    """A UNIT REACHES VALIDATED FROM IMPLEMENTED OR IT DOES NOT REACH IT AT ALL.
+
+    The runtime drives the lifecycle only when it is bound to the queue, and the platform
+    always binds it — so by the time assurance ran, the unit had already left ``EXECUTING``
+    and the orchestrator's own transition was dead code in every test. It is not dead in
+    use: a runtime composed in isolation (the documented, testable-in-isolation form) leaves
+    the unit in ``EXECUTING``, and ``EXECUTING → VALIDATED`` is not a legal transition, so
+    without this the whole tick would fail closed on a lifecycle refusal.
+    """
+
+    orchestrator, queue = _bare_orchestrator(
+        PipelineDefinition(
+            pipeline_id="test.queue-less-runtime",
+            pipeline_type="implementation",
+            version="1.0.0",
+            stages=(StageDefinition(stage_id="a", handler="uapf.record"),),
+        ),
+        bind_queue=False,
+    )
+    queue.enqueue(
+        QueueEntry(unit_id="unbound", pipeline_id="test.queue-less-runtime", version="1.0.0")
+    )
+
+    tick = orchestrator.tick()
+
+    assert "unbound" in tick.implemented
+    assert "unbound" in tick.certified
+    assert queue.entry("unbound").state == "CERTIFIED"
+
+
+def test_escalation_and_exhaustion_are_unchanged_when_no_bus_is_composed() -> None:
+    """THE BUS RECORDS AN ESCALATION; IT DOES NOT DECIDE ONE.
+
+    Both escalation paths emit before they act, and both are guarded because the bus is
+    optional — but every escalation test runs against the platform, which always has one, so
+    the unguarded case had never executed. If either emission were unconditional, composing
+    the orchestrator without a bus would turn an exhausted retry budget and the single
+    autonomy exit into an ``AttributeError`` raised from inside the halt itself: the two
+    moments where a clear failure matters most.
+    """
+
+    orchestrator, queue = _bare_orchestrator(
+        PipelineDefinition(
+            pipeline_id="test.bus-less-doomed",
+            pipeline_type="implementation",
+            version="1.0.0",
+            stages=(
+                StageDefinition(
+                    stage_id="gate",
+                    handler="uapf.gate",
+                    gates=(PipelineGateSpec("G", "never.supplied"),),
+                ),
+            ),
+        ),
+        max_retry=1,
+    )
+    queue.enqueue(QueueEntry(unit_id="doomed", pipeline_id="test.bus-less-doomed", version="1.0.0"))
+
+    ticks = orchestrator.run()
+    escalated = [unit for tick in ticks for unit, _reason in tick.escalated]
+
+    assert escalated == ["doomed"]
+    assert queue.entry("doomed").state == "ARCHIVED"
+
+    with pytest.raises(PipelineExceptionEscalation, match="human intervention required"):
+        orchestrator.escalate("subject", "constitutional-ambiguity")

@@ -349,3 +349,18 @@ def test_state_machine_projection_is_rendered_from_the_table() -> None:
     for row in machine["transitions"]:
         for target in row["to"]:
             require_unit_transition(row["from"], target)
+
+
+def test_a_vocabulary_knows_which_classification_it_governs() -> None:
+    """THE NAME IS NOT DECORATION — it is the classification the vocabulary governs, and it
+    is what every refusal raised by that vocabulary reports as ``name``.
+
+    Every other test here reaches a vocabulary through the module-level registry it belongs
+    to, where the caller already knows which one it asked for, so the accessor that lets a
+    HOLDER of a vocabulary say which one it is had no caller. Without it a consumer handed a
+    vocabulary object can register terms into it and never find out what it classifies.
+    """
+    vocabulary = _vocab("test-named-vocabulary")
+
+    assert vocabulary.name == "test-named-vocabulary"
+    assert vocabulary.to_dict()["vocabulary"] == vocabulary.name

@@ -590,3 +590,77 @@ def test_observability_records_telemetry_on_the_bus() -> None:
     bus = PipelineEventBus()
     PipelineObservability(bus=bus).record("counted", 1.0)
     assert len(bus.events_of("uapf.telemetry.recorded")) == 1
+
+
+def test_every_assurance_lookup_returns_the_most_recent_record_for_its_subject() -> None:
+    """THREE LOOKUPS, THREE ACTS, and only the certification refusal had a test.
+
+    Each walks its own ledger in reverse so the most recent record wins — an act performed
+    twice must resolve to the second one, or a re-validated unit would keep answering with
+    the evidence of the run that failed. Only the refusals were exercised, which leaves three
+    lookups that could return the WRONG record while still terminating, and every consumer
+    reading evidence from them would read it from another subject or another attempt.
+    """
+    assurance = PipelineAssurance()
+
+    assurance.validate("unit", evidence={"attempt": 1})
+    assurance.validate("unit", evidence={"attempt": 2})
+    assurance.validate("other", evidence={"attempt": 1})
+    assert assurance.latest_validation("unit").evidence["attempt"] == 2
+    assert assurance.latest_validation("other").evidence["attempt"] == 1
+
+    assurance.verify("unit", evidence={"attempt": 1})
+    assurance.verify("unit", evidence={"attempt": 2})
+    assert assurance.latest_verification("unit").evidence["attempt"] == 2
+
+    assurance.certify("unit", evidence={"attempt": 1})
+    assurance.certify("unit", evidence={"attempt": 2})
+    assert assurance.latest_certification("unit").evidence["attempt"] == 2
+
+    with pytest.raises(PipelineValidationError):
+        assurance.latest_validation("never")
+    with pytest.raises(PipelineCertificationError):
+        assurance.latest_verification("never")
+
+
+def test_a_certification_lookup_walks_past_records_belonging_to_another_subject() -> None:
+    """ONE LEDGER, MANY SUBJECTS — and the reverse walk has to step over the others.
+
+    Every existing case certifies one subject, or certifies the subject under test LAST, so
+    the reverse walk matched on its first step and the loop's continue arm never ran. That
+    arm is the difference between "the most recent certification of this subject" and "the
+    most recent certification", and collapsing the two would hand a caller another unit's
+    evidence — under a lookup whose whole contract is that it is subject-scoped.
+    """
+    assurance = PipelineAssurance()
+
+    for subject, attempt in (("wanted", 1), ("noise-a", 2), ("noise-b", 3)):
+        assurance.validate(subject, evidence={"attempt": attempt})
+        assurance.verify(subject, evidence={"attempt": attempt})
+        assurance.certify(subject, evidence={"attempt": attempt})
+
+    found = assurance.latest_certification("wanted")
+
+    assert found.subject == "wanted"
+    assert found.evidence["attempt"] == 1
+
+
+def test_recorded_measurements_are_readable_in_record_order() -> None:
+    """A METER THAT CANNOT BE READ IS NOT A METER.
+
+    ``health``, ``total`` and ``names`` are DERIVATIONS over the recorded measurements, and
+    each was tested; the raw sequence they derive from had no reader. It is the evidence
+    view — the one an operator or an evidence bundle uses to see what was actually recorded
+    rather than what was concluded from it — and record order is part of what it reports,
+    because two measurements of the same metric are only interpretable in the order taken.
+    """
+    observability = PipelineObservability()
+    observability.observe_outcome("s1", True)
+    span = observability.record_span("uapf.execution.stages", 3)
+
+    metrics = observability.metrics
+
+    assert isinstance(metrics, tuple)
+    assert len(metrics) == len(observability) == 2
+    assert metrics[0].name == SUCCESS_METRIC
+    assert metrics[1] is span
