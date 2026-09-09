@@ -43,6 +43,7 @@ from engine.ceu.sufficiency import (
     VERDICT_NEW_ROOT,
     assess,
     assess_registry,
+    digest,
     require_sufficient,
 )
 from engine.registry.universal.identity import is_well_formed
@@ -444,3 +445,18 @@ def test_a_unit_system_nobody_has_named_converts_with_zero_code():
     assert dict(registered[0].attributes)["target"] == metre
     # An unmeasured factor is a stated unknown, never a missing edge (CEU-017).
     assert dict(registered[0].attributes)["factor"] == "unknown"
+
+
+def test_a_sufficiency_report_is_content_addressed():
+    """TWO SUFFICIENCY REPORTS ARE THE SAME ANSWER OR THEY ARE NOT, and the digest is how
+    that is decided.
+
+    The report is the evidence that the substrate admits every named concept as data, and it
+    is only comparable across two runs — or two substrates — if it can be pinned. It had no
+    caller, so a non-deterministic field could have entered the report and nothing would have
+    detected it.
+    """
+    report = assess("perspective", ["context", "knowledge"])
+
+    assert digest(report) == digest(assess("perspective", ["context", "knowledge"]))
+    assert digest(report) != digest(assess("time-crystal", []))

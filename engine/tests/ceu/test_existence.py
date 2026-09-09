@@ -702,3 +702,195 @@ def test_the_view_serialises_an_open_set_with_no_upper_limit(registry, view):
     assert document["upper_limit"] is None
     assert document["dangling"] == []
     assert len(view.digest()) == 64
+
+
+# --------------------------------------------------------------------------- #
+# the arms a substrate built by this code never reaches                        #
+# --------------------------------------------------------------------------- #
+
+
+def test_a_single_valued_attribute_reads_as_a_one_element_tuple(registry: ExistenceRegistry):
+    """A DECLARATION MAY NAME ONE THING WITHOUT WRAPPING IT IN A LIST.
+
+    Every seeded and constructed unit here declares its list-valued attributes as lists, so
+    the string arm had no case. Without it a single declared value would be read
+    CHARACTER BY CHARACTER — ``"tree"`` becoming four topologies named ``t``, ``r``, ``e``
+    and ``e`` — which is the classic shape of this bug and is silent, because the result is
+    still a tuple of strings.
+    """
+    unit = registry.register(
+        ExistenceUnit(
+            form="entity",
+            key="single-valued",
+            title="Single valued",
+            attributes={"topologies": "tree", "faculties": ["a", "b"], "absent": None},
+        )
+    )
+
+    assert unit.tuple_attribute("topologies") == ("tree",)
+    assert unit.tuple_attribute("faculties") == ("a", "b")
+    assert unit.tuple_attribute("absent") == ()
+
+
+def test_an_unregistered_unit_serialises_without_an_identity(registry: ExistenceRegistry):
+    """REGISTRATION IS THE ACT THAT CREATES EXISTENCE, so an unregistered unit has no
+    identifier to serialise — and every serialisation test here runs over registered units.
+
+    Emitting ``universal_id`` anyway would have to invent one, and the property raises rather
+    than invent. Omitting the key says the unit is not yet in existence, which is the truth
+    and is what ``from_document`` reads back.
+    """
+    unregistered = ExistenceUnit(form="entity", key="not-yet", title="Not yet")
+
+    payload = unregistered.to_dict()
+
+    assert "universal_id" not in payload
+    assert payload["identity_kind"] == ""
+    with pytest.raises(ExistenceError, match="registration creates existence"):
+        _ = unregistered.universal_id
+
+    registered = registry.register(unregistered)
+    assert registered.to_dict()["universal_id"] == registered.universal_id
+
+
+def test_a_bound_substrate_answers_the_context_it_requires(registry: ExistenceRegistry):
+    """``require_context`` HAS TWO ANSWERS AND ONLY THE REFUSAL HAD A TEST.
+
+    The fail-closed arm is exercised wherever a measurement needs a reference frame; the
+    arm that actually hands the frame back is what every such measurement then reads. It
+    returns a COPY, so a caller that mutates what it was given cannot rewrite the substrate's
+    binding through the accessor that was supposed to only report it.
+    """
+    with pytest.raises(ExistenceError, match="not bound to any reference frame"):
+        registry.require_context()
+
+    frame = {"frame": "planetary-a1", "resolution_digest": "abc"}
+    registry.bind_context(frame)
+
+    answered = registry.require_context()
+    assert answered == frame
+    answered["frame"] = "mutated"
+    assert registry.require_context()["frame"] == "planetary-a1"
+
+
+def test_a_document_written_before_supersession_history_is_read_losslessly(
+    registry: ExistenceRegistry,
+):
+    """AN OLDER DOCUMENT IS STILL A FAITHFUL RECORD, and the reader that says so had no case.
+
+    Every document this substrate writes today carries ``supersession_history``, so the
+    legacy path — current-state summaries only, one entry per subject — was dead even though
+    it is the exact shape every registry's own output took before that field existed.
+    Refusing such a document would make the substrate unable to read its own history; reading
+    it as no history at all would silently drop every supersession it records.
+
+    The same document exercises what the reader must survive: a supersession row that is not
+    a mapping or names no subject, and an audit row that is not a mapping. Each is skipped
+    rather than raised on, because a reader that aborts on one malformed row loses every
+    sound row after it.
+    """
+    old = _classification(registry, "old")
+    new = _classification(registry, "new")
+    registry.supersede(
+        old.universal_id, successors=[new.universal_id], authority="TEST", note="first"
+    )
+
+    document = registry.to_document()
+    legacy = {
+        **document,
+        "supersession_history": "written by a version that had no history field",
+        "supersessions": [
+            *document["supersessions"],
+            {"no_subject": True},
+            "not a mapping at all",
+        ],
+        "audit": [*document["audit"], "not a mapping at all"],
+    }
+
+    rebuilt = ExistenceRegistry.from_document(legacy)
+
+    assert [row["subject"] for row in rebuilt.supersessions()] == [old.universal_id]
+    assert rebuilt.supersession_history(old.universal_id) == registry.supersessions()
+    assert len(rebuilt.audit()) == len(registry.audit())
+
+
+def test_a_history_whose_records_are_not_a_list_contribute_nothing(registry: ExistenceRegistry):
+    """The history field is read as ``subject -> list of records``, and a subject whose
+    value is not a list is skipped rather than wrapped.
+
+    Wrapping it would put a string or a mapping into a list the rest of the substrate
+    iterates as records, and every reader of that history would then see a malformed row it
+    has no way to interpret — reported as history, which is worse than no history.
+    """
+    old = _classification(registry, "old")
+    new = _classification(registry, "new")
+    registry.supersede(
+        old.universal_id, successors=[new.universal_id], authority="TEST", note="first"
+    )
+
+    document = registry.to_document()
+    damaged = {
+        **document,
+        "supersession_history": {
+            **document["supersession_history"],
+            "UCOS-CLSS-ffffffffffff": "not a list",
+        },
+    }
+
+    rebuilt = ExistenceRegistry.from_document(damaged)
+
+    assert rebuilt.supersession_history(old.universal_id)
+    assert rebuilt.supersession_history("UCOS-CLSS-ffffffffffff") == ()
+
+
+def test_a_unit_outside_a_relationship_gains_none_of_its_arrangements(
+    registry: ExistenceRegistry, view: RelationshipView
+):
+    """SIMULTANEOUS TOPOLOGIES ARE READ OFF THE RELATIONSHIPS A UNIT IS IN, and the skip for
+    the relationships it is NOT in had never run — every case here relates every unit.
+
+    Without it a unit would inherit the arrangements of every relationship in the substrate,
+    which turns "which arrangements does this participate in" into "which arrangements
+    exist" and makes the answer identical for every unit.
+    """
+    registry.register(ExistenceUnit(form="topology", key="mesh", title="Mesh"))
+    registry.register(
+        ExistenceUnit(form="relationship-type", key="links", title="Links", attributes={})
+    )
+    a = _entity(registry, "a")
+    b = _entity(registry, "b")
+    bystander = _entity(registry, "bystander")
+    view.relate("links", a.universal_id, b.universal_id, authority="T", topologies=("mesh",))
+
+    assert view.topologies_of(a.universal_id) == ("mesh",)
+    assert view.topologies_of(bystander.universal_id) == ()
+
+
+def test_reachability_terminates_when_two_routes_meet(
+    registry: ExistenceRegistry, view: RelationshipView
+):
+    """THE VISITED SET IS INVISIBLE UNTIL A GRAPH OFFERS A SECOND ROUTE INTO A NODE.
+
+    Every relationship graph tested here is a chain or a fan, so no node is ever reached
+    twice and the guard never fired. On a diamond it is what stops the shared node — and
+    everything below it — from being walked once per route; on a cycle it is what stops the
+    walk from not terminating at all. The ANSWER is unchanged either way, which is exactly
+    why the guard is invisible without a graph shaped to need it.
+    """
+    registry.register(
+        ExistenceUnit(form="relationship-type", key="flows-to", title="Flows to", attributes={})
+    )
+    top, left, right, bottom = (_entity(registry, key) for key in ("top", "left", "right", "join"))
+    for source, target in (
+        (top, left),
+        (top, right),
+        (left, bottom),
+        (right, bottom),
+    ):
+        view.relate("flows-to", source.universal_id, target.universal_id, authority="T")
+
+    assert set(view.reachable(top.universal_id, "flows-to")) == {
+        left.universal_id,
+        right.universal_id,
+        bottom.universal_id,
+    }

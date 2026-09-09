@@ -20,6 +20,7 @@ from engine.ceu.possessions import (
     certify_levels,
     completeness,
     dictionary_for_existence,
+    digest,
     gaps,
     governed_units,
     related_units,
@@ -338,3 +339,156 @@ def test_resurrection_does_not_erase_the_supersession(seeded: ExistenceRegistry)
     actions = [entry.action for entry in seeded.audit(subject=subject.universal_id)]
     assert actions == ["register", "supersede", "resurrect"]
     assert seeded.supersessions()
+
+
+# --- the arms a well-formed substrate never reaches ----------------------------------
+#
+# Every measurement above is taken over the seeded catalogue, where each relationship was
+# asserted through ``relate`` (which refuses an unregistered endpoint) and every unit was
+# created by ``register`` (which journals a genesis event and mints a well-formed identity).
+# So the readers below were only ever run against a substrate that cannot be wrong.
+
+GHOST = "UCOS-ENT-ffffffffffff"
+
+
+def _dangling(registry: ExistenceRegistry, relationship_type: str) -> ExistenceUnit:
+    """A relationship unit whose endpoints name nothing, registered DIRECTLY.
+
+    ``relate`` refuses this — it checks both endpoints — which is exactly why the readers'
+    skip arms have no case through the public path. A registry rehydrated from a document,
+    or assembled by anything other than ``relate``, can hold one, and these readers are what
+    stop a dangling endpoint from being counted as a governed, owned or related unit.
+    """
+    return registry.register(
+        ExistenceUnit(
+            form="relationship",
+            key=f"{relationship_type}:dangling",
+            title=f"{relationship_type} pointing at nothing",
+            attributes={"relationship_type": relationship_type, "source": GHOST, "target": GHOST},
+        )
+    )
+
+
+def test_a_relationship_naming_an_unregistered_endpoint_confers_nothing(
+    seeded: ExistenceRegistry,
+) -> None:
+    """A POSSESSION IS CONFERRED BY A REGISTERED FACT, NOT BY A MENTION.
+
+    Governance, ownership and participation are each read off relationships, and each reader
+    skips an endpoint the registry cannot resolve. Without the skip, naming an identifier
+    would be enough to confer the possession on it — a unit that does not exist would be
+    reported as governed, owned and related, and the gate would pass on a mention.
+    """
+    before_governed = governed_units(seeded)
+    before_related = related_units(seeded)
+
+    _dangling(seeded, "governs")
+    _dangling(seeded, "owns")
+
+    assert governed_units(seeded) == before_governed
+    assert related_units(seeded) == before_related
+    assert GHOST not in gaps(seeded)["ownership"]
+
+
+def test_the_relationship_view_reports_an_endpoint_that_names_nothing(
+    seeded: ExistenceRegistry,
+) -> None:
+    """``dangling()`` MUST ALWAYS BE EMPTY, and a check whose answer is always empty has
+    never been shown to be able to answer otherwise.
+
+    It is the invariant reader for the whole relationship substrate, and every existing test
+    asserts it over a catalogue where ``relate`` guaranteed the answer. Registering the
+    relationship directly is the only way this substrate can hold one, and it is the shape a
+    rehydrated document could arrive in.
+    """
+    view = relationship_view(seeded)
+    assert view.dangling() == ()
+
+    _dangling(seeded, "governs")
+
+    assert relationship_view(seeded).dangling() == (GHOST,)
+
+
+class _StrayUnit(ExistenceUnit):
+    """A unit whose identifier is not one this authority could have minted."""
+
+    @property
+    def universal_id(self) -> str:
+        return "not-an-identifier"
+
+
+class _WithStray:
+    """The seeded registry plus one unit the registry itself does not hold.
+
+    The five structural possessions hold for every seeded unit BY CONSTRUCTION — registration
+    mints the identity, projects the dictionary entry, indexes the unit and journals a genesis
+    event in one act — so no unit produced by this substrate can lack any of them, and the
+    five gap arms had no case. They are what the gate reports about a population assembled
+    some other way, and each names a different failure: an identifier this authority could
+    not have minted, one absent from the assigned-identifier dictionary, one the registry
+    cannot resolve, one with no journal entry at all, and one whose history has no readable
+    start.
+    """
+
+    def __init__(self, real: ExistenceRegistry, stray: ExistenceUnit) -> None:
+        self._real = real
+        self._stray = stray
+
+    def units(self, **filters: object) -> tuple[ExistenceUnit, ...]:
+        return (*self._real.units(**filters), self._stray)  # type: ignore[arg-type]
+
+    def __getattr__(self, name: str) -> object:
+        return getattr(self._real, name)
+
+
+def test_every_structural_possession_can_be_reported_absent(seeded: ExistenceRegistry) -> None:
+    sample = seeded.units()[0]
+    stray = _StrayUnit(
+        form=sample.form,
+        key="a-unit-this-substrate-did-not-make",
+        title="Stray",
+        identity_kind=sample.identity_kind,
+    )
+
+    found = gaps(_WithStray(seeded, stray))  # type: ignore[arg-type]
+    label = f"{stray.form}:{stray.key}"
+
+    for possession in ("identity", "dictionary", "registry", "lineage", "evolution"):
+        assert found[possession] == [label], possession
+
+
+def test_a_report_is_content_addressed_so_two_runs_can_be_compared(
+    seeded: ExistenceRegistry,
+) -> None:
+    """A MEASUREMENT NOBODY CAN PIN IS A MEASUREMENT NOBODY CAN COMPARE.
+
+    ``digest`` is how two assessments — of the same substrate at two moments, or of two
+    substrates — are shown to be the same answer or a different one. It had no caller, so the
+    report could have carried a non-deterministic field and nothing would have noticed.
+    """
+    first = digest(assess(seeded))
+
+    assert first == digest(assess(seeded))
+    assert first != digest(assess_by_form(seeded))
+
+
+def test_a_refusal_is_machine_readable_evidence_and_not_a_message(
+    seeded: ExistenceRegistry,
+) -> None:
+    """A REFUSAL IS EVIDENCE, WHICH IS THE WHOLE REASON THESE ERRORS ARE TYPED.
+
+    Every existing test reads ``.detail`` off the exception directly, so the projection that
+    turns a refusal into a record — the error class, the message and the sorted detail in one
+    mapping — had no caller. It is what a caller writes into an audit document or returns
+    from an API, and without it the only way to report a refusal is to string-match ``str()``,
+    which is precisely what the typed hierarchy exists to make unnecessary.
+    """
+    with pytest.raises(CEUError) as caught:
+        require_complete(seeded)
+
+    projected = caught.value.to_dict()
+
+    assert projected["error"] == "CEUError"
+    assert projected["message"] == caught.value.message
+    assert projected["detail"] == caught.value.detail
+    assert "governance" in projected["detail"]["missing"]

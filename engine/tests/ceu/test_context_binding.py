@@ -286,3 +286,31 @@ def test_unknown_future_context_kind_remains_admissible_without_a_code_change(
         )
     )
     assert record.kind == "quantum"
+
+
+def test_a_governance_binding_carries_its_note_as_a_declared_dimension(
+    context_registry: ContextRegistry, existence_registry: ExistenceRegistry
+) -> None:
+    """A NOTE IS A DIMENSION OR IT IS NOWHERE.
+
+    Governance is projected as declared context values, so the reason a governance decision
+    was taken has to be one of them — there is no free-text field on a declaration. Every
+    existing binding is made without a note, so the dimension was never emitted, and a note
+    silently dropped is a governance record that says WHAT was decided and never why. It is
+    conditional rather than always present because an empty note would declare a dimension
+    whose value is the empty string, which is a different claim from not having said anything.
+    """
+    unit = existence_registry.register(ExistenceUnit(form="entity", key="noted", title="Noted"))
+
+    silent = bind_governance(context_registry, existence_registry, unit)
+    assert "note" not in {value.dimension for value in silent.values}
+
+    noted = existence_registry.register(
+        ExistenceUnit(form="entity", key="explained", title="Explained")
+    )
+    record = bind_governance(
+        context_registry, existence_registry, noted, note="ratified by the commission"
+    )
+
+    values = {value.dimension: value.value for value in record.values}
+    assert values["note"] == "ratified by the commission"
