@@ -1419,3 +1419,165 @@ def test_a_declared_residual_domain_that_cannot_be_composed_is_reported(declarat
     monkeypatch.setattr(composition_module, "express", _refuse)
     problems = contract.residual_is_representable(_forge(declaration))
     assert any("residual domain cannot be expressed" in p for p in problems), problems
+
+
+# --- URKE-L-04: the append-only refusals ----------------------------------------------------
+#
+# The law asserts properties of what `subjects.add_resolution` and `add_verification` RETURN,
+# so the violation has to come from those operations. Each test replaces one of them with a
+# wrapper that calls the real function and then breaks exactly one property of its result, so
+# everything the law does apart from the property under test is genuine.
+
+
+def _wrap(monkeypatch, name, mangle):
+    real = getattr(subjects, name)
+
+    def wrapper(*args, **kwargs):
+        return mangle(real(*args, **kwargs))
+
+    monkeypatch.setattr(subjects, name, wrapper)
+
+
+def test_a_resolution_step_that_does_not_append_is_refused(declaration, monkeypatch):
+    _wrap(monkeypatch, "add_resolution", lambda s: dataclasses.replace(s, resolution_history=()))
+    problems = contract.histories_are_append_only(_forge(declaration))
+    assert any("resolution step did not append" in p for p in problems), problems
+
+
+def test_a_resolution_step_that_rewrites_earlier_entries_is_refused(declaration, monkeypatch):
+    def mangle(subject):
+        history = subject.resolution_history
+        rewritten = (dataclasses.replace(history[0], action="rewritten"),) + history[1:]
+        return dataclasses.replace(subject, resolution_history=rewritten)
+
+    _wrap(monkeypatch, "add_resolution", mangle)
+    problems = contract.histories_are_append_only(_forge(declaration))
+    assert any("altered the earlier entries" in p for p in problems), problems
+
+
+def test_a_verification_event_that_does_not_append_is_refused(declaration, monkeypatch):
+    _wrap(
+        monkeypatch, "add_verification", lambda s: dataclasses.replace(s, verification_history=())
+    )
+    problems = contract.histories_are_append_only(_forge(declaration))
+    assert any("verification event did not append" in p for p in problems), problems
+
+
+def test_a_hollow_verification_that_is_accepted_is_refused(declaration, monkeypatch):
+    # The law asserts a REFUSAL: a verification with no assumptions or no limitations must be
+    # rejected. The violation is therefore an `add_verification` that accepts one.
+    real = subjects.add_verification
+
+    def permissive(*args, **kwargs):
+        if not kwargs.get("assumptions") or not kwargs.get("limitations"):
+            return real(
+                *args,
+                **{**kwargs, "assumptions": ("assumed",), "limitations": ("bounded",)},
+            )
+        return real(*args, **kwargs)
+
+    monkeypatch.setattr(subjects, "add_verification", permissive)
+    problems = contract.histories_are_append_only(_forge(declaration))
+    assert any("a verification declaring no assumptions" in p for p in problems), problems
+    assert any("a verification declaring no limitations" in p for p in problems), problems
+
+
+def test_a_transition_that_rewrites_earlier_state_history_is_refused(declaration, monkeypatch):
+    real = states.transition
+
+    def mangle(*args, **kwargs):
+        moved = real(*args, **kwargs)
+        history = moved.state_history
+        rewritten = (dataclasses.replace(history[0], basis="rewritten"),) + history[1:]
+        return dataclasses.replace(moved, state_history=rewritten)
+
+    monkeypatch.setattr(states, "transition", mangle)
+    problems = contract.histories_are_append_only(_forge(declaration))
+    assert any("altered the earlier state history" in p for p in problems), problems
+
+
+# --- URKE-L-09: the open-vocabulary refusals -------------------------------------------------
+
+
+def test_a_member_that_cannot_be_exercised_is_reported(declaration, monkeypatch):
+    def refuse(*args, **kwargs):
+        raise RecursiveKnowledgeError("admission refused for the test")
+
+    monkeypatch.setattr(admission, "exercise", refuse)
+    problems = contract.data_extension_needs_no_redesign(_forge(declaration))
+    assert any("could not be exercised" in p for p in problems), problems
+
+
+def test_an_admitted_subject_the_ledger_did_not_retain_is_refused(declaration, monkeypatch):
+    real = admission.exercise
+
+    def forgetful(store, name, **kwargs):
+        extended, entity = real(store, name, **kwargs)
+        # The admission succeeds and the ledger forgets it: exactly the loss the law exists
+        # to catch, and invisible to a test that only checked `exercise` returned.
+        object.__setattr__(entity, "identity", entity.identity + "-never-recorded")
+        return extended, entity
+
+    monkeypatch.setattr(admission, "exercise", forgetful)
+    problems = contract.data_extension_needs_no_redesign(_forge(declaration))
+    assert any("the ledger did not retain" in p for p in problems), problems
+
+
+def test_an_admission_that_returns_no_declaration_is_refused(declaration, monkeypatch):
+    real = admission.exercise
+    monkeypatch.setattr(admission, "exercise", lambda *a, **k: (None, real(*a, **k)[1]))
+    problems = contract.data_extension_needs_no_redesign(_forge(declaration))
+    assert any("returned no declaration" in p for p in problems), problems
+
+
+def test_admitting_a_member_that_changes_the_package_is_refused(declaration, monkeypatch):
+    # The vocabulary is data, so admitting a member nobody declared must move no byte of the
+    # package. The violation is a fingerprint that moves.
+    calls = {"n": 0}
+
+    def drifting(self):
+        calls["n"] += 1
+        return f"fingerprint-{calls['n']}"
+
+    monkeypatch.setattr(contract.Probe, "fingerprint", drifting)
+    problems = contract.data_extension_needs_no_redesign(_forge(declaration))
+    assert any("changed this package" in p for p in problems), problems
+
+
+# --- URKE-L-19: the governance refusals -----------------------------------------------------
+
+
+def test_an_unreachable_construct_foundation_is_a_fault_not_a_verdict(declaration, monkeypatch):
+    # A superior that cannot be reached is not "no problems found": it is no verdict at all,
+    # which is why this law raises rather than returning an empty list.
+    def refuse(store):
+        raise RecursiveKnowledgeError("bridge refused for the test")
+
+    monkeypatch.setattr(bridge, "govern", refuse)
+    with pytest.raises(contract.ContractError, match="construct foundation could not be reached"):
+        contract.no_subject_exists_outside_governance(_forge(declaration))
+
+
+def test_a_subject_reaching_no_active_disposition_is_refused(declaration, monkeypatch):
+    real = bridge.govern
+    monkeypatch.setattr(
+        bridge,
+        "govern",
+        lambda store: {**real(store), "ungoverned": ("a-subject-nobody-dispositioned",)},
+    )
+    problems = contract.no_subject_exists_outside_governance(_forge(declaration))
+    assert any("reached no active disposition" in p for p in problems), problems
+
+
+def test_not_presenting_every_subject_for_disposition_is_refused(declaration, monkeypatch):
+    real = bridge.govern
+    monkeypatch.setattr(bridge, "govern", lambda store: {**real(store), "presented_count": 0})
+    problems = contract.no_subject_exists_outside_governance(_forge(declaration))
+    assert any("not every subject was presented" in p for p in problems), problems
+
+
+def test_recording_no_disposition_at_all_is_refused(declaration, monkeypatch):
+    real = bridge.govern
+    monkeypatch.setattr(bridge, "govern", lambda store: {**real(store), "dispositions": ()})
+    problems = contract.no_subject_exists_outside_governance(_forge(declaration))
+    assert any("nothing was actually governed" in p for p in problems), problems
