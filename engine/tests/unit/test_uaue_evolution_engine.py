@@ -1236,3 +1236,237 @@ def test_the_internal_sources_cite_the_declaration_as_their_own_evidence() -> No
     from engine.uaue.resolution import DECLARATION_PATH
 
     assert declaration_evidence() == DECLARATION_PATH
+
+
+# --------------------------------------------------------------------------------------
+# certification: every proof shown to fail
+#
+# Each proof holds on a complete chain, so none of the refusals below had ever been produced.
+# A proof that silently stopped measuring would certify every chain it was handed.
+
+
+def _proof(chain: EvolutionChain, authority: EvolutionAuthority, subject: str):
+    return next(
+        entry
+        for entry in certify_evolution(chain, authority).outcomes
+        if subject in entry.subject.lower()
+    )
+
+
+def test_an_understanding_that_leaves_a_question_unanswered_is_not_certified(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """Understanding answers why, what changes, what depends, what breaks and what evidence.
+    A chain missing one of those was not understood; it was described."""
+    hollow = replace(unknown_chain, understanding=replace(unknown_chain.understanding, why=""))
+    outcome = _proof(hollow, wired_authority, "understood")
+    assert not outcome.satisfied
+    assert "leaves questions unanswered" in outcome.detail
+
+
+def test_a_chain_no_object_of_which_carries_the_plan_is_not_certified(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """The objects of the phases BEFORE planning cannot carry a plan that did not yet exist, so
+    the obligation runs from the planning phase onward. With no object carrying it at all there
+    is no phase to run it from, and the proof says so rather than passing vacuously."""
+    unplanned = replace(
+        unknown_chain,
+        objects=tuple(replace(obj, plan=()) for obj in unknown_chain.objects),
+    )
+    outcome = _proof(unplanned, wired_authority, "planned")
+    assert not outcome.satisfied
+    assert "no object carries the plan" in outcome.detail
+
+
+def test_a_downstream_object_that_dropped_the_plan_is_not_certified(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """Every object from planning onward carries the plan it was executed under. One that
+    dropped it would be an act nothing authorises, sitting inside a chain that says it was
+    planned."""
+    planned = [obj for obj in unknown_chain.objects if obj.plan]
+    assert len(planned) > 1, "the chain carries no downstream planned object to strip"
+    stripped = replace(
+        unknown_chain,
+        objects=tuple(
+            replace(obj, plan=()) if obj is planned[-1] else obj for obj in unknown_chain.objects
+        ),
+    )
+    outcome = _proof(stripped, wired_authority, "planned")
+    assert not outcome.satisfied
+    assert "downstream objects not carrying the plan" in outcome.detail
+
+
+def test_an_execution_whose_path_or_gate_does_not_resolve_is_not_certified(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """Authorised is not the same as authorisable. A path that no longer resolves, or a gate
+    that is no longer wired, means the authorisation was recorded against something that is not
+    there now."""
+    for field in ("path_resolves", "gate_wired"):
+        broken = replace(
+            unknown_chain, execution=replace(unknown_chain.execution, **{field: False})
+        )
+        outcome = _proof(broken, wired_authority, "executed")
+        assert not outcome.satisfied
+        assert "does not resolve" in outcome.detail
+
+
+def test_an_object_carrying_an_empty_evidence_set_is_not_certified(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """Evidence is what makes a certified act reviewable afterwards. An object with none was
+    certified on the strength of the chain it sits in rather than on anything of its own."""
+    stripped = replace(
+        unknown_chain,
+        objects=(replace(unknown_chain.objects[0], evidence=()), *unknown_chain.objects[1:]),
+    )
+    outcome = _proof(stripped, wired_authority, "evidence")
+    assert not outcome.satisfied
+    assert "empty evidence set" in outcome.detail
+
+
+def test_an_object_absent_from_the_history_projection_is_not_certified(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority, monkeypatch
+) -> None:
+    """Measured by actually projecting and rehydrating through the ledger that owns the append
+    rules, so the proof fails if the history cannot be read back under the rules that wrote it —
+    rather than passing because a file exists."""
+    from engine.uaue import history as history_module
+
+    real = history_module.rehydrate_history
+
+    class _Forgetful:
+        """A ledger that rehydrates and remembers nothing — which is what a projection missing
+        its objects looks like from the proof's side."""
+
+        def __init__(self, rehydrated: object) -> None:
+            self._rehydrated = rehydrated
+
+        def records(self) -> tuple[object, ...]:
+            return ()
+
+        def __len__(self) -> int:
+            return 0
+
+    monkeypatch.setattr(
+        history_module, "rehydrate_history", lambda document: _Forgetful(real(document))
+    )
+    outcome = _proof(unknown_chain, wired_authority, "history")
+    assert not outcome.satisfied
+    assert "absent from the history projection" in outcome.detail
+
+
+# --------------------------------------------------------------------------------------
+# history: every declared dimension, and every declared query
+
+
+def test_every_declared_history_dimension_produces_a_value(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """A dimension this engine cannot derive returns an explicit marker rather than an empty
+    string, so an underivable dimension is VISIBLE in the history instead of looking like an
+    absent one. Both halves are measured: every declared dimension resolves, and a dimension
+    nobody declared renders as the marker."""
+    from engine.uaue.history import _dimension_value
+
+    obj = unknown_chain.objects[-1]
+    for dimension in wired_authority.history.dimensions:
+        value = _dimension_value(
+            dimension,
+            obj=obj,
+            chain=unknown_chain,
+            authority=wired_authority,
+            cycle=0,
+            stage=obj.lifecycle_state,
+            stage_ordinal=0,
+        )
+        assert value, dimension
+        assert value != "<no derivation declared for this dimension>", dimension
+    assert (
+        _dimension_value(
+            "a-dimension-nobody-declared",
+            obj=obj,
+            chain=unknown_chain,
+            authority=wired_authority,
+            cycle=0,
+            stage=obj.lifecycle_state,
+            stage_ordinal=0,
+        )
+        == "<no derivation declared for this dimension>"
+    )
+
+
+def test_a_verdict_dimension_falls_back_to_the_chain_verdict_it_summarises(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """An object sealed before its verdict existed carries no result of its own, so the
+    dimension reads the chain's. Reading it as empty would make "not yet measured" and "measured
+    and found nothing" the same history entry."""
+    from engine.uaue.history import _dimension_value
+
+    unsealed = replace(
+        unknown_chain.objects[0],
+        validation_result="",
+        verification_result="",
+        certification_result="",
+    )
+    for dimension, verdict in (
+        ("validation", unknown_chain.validation),
+        ("verification", unknown_chain.verification),
+        ("certification", unknown_chain.certification),
+    ):
+        assert verdict is not None, dimension
+        assert (
+            _dimension_value(
+                dimension,
+                obj=unsealed,
+                chain=unknown_chain,
+                authority=wired_authority,
+                cycle=0,
+                stage=unsealed.lifecycle_state,
+                stage_ordinal=0,
+            )
+            == verdict.summary
+        )
+
+
+def test_every_declared_query_dimension_finds_the_record_it_names(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """A query on an undeclared key is refused rather than returning nothing, because an empty
+    result would be indistinguishable from "no record matches". These are the declared ones, and
+    each must actually find something, or the query surface would be a shape with no contents."""
+    document = project_history(unknown_chain, wired_authority)
+    first = document["ledger"]["records"][0]
+
+    assert query_history(document, "cycle", str(first["cycle"]))
+    assert query_history(document, "canonical_stage", first["stage"])
+    assert query_history(document, "lifecycle_state", first["stage"])
+
+
+def test_a_queryable_key_the_ledger_stores_as_a_finding_is_still_queryable(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """The record's own columns answer four of the declared keys. The rest are matched against
+    the findings the ledger writes as prose, which is how a dimension stored as text stays
+    queryable without a second index — and it is the reason the query reads the DOCUMENT rather
+    than the ledger's typed columns."""
+    document = project_history(unknown_chain, wired_authority)
+    document["queryable_by"] = [*document["queryable_by"], "what"]
+    first = document["ledger"]["records"][0]
+    finding = next(item for item in first["findings"] if item.startswith("what="))
+    assert query_history(document, "what", finding.partition("=")[2])
+    assert query_history(document, "what", "a value no record carries") == ()
+
+
+def test_a_ledger_record_this_reader_cannot_read_is_skipped_rather_than_matched(
+    unknown_chain: EvolutionChain, wired_authority: EvolutionAuthority
+) -> None:
+    """A ledger holding a row of another shape must contribute no match. Matching it would put a
+    record nobody can read into the answer to a query about records."""
+    document = project_history(unknown_chain, wired_authority)
+    document["ledger"]["records"] = ["not a record", *document["ledger"]["records"]]
+    first = unknown_chain.objects[0]
+    assert query_history(document, "subject", first.evolution_id)

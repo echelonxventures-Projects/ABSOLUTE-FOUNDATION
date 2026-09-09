@@ -1156,3 +1156,241 @@ def test_the_replay_check_reports_an_unreadable_projection(
         assert "unreadable" in replay_drift(report, unreadable)
     finally:
         unreadable.chmod(0o600)
+
+
+# --------------------------------------------------------------------------------------
+# the controller's refusals, which a healthy repository never produces
+
+
+def test_an_evaluation_that_did_not_settle_halts_before_authorisation(
+    controller: EvolutionController, probe: EvolutionCandidate, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Authorisation reads the evaluation's verdict rather than re-deriving it, and an execution
+    authorised past an unsettled evaluation would perform an act nobody predicted the impact of.
+    The reason is carried through by name so an operator can see WHICH of the three conditions
+    withheld the authorisation."""
+    from engine.uaue import controller as controller_module
+
+    real = controller_module.simulate_evolution
+
+    def _unsettled(plan, authority, substrate=None):  # noqa: ANN001, ANN202
+        return replace(real(plan, authority, substrate), fixed_point=False)
+
+    monkeypatch.setattr(controller_module, "simulate_evolution", _unsettled)
+    run = controller.run(probe)
+    assert run.refusals
+    assert any("did not settle over the candidate state" in reason for reason in run.refusals)
+
+
+def test_an_execution_claiming_a_mutation_is_refused_twice_over(
+    controller: EvolutionController, probe: EvolutionCandidate, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """This controller never performs a mutation, so a record claiming one came from somewhere
+    it does not control. Refused at the authorisation position AND again when the run is sealed,
+    because the two are different readers and neither may rely on the other having looked."""
+    from engine.uaue import controller as controller_module
+
+    real = controller_module.execute_evolution
+
+    def _claiming(simulation, authority, substrate=None):  # noqa: ANN001, ANN202
+        return replace(real(simulation, authority, substrate), mutation_performed=True)
+
+    monkeypatch.setattr(controller_module, "execute_evolution", _claiming)
+    run = controller.run(probe)
+    assert any("never does and never permits" in reason for reason in run.refusals)
+    assert any("which this controller never performs" in reason for reason in run.refusals)
+
+
+def test_a_history_that_cannot_be_projected_is_a_refusal_and_not_a_crash(
+    controller: EvolutionController, probe: EvolutionCandidate, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The run is the unit an operator reads. A projection failure that escaped as an exception
+    would take the whole run's record with it, including every refusal already collected."""
+    from engine.uaue import controller as controller_module
+    from engine.uaue.model import EvolutionAuthorityError
+
+    def _unprojectable(chain, authority):  # noqa: ANN001, ANN202
+        raise EvolutionAuthorityError("the ledger refused the projection")
+
+    monkeypatch.setattr(controller_module, "project_history", _unprojectable)
+    run = controller.run(probe)
+    assert any("history could not be projected" in reason for reason in run.refusals)
+    assert run.history == {}
+
+
+# --------------------------------------------------------------------------------------
+# the gate's obligations, each shown to refuse
+#
+# Every one of these holds against the real declaration, so none of the refusal arms had run.
+# An obligation that silently stopped measuring would report SATISFIED for ever, and the gate
+# would be OPEN on the strength of a check that had stopped asking.
+
+
+def _obligation(context: EvolutionContext, builder: str):
+    from engine.uaue import gate as gate_module
+
+    return getattr(gate_module, builder)(context)
+
+
+def test_a_position_with_no_owner_or_an_unwired_gate_is_unresolved(
+    context: EvolutionContext,
+) -> None:
+    """A position with no declared owner answers to nobody, and one whose gate is not wired
+    refuses at nothing. Both make the position's later claims unattributable."""
+    authority = context.authority
+    ownerless = replace(
+        authority,
+        phases=(replace(authority.phases[0], owners=()), *authority.phases[1:]),
+    )
+    obligation = _obligation(replace(context, authority=ownerless), "_positions_obligation")
+    assert not obligation.satisfied
+    assert "no owner is declared" in obligation.detail
+
+    unwired_gate = replace(authority.phases[0].gate, wired=False, detail="not in the Makefile")
+    unwired = replace(
+        authority,
+        phases=(replace(authority.phases[0], gate=unwired_gate), *authority.phases[1:]),
+    )
+    obligation = _obligation(replace(context, authority=unwired), "_positions_obligation")
+    assert not obligation.satisfied
+    assert "gate not wired" in obligation.detail
+
+
+def test_a_stage_claimed_by_nobody_or_by_two_positions_closes_the_stage_obligation(
+    context: EvolutionContext,
+) -> None:
+    """Exactly once is the property. Claimed by nobody is a stage of a governed cycle that is
+    ungoverned; claimed twice is a stage with two authorities and no tiebreak."""
+    authority = context.authority
+    for claimed_by, message in (
+        ((), "claimed by no position"),
+        (("AUE-P-01", "AUE-P-02"), "claimed by more than one position"),
+    ):
+        doctored = replace(
+            authority,
+            lifecycle_states=(
+                replace(authority.lifecycle_states[0], claimed_by=claimed_by),
+                *authority.lifecycle_states[1:],
+            ),
+        )
+        obligation = _obligation(replace(context, authority=doctored), "_stages_obligation")
+        assert not obligation.satisfied
+        assert message in obligation.detail
+
+
+def test_a_backward_or_unresolved_dependency_closes_the_dependency_obligation(
+    context: EvolutionContext,
+) -> None:
+    """A phase edge pointing forwards would let a position depend on one that has not run; a
+    home edge naming a path nobody wrote is a dependency on nothing.
+
+    The loader derives phase edges from loop order and refuses a phase whose ordinal disagrees
+    with its position, so no declaration can produce the first. Handing the obligation an edge
+    set the deriver cannot build is what shows the guard still works if a future deriver could.
+    """
+    from engine.uaue.model import Dependency
+
+    authority = context.authority
+    forward = Dependency(
+        phase=authority.phases[0].identifier,
+        depends_on=authority.phases[-1].identifier,
+        kind="phase",
+    )
+    absent = Dependency(
+        phase=authority.phases[0].identifier,
+        depends_on="engine/absent/nowhere.py",
+        kind="home",
+    )
+    # A home edge naming a POSITION rather than a path is resolved by the position existing, so
+    # it is skipped rather than looked for on disk — otherwise every such edge would report as
+    # an unresolved file nobody wrote.
+    positional = Dependency(
+        phase=authority.phases[0].identifier,
+        depends_on=authority.phases[1].identifier,
+        kind="home",
+    )
+    doctored = replace(
+        authority, dependencies=(*authority.dependencies, forward, absent, positional)
+    )
+    obligation = _obligation(replace(context, authority=doctored), "_dependencies_obligation")
+    assert not obligation.satisfied
+    assert "backward edges" in obligation.detail
+    assert "unresolved" in obligation.detail
+
+
+def test_a_replay_that_does_not_reproduce_the_run_closes_the_replay_obligation(
+    controller: EvolutionController, probe: EvolutionCandidate
+) -> None:
+    """Four separate differences, because they mean different things: a different population, a
+    different run digest, a different run identity, and a settlement that took a different
+    number of rounds. Collapsing them would report "the replay differs" and say nothing an
+    operator could act on."""
+    from engine.uaue import gate as gate_module
+
+    first = controller.run(probe)
+    drifted = replace(
+        first,
+        run_id=f"{first.run_id}x",
+        settlement=replace(first.settlement, rounds=first.settlement.rounds + 1),
+    )
+    obligation = gate_module._replay_obligation((first,), (drifted, drifted))
+    assert not obligation.satisfied
+    assert "1 runs against 2 on replay" in obligation.detail
+    assert "run digest differs" in obligation.detail
+    assert "run identity differs" in obligation.detail
+    assert "rounds" in obligation.detail
+
+
+def test_a_run_recording_a_mutation_or_inventing_an_owner_home_closes_the_unknown_obligation(
+    context: EvolutionContext, probe_run: EvolutionRun
+) -> None:
+    """Nothing new was required, and "nothing new" is measured two ways: no mutation was
+    performed, and no owner home lies inside this programme's own home. The second is what
+    would make the register its own authority."""
+    from engine.uaue import gate as gate_module
+    from engine.uaue.resolution import PROGRAMME_HOME
+
+    mutating = replace(probe_run, mutation_performed=True)
+    obligation = gate_module._unknown_obligation(mutating, context)
+    assert not obligation.satisfied
+    assert "a mutation was recorded" in obligation.detail
+
+    authority = context.authority
+    invented = replace(
+        authority,
+        ownership=(
+            replace(authority.ownership[0], home=f"{PROGRAMME_HOME}/invented.py"),
+            *authority.ownership[1:],
+        ),
+    )
+    obligation = gate_module._unknown_obligation(probe_run, replace(context, authority=invented))
+    assert not obligation.satisfied
+    assert "created inside this programme" in obligation.detail
+
+
+def test_the_report_names_the_replay_drift_it_found(capsys) -> None:
+    """The drift line is the one an operator acts on. A report that computed the drift and did
+    not print it would leave the committed projection's disagreement discoverable only by
+    running the gate again with different flags."""
+    import io
+
+    from engine.uaue import gate as gate_module
+
+    context = EvolutionContext.resolve()
+    report = gate_module.measure(context)
+    stream = io.StringIO()
+    gate_module._print_report(report, "the committed projection disagrees", stream)
+    assert "replay drift:" in stream.getvalue()
+
+
+def test_a_render_the_declaration_refuses_is_a_fault_and_never_a_verdict(monkeypatch) -> None:
+    """An IO failure and a declaration failure are different faults on the same command, and
+    both must exit FAULT rather than reporting a gate verdict about a surface nobody wrote."""
+    from engine.uaue import gate as gate_module
+    from engine.uaue.model import EvolutionAuthorityError
+
+    def _refusing(*_: Any, **__: Any) -> None:
+        raise EvolutionAuthorityError("the surface cannot be rendered")
+
+    monkeypatch.setattr(gate_module, "render_surface", _refusing)
+    assert gate_module.main(["--render", "--quiet"]) == gate_module.EXIT_FAULT

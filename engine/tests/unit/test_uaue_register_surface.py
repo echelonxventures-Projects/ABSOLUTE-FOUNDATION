@@ -346,3 +346,95 @@ def test_the_mandatory_obligation_closes_when_a_measure_cannot_be_computed(
     obligation = gate_module._mandatory_obligation(report.runs, context, measures)
     assert not obligation.satisfied
     assert "AUE-MAN-TEST" in obligation.detail
+
+
+def test_a_rendered_register_that_cannot_be_read_is_drift_and_never_a_match(
+    report: GateReport, tmp_path: Path
+) -> None:
+    """Unreadable is a third answer beside "not rendered" and "different bytes", and it must
+    read as drift: a register whose bytes cannot be compared has not been shown to be the
+    product of the declaration, and treating it as a match would let an unreadable file certify
+    itself."""
+    written = render_registers(report, tmp_path)
+    written[0].chmod(0o000)
+    drift = replay_drift(report, tmp_path)
+    assert any("unreadable" in entry for entry in drift), drift
+
+
+def test_a_path_outside_the_measured_root_is_left_as_it_was_given(tmp_path: Path) -> None:
+    """Rendered paths are made repository-relative so a register reproduces on any machine. A
+    path that is not under the root has no relative form, and inventing one would put a
+    fabricated location into the surface — so it is carried through unchanged."""
+    from engine.uaue.registers import _relative
+
+    assert _relative(tmp_path / "inside" / "register.md", tmp_path) == "inside/register.md"
+    assert _relative("/elsewhere/register.md", tmp_path) == "/elsewhere/register.md"
+
+
+def test_two_phases_declaring_one_owner_set_are_counted_as_a_duplicate_authority(
+    report: GateReport,
+) -> None:
+    """Two positions answering to exactly the same owners are one authority wearing two names,
+    and the measure exists so that collapse is visible rather than inferred from a reading of
+    the declaration."""
+    from engine.uaue.registers import mandatory_measures
+
+    authority = report.context.authority
+    first, second = authority.phases[0], authority.phases[1]
+    collapsed = replace(
+        authority,
+        phases=tuple(
+            replace(entry, owners=first.owners) if entry is second else entry
+            for entry in authority.phases
+        ),
+    )
+    doctored = replace(report, context=replace(report.context, authority=collapsed))
+    assert mandatory_measures(doctored)["duplicate_authorities"] >= 1
+
+
+def test_a_ledger_row_of_another_shape_contributes_no_history_identity(
+    report: GateReport,
+) -> None:
+    """The history identities are read out of the projection the run produced. A row this reader
+    cannot read must contribute nothing rather than a partial identity, because a partial one
+    would count an object as recorded that nothing recorded."""
+    from engine.uaue.registers import mandatory_measures
+
+    baseline = mandatory_measures(report)
+    projection = {
+        **report.projection,
+        "ledger": {
+            **report.projection.get("ledger", {}),
+            "records": [
+                "not a record",
+                {"subject": 7},
+                *(report.projection.get("ledger", {}).get("records", []) or []),
+            ],
+        },
+    }
+    assert mandatory_measures(replace(report, projection=projection)) == baseline
+    assert mandatory_measures(replace(report, projection={"ledger": "not a mapping"}))
+
+
+def test_the_unknown_obligation_is_unsatisfied_when_no_run_carries_the_probe_subject(
+    report: GateReport,
+) -> None:
+    """Selected by the probe's own subject rather than by an obligation identifier, so the
+    register is not coupled to the gate's numbering — and with no run carrying that subject the
+    obligation is unsatisfied rather than silently absent."""
+    from engine.uaue.registers import _unknown_satisfied
+
+    assert _unknown_satisfied(report) is True
+    assert _unknown_satisfied(replace(report, runs=())) is False
+
+
+def test_a_run_of_another_subject_does_not_answer_for_the_unknown_obligation(
+    report: GateReport,
+) -> None:
+    """The obligation is about ONE declared subject. A run of some other candidate must not
+    answer for it — neither by satisfying it nor by refusing it — or the measure would report
+    whatever the last run happened to do."""
+    from engine.uaue.registers import _unknown_satisfied
+
+    other = replace(report.runs[0], subject_identity="a-subject-the-probe-never-names")
+    assert _unknown_satisfied(replace(report, runs=(other,))) is False

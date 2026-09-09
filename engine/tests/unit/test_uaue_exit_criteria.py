@@ -497,3 +497,261 @@ def test_the_measures_live_in_one_place(report: GateReport) -> None:
     for name in MEASURES:
         assert name not in gate_source, f"gate.py reimplements the measure {name}"
     assert Path(EXITS_SOURCE).is_file()
+
+
+# --------------------------------------------------------------------------------------
+# the arms of each measure that a healthy run never takes
+
+
+def test_an_execution_carrying_another_chains_evaluation_is_measured(report: GateReport) -> None:
+    """Preceding, not merely present. An execution whose own simulation reference is not this
+    chain's would satisfy a presence check while having evaluated nothing about itself."""
+    borrowed = _with_runs(
+        report,
+        [
+            replace(
+                run,
+                chain=replace(
+                    run.chain,
+                    execution=replace(
+                        run.chain.execution,
+                        simulation=replace(run.chain.simulation, fixed_point=False),
+                    ),
+                ),
+            )
+            for run in report.runs
+        ],
+    )
+    assert _one_measure(borrowed, "executions_without_simulation")
+
+
+def test_two_executions_binding_different_paths_are_measured(report: GateReport) -> None:
+    """Per object, an execution could bind a resolving path that is not the declared gateway;
+    across objects, two executions could each bind a correct-looking path and the engine would
+    have two mutation gateways. The second is what this half counts."""
+    runs = list(report.runs)
+    assert runs, "the report conducted no run"
+    doubled = _with_runs(
+        report,
+        [
+            *runs,
+            replace(
+                runs[0],
+                chain=replace(
+                    runs[0].chain,
+                    execution=replace(
+                        runs[0].chain.execution, mutation_path="engine/uaue/a-second-gateway.py"
+                    ),
+                ),
+            ),
+        ],
+    )
+    assert _one_measure(doubled, "executions_without_the_single_mutation_path")
+
+
+@pytest.mark.parametrize("field", ["path_resolves", "gate_wired"])
+def test_an_execution_whose_path_or_gate_stopped_resolving_is_measured(
+    report: GateReport, field: str
+) -> None:
+    """Authorised is not the same as authorisable now. Either fact going false means the
+    authorisation was recorded against something that is no longer there."""
+    broken = _with_runs(
+        report,
+        [
+            replace(
+                run,
+                chain=replace(run.chain, execution=replace(run.chain.execution, **{field: False})),
+            )
+            for run in report.runs
+        ],
+    )
+    assert _one_measure(broken, "executions_without_the_single_mutation_path")
+
+
+@pytest.mark.parametrize(
+    ("changes", "reason"),
+    [
+        ({"deviation": None}, "an observation that never compared"),
+        ({"measured_by": ""}, "an observation nobody owns"),
+    ],
+    ids=["no-deviation", "no-owner"],
+)
+def test_an_observation_that_never_compared_or_names_no_owner_is_measured(
+    report: GateReport, changes: dict, reason: str
+) -> None:
+    """Deviation is a RECORD, not a requirement to differ — an empty tuple is a measured match.
+    What is refused is an observation that never compared at all, and one nobody owns."""
+    hollow = _with_runs(
+        report,
+        [
+            replace(
+                run, chain=replace(run.chain, observation=replace(run.chain.observation, **changes))
+            )
+            for run in report.runs
+        ],
+    )
+    assert _one_measure(hollow, "observations_without_expected_actual_deviation"), reason
+
+
+@pytest.mark.parametrize(
+    ("measure_name", "verdict_field"),
+    [
+        ("validation_dimensions_unsatisfied", "validation"),
+        ("verification_dimensions_unsatisfied_or_ungated", "verification"),
+        ("certification_proofs_unsatisfied", "certification"),
+    ],
+)
+def test_a_declared_dimension_measured_and_unsatisfied_is_counted(
+    report: GateReport, measure_name: str, verdict_field: str
+) -> None:
+    """A verdict that is PRESENT and reports a dimension unsatisfied is a different failure from
+    one that is absent. The absent case is already measured; this is the one where the run
+    measured the dimension and found it wanting."""
+    unsatisfied = _with_runs(
+        report,
+        [
+            replace(
+                run,
+                **{
+                    verdict_field: replace(
+                        getattr(run, verdict_field),
+                        outcomes=tuple(
+                            replace(entry, satisfied=False)
+                            for entry in getattr(run, verdict_field).outcomes
+                        ),
+                    )
+                },
+            )
+            for run in report.runs
+        ],
+    )
+    assert _one_measure(unsatisfied, measure_name)
+
+
+def test_a_projection_whose_ledger_is_not_a_mapping_is_measured(report: GateReport) -> None:
+    """A ledger of another shape records no subject this reader can name, so every object is
+    absent from it — which is what the measure has to say rather than reading it as empty."""
+    assert _one_measure(
+        replace(report, projection={"ledger": "not a mapping"}), "history_projection_gaps"
+    )
+    ledger = {**report.projection.get("ledger", {}), "records": ["not a record", {"subject": 7}]}
+    assert _one_measure(
+        replace(report, projection={**report.projection, "ledger": ledger}),
+        "history_projection_gaps",
+    )
+
+
+def test_a_self_evolution_home_that_stopped_resolving_is_measured(report: GateReport) -> None:
+    """The gap closes when the surface appears and reopens when it goes. A home that no longer
+    resolves is the reopening, and it must be counted rather than read as a closed gap."""
+    self_evolution = replace(report.context.authority.self_evolution, home_state="absent")
+    assert _one_measure(
+        _with_authority(report, self_evolution=self_evolution), "self_evolution_unclosed"
+    )
+
+
+def test_a_probe_declaring_no_stage_term_is_measured(report: GateReport) -> None:
+    """The openness proof needs a term to put through the vocabulary. With none declared there
+    is nothing to admit, and the criterion is unmet rather than vacuously satisfied."""
+    probe = replace(report.context.authority.unknown_probe, unknown_stage_term="")
+    assert _one_measure(
+        _with_authority(report, unknown_probe=probe), "unknown_subject_or_vocabulary_unmet"
+    )
+
+
+def test_a_vocabulary_that_refuses_the_term_or_mutates_itself_is_measured(
+    report: GateReport, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Three things are required of the extension surface: it admits the term, the extension
+    carries it, and the ORIGINAL vocabulary is unchanged. A surface that mutated the base would
+    be a legislative act rather than an admission."""
+    from engine.uckp import vocabulary as vocabulary_module
+
+    real = vocabulary_module.LIFECYCLE_STAGE_VOCABULARY
+
+    class _Refusing:
+        def has(self, term: str) -> bool:
+            return real.has(term)
+
+        def term_ids(self):  # noqa: ANN202
+            return real.term_ids()
+
+        def extended_with(self, term):  # noqa: ANN001, ANN202
+            raise RuntimeError("this vocabulary admits nothing")
+
+    monkeypatch.setattr(vocabulary_module, "LIFECYCLE_STAGE_VOCABULARY", _Refusing())
+    assert _one_measure(report, "unknown_subject_or_vocabulary_unmet")
+
+    class _Forgetful(_Refusing):
+        """Admits the term and does not carry it — an extension that reported success and
+        produced a vocabulary the term is not in."""
+
+        def extended_with(self, term):  # noqa: ANN001, ANN202
+            return self
+
+    monkeypatch.setattr(vocabulary_module, "LIFECYCLE_STAGE_VOCABULARY", _Forgetful())
+    assert _one_measure(report, "unknown_subject_or_vocabulary_unmet")
+
+    class _Mutating(_Refusing):
+        """Admits the term and rewrites ITSELF while doing it. The extension surface is
+        append-only, and a base that moved is a legislative act rather than an admission."""
+
+        def __init__(self) -> None:
+            self._ids = real.term_ids()
+
+        def term_ids(self):  # noqa: ANN202
+            return self._ids
+
+        def extended_with(self, term):  # noqa: ANN001, ANN202
+            self._ids = (*self._ids, term.term_id)
+
+            class _Extended:
+                def has(self, candidate: str) -> bool:
+                    return candidate == term.term_id
+
+            return _Extended()
+
+    monkeypatch.setattr(vocabulary_module, "LIFECYCLE_STAGE_VOCABULARY", _Mutating())
+    assert _one_measure(report, "unknown_subject_or_vocabulary_unmet")
+
+
+def test_a_run_of_the_probe_that_stopped_short_or_was_not_certified_is_measured(
+    report: GateReport,
+) -> None:
+    """The probe's traversal IS the openness claim. A run that stopped short traversed fewer
+    positions than the loop declares; one that was not certified reached the end and was refused.
+    Both are unmet exit criteria and neither may be read as the other."""
+    probe = report.context.authority.unknown_probe.subject
+    conducted = next(run for run in report.runs if run.subject_identity == probe)
+    short = replace(conducted, stage_results=conducted.stage_results[:-1])
+    assert _one_measure(_with_runs(report, [short]), "unknown_subject_or_vocabulary_unmet")
+    # `certified` and `halted` are DERIVED from the stage results and the refusals, so a run
+    # that carries a refusal is refused — there is no flag to set, which is the point of
+    # deriving them.
+    refused = replace(conducted, refusals=("a position refused",))
+    assert not refused.certified
+    assert _one_measure(_with_runs(report, [refused]), "unknown_subject_or_vocabulary_unmet")
+
+
+def test_a_chain_with_no_execution_object_contributes_no_simulation_violation(
+    report: GateReport,
+) -> None:
+    """A chain that never reached execution has no execution to check against a simulation, and
+    counting its absence here would double-count what the traversal criteria already measure."""
+    assert _one_measure(_break_chain(report, execution=None), "executions_without_simulation") == 0
+
+
+def test_a_verification_dimension_bound_to_an_unwired_gate_is_measured(
+    report: GateReport,
+) -> None:
+    """The gate half catches a report nobody runs: a dimension bound to a command the repository
+    cannot perform is a dimension whose satisfaction rests on nothing being executed."""
+    authority = report.context.authority
+    rebound = tuple(
+        replace(entry, bound_gate="make a-target-no-makefile-declares")
+        for entry in authority.verifications
+    )
+    assert _one_measure(
+        _with_authority(report, verifications=rebound),
+        "verification_dimensions_unsatisfied_or_ungated",
+    )
