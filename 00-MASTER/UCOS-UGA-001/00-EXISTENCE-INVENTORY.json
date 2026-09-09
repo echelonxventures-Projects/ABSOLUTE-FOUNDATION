@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7145,
+  "total_objects": 7150,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -23535,6 +23535,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-MASTER/UCCFA-000001/uccfa-declaration.json",
+      "object_class": "DATA_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCCFA-000001",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-DATAOBJ-000147",
+      "first_seen": "commit:5f8016c53380"
+    },
+    {
       "path": "00-MASTER/UCDA-000001/00-UCDA-DASHBOARD.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "GENERATED",
@@ -42848,6 +42857,33 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "engine/coordinate_framework/__init__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/coordinate_framework",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001388",
+      "first_seen": "commit:5f8016c53380"
+    },
+    {
+      "path": "engine/coordinate_framework/contract.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/coordinate_framework",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001389",
+      "first_seen": "commit:5f8016c53380"
+    },
+    {
+      "path": "engine/coordinate_framework/gate.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/coordinate_framework",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001390",
+      "first_seen": "commit:5f8016c53380"
+    },
+    {
       "path": "engine/determinism/EPIC-004-COMPLETION-REPORT.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -47903,6 +47939,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TESTOBJ-000838",
       "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/tests/unit/test_coordinate_framework.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000901",
+      "first_seen": "commit:5f8016c53380"
     },
     {
       "path": "engine/tests/unit/test_corpus_currency.py",

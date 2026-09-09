@@ -765,6 +765,27 @@
         "reusable": false
       },
       {
+        "$not_reusable": "The set of files it measures is DECLARED IN DATA, not fixed by this registry: uccfa-declaration.json names the canonical register, the ratification record and the constitutional laws register that carries LAW Ω∞-000, and it reads UCPA-000001's own declaration for the primitives rather than restating them. A static reuse_inputs list would go stale the moment any of those bindings changed, which is the one thing a reuse decision must never do, so this stage is recomputed rather than reused.",
+        "depends_on": [],
+        "id": "coordinate-alignment",
+        "label": "coordinate framework alignment (UCCFA-000001, five coordinates measured against the register)",
+        "modes": [
+          "change",
+          "integration",
+          "full"
+        ],
+        "owner": "UCCFA-000001",
+        "phase": "MAIN",
+        "plane": "READ_ONLY",
+        "read_set": [
+          "00-MASTER/UCCFA-000001/",
+          "00-MASTER/UCPA-000001/",
+          "engine/coordinate_framework/",
+          "engine/uckp/"
+        ],
+        "reusable": false
+      },
+      {
         "depends_on": [],
         "id": "verification-intelligence",
         "label": "universal verification intelligence (UVI-000001, selection derived and assurance preserved)",

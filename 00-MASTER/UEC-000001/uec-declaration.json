@@ -150,6 +150,12 @@
       "rule_id": "UEC-R-06"
     },
     {
+      "identity": "00-MASTER/UCCFA-000001/uccfa-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
       "identity": "00-MASTER/UCI-000001/uci-declaration.json",
       "kind": "DECLARATION",
       "owner": "UCI-000001 (certification integrity)",
@@ -183,6 +189,12 @@
       "identity": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
       "kind": "DECLARATION",
       "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-SUB-001/sub-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "UCOS-SUB-001 (substrate consumption)",
       "rule_id": "UEC-R-06"
     },
     {
@@ -684,6 +696,12 @@
       "rule_id": "UEC-R-04"
     },
     {
+      "identity": "substrate-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
       "identity": "uaep-gate",
       "kind": "MAKE_GATE_TARGET",
       "owner": "gate owner",
@@ -721,6 +739,12 @@
     },
     {
       "identity": "uccep-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uccfa-gate",
       "kind": "MAKE_GATE_TARGET",
       "owner": "gate owner",
       "rule_id": "UEC-R-04"
@@ -852,6 +876,12 @@
       "rule_id": "UEC-R-02"
     },
     {
+      "identity": "engine/coordinate_framework/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
       "identity": "engine/enforcement_closure/gate.py",
       "kind": "MODULE_GATE",
       "owner": "each capability's own owner",
@@ -885,6 +915,12 @@
       "identity": "engine/root_ontology/gate.py",
       "kind": "MODULE_GATE",
       "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/substrate/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "UCOS-SUB-001 (substrate consumption)",
       "rule_id": "UEC-R-02"
     },
     {
@@ -925,6 +961,24 @@
     },
     {
       "identity": "constitutional primitive alignment (UCPA-000001, root ontology measured and reduced)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "context closure certification (UCOS-UCTX-001, Phase 10 claims at fixed point)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UCOS-UCTX-001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "context proposal gate (four declared gates, every discovered proposal)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UCOS-UCTX-001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "coordinate framework alignment (UCCFA-000001, five coordinates measured against the register)",
       "kind": "VERIFY_STAGE",
       "owner": "UVI-000001",
       "rule_id": "UEC-R-05"
@@ -1146,6 +1200,12 @@
       "rule_id": "UEC-R-03"
     },
     {
+      "identity": ".github/workflows/sub-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
       "identity": ".github/workflows/uaep-gate.yml",
       "kind": "WORKFLOW",
       "owner": "gate owner",
@@ -1276,42 +1336,6 @@
       "kind": "WORKFLOW",
       "owner": "gate owner",
       "rule_id": "UEC-R-03"
-    },
-    {
-      "identity": "context closure certification (UCOS-UCTX-001, Phase 10 claims at fixed point)",
-      "kind": "VERIFY_STAGE",
-      "owner": "UCOS-UCTX-001",
-      "rule_id": "UEC-R-05"
-    },
-    {
-      "identity": "context proposal gate (four declared gates, every discovered proposal)",
-      "kind": "VERIFY_STAGE",
-      "owner": "UCOS-UCTX-001",
-      "rule_id": "UEC-R-05"
-    },
-    {
-      "identity": "engine/substrate/gate.py",
-      "kind": "MODULE_GATE",
-      "owner": "UCOS-SUB-001 (substrate consumption)",
-      "rule_id": "UEC-R-02"
-    },
-    {
-      "identity": "00-MASTER/UCOS-SUB-001/sub-declaration.json",
-      "kind": "DECLARATION",
-      "owner": "UCOS-SUB-001 (substrate consumption)",
-      "rule_id": "UEC-R-06"
-    },
-    {
-      "identity": ".github/workflows/sub-gate.yml",
-      "kind": "WORKFLOW",
-      "owner": "gate owner",
-      "rule_id": "UEC-R-03"
-    },
-    {
-      "identity": "substrate-gate",
-      "kind": "MAKE_GATE_TARGET",
-      "owner": "gate owner",
-      "rule_id": "UEC-R-04"
     }
   ],
   "laws": [
@@ -1447,7 +1471,7 @@
     "discovery_floor_total": 130,
     "engines_with_no_invoker": 6,
     "engines_without_a_test": 16,
-    "governed_artifacts": 197,
+    "governed_artifacts": 201,
     "engines_without_a_refusal_witness": 17,
     "$engines_without_a_refusal_witness": "17 of 52 verifiers. LOWERED 19 -> 17 in the same edit and for the same reason as `engines_without_a_test`: the new extraction tests do not merely NAME those engines, they force each to refuse — a corrupted archive, a sha that does not exist, a command that exits non-zero — so both counters fell together. UEC-L-05 asks whether a test names the engine; this asks whether a test has shown it REFUSE, and the gap between the two counters is still one engine that is named by a test which never forges a refusal. May fall; may never rise.",
     "engines_outside_the_canonical_lane": 26,

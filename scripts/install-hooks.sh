@@ -76,8 +76,9 @@ ucos_ok "Configured merge drivers: ucos-regenerate, ucos-union-ledger"
 cat > "$HOOK" <<'HOOK_EOF'
 #!/usr/bin/env bash
 # UCOS-MANAGED-HOOK — installed by scripts/install-hooks.sh. Do not edit by hand;
-# re-run the installer to update. Fast additive gate: ruff lint + format check via
-# the canonical .ec1-venv (no activation). Bypass with: git commit --no-verify
+# re-run the installer to update. Fast additive gate: ruff lint + format check and the
+# Universal ID gate, via the canonical .ec1-venv (no activation).
+# Bypass with: git commit --no-verify
 set -euo pipefail
 repo="$(git rev-parse --show-toplevel)"
 cd "$repo"
@@ -88,11 +89,16 @@ ucos_log "pre-commit: ruff lint + format check (engine + platform)"
 # SINGLE SOURCE OF TRUTH: the identical gate verify.sh Stage 1 runs (ucos_ruff_gate in
 # scripts/ucos-env.sh). No duplicated verification logic — verify.sh passes => this passes.
 ucos_ruff_gate
+# NOTHING ENTERS HISTORY WITHOUT AN IDENTITY. UGA-INV-01 already refuses an anonymous
+# object, but only when the gate is run; this makes the condition unreachable at the point
+# a file would become permanent. 153ms measured, so it costs the commit nothing.
+ucos_log "pre-commit: every tracked object carries a Universal ID"
+ucos_identity_gate
 ucos_ok "pre-commit: OK"
 HOOK_EOF
 
 chmod +x "$HOOK"
 ucos_ok "Installed UCOS pre-commit hook -> $HOOK"
-ucos_log "It runs: ruff lint + ruff format --check (via .ec1-venv, no activation)."
+ucos_log "It runs: ruff lint + ruff format --check, then the Universal ID gate."
 ucos_log "Bypass a single commit with: git commit --no-verify"
 ucos_log "Uninstall with: ./scripts/install-hooks.sh --uninstall"

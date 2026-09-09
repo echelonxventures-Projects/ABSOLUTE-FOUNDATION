@@ -12141,11 +12141,11 @@
     "STAGE0": 1,
     "DET": 6,
     "CONFIG": 40,
-    "DATAOBJ": 146,
+    "DATAOBJ": 147,
     "EXDOC": 3148,
     "TOOLING": 57,
-    "ENGINE": 1387,
-    "TESTOBJ": 900,
+    "ENGINE": 1390,
+    "TESTOBJ": 901,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -67226,6 +67226,36 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:b239389ed9ff"
+    },
+    "00-MASTER/UCCFA-000001/uccfa-declaration.json": {
+      "universal_id": "UCOS-DATAOBJ-000147",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:5f8016c53380"
+    },
+    "engine/coordinate_framework/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001388",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5f8016c53380"
+    },
+    "engine/coordinate_framework/contract.py": {
+      "universal_id": "UCOS-ENGINE-001389",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5f8016c53380"
+    },
+    "engine/coordinate_framework/gate.py": {
+      "universal_id": "UCOS-ENGINE-001390",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5f8016c53380"
+    },
+    "engine/tests/unit/test_coordinate_framework.py": {
+      "universal_id": "UCOS-TESTOBJ-000901",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:5f8016c53380"
     }
   },
   "by_observation": {

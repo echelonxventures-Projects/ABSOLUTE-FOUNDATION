@@ -59,7 +59,7 @@ The canonical layer records the deterministic RESULT of the gate. The execution 
 | command | `./verify.sh --full` |
 | invocation | --full (the certification contract; the bare invocation is --change, a developer mode that certifies nothing) |
 | contract artifacts | `verify.sh`, `scripts/ucos-env.sh` |
-| declared-stage digest (sha256) | `4dc04f28aa98e872` |
+| declared-stage digest (sha256) | `dabd65c86afa7762` |
 | result | **PASS** |
 
 | Gate (declared contract stage) | Result |
@@ -82,6 +82,7 @@ The canonical layer records the deterministic RESULT of the gate. The execution 
 | universal object birth contract (UOBC-000001, identity before existence) | PASS |
 | universal infinite scope and direction (UISD-000001, unbounded and self-applied) | PASS |
 | constitutional primitive alignment (UCPA-000001, root ontology measured and reduced) | PASS |
+| coordinate framework alignment (UCCFA-000001, five coordinates measured against the register) | PASS |
 | universal verification intelligence (UVI-000001, selection derived and assurance preserved) | PASS |
 | universal construct foundation (UCON-000001, every construct disposed and nothing silently ignored) | PASS |
 | universal enforcement closure (UEC-000001, every protection governed, invoked twice and covered) | PASS |

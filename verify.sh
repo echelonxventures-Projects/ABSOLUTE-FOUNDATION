@@ -760,6 +760,18 @@ run_stage "universal infinite scope and direction (UISD-000001, unbounded and se
 run_stage "constitutional primitive alignment (UCPA-000001, root ontology measured and reduced)" \
   "$PY" -m engine.root_ontology.gate --quiet
 
+# --- Stage 6g2: coordinate framework alignment (UCCFA-000001) ---------------------
+# The layer beside the one above. UCPA measures the four root primitives; this measures the
+# five coordinates that complete LAW Ω∞-000's nine dimensions, and UCCFA-L-06 proves the two
+# bindings partition those nine exactly — a dimension bound by both is the duplication
+# UCKP-ART-03 makes void, and one bound by neither is a constitutional requirement nothing
+# measures. It ran nowhere before: ONT-05 through ONT-10 appeared in no .py file at all.
+#
+# OBSERVE MODE, same as the stage above: reads the declaration and the declared registers,
+# computes, writes nothing. Exit 1 means a law was refused; exit 2 means no verdict.
+run_stage "coordinate framework alignment (UCCFA-000001, five coordinates measured against the register)" \
+  "$PY" -m engine.coordinate_framework.gate
+
 # --- Stage 6h: universal verification intelligence (UVI-000001) -------------------
 # The stage that measures the thing deciding what the other stages do. Every gate above
 # answers "is the repository compliant"; this one answers "is the verification that just

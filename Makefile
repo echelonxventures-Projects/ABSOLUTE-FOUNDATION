@@ -2361,7 +2361,7 @@ urke-metrics: bootstrap-quiet
 # and the declared ceiling is tightened to match — UEC-L-11 refuses a ceiling left above its
 # measurement, so a repair cannot leave slack for a future violation to occupy.
 # ===========================================================================
-.PHONY: uga uga-gate ucpa ucpa-gate
+.PHONY: uga uga-gate ucpa ucpa-gate uccfa uccfa-gate
 
 # uga: the human-readable measurement — every universal object invariant, every violation named.
 uga: bootstrap-quiet
@@ -2384,6 +2384,19 @@ ucpa-gate: bootstrap-quiet
 	@$(PY) -m engine.root_ontology.gate --quiet \
 	  || { echo "UCPA GATE CLOSED — run 'make ucpa' for the named refusals" >&2; exit 1; }
 	@echo "ucpa-gate: the root ontology is measured, reduced and singly authored"
+
+# uccfa: the human-readable measurement — the six coordinate framework alignment laws. The
+# layer beside UCPA: four root primitives there, five coordinates here, and UCCFA-L-06 proves
+# the two together are exactly the nine dimensions LAW Ω∞-000 requires.
+uccfa: bootstrap-quiet
+	@$(PY) -m engine.coordinate_framework.gate
+
+# uccfa-gate: fail-closed. The same command ./verify.sh runs as its coordinate framework
+# alignment stage, so this plane and that one measure one thing rather than two.
+uccfa-gate: bootstrap-quiet
+	@$(PY) -m engine.coordinate_framework.gate >/dev/null \
+	  || { echo "UCCFA GATE CLOSED — run 'make uccfa' for the named refusals" >&2; exit 1; }
+	@echo "uccfa-gate: the five coordinates are measured against the register that owns them"
 
 # ===========================================================================
 # EX-018 — MUTATION GOVERNANCE BOUNDARY DECIDABILITY

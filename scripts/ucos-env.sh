@@ -318,6 +318,77 @@ ucos_ensure_venv() {
 # Runs the pinned ruff via the venv interpreter by ABSOLUTE PATH (no activation, no PATH
 # dependency). ruff format --check is a NON-mutating check (it never rewrites files); use
 # `make format` to apply formatting.
+ucos_identity_gate() {
+  # NOTHING EXISTS WITHOUT A UNIVERSAL ID. UCKP-ART-05 gives every object a permanent
+  # identity and UGA-INV-01 refuses any tracked file without one — but only when somebody
+  # runs the gate. A file could therefore enter history anonymous and stay that way until a
+  # later verify.sh noticed, which is the shape this gate closes: an anonymous object cannot
+  # be COMMITTED, so the condition cannot arise rather than being detected after the fact.
+  #
+  # WHY NOT CALL uga_engine DIRECTLY. That is the single-source-of-truth pattern
+  # ucos_ruff_gate follows, and here it is the wrong trade: `uga_engine.py gate` builds the
+  # whole object graph and takes 25.9s measured, against 153ms for this. A 26-second
+  # pre-commit hook is one people bypass with --no-verify, and a gate that is routinely
+  # bypassed protects nothing.
+  #
+  # THE TWO ARE EQUIVALENT BY CONSTRUCTION, NOT BY HOPE. UGA-INV-01 reports
+  # `measured=7150` and `git ls-files` tracks exactly 7150 paths: UGA's population IS the
+  # tracked set, with no exclusions, so "tracked and in neither identity map" is the same
+  # predicate it applies. Both reported the identical four anonymous objects when this was
+  # written. UGA remains the authority: if the two ever disagree, verify.sh still refuses,
+  # so the worst this fast form can do is let something through for one commit — never
+  # certify something UGA would refuse.
+  #
+  # UCOS-CL-011 applies here too: paths are read NUL-delimited. 23 tracked paths contain
+  # spaces and 117 contain characters git would escape under core.quotepath, so a
+  # newline-joined or quoted listing compares escaped text against real UTF-8 keys and
+  # reports false anonymity for every one of them. That error was made while measuring this
+  # (121 false positives) before `-z` was used.
+  local py; py="$(ucos_venv_python)"
+  local repo; repo="$(git rev-parse --show-toplevel)"
+  "$py" - "$repo" <<'IDENTITY_EOF'
+import json
+import subprocess
+import sys
+
+repo = sys.argv[1]
+ledger = f"{repo}/00-BOOK/DATA/id-ledger.json"
+try:
+    with open(ledger, encoding="utf-8") as handle:
+        document = json.load(handle)
+except (OSError, json.JSONDecodeError) as exc:
+    print(f"identity gate: the id ledger is unreadable ({exc})", file=sys.stderr)
+    raise SystemExit(2) from None
+
+known = set(document.get("by_object") or ()) | set(document.get("by_path") or ())
+if not known:
+    print("identity gate: the id ledger carries no identities", file=sys.stderr)
+    raise SystemExit(2)
+
+listing = subprocess.run(
+    ["git", "-C", repo, "ls-files", "-z"], capture_output=True, check=False
+)
+tracked = [path for path in listing.stdout.decode("utf-8").split("\0") if path]
+anonymous = sorted(path for path in tracked if path not in known)
+if anonymous:
+    print(
+        f"identity gate: {len(anonymous)} tracked object(s) carry no Universal ID.",
+        file=sys.stderr,
+    )
+    for path in anonymous[:20]:
+        print(f"  - {path}", file=sys.stderr)
+    if len(anonymous) > 20:
+        print(f"  ... and {len(anonymous) - 20} more", file=sys.stderr)
+    print(
+        "Allocation is IRREVERSIBLE and operator-authorized: obtain a REG-AUTO-001 permit, "
+        "then run `python3 00-MASTER/UCOS-UGA-001/uga_engine.py run --permit=<id>`. "
+        "Diagnose with `uga_engine.py gate`.",
+        file=sys.stderr,
+    )
+    raise SystemExit(1)
+IDENTITY_EOF
+}
+
 ucos_ruff_gate() {
   # UCOS-GOV-LINT-BOUNDARY: lint scope is the git-tracked file set, not the filesystem.
   #

@@ -459,6 +459,38 @@
       "expires_at": null,
       "single_use": true,
       "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. One by_object identity for 00-BOOK/PORTAL/UCOS-MASTER-000044.md, the navigation page for 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md registered under P-UCOS-CORPUS-010. Portal pages are by_object artifacts, so UGA-INV-01 and UGA-INV-10 both refuse while it is anonymous. WHEN IT APPEARED, AND A CORRECTION. The agent told the operator this permit would follow, then checked immediately after the registration transaction, saw UGA pass with no anonymous object, and reported that the prediction had been wrong. It had not been: the page is rendered by the downstream register regeneration rather than by the transaction itself, so it appeared on the next pass and the original prediction held. The correction was issued too early on one observation, and is recorded here rather than left as a retracted claim, because the sequence matters for anyone registering the next artifact: registration allocates the corpus identity, the following regeneration renders the page, and the page needs its own identity. Two permits per register, in that order. Recorded because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded, and because UCKP-ART-05 makes an allocated identity permanent."
+    },
+    {
+      "permit_id": "P-UCOS-UGA-016",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "ed1afc22d30845f3f1247d78905c25c15d45c50525fac9bb3d3f08c35e1caa80",
+      "preimage_digest": "8c1cbb98c62ece357fd0ec90621a6179805c05c04df90ef72350a217a5fe75b2",
+      "head": "5f8016c533802ec5c4c13a0cdc448c77fd5ff325",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. The operator was shown the scope, the digests, the identity that would be issued and the irreversibility, and answered \"authorize P-UCOS-UGA-016\". WHAT IT ALLOCATES. Exactly one by_object identity, for 00-MASTER/UCCFA-000001/uccfa-declaration.json, the UCCFA-000001 Universal Coordinate Framework Alignment declaration. `uga_engine.py run --plan` reports [by_object+1] with category_seq(DATAOBJ:146->147), so the identity issued would be UCOS-DATAOBJ-000147 — the same object class and category its sibling UCPA-000001 carries as UCOS-DATAOBJ-000123. WHY IT IS NEEDED. `uga_engine.py gate` reports ANONYMOUS OBJECTS: 1 and fails UGA-INV-01 and UGA-INV-10 on that path; a tracked file with no Universal ID is an anonymous object and both invariants refuse while it stays that way. WHY NOTHING ELSE IS NEEDED. CAA-INV-02 already PASSES over 146 measured instruments: the declaration's `authority` field opens with the `NONE` disclaiming prefix, identical to UCPA-000001's, so it claims no authority and needs no subordinate_instruments binding. The registration plane is clean — `register.sh --observe` reports CERTIFIED, hard checks 7/7. WHAT IT DOES NOT COVER. The gate module engine/coordinate_framework/ is not placed and not in scope here; its five files would be EXECUTABLE_OBJECT/ENGINE allocations under a separate permit. IRREVERSIBILITY. Identity allocation is permanent and not operator-remediable: UCKP-ART-05 forbids reissue, so a wrongly minted id is spent forever. The digests above bind this permit to this manifest, this pre-image and HEAD 5f8016c5; if the tree changes before it runs, the binding no longer matches and the permit is refused rather than silently applied."
+    },
+    {
+      "permit_id": "P-UCOS-UGA-017",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "e69c06f2cea55ab22c93f1b2b4994d3da64d51b0abf5d9f61a73f7d79d4f21c2",
+      "preimage_digest": "c4495680b3b6701d0a7d2b038eef4aef255afdd07a31f4e34b954120702e2d70",
+      "head": "5f8016c533802ec5c4c13a0cdc448c77fd5ff325",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 4
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. The operator was shown the scope, the four paths, the digests and the irreversibility in the preceding turn, and answered \"Check all with 'no Universal IDs yet', fix them permanently\". WHAT IT ALLOCATES. Four by_object identities, for the consumer of the UCCFA-000001 declaration registered under P-UCOS-UGA-016: engine/coordinate_framework/__init__.py, engine/coordinate_framework/contract.py and engine/coordinate_framework/gate.py (EXECUTABLE_OBJECT/ENGINE, seq 1387->1390) and engine/tests/unit/test_coordinate_framework.py (TESTOBJ, seq 900->901). WHY IT IS NEEDED. UEC-L-07 refused the declaration alone: 'the number of declarations no module loads may not exceed the declared ceiling — every field of an unloaded declaration is unenforced', and 4 violated a ceiling of 3. A declaration nothing loads is exactly the condition UCCFA exists to complain about, so the fix is the consumer rather than a raised ceiling. With the module present UEC reports 16/16 laws holding, 0 refused. UVI-L-11 is the remaining refusal and it resolves on this allocation: the declared read-set prefix 'engine/coordinate_framework/' currently resolves to no REGISTERED object, because these four files carry no Universal ID yet. WHAT IT ALSO SETTLED. Three further obligations a new gate engine incurs, all now met: UEC-L-04 (invoked by a plane) and UEC-L-06 (reachable from two independent planes) by a verify.sh stage plus `make uccfa` / `make uccfa-gate`; UEC-L-05 (a detector with no test is one nobody has shown can fail) by 40 tests at 100% coverage of all three modules, each of the six laws exercised in both directions. UEC-L-03 was satisfied by adopting the four discovered artifacts into governed_enforcement, emitted by the module's own inventory() rather than hand-typed, with the two-sided ratchet moved 197->201 to match — that ratchet counts GOVERNED artifacts, so growth is the direction it exists to record. WHAT IT DOES NOT COVER. No further files. IRREVERSIBILITY. Identity allocation is permanent and not operator-remediable; UCKP-ART-05 forbids reissue. The digests bind this permit to this manifest, this pre-image and HEAD 5f8016c5; if the tree changes before it runs the binding no longer matches and the permit is refused rather than silently applied."
     }
   ]
 }
