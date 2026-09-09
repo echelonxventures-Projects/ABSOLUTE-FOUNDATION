@@ -14,24 +14,32 @@ Run: .ec1-venv/bin/python -m pytest intelligence/tests -q
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
-from engine.knowledge.errors import KnowledgeSourceError
+from engine.knowledge import (
+    CanonicalKnowledgeObject,
+    KnowledgeAuthority,
+    KnowledgeKind,
+    KnowledgeSourceError,
+    Lifecycle,
+)
 from intelligence.kernel.canonical import canonical_json
 from intelligence.kernel.config import MemorySink, subsystem_config
 from intelligence.kernel.errors import (
     DuplicateRecordError,
+    IdentityDivergenceError,
     KnowledgeOnceViolation,
     SubstrateUnavailableError,
     UnresolvedReferenceError,
 )
 from intelligence.kernel.ids import ArtifactClass, artifact_id, parse_class
 from intelligence.kernel.ledger import GENESIS_HASH, LedgerRegistry
+from intelligence.research import assimilation, model, registry, standards, validation
 from intelligence.research.__main__ import main as cli_main
 from intelligence.research.engine import OUTPUT_DIR, ResearchIntelligenceEngine
-from intelligence.research.model import CONFORMANCE_NON_CONFORMANT
 
 REPO = subsystem_config(OUTPUT_DIR).repo_root
 
@@ -209,11 +217,11 @@ def test_every_corpus_reference_resolves(engine) -> None:
 
 
 def test_standards_analysis_is_fail_closed(engine) -> None:
-    model = engine.standards().model()
-    assert model["standards_analysed"] == len(engine.corpus().standards)
-    assert model["conformance_histogram"][CONFORMANCE_NON_CONFORMANT] == 0
-    assert model["external_cross_reference"]["classification"].startswith("CURATED")
-    assert model["programme_instruments"]["science_registry_count"] > 0
+    analysis = engine.standards().model()
+    assert analysis["standards_analysed"] == len(engine.corpus().standards)
+    assert analysis["conformance_histogram"][model.CONFORMANCE_NON_CONFORMANT] == 0
+    assert analysis["external_cross_reference"]["classification"].startswith("CURATED")
+    assert analysis["programme_instruments"]["science_registry_count"] > 0
 
 
 # -- validation + gate ------------------------------------------------------
@@ -334,3 +342,421 @@ def test_a_subcommand_is_required() -> None:
     with pytest.raises(SystemExit) as raised:
         cli_main([])
     assert raised.value.code == 2
+
+
+# --------------------------------------------------------------------------- the corpus indexes
+#
+# `model.ResearchCorpus` publishes five indexes over the assimilated population and nothing called
+# any of them. They are the corpus's only read interface for a consumer that wants a SUBSET —
+# the publication engine asks for claims by class, a unit asks for its own claims — and an
+# index that has never been evaluated is a lookup nobody has checked returns the right rows.
+
+
+def test_every_corpus_index_selects_from_the_population_it_indexes(engine) -> None:
+    corpus = engine.corpus()
+    first = corpus.claims[0]
+
+    assert corpus.claim(first.claim_id) is first
+    assert corpus.claim("UCOS-RSCH-NO-SUCH-CLAIM") is None
+
+    by_class = corpus.claims_by_class(first.claim_class)
+    assert first in by_class
+    assert {c.claim_class for c in by_class} == {first.claim_class}
+    assert corpus.claims_by_class() == ()
+
+    by_universe = corpus.claims_by_universe(first.universe)
+    assert first in by_universe
+    assert {c.universe for c in by_universe} == {first.universe}
+    assert corpus.claims_by_universe("no-such-universe") == ()
+
+    finding = corpus.findings[0]
+    assert finding in corpus.findings_by_class(finding.finding_class)
+    assert corpus.findings_by_class() == ()
+
+    unit = corpus.units[0]
+    assert corpus.unit(unit.natural_key) is unit
+    assert corpus.unit("no-such-area") is None
+
+
+# --------------------------------------------------------------------------- the registry index
+#
+# The registry's whole purpose beyond the ledger is CITATION RESOLUTION: it remembers which
+# registered record owns a content reference and which one owns a substrate locator, so a
+# publication can cite a record rather than restate its content. Both maps were built on every
+# run and neither was ever read.
+
+
+def test_the_registry_resolves_a_citation_back_to_the_record_that_owns_it(engine) -> None:
+    registry = engine.registry()
+
+    citable = registry.citable_refs()
+    assert citable
+    owner = registry.record_id_for_ref(citable[0])
+    assert owner is not None
+    assert registry.get(owner) is not None
+    assert registry.record_id_for_ref("cko:UCKO-DOES-NOT-EXIST#statement") is None
+
+    locators = registry.source_locators()
+    assert locators
+    source_owner = registry.record_id_for_locator(locators[0])
+    assert source_owner is not None
+    assert parse_class(source_owner) is ArtifactClass.RESEARCH_SOURCE
+    assert registry.record_id_for_locator("no/such/file.json") is None
+
+    unit_ids = registry.unit_ids()
+    assert set(unit_ids) == {u.unit_id for u in engine.corpus().units}
+
+
+def test_an_unregistered_artifact_class_contributes_no_population(engine) -> None:
+    """THE REGISTRATION ORDER IS THE POPULATION'S DEFINITION, and the fallthrough is what
+    keeps that true.
+
+    ``_register_all`` walks six classes and each has a branch, so the final ``return []``
+    cannot be reached from any caller — it answers for a class the registry does not
+    populate. Without it a seventh class added to the order would fall off the end of the
+    function and register ``None``; with it the answer is "this registry holds none of
+    those", which is the honest one and the one the ledger can act on.
+    """
+    registry = engine.registry()
+
+    assert list(registry._population(ArtifactClass.PUBLICATION)) == []
+    assert list(registry._population(ArtifactClass.CITATION)) == []
+
+
+def test_an_identity_that_diverges_between_assimilation_and_registration_is_refused() -> None:
+    """TWO PLACES DERIVE THE SAME ID FROM THE SAME NATURAL KEY, and this is the check that
+    they agree.
+
+    Assimilation mints a record's id; the ledger mints it again at registration from the
+    natural key the record reports. They cannot disagree for a record built through
+    ``from_surface``, which is why the arm was dead — but a record assembled any other way
+    would enter the ledger under an id that nothing else in the corpus references, and every
+    citation of it would resolve to nothing while the registry reported a clean chain.
+    """
+    diverged = model.ResearchSource(
+        source_id="UCOS-RSCH-SRC-NOT-DERIVED-FROM-THE-KEY",
+        substrate_key="canonical-knowledge",
+        locator="knowledge/canonical-knowledge.json",
+        media="application/json",
+        authority="DECLARED",
+        role="substrate",
+        available=True,
+        record_count=1,
+        content_sha256="0" * 64,
+    )
+
+    with pytest.raises(IdentityDivergenceError) as raised:
+        registry.ResearchRegistry(model.ResearchCorpus(sources=(diverged,)))
+
+    assert raised.value.context["assimilated_id"] == diverged.source_id
+    assert raised.value.context["registered_id"] != diverged.source_id
+    assert raised.value.context["natural_key"] == diverged.natural_key
+
+
+# --------------------------------------------------------------------------- standards analysis
+#
+# The repository's own standards all declare their enforcement points, so the analysis reached
+# CONFORMANT for every one of them — and `test_standards_analysis_is_fail_closed` asserts the
+# NON-CONFORMANT histogram bucket is empty, which is a claim about this repository rather than
+# about the verdict. The verdict itself had never been shown to distinguish the three cases.
+
+
+def _standard(cko_id: str, **fields: object) -> CanonicalKnowledgeObject:
+    return CanonicalKnowledgeObject.create(
+        cko_id=cko_id,
+        kind=KnowledgeKind.STANDARD,
+        title="a declared standard",
+        statement="a standard is only a standard if something enforces it",
+        universe="test",
+        authority=KnowledgeAuthority.ENGINEERING,
+        owner="test",
+        lifecycle=Lifecycle.OPERATIONAL,
+        version="1.0.0",
+        **fields,
+    )
+
+
+def test_a_reference_resolves_as_an_id_a_concept_or_a_path_and_otherwise_does_not(
+    engine,
+) -> None:
+    """FOUR WAYS TO RESOLVE AND ONE WAY NOT TO — and none of the four had run.
+
+    Every enforcement point in this repository resolves, and the analysis only ever reports
+    the verdict, so the predicate underneath it was never evaluated by a test at all. Each
+    arm answers a different question: an id names a canonical object or a canonical decision,
+    a concept names a closure entry, and everything else is tried as a repository path. The
+    order matters — an id is checked before the filesystem — because a canonical id that
+    happened to also be a filename would otherwise resolve for the wrong reason.
+    """
+    resolver = engine.resolver
+    obj_id = resolver.objects()[0].cko_id
+    concept = next(iter(resolver.concepts()))
+
+    assert standards._resolves(obj_id, resolver) is True
+    assert standards._resolves(concept, resolver) is True
+    assert standards._resolves("knowledge/canonical-knowledge.json", resolver) is True
+    assert standards._resolves("no/such/path/at/all.json", resolver) is False
+
+
+def test_the_conformance_verdict_separates_indeterminate_from_conformant_and_not(engine) -> None:
+    """A STANDARD THAT DECLARES NOTHING IS NOT A STANDARD THAT PASSES.
+
+    Three verdicts, and only INDETERMINATE had ever been produced by a test. The distinction
+    the other two carry is the whole point of the analysis: a standard whose enforcement
+    reference resolves is CONFORMANT, and one whose reference does not is NON-CONFORMANT
+    rather than INDETERMINATE, because a broken enforcement point is a worse finding than an
+    absent one — it reads as enforced and enforces nothing.
+    """
+    resolver = engine.resolver
+
+    silent = standards.analyse_standard(_standard("UCKO-TEST-STANDARD-SILENT"), resolver)
+    assert silent.conformance == model.CONFORMANCE_INDETERMINATE
+    assert silent.enforcement_refs == ()
+
+    enforced = standards.analyse_standard(
+        _standard(
+            "UCKO-TEST-STANDARD-ENFORCED",
+            evidence=("knowledge/canonical-knowledge.json",),
+            certification="knowledge/decisions.json",
+        ),
+        resolver,
+    )
+    assert enforced.conformance == model.CONFORMANCE_CONFORMANT
+    assert enforced.resolved_enforcement_refs == enforced.enforcement_refs
+
+    broken = standards.analyse_standard(
+        _standard(
+            "UCKO-TEST-STANDARD-BROKEN",
+            evidence=("knowledge/canonical-knowledge.json",),
+            validation="evidence/never-produced.json",
+        ),
+        resolver,
+    )
+    assert broken.conformance == model.CONFORMANCE_NON_CONFORMANT
+    assert broken.unresolved_enforcement_refs == ("evidence/never-produced.json",)
+
+
+# --------------------------------------------------------------------------- assimilation arms
+#
+# Assimilation is a projection of whatever the repository happens to hold, and this repository
+# holds all of it: every declared surface is present, the coverage report has been produced, and
+# no canonical object supersedes another. Each absence below is a REAL state of a clone — a
+# fresh checkout before the coverage gate has run, a repository whose closure has not been
+# generated — and none of the arms that handle them had ever executed.
+
+
+def test_an_object_that_supersedes_another_is_superseding_not_prior_art_linked() -> None:
+    """THREE NOVELTY VERDICTS AND THEY ARE CHECKED IN ORDER.
+
+    A superseding object almost always also carries knowledge links, so an unordered reading
+    would classify it as PRIOR-ART-LINKED — the weaker statement — and the corpus would lose
+    the fact that it REPLACES something. No canonical object in this repository supersedes
+    another today, which is why the first arm had never been taken.
+    """
+    superseding = _standard(
+        "UCKO-TEST-SUPERSEDES",
+        supersedes=("UCKO-TEST-OLD",),
+        knowledge_links=("UCKO-TEST-RELATED",),
+    )
+    linked = _standard("UCKO-TEST-LINKED", knowledge_links=("UCKO-TEST-RELATED",))
+    alone = _standard("UCKO-TEST-ALONE")
+
+    assert assimilation._novelty(superseding) == model.NOVELTY_SUPERSEDING
+    assert assimilation._novelty(linked) == model.NOVELTY_PRIOR_ART_LINKED
+    assert assimilation._novelty(alone) == model.NOVELTY_STANDALONE
+
+
+def test_an_absent_coverage_report_produces_no_findings_and_is_reported_as_a_gap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """EMPIRICAL FINDINGS ARE DERIVED FROM THE COVERAGE REPORT OR NOT DERIVED AT ALL.
+
+    ``coverage.xml`` is a generated artifact that a pristine clone does not have until the
+    coverage gate has run, and this checkout has one — so the two arms that answer for its
+    absence were dead. They are the difference between a corpus that reports "the empirical
+    findings are not produced, and here is why" and one that either invents them or crashes
+    while reading a file that is not there.
+    """
+    research = _engine()
+    monkeypatch.setattr(type(research.resolver), "coverage", lambda _self: None)
+    assimilation = research.assimilation
+
+    assert assimilation._coverage_findings() == []
+
+    gap = next(g for g in assimilation.gaps() if g["substrate_key"] == "coverage-report")
+    assert gap["required"] is False
+    assert "not produced" in gap["consequence"]
+
+
+def test_an_unavailable_concept_closure_yields_no_contributions_rather_than_an_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A CONTRIBUTION AREA IS DERIVED FROM THE CLOSURE OR IT IS NOT DERIVED.
+
+    The closure is a declared surface and it is present here, so the guard above the
+    derivation had never run. Reading records from an unavailable surface would either raise
+    inside a projection whose contract is to survive whatever the repository contains, or
+    silently produce zero areas with no signal that the input was missing — the gap register
+    is where the absence is reported, and this is what routes it there.
+    """
+    assimilation = _engine().assimilation
+    real_surface = assimilation.substrate.surface
+
+    def unavailable(key: str):
+        surface = real_surface(key)
+        if key == "concept-closure":
+            return replace(surface, available=False)
+        return surface
+
+    monkeypatch.setattr(assimilation.substrate, "surface", unavailable)
+
+    assert assimilation.contributions() == ()
+
+
+# --------------------------------------------------------------------------- the failing checks
+#
+# Thirteen obligations, and this corpus satisfies all thirteen — so `test_validation_certifies
+# _the_corpus` proves the checks PASS on a corpus that passes and says nothing about whether
+# any of them can fail. A check that has only ever returned True is not a check; each finding
+# arm below is reached with a corpus defective in exactly the one way the check names.
+
+
+def _validator(engine, corpus, **kwargs: object) -> validation.ResearchValidationEngine:
+    return validation.ResearchValidationEngine(corpus, engine.resolver, engine.registry(), **kwargs)
+
+
+def test_a_reference_that_does_not_resolve_is_reported_as_fabrication(engine) -> None:
+    """RV-02 IS THE ANTI-FABRICATION CHECK, and it had only ever been run over refs that
+    resolve. The finding names the ref AND the reason, because "something did not resolve" is
+    not actionable and "cko:X#statement — no such object" is.
+    """
+    corpus = engine.corpus()
+    fabricated = replace(corpus.claims[0], claim_ref="cko:UCKO-INVENTED-BY-A-TEST#statement")
+    check = _validator(engine, replace(corpus, claims=(fabricated,)))._rv02()
+
+    assert check.passed is False
+    assert check.detail["unresolved"][0]["ref"] == "cko:UCKO-INVENTED-BY-A-TEST#statement"
+    assert check.detail["unresolved"][0]["reason"]
+
+
+def test_a_closure_that_declares_no_total_makes_the_reconciliation_indeterminate(
+    engine, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """RV-07 RECONCILES AGAINST A DECLARED TOTAL, and without one there is nothing to
+    reconcile against. The verdict is None — indeterminate — rather than a pass, because a
+    check that passes when its reference value is missing would certify the corpus on the
+    strength of the closure having said nothing.
+    """
+    real_payload = engine.resolver.substrate.payload
+
+    def silent(key: str):
+        return {} if key == "concept-closure" else real_payload(key)
+
+    monkeypatch.setattr(engine.resolver.substrate, "payload", silent)
+    check = _validator(engine, engine.corpus())._rv07()
+
+    assert check.passed is None
+    assert "does not declare concept_total" in check.detail["reason"]
+
+
+def test_a_record_carrying_canonical_prose_is_a_zero_duplication_violation(engine) -> None:
+    """RV-09 IS ZERO DUPLICATION ENFORCED MECHANICALLY, and its violation arm had no case.
+
+    A research record may reference canonical prose and may never carry it, because a copy is
+    a second authority that drifts from the first the moment either is edited. The violation
+    names the group, the field and the canonical object the prose was copied FROM, so the
+    finding points at both ends of the duplication rather than only at the copy.
+    """
+    corpus = engine.corpus()
+    prose = engine.resolver.resolve(corpus.claims[0].claim_ref).text
+    copied = replace(corpus.units[0], area_label=prose)
+    check = _validator(engine, replace(corpus, units=(copied,)))._rv09()
+
+    assert check.passed is False
+    violation = check.detail["violations"][0]
+    assert violation["group"] == "units"
+    assert violation["field"] == "area_label"
+    assert violation["copied_from"]
+
+
+def test_determinism_is_indeterminate_when_no_second_assimilation_is_supplied(engine) -> None:
+    """RV-10 NEEDS A WITNESS, and a validator constructed without one cannot produce it.
+
+    The engine always supplies a re-assimilation callable, so the arm that answers for its
+    absence was dead — and it is the arm that keeps the validator usable standalone, over a
+    corpus handed to it rather than one it can regenerate. Answering None says the property
+    was not examined; answering True would claim determinism was proven by not testing it.
+    """
+    check = _validator(engine, engine.corpus(), reassimilate=None)._rv10()
+
+    assert check.passed is None
+    assert check.check_id == "RV-10"
+
+
+def test_a_unit_naming_an_unregistered_member_is_dangling(engine) -> None:
+    """RV-12 IS THE MEMBERSHIP CHECK READ FROM THE UNIT END.
+
+    RV-13 asks whether every record belongs to a unit; RV-12 asks whether every member a unit
+    NAMES is a registered record. They are not the same question, and only RV-12 catches a
+    unit that lists an id nothing holds — a member that renders as a citation to a record
+    that was never registered.
+    """
+    corpus = engine.corpus()
+    dangling = replace(corpus.units[0], claim_ids=("UCOS-RSCH-CLM-NEVER-REGISTERED",))
+    check = _validator(engine, replace(corpus, units=(dangling,)))._rv12()
+
+    assert check.passed is False
+    assert check.detail["dangling"][0]["unit_id"] == dangling.unit_id
+    assert check.detail["dangling"][0]["missing"] == ["UCOS-RSCH-CLM-NEVER-REGISTERED"]
+
+
+# --------------------------------------------------------------------------- the gate's other codes
+#
+# `test_gate_opens_and_reports_a_seal` proves the gate opens on a healthy repository. The two
+# arms that answer for an unhealthy one — the only two the docstring promises — had never run.
+
+
+def test_a_missing_required_surface_aborts_the_gate_before_any_verdict(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """EXIT 2 IS NOT A CLOSED GATE, and reaching it early is the whole point.
+
+    A required substrate surface is the input the verdict would be derived FROM, so with one
+    missing there is no verdict to reach — validating anyway would produce a CLOSED gate that
+    reads as "the corpus failed" when the truth is "the corpus could not be read". The abort
+    line names the surfaces so an operator knows what to restore.
+    """
+    engine = _engine()
+    monkeypatch.setattr(
+        type(engine.substrate), "missing_required", lambda _self: ["canonical-knowledge"]
+    )
+
+    code, line = engine.gate()
+
+    assert code == 2
+    assert "FAIL-CLOSED ABORT" in line
+    assert "canonical-knowledge" in line
+
+
+def test_a_non_deterministic_assimilation_closes_the_gate_that_validation_would_open(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """DETERMINISM IS A GATE CONDITION IN ITS OWN RIGHT, not a line in the report.
+
+    Validation can certify a corpus that is not reproducible — every check would pass over
+    the one assimilation it was handed — so the gate re-asks the question and closes on a
+    negative answer regardless of the verdict. The line is still emitted, with
+    ``deterministic=false`` in it, so the code arrives with its reason attached.
+    """
+    engine = _engine()
+    monkeypatch.setattr(
+        type(engine),
+        "verify_determinism",
+        lambda _self: {"deterministic": False, "mismatches": ["research-model.json"]},
+    )
+
+    code, line = engine.gate()
+
+    assert code == 1
+    assert "deterministic=false" in line
+    assert "seal=" in line
