@@ -73,6 +73,7 @@ from engine.construct.model import (
     DispositionRecord,
     Evidence,
     Presentation,
+    RealityAssessment,
     construct_id,
 )
 from engine.construct.reality import RealityError
@@ -3458,3 +3459,351 @@ def test_a_row_missing_a_required_key_is_a_fault_and_names_the_key() -> None:
     document["laws"][0].pop("statement")
     with pytest.raises(DeclarationError, match="malformed"):
         parse(document)
+
+
+# --- the closure audit's detectors and its unreadable files ------------------------------------
+
+
+def test_a_bare_set_literal_is_a_frozen_membership_set(declaration: Declaration, tmp_path) -> None:
+    # `frozenset({...})` was detected and `{...}` was not, so the cheapest spelling of a closed
+    # membership set was the one the audit could not see.
+    module = tmp_path / "engine" / "bare.py"
+    module.parent.mkdir(parents=True)
+    module.write_text("MEMBERS = {'a', 'b', 'c'}\n", encoding="utf-8")
+    spec = replace(declaration.audit, roots=("engine",))
+    found = audit.scan(replace(declaration, audit=spec), str(tmp_path))
+    assert "FROZEN_MEMBERSHIP_SET" in {closure.form for closure in found}
+    assert "MEMBERS" in {closure.symbol for closure in found}
+
+
+def test_a_comparison_against_a_boolean_is_not_a_population_assertion(
+    declaration: Declaration, tmp_path
+) -> None:
+    # `True` is an int in Python, so `len(x) == True` reaches the population detector as a
+    # comparison against 1. It asserts nothing about a population and must not be counted, or
+    # the closure census would inflate with every truthiness test in the repository.
+    module = tmp_path / "engine" / "boolean.py"
+    module.parent.mkdir(parents=True)
+    module.write_text("def f(x):\n    return len(x) == True\n", encoding="utf-8")
+    spec = replace(declaration.audit, roots=("engine",))
+    found = audit.scan(replace(declaration, audit=spec), str(tmp_path))
+    assert "POPULATION_ASSERTION" not in {closure.form for closure in found}
+
+
+def test_a_file_that_cannot_be_opened_is_reported_and_does_not_crash_the_audit(
+    declaration: Declaration, tmp_path
+) -> None:
+    # Unparseable is already measured. Unreadable is a different failure and a different branch:
+    # the file never becomes source at all, so there is nothing for the parser to refuse.
+    module = tmp_path / "engine" / "unreadable.py"
+    module.parent.mkdir(parents=True)
+    module.write_text("TABLE = {'a': 1}\n", encoding="utf-8")
+    module.chmod(0o000)
+    spec = replace(declaration.audit, roots=("engine",))
+    forged = replace(declaration, audit=spec)
+    assert audit.scan(forged, str(tmp_path)) == ()
+    assert "engine/unreadable.py" in audit.unscannable(forged, str(tmp_path))
+
+
+def test_scanning_for_a_form_no_detector_implements_is_a_fault(
+    declaration: Declaration, tmp_path
+) -> None:
+    # A declared form with no detector would otherwise scan to zero findings, and zero findings
+    # is what a form that does not occur looks like. The two must not be spelled the same way.
+    module = tmp_path / "engine" / "probe.py"
+    module.parent.mkdir(parents=True)
+    module.write_text("TABLE = {'a': 1}\n", encoding="utf-8")
+    spec = declaration.audit
+    forged = replace(
+        declaration,
+        audit=replace(
+            spec, roots=("engine",), forms=(replace(spec.forms[0], form="NO-SUCH-FORM"),)
+        ),
+    )
+    with pytest.raises(audit.AuditError, match="no detector implements it"):
+        audit.scan(forged, str(tmp_path))
+
+
+# --- the model's own refusals ------------------------------------------------------------------
+
+
+def test_a_disposition_sequence_below_zero_is_refused() -> None:
+    # The sequence is the ordinal a supersession chain is read in. A negative one would order
+    # a record before the genesis of the construct it belongs to.
+    with pytest.raises(ConstructError, match="non-negative ordinal"):
+        DispositionRecord(
+            identity="UMK-ENTITY-0000",
+            disposition="ADMIT",
+            rule_id="R",
+            rationale="measured",
+            sequence=-1,
+            inputs_digest="d",
+        )
+
+
+def _assessment(**overrides) -> RealityAssessment:
+    """A well-formed assessment with one field replaced, for the model's own guards."""
+    fields = {
+        "identity": "UMK-ENTITY-0000",
+        "status": "HYPOTHETICAL",
+        "evidence_count": 0,
+        "independent_sources": 0,
+        "assessed_from": (),
+        "sequence": 0,
+        "floor_met": True,
+    }
+    fields.update(overrides)
+    return RealityAssessment(**fields)
+
+
+def test_a_reality_assessment_without_a_status_is_refused() -> None:
+    with pytest.raises(ConstructError, match="requires status"):
+        _assessment(status="")
+
+
+def test_an_assessment_naming_no_source_and_one_named_as_a_string_agree() -> None:
+    # `assessed_from` is normalised rather than validated: None is no sources and a bare string
+    # is one source. A caller that passed a string and got its characters back would have
+    # produced an assessment naming len(s) sources, none of which exist.
+    assert _assessment(assessed_from=None).assessed_from == ()
+    assert _assessment(assessed_from="one-source").assessed_from == ("one-source",)
+
+
+def test_a_construct_with_two_active_reality_assessments_is_refused(declaration) -> None:
+    # The disposition side of this invariant is measured by UCON-L-01. The reality side is a
+    # separate record type with a separate active flag, and nothing had ever produced two.
+    registry = ConstructRegistry(declaration)
+    sample = registry.present(Presentation(kind="entity", natural_key="two-assessments"))
+    with pytest.raises(ConstructError, match="exactly one active reality assessment"):
+        Construct(
+            presentation=sample.presentation,
+            dispositions=sample.dispositions,
+            assessments=(sample.reality, replace(sample.reality, sequence=99)),
+            kind_registered=True,
+        )
+
+
+# --- the registry's remaining branches ---------------------------------------------------------
+
+
+def test_a_registry_can_be_built_without_bootstrapping(declaration: Declaration) -> None:
+    # The bootstrap seeds the reflective constructs the foundation describes itself with. A
+    # registry that skips it is how the seeding itself can be measured rather than assumed, and
+    # an empty population is the only starting point from which "nothing was dropped" means
+    # anything.
+    registry = ConstructRegistry(declaration, bootstrap=False)
+    assert registry.all() == ()
+    assert registry.summary()["chain_head"] == GENESIS
+
+
+def test_a_registered_kind_declaring_an_unknown_facet_carries_none(declaration: Declaration):
+    # A kind registered at runtime names its facet in its payload. A payload naming a facet the
+    # declaration does not carry must fall back to the uninterpreted facet rather than to the
+    # named one, or registration would be a way to invent a facet the declaration never saw.
+    registry = ConstructRegistry(declaration)
+    registry.present(
+        Presentation(
+            kind=declaration.reflective_root,
+            natural_key="a-kind-with-a-facet-nobody-declared",
+            payload={"facet": "not-a-declared-facet"},
+        )
+    )
+    assert registry.facet_of("a-kind-with-a-facet-nobody-declared") == "none"
+
+
+def test_a_contradiction_naming_no_side_contradicts_nothing(declaration: Declaration) -> None:
+    # The contradicted set is built from the sides a contradiction names. A contradiction whose
+    # payload carries no side must contribute no identity — an empty string in that set would
+    # quarantine a construct whose identity is "".
+    registry = ConstructRegistry(declaration)
+    registry.present(
+        Presentation(
+            kind=views._kind_for_facet(registry, views.FACET_CONTRADICTION),
+            natural_key="a-contradiction-naming-nobody",
+            payload={"resolution_state": sorted(declaration.contradicting_states)[0]},
+        )
+    )
+    assert "" not in registry.contradicted()
+
+
+def test_an_edited_journal_body_breaks_the_chain(declaration: Declaration) -> None:
+    # A relinked chain and an edited body are different tampering. The link check alone would
+    # pass on a journal whose entries still point at each other while one of them says something
+    # else than it did when its hash was taken.
+    registry = ConstructRegistry(declaration)
+    assert registry.chain_is_intact()
+    # Edited in place rather than rebuilt: JournalEntry recomputes its own hash on construction,
+    # so a replaced entry is a consistent record of a different act. Tampering is the body
+    # changing AFTER the hash was taken, and that is the only thing this check can see.
+    object.__setattr__(registry._journal[0], "identity", "UMK-ENTITY-somebody-else")
+    assert not registry.chain_is_intact()
+
+
+def test_the_summary_reports_the_facet_violations_it_finds(declaration: Declaration) -> None:
+    # The summary is what the gate and the evidence record read. A construct whose payload omits
+    # a field its facet requires must appear there by identity, or a facet violation is visible
+    # only to whoever happened to hold the construct.
+    registry = ConstructRegistry(declaration)
+    registry.present(Presentation(kind="unknown", natural_key="malformed-unknown", payload={}))
+    assert registry.summary()["facet_violations"]
+
+
+# --- the CLI and the gate ----------------------------------------------------------------------
+
+
+def test_the_cli_emits_the_same_bytes_whether_or_not_json_is_asked_for(capsys) -> None:
+    # Every command of this CLI emits JSON. The flag selects nothing, and pinning that is the
+    # point: a command whose output SHAPE changed with a flag would be two commands sharing a
+    # name, and the caller parsing it would have to know which one it got.
+    construct_cli._emit({"b": 2, "a": 1}, as_json=True)
+    asked = capsys.readouterr().out
+    construct_cli._emit({"b": 2, "a": 1}, as_json=False)
+    assert capsys.readouterr().out == asked
+
+
+def test_the_audit_command_names_the_ratchet_violations_it_found(capsys, tmp_path) -> None:
+    document = json.loads(
+        open(
+            os.path.join(REPO, "00-MASTER", "UCON-000001", "ucon-declaration.json"),
+            encoding="utf-8",
+        ).read()
+    )
+    document["audit"]["baseline"] = {form: 0 for form in audit.available_forms()}
+    path = tmp_path / "forged.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    code = construct_cli.main(["--declaration", str(path), "audit"])
+    out = capsys.readouterr().out
+    assert code == construct_cli.EXIT_FAILED
+    assert "RATCHET VIOLATIONS:" in out
+
+
+def test_the_rendered_report_truncates_a_law_with_more_violations_than_it_prints(report) -> None:
+    # Six violations are shown and the rest are counted. A render that printed all of them would
+    # bury the verdict under one law's findings; one that printed six and said nothing about the
+    # remainder would report a smaller refusal than the one that was measured.
+    forged = copy.deepcopy(report)
+    forged["laws"][0]["verdict"] = REFUSED
+    forged["laws"][0]["violations"] = [f"violation {index}" for index in range(9)]
+    rendered = construct_gate._render(forged)
+    assert "... +3 more" in rendered
+
+
+def test_the_gate_names_the_evidence_it_wrote_unless_asked_to_be_quiet(capsys, tmp_path) -> None:
+    # --quiet is measured. The default is not, and the default is what an operator runs: an
+    # evidence write nobody is told about is indistinguishable from no write at all.
+    declaration_path = os.path.join(REPO, "00-MASTER", "UCON-000001", "ucon-declaration.json")
+    code = construct_gate.main(
+        [
+            "--law",
+            "UCON-L-10",
+            "--evidence",
+            "--declaration",
+            declaration_path,
+            "--repository",
+            str(tmp_path),
+        ]
+    )
+    assert code == construct_gate.EXIT_OPEN
+    assert "UCON: wrote" in capsys.readouterr().err
+
+
+# --- the views' remaining refusals -------------------------------------------------------------
+
+
+def test_a_contradiction_in_an_undeclared_resolution_state_is_refused(declaration) -> None:
+    registry = ConstructRegistry(declaration)
+    with pytest.raises(ViewError, match="not a declared resolution state"):
+        views.register_contradiction(
+            registry,
+            natural_key="UCON-views-bad-state",
+            left="UMK-ENTITY-a",
+            right="UMK-ENTITY-b",
+            contradiction_class=declaration.contradiction_classes[0],
+            resolution_state="A-RESOLUTION-STATE-NOBODY-DECLARED",
+        )
+
+
+def test_a_discovery_object_with_an_undeclared_impact_is_refused(declaration) -> None:
+    registry = ConstructRegistry(declaration)
+    with pytest.raises(ViewError, match="not a declared discovery impact"):
+        views.register_discovery(
+            registry,
+            natural_key="UCON-views-bad-impact",
+            opportunity="an opportunity nobody can weigh",
+            priority=declaration.priority_scale[0],
+            impact="AN-IMPACT-NOBODY-DECLARED",
+        )
+
+
+def test_a_discovery_source_naming_an_unimplemented_selector_is_a_fault(declaration) -> None:
+    # Declared-but-unimplemented is refused at load time by validate(). This is the same defect
+    # reached at discovery time, and it must be a fault rather than a source that selects
+    # nothing — a selector that silently matches no construct is a discovery source switched off.
+    source = declaration.discovery_sources[0]
+    forged = replace(
+        declaration,
+        discovery_sources=(replace(source, selector="not_a_selector"),),
+    )
+    registry = ConstructRegistry(forged)
+    with pytest.raises(ViewError, match="declared but not implemented"):
+        views.opportunities(registry)
+
+
+# --- extension refuses what would narrow or unbind the vocabulary ------------------------------
+
+
+def test_extending_with_an_already_declared_reality_state_is_refused(declaration) -> None:
+    with pytest.raises(ExtensionError, match="already declared"):
+        extension.extended_with_reality_state(
+            declaration,
+            "VERIFIED",
+            definition="a second definition of a state that exists",
+            permits=(),
+            successors=("UNKNOWN",),
+        )
+
+
+def test_extending_with_a_reality_state_permitting_an_undeclared_act_is_refused(declaration):
+    with pytest.raises(ExtensionError, match="permits undeclared acts"):
+        extension.extended_with_reality_state(
+            declaration,
+            "A-NEW-STATE",
+            definition="a state permitting an act nobody declared",
+            permits=("transmute",),
+            successors=("UNKNOWN",),
+        )
+
+
+def test_extending_with_a_reality_state_naming_an_undeclared_successor_is_refused(declaration):
+    with pytest.raises(ExtensionError, match="undeclared successor"):
+        extension.extended_with_reality_state(
+            declaration,
+            "A-NEW-STATE",
+            definition="a state whose exit leaves the declared world",
+            permits=(),
+            successors=("A-STATE-NOBODY-DECLARED",),
+        )
+
+
+# --- evidence and disposition ------------------------------------------------------------------
+
+
+def test_a_record_this_module_produces_and_the_declaration_omits_is_refused(declaration) -> None:
+    # The two-way binding again, on the evidence side. A record produced but not declared is a
+    # file appearing in the evidence home that no reader is looking for.
+    forged = replace(declaration, evidence_records=declaration.evidence_records[:-1])
+    with pytest.raises(evidence.EvidenceError, match="the declaration does not name"):
+        evidence.assert_complete(forged, {})
+
+
+def test_a_rule_set_with_no_catch_all_is_a_fault_rather_than_a_default(declaration) -> None:
+    # The fallback is written as a fault deliberately: it is unreachable while validate() holds,
+    # and a defensive `return declaration.catch_all` here would keep disposing constructs from a
+    # rule set that had quietly stopped being total.
+    registry = ConstructRegistry(declaration)
+    with pytest.raises(DispositionError, match="not total"):
+        select_rule(
+            replace(declaration, rules=()),
+            Presentation(kind="entity", natural_key="nothing-decides-this"),
+            registry.context(),
+        )
