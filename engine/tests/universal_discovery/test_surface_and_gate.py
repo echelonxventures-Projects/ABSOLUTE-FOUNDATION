@@ -13,11 +13,27 @@ from pathlib import Path
 
 import pytest
 
-from engine.universal_discovery import gate, ratchet, relocation, surface
+from engine.universal_discovery import __main__ as cli
+from engine.universal_discovery import (
+    classification,
+    gate,
+    pytest_scope,
+    ratchet,
+    relocation,
+    surface,
+)
 from engine.universal_discovery.model import (
+    ARCHIVED,
+    CONVERGENT,
     DISPOSITIONS,
+    MEASURED,
+    MONOTONIC,
     RATCHET_KINDS,
+    REGRESSED,
+    SEEDED,
     SURFACE_DISPOSITIONS,
+    Artifact,
+    Observation,
     OmegaError,
     Population,
 )
@@ -295,23 +311,17 @@ def test_sealing_writes_exactly_two_paths_inside_the_programme_home(
 
 
 def test_the_cli_reports_and_exits_zero(capsys: pytest.CaptureFixture[str]) -> None:
-    from engine.universal_discovery import __main__ as cli
-
     assert cli.main([]) == 0
     assert "UNIVERSAL DISCOVERY GATE" in capsys.readouterr().out
 
 
 def test_the_cli_emits_the_surface_document(capsys: pytest.CaptureFixture[str]) -> None:
-    from engine.universal_discovery import __main__ as cli
-
     assert cli.main(["--json"]) == 0
     document = json.loads(capsys.readouterr().out)
     assert document["schema"] == surface.SCHEMA
 
 
 def test_the_cli_prints_the_derived_scope(capsys: pytest.CaptureFixture[str]) -> None:
-    from engine.universal_discovery import __main__ as cli
-
     assert cli.main(["--scope"]) == 0
     document = json.loads(capsys.readouterr().out)
     assert document["measurable_packages"] and document["test_roots"]
@@ -320,8 +330,6 @@ def test_the_cli_prints_the_derived_scope(capsys: pytest.CaptureFixture[str]) ->
 def test_a_discovery_fault_exits_two_rather_than_reporting_a_pass(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    from engine.universal_discovery import __main__ as cli
-
     assert cli.main(["--root", str(tmp_path)]) == 2
     assert "FAULT" in capsys.readouterr().err
 
@@ -333,7 +341,6 @@ def test_the_plugin_derives_the_same_scope_the_gate_measures(
     omega: surface.OmegaSurface,
 ) -> None:
     """One derivation. If these two ever disagree, the suite is measuring a different world."""
-    from engine.universal_discovery import pytest_scope
 
     packages, test_roots = pytest_scope.derive()
     assert tuple(packages) == omega.population.measurable_packages
@@ -341,8 +348,6 @@ def test_the_plugin_derives_the_same_scope_the_gate_measures(
 
 
 def test_the_plugin_locates_the_repository_from_its_own_position() -> None:
-    from engine.universal_discovery import pytest_scope
-
     assert (Path(pytest_scope._repository_root()) / "pyproject.toml").is_file()
 
 
@@ -379,7 +384,6 @@ def test_the_hook_injects_the_derived_scope_and_the_derived_collection_set() -> 
     reader would otherwise have to infer: an explicit ``--cov=`` wins, and named paths suppress the
     injected collection set.
     """
-    from engine.universal_discovery import pytest_scope
 
     class _Namespace:
         def __init__(self, **kwargs: object) -> None:
@@ -421,7 +425,6 @@ def test_the_injection_can_be_disabled_for_bisecting_discovery_itself(
 ) -> None:
     """The escape hatch exists, is read from the environment so it cannot become the default, and
     is reported in the header when it is in force."""
-    from engine.universal_discovery import pytest_scope
 
     class _Namespace:
         cov_source: list[str] = []
@@ -443,7 +446,394 @@ def test_the_injection_can_be_disabled_for_bisecting_discovery_itself(
 def test_the_plugin_reports_the_denominator_in_the_run_header(
     request: pytest.FixtureRequest,
 ) -> None:
-    from engine.universal_discovery import pytest_scope
-
     header = pytest_scope.pytest_report_header(request.config)
     assert "UCOS-OMEGA-001" in header
+
+
+# ------------------------------------------ the gate's refusals, one criterion at a time
+#
+# WHY THESE FEED THE GATE A SURFACE INSTEAD OF A REPOSITORY. Every test above measures the real
+# tree, and the real tree PASSES — which is the claim, and which also means the five refusal arms
+# never execute. A gate whose refusals are never exercised is a gate nobody has checked can close:
+# `test_the_gate_refuses_when_a_ratchet_regresses` already makes that argument for Ω-4 and it is
+# the same argument for the other four.
+#
+# The refusals cannot be reached from a repository, either. Ω-2 and Ω-5 are asserted INSIDE
+# `surface.build` — `authority.assert_total` and `classification.assert_total` raise before the
+# gate could ever see an orphan or an unknown disposition — so a fixture repository that produced
+# one would fault during construction rather than reach `evaluate`. The join is what makes those
+# arms unreachable from below, and that is a property worth having; it also means the only place
+# left to test them is at the join's output.
+#
+# So `evaluate` is given a surface built by hand, with exactly one criterion falsified in each.
+# `surface._totals` computes the totals from those artifacts, so nothing here asserts a number it
+# also chose.
+
+
+def _artifact(path: str, **overrides: object) -> Artifact:
+    fields: dict[str, object] = {
+        "path": path,
+        "root": path.split("/", 1)[0] if "/" in path else "",
+        "module": path[: -len(".py")].replace("/", "."),
+        "disposition": MEASURED,
+        "disposition_rule": classification.RULE_MEASURED,
+        "disposition_reason": "the derived coverage denominator names its package",
+        "authority": "SOME-OWNER-001",
+        "authority_rule": "Ω-A-01",
+        "reachable": True,
+        "reached_by": ("import",),
+        "statements": 3,
+        "callables": 1,
+        "imports": 1,
+    }
+    fields.update(overrides)
+    return Artifact(**fields)  # type: ignore[arg-type]
+
+
+def _omega(
+    artifacts: tuple[Artifact, ...],
+    *,
+    paths: tuple[str, ...] | None = None,
+    measurable_packages: tuple[str, ...] = ("alpha.core",),
+    observations: tuple[Observation, ...] = (),
+    frozen: tuple[str, ...] = (),
+) -> surface.OmegaSurface:
+    """One hand-built surface. Every derived field is computed by the real derivation."""
+    paths = paths if paths is not None else tuple(a.path for a in artifacts)
+    population = Population(
+        paths=paths,
+        roots=tuple(sorted({p.split("/", 1)[0] if "/" in p else "" for p in paths})),
+        importable_roots=("alpha",),
+        test_roots=(),
+        measurable_packages=measurable_packages,
+    )
+    return surface.OmegaSurface(
+        population=population,
+        artifacts=artifacts,
+        observations=observations,
+        totals=surface._totals(artifacts, population),
+        unresolved_dynamic={},
+        unparsed=(),
+        source_heads=dict.fromkeys(paths, ""),
+        imported_by=dict.fromkeys(paths, frozenset()),
+        frozen=frozen,
+    )
+
+
+def _verdict(
+    monkeypatch: pytest.MonkeyPatch,
+    omega: surface.OmegaSurface,
+    *,
+    invariance: tuple[str, ...] = (),
+) -> gate.Verdict:
+    """Run the gate over a supplied surface.
+
+    Ω-3 is stubbed by default so each test below falsifies exactly ONE criterion: an artifact
+    doctored to break Ω-5 also disagrees with what classification would recompute for it, and a
+    test that produced two findings could not say which arm it had exercised.
+    """
+    monkeypatch.setattr(surface, "build", lambda root=".": omega)
+    monkeypatch.setattr(gate, "relocation_invariance", lambda _omega: invariance)
+    return gate.evaluate(".")
+
+
+def test_the_gate_refuses_a_denominator_it_could_not_derive(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ω-1's first arm. An empty denominator makes every percentage a number about nothing, and
+    every Ω invariant vacuously true — which is the one failure mode that reports a pass."""
+    verdict = _verdict(monkeypatch, _omega((_artifact("alpha/core/x.py"),), measurable_packages=()))
+    assert not verdict.passed
+    assert verdict.exit_code == 1
+    assert any("denominator is empty" in finding for finding in verdict.findings)
+
+
+def test_the_gate_refuses_when_the_discovered_and_classified_populations_disagree(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ω-1's second arm, and the defect the whole join exists to close.
+
+    Four populations were computed independently and no code ever asked whether they agreed; 619
+    files sat in exactly one of them. Here the classified set is missing a path the discovery set
+    holds, which is that disagreement in its smallest possible form.
+    """
+    verdict = _verdict(
+        monkeypatch,
+        _omega(
+            (_artifact("alpha/core/x.py"),),
+            paths=("alpha/core/x.py", "alpha/core/y.py"),
+        ),
+    )
+    assert not verdict.passed
+    assert any("two worlds were measured instead of one" in f for f in verdict.findings)
+
+
+def test_the_gate_refuses_an_artifact_carrying_no_valid_disposition(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ω-5. The classifier's last rule is unconditional, so this state is unreachable from a
+    repository — `classification.assert_total` raises inside `build` long before the gate runs.
+    That is exactly why the gate keeps its own check: the arm is the one that would notice if
+    the totality argument ever stopped being true, and an unchecked check is not one."""
+    verdict = _verdict(monkeypatch, _omega((_artifact("alpha/core/x.py", disposition="UNKNOWN"),)))
+    assert not verdict.passed
+    assert any("carries no valid disposition" in f for f in verdict.findings)
+    assert any("alpha/core/x.py" in f for f in verdict.findings)
+
+
+def test_the_gate_refuses_an_orphan_that_declared_no_transience(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ω-2. ``authority = NONE`` is admissible under exactly one disposition, and MEASURED is not
+    it: transience is self-justifying, and nothing else is. The finding names the artifact."""
+    verdict = _verdict(
+        monkeypatch, _omega((_artifact("alpha/core/x.py", authority="", authority_rule="Ω-A-07"),))
+    )
+    assert not verdict.passed
+    finding = next(f for f in verdict.findings if f.startswith("Ω-2"))
+    assert "without a transient declaration" in finding
+    assert "alpha/core/x.py" in finding
+
+
+def test_the_gate_refuses_a_relocation_that_moved_a_verdict(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ω-3. A drift report is not cosmetic: it means some verdict is still keyed on a path, which
+    is the defect that put five whole trees outside the denominator."""
+    verdict = _verdict(
+        monkeypatch,
+        _omega((_artifact("alpha/core/x.py"),)),
+        invariance=("alpha/core/x.py → galaxy/core/x.py: MEASURED/Ω-C-04 became EXEMPTED/Ω-C-07",),
+    )
+    assert not verdict.passed
+    assert any("scope is still directory-derived" in f for f in verdict.findings)
+
+
+def test_the_gate_refuses_a_ratchet_refusal_and_names_the_measurement(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ω-4. The finding carries the metric, the measured value and the best-ever it was held to,
+    because a refusal a reader cannot check is a refusal they will route around."""
+    regressed = Observation(
+        "unreachable_artifacts", CONVERGENT, 60.0, 49.0, REGRESSED, "code that cannot run"
+    )
+    verdict = _verdict(
+        monkeypatch, _omega((_artifact("alpha/core/x.py"),), observations=(regressed,))
+    )
+    assert not verdict.passed
+    finding = next(f for f in verdict.findings if f.startswith("Ω-4"))
+    assert "unreachable_artifacts" in finding
+    assert "60.0" in finding and "49.0" in finding
+    assert "code that cannot run" in finding
+
+
+def test_the_gate_states_which_metrics_this_run_seeded(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Seeding is not a free pass — the seeded value becomes the bound every future run is held
+    to — so the run that took it says so in its own report rather than only in the state file."""
+    seeded = Observation("a_new_metric", MONOTONIC, 7.0, None, SEEDED, "something newly counted")
+    verdict = _verdict(monkeypatch, _omega((_artifact("alpha/core/x.py"),), observations=(seeded,)))
+    assert verdict.passed, verdict.findings
+    assert any("seeded 1 metrics" in note and "a_new_metric" in note for note in verdict.notes)
+
+
+def test_the_refusal_report_lists_every_finding_rather_than_the_first(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A gate that printed PASS on a failing verdict, or one finding out of three, would be worse
+    than no gate: the reader would take the report as the answer.
+
+    THE TWO ARTIFACTS ARE NOT INTERCHANGEABLE, and the first draft of this test got it wrong by
+    assuming they were. An artifact with no authority AND an unknown disposition produces no Ω-2
+    finding, because Ω-2 asks only about the four dispositions under which an absent owner is a
+    defect and "UNKNOWN" is not one of them. Falsifying Ω-2 needs an artifact whose disposition is
+    valid and whose owner is missing, which is the state that would actually escape into a report.
+    """
+    verdict = _verdict(
+        monkeypatch,
+        _omega(
+            (
+                _artifact("alpha/core/x.py", disposition="UNKNOWN"),
+                _artifact("alpha/core/y.py", authority="", authority_rule="Ω-A-07"),
+            ),
+            measurable_packages=(),
+        ),
+    )
+    rendered = gate.render(verdict)
+    assert "REFUSED" in rendered
+    assert "PASS —" not in rendered
+    assert rendered.count("✗") == len(verdict.findings) >= 3
+    for finding in verdict.findings:
+        assert finding in rendered
+
+
+def test_the_gate_is_invocable_by_the_module_path_uec_names(tmp_path: Path) -> None:
+    """UEC-L-04: "nothing enforces by existing". UEC locates every ``engine/*/gate.py`` as an
+    enforcement artifact and requires each to have an invoker under the name UEC uses, so
+    ``python -m engine.universal_discovery.gate`` has to reach the same CLI as the package path.
+    The alternative was raising a ceiling to accept the violation, which is the move Ω-4 refuses.
+
+    Driven against an empty directory so the delegation is what is measured rather than a second
+    full run over the repository: the fault path returns 2, and returning 2 is proof the argument
+    vector reached ``__main__.main`` rather than being swallowed here.
+    """
+    assert gate.main(["--root", str(tmp_path)]) == 2
+
+
+def test_sealing_is_reported_path_by_path_and_only_when_asked(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """``--seal`` is the CLI's ONE writing mode, so the two paths it wrote are named on stdout.
+
+    ``evaluate`` and ``seal`` are both stubbed. What is under test is the flag's wiring — that a
+    read-only run writes nothing and a sealing run reports what it wrote — and driving it through
+    a real measurement would make the test about the measurement instead.
+    """
+    omega = _omega((_artifact("alpha/core/x.py"),))
+    monkeypatch.setattr(gate, "evaluate", lambda root: gate.Verdict(True, (), (), omega))
+    monkeypatch.setattr(gate, "render", lambda verdict: "REPORT\n")
+    monkeypatch.setattr(gate, "seal", lambda root, verdict: ("first.json", "second.json"))
+
+    assert cli.main([]) == 0
+    assert "sealed" not in capsys.readouterr().out
+
+    assert cli.main(["--seal"]) == 0
+    out = capsys.readouterr().out
+    assert "sealed first.json" in out
+    assert "sealed second.json" in out
+
+
+def test_the_surface_answers_which_artifacts_carry_a_disposition(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """``by_disposition`` is how a reader asks the surface a question instead of re-deriving it.
+    A second implementation of that filter elsewhere would be a second answer to one question."""
+    omega = _omega(
+        (
+            _artifact("alpha/core/x.py"),
+            _artifact("alpha/core/y.py", disposition=ARCHIVED, disposition_rule="Ω-C-02"),
+        )
+    )
+    assert [a.path for a in omega.by_disposition(MEASURED)] == ["alpha/core/x.py"]
+    assert [a.path for a in omega.by_disposition(ARCHIVED)] == ["alpha/core/y.py"]
+    assert omega.by_disposition("UNKNOWN") == ()
+    assert [a.path for a in omega.by_rule(classification.RULE_MEASURED)] == ["alpha/core/x.py"]
+
+
+# ------------------------------- Ω-3: what the experiment does when it cannot run
+
+
+def test_the_experiment_reports_that_it_could_not_run_rather_than_passing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A population with no importable root gives the experiment nothing to relocate.
+
+    The honest answer is a FINDING, not an empty tuple, and the difference is the whole design:
+    an empty tuple means "relocation changed no verdict", which over a world where the experiment
+    never ran is true and worthless. 00-MASTER is a real root that reaches this — its name is not
+    a Python identifier, so ``_largest_root`` skips it and there is nothing left to move.
+    """
+    omega = _omega((_artifact("00-MASTER/PROG-001/engine.py"),))
+    assert relocation._largest_root(omega.artifacts) == ""
+    drift = relocation.relocation_invariance(omega)
+    assert drift == ("<no root carried tracked python, so the experiment could not run>",)
+
+
+def test_a_verdict_that_moves_under_relocation_is_reported_with_both_answers() -> None:
+    """The experiment closing, over a surface built to make it close.
+
+    A FROZEN PREFIX IS THE HONEST WAY TO BREAK IT, and the reason is worth stating: `frozen` is
+    read from the DP-03 guard as a set of PATHS and is deliberately NOT relocated, because a
+    freeze protects a directory and moving a file out of it really does end the protection. So
+    `alpha/core/x.py` under a frozen `alpha/` is ARCHIVED, and `galaxy/core/x.py` is not — a
+    verdict that changed because the file moved, which is precisely what Ω-3 exists to detect.
+    The drift line names the old disposition and rule and the new ones, so a reader can see which
+    way it moved without re-running anything.
+    """
+    omega = _omega(
+        (
+            _artifact(
+                "alpha/core/x.py",
+                disposition=ARCHIVED,
+                disposition_rule=classification.RULE_ARCHIVED,
+            ),
+        ),
+        frozen=("alpha/",),
+    )
+    drift = relocation.relocation_invariance(omega)
+    assert len(drift) == 1
+    assert drift[0].startswith("alpha/core/x.py → galaxy/core/x.py:")
+    assert f"{ARCHIVED}/{classification.RULE_ARCHIVED} became" in drift[0]
+    assert f"{MEASURED}/{classification.RULE_MEASURED}" in drift[0]
+
+
+# ------------------------------ the denominator correction the plugin applies to coverage
+
+
+def test_a_directory_named_as_a_source_is_routed_to_source_pkgs(tmp_path: Path) -> None:
+    """The measured defect: 4,867 statements — 11.27% — absent from ``coverage.xml`` entirely.
+
+    ``inorout.py`` sorts each declared ``source`` entry by asking ``os.path.isdir``. A directory
+    becomes a SOURCE ROOT and every file under it is keyed RELATIVE TO THAT ROOT, so six flat
+    top-level layers each became their own root and ``service/model_meta.py``,
+    ``application/model_meta.py`` and ``data/model_meta.py`` all reduced to ``model_meta.py``.
+    One ``<class>`` element survived per key and 37 keys were claimed by more than one file, while
+    every summary percentage still agreed — only a per-file consumer could see the loss.
+
+    THE DENOMINATOR IS UNCHANGED by the correction. The same packages are measured; they are
+    simply declared as packages, so there is one implied root and a full path cannot collide.
+    """
+    import coverage
+
+    layer = tmp_path / "service"
+    layer.mkdir()
+    measured = coverage.Coverage(source=[str(layer), "engine.foundation"])
+    assert measured.config.source == ["engine.foundation"]
+    assert str(layer) in measured.config.source_pkgs
+
+
+def test_a_source_list_of_only_directories_leaves_no_empty_root_behind(tmp_path: Path) -> None:
+    """``remaining or None`` and not ``remaining``: coverage reads an EMPTY source list as "the
+    caller declared a source and it selects nothing", which measures nothing at 100%."""
+    import coverage
+
+    first, second = tmp_path / "data", tmp_path / "application"
+    first.mkdir()
+    second.mkdir()
+    measured = coverage.Coverage(source=[str(first), str(second)])
+    assert measured.config.source is None
+    assert set(measured.config.source_pkgs) == {str(first), str(second)}
+
+
+def test_a_source_list_naming_no_directory_is_left_exactly_as_declared() -> None:
+    """The wrapper is a correction, not a rewrite. A dotted package was never the broken case —
+    ``engine.foundation`` is not a directory, so it was already dispatched as a package and keyed
+    from the repository root — and moving it would change a denominator that was correct."""
+    import coverage
+
+    measured = coverage.Coverage(source=["engine.foundation", "engine.universal_discovery"])
+    assert measured.config.source == ["engine.foundation", "engine.universal_discovery"]
+    assert not measured.config.source_pkgs
+
+
+def test_the_wrapper_is_installed_once_however_often_the_module_is_loaded() -> None:
+    """Idempotence, exercised by executing the module body a second time.
+
+    The guard exists because a double-wrap is not a cosmetic problem: ``_coverage_init`` reads
+    ``_COVERAGE_INIT`` as a module global at call time, so wrapping the wrapper would make every
+    ``Coverage(...)`` recurse until the stack ends. It is checked by re-running the source in a
+    namespace of its own rather than by ``importlib.reload``, because a reload would rebind the
+    real module's ``_COVERAGE_INIT`` to the wrapper and build exactly the recursion the guard
+    prevents — the test would install the defect it is checking for.
+    """
+    import coverage
+
+    installed = coverage.Coverage.__init__
+    assert getattr(installed, "__module__", None) == pytest_scope.__name__
+
+    source = Path(pytest_scope.__file__).read_text(encoding="utf-8")
+    namespace = {"__name__": pytest_scope.__name__, "__file__": pytest_scope.__file__}
+    exec(compile(source, pytest_scope.__file__, "exec"), namespace)  # noqa: S102
+
+    assert (
+        coverage.Coverage.__init__ is installed
+    ), "the module body re-wrapped an installed wrapper"

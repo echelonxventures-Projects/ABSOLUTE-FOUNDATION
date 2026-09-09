@@ -178,10 +178,27 @@ def test_a_repository_with_no_orchestration_is_a_fault(
         (".github/workflows/uci-gate.yml", graph.PLANE_CI),
         (".github/workflows/anything-new.yml", graph.PLANE_CI),
         ("scripts/tool.sh", graph.PLANE_PYTHON),
+        # The unconditional tail. A text under none of the four declared plane locations is
+        # still a plane, because the alternative is a location that reaches nothing — and an
+        # artifact invoked from an unclassified text would then read as unreachable code.
+        ("docs/RUNBOOK.md", graph.PLANE_PYTHON),
+        ("Makefile.d/extra.mk", graph.PLANE_PYTHON),
     ],
 )
 def test_every_orchestration_text_maps_to_a_plane_type(location: str, plane: str) -> None:
     assert graph.plane_for(location) == plane
+
+
+def test_a_location_under_no_declared_plane_still_names_one() -> None:
+    """``plane_for`` is TOTAL, and the last line is what makes it so.
+
+    ``Makefile.d/extra.mk`` is the case that proves the prefix test is a path test rather than a
+    string test: it starts with the characters of ``Makefile`` and is not that file, so the
+    ``make`` plane must not claim it.
+    """
+    assert graph.plane_for("Makefile.d/extra.mk") == graph.PLANE_PYTHON
+    assert graph.plane_for("verify.sh.bak") == graph.PLANE_PYTHON
+    assert graph.plane_for("verify.sh") == graph.PLANE_VERIFY
 
 
 def test_planes_are_grouped_so_many_workflows_are_still_one_plane() -> None:

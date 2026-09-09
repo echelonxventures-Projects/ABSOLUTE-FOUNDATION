@@ -326,3 +326,54 @@ def test_frozen_prefixes_come_from_the_guard_that_owns_the_question() -> None:
     derived = discovery.frozen_prefixes(".")
     assert derived
     assert set(derived) == {p.rstrip("/") + "/" for p in FROZEN_PREFIXES}
+
+
+def test_a_guard_that_freezes_nothing_is_a_fault_rather_than_an_empty_answer(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """ARCHIVED would be vacuous, and a vacuous disposition reports a pass it did not earn.
+
+    The guard is read at call time — ``frozen_prefixes`` imports ``FROZEN_PREFIXES`` inside its
+    own body precisely so the answer tracks the declaration rather than a value captured at
+    import. Emptying the declaration is therefore the honest way to reach this refusal, and it
+    is the state a future edit that removes the last frozen tree would actually produce.
+    """
+    from engine.foundation.guards import frozen_paths
+
+    monkeypatch.setattr(frozen_paths, "FROZEN_PREFIXES", ())
+    with pytest.raises(OmegaError, match="ARCHIVED would be vacuous"):
+        discovery.frozen_prefixes(".")
+
+
+def test_a_sub_directory_python_could_not_import_never_becomes_a_package(
+    make_repo: Callable[..., Path],
+) -> None:
+    """``alpha/00-GOV/engine.py`` is tracked, importable-rooted, and nameable by no source.
+
+    The root passes ``is_importable_name`` so the root-level filter admits it, and then the
+    SECOND segment fails the same rule. Without this test the branch that drops it reads as
+    dead: every sub-directory in the fixtures happens to be an identifier, so the denominator
+    would have been identical whether the check existed or not — and a check that cannot change
+    an answer is indistinguishable from one that has been deleted.
+    """
+    repository = make_repo(
+        {
+            "alpha/core/service.py": "X = 1\n",
+            "alpha/00-GOV/engine.py": "Y = 2\n",
+            "alpha/tests/test_service.py": "def test_x():\n    pass\n",
+        }
+    )
+    paths = discovery.tracked_python(str(repository))
+    packages = discovery.derive_measurable_packages(paths, ("alpha/tests",))
+    assert "alpha.core" in packages
+    assert not any("00-GOV" in package for package in packages)
+
+
+def test_the_derivation_cache_can_be_dropped_by_a_caller_that_changed_the_tree() -> None:
+    """The cache is keyed on the ROOT and the population cannot change inside one process run —
+    unless a caller mutates the tree, which is what this escape hatch exists for. A cache with
+    no way to be dropped would make the Ω suite's own fixtures unable to re-derive."""
+    discovery.derived_scope(".")
+    assert discovery._DERIVED_SCOPE
+    discovery.clear_derived_scope_cache()
+    assert not discovery._DERIVED_SCOPE

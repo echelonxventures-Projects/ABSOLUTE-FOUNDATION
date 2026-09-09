@@ -144,6 +144,42 @@ def test_only_declaration_shaped_filenames_are_read(make_repo: Callable[..., Pat
     assert authority.ContractIndex(str(repository)).programme_for("alpha/core/x.py") == ""
 
 
+def test_a_file_named_like_a_governance_home_is_not_walked_as_one(
+    make_repo: Callable[..., Path],
+) -> None:
+    """``00-NOTES`` matching the home SHAPE does not make it a directory to descend into.
+
+    The index walks whatever ``00-[A-Z]+`` names, and the repository root is not curated, so the
+    guard has to survive a plain file sitting there. Without it the walk raises
+    ``NotADirectoryError`` and every artifact's authority becomes unavailable because somebody
+    committed a note.
+    """
+    repository = make_repo({"alpha/core/x.py": "X = 1\n"})
+    (repository / "00-NOTES").write_text("not a governance home\n", encoding="utf-8")
+    contracts = authority.ContractIndex(str(repository))
+    assert contracts.declarations == ()
+    assert contracts.programme_for("alpha/core/x.py") == ""
+
+
+def test_an_absurdly_nested_declaration_terminates_rather_than_recursing_forever() -> None:
+    """The depth bound, exercised at the depth that trips it.
+
+    A declaration is somebody else's document and this package parses it defensively: the bound
+    is what stops one programme's pathological JSON from becoming this measurement's stack
+    overflow. Twelve levels deep the path is still found; thirteen and the walk stops, which is
+    a LOSS OF PRECISION and never a loss of totality — the ancestry rules below are unconditional.
+    """
+
+    def nest(depth: int) -> object:
+        node: object = {"subject": "alpha/deep.py"}
+        for _ in range(depth):
+            node = {"child": node}
+        return node
+
+    assert "alpha/deep.py" in authority._strings(nest(10))
+    assert authority._strings(nest(40)) == []
+
+
 # --------------------------------------------------------------------------- Ω-A-03: programme home
 
 
