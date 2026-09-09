@@ -3072,3 +3072,245 @@ def test_adopting_a_narrowed_declaration_must_be_refused(declaration, monkeypatc
     monkeypatch.setattr(ConstructRegistry, "adopt", lambda self, declaration: None)
     problems = contract.extension_points_are_exercisable(Probe(declaration=declaration, repo=REPO))
     assert any("dropped a disposition was adopted" in p for p in problems), problems
+
+
+# --- the measurement workspace itself ---------------------------------------------------------
+
+
+def test_the_fingerprint_is_computed_once_and_reused(declaration):
+    # The Probe caches two expensive derivations so sixteen laws do not recompute them sixteen
+    # times. A cache that recomputed would still be correct and would make the measurement cost
+    # sixteen times what it costs, so the second call reading the cache is the property.
+    probe = Probe(declaration=declaration, repo=REPO)
+    first = probe.fingerprint()
+    assert first is probe.fingerprint()
+
+
+def test_a_module_that_cannot_be_read_is_a_fault_and_not_a_verdict(declaration):
+    # ContractError is deliberately not a refusal: a law that cannot read its own subject has
+    # measured nothing, and reporting "HOLDS" or "REFUSED" from that position would be a claim
+    # about bytes nobody looked at.
+    probe = Probe(declaration=declaration, repo=REPO)
+    with pytest.raises(contract.ContractError, match="cannot read"):
+        probe.source("a-module-this-package-has-never-had.py")
+
+
+# --- UCON-L-01: every construct carries exactly one active disposition ------------------------
+
+
+def test_a_model_that_accepts_a_forged_disposition_set_is_refused(declaration, monkeypatch):
+    # The law's non-vacuity check asserts that the MODEL refuses the forged forms. The violation
+    # it guards against is a model that accepts them — at which point every other branch of the
+    # law is measuring a shape the model would let through.
+    class _Permissive:
+        def __init__(self, presentation, dispositions, assessments, kind_registered):
+            self.presentation = presentation
+            self.dispositions = dispositions
+            self.assessments = assessments
+            self.kind_registered = kind_registered
+
+    monkeypatch.setattr(contract, "Construct", _Permissive)
+    problems = contract.every_construct_is_disposed(Probe(declaration=declaration, repo=REPO))
+    assert any("no disposition at all" in p for p in problems), problems
+    assert any("two active dispositions" in p for p in problems), problems
+
+
+# --- UCON-L-05: nothing is silently ignored ---------------------------------------------------
+
+
+def test_a_registry_holding_more_constructs_than_it_counted_presentations_is_refused(declaration):
+    # The arithmetic is the point: a registry cannot hold more constructs than were presented to
+    # it without having invented one, and the check is what makes "the population equals the
+    # presentations" a measurement rather than a restatement of the same number twice.
+    probe = _registry_probe(declaration, presented=0)
+    problems = contract.nothing_is_silently_ignored(probe)
+    assert any("arithmetically impossible" in p for p in problems), problems
+
+
+# --- UCON-L-06: unknowns, contradictions, research and discovery are first class ---------------
+
+
+def test_a_research_object_that_names_no_origin_is_refused(declaration, monkeypatch):
+    # Promotion without lineage produces an object whose subject cannot be recovered: the
+    # research exists and nothing says what it is research INTO.
+    real = views.promote_to_research
+
+    def forgetful(registry, identity):
+        promoted = real(registry, identity)
+        lineage = dataclasses.replace(promoted.presentation.lineage, derived_from=())
+        presentation = dataclasses.replace(promoted.presentation, lineage=lineage)
+        return _Stand_in(
+            promoted.identity,
+            promoted.dispositions,
+            promoted.disposition,
+            presentation=presentation,
+            assessments=promoted.assessments,
+        )
+
+    monkeypatch.setattr(views, "promote_to_research", forgetful)
+    problems = contract.unknown_and_contradiction_are_first_class(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("does not name the construct it derives from" in p for p in problems), problems
+
+
+def test_an_ordinary_construct_that_cannot_be_promoted_is_refused(declaration, monkeypatch):
+    # Promotion must work on ANY construct. A promotion that only succeeds for the kinds the
+    # foundation anticipated is a closed set wearing an open interface.
+    real = views.promote_to_research
+
+    def barren(registry, identity):
+        promoted = real(registry, identity)
+        return _Stand_in(
+            "",
+            promoted.dispositions,
+            promoted.disposition,
+            presentation=promoted.presentation,
+            assessments=promoted.assessments,
+        )
+
+    monkeypatch.setattr(views, "promote_to_research", barren)
+    problems = contract.unknown_and_contradiction_are_first_class(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("could not be promoted to a research object" in p for p in problems), problems
+
+
+def test_a_governed_object_carrying_an_undeclared_disposition_is_refused(declaration):
+    # The registry disposes these objects from the real declaration; the law reads the declared
+    # set from the probe. Narrowing the probe's view is how the branch that would fire on a
+    # disposition nobody declared can be shown to fire at all.
+    probe = _ProbeWithRegistry(_NarrowedDispositions(declaration), ConstructRegistry(declaration))
+    problems = contract.unknown_and_contradiction_are_first_class(probe)
+    assert any("carries an undeclared disposition" in p for p in problems), problems
+
+
+# --- UCON-L-08: a future category is admissible by registration alone -------------------------
+
+
+def test_a_package_whose_source_changed_under_registration_is_refused(declaration, monkeypatch):
+    # The openness claim is only worth the fingerprint that backs it. If registering eleven
+    # categories nobody declared rewrote a byte of this package, admission would require a code
+    # change and the model would be closed however the docstring reads.
+    prints = iter(({"model.py": "before"}, {"model.py": "after"}))
+
+    monkeypatch.setattr(contract, "_package_fingerprint", lambda repo: next(prints))
+    problems = contract.future_kinds_need_no_redesign(Probe(declaration=declaration, repo=REPO))
+    assert any("changed while admitting categories" in p for p in problems), problems
+
+
+# --- UCON-L-11: admission and reality are independent -----------------------------------------
+
+
+def test_a_construct_presented_as_something_other_than_admitted_is_redisposed(declaration):
+    # The conjunction the law measures needs an ADMITted construct in a hypothetical state. The
+    # rules currently admit it outright, so the redisposition branch is what makes the law
+    # survive a future rule that disposes this presentation some other way.
+    real = ConstructRegistry(declaration)
+
+    def present(presentation):
+        got = real.present(presentation)
+        if presentation.natural_key != "admitted-but-hypothetical":
+            return got
+        return real.redispose(
+            got.identity,
+            disposition="TRANSFORM",
+            rule_id="doctored",
+            rationale="a rule that does not admit this presentation outright",
+        )
+
+    probe = _registry_probe(declaration, base=real, present=present)
+    assert contract.reality_is_independent_of_admission(probe) == []
+
+
+# --- UCON-L-12: verification is itself verifiable ---------------------------------------------
+
+
+def test_a_well_formed_verifier_reporting_facet_violations_is_refused(declaration, monkeypatch):
+    # The verifier facet declares required fields. A registration that supplies every one of
+    # them and still comes back with violations means the facet machinery disagrees with itself,
+    # and every later verifier is being validated by a rule nobody can satisfy.
+    real = extension.register_verifier
+
+    def violating(registry, **kwargs):
+        got = real(registry, **kwargs)
+        if kwargs.get("natural_key") != "UCON-L-12-verifier":
+            return got
+        return dataclasses.replace(got, facet_violations=("a violation nobody can remove",))
+
+    monkeypatch.setattr(extension, "register_verifier", violating)
+    problems = contract.verification_is_itself_verifiable(Probe(declaration=declaration, repo=REPO))
+    assert any("reports facet violations" in p for p in problems), problems
+
+
+# --- UCON-L-13: no completeness claim is declared ---------------------------------------------
+
+
+def test_the_claim_scan_reads_only_the_declared_extensions(declaration, tmp_path):
+    # A scan that read every file would report the guarantee vocabulary out of a fixture, a
+    # changelog or a test, and the ratchet would be unusable. The `continue` is what confines
+    # the measurement to source.
+    root = tmp_path / "capability"
+    root.mkdir()
+    (root / "clean.py").write_text("x = 1\n", encoding="utf-8")
+    (root / "notes.txt").write_text("this file declares infinite truth\n", encoding="utf-8")
+    scan = dict(declaration.claim_scan, roots=["capability"], preserved_sites=[])
+    probe = Probe(declaration=dataclasses.replace(declaration, claim_scan=scan), repo=str(tmp_path))
+    assert contract.no_completeness_claim_is_declared(probe) == []
+
+
+def test_a_preserved_site_admits_its_occurrence_and_an_undeclared_one_does_not(
+    declaration, tmp_path
+):
+    # Both directions of the ratchet in one measurement: the declared site is admitted in
+    # silence, the undeclared one is named. A scan that reported both, or neither, would make
+    # the exemption list decorative.
+    root = tmp_path / "capability"
+    root.mkdir()
+    (root / "admitted.py").write_text('PHRASE = "infinite truth"\n', encoding="utf-8")
+    (root / "undeclared.py").write_text('OTHER = "infinite truth"\n', encoding="utf-8")
+    scan = dict(
+        declaration.claim_scan,
+        roots=["capability"],
+        phrases=["infinite truth"],
+        preserved_sites=[
+            {"module": os.path.join("capability", "admitted.py"), "phrase": "infinite truth"}
+        ],
+    )
+    probe = Probe(declaration=dataclasses.replace(declaration, claim_scan=scan), repo=str(tmp_path))
+    problems = contract.no_completeness_claim_is_declared(probe)
+    assert [p for p in problems if "undeclared.py" in p], problems
+    assert not [p for p in problems if "admitted.py" in p], problems
+
+
+# --- UCON-L-14: vocabulary is bound, never copied ---------------------------------------------
+
+
+def test_a_reality_vocabulary_that_contains_a_whole_ceu_population_is_refused(
+    declaration, monkeypatch
+):
+    # Binding to somebody else's vocabulary and copying it whole are indistinguishable from the
+    # outside until the owner changes one row. Holding the whole population is the copy.
+    from engine.ceu import catalog
+
+    ours = tuple((identifier.lower(), "") for identifier in declaration.reality_ids[:2])
+    monkeypatch.setattr(catalog, "SEED_POPULATIONS", (("a-copied-population", ours),))
+    problems = contract.vocabulary_is_not_duplicated(Probe(declaration=declaration, repo=REPO))
+    assert any("is a copy rather than a binding" in p for p in problems), problems
+
+
+class _NarrowedDispositions:
+    """The declaration with its disposition vocabulary emptied, and nothing else changed.
+
+    A registry built from the real declaration disposes constructs from the real rules. Reading
+    the declared set through this proxy is what lets a law's "an undeclared disposition arrived"
+    branch fire without forging a construct the model would have refused.
+    """
+
+    disposition_ids: tuple[str, ...] = ()
+
+    def __init__(self, real):
+        object.__setattr__(self, "_real", real)
+
+    def __getattr__(self, name):
+        return getattr(object.__getattribute__(self, "_real"), name)
