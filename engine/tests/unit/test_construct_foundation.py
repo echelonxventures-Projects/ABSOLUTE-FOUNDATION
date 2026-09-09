@@ -2315,10 +2315,16 @@ class _ProbeWithRegistry(Probe):
         return object.__getattribute__(self, "_doctored")
 
 
-def _registry_probe(declaration, **overrides):
-    return _ProbeWithRegistry(
-        declaration, _DoctoredRegistry(ConstructRegistry(declaration), **overrides)
-    )
+def _registry_probe(declaration, base=None, **overrides):
+    """A probe whose registry is `base` with named behaviours replaced.
+
+    `base` is threaded through on purpose: a test that builds its own ConstructRegistry for the
+    overrides and lets this helper build another ends up with two registries — one that records
+    the presentations and one the law reads from — and the law then fails on a construct that
+    was presented to the wrong instance.
+    """
+    real = base if base is not None else ConstructRegistry(declaration)
+    return _ProbeWithRegistry(declaration, _DoctoredRegistry(real, **overrides))
 
 
 class _Stand_in:
@@ -2404,3 +2410,115 @@ def test_a_disposition_naming_no_rule_is_refused(declaration):
     probe = _registry_probe(declaration, all=lambda: [stand_in])
     problems = contract.every_construct_is_disposed(probe)
     assert any("naming no rule" in p for p in problems), problems
+
+
+# --- UCON-L-02: the totality refusals ------------------------------------------------------
+
+
+def test_two_catch_all_rules_are_refused(declaration):
+    doubled = (*declaration.rules, dataclasses.replace(declaration.rules[-1], rule_id="second"))
+    problems = contract.disposition_is_total(
+        Probe(declaration=dataclasses.replace(declaration, rules=doubled), repo=REPO)
+    )
+    assert any("catch-all rules are declared" in p for p in problems), problems
+    # The law returns immediately: with the catch-all ambiguous, nothing after it can be read.
+    assert len(problems) == 1, problems
+
+
+def test_a_construct_selecting_the_wrong_rule_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+
+    def wrong_rule(presentation):
+        admitted = real.present(presentation)
+        return dataclasses.replace(
+            admitted,
+            dispositions=(
+                dataclasses.replace(
+                    admitted.disposition, rule_id="a-rule-that-is-not-the-catch-all"
+                ),
+            ),
+        )
+
+    probe = _registry_probe(declaration, present=wrong_rule)
+    problems = contract.disposition_is_total(probe)
+    assert any("rather than the catch-all" in p for p in problems), problems
+
+
+def test_a_catch_all_assigning_the_wrong_disposition_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    catch_all = [rule for rule in declaration.rules if rule.catch_all][0]
+    other = [d for d in declaration.disposition_ids if d != catch_all.disposition][0]
+
+    def wrong_disposition(presentation):
+        admitted = real.present(presentation)
+        return dataclasses.replace(
+            admitted,
+            dispositions=(dataclasses.replace(admitted.disposition, disposition=other),),
+        )
+
+    probe = _registry_probe(declaration, present=wrong_disposition)
+    problems = contract.disposition_is_total(probe)
+    assert any("the catch-all assigned" in p for p in problems), problems
+
+
+def test_a_selection_engine_that_is_not_total_is_refused(declaration, monkeypatch):
+    # Totality means every presentation, in any world, reaches a rule. An engine that raises
+    # for an unknown kind has a hole in it, and the law performs the check rather than arguing.
+    def refuse(*args, **kwargs):
+        raise ConstructError("no rule matched")
+
+    monkeypatch.setattr(contract, "select_rule", refuse)
+    problems = contract.disposition_is_total(Probe(declaration=declaration, repo=REPO))
+    assert any("disposition is not total" in p for p in problems), problems
+
+
+# --- UCON-L-05: the nothing-ignored refusals -------------------------------------------------
+
+
+def test_presenting_more_than_are_returned_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    probe = _registry_probe(declaration, base=real, present_all=lambda h: real.present_all(h)[:1])
+    problems = contract.nothing_is_silently_ignored(probe)
+    assert any("were returned" in p for p in problems), problems
+
+
+def test_a_presented_construct_absent_from_the_registry_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    probe = _registry_probe(declaration, base=real, has=lambda identity: False)
+    problems = contract.nothing_is_silently_ignored(probe)
+    assert any("is not in the registry" in p for p in problems), problems
+
+
+def test_a_population_smaller_than_the_presentations_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    seeded = list(real.all())
+    probe = _registry_probe(declaration, base=real, all=lambda: seeded)
+    problems = contract.nothing_is_silently_ignored(probe)
+    assert any("distinct" in p and "identities were presented" in p for p in problems), problems
+
+
+def test_a_broken_admission_journal_chain_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    probe = _registry_probe(declaration, base=real, chain_is_intact=lambda: False)
+    problems = contract.nothing_is_silently_ignored(probe)
+    assert any("admission journal chain is broken" in p for p in problems), problems
+
+
+def test_a_rejected_construct_leaving_no_record_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    seen = {"redisposed": None}
+
+    def redispose(identity, **kwargs):
+        seen["redisposed"] = real.redispose(identity, **kwargs)
+        return seen["redisposed"]
+
+    def has(identity):
+        # A rejection that erases the record is indistinguishable from never having been
+        # presented, which is the whole condition this law exists to refuse.
+        if seen["redisposed"] is not None and identity == seen["redisposed"].identity:
+            return False
+        return real.has(identity)
+
+    probe = _registry_probe(declaration, base=real, redispose=redispose, has=has)
+    problems = contract.nothing_is_silently_ignored(probe)
+    assert any("rejected construct left no record" in p for p in problems), problems
