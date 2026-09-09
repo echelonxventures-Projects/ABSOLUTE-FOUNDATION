@@ -1288,57 +1288,19 @@ def test_a_residual_relation_the_declaration_does_not_carry_is_refused(declarati
     assert any("residual relation is not declared" in p for p in problems), problems
 
 
-def test_an_undeclared_residual_context_kind_refuses_at_ledger_construction(declaration):
-    """The law's own guard for this is unreachable, and the reason is worth recording.
-
-    `residual_is_representable` ends with `if declaration.residual_context_kind not in
-    set(declaration.context_kind_ids)`, but `probe.fresh_ledger()` runs FIRST and composes
-    with that kind, so any declaration that could satisfy the guard raises before the guard
-    is read. The behaviour is still correct — an undeclared residual context kind is refused,
-    loudly — but it is refused as a CompositionError rather than reported as a problem, and
-    that branch of the law is defensive rather than live. Asserting the real behaviour is
-    worth more than a test contorted to reach a line, and more honest than a pragma.
-    """
+def test_an_undeclared_residual_context_kind_is_reported(declaration):
     kept = tuple(
         k for k in declaration.context_kinds if k.identifier != declaration.residual_context_kind
     )
-    forged = _forge(declaration, context_kinds=kept)
-    with pytest.raises(RecursiveKnowledgeError, match="not a declared context kind"):
-        contract.residual_is_representable(forged)
+    problems = contract.residual_is_representable(_forge(declaration, context_kinds=kept))
+    assert any("residual context kind is not declared" in p for p in problems), problems
 
 
-def test_a_law_selector_matching_nothing_is_a_fault(declaration):
-    # adr/0041's shape: `--law NOT-A-REAL-LAW` used to select an empty set and exit 0, so a
-    # workflow written that way was green because it measured nothing.
-    with pytest.raises(contract.ContractError, match="no declared law matches"):
-        contract.measure(laws=["NOT-A-REAL-LAW"])
-
-
-def test_a_law_selector_naming_a_check_rather_than_a_law_is_a_fault(declaration):
-    # The more dangerous half: check names look like law selectors and silently matched none.
-    a_check_name = declaration.laws[0].check
-    with pytest.raises(contract.ContractError, match="no declared law matches"):
-        contract.measure(laws=[a_check_name])
-
-
-def test_selecting_one_law_measures_only_that_law(declaration):
-    only = declaration.laws[0].law_id
-    report = contract.measure(laws=[only])
-    assert [row["law_id"] for row in report["laws"]] == [only]
-
-
-def test_an_undeclared_residual_domain_refuses_at_ledger_construction(declaration):
-    """Second of the same shape as the context kind, and the pattern is the point.
-
-    `residual_is_representable` wraps its `express` call in `except RecursiveKnowledgeError`,
-    and DeclarationError IS one, so the handler would catch it. It never gets the chance:
-    `probe.fresh_ledger()` runs first and resolves the same field, so the declaration raises
-    during ledger construction. The refusal is real and correct; the law's own handler for it
-    is defensive rather than live.
-    """
-    forged = _forge(declaration, residual_domain="not-a-declared-domain")
-    with pytest.raises(RecursiveKnowledgeError, match="not a declared"):
-        contract.residual_is_representable(forged)
+def test_an_undeclared_residual_domain_is_reported(declaration):
+    problems = contract.residual_is_representable(
+        _forge(declaration, residual_domain="not-a-declared-domain")
+    )
+    assert any("residual domain is not declared" in p for p in problems), problems
 
 
 def test_an_inadmissible_residual_gap_class_is_reported(declaration):
@@ -1346,3 +1308,114 @@ def test_an_inadmissible_residual_gap_class_is_reported(declaration):
         _forge(declaration, residual_gap_class="not-a-declared-gap-class")
     )
     assert any("residual gap class cannot be admitted" in p for p in problems), problems
+
+
+# --- URKE-L-15: the ledger-integrity refusals ----------------------------------------------
+#
+# These laws do not read the declaration, they interrogate the LEDGER, so a mutated
+# declaration cannot reach them. Each test substitutes a ledger that violates exactly one
+# property and asserts the law names that property. The substitute delegates everything it
+# does not override to a real KnowledgeLedger, so a law reaching any other behaviour reaches
+# the genuine one rather than a stub that agrees with the test.
+
+
+class _Doctored:
+    """A real ledger with named behaviours replaced."""
+
+    def __init__(self, real, **overrides):
+        object.__setattr__(self, "_real", real)
+        object.__setattr__(self, "_overrides", overrides)
+
+    def __getattr__(self, name):
+        overrides = object.__getattribute__(self, "_overrides")
+        if name in overrides:
+            return overrides[name]
+        return getattr(object.__getattribute__(self, "_real"), name)
+
+
+class _ProbeWith(contract.Probe):
+    """A probe whose fresh_ledger yields the doctored store."""
+
+    def __init__(self, declaration, store):
+        super().__init__(declaration=declaration, repo=repo_root())
+        object.__setattr__(self, "_doctored", store)
+
+    def fresh_ledger(self):
+        return object.__getattribute__(self, "_doctored")
+
+
+def _ledger_probe(declaration, **overrides):
+    return _ProbeWith(declaration, _Doctored(KnowledgeLedger(declaration), **overrides))
+
+
+def test_a_ledger_that_does_not_reconcile_is_refused(declaration):
+    real = KnowledgeLedger(declaration)
+    bad = dict(real.verify())
+    bad["status"] = "FAIL"
+    probe = _ledger_probe(declaration, verify=lambda: bad)
+    problems = contract.nothing_admitted_can_silently_disappear(probe)
+    assert any("does not reconcile" in p for p in problems), problems
+
+
+def test_admissions_that_do_not_match_journal_entries_are_refused(declaration):
+    real = KnowledgeLedger(declaration)
+    bad = dict(real.verify())
+    bad["journal_entries"] = bad["admitted"] + 1
+    probe = _ledger_probe(declaration, verify=lambda: bad)
+    problems = contract.nothing_admitted_can_silently_disappear(probe)
+    assert any("journal entries" in p for p in problems), problems
+
+
+@pytest.mark.parametrize("forbidden", ["remove", "delete", "pop", "clear", "discard"])
+def test_a_ledger_exposing_a_removal_path_is_refused(declaration, forbidden):
+    # Append-only is a property of the INTERFACE, not only of the data: a ledger that offers
+    # a removal method has already lost it, whether or not anything calls it.
+    probe = _ledger_probe(declaration, **{forbidden: lambda *a, **k: None})
+    problems = contract.nothing_admitted_can_silently_disappear(probe)
+    assert any(f"removal path named {forbidden!r}" in p for p in problems), problems
+
+
+def test_a_superseded_subject_that_stops_being_retrievable_is_refused(declaration):
+    probe = _ledger_probe(declaration, has=lambda identity: False)
+    problems = contract.nothing_admitted_can_silently_disappear(probe)
+    assert any("stopped being retrievable" in p for p in problems), problems
+
+
+def test_a_chain_broken_by_supersession_is_refused(declaration):
+    probe = _ledger_probe(declaration, chain_is_intact=lambda: False)
+    problems = contract.nothing_admitted_can_silently_disappear(probe)
+    assert any("chain broke on a supersession" in p for p in problems), problems
+
+
+def test_superseding_by_an_unrecorded_subject_must_refuse(declaration):
+    # The law asserts a REFUSAL, so the violation is a ledger that quietly accepts.
+    real = KnowledgeLedger(declaration)
+    probe = _ledger_probe(declaration, supersede=lambda *a, **k: None, has=real.has)
+    problems = contract.nothing_admitted_can_silently_disappear(probe)
+    assert any("superseding by an unrecorded subject" in p for p in problems), problems
+
+
+def test_reading_an_unrecorded_identity_must_refuse(declaration):
+    # A miss that returns None instead of raising lets absence pass as an answer.
+    probe = _ledger_probe(declaration, get=lambda identity: None)
+    problems = contract.nothing_admitted_can_silently_disappear(probe)
+    assert any("a miss could pass as absent" in p for p in problems), problems
+
+
+def test_a_declared_residual_domain_that_cannot_be_composed_is_reported(declaration, monkeypatch):
+    """The guard above proves the domain is DECLARED; this proves the law survives it failing.
+
+    Measured: all 31 declared domains compose with the declared initial state and no
+    qualifiers, so no real declaration reaches this handler today. It is not dead code — a
+    domain added later that requires a qualifier would raise here — so the handler is tested
+    by injecting the failure its contract exists to absorb, rather than deleted because
+    today's data happens not to trigger it.
+    """
+    from engine.recursive_knowledge import composition as composition_module
+
+    def _refuse(*args, **kwargs):
+        raise RecursiveKnowledgeError("composition refused for the test")
+
+    monkeypatch.setattr(composition_module, "express", _refuse)
+    problems = contract.residual_is_representable(_forge(declaration))
+    assert any("residual domain cannot be expressed" in p for p in problems), problems

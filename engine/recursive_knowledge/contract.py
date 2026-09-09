@@ -160,6 +160,21 @@ def residual_is_representable(probe: Probe) -> list[str]:
     """URKE-L-02 — every declared residual admits a subject rather than refusing one."""
     problems: list[str] = []
     declaration = probe.declaration
+    # THE DECLARATIVE GUARDS COME FIRST, AND THE ORDER IS THE POINT. They used to sit at the
+    # end, after `probe.fresh_ledger()` — which resolves these same fields — so any
+    # declaration able to fail them raised a DeclarationError during ledger construction and
+    # the guards could not execute. A law that crashes instead of reporting is a law with no
+    # verdict, and the branches that would have reported were dead code. Reading the cheap
+    # declarative facts before building anything makes them live and makes the refusal a
+    # finding rather than a traceback.
+    if declaration.residual_relation not in set(declaration.relation_ids):
+        problems.append("the residual relation is not declared")
+    if declaration.residual_context_kind not in set(declaration.context_kind_ids):
+        problems.append("the residual context kind is not declared")
+    if declaration.residual_domain not in set(declaration.domain_ids):
+        problems.append("the residual domain is not declared")
+    if problems:
+        return problems
     store = probe.fresh_ledger()
     try:
         composition.express(
@@ -184,10 +199,6 @@ def residual_is_representable(probe: Probe) -> list[str]:
         )
     except RecursiveKnowledgeError as exc:
         problems.append(f"the residual gap class cannot be admitted: {exc}")
-    if declaration.residual_relation not in set(declaration.relation_ids):
-        problems.append("the residual relation is not declared")
-    if declaration.residual_context_kind not in set(declaration.context_kind_ids):
-        problems.append("the residual context kind is not declared")
     return problems
 
 
