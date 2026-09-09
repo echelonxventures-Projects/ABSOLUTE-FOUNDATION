@@ -17,9 +17,10 @@ from pathlib import Path
 
 import pytest
 
+from intelligence.rie import census, discovery, drift
 from intelligence.rie.__main__ import main as cli_main
-from intelligence.rie.canonical import canonical_json, sha256_text
-from intelligence.rie.config import MemorySink, RepoConfig
+from intelligence.rie.canonical import canonical_json, sha256_file, sha256_text
+from intelligence.rie.config import MemorySink, RepoConfig, resolve_repo_root
 from intelligence.rie.engine import RepositoryIntelligenceEngine, build_model
 from intelligence.rie.evidence import EvidenceReader
 
@@ -130,7 +131,6 @@ def test_canonical_identity_independent_of_coverage() -> None:
       (b) input domain — state_fingerprint() contains exactly the 5 canonical DATA files
       (c) behavioral  — input_hash is stable across re-derivations (no coverage leakage)
     """
-    from intelligence.rie.evidence import EvidenceReader
 
     config = RepoConfig.create(REPO)
     reader = EvidenceReader(config)
@@ -392,3 +392,322 @@ def test_a_subcommand_is_required() -> None:
     with pytest.raises(SystemExit) as raised:
         cli_main([])
     assert raised.value.code == 2, "argparse.error exits 2; a caller must not read it as a pass"
+
+
+# --------------------------------------------------------------------------- the evidence reader
+#
+# Every test above reads the model the engine derived, so the reader underneath it was
+# exercised only through the surfaces the model happens to use. Git answers here, the
+# coverage report has been produced, and every source file parses — so each arm that answers
+# for a repository where one of those is false had never run.
+
+
+def _reader() -> EvidenceReader:
+    return EvidenceReader(RepoConfig.create(REPO))
+
+
+def test_every_git_fact_the_reader_reports_comes_from_git() -> None:
+    """FOUR GIT READERS AND NONE OF THEM HAD A CALLER IN THIS SUITE.
+
+    The commit, the short commit, the committer date and the branch are what bind a derived
+    output to the source state it was derived at — the generation timestamp is taken from the
+    commit precisely so that regenerating an unchanged repository produces identical bytes.
+    Each answers ``UNKNOWN`` rather than raising when git cannot say, because an
+    observational surface must degrade rather than abort.
+    """
+    reader = _reader()
+
+    assert reader.head_commit().startswith(reader.head())
+    assert len(reader.head_commit()) == 40
+    assert reader.head_committed_at()[:2] == "20"
+    assert reader.branch()
+    assert reader.twin() == reader.data("twin.json")
+
+
+def test_a_repository_git_cannot_read_reports_unknown_rather_than_raising(tmp_path) -> None:
+    """GIT IS NOT A DEPENDENCY OF BEING ABLE TO ANSWER.
+
+    Every git read goes through one runner that returns the empty string when the process
+    cannot be started at all, and each reader turns that into ``UNKNOWN``. Letting the OSError
+    escape would make the whole intelligence surface unavailable on a machine without git,
+    for facts that are provenance rather than content.
+    """
+    config = RepoConfig.create(tmp_path)
+    reader = EvidenceReader(replace(config, repo_root=tmp_path / "never-created"))
+
+    assert reader.head() == "UNKNOWN"
+    assert reader.head_commit() == "UNKNOWN"
+    assert reader.head_committed_at() == "UNKNOWN"
+    assert reader.branch() == "UNKNOWN"
+    assert reader.tracked("*.py") == []
+
+
+def test_coverage_is_read_when_present_and_reported_unavailable_when_it_is_not(
+    tmp_path, monkeypatch
+) -> None:
+    """COVERAGE IS ENVIRONMENTAL, and all three of its answers matter.
+
+    ``coverage.xml`` is gitignored, produced by the test runner and absent from every
+    pristine clone — so "no report" is the NORMAL state, not an error, and the reader
+    degrades to unavailable rather than aborting a caller that is not asking about coverage.
+    An unreadable report degrades the same way, because an environmental artifact that
+    cannot be parsed must never take down an observational surface.
+    """
+    present = _reader().coverage()
+    assert present.available is True
+    assert present.lines_valid > 0
+
+    absent = EvidenceReader(RepoConfig.create(tmp_path)).coverage()
+    assert absent.available is False
+    assert absent.lines_valid == 0
+
+    malformed = tmp_path / "coverage.xml"
+    malformed.write_text("<not-cobertura/>", encoding="utf-8")
+    unreadable = EvidenceReader(RepoConfig.create(tmp_path)).coverage()
+    assert unreadable.available is False
+
+
+def test_a_file_that_is_absent_hashes_to_a_stable_sentinel(tmp_path) -> None:
+    """AN ABSENT FILE HAS A CONTENT HASH AND IT IS NOT A HASH OF NOTHING.
+
+    Returning the digest of the empty string would make "the file is missing" and "the file
+    is empty" the same evidence value. ``absent`` is a sentinel no digest can collide with,
+    so a snapshot records which of the two it saw.
+    """
+    written = tmp_path / "present.json"
+    written.write_text("{}", encoding="utf-8")
+
+    assert sha256_file(tmp_path / "never-written.json") == "absent"
+    assert sha256_file(written) != "absent"
+
+
+def test_a_path_outside_the_repository_is_rendered_whole(tmp_path) -> None:
+    """A RELATIVE RENDER OF AN UNRELATED PATH WOULD BE A LIE ABOUT WHERE IT IS.
+
+    Every path this engine renders lies inside the repository, so the fallback had no case.
+    A path outside it has no repository-relative form, and inventing one with ``..``
+    components would produce a string that reads like a repository location and is not one.
+    """
+    config = RepoConfig.create(REPO)
+
+    assert config.rel(REPO / "engine" / "uckp") == "engine/uckp"
+    assert config.rel(tmp_path / "elsewhere") == str(tmp_path / "elsewhere")
+
+
+def test_the_repository_root_falls_back_when_no_marker_is_found(tmp_path) -> None:
+    """THE MARKERS ARE THE ANSWER AND THE PACKAGE'S OWN LOCATION IS THE LAST RESORT.
+
+    Resolution walks upward looking for the evidence markers, and it finds them from
+    anywhere inside this repository — so the fallback had never run. It answers for a start
+    path outside any repository at all, where returning None or raising would leave a caller
+    with no root rather than with the one this package is installed under.
+    """
+    assert resolve_repo_root(REPO / "intelligence" / "rie") == REPO
+    assert resolve_repo_root(tmp_path) == REPO
+
+
+# --------------------------------------------------------------------------- drift
+#
+# Drift is the one derivation that depends on a PRIOR snapshot, and this repository's
+# `.runtime` directory holds none while the suite runs — so every drift call took the
+# baseline arm and the whole comparison was unmeasured.
+
+
+def _model(*, capabilities=(), verdict="CERTIFIED", domains=1, edges=10) -> dict:
+    return {
+        "capabilities": [
+            {"canonical_name": name, "implementation_status": status}
+            for name, status in capabilities
+        ],
+        "health": {
+            "certification": {"digital_twin_verdict": verdict, "domains": domains},
+            "corpus": {"edges": edges},
+        },
+    }
+
+
+def test_with_no_prior_snapshot_drift_reports_a_baseline_rather_than_change() -> None:
+    report = drift.detect(_model(capabilities=[("engine.alpha", "IMPLEMENTED")]), None)
+
+    assert report["baseline"] is True
+    assert report["implementation_drift"] == []
+    assert report["certification_drift"] == []
+    assert report["dependency_drift"] == []
+
+
+def test_every_kind_of_change_between_two_snapshots_is_named(tmp_path) -> None:
+    """FOUR COMPARISONS, NONE OF WHICH HAD EVER RUN, and each says something different.
+
+    A capability that appears is ADDED; one whose status moves is a STATUS change carrying
+    both ends; one that disappears is REMOVED carrying what it was. Reporting the first two
+    and not the third would make a capability's disappearance invisible — the one change a
+    reader most needs to see. Certification drift is reported per FIELD, so a verdict change
+    and a domain-count change are separate findings rather than one "certification changed".
+    And the comparison is keyed on the canonical NAME rather than on the catalogue ordinal,
+    because inserting a capability shifts every later id and a report keyed on it would
+    attribute the change to the wrong capability.
+    """
+    was = _model(
+        capabilities=[("engine.gone", "IMPLEMENTED"), ("engine.moved", "PARTIAL")],
+        verdict="CERTIFIED",
+        domains=3,
+        edges=10,
+    )
+    now = _model(
+        capabilities=[("engine.moved", "IMPLEMENTED"), ("engine.new", "PARTIAL")],
+        verdict="REFUSED",
+        domains=4,
+        edges=11,
+    )
+
+    report = drift.detect(now, was)
+
+    assert report["baseline"] is False
+    assert report["implementation_drift"] == [
+        {"capability": "engine.moved", "change": "STATUS", "from": "PARTIAL", "to": "IMPLEMENTED"},
+        {"capability": "engine.new", "change": "ADDED", "status": "PARTIAL"},
+        {"capability": "engine.gone", "change": "REMOVED", "was": "IMPLEMENTED"},
+    ]
+    assert report["certification_drift"] == [
+        {"field": "digital_twin_verdict", "from": "CERTIFIED", "to": "REFUSED"},
+        {"field": "domains", "from": 3, "to": 4},
+    ]
+    assert report["dependency_drift"] == [{"metric": "corpus_edges", "from": 10, "to": 11}]
+
+
+def test_two_identical_snapshots_produce_no_drift_at_all() -> None:
+    """A comparison that always finds something is not a comparison. The equal case is what
+    makes a drift report readable: an unchanged repository must produce three empty lists,
+    or every run would report noise and the real changes would stop standing out.
+    """
+    same = _model(capabilities=[("engine.alpha", "IMPLEMENTED")])
+
+    report = drift.detect(same, dict(same))
+
+    assert report["implementation_drift"] == []
+    assert report["certification_drift"] == []
+    assert report["dependency_drift"] == []
+
+
+def test_a_prior_snapshot_that_cannot_be_parsed_is_treated_as_no_prior(tmp_path) -> None:
+    """AN UNREADABLE PRIOR IS A BASELINE, NEVER A FAULT.
+
+    The snapshot is the engine's own previous output, and a truncated or hand-edited one is
+    a real state. Raising would make the engine unable to produce a model at all because of
+    a file that only affects the drift section; reporting it as a baseline says "there is
+    nothing to compare against", which is exactly the truth.
+    """
+    config = RepoConfig.create(tmp_path, output_subdir="out")
+    engine = RepositoryIntelligenceEngine(config)
+    assert engine._prior_model() is None
+
+    config.output_dir.mkdir(parents=True, exist_ok=True)
+    (config.output_dir / "UCOS-RIE-MODEL.json").write_text("{ truncated", encoding="utf-8")
+
+    assert engine._prior_model() is None
+
+
+# --------------------------------------------------------------------------- discovery + census
+#
+# Both walk the repository through git, over source files that all parse. The arms below
+# answer for a checkout git cannot enumerate and for paths that cannot be read as Python —
+# which is what "derive the catalogue from whatever is there" means in practice.
+
+
+def _untracked_repo(tmp_path: Path, root: str) -> tuple[EvidenceReader, Path]:
+    """A reader over a directory git does not track, so every ``tracked`` call is empty."""
+    base = tmp_path / root
+    base.mkdir(parents=True)
+    return EvidenceReader(RepoConfig.create(tmp_path, code_roots=(root,))), base
+
+
+def test_a_module_that_cannot_be_parsed_contributes_no_docstring(tmp_path: Path) -> None:
+    """A CATALOGUE ENTRY IS DESCRIBED BY ITS PACKAGE DOCSTRING OR BY NOTHING.
+
+    Every tracked ``__init__.py`` in this repository parses, so the failure arm had no case.
+    A file that is not valid Python, or a path that is not a readable file at all, must
+    contribute an empty description rather than aborting discovery — a catalogue that cannot
+    be built because one package has a syntax error answers no question at all.
+    """
+    broken = tmp_path / "__init__.py"
+    broken.write_text("def (:\n", encoding="utf-8")
+    assert discovery._docstring(broken) == ""
+    assert discovery._docstring(tmp_path / "not-a-file") == ""
+
+    good = tmp_path / "good.py"
+    good.write_text('"""A described package."""\n', encoding="utf-8")
+    assert discovery._docstring(good) == "A described package."
+
+
+def test_a_tracked_file_that_cannot_be_parsed_contributes_no_symbols(tmp_path: Path) -> None:
+    """THE SYMBOL SURFACE IS WHAT PARSES, and the file that does not is skipped rather than
+    fatal — but its STEM is still recorded, because the module exists whether or not this
+    reader can read it. Dropping the file entirely would understate the surface; raising
+    would make one unparseable module cost the whole catalogue.
+    """
+    reader, base = _untracked_repo(tmp_path, "pkg")
+    (base / "sound.py").write_text("class Alpha: pass\ndef beta(): pass\ndef _private(): pass\n")
+    (base / "broken.py").write_text("def (:\n", encoding="utf-8")
+
+    class _Tracking:
+        config = reader.config
+
+        @staticmethod
+        def tracked(_pattern: str) -> list[str]:
+            return ["pkg/sound.py", "pkg/broken.py"]
+
+    symbols = discovery._symbols(_Tracking(), "pkg")
+
+    assert "Alpha" in symbols and "beta" in symbols
+    assert "_private" not in symbols
+    assert "broken" in symbols and "sound" in symbols
+
+
+def test_package_locations_fall_back_to_the_filesystem_when_git_lists_nothing(
+    tmp_path: Path,
+) -> None:
+    """GIT IS THE ELIGIBILITY BOUNDARY AND THE FILESYSTEM IS THE FALLBACK.
+
+    Discovery reads tracked paths so the catalogue obeys the same version-control boundary
+    registration does — which means in this repository the tracked branch always answers and
+    the walk beneath it never ran. It is what keeps the engine usable on an export, a
+    worktree git cannot enumerate, or a root that is not there at all: a missing root is an
+    empty list rather than an exception, and a present one is walked deterministically with
+    dot-directories excluded.
+    """
+    reader, base = _untracked_repo(tmp_path, "pkg")
+    (base / "__init__.py").write_text("", encoding="utf-8")
+    (base / "child").mkdir()
+    (base / "child" / "__init__.py").write_text("", encoding="utf-8")
+    (base / ".hidden").mkdir()
+    (base / ".hidden" / "__init__.py").write_text("", encoding="utf-8")
+
+    assert discovery._package_locations(reader, "pkg") == ["pkg/child"]
+    assert discovery._package_locations(reader, "no-such-root") == []
+
+
+def test_the_census_walks_the_filesystem_and_survives_a_path_it_cannot_read(
+    tmp_path: Path,
+) -> None:
+    """A CENSUS IS A COUNT AND A COUNT MUST NOT ABORT.
+
+    Like discovery, the census prefers git and falls back to a deterministic walk — and the
+    walk had never run. Both of its read loops skip a path that cannot be read as text: a
+    directory whose name ends in ``.py`` matches the walk and is not a file, which is the
+    ordinary shape of this. Raising there would make one such path cost the entire census,
+    reporting nothing about the roots that were perfectly countable.
+    """
+    reader, base = _untracked_repo(tmp_path, "pkg")
+    (base / "module.py").write_text("one\ntwo\nthree\n", encoding="utf-8")
+    (base / "unreadable.py").mkdir()
+    tests = base / "tests"
+    tests.mkdir()
+    (tests / "test_real.py").write_text("def test_alpha():\n    pass\n", encoding="utf-8")
+    (tests / "test_unreadable.py").mkdir()
+
+    counted = census.census_for(reader, "pkg")
+
+    assert counted.source_files == 2
+    assert counted.test_files == 2
+    assert counted.loc == 3
+    assert counted.test_functions == 1
