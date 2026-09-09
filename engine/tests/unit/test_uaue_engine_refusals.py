@@ -718,3 +718,325 @@ def test_project_history_accepts_a_sequence_of_chains(
 ) -> None:
     with pytest.raises(EvolutionAuthorityError):
         project_history([EvolutionChain(candidate=candidate, objects=())], authority)
+
+
+# --------------------------------------------------------------------------------------
+# the accessors, and the integrity dimensions that have only ever passed
+#
+# Every dimension below returns (satisfied, detail). The unsatisfied arm of each is the one a
+# real defect would take, and none of them had ever been produced — so a dimension that
+# silently stopped measuring would have reported "satisfied" for ever.
+
+
+def test_every_accessor_resolves_a_declared_member_and_refuses_an_undeclared_one(
+    authority: EvolutionAuthority,
+) -> None:
+    """The refusals are already measured elsewhere. The resolutions are the other half, and an
+    accessor that could only refuse would make every caller's lookup a failure path."""
+    assert (
+        authority.classification(authority.classifications[0].identifier)
+        is (authority.classifications[0])
+    )
+    assert authority.phase(authority.phases[0].identifier) is authority.phases[0]
+    assert authority.register(authority.registers[0].file) is authority.registers[0]
+    for accessor, argument in (
+        ("classification", "A-CLASSIFICATION-NOBODY-DECLARED"),
+        ("phase", "A-PHASE-NOBODY-DECLARED"),
+        ("register", "a-register-nobody-declared.md"),
+    ):
+        with pytest.raises(EvolutionAuthorityError, match="no such"):
+            getattr(authority, accessor)(argument)
+
+
+def _discovery_object(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate, **overrides: Any
+) -> EvolutionObject:
+    phase = authority.phase_by_ordinal(1)
+    obj = EvolutionObject.derive(
+        rule=authority.identity,
+        candidate=candidate,
+        object_kind=authority.object_kind_of(phase.identifier).identifier,
+        phase=phase.identifier,
+        lifecycle_state=authority.stage_of(phase.identifier),
+        dependencies=(),
+        evidence=candidate.evidence,
+        authority=phase.authority,
+    )
+    return replace(obj, **overrides) if overrides else obj
+
+
+def test_two_objects_sharing_one_identity_fail_verification(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """A collision makes one identity name two objects, and every later reference to it resolves
+    to whichever the reader reached first."""
+    first = _discovery_object(authority, candidate)
+    chain = EvolutionChain(candidate=candidate, objects=(first, first))
+    outcome = next(
+        entry
+        for entry in verify_evolution(chain, authority).outcomes
+        if entry.subject.lower().startswith("identity")
+    )
+    assert not outcome.satisfied
+    assert "share an identity" in outcome.detail
+
+
+def test_an_object_whose_identity_inputs_cannot_be_read_is_anonymous(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Unidentifiable is not merely mismatched: an object that cannot present its own identity
+    inputs cannot be shown to be the object its identity claims."""
+    from engine.uaue import validation as validation_module
+    from engine.uaue import verification as verification_module
+
+    def _unreadable(rule, obj):  # noqa: ANN001, ANN202
+        raise EvolutionAuthorityError("the identity inputs could not be read")
+
+    monkeypatch.setattr(verification_module, "identity_inputs", _unreadable)
+    monkeypatch.setattr(validation_module, "identity_inputs", _unreadable)
+    chain = EvolutionChain(candidate=candidate, objects=(_discovery_object(authority, candidate),))
+    verified = next(
+        entry
+        for entry in verify_evolution(chain, authority).outcomes
+        if entry.subject.lower().startswith("identity")
+    )
+    assert not verified.satisfied
+    validated = next(
+        entry
+        for entry in validate_evolution(chain, authority).outcomes
+        if entry.identifier == "AUE-VAL-01"
+    )
+    assert not validated.satisfied
+
+
+def test_a_backward_phase_dependency_fails_verification(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """The loop's order is what makes "an earlier phase produced this" checkable, and an edge
+    pointing forwards would let a phase depend on one that has not run.
+
+    The edges are DERIVED from loop order, and the loader already refuses a phase whose ordinal
+    disagrees with its position, so no declaration can produce a backward edge. That is what
+    makes the check worth holding: it is the guard that survives a future loader deriving the
+    edges some other way, and reaching it means handing the verifier an edge set the deriver
+    cannot currently build.
+    """
+    from engine.uaue.model import Dependency
+
+    forward = Dependency(
+        phase=authority.phases[0].identifier,
+        depends_on=authority.phases[-1].identifier,
+        kind="phase",
+    )
+    doctored = replace(authority, dependencies=(*authority.dependencies, forward))
+    chain = EvolutionChain(candidate=candidate, objects=())
+    outcome = next(
+        entry
+        for entry in verify_evolution(chain, doctored).outcomes
+        if entry.subject.lower().startswith("dependency")
+    )
+    assert not outcome.satisfied
+    assert "backward dependency edges" in outcome.detail
+
+
+def test_a_phase_naming_no_gate_fails_governance_verification(
+    mutable: dict[str, Any], candidate: EvolutionCandidate
+) -> None:
+    """A phase with no gate is a position nothing refuses at, so every later claim that the
+    position was governed rests on nothing having been asked."""
+    mutable["phases"][0]["gate"] = ""
+    authority = _load(mutable)
+    chain = EvolutionChain(candidate=candidate, objects=())
+    outcome = next(
+        entry
+        for entry in verify_evolution(chain, authority).outcomes
+        if entry.subject.lower().startswith("governance")
+    )
+    assert not outcome.satisfied
+    assert "phases naming no gate" in outcome.detail
+
+
+def test_a_stage_claimed_by_no_phase_or_by_two_fails_validation(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """Exactly one phase per canonical stage is what makes the loop's coverage a partition. A
+    stage claimed twice is measured twice; one claimed never is measured by nothing.
+
+    The loader already refuses a declaration whose stages overlap, so the state set is doctored
+    directly — this is the consistency dimension's own guard, not the loader's."""
+    contested = replace(authority.lifecycle_states[0], claimed_by=("AUE-P-01", "AUE-P-02"))
+    doctored = replace(authority, lifecycle_states=(contested, *authority.lifecycle_states[1:]))
+    chain = EvolutionChain(candidate=candidate, objects=())
+    outcome = next(
+        entry
+        for entry in validate_evolution(chain, doctored).outcomes
+        if entry.subject.strip().lower() == "consistency"
+    )
+    assert not outcome.satisfied
+    assert "not claimed by exactly one phase" in outcome.detail
+
+
+def test_two_objects_of_one_kind_in_a_chain_fail_validation(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """One object per kind is what makes a chain a chain rather than a bag: two of one kind
+    leaves no answer to "which one did the next phase read"."""
+    first = _discovery_object(authority, candidate)
+    chain = EvolutionChain(
+        candidate=candidate, objects=(first, replace(first, evolution_id=f"{first.evolution_id}x"))
+    )
+    outcome = next(
+        entry
+        for entry in validate_evolution(chain, authority).outcomes
+        if entry.subject.strip().lower() == "consistency"
+    )
+    assert not outcome.satisfied
+    assert "claim one object kind" in outcome.detail
+
+
+def test_an_owner_home_that_does_not_resolve_fails_compatibility(
+    mutable: dict[str, Any], candidate: EvolutionCandidate
+) -> None:
+    """Compatibility is a statement about the tree, not about the declaration. A home nobody
+    wrote makes every symbol the phase declares unbound and unbindable."""
+    mutable["phases"][2]["owners"] = [{"home": "engine/absent/nowhere.py", "symbols": ["run"]}]
+    authority = _load(mutable)
+    chain = EvolutionChain(candidate=candidate, objects=())
+    outcome = next(
+        entry
+        for entry in validate_evolution(chain, authority).outcomes
+        if entry.subject.strip().lower() == "compatibility"
+    )
+    assert not outcome.satisfied
+    assert "do not resolve" in outcome.detail
+
+
+def test_a_chain_that_renders_differently_twice_fails_reproducibility(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Two renders of one chain must be byte-identical or nothing downstream can be compared
+    across runs — which is what every digest in this programme is for. Every object is frozen
+    and every collection ordered, so a difference here would mean non-determinism entered the
+    chain; producing one is the only way to show the dimension can see it."""
+    calls = {"n": 0}
+
+    def _drifting(self: EvolutionChain) -> str:
+        calls["n"] += 1
+        return f"digest-{calls['n']}"
+
+    monkeypatch.setattr(EvolutionChain, "digest", _drifting)
+    chain = EvolutionChain(candidate=candidate, objects=())
+    outcome = next(
+        entry
+        for entry in validate_evolution(chain, authority).outcomes
+        if entry.subject.strip().lower() == "reproducibility"
+    )
+    assert not outcome.satisfied
+    assert "byte-identical" in outcome.detail
+
+
+def test_a_declared_discovery_source_resolves_by_its_identifier(
+    authority: EvolutionAuthority,
+) -> None:
+    """The refusal is measured elsewhere; the resolution is the half every candidate's
+    provenance check depends on."""
+    first = authority.discovery_sources[0]
+    assert authority.discovery_source(first.identifier) is first
+    with pytest.raises(EvolutionAuthorityError, match="no such discovery source"):
+        authority.discovery_source("A-SOURCE-NOBODY-DECLARED")
+
+
+def test_a_verdict_and_an_execution_record_each_digest_their_own_content(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """Both are recorded downstream under their digest. A digest that did not move with the
+    content would record two different verdicts — or two different executions — under one
+    identity, which is the collision every identity rule in this programme exists to prevent."""
+    chain = EvolutionChain(candidate=candidate, objects=())
+    verdict = validate_evolution(chain, authority)
+    assert verdict.digest() == validate_evolution(chain, authority).digest()
+    assert verdict.digest() != replace(verdict, subject="something else").digest()
+
+    execution = execute_evolution(_through_simulation(candidate, authority), authority)
+    assert (
+        execution.digest()
+        == execute_evolution(_through_simulation(candidate, authority), authority).digest()
+    )
+    assert execution.digest() != replace(execution, authorised=not execution.authorised).digest()
+
+
+def test_execution_refuses_a_plan_object_that_authorises_nothing(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """An object carrying no plan authorises nothing, so there is nothing for execution to
+    perform. The pipeline satisfies this on every real run, which is why the check had never
+    been reached — it is what execution asks INSTEAD of trusting that planning did its job."""
+    simulation = _through_simulation(candidate, authority)
+    stripped = replace(
+        simulation, plan=replace(simulation.plan, obj=replace(simulation.plan.obj, plan=()))
+    )
+    execution = execute_evolution(stripped, authority)
+    assert not execution.authorised
+    assert any("carries no plan" in refusal for refusal in execution.refusals)
+
+
+def test_execution_refuses_an_anonymous_plan_object(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """An object with no identity cannot be traced back to the candidate it came from, so the
+    execution record it would produce could never be joined to the chain it belongs to."""
+    simulation = _through_simulation(candidate, authority)
+    stripped = replace(
+        simulation,
+        plan=replace(simulation.plan, obj=replace(simulation.plan.obj, evolution_id="")),
+    )
+    execution = execute_evolution(stripped, authority)
+    assert not execution.authorised
+    assert any("is anonymous" in refusal for refusal in execution.refusals)
+
+
+def test_execution_refuses_an_object_carrying_no_evidence(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """The refusal is recorded and the run then FAULTS, because the same emptiness that makes
+    execution unauthorised also makes the execution object underivable: an evolution object must
+    carry at least one resolving evidence path. Collecting the refusal first is what keeps the
+    reason attributable when the fault surfaces."""
+    simulation = _through_simulation(candidate, authority)
+    stripped = replace(
+        simulation, plan=replace(simulation.plan, obj=replace(simulation.plan.obj, evidence=()))
+    )
+    with pytest.raises(EvolutionAuthorityError, match="at least one resolving evidence path"):
+        execute_evolution(stripped, authority)
+
+
+def test_execution_refuses_a_simulation_that_did_not_authorise_it(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """Simulation is what decides whether execution may be authorised AT ALL. A run that
+    executed past an unsettled evaluation would perform a mutation nobody predicted the impact
+    of, which is the one thing this loop's ordering exists to prevent."""
+    simulation = _through_simulation(candidate, authority)
+    execution = execute_evolution(replace(simulation, fixed_point=False), authority)
+    assert not execution.authorised
+    assert any("did not authorise execution" in refusal for refusal in execution.refusals)
+
+
+def test_execution_refuses_a_phase_that_names_no_authority(
+    authority: EvolutionAuthority, candidate: EvolutionCandidate
+) -> None:
+    """The authority is what the execution record cites as having permitted the mutation, and a
+    phase naming none would produce a record saying a mutation was authorised by nobody. The
+    refusal is recorded before the object is derived, and the derivation then faults on the same
+    empty field — an evolution object whose identity inputs are incomplete is anonymous, and
+    anonymous evolution is refused rather than reported."""
+    execution_phase = next(entry for entry in authority.phases if entry.ordinal == 5)
+    unauthorised = replace(
+        authority,
+        phases=tuple(
+            replace(entry, authority="") if entry is execution_phase else entry
+            for entry in authority.phases
+        ),
+    )
+    with pytest.raises(EvolutionAuthorityError, match="empty identity inputs"):
+        execute_evolution(_through_simulation(candidate, authority), unauthorised)

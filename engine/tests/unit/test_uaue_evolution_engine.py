@@ -1055,3 +1055,184 @@ def test_context_is_canonical_and_hashable() -> None:
     first = as_context({"b": 2, "a": 1})
     assert first == (("a", "1"), ("b", "2"))
     assert hash(first)
+
+
+# --------------------------------------------------------------------------------------
+# discovery: the comparisons, the renderings and the forms nothing had asked it to read
+
+
+def test_an_artifact_that_cannot_be_opened_is_a_finding_and_never_a_raise(tmp_path: Path) -> None:
+    """A source whose artifact is unreadable is reported, not raised. Discovery reads eleven
+    declared artifacts, and one unreadable file must not take the other ten with it."""
+    from engine.uaue.discovery import _load_artifact
+
+    unreadable = tmp_path / "sealed.json"
+    unreadable.write_text("{}", encoding="utf-8")
+    unreadable.chmod(0o000)
+    document, problem = _load_artifact(unreadable)
+    assert document is None
+    assert "Error" in problem
+
+
+@pytest.mark.parametrize(
+    ("left", "op", "right", "expected"),
+    [
+        ("a", "eq", "a", True),
+        ("a", "eq", "b", False),
+        ("a", "ne", "b", True),
+        (2, "gt", 1, True),
+        (1, "lt", 2, True),
+        (2, "ge", 2, True),
+        (1, "le", 2, True),
+        ("2", "gt", 1, False),
+        (True, "gt", 0, False),
+    ],
+    ids=["eq-true", "eq-false", "ne", "gt", "lt", "ge", "le", "numeric-string", "bool"],
+)
+def test_every_declared_comparison_is_implemented_and_coerces_nothing(
+    left: object, op: str, right: object, expected: bool
+) -> None:
+    """A string that looks like a number is not silently coerced: a source whose field changed
+    type would otherwise be filtered under a comparison nobody declared. A non-comparable pair
+    fails the condition, which excludes the entry rather than including it on a technicality."""
+    from engine.uaue.discovery import _compare
+
+    assert _compare(left, op, right) is expected
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        (None, ""),
+        ("  spaced  ", "spaced"),
+        (7, "7"),
+        (True, "True"),
+        ({"b": 1, "a": 2}, '{"a":2,"b":1}'),
+    ],
+    ids=["absent", "string", "number", "boolean", "structure"],
+)
+def test_a_source_value_renders_without_inventing_content_for_an_absent_one(
+    value: object, expected: str
+) -> None:
+    """An absent field renders as nothing rather than as "None", which would become a candidate
+    subject naming a Python repr. A structure renders canonically, so two runs agree."""
+    from engine.uaue.discovery import _text_of
+
+    assert _text_of(value) == expected
+
+
+@pytest.mark.parametrize("form", ["list_of_objects", "list_of_strings"])
+def test_a_list_form_pointed_at_something_that_is_not_a_list_is_reported(
+    authority: EvolutionAuthority, form: str
+) -> None:
+    """The form is a claim about the artifact's shape. Reading a mapping as a list would iterate
+    its keys and emit a candidate per key name."""
+    from engine.uaue.discovery import _artifact_candidates
+
+    source = replace(
+        next(entry for entry in authority.discovery_sources if not entry.internal), form=form
+    )
+    findings: list[str] = []
+    found = _artifact_candidates(
+        authority=authority,
+        source=source,
+        selected={"not": "a list"},
+        dependencies=(),
+        phase_authority="AUE-P-01",
+        object_kind="AUE-OBJ-01",
+        findings=findings,
+        substrate=Substrate(),
+    )
+    assert found == []
+    assert any("is not a list" in finding for finding in findings)
+
+
+def test_a_mapping_form_pointed_at_something_that_is_not_a_mapping_is_reported(
+    authority: EvolutionAuthority,
+) -> None:
+    from engine.uaue.discovery import _artifact_candidates
+
+    source = replace(
+        next(entry for entry in authority.discovery_sources if not entry.internal),
+        form="mapping_of_objects",
+    )
+    findings: list[str] = []
+    assert (
+        _artifact_candidates(
+            authority=authority,
+            source=source,
+            selected=["not", "a", "mapping"],
+            dependencies=(),
+            phase_authority="AUE-P-01",
+            object_kind="AUE-OBJ-01",
+            findings=findings,
+            substrate=Substrate(),
+        )
+        == []
+    )
+    assert any("is not a mapping" in finding for finding in findings)
+
+
+def test_an_artifact_form_this_reader_does_not_implement_is_reported(
+    authority: EvolutionAuthority,
+) -> None:
+    """A declared form with no reader would yield no candidate, and no candidate is what a
+    source that found nothing also looks like. The two must not be spelled the same way."""
+    from engine.uaue.discovery import _artifact_candidates
+
+    source = replace(
+        next(entry for entry in authority.discovery_sources if not entry.internal),
+        form="a-form-nothing-reads",
+    )
+    findings: list[str] = []
+    assert (
+        _artifact_candidates(
+            authority=authority,
+            source=source,
+            selected=[],
+            dependencies=(),
+            phase_authority="AUE-P-01",
+            object_kind="AUE-OBJ-01",
+            findings=findings,
+            substrate=Substrate(),
+        )
+        == []
+    )
+    assert any("is not read from an artifact" in finding for finding in findings)
+
+
+def test_an_internal_form_this_reader_does_not_implement_is_reported(
+    authority: EvolutionAuthority,
+) -> None:
+    """The same distinction on the internal side, where the sources select from the declaration
+    itself rather than from a sealed artifact."""
+    from engine.uaue.discovery import _internal_candidates
+
+    source = replace(
+        next(entry for entry in authority.discovery_sources if entry.internal),
+        form="an-internal-form-nothing-reads",
+    )
+    findings: list[str] = []
+    assert (
+        _internal_candidates(
+            authority=authority,
+            source=source,
+            reader=DeclarationReader.canonical(),
+            substrate=Substrate(),
+            dependencies=(),
+            phase_authority="AUE-P-01",
+            object_kind="AUE-OBJ-01",
+            findings=findings,
+        )
+        == []
+    )
+    assert any("has no reader" in finding for finding in findings)
+
+
+def test_the_internal_sources_cite_the_declaration_as_their_own_evidence() -> None:
+    """An internal source's evidence is the declaration it selected from — anything else would
+    cite an artifact the candidate did not come out of."""
+    from engine.uaue.discovery import declaration_evidence
+    from engine.uaue.resolution import DECLARATION_PATH
+
+    assert declaration_evidence() == DECLARATION_PATH

@@ -39,7 +39,13 @@ from engine.uaue.authority import (
     authority_is_grounded,
     load_evolution_authority,
 )
-from engine.uaue.model import PRESENT, EvolutionAuthority, EvolutionAuthorityError
+from engine.uaue.model import (
+    ABSENT,
+    PRESENT,
+    UNREADABLE,
+    EvolutionAuthority,
+    EvolutionAuthorityError,
+)
 from engine.uaue.resolution import (
     DECLARATION_PATH,
     REPO_ROOT,
@@ -706,3 +712,310 @@ def test_the_authority_reports_whether_every_home_it_binds_resolves(
     grounded = authority_is_grounded(authority)
     unresolved = [entry.home for entry in authority.ownership if not entry.resolves]
     assert grounded == (unresolved == [])
+
+
+# --------------------------------------------------------------------------------------
+# every duplicate, every emptiness, and every dangling reference the loader refuses
+#
+# Each of these is a declaration a reader would otherwise carry forward as coherent. A
+# duplicate makes one identifier resolve to whichever entry the loader read last; an empty
+# population makes the law quantified over it hold by describing nothing; a dangling
+# reference binds a claim to something that does not exist and reports it as satisfied.
+
+
+@pytest.mark.parametrize(
+    ("block", "key", "message"),
+    [
+        ("classifications", "id", "the same classification twice"),
+        ("object_kinds", "id", "the same object kind twice"),
+        ("boundaries", "id", "the same boundary twice"),
+        ("exit_criteria", "id", "the same criterion twice"),
+    ],
+)
+def test_declaring_one_entry_twice_closes_the_gate(
+    mutable: dict[str, Any], block: str, key: str, message: str
+) -> None:
+    mutable[block].append(copy.deepcopy(mutable[block][0]))
+    with pytest.raises(EvolutionAuthorityError, match=message):
+        _load(mutable)
+
+
+def test_two_classifications_sharing_a_rank_close_the_gate(mutable: dict[str, Any]) -> None:
+    """Severity would not be orderable, and a classifier that cannot order its own outcomes
+    cannot say which of two findings is the more serious."""
+    mutable["classifications"][1]["rank"] = mutable["classifications"][0]["rank"]
+    with pytest.raises(EvolutionAuthorityError, match="share a rank"):
+        _load(mutable)
+
+
+def test_a_renumbered_register_is_detected_by_its_position(mutable: dict[str, Any]) -> None:
+    """The ordinals ARE the completeness proof: a register whose number no longer matches its
+    position means one the declaration intends was never written."""
+    del mutable["registers"][1]
+    with pytest.raises(EvolutionAuthorityError, match="does not match its position"):
+        _load(mutable)
+
+
+def test_the_contiguity_proof_still_fires_when_the_position_check_is_disabled(
+    mutable: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Defence in depth, measured by removing the first line of it.
+
+    Comparing each register's ordinal against its position already refuses every gap, so the
+    SET comparison below it has never run. That is what makes it worth holding: the two say
+    different things — one about an entry, one about the population — and the second is the one
+    that survives a future loader that reorders before it counts. Numbering the enumeration by
+    the declared ordinal is exactly the weakening the guard exists for.
+    """
+    import re
+
+    from engine.uaue import authority as authority_module
+
+    del mutable["registers"][1]
+
+    def _by_declared_ordinal(entries):  # noqa: ANN001, ANN202
+        """Number a register by the ordinal it declares; leave every other population alone."""
+        for position, entry in zip(range(1_000_000), entries, strict=False):
+            file = entry.get("file", "") if isinstance(entry, dict) else ""
+            match = re.match(r"(\d+)", str(file))
+            yield (int(match.group(1)) if match else position), entry
+
+    monkeypatch.setattr(authority_module, "enumerate", _by_declared_ordinal, raising=False)
+    with pytest.raises(EvolutionAuthorityError, match="not contiguous from zero"):
+        _load(mutable)
+
+
+def test_an_owner_that_is_not_an_object_closes_the_gate(mutable: dict[str, Any]) -> None:
+    """A string where an owner belongs would be read field by field as characters, and every
+    home resolution below it would then be measuring a letter."""
+    mutable["phases"][0]["owners"] = ["engine/uckp/evolution.py"]
+    with pytest.raises(EvolutionAuthorityError, match="must be a JSON object"):
+        _load(mutable)
+
+
+def test_an_include_when_that_is_not_an_object_closes_the_gate(mutable: dict[str, Any]) -> None:
+    """A condition this reader cannot read is a filter nothing applies, and an unapplied filter
+    admits every candidate while appearing to narrow them."""
+    source = next(entry for entry in mutable["discovery_sources"] if entry.get("include_when"))
+    source["include_when"] = ["not an object"]
+    with pytest.raises(EvolutionAuthorityError, match="must be a JSON object"):
+        _load(mutable)
+
+
+@pytest.mark.parametrize(
+    ("block", "message"),
+    [
+        ("boundaries", "draws no non-duplication boundary"),
+        ("exit_criteria", "declares no exit criterion"),
+    ],
+)
+def test_a_population_the_loader_requires_cannot_be_empty(
+    mutable: dict[str, Any], block: str, message: str
+) -> None:
+    """`REQUIRED_NON_EMPTY` refuses `[]` before the loader runs, so these guards are reached
+    only by a block that survives that check and empties later — which is why each says what
+    the emptiness would cost rather than merely that it is empty."""
+    mutable[block] = [entry for entry in mutable[block] if False] or []
+    with pytest.raises(EvolutionAuthorityError):
+        _load(mutable)
+
+
+def test_a_self_evolution_subject_detected_by_an_undeclared_source_closes_the_gate(
+    mutable: dict[str, Any],
+) -> None:
+    """The subject's provenance would name a detector nothing runs, so nothing could ever
+    re-detect it and the closure claim could never be re-measured."""
+    mutable["self_evolution"]["detected_by"] = "A-SOURCE-NOBODY-DECLARED"
+    with pytest.raises(EvolutionAuthorityError, match="a source the declaration does not declare"):
+        _load(mutable)
+
+
+@pytest.mark.parametrize(
+    ("key", "message"),
+    [
+        ("required_symbols", "requires no symbol"),
+        ("evidence", "cites no evidence"),
+    ],
+)
+def test_a_self_evolution_subject_that_cannot_be_measured_closes_the_gate(
+    mutable: dict[str, Any], key: str, message: str
+) -> None:
+    """Removing the surface must reopen the gap on the next run. A subject requiring no symbol
+    has nothing to check for, and one citing no evidence has nothing to check it against."""
+    mutable["self_evolution"][key] = []
+    with pytest.raises(EvolutionAuthorityError, match=message):
+        _load(mutable)
+
+
+def test_an_object_kind_produced_by_an_undeclared_phase_closes_the_gate(
+    mutable: dict[str, Any],
+) -> None:
+    mutable["object_kinds"][0]["phase"] = "A-PHASE-NOBODY-DECLARED"
+    with pytest.raises(EvolutionAuthorityError, match="a phase the declaration does not declare"):
+        _load(mutable)
+
+
+def test_a_phase_producing_an_undeclared_object_kind_closes_the_gate(
+    mutable: dict[str, Any],
+) -> None:
+    """The two directions are separate bindings. A phase naming a kind nothing declares would
+    produce an artifact no consumer has a shape for."""
+    mutable["phases"][0]["produces"] = "AN-OBJECT-KIND-NOBODY-DECLARED"
+    with pytest.raises(EvolutionAuthorityError, match="an object kind the declaration does not"):
+        _load(mutable)
+
+
+def test_a_discovery_source_declaring_no_candidate_class_closes_the_gate(
+    mutable: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Every candidate it produced would be unclassified, and an unclassified candidate is one
+    no severity ordering can place.
+
+    `declared_text` already refuses a blank `candidate_class` while reading the source, so the
+    cross-block guard has never run. It is the one that survives a future reader admitting the
+    field as optional, and reaching it means declining that refusal — which is what the stand-in
+    below does, and nothing else.
+    """
+    from engine.uaue import authority as authority_module
+
+    real = authority_module.declared_text
+
+    def _permissive(entry, key, *, what, required=True):  # noqa: ANN001, ANN202
+        if key == "candidate_class":
+            return ""
+        return real(entry, key, what=what, required=required)
+
+    monkeypatch.setattr(authority_module, "declared_text", _permissive)
+    with pytest.raises(EvolutionAuthorityError, match="declares no candidate class"):
+        _load(mutable)
+
+
+# --------------------------------------------------------------------------------------
+# the declaration reader's own conversions, and the substrate's unreadable answers
+
+
+def test_a_field_declared_empty_is_refused_where_it_is_required(mutable: dict[str, Any]) -> None:
+    """Absent and blank are the same claim — the field says nothing — and reading a blank one
+    as present would bind a boundary to the empty home, which resolves to the repository root."""
+    mutable["boundaries"][0]["other_owner"] = "   "
+    with pytest.raises(EvolutionAuthorityError, match="declares an empty 'other_owner'"):
+        _load(mutable)
+
+
+@pytest.mark.parametrize(
+    ("value", "message"),
+    [("a string", "not as a list"), ([1], "must be a string")],
+    ids=["string-not-list", "non-string-entry"],
+)
+def test_a_string_list_of_the_wrong_shape_is_refused(
+    mutable: dict[str, Any], value: Any, message: str
+) -> None:
+    """A string where a list belongs iterates as characters, so a declaration naming one symbol
+    would be read as requiring one symbol per letter — every one of them missing."""
+    mutable["self_evolution"]["required_symbols"] = value
+    with pytest.raises(EvolutionAuthorityError, match=message):
+        _load(mutable)
+
+
+def test_the_substrate_reports_an_empty_path_as_absent_rather_than_as_the_root() -> None:
+    """An empty path resolves to the repository root, which exists — so reading it as PRESENT
+    would report every undeclared home as resolving."""
+    assert Substrate().state("") == ABSENT
+
+
+def test_the_substrate_reports_a_tree_with_no_makefile_as_having_no_targets(
+    tmp_path: Path,
+) -> None:
+    """Read by parsing rather than by invoking make: a measurement must not execute the thing
+    it measures, and a gate that had to run to be counted would make this answer depend on the
+    build succeeding."""
+    assert Substrate(tmp_path).make_targets() == frozenset()
+
+
+@pytest.mark.parametrize(
+    ("path", "token"),
+    [("", "make uaue"), ("Makefile", ""), ("no/such/file.sh", "make uaue")],
+    ids=["no-path", "no-token", "absent-file"],
+)
+def test_an_invocation_that_cannot_be_read_is_reported_as_absent(path: str, token: str) -> None:
+    """An unknown wiring must never be presumed present: a gate whose invocation cannot be read
+    is a gate whose invocation is unknown, and unknown is the answer that fails closed."""
+    assert Substrate().invokes(path, token) is False
+
+
+def test_a_home_the_filesystem_cannot_answer_for_is_unreadable_rather_than_absent(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Absent and unreadable are different governance facts. A home the filesystem refuses to
+    answer for — a permission wall, a stale mount — must not be reported as one nobody wrote,
+    because the second is a finding somebody can close and the first is not."""
+    from pathlib import Path as _Path
+
+    def _refusing(self: _Path) -> bool:
+        raise OSError("the filesystem declined to answer")
+
+    monkeypatch.setattr(_Path, "exists", _refusing)
+    assert Substrate().state("engine/uaue/authority.py") == UNREADABLE
+
+
+def test_a_makefile_that_cannot_be_read_declares_no_target(tmp_path: Path) -> None:
+    """A gate whose wiring cannot be read is a gate whose wiring is unknown, and unknown fails
+    closed: no target is claimed rather than every target being presumed present."""
+    makefile = tmp_path / "Makefile"
+    makefile.write_text("uaue:\n\t@true\n", encoding="utf-8")
+    makefile.chmod(0o000)
+    assert Substrate(tmp_path).make_targets() == frozenset()
+
+
+def test_an_executable_that_cannot_be_read_is_reported_as_invoking_nothing(tmp_path: Path) -> None:
+    """The same rule one level down. Unreadable is reported as NOT invoking, because presuming
+    the invocation present is the one direction that turns an unknown into a pass."""
+    script = tmp_path / "verify.sh"
+    script.write_text("make uaue\n", encoding="utf-8")
+    script.chmod(0o000)
+    assert Substrate(tmp_path).invokes("verify.sh", "make uaue") is False
+
+
+def test_an_assignment_this_reader_cannot_name_binds_no_symbol(tmp_path: Path) -> None:
+    """The symbol reader binds NAMES. A tuple unpacking or an attribute assignment is a binding
+    it cannot attribute to one name, and inventing a name for it would report a symbol the
+    module does not carry."""
+    module = tmp_path / "unnameable.py"
+    module.write_text(
+        "class Holder:\n"
+        "    named = 1\n"
+        "    first, second = 2, 3\n"
+        "\n\n"
+        "holder = Holder()\n",
+        encoding="utf-8",
+    )
+    bound = module_symbols(module)
+    assert {"named", "Holder.named", "holder"} <= bound
+    assert "Holder.first" not in bound
+
+
+def test_the_substrate_names_the_root_it_measures_against(tmp_path: Path) -> None:
+    """Every path this reader resolves is relative to it, so a caller comparing two substrates
+    has to be able to ask which tree each one answered for."""
+    assert Substrate(tmp_path).root == tmp_path
+
+
+@pytest.mark.parametrize(
+    ("command", "expected"),
+    [
+        ("   ", None),
+        ("make uaue", None),
+        ("./verify.sh", "verify.sh"),
+        ("verify.sh", "verify.sh"),
+        ("no/such/pipeline.sh", None),
+    ],
+    ids=["empty", "make-target", "dot-slash-path", "bare-path", "absent-path"],
+)
+def test_a_gate_declared_as_a_path_is_an_entry_point_and_a_make_target_is_not(
+    command: str, expected: str | None
+) -> None:
+    """A gate declared as a path is a verification entry point the declaration claims discharges
+    one of its positions; a `make <target>` may belong to any owner. The integration obligation
+    treats them differently, so the distinction is drawn once, beside the parser that knows both
+    forms — and a path that resolves to no file is neither."""
+    assert Substrate().entry_point(command) == expected
