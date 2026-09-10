@@ -660,3 +660,24 @@ def test_context_stage_function_is_deterministic(frames, resolution):
     # deterministic, but not constant: a different reality is a different record
     elsewhere = execute_in_context(subject, frames.resolve(OTHER))
     assert first.digest() != elsewhere.digest()
+
+
+def test_the_verified_gate_catches_a_registry_bound_to_another_reality(registry, frames):
+    """A FORGED LINEAGE ENTRY WAS TESTED AND THE REGISTRY'S OWN BINDING WAS NOT.
+
+    ``bind`` writes the registry's binding and the lineage entries from one resolution, so
+    the two always agree and this arm was dead. It is the case that matters most: the
+    registry's binding is what every enforcing read resolves against, so a registry bound to
+    ANOTHER frame than the one being verified would answer every question under a reality the
+    certificate does not describe — and the lineage entries could all reproduce perfectly
+    while it did.
+    """
+    ledger = bind(registry, frames.resolve(OTHER))
+
+    gates = context_gates(frames, frame_key=COMPLETE, registry=registry, lineage=ledger)
+
+    assert gates["CV-CONTEXT-03"]["passed"] is False
+    assert any(
+        "the registry's binding does not reproduce" in finding
+        for finding in gates["CV-CONTEXT-03"]["findings"]
+    )

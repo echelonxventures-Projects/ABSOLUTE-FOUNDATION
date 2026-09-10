@@ -181,3 +181,19 @@ def test_certification_is_unchanged_by_the_migration():
     second = certify(build_seed_registry())
     assert first.certificate_id == second.certificate_id
     assert first.certified is True
+
+
+def test_the_authority_hands_out_a_fresh_substrate_each_time():
+    """A SHARED MUTABLE AUTHORITY IS AN AUTHORITY A CALLER CAN GRANT ITSELF.
+
+    Every predicate here reads the CACHED answers, so the constructor that builds the
+    substrate had no direct caller — and the property it exists for is exactly that it does
+    NOT cache: the CEU substrate is append-only, so handing out one shared registry would let
+    a caller register a subject into the authority that decides what may own, and grant
+    itself ownership without any declaration having been made.
+    """
+    first = authority.ownership_authority()
+    second = authority.ownership_authority()
+
+    assert first is not second
+    assert {u.universal_id for u in first.units()} == {u.universal_id for u in second.units()}

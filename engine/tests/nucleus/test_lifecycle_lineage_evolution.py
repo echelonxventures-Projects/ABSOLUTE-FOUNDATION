@@ -13,6 +13,7 @@ from engine.nucleus.evolution import (
     Evolution,
     EvolutionLedger,
     always_valid,
+    context_is_declared,
     state_must_grow,
 )
 from engine.nucleus.lifecycle import Stage, StageStatus
@@ -374,3 +375,113 @@ def test_everything_evolves_through_one_mechanism():
     assert len(ledger.evolutions()) == len(population)
     assert ledger.unevidenced() == ()
     assert all(ledger.chain_is_unbroken(s) for s in ledger.subjects())
+
+
+def test_a_context_missing_its_resolution_digest_is_refused():
+    """A FRAME NAME IS NOT A RESOLVED FRAME.
+
+    Two conditions, and only the absent-frame one had a case. A context naming a frame but no
+    resolution digest says which reality was intended and not which reality was RESOLVED — so
+    two generations recorded under two different resolutions of the same frame would be
+    indistinguishable records, which is the continuity the ledger would then be claiming
+    without support. The passing arm is measured beside it, because a validator that refuses
+    everything proves nothing about what it admits.
+    """
+
+    def _evolution(context):
+        return Evolution(
+            subject_id="ID-1",
+            subject_key="k",
+            generation=1,
+            change="c",
+            state={"context": context},
+            supersedes=None,
+            authority="A",
+        )
+
+    assert context_is_declared(_evolution({"frame": "planetary-a1", "resolution_digest": "abc"}))[0]
+
+    unframed = context_is_declared(_evolution({"resolution_digest": "abc"}))
+    assert unframed == (False, "evolution declares no reference frame")
+
+    unresolved = context_is_declared(_evolution({"frame": "planetary-a1"}))
+    assert unresolved == (False, "evolution's context names no resolution digest")
+
+
+def test_capability_that_holds_or_grows_is_admitted():
+    """MONOTONICITY REFUSES A FALL AND MUST ADMIT A HOLD.
+
+    Only the regression was tested, so the arm that says "this reading is fine" had never
+    executed — and a validator whose passing path is unmeasured is one that could be refusing
+    everything while the suite only ever asks it to refuse. A reading equal to its predecessor
+    is not a regression: capability may hold, and requiring strict growth would refuse every
+    evolution that changed something other than capability.
+    """
+    ledger = EvolutionLedger(validator=state_must_grow)
+    first = ledger.evolve(
+        subject_id="ID-1", subject_key="k", change="c1", authority="A", state={"capability": 5}
+    )
+    held = ledger.evolve(
+        subject_id="ID-1", subject_key="k", change="c2", authority="A", state={"capability": 5}
+    )
+    grew = ledger.evolve(
+        subject_id="ID-1", subject_key="k", change="c3", authority="A", state={"capability": 6}
+    )
+
+    assert (first.generation, held.generation, grew.generation) == (1, 2, 3)
+    assert held.state["previous_capability"] == 5
+    assert grew.state["previous_capability"] == 5
+
+
+def test_a_first_evolution_carries_no_previous_reading():
+    """THE PREVIOUS READING IS COPIED FORWARD FROM A PREDECESSOR THAT EXISTS.
+
+    Every ledger in this suite is measured after at least one evolution, so the arm for the
+    FIRST one — where there is no predecessor to read a prior capability from — had never
+    run. Inventing a previous reading there would give generation 1 a predecessor it does not
+    have, and the monotonicity check would then be comparing a real reading against a
+    fabricated one.
+    """
+    ledger = EvolutionLedger(validator=state_must_grow)
+
+    first = ledger.evolve(
+        subject_id="ID-1", subject_key="k", change="c1", authority="A", state={"capability": 5}
+    )
+
+    assert "previous_capability" not in first.state
+    assert first.supersedes is None
+
+
+def test_a_chain_whose_generations_or_links_disagree_is_reported_broken():
+    """AN UNBROKEN CHAIN IS THE CLAIM, AND IT HAD ONLY EVER BEEN CONFIRMED.
+
+    The reader answers True on every ledger this suite builds, because ``evolve`` is the only
+    way to add to one and it numbers and links each generation itself. The False arm is what
+    the reader is FOR: a history assembled another way — rehydrated, or merged from two
+    ledgers — can carry a generation out of order or a link to the wrong predecessor, and
+    either makes the sequence a list rather than a chain.
+    """
+    ledger = EvolutionLedger()
+    ledger.evolve(subject_id="ID-1", subject_key="k", change="c1", authority="A", state={})
+    second = ledger.evolve(subject_id="ID-1", subject_key="k", change="c2", authority="A", state={})
+    assert ledger.chain_is_unbroken("ID-1") is True
+
+    object.__setattr__(second, "generation", 7)
+    assert ledger.chain_is_unbroken("ID-1") is False
+
+
+def test_a_lineage_entry_recorded_out_of_sequence_is_not_intact():
+    """THE LEDGER'S THREE INVARIANTS, AND THE ORDINAL WAS THE UNTESTED ONE.
+
+    A forged back-link was tested; the sequence was not. An entry whose ordinal disagrees
+    with where it sits is a record that was reordered or removed — the digests can still
+    reproduce while the ledger no longer says what happened in what order, which is the whole
+    thing a lineage ledger is for.
+    """
+    ledger = lineage.LineageLedger()
+    ledger.record(event="declared", subject_id="ID-1", subject_key="k1")
+    ledger.record(event="declared", subject_id="ID-2", subject_key="k2")
+    assert ledger.is_intact() is True
+
+    object.__setattr__(ledger.entries()[1], "sequence", 9)
+    assert ledger.is_intact() is False

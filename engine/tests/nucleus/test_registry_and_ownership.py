@@ -20,6 +20,7 @@ from engine.nucleus.registry import (
     build_seed_registry,
     declarations_from_mapping,
 )
+from engine.uckp.vocabulary import build_vocabulary_registry
 
 
 @pytest.fixture(scope="module")
@@ -399,3 +400,79 @@ def test_registry_document_is_deterministic_and_unbounded(registry: NucleusRegis
     assert document["closed_set"] is False
     assert document["upper_limit"] is None
     assert registry.digest() == build_seed_registry().digest()
+
+
+def test_two_registries_may_share_one_vocabulary_authority():
+    """ARTICLE 17 PUTS THE ROLES IN A REGISTRY, AND A REGISTRY IS REGISTERED ONCE.
+
+    Every registry here builds its own vocabulary registry, so the role vocabulary was always
+    absent and always registered — the arm that finds it ALREADY there had no case. It is
+    what lets two nucleus registries share one vocabulary authority, which is the whole point
+    of the vocabulary being injectable: registering the terms a second time would either
+    raise or create a second answer to "what is a structural role".
+    """
+    vocabularies = build_vocabulary_registry()
+
+    first = NucleusRegistry(vocabularies=vocabularies)
+    second = NucleusRegistry(vocabularies=vocabularies)
+
+    assert first.vocabularies is second.vocabularies
+    assert first.require_role_term("nucleus") == second.require_role_term("nucleus")
+    assert vocabularies.get(STRUCTURAL_ROLE_VOCABULARY) is not None
+
+
+def test_two_subjects_that_mint_one_identity_are_refused():
+    """THE KEY COLLISION WAS TESTED AND THE IDENTITY COLLISION WAS NOT.
+
+    A (role, key) pair registered twice is refused by the first check. This is the second:
+    two DIFFERENT declarations whose deterministic identity is the same. It cannot arise from
+    the seed catalogue, because identity is derived from role, namespace and key and those
+    three are exactly what the first check already made unique — which is why the arm was
+    dead. It is the registry's guarantee that the derivation stays injective: two subjects
+    under one universal id would make every lookup answer arbitrarily, and the refusal names
+    both so the collision can be read.
+    """
+    registry = NucleusRegistry()
+    first = registry.register_subject(SubjectDeclaration(key="tax", title="Tax", concept="tax"))
+
+    class _Colliding(SubjectDeclaration):
+        @property
+        def identity(self) -> str:
+            return first.universal_id
+
+    with pytest.raises(RegistrationError, match="identity collision") as raised:
+        registry.register_subject(_Colliding(key="levy", title="Levy", concept="levy"))
+
+    assert raised.value.detail["universal_id"] == first.universal_id
+    assert raised.value.detail["subject"] == "levy"
+
+
+def test_a_role_no_clause_names_is_still_refused_ownership():
+    """THE DECISION IS THE FIRST LINE; THE BRANCHES BELOW ARE ONLY REPORTING.
+
+    ``may_own_capability`` resolves to the CEU registry, so what may own is a registered
+    fact — and the three roles that exist each have a clause naming them, which leaves the
+    final refusal unreachable through any declared role. It is what the docstring says it is:
+    the catch for a role with no specific clause, so an owner is refused WHETHER OR NOT a
+    clause names its role. Without it a fourth role admitted by registration would fall off
+    the end of the function and be granted ownership by omission — which is the exact failure
+    Article 17's open registration makes possible.
+    """
+    registry = build_seed_registry()
+
+    class _Role:
+        # A role admitted by registration and named by no clause. It cannot be a
+        # StructuralRole member, because the enum is exactly the three roles that DO have
+        # clauses — which is why this arm is unreachable through any declared subject.
+        value = "an-unregistered-role"
+
+    class _Owner:
+        key = "future"
+        role = _Role()
+        may_own_capability = False
+
+    with pytest.raises(OwnershipViolation) as raised:
+        registry._require_lawful_owner(_Owner(), capability="tax.rate")
+
+    assert raised.value.detail["clause"] == "NL-01"
+    assert type(raised.value) is OwnershipViolation
