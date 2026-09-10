@@ -11,14 +11,20 @@ not the declared parent must fail, at the projection layer as well as at `ukb va
 
 from __future__ import annotations
 
+import ast
 import dataclasses
 import json
+import os
+import pathlib
+import re
+import subprocess
 
 import pytest
 
 from engine.lineage import query
 from engine.lineage.model import Classification, LineageEdge, LineageError, LineageProjection
 from engine.lineage.projection import (
+    _relation_named,
     build,
     digest,
     load_classification,
@@ -47,8 +53,6 @@ def _classification() -> Classification:
 
 @pytest.fixture(name="document")
 def _document() -> dict:
-    import os
-
     with open(
         os.path.join(repo_root(), "engine", "lineage", "families.json"), encoding="utf-8"
     ) as h:
@@ -72,15 +76,12 @@ def test_the_projection_builds_over_every_declared_source(projection) -> None:
 
 
 def test_every_declared_source_file_exists() -> None:
-    import os
-
     missing = [p for p in SOURCE_FILES if not os.path.exists(os.path.join(repo_root(), p))]
     assert missing == []
 
 
 def test_the_projection_writes_nothing(tmp_path) -> None:
     """A lineage store is what UCI-001 XVI.5 forbids."""
-    import subprocess
 
     before = subprocess.run(  # noqa: S603
         ["git", "status", "--porcelain"],  # noqa: S607
@@ -131,7 +132,6 @@ def test_verify_reports_determinism_and_passes() -> None:
 
 def test_no_wall_clock_enters_the_document(projection) -> None:
     """A timestamp would make two builds of one state differ."""
-    import re
 
     document = to_document(projection)
     document.pop("edges")
@@ -395,8 +395,6 @@ def test_an_unparseable_classification_is_a_fault(tmp_path) -> None:
 
 def test_the_classification_is_data_not_code(classification) -> None:
     """Family and relation names live in families.json, checked against the owner."""
-    import ast
-    import pathlib
 
     source = (pathlib.Path(repo_root()) / "engine" / "lineage" / "model.py").read_text("utf-8")
     tree = ast.parse(source)
@@ -415,3 +413,256 @@ def test_the_classification_is_data_not_code(classification) -> None:
     names = {f.name for f in classification.families} | set(classification.rules)
     for literal in literals:
         assert literal not in names, f"model.py hard-codes {literal!r}"
+
+
+# --- the arms this repository's own sources never take -------------------------------
+#
+# Every projection above is built from the governed sources of THIS repository, where each
+# declared family exists, each declared relation is present, every edge names both ends and
+# every source file is readable. The arms below answer for a corpus where one of those is
+# false, and none of them had run.
+
+
+def test_a_classification_that_declares_no_family_projects_only_typed_edges(classification):
+    """THE DERIVED FAMILIES ARE LOOKED UP BY NAME, and every lookup can miss.
+
+    Derivation and supersession edges are emitted only when the classification declares the
+    family AND the relation inside it. This repository declares both, so all four lookups
+    always succeeded and their misses were dead — and a miss is not a fault: the projection
+    composes whatever the classification says is ancestry, so a classification that says
+    derivation is not ancestry must produce no derivation edges rather than emit them under
+    a family nobody declared.
+    """
+    silent = dataclasses.replace(classification, families=())
+
+    projection = build(classification=silent)
+
+    assert projection.edges == ()
+
+
+def test_a_family_that_does_not_declare_the_relation_emits_nothing_for_it(classification):
+    """A FAMILY IS NOT ENOUGH — THE RELATION INSIDE IT IS WHAT CARRIES THE MEANING.
+
+    The derivation family declares both ``Produced-By`` and ``Derived-From`` here, so the
+    per-relation lookup never came back empty. Emitting an edge without it would have to
+    invent a relation name and a family, which is precisely the thing the classification
+    exists to be the only source of.
+    """
+    derivation = next(f for f in classification.families if f.name == "derivation")
+    stripped = dataclasses.replace(
+        classification,
+        families=tuple(
+            dataclasses.replace(f, relations=()) if f.name == "derivation" else f
+            for f in classification.families
+        ),
+    )
+
+    assert derivation.relations
+    projection = build(classification=stripped)
+
+    assert not [e for e in projection.edges if e.family == "derivation"]
+
+
+def test_a_family_declared_cyclic_is_not_checked_for_cycles(projection):
+    """ACYCLICITY IS A DECLARED PROPERTY OF A FAMILY, NOT AN ASSUMPTION ABOUT ALL OF THEM.
+
+    Every family this repository declares is acyclic, so the skip had no case — and it is
+    what keeps the validator honest about a family whose question permits a cycle. Checking
+    one anyway would report a legitimate structure as a violation, and a validator that
+    reports legitimate structures gets its findings ignored.
+    """
+    permissive = dataclasses.replace(
+        projection.classification,
+        families=tuple(
+            dataclasses.replace(f, acyclic=False) for f in projection.classification.families
+        ),
+    )
+    relaxed = dataclasses.replace(projection, classification=permissive)
+
+    assert validate(relaxed) == [p for p in validate(projection) if "not acyclic" not in p]
+
+
+def test_an_edge_missing_either_end_is_skipped_rather_than_projected(tmp_path, classification):
+    """AN EDGE WITH ONE END IS NOT AN EDGE.
+
+    Every relationship in this corpus names both ends, so the skip had no case. Projecting a
+    half-edge would put the empty string into the ancestry graph as a node — an ancestor
+    every such edge shares, joining unrelated subjects through a node that does not exist.
+    """
+    repo = _corpus(
+        tmp_path,
+        relationships=[
+            {"type": "Parent", "from": "UCOS-A", "to": "UCOS-B"},
+            {"type": "Parent", "from": "UCOS-A", "to": ""},
+            {"type": "Parent", "from": "", "to": "UCOS-B"},
+        ],
+    )
+
+    projection = build(repo=str(repo), classification=classification)
+
+    assert [(e.ancestor, e.descendant) for e in projection.edges] == [("UCOS-B", "UCOS-A")]
+
+
+def _corpus(tmp_path, *, relationships=(), generated=(), change=None, optional=True):
+    """A miniature governed corpus: the four required source documents, and optionally the two
+    that are declared optional."""
+
+    data = tmp_path / "00-BOOK" / "DATA"
+    data.mkdir(parents=True, exist_ok=True)
+    (data / "artifacts.json").write_text(json.dumps({"artifacts": []}), encoding="utf-8")
+    (data / "relationships.json").write_text(
+        json.dumps({"relationships": list(relationships)}), encoding="utf-8"
+    )
+    (data / "change-ledger.json").write_text(
+        json.dumps(change or {"change_events": [], "lineage": {}}), encoding="utf-8"
+    )
+    (data / "generated-artifact-registry.json").write_text(
+        json.dumps({"entries": list(generated)}), encoding="utf-8"
+    )
+    tools = tmp_path / "00-BOOK" / "tools"
+    tools.mkdir(parents=True, exist_ok=True)
+    (tools / "config.py").write_text(
+        'RELATIONSHIP_TYPES = [{"type": "Parent", "inverse": "Child"}]\n',
+        encoding="utf-8",
+    )
+    if optional:
+        births = tmp_path / "00-MASTER" / "UOBC-000001"
+        births.mkdir(parents=True, exist_ok=True)
+        (births / "birth-ledger.json").write_text(json.dumps({"births": {}}), encoding="utf-8")
+        (data / "id-ledger.json").write_text(json.dumps({"history": {}}), encoding="utf-8")
+    assert os.path.isdir(data)
+    return tmp_path
+
+
+def test_a_required_source_is_a_refusal_and_an_optional_one_is_an_absence(tmp_path):
+    """REQUIRED AND OPTIONAL ARE DIFFERENT ANSWERS TO THE SAME MISSING FILE.
+
+    Every source is present in this repository, so neither arm ran. A required source that
+    is absent is a refusal naming the file, because a projection composed without it would
+    silently omit a whole family of ancestry. An optional one is simply absent — the births
+    ledger and the id ledger are declared optional, and returning None lets the projection
+    report what it does have rather than refusing to answer at all.
+    """
+    complete = _corpus(tmp_path / "complete")
+    assert set(load_sources(str(complete))) >= {"artifacts", "edges", "births", "history"}
+
+    without_optional = _corpus(tmp_path / "partial", optional=False)
+    partial = load_sources(str(without_optional))
+    assert partial["births"] == {}
+    assert partial["history"] == {}
+
+    incomplete = _corpus(tmp_path / "incomplete")
+    (incomplete / "00-BOOK" / "DATA" / "relationships.json").unlink()
+    with pytest.raises(LineageError, match="declared lineage source is absent") as raised:
+        load_sources(str(incomplete))
+    assert raised.value.subject.endswith("relationships.json")
+
+
+def test_a_source_that_is_not_valid_json_is_a_named_refusal(tmp_path):
+    """A TRUNCATED SOURCE IS NOT AN EMPTY ONE.
+
+    Reading a half-written document as ``{}`` would compose a projection that reports no
+    ancestry where ancestry exists — the most dangerous possible answer, because it looks
+    like a clean result. The refusal names the file and carries the parser's own position, so
+    the fault points at the document rather than at the projection that could not read it.
+    """
+    corpus = _corpus(tmp_path)
+    (corpus / "00-BOOK" / "DATA" / "artifacts.json").write_text("{ truncated", encoding="utf-8")
+
+    with pytest.raises(LineageError, match="not valid JSON") as raised:
+        load_sources(str(corpus))
+
+    assert raised.value.subject.endswith("artifacts.json")
+
+
+def test_a_vocabulary_owner_declaring_no_relationship_types_is_refused(tmp_path):
+    """THE OWNER'S SET IS WHAT MAKES THE CLASSIFICATION CHECKABLE RATHER THAN TRUSTED.
+
+    The forward relations are read from the corpus vocabulary OWNER, so an owner module that
+    declares none leaves the projection with no way to tell a forward relation from its
+    inverse — and every ancestry fact would then be reported twice, once per direction.
+    Treating an empty declaration as "no primaries" would do exactly that silently.
+    """
+    corpus = _corpus(tmp_path)
+    (corpus / "00-BOOK" / "tools" / "config.py").write_text("# no declaration\n", encoding="utf-8")
+
+    with pytest.raises(LineageError, match="declares no RELATIONSHIP_TYPES"):
+        declared_relations(str(corpus))
+
+
+def test_a_vocabulary_that_cannot_be_specified_is_refused(tmp_path, monkeypatch):
+    """THE GUARD ABOVE THE LOADER, REACHED BY REMOVING WHAT MAKES IT UNREACHABLE.
+
+    ``spec_from_file_location`` returns a spec for any ``.py`` path, present or not — a
+    missing file fails later, inside the loader — so this guard cannot fire through any real
+    path today. It is the check that keeps the failure a named LineageError rather than an
+    ``AttributeError`` on ``None`` if the import machinery ever declines to describe the
+    file, which is what happens for a path Python does not recognise as a module.
+    """
+    corpus = _corpus(tmp_path)
+    monkeypatch.setattr("importlib.util.spec_from_file_location", lambda *_a, **_k: None)
+
+    with pytest.raises(LineageError, match="vocabulary cannot be loaded"):
+        declared_relations(str(corpus))
+
+
+def test_a_relation_lookup_with_no_family_answers_none(classification):
+    """THE LOOKUP GUARDS ITSELF AS WELL AS BEING GUARDED BY ITS CALLERS.
+
+    Every call site short-circuits on a missing family, so the parameter check inside the
+    lookup is a second defence and cannot fire through ``build``. It is what keeps the
+    helper total for a caller that does not short-circuit — the alternative is an
+    ``AttributeError`` on ``None.relations`` inside a function whose whole job is to answer
+    "is this relation declared".
+    """
+    derivation = next(f for f in classification.families if f.name == "derivation")
+
+    assert _relation_named(derivation, "Produced-By") is not None
+    assert _relation_named(derivation, "A-Relation-Nobody-Declares") is None
+    assert _relation_named(None, "Produced-By") is None
+
+
+def test_a_relation_reports_the_family_that_classifies_it(classification):
+    """AN EDGE'S FAMILY IS WHAT GIVES IT MEANING, and the reader that answers it by relation
+    name had no caller.
+
+    The projection resolves the family while composing each edge, so nothing later asks — but
+    a consumer holding a relation name and no edge has no other way to find out which
+    question that relation answers. An unclassified relation answers None, because inventing
+    a family would put a relation the classification deliberately excluded into ancestry.
+    """
+    assert classification.family_of("Parent") == "structure"
+    assert classification.family_of("Produced-By") == "derivation"
+    assert classification.family_of("A-Relation-Nobody-Declares") is None
+
+
+def test_an_edge_and_an_event_each_render_every_field_they_carry(projection):
+    """AN EDGE CITES ITS SOURCE AND SO DOES AN EVENT, and the renders are where those
+    citations are written down.
+
+    The document builder projects both through its own shaping, so neither record's own
+    render had a caller — and they are what an evidence consumer uses to write ONE edge or
+    ONE event, with its relation, its family and the source that declared it, rather than
+    reconstructing those from the projection's aggregate view. An event is deliberately not
+    an edge: it carries a kind, a moment and an ordinal where an edge carries a direction,
+    and the two renders are what keep that distinction visible in the evidence.
+    """
+    edge = projection.edges[0]
+
+    assert edge.as_dict() == {
+        "ancestor": edge.ancestor,
+        "descendant": edge.descendant,
+        "family": edge.family,
+        "relation": edge.relation,
+        "source": edge.source,
+    }
+
+    event = projection.events[0]
+
+    assert event.as_dict() == {
+        "at": event.at,
+        "kind": event.kind,
+        "sequence": event.sequence,
+        "source": event.source,
+        "subject": event.subject,
+    }

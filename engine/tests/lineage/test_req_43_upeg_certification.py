@@ -32,7 +32,9 @@ from engine.lineage.memory import (
     ACCESS_MODES,
     MODE_LIST_MATCH,
     MemoryAccess,
+    MemoryDeclaration,
     MemoryLayer,
+    declaration_document,
     duplicate_owners,
     load_declaration,
     owners,
@@ -296,7 +298,6 @@ def test_req_43_memory_declaration_serialization() -> None:
     declaration = load_declaration()
 
     # Serialize to document
-    from engine.lineage.memory import declaration_document
 
     document = declaration_document(declaration)
 
@@ -318,7 +319,6 @@ def test_req_43_memory_declaration_serialization() -> None:
     # Validate: ROUND-TRIP, which is what makes this a restore path rather than a report.
     # A document that serialises but cannot be read back would satisfy every assertion above
     # and restore nothing.
-    from engine.lineage.memory import MemoryDeclaration
 
     assert MemoryDeclaration.of(document) == declaration
 
@@ -529,6 +529,10 @@ def test_a_record_matches_its_subject_by_field_or_by_membership():
     assert memory_module._matches({"members": ["A", "S"]}, "S", access) is True
     assert memory_module._matches({"members": ["A"]}, "S", access) is False
     assert memory_module._matches({"single": "S"}, "S", access) is True
+    # a scalar membership field that names ANOTHER subject: the walk moves on to the next
+    # declared field rather than answering, which is what lets a record carry several
+    # membership fields and match on any one of them.
+    assert memory_module._matches({"single": "OTHER"}, "S", access) is False
     assert memory_module._matches({"single": {"S": 1}}, "S", access) is False
     assert memory_module._matches({}, "S", access) is False
 
@@ -649,3 +653,42 @@ def test_a_declaration_can_be_extended_without_mutating_the_one_it_came_from():
     assert "synthetic" in extended.names
     assert "synthetic" not in declaration.names
     assert extended.layer_of("synthetic") is not None
+
+
+def test_a_subject_memory_names_the_layer_it_holds_and_the_records_it_read():
+    """TWO READERS OVER A RESOLVED MEMORY, AND NEITHER HAD A CALLER.
+
+    Every test above reads the layers tuple directly. ``layer`` is the lookup a consumer
+    makes when it wants one layer by name — and its MISS is the arm that matters, because a
+    layer nobody declared must answer None rather than the first layer or an invented empty
+    one. ``sources`` is the provenance half: the memory reports nothing it cannot source, and
+    this is where the governed records it actually consulted are named.
+    """
+    remembered = resolve(KNOWN_SUBJECT)
+
+    first = remembered.layers[0]
+    assert remembered.layer(first.layer) is first
+    assert remembered.layer("a-layer-nothing-declares") is None
+
+    consulted = remembered.sources()
+    assert consulted == tuple(sorted(set(consulted)))
+    assert set(consulted) == {x.source for x in remembered.layers}
+
+
+def test_resolution_that_is_not_repeatable_is_refused(monkeypatch):
+    """HISTORICAL RECONSTRUCTION IS ONLY MEANINGFUL IF IT IS REPEATABLE.
+
+    Nothing in resolution reads a clock or a random source, so two resolutions over an
+    unchanged repository are byte-identical and the guard cannot fire — which is exactly why
+    it exists: it is the check that says so the day the projection acquires hidden state.
+    Reached here by making resolution answer differently the second time, which is the one
+    condition it detects.
+    """
+    assert reconstruct(KNOWN_SUBJECT).subject == KNOWN_SUBJECT
+
+    real = memory_module.resolve
+    answers = iter((real(KNOWN_SUBJECT), real(UNKNOWN_SUBJECT)))
+    monkeypatch.setattr(memory_module, "resolve", lambda *_a, **_k: next(answers))
+
+    with pytest.raises(LineageError, match="not deterministic"):
+        reconstruct(KNOWN_SUBJECT)
