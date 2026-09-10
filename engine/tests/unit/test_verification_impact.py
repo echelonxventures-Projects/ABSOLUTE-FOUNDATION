@@ -9,6 +9,7 @@ produces a green run which skipped the affected test, so every test named
 from __future__ import annotations
 
 import json
+import runpy
 
 import pytest
 
@@ -22,6 +23,7 @@ from engine.verification_impact import (
     load_graph,
     plan,
 )
+from engine.verification_impact.changes import changed_paths, working_tree_changes
 from engine.verification_impact.cli import EXIT_BOUNDED, EXIT_ESCALATED, main
 from engine.verification_impact.graph import CODE_CLASSES, repo_root
 
@@ -705,3 +707,160 @@ def test_path_normalisation_does_not_weaken_escalation(scratch_repo) -> None:
     unbounded_report = analyse(graph, ["00-CEP/UCOS-Ω∞-X.md"])
     assert unbounded_report.scope is Scope.FULL
     assert any("not bounded by import edges" in e for e in unbounded_report.escalations)
+
+
+# --- git that answers, and git that does not ------------------------------------------
+#
+# Every change-set read here runs against this checkout, where git answers every question.
+# Each read below is best-effort by construction — the sequence tries several bases and keeps
+# what it can — so the arm that answers for a read that FAILS exists at every step and none
+# had run. They matter because the failure mode they prevent is silent: a change set that
+# comes back empty because git could not answer looks exactly like a verified run.
+
+
+def _paths_returning(monkeypatch, *results):
+    """Script the path-emitting git reads in order, so each failure position is reachable.
+
+    git does not produce these combinations on demand — ``diff HEAD`` succeeding while
+    ``diff --cached HEAD`` fails is not a state a repository can be put into — so the runner
+    is scripted rather than a repository forged. What is under test is the SEQUENCE's response
+    to a failed read, which is the same whatever made it fail.
+    """
+    answers = iter(results)
+    monkeypatch.setattr(
+        "engine.verification_impact.changes._git_paths", lambda *_a, **_k: next(answers)
+    )
+
+
+def test_a_read_that_fails_contributes_nothing_and_does_not_lose_the_others(monkeypatch) -> None:
+    """THE WORKING-TREE CHANGE SET IS THREE READS UNIONED, and each may fail alone.
+
+    Tracked modifications, staged modifications and untracked files are three separate git
+    questions. A failure in the second or third must not discard the first: the union is what
+    "the local change set" means, and answering with nothing because one read failed would
+    narrow the verification silently. Only a failure of the FIRST read is fatal to the
+    answer, and that arm was already exercised.
+    """
+    _paths_returning(monkeypatch, (0, ("tracked.py",)), (1, ()), (1, ()))
+
+    assert working_tree_changes() == ("tracked.py",)
+
+
+def test_a_supplied_base_that_resolves_but_cannot_be_diffed_is_a_fault(monkeypatch) -> None:
+    """A BASE THAT RESOLVES IS NOT A BASE THAT DIFFS.
+
+    The unresolvable base was tested. This is the other half: the ref exists and the diff
+    against it still fails — a shallow clone whose history does not reach the base is the
+    ordinary way. Returning an empty change set there would report that an explicitly based
+    run found nothing to verify, which is the one answer this module refuses to give.
+    """
+    monkeypatch.setattr("engine.verification_impact.changes._exists", lambda *_a, **_k: True)
+    _paths_returning(monkeypatch, (128, ()))
+
+    with pytest.raises(ImpactError, match="could not diff against base"):
+        changed_paths("origin/main")
+
+
+def test_every_fallback_base_that_fails_falls_through_to_the_refusal(monkeypatch) -> None:
+    """THE FALLBACK CHAIN ENDS IN A REFUSAL, NEVER IN AN EMPTY ANSWER.
+
+    With no working-tree change the resolution tries the upstream merge-base and then
+    ``HEAD^``, and each step has a failure arm none of which had run. All three lead to the
+    same place on purpose: an empty change set is indistinguishable from a verified run, so
+    when no base can be established the engine refuses rather than reporting that nothing
+    changed.
+    """
+    monkeypatch.setattr(
+        "engine.verification_impact.changes.working_tree_changes", lambda *_a, **_k: ()
+    )
+    monkeypatch.setattr("engine.verification_impact.changes._exists", lambda *_a, **_k: True)
+
+    # the upstream resolves, and the merge-base against it does not
+    refs = iter([(0, "origin/main"), (1, "")])
+    monkeypatch.setattr("engine.verification_impact.changes._git", lambda *_a, **_k: next(refs))
+    _paths_returning(monkeypatch, (1, ()))
+    with pytest.raises(ImpactError, match="no diff base could be resolved"):
+        changed_paths()
+
+    # the merge-base resolves, and the diff from it does not
+    refs = iter([(0, "origin/main"), (0, "abc123")])
+    monkeypatch.setattr("engine.verification_impact.changes._git", lambda *_a, **_k: next(refs))
+    _paths_returning(monkeypatch, (1, ()), (1, ()))
+    with pytest.raises(ImpactError, match="no diff base could be resolved"):
+        changed_paths()
+
+    # and when the whole chain answers, the upstream merge-base IS the change set — the arm
+    # every branch with an upstream and no local edits takes, which nothing had exercised.
+    refs = iter([(0, "origin/main"), (0, "abc123")])
+    monkeypatch.setattr("engine.verification_impact.changes._git", lambda *_a, **_k: next(refs))
+    _paths_returning(monkeypatch, (0, ("b.py", "a.py")))
+    assert changed_paths() == ("a.py", "b.py")
+
+
+def test_a_report_with_no_escalation_renders_without_an_escalation_block(
+    capsys, a_currently_bounded_path: str
+) -> None:
+    """THE RENDERED REPORT WAS ONLY EVER SEEN ESCALATING.
+
+    The one render test names a path the live graph escalates, so the block-free form — what
+    an operator sees on every bounded change, which is the common case — had never been
+    produced. Emitting an empty "escalations:" heading would make a clean report look like a
+    truncated one.
+    """
+    assert main([f"--path={a_currently_bounded_path}"]) == EXIT_BOUNDED
+
+    rendered = capsys.readouterr().out
+    assert "scope" in rendered
+    assert "escalations:" not in rendered
+
+
+def test_more_than_twelve_escalations_are_elided_with_a_count(capsys) -> None:
+    """A REPORT NOBODY READS IS A REPORT THAT REPORTS NOTHING.
+
+    The reasons are truncated at twelve and the remainder is counted, and the count arm had no
+    case because no tested change escalates more than twelve times. It is the same discipline
+    the environment gate keeps: forty lines of reasons above a verdict is how a report becomes
+    something people scroll past, and the count is what stops the truncation from hiding that
+    there was more.
+    """
+    unregistered = [f"--path=engine/never_written/module_{index}.py" for index in range(15)]
+
+    assert main([*unregistered]) == EXIT_ESCALATED
+
+    rendered = capsys.readouterr().out
+    assert rendered.count("    - ") == 12
+    assert "... +3 more" in rendered
+
+
+def test_print_tests_emits_one_path_per_line_for_a_bounded_change(
+    capsys, a_currently_bounded_path: str
+) -> None:
+    """SILENCE PLUS EXIT 2 WAS TESTED; SPEECH PLUS EXIT 0 WAS NOT.
+
+    ``--print-tests`` is the mode ``verify.sh`` consumes, and the only case exercised was the
+    escalated one where it prints nothing. The bounded case is the mode's whole purpose: one
+    affected test path per line, with no report interleaved, so the output can be handed
+    straight to the runner.
+    """
+    code = main([f"--path={a_currently_bounded_path}", "--print-tests"])
+
+    printed = capsys.readouterr().out.splitlines()
+    assert code == EXIT_BOUNDED
+    assert printed
+    assert all(line.endswith(".py") for line in printed), printed
+
+
+def test_the_module_entry_point_dispatches_to_the_cli(monkeypatch) -> None:
+    """``python -m engine.verification_impact`` IS THE INVOCATION verify.sh MAKES.
+
+    The dispatcher is deliberately thin — two copies of an entry point are two things to keep
+    in step — and nothing had ever run it, so the one line binding the module form to the CLI
+    was unmeasured. It is executed rather than imported because the module body carries no
+    ``__main__`` guard, which is also the only way the declared invocation is exercised.
+    """
+    monkeypatch.setattr("sys.argv", ["engine.verification_impact", "--path=verify.sh", "--quiet"])
+
+    with pytest.raises(SystemExit) as raised:
+        runpy.run_module("engine.verification_impact", run_name="__main__")
+
+    assert raised.value.code == EXIT_ESCALATED
