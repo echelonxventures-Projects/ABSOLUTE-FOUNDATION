@@ -420,3 +420,102 @@ def test_require_aligned_raises_on_a_drifted_binding(binding) -> None:
     document["supreme_authority"]["id"] = "SOMETHING-ELSE"
     with pytest.raises(AlignmentError):
         require_aligned(document)
+
+
+def test_an_orthogonal_instrument_must_declare_a_scope_and_it_must_be_bounded(binding) -> None:
+    """ORTHOGONAL IS THE ROLE THAT SAYS "I GOVERN SOMETHING ELSE", AND IT HAS TO SAY WHAT.
+
+    An instrument claiming a supreme role is refused by Article 1, and an unknown role is
+    refused by the vocabulary — both tested. The ORTHOGONAL branch beneath them had neither
+    arm run, and it is the one that stops the role from becoming a way to claim supremacy
+    without the word: an instrument that governs "everything in UCOS" orthogonally is a second
+    supreme authority with a different label, and one that declares no scope at all is the
+    same claim left unwritten.
+    """
+
+    def unscoped(doc):
+        doc["subordinate_instruments"][1]["role"] = "ORTHOGONAL"
+        doc["subordinate_instruments"][1].pop("owns", None)
+
+    assert any("declares no explicit scope" in f for f in _mutated(binding, unscoped))
+
+    def blank_scope(doc):
+        doc["subordinate_instruments"][1]["role"] = "ORTHOGONAL"
+        doc["subordinate_instruments"][1]["owns"] = "   "
+
+    assert any("declares no explicit scope" in f for f in _mutated(binding, blank_scope))
+
+    def unrestricted(doc):
+        doc["subordinate_instruments"][1]["role"] = "ORTHOGONAL"
+        doc["subordinate_instruments"][1]["owns"] = "Unrestricted authority over the corpus"
+
+    assert any("unrestricted scope" in f for f in _mutated(binding, unrestricted))
+
+    def bounded(doc):
+        doc["subordinate_instruments"][1]["role"] = "ORTHOGONAL"
+        doc["subordinate_instruments"][1]["owns"] = "the temporal coordinate model"
+
+    assert not any("ORTHOGONAL" in f for f in _mutated(binding, bounded))
+
+
+def test_a_role_declaration_that_is_not_a_mapping_is_rejected(binding) -> None:
+    """A ROLE IS A DECLARATION WITH FIELDS, AND A ROLE THAT IS NOT ONE IS ABSENT.
+
+    A role missing from the binding entirely is refused, and a role whose fields have drifted
+    is refused field by field — both tested. The arm between them was not: a key present under
+    the role's name whose value is a string, a list or a number. Reading its fields would raise
+    from inside a verifier whose contract is to RETURN findings, so it is reported as the
+    absence it is.
+    """
+
+    def corrupt(doc):
+        role_id = next(iter(doc["authority_roles"]))
+        doc["authority_roles"][role_id] = "not a mapping"
+
+    findings = _mutated(binding, corrupt)
+
+    assert any("declared in the law and absent from the binding" in f for f in findings)
+
+
+def test_two_identifiers_deriving_one_urn_is_a_collision(binding) -> None:
+    """INJECTIVITY IS MEASURED, NOT ASSUMED — and the collision arm had no case.
+
+    The whole committed ledger derives without collision, which is the property the measure
+    exists to check and therefore not evidence that it CAN report one. Two identifiers mapping
+    to one repository-local URN means one of the two objects is unaddressable through the
+    derivation: every reference resolves to the other, and nothing in the ledger says so.
+    """
+    assert derivation_is_injective(["UCOS-A-000001", "UCOS-B-000002"]) == ()
+
+    # Two DISTINCT identifiers that derive one URN: the derivation trims, so a trailing
+    # space makes a different identifier addressing the same object.
+    findings = derivation_is_injective(["UCOS-A-000001", "UCOS-A-000001 "])
+
+    assert any("both derive" in finding for finding in findings)
+
+
+def test_every_alignment_object_renders_the_declaration_behind_it() -> None:
+    """A ROLE AND A RULE ARE DATA, AND THEIR RENDERS ARE HOW THEY LEAVE THE PROCESS.
+
+    Both are compared field by field against the binding, so their own projections had no
+    caller — and they are what writes the law side of the comparison out. A rule carries the
+    article it enforces plus the further articles it also serves, which is the difference
+    between "this rule exists" and "this rule enforces an article that already exists".
+    """
+    role = AUTHORITY_ROLES[0]
+    rule = ALIGNMENT_RULES[0]
+
+    assert role.to_dict() == {
+        "role_id": role.role_id,
+        "definition": role.definition,
+        "article": role.article,
+        "may_hold_authority": role.may_hold_authority,
+        "cardinality": role.cardinality,
+    }
+    assert rule.to_dict() == {
+        "rule_id": rule.rule_id,
+        "name": rule.name,
+        "statement": rule.statement,
+        "article": rule.article,
+        "also": list(rule.also),
+    }

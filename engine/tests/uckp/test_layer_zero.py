@@ -6,6 +6,7 @@ rather than examples: determinism, purity, totality, and refusal.
 
 from __future__ import annotations
 
+import dataclasses
 import uuid
 
 import pytest
@@ -33,6 +34,7 @@ from engine.uckp.identity import (
     urn_for,
     uuid_for,
 )
+from engine.uckp.payload import canonical_payload
 from engine.uckp.values import (
     Attestation,
     AuditEntry,
@@ -313,3 +315,45 @@ def test_unattested_is_distinguishable_from_absent():
     attestation = Attestation("validation")
     assert attestation.to_dict()["kind"] == "validation"
     assert not attestation.attested
+
+
+def test_the_canonical_payload_refuses_a_value_it_would_have_to_guess_about() -> None:
+    """INVERSION IS THE REMEDY, AND REFUSAL IS WHAT KEEPS IT HONEST.
+
+    Every declaration this renders is built from scalars, mappings, sequences, sets and other
+    dataclasses, so the refusal at the end had no case — and it is the whole reason the
+    renderer is safe to invert. A value it cannot render has exactly two other options:
+    render it as its ``repr``, which puts a memory address into a certification identity and
+    makes the digest non-deterministic, or drop it, which leaves a field out of the identity
+    the inversion promised would be there. Refusing is the only answer that keeps "a new
+    field is covered on the day it is written" true.
+
+    The arms it DOES render are asserted beside it, because a refusal with no admitted cases
+    is indistinguishable from a renderer that refuses everything.
+    """
+
+    @dataclasses.dataclass(frozen=True)
+    class _Declared:
+        name: str
+        weights: tuple[int, ...]
+        labels: frozenset[str]
+        nested: dict[str, int]
+
+    rendered = canonical_payload(_Declared("n", (1, 2), frozenset({"b", "a"}), {"k": 1}))
+
+    assert rendered == {
+        "name": "n",
+        "weights": [1, 2],
+        "labels": ["a", "b"],
+        "nested": {"k": 1},
+    }
+    assert canonical_payload(_Declared("n", (1, 2), frozenset(), {}), exclude=("name",)) == {
+        "weights": [1, 2],
+        "labels": [],
+        "nested": {},
+    }
+
+    with pytest.raises(TypeError, match="without guessing"):
+        canonical_payload(object())
+    with pytest.raises(TypeError, match="without guessing"):
+        canonical_payload({"declared": object()})

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from platform.foundation.services import ServiceRegistry
 from platform.universal_ownership import (
@@ -38,7 +39,10 @@ from platform.universal_ownership import (
     register_ownership,
 )
 from platform.universal_ownership.bootstrap import catalog_path, default_evidence_providers
+from platform.universal_ownership.cli import _print_summary
 from platform.universal_ownership.cli import main as ownership_main
+from platform.universal_ownership.contracts import OwnershipGranularity
+from platform.universal_ownership.determination import CANONICAL_HOME_REFUSER
 from platform.universal_ownership.errors import (
     OwnershipContractError,
     OwnershipDeterminationError,
@@ -46,8 +50,13 @@ from platform.universal_ownership.errors import (
     OwnershipFabricationError,
     OwnershipProviderConflictError,
 )
-from platform.universal_ownership.evidence import EvidenceRefusal, RoleLocatorProvider
+from platform.universal_ownership.evidence import (
+    EvidenceRefusal,
+    RoleLocatorProvider,
+    read_declared_identities,
+)
 from platform.universal_truth import Subject, TruthPolicy, TruthZone, default_truth_policy
+from platform.universal_truth.eligibility import CanonicalHomePolicy, EligibilityLedger
 
 import pytest
 
@@ -690,7 +699,6 @@ def _gated_home(*registered: str):
     empty ledger fails closed by design — the ledger refuses to *decide* without data, which is
     a different (and correct) behaviour from refusing a locator.
     """
-    from platform.universal_truth.eligibility import CanonicalHomePolicy, EligibilityLedger
 
     return CanonicalHomePolicy(
         _policy(),
@@ -852,7 +860,6 @@ def test_the_determination_attributes_a_whole_subject_refusal_to_the_canonical_h
     And exactly once: a locator a provider already diagnosed is not re-attributed to the
     policy, so each refused locator carries one refusal naming its most specific refuser.
     """
-    from platform.universal_ownership.determination import CANONICAL_HOME_REFUSER
 
     engine = _engine(DefinitionalLocatorProvider(_policy()), policy=_policy())
     recognised = engine.determine_subject(_subject("UCOS-COMP-000001", EVIDENCE_ONLY))
@@ -1004,3 +1011,173 @@ def test_cli_refuses_a_specialisation_that_projects_no_population(
         ownership_main(["homing", "--specialization", str(document), "--root", str(tmp_path)]) == 2
     )
     assert "projects no population" in capsys.readouterr().err
+
+
+# --------------------------------------------------------------------------- the quiet arms
+#
+# The declared catalogue supplies every optional field, every locator has segments, every
+# artifact on disk is readable, and this repository's governance minimum is empty. Each arm
+# below answers for a project where one of those is not so.
+
+
+def test_a_declaration_omitting_every_optional_field_takes_the_provider_defaults(
+    tmp_path: Path,
+) -> None:
+    """THREE OPTIONAL FIELDS, AND THE ONLY TESTED DOCUMENT SUPPLIES ALL THREE.
+
+    A governed catalogue may declare its authority, its provider id and its precedence — or
+    none of them, and take the provider's own. Reading an absent key as an empty authority or
+    a precedence of zero would silently demote a declaration below every other provider,
+    which is the kind of change nobody reviews because nothing in the document says it
+    happened.
+    """
+    minimal = DeclaredAssignmentProvider.from_document(
+        {"assignments": {"S": {"owner": "Owner A", "locator": HOME}}}
+    )
+    declared = DeclaredAssignmentProvider.from_document(
+        {
+            "authority": "Governed Authority",
+            "provider_id": "ownership.custom",
+            "precedence": 950,
+            "assignments": {"S": {"owner": "Owner A", "locator": HOME}},
+        }
+    )
+
+    assert minimal.count == 1
+    assert minimal.descriptor().provider_id != declared.descriptor().provider_id
+    assert minimal.descriptor().precedence != 950
+    assert minimal.collect(_subject("S", HOME))[0].owner == "Owner A"
+
+
+def test_a_locator_with_no_segments_is_not_a_definitional_candidate() -> None:
+    """A LOCATOR THAT NAMES NOTHING CANNOT BE DEFINITIONAL OF ANYTHING.
+
+    Every tested subject carries real paths, so the skip had no case — and without it the
+    basename check would be run against the last element of an empty tuple and raise from
+    inside a provider whose contract is to return candidates. An empty locator is a real
+    shape: a declaration with a trailing separator, or a projection field that was blank.
+    """
+    provider = DefinitionalLocatorProvider(_policy())
+
+    assert provider.candidates(_subject("UCOS-COMP-000000", "", "/", HOME)) == (HOME,)
+
+
+def test_a_role_provider_reports_the_role_it_reads() -> None:
+    """A PROVIDER READING A DECLARED ROLE MUST BE ABLE TO SAY WHICH ROLE.
+
+    The role is supplied at construction and appears in the provider's own description, so
+    nothing ever asked the provider back for it — and it is what a registry listing several
+    role providers uses to tell them apart. Two providers reading two roles are otherwise
+    identical from the outside.
+    """
+    provider = RoleLocatorProvider("owner", _policy())
+
+    assert provider.role == "owner"
+    assert provider.home is not None
+    assert "owner" in provider.descriptor().description
+
+
+def test_a_blank_locator_is_read_from_nothing_rather_than_from_the_root(tmp_path: Path) -> None:
+    """READING A BLANK LOCATOR WOULD READ THE ROOT DIRECTORY ITSELF.
+
+    The unreadable-locator skip below it is exercised by every missing file; the blank one
+    was not, and it is the more dangerous of the two: ``root / ""`` is the root, so a blank
+    entry would attempt to read the whole checkout as one artifact's front matter. Dropping
+    it is the same fail-closed rule the module already states — an absent declaration must
+    never resolve to an assertion.
+    """
+    (tmp_path / "declared.md").write_text("id: UCOS-COMP-000000\n", encoding="utf-8")
+
+    found = read_declared_identities(
+        ["", "   ", "declared.md", "never-written.md"], root=tmp_path, labels=("id",)
+    )
+
+    assert set(found) == {"declared.md"}
+
+
+def test_a_granularity_that_is_not_a_string_is_refused() -> None:
+    """A GRANULARITY IS AN ENUM MEMBER OR THE STRING THAT SPELLS ONE.
+
+    Both string arms were tested; the value that is neither was not, and it is refused before
+    it reaches the enum constructor — because the ValueError raised from inside would say
+    "not a valid OwnershipGranularity" about an integer, naming the wrong problem at a
+    boundary whose contract is to name it exactly.
+    """
+    assert OwnershipGranularity.coerce(OwnershipGranularity.LOCATOR) is (
+        OwnershipGranularity.LOCATOR
+    )
+    assert OwnershipGranularity.coerce("locator") is OwnershipGranularity.LOCATOR
+
+    with pytest.raises(OwnershipContractError, match="unknown ownership granularity"):
+        OwnershipGranularity.coerce("not-a-granularity")
+    with pytest.raises(OwnershipContractError, match="must be a string"):
+        OwnershipGranularity.coerce(7)
+
+
+def test_the_recommend_summary_names_the_governance_minimum_when_there_is_one(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """THE ONE BLOCK THIS REPOSITORY CANNOT PRODUCE.
+
+    The governance minimum is the residue no provider can propose an owner for and no
+    declared rule names a deficit against — the subjects an authority must decide from first
+    principles. It is EMPTY here, which is the programme working, and that is exactly why the
+    block announcing it had never been rendered. It is reached by rendering a payload that
+    carries one, because forging a subject the whole provider set is silent about would mean
+    disabling the providers rather than exercising the report.
+    """
+    assert ownership_main(["recommend"]) == 0
+    assert "GOVERNANCE MINIMUM" not in capsys.readouterr().err
+
+    _print_summary(
+        "recommend",
+        {"counts": {}, "governance_minimum": ["UCOS-COMP-000000", "UCOS-COMP-000001"]},
+        sys.stderr,
+    )
+
+    rendered = capsys.readouterr().err
+    assert "GOVERNANCE MINIMUM (2)" in rendered
+    assert "authority to decide from first principles" in rendered
+
+
+def test_a_declared_eligibility_ledger_is_composed_onto_an_existing_home_policy() -> None:
+    """A HOME POLICY MAY ARRIVE ALREADY COMPOSED, AND AN ELIGIBILITY LEDGER STILL BINDS.
+
+    Two of the three composition shapes were exercised: a bare Truth policy with a ledger,
+    and a composed policy with none. The third — a composed policy AND a ledger — had no
+    case, and it is what a project specialising a foundation it did not build takes. Ignoring
+    the ledger there would drop a declared eligibility requirement silently, which is the
+    Zero Silent Repair failure the whole framework refuses.
+    """
+    ledger = EligibilityLedger.create(registered=[HOME], require_registration=True)
+    composed = CanonicalHomePolicy(default_truth_policy())
+
+    engine = bootstrap_ownership(policy=composed, eligibility=ledger)
+
+    assert engine.home.ledger is ledger
+    assert engine.home.policy is composed.policy
+
+
+def test_a_typed_refusal_fault_passes_through_without_being_wrapped_again() -> None:
+    """AN ERROR THAT ALREADY NAMES ITS PROVIDER MUST NOT BE RE-NAMED BY THE CONTAINMENT.
+
+    The untyped fault is contained and re-raised as a framework error — tested. This is the
+    arm above it: a provider that raises the framework's OWN error while diagnosing has
+    already said which provider, which subject and what was wrong, and wrapping it a second
+    time would bury that detail inside a generic "failed while diagnosing a refusal". The
+    containment exists to make an unknown failure legible, not to overwrite a legible one.
+    """
+
+    class Refusing(DefinitionalLocatorProvider):
+        def refusals(self, subject: Subject):
+            raise OwnershipEvidenceError(
+                "the ledger this provider reads is unavailable",
+                provider_id="ownership.definitional-locator",
+                subject=subject.subject_id,
+            )
+
+    with pytest.raises(OwnershipEvidenceError) as raised:
+        Refusing(_gated_home()).collect_refusals(_subject("S", HOME))
+
+    assert "the ledger this provider reads is unavailable" in str(raised.value)
+    assert "failed while diagnosing" not in str(raised.value)

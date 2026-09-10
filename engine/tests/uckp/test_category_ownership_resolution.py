@@ -56,6 +56,7 @@ from engine.uckp.intelligence import (
     RECOGNITION_CATEGORY,
     RECOGNITIONS,
     UNKNOWN,
+    CategoryRecognition,
     build_intelligence,
 )
 from engine.uckp.resolution import (
@@ -748,3 +749,82 @@ def test_reading_a_resolution_mutates_no_canonical_state(universe):
     # mints nothing — the population it recognises is the population it was written from
     assert binding_reader().read(CATEGORY_OWNERSHIP_RESOLUTION).state == PRESENT
     assert len(universe.registry.ids()) == universe.discovery.objects_admitted
+
+
+def test_an_entry_naming_no_category_or_a_blank_populator_recognises_nothing(sole, vocabularies):
+    """AN ENTRY IS READ AS A RECOGNITION OR AS NOTHING, AND EVERY FIELD CAN COST IT.
+
+    The missing accountable authority was tested; the other two field checks were not. A
+    category that is not a non-empty string names nothing to recognise, and a populator list
+    holding a blank name recognises a provider with no identity — which would then "match" any
+    provider whose name normalises to nothing. Both drop the entry rather than repairing it,
+    and the position is reported so a reader can find the line: the reader is total and
+    silent about WHY, because a complaint needs the entry's position and the reader does not
+    have it.
+    """
+    for defective in (
+        _entry("   ", "p.sole"),
+        {**_entry("runtime", "p.sole"), RECOGNITION_CATEGORY: 7},
+        _entry("runtime", "p.sole", "  "),
+        {**_entry("runtime", "p.sole"), RECOGNISED_POPULATORS: []},
+        {**_entry("runtime", "p.sole"), RECOGNISED_POPULATORS: "p.sole"},
+    ):
+        ledger = _ledger(defective)
+        result = _gap(sole, vocabularies=vocabularies, resolutions=ledger)
+        assert "recognises nothing" in _resolution_statements(result), defective
+        assert (
+            _state(_integrity(sole, vocabularies=vocabularies, resolutions=ledger), "runtime").state
+            == UNKNOWN
+        )
+
+
+def test_a_category_recognised_three_times_is_still_complained_about_once(sole, vocabularies):
+    """THE COMPLAINT IS ABOUT THE CATEGORY, NOT ABOUT EACH ENTRY THAT NAMES IT.
+
+    Two entries claiming one category was tested, which reaches the guard on its first
+    duplicate. A third reaches the arm that KEEPS QUIET: the category is already known to be
+    ambiguous, and repeating the complaint per entry would make a declaration with twenty
+    duplicates twenty times as loud about one fault. Every one of them is still dropped, so
+    the disposition is unchanged however many there are.
+    """
+    ledger = _ledger(
+        _entry("runtime", "p.sole"), _entry("runtime", "p.other"), _entry("runtime", "p.third")
+    )
+
+    result = _gap(sole, vocabularies=vocabularies, resolutions=ledger)
+
+    assert _resolution_statements(result).count("more than once") == 1
+    assert (
+        _state(_integrity(sole, vocabularies=vocabularies, resolutions=ledger), "runtime").state
+        == UNKNOWN
+    )
+
+
+def test_a_recognition_cites_itself_as_a_finding_may_quote_it(sole, vocabularies):
+    """A FINDING THAT NAMES NO POPULATOR AND NO AUTHORITY IS UNACTIONABLE.
+
+    The citation is the recognition's own rendering for use inside a finding — the declared
+    populators and who answers for them — and nothing called it. Without it a reader is told
+    that a category is recognised and not by whom, which is the half of the recognition that
+    makes it reviewable.
+    """
+    recognition = CategoryRecognition("runtime", ("p.sole", "p.other"), AUTHORITY)
+
+    assert recognition.cite() == f"[p.sole, p.other] accountable to {AUTHORITY}"
+    assert recognition.recognises("p.sole") is True
+    assert recognition.recognises("p.absent") is False
+
+
+def test_a_reader_cites_the_source_it_read_from(tmp_path):
+    """A RESOLUTION IS ONLY REVIEWABLE IF ITS SOURCE CAN BE NAMED.
+
+    Every reader here is built with a source and none of them was ever asked for it. It is
+    what a finding quotes so a reader can go and look: "<no ledger>" and a real path are
+    different answers, and a finding that reports neither cannot be traced to the declaration
+    it came from.
+    """
+    document = tmp_path / "binding.json"
+    document.write_text("{}", encoding="utf-8")
+
+    assert ResolutionReader.from_path(document).source == str(document)
+    assert ResolutionReader.from_document({}, source="<no ledger>").source == "<no ledger>"

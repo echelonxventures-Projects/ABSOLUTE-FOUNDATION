@@ -536,3 +536,31 @@ def test_interchangeability_reports_a_failing_technology_and_one_claiming_owners
     )
     assert report.knowledge_owners == ("claiming",)
     assert any("failing: failed:Unavailable" in failure for failure in report.failures)
+
+
+def test_a_cloud_mechanism_asserting_a_region_writes_and_locates_inside_it(tmp_path):
+    """A REGION IS A LOCALITY ASSERTION, and every test made none.
+
+    ``CloudPersistence`` is constructed without a region everywhere here, so all three of its
+    region-aware members answered the same way and the arm that HONOURS one had never run. A
+    region is a real constitutional fact — where the universe physically resides — so it has
+    to be visible in the locator (an operator reading a receipt must be able to tell two
+    regions apart) and it has to change where the bytes go, or two regions would overwrite
+    one another in the same directory.
+    """
+    from engine.uckp.persistence import CloudPersistence
+
+    unlocated = CloudPersistence(tmp_path / "cloud")
+    located = CloudPersistence(tmp_path / "cloud", region="eu-west-1")
+
+    assert unlocated.region is None
+    assert located.region == "eu-west-1"
+    assert unlocated.locator == "cloud://cloud"
+    assert located.locator == "cloud://eu-west-1/cloud"
+
+    receipt = located.write(())
+    assert receipt.locator == located.locator
+    assert (tmp_path / "cloud" / "eu-west-1" / "universe.json").is_file()
+    assert not (tmp_path / "cloud" / "universe.json").exists()
+    assert located.read() == ()
+    assert unlocated.read() == (), "a region is a different location, not a different view"
