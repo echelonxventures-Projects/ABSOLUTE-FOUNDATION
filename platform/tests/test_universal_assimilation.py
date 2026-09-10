@@ -590,3 +590,142 @@ def test_cli_manifest_faults(tmp_path: Path) -> None:
         manifest = tmp_path / "manifest.json"
         manifest.write_text(body, "utf-8")
         assert assimilate_main(["run", "--manifest", str(manifest), "--root", str(tmp_path)]) == 2
+
+
+# --------------------------------------------------------------------------- the skipped arms
+#
+# Every adapter case above supplies a payload that yields text, is small, and is shaped the way
+# its format's documents usually are. The arms below answer for the rest — a payload too large
+# to decode, a member that normalises to nothing, and content nested in a shape the extractor
+# has to walk rather than read.
+
+
+def test_a_payload_larger_than_the_decodable_limit_is_refused(monkeypatch) -> None:
+    """A LIMIT NOBODY HAS CROSSED IS A LIMIT NOBODY HAS CHECKED.
+
+    Both refusals guard the same thing from two directions: text decoding materialises the
+    whole payload as a string, and PDF extraction scans the whole byte string with a regular
+    expression — so an unbounded input is a memory fault inside a framework whose contract is
+    to REPORT what it cannot assimilate. The limit is patched down rather than a 64 MB payload
+    built, because the size is a declared constant and constructing one to cross it would make
+    the suite slower for no additional evidence.
+    """
+    monkeypatch.setattr("platform.universal_assimilation.adapters.MAX_PAYLOAD_BYTES", 8)
+
+    with pytest.raises(SourceAdapterError, match="payload exceeds the decodable limit"):
+        TextAdapter().units(_ref(KIND_PLAIN_TEXT, "00-SOURCE/big.txt"), b"far too many bytes")
+
+    with pytest.raises(SourceAdapterError, match="pdf payload exceeds the decodable limit"):
+        PdfAdapter().units(_ref(KIND_DOCUMENT_PDF, "00-SOURCE/big.pdf"), _pdf("hello"))
+
+
+def test_a_member_that_normalises_to_nothing_yields_no_unit() -> None:
+    """AN EMPTY UNIT IS A CITATION TO NOTHING.
+
+    Two extractors skip a member whose normalised body is empty and neither skip had a case,
+    because every fixture here carries text in every member. A message with no content and a
+    PDF stream holding no recoverable text are both ordinary; emitting a unit for one would
+    put an addressable, digestible record into the corpus whose body is the empty string —
+    indistinguishable from every other empty member, and citable as though it said something.
+    """
+    conversation = ConversationExportAdapter().units(
+        _ref(KIND_CONVERSATION_EXPORT, "00-SOURCE/c.json"),
+        json.dumps(
+            [
+                {
+                    "id": "c1",
+                    "title": "T",
+                    "messages": [
+                        {"role": "user", "content": "a real message"},
+                        {"role": "assistant", "content": "   "},
+                    ],
+                }
+            ]
+        ).encode(),
+    )
+    assert [unit.text for unit in conversation] == ["a real message"]
+
+    empty_stream = PdfAdapter().units(
+        _ref(KIND_DOCUMENT_PDF, "00-SOURCE/blank.pdf"),
+        b"%PDF-1.4\nstream\n\nendstream\n" + _pdf("real text"),
+    )
+    assert [unit.text for unit in empty_stream] == ["real text"]
+
+
+def test_a_json_member_that_renders_to_nothing_is_skipped_too(monkeypatch) -> None:
+    """THE SAME SKIP, IN THE ONE EXTRACTOR WHERE IT CANNOT FIRE TODAY.
+
+    A JSON member's body is ``json.dumps`` of its value, which renders SOMETHING for every
+    value there is — ``null``, ``""``, ``0`` — so no document can reach this guard. It is the
+    second defence for the day the rendering changes: without it a member rendering to nothing
+    would enter the corpus as an addressable unit with an empty body, which is the same defect
+    the other two extractors refuse. Reached by making the normalisation answer empty, which
+    is the only condition it responds to.
+    """
+    real = normalize_text
+    monkeypatch.setattr(
+        "platform.universal_assimilation.adapters.normalize_text",
+        lambda text: "" if "skipped" in text else real(text),
+    )
+
+    units = JsonAdapter().units(
+        _ref(KIND_STRUCTURED_JSON, "00-SOURCE/mixed.json"),
+        json.dumps({"kept": "content", "gone": "skipped"}).encode(),
+    )
+
+    assert [unit.title for unit in units] == ["kept"]
+
+
+def test_message_content_is_walked_through_every_shape_an_export_uses() -> None:
+    """AN EXPORT NESTS ITS TEXT DIFFERENTLY IN EVERY VERSION, and the walker is why.
+
+    The tested exports carry a plain string or a ``parts`` list. The remaining shapes had no
+    case: a mapping keyed under one of the declared field names, a mapping keyed under none of
+    them, a bare list, an absent content, and a scalar that is not a string. Each is a real
+    export shape, and the two ``return ""`` arms are what stop an unknown one from being
+    rendered as its Python repr — ``{'kind': 'image'}`` assimilated as text is a unit that
+    reads as content and is not.
+    """
+    walk = ConversationExportAdapter._content_text
+
+    assert walk(None) == ""
+    assert walk("plain") == "plain"
+    assert walk({"parts": ["a", "b"]}) == "a b"
+    assert walk({"value": "under a declared key"}) == "under a declared key"
+    assert walk({"kind": "image", "url": "..."}) == ""
+    assert walk(["a", {"text": "b"}]) == "a b"
+    assert walk(7) == "7"
+
+
+def test_a_source_no_adapter_claims_is_deferred_rather_than_dropped() -> None:
+    """A KIND MAY BE DECLARED AND STILL HAVE NOTHING THAT CAN READ IT.
+
+    The undeclared-kind refusal above it was tested; this is the arm underneath, reached only
+    when the kind IS admitted and no registered adapter claims the source. It is the state a
+    repository is in the moment it declares a new kind and before it writes the adapter — and
+    DEFERRED is the honest answer, because the source is neither assimilated nor refused. A
+    silent drop would let a declared kind accumulate sources nothing ever reads.
+    """
+    permissive = AssimilationPipeline(
+        SourceAdapterRegistry(
+            [TextAdapter(adapter_id="assimilation.text", kinds=(KIND_MARKDOWN,))]
+        ),
+        policy=default_truth_policy(),
+        require_declared_kind=False,
+    )
+
+    report = permissive.assimilate(
+        [
+            SourceInput.from_text(
+                "a-kind-no-adapter-claims",
+                "00-SOURCE/a.unknown",
+                "body",
+                destination="02-MASTER/a.md",
+            )
+        ]
+    )
+
+    assert report.closed is False
+    record = report.records[0]
+    assert record.state is AssimilationState.DEFERRED
+    assert record.reasons == (REASON_NO_ADAPTER,)
