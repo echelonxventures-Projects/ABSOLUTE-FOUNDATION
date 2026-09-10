@@ -24,6 +24,7 @@ from platform.universal_truth import (
     truth_service_descriptor,
 )
 from platform.universal_truth.cli import main as truth_main
+from platform.universal_truth.eligibility import CanonicalHomePolicy, EligibilityLedger
 from platform.universal_truth.errors import (
     TruthContractError,
     TruthPolicyError,
@@ -452,3 +453,138 @@ def test_cli_partition_gate_and_faults(tmp_path: Path, capsys: pytest.CaptureFix
     assert truth_main(["classify", "02-MASTER/a.md", "--require-classified"]) == 0
     assert truth_main(["classify"]) == 0
     assert truth_main(["policy", "--policy", str(tmp_path / "missing.json")]) == 2
+
+
+# --------------------------------------------------------------------------- roles and residues
+#
+# Roles are the newest half of the projection and the only declarations here that carry them
+# are well formed, so the refusals that keep a role declaration honest — and the readers a
+# consumer uses to ask which roles exist — had no case.
+
+
+def test_a_role_declaring_no_field_or_no_name_is_refused() -> None:
+    """A ROLE THAT NAMES NO FIELD NARROWS NOTHING.
+
+    A role is a named subset of a subject's locators, so a declaration with an empty field
+    list, or one whose fields are all blank, declares a role that can never be populated —
+    every subject would carry it, empty, and a consumer filtering by it would get the whole
+    population back. The ``$``-prefixed key is skipped rather than refused, because a
+    declaration comment is not a role and refusing one would make declarations
+    uncommentable.
+    """
+    with pytest.raises(TruthProjectionError, match="names no field") as raised:
+        ProjectionSpec.create("concepts", "id", role_fields={"owner": []})
+    assert raised.value.context["role"] == "owner"
+
+    with pytest.raises(TruthProjectionError, match="names no field"):
+        ProjectionSpec.create("concepts", "id", role_fields={"owner": ["", "  "]})
+
+    commented = ProjectionSpec.create(
+        "concepts", "id", role_fields={"$note": ["ignored"], "": ["ignored"], "owner": ["owners"]}
+    )
+    assert commented.role_names() == ("owner",)
+
+
+def test_a_role_name_that_is_blank_is_refused_on_the_subject_too() -> None:
+    """THE SAME CLAIM AT THE SUBJECT END, where a role is attached rather than declared.
+
+    A subject may be constructed with roles directly — that is how a caller tags a population
+    it projected itself — and a blank name there would attach a role nothing can ask for. A
+    role whose members are all blank is DROPPED rather than refused, because an empty role on
+    one subject is an ordinary absence: the subject simply holds none of that role's locators.
+    """
+    with pytest.raises(TruthContractError, match="role name must be a non-empty string"):
+        Subject.create("UCOS-A", locators=["a.md"], roles={"  ": ["a.md"]})
+
+    tagged = Subject.create(
+        "UCOS-A", locators=["a.md"], roles={"owner": ["b.md"], "empty": ["", "  "]}
+    )
+
+    assert tagged.role_names() == ("owner",)
+    assert tagged.role("owner") == ("b.md",)
+    assert "b.md" in tagged.locators, "a role narrows the population and never introduces one"
+
+
+def test_a_locator_field_holding_a_value_that_is_not_a_string_is_rendered_as_one() -> None:
+    """A DECLARED LOCATOR FIELD IS FLATTENED HONESTLY, WHATEVER IT HOLDS.
+
+    Strings, mappings and iterables each have an arm and each was exercised. The last one —
+    a scalar that is none of those — had no case, and it is what a document holding a number
+    or a boolean under a locator field produces. Rendering it as its string form keeps the
+    projection total: dropping it would lose a declared locator silently, and raising would
+    make one malformed field cost the whole document.
+    """
+    subjects = SubjectProjection(
+        ProjectionSpec.create("concepts", "id", locator_fields=("files",))
+    ).project({"concepts": [{"id": "A", "files": [7, "real.md", True]}]})
+
+    assert subjects[0].locators == ("7", "True", "real.md")
+
+
+def test_a_class_the_tally_does_not_carry_counts_zero() -> None:
+    """AN ABSENT CLASS IS A COUNT OF ZERO, NOT A MISSING ANSWER.
+
+    A partition built through ``create`` tallies EVERY declared class, zeros included, so the
+    reader always finds the class it is asked about and its fallthrough is unreachable
+    through any policy. It is the second defence for a partition assembled another way —
+    rehydrated, or narrowed to the classes that were non-empty — where a caller asking about
+    every declared class must still get a number for each. Returning None or raising would
+    put a hole in a report wherever the repository happens to hold none of a class.
+    """
+    measured = default_truth_policy().classify_all(["00-BOOK/DATA/artifacts.json"])
+    assert measured.total == 1
+    assert {name for name, _ in measured.counts} == {member.value for member in TruthClass}
+
+    narrowed = TruthPartition(
+        classifications=measured.classifications,
+        counts=tuple((name, value) for name, value in measured.counts if value),
+    )
+
+    absent = next(c for c in TruthClass if c.value not in {n for n, _ in narrowed.counts})
+    assert narrowed.count(absent) == 0
+    assert narrowed.of_class(absent) == ()
+
+
+def test_zones_may_be_declared_in_one_call() -> None:
+    """THE BULK DECLARATION HAD NO CALLER, and it is the form a catalogue takes.
+
+    Every test registers zones one at a time. Declaring a whole catalogue is what the loader
+    does, and it returns the zones in RESOLUTION order rather than in declaration order —
+    which is the property that makes the result usable as evidence of what will match first.
+    """
+    registry = TruthPolicy()
+
+    declared = registry.register_all(
+        [
+            _zone("test.b", "canonical", "02-MASTER", authority="UCOS-TEST"),
+            _zone("test.a", "derived", "03-DERIVED"),
+        ]
+    )
+
+    assert {zone.zone_id for zone in declared} == {"test.a", "test.b"}
+    assert declared == registry.zones()
+
+
+def test_a_duplicate_or_unnameable_locator_is_counted_once() -> None:
+    """A VERDICT PER DISTINCT LOCATOR, AND DISTINCT IS AFTER NORMALISATION.
+
+    The skip appears in BOTH readers — the ledger's own and the composed canonical-home
+    policy's — and had no case in either, because every tested population is already distinct
+    and non-empty.
+    Two spellings of one path are one locator — that is what normalisation is for — and
+    emitting a verdict for each would double-count the residue a triage is meant to size. An
+    empty locator is dropped for the adjacent reason: it names nothing, so a verdict about it
+    is a verdict about nothing.
+    """
+    ledger = EligibilityLedger.create(registered=["02-MASTER/a.md"], require_registration=True)
+    composed = CanonicalHomePolicy(default_truth_policy(), ledger)
+
+    for reader in (ledger, composed):
+        verdicts = reader.verdicts(["./02-MASTER/a.md", "02-MASTER\\a.md", "", "   "])
+
+        assert [verdict.locator for verdict in verdicts] == ["02-MASTER/a.md"]
+        assert verdicts[0].to_dict() == {
+            "locator": "02-MASTER/a.md",
+            "eligible": verdicts[0].eligible,
+            "reason": verdicts[0].reason,
+        }
