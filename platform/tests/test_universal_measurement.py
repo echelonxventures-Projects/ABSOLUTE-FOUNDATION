@@ -41,9 +41,11 @@ from platform.universal_measurement.cli import main as cli_main
 from platform.universal_measurement.errors import (
     MeasurementContextError,
     MeasurementPolicyContractError,
+    MeasurementPolicyError,
     MeasurementPolicyEvaluationError,
     MeasurementPolicyRegistryError,
 )
+from platform.universal_measurement.policies import policies_from_document
 from platform.universal_ownership import (
     DefinitionalLocatorProvider,
     EvidenceProviderRegistry,
@@ -506,3 +508,104 @@ def test_an_unknown_command_is_refused_by_the_parser() -> None:
 
     with pytest.raises(SystemExit):
         cli_main(["not-a-command"])
+
+
+# --------------------------------------------------------------------------- the composition
+#
+# WHICH measurements bind and HOW STRONGLY is data: the packaged declaration composes the nine
+# shipped policies and configures each. Every test above reads the composed result, so the
+# reader that turns a declaration into policies was only ever run over the packaged one — and
+# each of its five refusals, which are what keep a declaration from becoming code, had no case.
+
+
+def test_a_declaration_that_is_not_a_policy_composition_is_refused() -> None:
+    """A COMPOSITION DOCUMENT HAS A SHAPE, AND THE SHAPE IS THE CONTRACT.
+
+    A document that is not a mapping, or one whose ``policies`` is absent, a scalar or a
+    string, cannot be composed — and each answers with what was wrong rather than raising from
+    inside the iteration. A string is refused explicitly because it IS a sequence: iterating
+    it would compose one policy per character and fail with a message about a policy named
+    ``p``.
+    """
+    for malformed in ("nope", [], 7):
+        with pytest.raises(MeasurementPolicyError, match="must be a mapping"):
+            policies_from_document(malformed)  # type: ignore[arg-type]
+
+    for shapeless in ({}, {"policies": "OwnershipCoveragePolicy"}, {"policies": 3}):
+        with pytest.raises(MeasurementPolicyError, match="requires a 'policies' sequence"):
+            policies_from_document(shapeless)  # type: ignore[arg-type]
+
+
+def test_an_entry_that_names_no_policy_is_refused() -> None:
+    """AN ENTRY IS A NAMED POLICY PLUS ITS CONFIGURATION, and the name is not optional.
+
+    An entry with no ``policy`` key configures nothing — there is no default policy to fall
+    back to, and choosing one would make the declaration's silence into a decision the
+    declaration did not take.
+    """
+    for entry in ({"blocking": True}, "OwnershipCoveragePolicy", 7):
+        with pytest.raises(MeasurementPolicyError, match="requires 'policy'"):
+            policies_from_document({"policies": [entry]})
+
+
+def test_a_declaration_may_name_only_a_shipped_policy() -> None:
+    """RESOLUTION IS CONFINED TO THIS MODULE'S OWN NAMESPACE, and that is the security claim.
+
+    A declaration composes the shipped policies and configures them; it can never name an
+    arbitrary importable object. Both refusals were dead because the packaged declaration
+    names only real policies: a name that is not a policy class at all, and the ABSTRACT
+    policy itself — which would register a base class that measures nothing and answers for
+    every measurement it was given.
+    """
+    with pytest.raises(MeasurementPolicyError, match="is not a MeasurementPolicy"):
+        policies_from_document({"policies": [{"policy": "Path"}]})
+    with pytest.raises(MeasurementPolicyError, match="is not a MeasurementPolicy"):
+        policies_from_document({"policies": [{"policy": "NoSuchPolicyWasEverShipped"}]})
+    with pytest.raises(MeasurementPolicyError, match="abstract policy cannot be registered"):
+        policies_from_document({"policies": [{"policy": "MeasurementPolicy"}]})
+
+
+def test_a_policy_that_cannot_be_configured_names_itself_in_the_refusal() -> None:
+    """A DECLARED CONFIGURATION THAT THE POLICY REFUSES IS THE DECLARATION'S FAULT.
+
+    ``precedence`` is coerced to an integer and ``blocking`` to a boolean, so a declaration
+    supplying something neither can be built from fails at construction. The refusal carries
+    the policy name and the underlying detail, because a bare "could not be configured" over a
+    nine-entry declaration tells a reader nothing about which entry to fix.
+    """
+    with pytest.raises(MeasurementPolicyError, match="could not be configured") as raised:
+        policies_from_document(
+            {"policies": [{"policy": "OwnershipCoveragePolicy", "precedence": "not-a-number"}]}
+        )
+
+    assert raised.value.context["policy"] == "OwnershipCoveragePolicy"
+    assert raised.value.context["detail"]
+
+
+def test_a_composition_declaring_no_policy_is_refused() -> None:
+    """AN EMPTY COMPOSITION MEASURES NOTHING AND WOULD REPORT EVERYTHING CLOSED.
+
+    An empty ``policies`` list is well formed and unusable: a suite over zero policies is
+    vacuously complete, so the engine would certify every project it was pointed at. Refusing
+    is what keeps "no policy failed" from meaning "no policy ran".
+    """
+    with pytest.raises(MeasurementPolicyError, match="declares no policy"):
+        policies_from_document({"policies": []})
+
+
+def test_a_supplied_registry_overrides_the_declaration_entirely() -> None:
+    """THREE WAYS TO COMPOSE THE ENGINE AND THE FIRST HAD NO CALLER.
+
+    A registry handed in overrides the declaration; a document specialises it; neither means
+    the packaged declaration governs. The override is what lets a caller measure a policy set
+    it built or narrowed in memory — without it the only way to run a different set would be
+    to write a declaration file first, which makes an in-process composition impossible to
+    express.
+    """
+    narrowed = MeasurementPolicyRegistry((OwnershipCoveragePolicy(),))
+
+    engine = bootstrap_measurement_policies(narrowed)
+
+    assert engine.registry is narrowed
+    assert engine.registry.count == 1
+    assert bootstrap_measurement_policies().registry.count == 9
