@@ -16,7 +16,6 @@ recovered rather than copied.
 
 from __future__ import annotations
 
-import dataclasses
 import json
 from pathlib import Path
 from platform.universal_control_plane import ControlPlane
@@ -29,6 +28,7 @@ from platform.universal_control_plane.ontology import (
     LIFECYCLE_DRAFT,
     BacklogItem,
     Vision,
+    dataclass,
 )
 from platform.universal_project_state import (
     DEPENDENCY_KEYS,
@@ -377,9 +377,7 @@ def test_an_unreadable_truth_substrate_fails_closed():
         def truth(self) -> object:
             raise RuntimeError("substrate gone")
 
-    import dataclasses
-
-    @dataclasses.dataclass
+    @dataclass
     class FakePlane:
         truth: Broken
 
@@ -388,9 +386,7 @@ def test_an_unreadable_truth_substrate_fails_closed():
 
 
 def test_a_plane_without_a_truth_engine_records_an_empty_truth_id():
-    import dataclasses
-
-    @dataclasses.dataclass
+    @dataclass
     class BarePlane:
         note: str = "no engines here"
 
@@ -797,7 +793,7 @@ def test_a_plane_field_projecting_something_that_is_not_a_mapping_is_skipped():
     consumer iterates as mappings.
     """
 
-    @dataclasses.dataclass
+    @dataclass
     class _Plane:
         good: object
         odd: object
