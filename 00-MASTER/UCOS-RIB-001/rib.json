@@ -3014,8 +3014,8 @@
         ],
         "engine.tests -> engine.compiler": [
           "engine/tests/conftest.py",
-          "engine/tests/contract/test_compiler_pipeline.py",
-          "engine/tests/factory/test_classifier.py"
+          "engine/tests/context/test_resolution_composition.py",
+          "engine/tests/contract/test_compiler_pipeline.py"
         ],
         "engine.tests -> engine.conformance": [
           "engine/tests/conformance/test_agnosticism_conformance.py"
@@ -3027,7 +3027,8 @@
         ],
         "engine.tests -> engine.construct": [
           "engine/tests/unit/test_construct_foundation.py",
-          "engine/tests/unit/test_enforcement_closure.py"
+          "engine/tests/unit/test_enforcement_closure.py",
+          "engine/tests/unit/test_recursive_knowledge.py"
         ],
         "engine.tests -> engine.context": [
           "engine/tests/ceu/test_context_binding.py",
@@ -3165,7 +3166,8 @@
           "engine/tests/unit/test_runtime_bridge.py"
         ],
         "engine.tests -> engine.verification_impact": [
-          "engine/tests/unit/test_verification_impact.py"
+          "engine/tests/unit/test_verification_impact.py",
+          "engine/tests/unit/test_verification_intelligence.py"
         ],
         "engine.tests -> engine.verification_intelligence": [
           "engine/tests/unit/test_verification_cost_model.py",
@@ -3678,6 +3680,10 @@
           "platform/tests/test_dag_ledger.py",
           "platform/tests/test_durable_identity.py"
         ],
+        "platform.tests -> engine.omega_infinite": [
+          "platform/tests/test_ledger_authority.py",
+          "platform/tests/test_repository_intelligence_substrate.py"
+        ],
         "platform.tests -> engine.registry": [
           "platform/tests/_measurement_helpers.py",
           "platform/tests/test_measurement_cli.py"
@@ -3703,6 +3709,12 @@
           "platform/tests/certification_console_helpers.py",
           "platform/tests/test_validation_console_context.py",
           "platform/tests/test_validation_console_contracts.py"
+        ],
+        "platform.tests -> engine.verification_intelligence": [
+          "platform/tests/test_canonical_validation_evidence.py"
+        ],
+        "platform.tests -> intelligence.rie": [
+          "platform/tests/test_repository_intelligence_substrate.py"
         ],
         "platform.tests -> platform": [
           "platform/tests/test_commercial_contracts.py"
@@ -4169,7 +4181,7 @@
           "service/tests/test_band11_freeze.py"
         ]
       },
-      "edges": 359,
+      "edges": 362,
       "id": "PLN-CODE",
       "kind": "python_import_graph",
       "nodes": 100,
@@ -4340,7 +4352,7 @@
         }
       ],
       "edge_sites": {},
-      "edges": 9800,
+      "edges": 9913,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
       "nodes": 2226,
@@ -4847,42 +4859,42 @@
         "dependents": 4,
         "disposition": "EXTEND",
         "rank": 59,
-        "unit_key": "engine.coordinate_framework",
-        "wave": 2
-      },
-      {
-        "dependents": 4,
-        "disposition": "EXTEND",
-        "rank": 60,
-        "unit_key": "engine.enforcement_closure",
-        "wave": 2
-      },
-      {
-        "dependents": 4,
-        "disposition": "EXTEND",
-        "rank": 61,
-        "unit_key": "engine.infinite_scope",
-        "wave": 2
-      },
-      {
-        "dependents": 4,
-        "disposition": "EXTEND",
-        "rank": 62,
-        "unit_key": "engine.lineage",
-        "wave": 2
-      },
-      {
-        "dependents": 4,
-        "disposition": "EXTEND",
-        "rank": 63,
         "unit_key": "engine.uaue",
         "wave": 2
       },
       {
         "dependents": 4,
         "disposition": "EXTEND",
+        "rank": 60,
+        "unit_key": "engine.verification_intelligence",
+        "wave": 2
+      },
+      {
+        "dependents": 4,
+        "disposition": "EXTEND",
+        "rank": 61,
+        "unit_key": "engine.coordinate_framework",
+        "wave": 2
+      },
+      {
+        "dependents": 4,
+        "disposition": "EXTEND",
+        "rank": 62,
+        "unit_key": "engine.enforcement_closure",
+        "wave": 2
+      },
+      {
+        "dependents": 4,
+        "disposition": "EXTEND",
+        "rank": 63,
+        "unit_key": "engine.infinite_scope",
+        "wave": 2
+      },
+      {
+        "dependents": 4,
+        "disposition": "EXTEND",
         "rank": 64,
-        "unit_key": "engine.conformance",
+        "unit_key": "engine.lineage",
         "wave": 2
       },
       {
@@ -4896,14 +4908,14 @@
         "dependents": 4,
         "disposition": "EXTEND",
         "rank": 66,
-        "unit_key": "engine.root_ontology",
+        "unit_key": "engine.conformance",
         "wave": 2
       },
       {
         "dependents": 4,
         "disposition": "EXTEND",
         "rank": 67,
-        "unit_key": "engine.verification_intelligence",
+        "unit_key": "engine.root_ontology",
         "wave": 2
       },
       {
@@ -5285,7 +5297,7 @@
         "wave": 7
       },
       {
-        "dependents": 5,
+        "dependents": 6,
         "disposition": "EXTEND",
         "rank": 122,
         "unit_key": "intelligence.rie",
@@ -5735,6 +5747,7 @@
           "engine",
           "engine.certification",
           "engine.knowledge",
+          "engine.omega_infinite",
           "engine.registry",
           "engine.runtime",
           "engine.tests",
@@ -5742,6 +5755,7 @@
           "engine.universal_certification",
           "engine.universal_discovery",
           "engine.validation",
+          "engine.verification_intelligence",
           "infrastructure",
           "intelligence.realization.generators",
           "intelligence.rie",
@@ -21818,12 +21832,13 @@
       "canonical_name": "engine.ceu",
       "consumer_units": [
         "engine.nucleus",
-        "engine.tests"
+        "engine.tests",
+        "engine.tests.unit.test_construct_foundation"
       ],
-      "consumers": 2,
+      "consumers": 3,
       "corpus_artifacts": 0,
       "declared": "engine.ceu",
-      "degree": 6,
+      "degree": 7,
       "dependencies": 4,
       "dependency_units": [
         "engine.compiler",
@@ -22304,12 +22319,16 @@
         "engine.ceu",
         "engine.knowledge",
         "engine.nucleus",
-        "engine.tests"
+        "engine.tests",
+        "engine.tests.context.test_certification_evidence",
+        "engine.tests.context.test_location",
+        "engine.tests.context.test_location_assurance_negatives",
+        "engine.tests.context.test_resolution_composition"
       ],
-      "consumers": 4,
+      "consumers": 8,
       "corpus_artifacts": 0,
       "declared": "engine.context",
-      "degree": 25,
+      "degree": 29,
       "dependencies": 21,
       "dependency_units": [
         "engine.compiler",
@@ -23718,12 +23737,14 @@
         "intelligence.kernel",
         "intelligence.realization",
         "intelligence.research",
-        "intelligence.tests"
+        "intelligence.tests",
+        "intelligence.tests.test_realization",
+        "intelligence.tests.test_research_intelligence"
       ],
-      "consumers": 7,
+      "consumers": 9,
       "corpus_artifacts": 0,
       "declared": "engine.knowledge",
-      "degree": 25,
+      "degree": 27,
       "dependencies": 18,
       "dependency_units": [
         "engine.context",
@@ -23804,12 +23825,13 @@
     {
       "canonical_name": "engine.knowledge.integration",
       "consumer_units": [
+        "engine.tests.knowledge.integration.test_pipeline",
         "engine.tests.knowledge.integration.test_repository"
       ],
-      "consumers": 1,
+      "consumers": 2,
       "corpus_artifacts": 0,
       "declared": "engine.knowledge.integration",
-      "degree": 15,
+      "degree": 16,
       "dependencies": 14,
       "dependency_units": [
         "engine.knowledge.integration.composition",
@@ -24193,12 +24215,13 @@
       "canonical_name": "engine.object_birth",
       "consumer_units": [
         "engine.tests",
+        "engine.tests.unit.test_birth_scope",
         "engine.tests.unit.test_object_birth"
       ],
-      "consumers": 2,
+      "consumers": 3,
       "corpus_artifacts": 0,
       "declared": "engine.object_birth",
-      "degree": 8,
+      "degree": 9,
       "dependencies": 6,
       "dependency_units": [
         "engine.object_birth.birth",
@@ -24389,12 +24412,13 @@
     {
       "canonical_name": "engine.omega_governance.temporal",
       "consumer_units": [
-        "engine.tests.omega_governance.test_package_architecture"
+        "engine.tests.omega_governance.test_package_architecture",
+        "engine.tests.omega_governance.test_temporal_coordinate_and_clocks"
       ],
-      "consumers": 1,
+      "consumers": 2,
       "corpus_artifacts": 0,
       "declared": "engine.omega_governance.temporal",
-      "degree": 1,
+      "degree": 2,
       "dependencies": 0,
       "dependency_units": [],
       "dependents": 0,
@@ -24464,12 +24488,14 @@
         "engine.uicm",
         "engine.universal_discovery",
         "intelligence.rie",
-        "platform.repository_intelligence"
+        "platform.repository_intelligence",
+        "platform.tests",
+        "platform.tests.test_ledger_authority"
       ],
-      "consumers": 15,
+      "consumers": 17,
       "corpus_artifacts": 0,
       "declared": "engine.omega_infinite",
-      "degree": 20,
+      "degree": 22,
       "dependencies": 5,
       "dependency_units": [
         "engine.omega_infinite.artifact",
@@ -26946,13 +26972,17 @@
       "canonical_name": "engine.uaue",
       "consumer_units": [
         "engine.tests",
+        "engine.tests.unit.test_uaue_controller",
+        "engine.tests.unit.test_uaue_engine_refusals",
+        "engine.tests.unit.test_uaue_evolution_authority",
+        "engine.tests.unit.test_uaue_evolution_engine",
         "engine.tests.unit.test_uaue_exit_criteria",
         "engine.tests.unit.test_uaue_register_surface"
       ],
-      "consumers": 3,
+      "consumers": 7,
       "corpus_artifacts": 0,
       "declared": "engine.uaue",
-      "degree": 8,
+      "degree": 12,
       "dependencies": 5,
       "dependency_units": [
         "engine.foundation",
@@ -27039,6 +27069,7 @@
         "engine.root_ontology",
         "engine.tests",
         "engine.tests.uckp.test_cli_and_package",
+        "engine.tests.unit.test_uaue_exit_criteria",
         "engine.uaue",
         "engine.uicm",
         "engine.universal_certification",
@@ -27046,10 +27077,10 @@
         "platform.tests",
         "platform.universal_provider"
       ],
-      "consumers": 28,
+      "consumers": 29,
       "corpus_artifacts": 0,
       "declared": "engine.uckp",
-      "degree": 29,
+      "degree": 30,
       "dependencies": 1,
       "dependency_units": [
         "engine.foundation"
@@ -27275,6 +27306,7 @@
         "engine.tests",
         "engine.tests.omega_infinite.test_compat_and_evidence",
         "engine.tests.unit.test_certification_integrity",
+        "engine.tests.unit.test_verification_intelligence",
         "engine.tests.universal_discovery.test_authority",
         "engine.tests.universal_discovery.test_classification",
         "engine.tests.universal_discovery.test_discovery",
@@ -27288,10 +27320,10 @@
         "platform.tests",
         "platform.tests.test_coverage_scope"
       ],
-      "consumers": 17,
+      "consumers": 18,
       "corpus_artifacts": 0,
       "declared": "engine.universal_discovery",
-      "degree": 19,
+      "degree": 20,
       "dependencies": 2,
       "dependency_units": [
         "engine.omega_infinite",
@@ -27513,12 +27545,14 @@
       "canonical_name": "engine.verification_intelligence",
       "consumer_units": [
         "engine.tests",
-        "engine.tests.unit.test_verification_intelligence"
+        "engine.tests.unit.test_verification_cost_model",
+        "engine.tests.unit.test_verification_intelligence",
+        "platform.tests"
       ],
-      "consumers": 2,
+      "consumers": 4,
       "corpus_artifacts": 0,
       "declared": "engine.verification_intelligence",
-      "degree": 9,
+      "degree": 11,
       "dependencies": 7,
       "dependency_units": [
         "engine.verification_impact",
@@ -28082,12 +28116,13 @@
         "intelligence.realization",
         "intelligence.realization.cli",
         "intelligence.realization.evidence",
-        "intelligence.realization.generation"
+        "intelligence.realization.generation",
+        "intelligence.tests.test_realization"
       ],
-      "consumers": 4,
+      "consumers": 5,
       "corpus_artifacts": 0,
       "declared": "intelligence.realization.generators",
-      "degree": 14,
+      "degree": 15,
       "dependencies": 10,
       "dependency_units": [
         "intelligence.realization.contracts",
@@ -28158,12 +28193,13 @@
         "intelligence.research.engine",
         "intelligence.research.registry",
         "intelligence.research.validation",
-        "intelligence.tests"
+        "intelligence.tests",
+        "intelligence.tests.test_research_intelligence"
       ],
-      "consumers": 5,
+      "consumers": 6,
       "corpus_artifacts": 0,
       "declared": "intelligence.research",
-      "degree": 7,
+      "degree": 8,
       "dependencies": 2,
       "dependency_units": [
         "engine.knowledge",
@@ -28226,18 +28262,21 @@
       "consumer_units": [
         "intelligence.kernel",
         "intelligence.realization",
-        "intelligence.tests"
+        "intelligence.tests",
+        "intelligence.tests.test_rie",
+        "platform.tests",
+        "platform.tests.test_repository_intelligence_substrate"
       ],
-      "consumers": 3,
+      "consumers": 6,
       "corpus_artifacts": 0,
       "declared": "intelligence.rie",
-      "degree": 5,
+      "degree": 8,
       "dependencies": 2,
       "dependency_units": [
         "engine.omega_infinite",
         "platform.repository_operations"
       ],
-      "dependents": 5,
+      "dependents": 6,
       "disposition": "EXTEND",
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
@@ -29767,15 +29806,17 @@
         "platform.repository_intelligence.generated_artifacts",
         "platform.repository_intelligence.mutation_classification",
         "platform.tests",
+        "platform.tests.test_generated_artifact_registry",
         "platform.tests.test_mutation_classification",
+        "platform.tests.test_repository_contamination",
         "platform.tests.test_repository_intelligence_dimensions",
         "platform.tests.test_repository_intelligence_substrate",
         "platform.tests.test_universal_canonical_governance"
       ],
-      "consumers": 7,
+      "consumers": 9,
       "corpus_artifacts": 0,
       "declared": "platform.repository_intelligence",
-      "degree": 24,
+      "degree": 26,
       "dependencies": 17,
       "dependency_units": [
         "engine.acceptance",
@@ -30186,12 +30227,13 @@
       "consumers": 0,
       "corpus_artifacts": 0,
       "declared": "platform.tests",
-      "degree": 48,
-      "dependencies": 48,
+      "degree": 51,
+      "dependencies": 51,
       "dependency_units": [
         "engine",
         "engine.certification",
         "engine.foundation",
+        "engine.omega_infinite",
         "engine.registry",
         "engine.runtime",
         "engine.tests",
@@ -30199,6 +30241,8 @@
         "engine.universal_certification",
         "engine.universal_discovery",
         "engine.validation",
+        "engine.verification_intelligence",
+        "intelligence.rie",
         "platform",
         "platform.administration",
         "platform.artifact_explorer",
@@ -30261,7 +30305,7 @@
         "PLN-MODULE"
       ],
       "program": "platform",
-      "providers": 48,
+      "providers": 51,
       "reachable": true,
       "reachable_by": [
         "rie_id",
@@ -31183,12 +31227,13 @@
       "canonical_name": "platform.universal_provider",
       "consumer_units": [
         "platform.providers",
-        "platform.tests"
+        "platform.tests",
+        "platform.tests.test_provider_validation"
       ],
-      "consumers": 2,
+      "consumers": 3,
       "corpus_artifacts": 0,
       "declared": "platform.universal_provider",
-      "degree": 15,
+      "degree": 16,
       "dependencies": 13,
       "dependency_units": [
         "engine.uckp",

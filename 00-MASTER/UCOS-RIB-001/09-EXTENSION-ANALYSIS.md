@@ -137,7 +137,7 @@
 | `UCOS-RIB-001-CAP-0388` | `intelligence.realization` | **EXTEND** | the canonical capability owner already records this capability as reuse-with-… | 1 | 9 |
 | `UCOS-RIB-001-CAP-0389` | `intelligence.realization.generators` | **EXTEND** | the canonical capability owner already records this capability as reuse-with-… | 2 | 1 |
 | `UCOS-RIB-001-CAP-0390` | `intelligence.research` | **EXTEND** | the canonical capability owner already records this capability as reuse-with-… | 2 | 10 |
-| `UCOS-RIB-001-CAP-0391` | `intelligence.rie` | **EXTEND** | the canonical capability owner already records this capability as reuse-with-… | 5 | 8 |
+| `UCOS-RIB-001-CAP-0391` | `intelligence.rie` | **EXTEND** | the canonical capability owner already records this capability as reuse-with-… | 6 | 8 |
 | `UCOS-RIB-001-CAP-0392` | `intelligence.tests` | **CONFIGURE** | the unit is a verification suite the canonical runner does not collect — what… | 0 | 12 |
 | `UCOS-RIB-001-CAP-0394` | `platform.administration` | **EXTEND** | the unit is implemented and consumed but lies outside the declared verificati… | 2 | 5 |
 | `UCOS-RIB-001-CAP-0395` | `platform.artifact_explorer` | **EXTEND** | the unit is implemented and consumed but lies outside the declared verificati… | 1 | 8 |

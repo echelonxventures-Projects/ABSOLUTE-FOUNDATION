@@ -45,7 +45,7 @@
 | 6 | 5 | `engine.nucleus`, `engine.runtime`, `platform.blueprints`, `platform.universal_foundation`, `platform.universal_portal` | `engine.acceptance`, `engine.certification`, `engine.ceu`, `engine.compiler`, `engine.context`, `engine.knowledge`, `engine.registry`, `engine.uckp`, `engine.validation`, `platform.administration`, `platform.certification`, `platform.coverage`, `platform.foundation`, `platform.identity`, `platform.observability`, `platform.portal`, `platform.projects`, `platform.universal_assimila…`, `platform.universal_measurem…`, `platform.universal_ownership`, `platform.universal_truth`, `platform.validation`, `platform.workspace` |
 | 7 | 15 | `application`, `data`, `engine.constitution`, `engine.factory`, `engine.governance`, `engine.universal_certification`, `infrastructure`, `platform.commercial_intelligence`, `platform.generation`, `platform.repository_operations`, `platform.runtime_operations`, `platform.universal_generator`, `platform.universal_validation`, `platform.validation_intelligence`, `service` | `engine.acceptance`, `engine.certification`, `engine.compiler`, `engine.determinism`, `engine.nucleus`, `engine.registry`, `engine.runtime`, `engine.uckp`, `engine.validation`, `platform.blueprints`, `platform.certification`, `platform.foundation`, `platform.identity`, `platform.observability`, `platform.universal_foundati…`, `platform.workspace` |
 | 8 | 9 | `application.tests`, `engine.tests`, `engine.uicm`, `intelligence.rie`, `platform.artifact_explorer`, `platform.execution_dashboard`, `platform.repository_intelligence`, `platform.universal_assurance`, `service.tests` | `application`, `engine`, `engine.acceptance`, `engine.certification`, `engine.certification_integr…`, `engine.ceu`, `engine.civilization`, `engine.compiler`, `engine.conformance`, `engine.constitution`, `engine.construct`, `engine.context`, `engine.coordinate_framework`, `engine.determinism`, `engine.discovery`, `engine.enforcement_closure`, `engine.execution_environment`, `engine.factory`, `engine.governance`, `engine.graph`, `engine.infinite_scope`, `engine.kernel`, `engine.knowledge`, `engine.lineage`, `engine.nucleus`, `engine.object_birth`, `engine.omega_governance`, `engine.omega_infinite`, `engine.provider`, `engine.registry`, `engine.registry_coverage`, `engine.root_ontology`, `engine.runtime`, `engine.substrate`, `engine.temporal`, `engine.uaue`, `engine.uckp`, `engine.universal_certificat…`, `engine.universal_discovery`, `engine.validation`, `engine.verification_impact`, `engine.verification_intelli…`, `engine.zero_class`, `platform.blueprints`, `platform.foundation`, `platform.generation`, `platform.identity`, `platform.observability`, `platform.repository_operati…`, `platform.universal_validati…`, `platform.validation_intelli…`, `platform.workspace`, `service` |
-| 9 | 5 | `data.tests`, `infrastructure.tests`, `intelligence.kernel`, `intelligence.realization`, `platform.tests` | `data`, `engine`, `engine.certification`, `engine.knowledge`, `engine.registry`, `engine.runtime`, `engine.tests`, `engine.uckp`, `engine.universal_certificat…`, `engine.universal_discovery`, `engine.validation`, `infrastructure`, `intelligence.realization.ge…`, `intelligence.rie`, `platform.administration`, `platform.artifact_explorer`, `platform.blueprints`, `platform.certification`, `platform.commercial_intelli…`, `platform.coverage`, `platform.execution_dashboard`, `platform.foundation`, `platform.generation`, `platform.identity`, `platform.measurement`, `platform.observability`, `platform.portal`, `platform.projects`, `platform.repository_intelli…`, `platform.repository_operati…`, `platform.runtime_operations`, `platform.runtime_platform`, `platform.security`, `platform.universal_assimila…`, `platform.universal_assurance`, `platform.universal_control_…`, `platform.universal_foundati…`, `platform.universal_generator`, `platform.universal_master_p…`, `platform.universal_measurem…`, `platform.universal_ownership`, `platform.universal_pipeline`, `platform.universal_portal`, `platform.universal_project_…`, `platform.universal_provider`, `platform.universal_truth`, `platform.universal_validati…`, `platform.validation`, `platform.validation_intelli…`, `platform.workspace` |
+| 9 | 5 | `data.tests`, `infrastructure.tests`, `intelligence.kernel`, `intelligence.realization`, `platform.tests` | `data`, `engine`, `engine.certification`, `engine.knowledge`, `engine.omega_infinite`, `engine.registry`, `engine.runtime`, `engine.tests`, `engine.uckp`, `engine.universal_certificat…`, `engine.universal_discovery`, `engine.validation`, `engine.verification_intelli…`, `infrastructure`, `intelligence.realization.ge…`, `intelligence.rie`, `platform.administration`, `platform.artifact_explorer`, `platform.blueprints`, `platform.certification`, `platform.commercial_intelli…`, `platform.coverage`, `platform.execution_dashboard`, `platform.foundation`, `platform.generation`, `platform.identity`, `platform.measurement`, `platform.observability`, `platform.portal`, `platform.projects`, `platform.repository_intelli…`, `platform.repository_operati…`, `platform.runtime_operations`, `platform.runtime_platform`, `platform.security`, `platform.universal_assimila…`, `platform.universal_assurance`, `platform.universal_control_…`, `platform.universal_foundati…`, `platform.universal_generator`, `platform.universal_master_p…`, `platform.universal_measurem…`, `platform.universal_ownership`, `platform.universal_pipeline`, `platform.universal_portal`, `platform.universal_project_…`, `platform.universal_provider`, `platform.universal_truth`, `platform.universal_validati…`, `platform.validation`, `platform.validation_intelli…`, `platform.workspace` |
 | 10 | 1 | `intelligence.research` | `engine.knowledge`, `intelligence.kernel` |
 | 11 | 1 | `intelligence.publication` | `intelligence.kernel`, `intelligence.research` |
 | 12 | 1 | `intelligence.tests` | `engine.knowledge`, `intelligence`, `intelligence.kernel`, `intelligence.publication`, `intelligence.realization`, `intelligence.research`, `intelligence.rie` |
@@ -127,15 +127,15 @@
 | 56 | `engine.acceptance` | **EXTEND** | 2 | 29 |
 | 57 | `engine.kernel` | **EXTEND** | 2 | 8 |
 | 58 | `engine.universal_discovery` | **EXTEND** | 2 | 5 |
-| 59 | `engine.coordinate_framework` | **EXTEND** | 2 | 4 |
-| 60 | `engine.enforcement_closure` | **EXTEND** | 2 | 4 |
-| 61 | `engine.infinite_scope` | **EXTEND** | 2 | 4 |
-| 62 | `engine.lineage` | **EXTEND** | 2 | 4 |
-| 63 | `engine.uaue` | **EXTEND** | 2 | 4 |
-| 64 | `engine.conformance` | **EXTEND** | 2 | 4 |
+| 59 | `engine.uaue` | **EXTEND** | 2 | 4 |
+| 60 | `engine.verification_intelligence` | **EXTEND** | 2 | 4 |
+| 61 | `engine.coordinate_framework` | **EXTEND** | 2 | 4 |
+| 62 | `engine.enforcement_closure` | **EXTEND** | 2 | 4 |
+| 63 | `engine.infinite_scope` | **EXTEND** | 2 | 4 |
+| 64 | `engine.lineage` | **EXTEND** | 2 | 4 |
 | 65 | `engine.object_birth` | **EXTEND** | 2 | 4 |
-| 66 | `engine.root_ontology` | **EXTEND** | 2 | 4 |
-| 67 | `engine.verification_intelligence` | **EXTEND** | 2 | 4 |
+| 66 | `engine.conformance` | **EXTEND** | 2 | 4 |
+| 67 | `engine.root_ontology` | **EXTEND** | 2 | 4 |
 | 68 | `engine.registry_coverage` | **EXTEND** | 2 | 4 |
 | 69 | `platform.universal_project_state` | **EXTEND** | 2 | 2 |
 | 70 | `platform.universal_provider` | **EXTEND** | 2 | 2 |
@@ -190,7 +190,7 @@
 | 119 | `platform.commercial_intelligence` | **EXTEND** | 7 | 1 |
 | 120 | `platform.runtime_operations` | **EXTEND** | 7 | 1 |
 | 121 | `platform.universal_generator` | **EXTEND** | 7 | 1 |
-| 122 | `intelligence.rie` | **EXTEND** | 8 | 5 |
+| 122 | `intelligence.rie` | **EXTEND** | 8 | 6 |
 | 123 | `engine.tests` | **CONFIGURE** | 8 | 3 |
 | 124 | `platform.repository_intelligence` | **EXTEND** | 8 | 1 |
 | 125 | `platform.universal_assurance` | **EXTEND** | 8 | 1 |
