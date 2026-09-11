@@ -16,6 +16,7 @@ recovered rather than copied.
 
 from __future__ import annotations
 
+import dataclasses
 import json
 from pathlib import Path
 from platform.universal_control_plane import ControlPlane
@@ -682,3 +683,161 @@ def test_no_wall_clock_reaches_project_state():
         source = path.read_text(encoding="utf-8")
         for forbidden in ("import time", "datetime", "utcnow", "import random", "uuid"):
             assert forbidden not in source, f"{path.name} reaches for {forbidden}"
+
+
+# ---------------------------------------------------------------------------
+# the arms a well-formed control plane never takes
+# ---------------------------------------------------------------------------
+
+
+def test_a_re_exported_name_is_discovered_only_where_it_is_declared():
+    """A NAME DISCOVERED TWICE UNDER TWO PATHS IS ONE ENTITY KIND COUNTED TWICE.
+
+    The module check is what enforces that, and its SKIP had never run: the two modules
+    discovery is pointed at here happen to declare everything they expose. A control-plane
+    package re-exports its ontology, so pointing discovery at the package rather than at the
+    module it is declared in is the ordinary way to hit this — and without the skip the same
+    frozen dataclass would enter the kind vocabulary under both paths.
+    """
+    from platform.universal_control_plane import ontology
+    from platform.universal_control_plane import state as lifecycle_module
+
+    assert "Transition" in dir(lifecycle_module)
+    assert discover_entity_kinds(lifecycle_module) == ("Transition",)
+
+    # `ontology` re-exports nothing it does not declare, so every discovered kind is its own.
+    for kind in discover_entity_kinds(ontology):
+        assert getattr(ontology, kind).__module__ == ontology.__name__
+
+    # A module that exposes a dataclass declared elsewhere discovers none of it.
+    assert discover_entity_kinds(pytest) == ()
+
+
+def test_a_projection_keyed_only_on_identity_is_read_from_identity():
+    """IDENTITY IS THE FALLBACK, AND IT HAD NO CASE.
+
+    Every ontology ``to_dict`` emits a ``*_id`` key, so the positional scan always answers
+    and the fallback below it was dead. It is what keeps the reader total over a projection
+    that carries a content identity and no domain identifier — a shape a hand-built or
+    rehydrated record takes — and without it such a record would be refused as identifierless
+    while plainly carrying an identity.
+    """
+    assert entity_id_of({"kind": "Goal", "identity": "UCOS-CP-abc123"}) == "UCOS-CP-abc123"
+    with pytest.raises(ProjectStateError, match="declares no identifier"):
+        entity_id_of({"kind": "Goal", "identity": "   "})
+
+
+def test_an_entity_resolves_a_declared_fact_and_renders_itself():
+    """THE OPEN FACT BAG IS THE POINT OF THE MODEL, AND NOTHING HAD READ FROM IT.
+
+    An entity carries whatever its ontology projection declared, so the resolver is how a
+    consumer asks about a field this package does not enumerate — the mechanism that lets a
+    new ontology field be queried without a change here. The render beside it is how an
+    entity leaves the process, and it names the entity kind under a distinct key so a
+    rendered entity cannot be mistaken for the projection it was built from.
+    """
+    entity = StateEntity.from_projection(
+        {"kind": "Goal", "goal_id": "GOAL-1", "title": "a goal", "lifecycle": "ACTIVE"}
+    )
+
+    assert entity.fact("title") == "a goal"
+    assert entity.fact("a-field-no-ontology-declares") is None
+
+    rendered = entity.to_dict()
+    assert rendered["kind"] == "StateEntity"
+    assert rendered["entity_kind"] == "Goal"
+    assert rendered["entity_id"] == "GOAL-1"
+
+
+def test_the_registry_selects_the_entities_of_one_kind():
+    """A REGISTRY THAT CAN ONLY BE READ WHOLE IS A REGISTRY NOBODY CAN QUERY.
+
+    The kind vocabulary is read and the whole population is read, so the selector between
+    them had no caller — and it is what every per-kind report is built from. Selecting on the
+    entity's declared kind rather than filtering the projection again is what keeps the
+    answer consistent with the vocabulary the registry publishes.
+    """
+    registry = ProjectStateRegistry()
+    registry.register(StateEntity.from_projection({"kind": "Goal", "goal_id": "GOAL-1"}))
+    registry.register(StateEntity.from_projection({"kind": "Goal", "goal_id": "GOAL-2"}))
+    registry.register(StateEntity.from_projection({"kind": "Vision", "vision_id": "VIS-1"}))
+
+    assert [e.entity_id for e in registry.of_kind("Goal")] == ["GOAL-1", "GOAL-2"]
+    assert [e.entity_id for e in registry.of_kind("Vision")] == ["VIS-1"]
+    assert registry.of_kind("a-kind-nothing-registered") == ()
+
+
+def test_a_projection_nested_past_the_declared_depth_is_not_walked_forever():
+    """THE BOUND EXISTS SO A SELF-REFERENTIAL PROJECTION CANNOT MAKE HARVESTING ENDLESS.
+
+    A control-plane projection nests a plan three levels deep, so the bound is never
+    approached and the arm enforcing it had never run. A projection that contains itself —
+    a rehydrated document with a cycle, or a plane whose engine renders its own parent — is
+    what it exists for: without it the walk does not terminate, and with it the harvest is
+    finite and the entities above the bound are still found.
+    """
+    from platform.universal_project_state.state_runtime import MAX_PROJECTION_DEPTH, _harvest
+
+    node: dict = {"kind": "Goal", "goal_id": "GOAL-DEEP"}
+    for _ in range(MAX_PROJECTION_DEPTH + 4):
+        node = {"nested": node}
+
+    found = _harvest(node, frozenset({"Goal"}))
+
+    assert found == [], "everything below the bound is left unwalked rather than looped over"
+    assert _harvest({"nested": {"kind": "Goal", "goal_id": "G"}}, frozenset({"Goal"})) != []
+
+
+def test_a_plane_field_projecting_something_that_is_not_a_mapping_is_skipped():
+    """A ``to_dict`` THAT DOES NOT RETURN A DOCUMENT PROJECTS NOTHING.
+
+    Every engine on the composed plane renders a mapping, so the guard had no case. A field
+    that publishes a callable ``to_dict`` returning a list or a string is not a projection
+    this harvester can read, and appending it would put a non-document into a sequence every
+    consumer iterates as mappings.
+    """
+
+    @dataclasses.dataclass
+    class _Plane:
+        good: object
+        odd: object
+        absent: object = None
+
+    class _Good:
+        @staticmethod
+        def to_dict() -> dict:
+            return {"kind": "Goal", "goal_id": "GOAL-1"}
+
+    class _Odd:
+        @staticmethod
+        def to_dict() -> list:
+            return ["not a document"]
+
+    projections = plane_projections(_Plane(_Good(), _Odd()))
+
+    assert projections == ({"kind": "Goal", "goal_id": "GOAL-1"},)
+
+
+def test_a_journal_whose_chain_is_broken_does_not_replay(tmp_path: Path):
+    """REPLAY IS TWO CLAIMS AND ONLY THE SECOND HAD A CASE.
+
+    A snapshot that reconstructs to a different identity was tested. The first claim — that
+    the journal's own chain is intact — had not been falsified, and it is the one that
+    matters more: a tampered journal can be made to reconstruct anything, so checking the
+    reconstruction without checking the chain would let a rewritten history "replay"
+    perfectly.
+    """
+    journal = DurableJournal.open(tmp_path)
+    snapshot = _snapshot(_entity("Goal", "G-1", owner="T1"))
+    record_snapshot(journal, snapshot, tick=1)
+    assert replays(journal, snapshot) is True
+
+    class _Broken:
+        @staticmethod
+        def verify() -> bool:
+            return False
+
+        def __getattr__(self, name: str):
+            return getattr(journal, name)
+
+    assert replays(_Broken(), snapshot) is False
