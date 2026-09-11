@@ -296,6 +296,63 @@ def check_the_two_bindings_are_the_omega_law_dimensions(
 CHECK_PREFIX = "check_"
 
 
+#: The absolute constitutional laws, transcribed verbatim from the register that carries them.
+#: UCCFA-L-07 counts each of these where it is carried; the dict values are the verbatim
+#: statements so a row whose text was edited in the register is refused rather than counted.
+#: Ω∞-000's row is the one verbatim statement too long for a single source line, so it is
+#: assembled from the three clauses the register states — the row is still matched whole.
+_ABSOLUTE_LAW_000 = (
+    "Every entity, relationship, transformation, capability, language, algorithm, organization, "
+    "institution, government, economy, AI, agent, robot, device, civilization, planet, galaxy, "
+    "universe, multiverse, known construct, unknown construct, past construct, present "
+    "construct, future construct, timeless construct, and hypothetical construct shall be "
+    "representable through: BEING EXISTENCE RELATIONSHIP TRANSFORMATION SPACE TIME SCALE "
+    "OBSERVER PERSPECTIVE and therefore remain: REPRESENTABLE GOVERNABLE TRACEABLE "
+    "EXPLAINABLE SIMULATABLE EVOLVABLE COMPILABLE"
+)
+ABSOLUTE_LAWS: tuple[tuple[str, str], ...] = (
+    ("Ω∞-000", _ABSOLUTE_LAW_000),
+    ("Ω∞-001", "Everything Is Derived From Being."),
+    ("Ω∞-002", "Everything Is Registry Driven."),
+    ("Ω∞-003", "Everything Is Compiler Governed."),
+    ("Ω∞-004", "Identity Before Participation."),
+    ("Ω∞-005", "Authority Before Change."),
+    ("Ω∞-006", "Evidence Before Truth Claims."),
+    ("Ω∞-007", "Governance Before Execution."),
+    ("Ω∞-008", "Memory Before Intelligence."),
+    ("Ω∞-009", "Intelligence Before Wisdom."),
+    ("Ω∞-010", "Wisdom Before Evolution."),
+    ("Ω∞-011", "Nothing May Violate Invariants."),
+    ("Ω∞-012", "Nothing May Bypass Sovereignty."),
+    ("Ω∞-013", "Everything Must Be Traceable."),
+    ("Ω∞-014", "Everything Must Be Auditable."),
+    ("Ω∞-015", "Everything Must Be Explainable."),
+    ("Ω∞-016", "Everything Must Be Evolvable."),
+    ("Ω∞-017", "Discovery Does Not Equal Execution."),
+    ("Ω∞-018", "Evolution Requires Governance."),
+    ("Ω∞-019", "Reality Is Constitutionally Governed."),
+    ("Ω∞-020", "All Future Constructs Must Be Derivable."),
+)
+
+
+def check_every_absolute_law_is_counted_where_it_is_carried(
+    contract: CoordinateContract, repo: str
+) -> tuple[str, ...]:
+    """UCCFA-L-07 — the twenty-one absolute laws, each counted where the register carries it."""
+    text = _read(repo, str(contract.omega_law["carried_by"]))
+    findings: list[str] = []
+    for law_id, statement in ABSOLUTE_LAWS:
+        rows = [line for line in text.splitlines() if f"**{law_id}**" in line]
+        if not rows:
+            findings.append(f"{law_id}: carried by no row of the absolute laws register")
+            continue
+        if len(rows) > 1:
+            findings.append(f"{law_id}: carried by {len(rows)} rows of one register")
+        if f"| **{law_id}** | {statement} |" not in text:
+            findings.append(f"{law_id}: its register row is not the verbatim statement")
+    return tuple(findings)
+
+
 def _implemented_checks() -> dict[str, Callable[[CoordinateContract, str], tuple[str, ...]]]:
     """Every law check this module defines, keyed by the name a declaration would use."""
     return {

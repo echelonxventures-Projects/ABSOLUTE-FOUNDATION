@@ -133,6 +133,43 @@ def test_l06_refuses_when_the_law_carries_no_row(tmp_path, document):
     assert _refusals(_measure(tmp_path, altered), "UCCFA-L-06")
 
 
+def test_l07_counts_exactly_the_twenty_one_absolute_laws():
+    # The register transcribes twenty-one ratified laws, Ω∞-000 through Ω∞-020, and the
+    # catalogue this module counts must name every one of them exactly once: a law the
+    # count omitted would read as ratified-and-unmeasured, which is the state UCCFA-L-07
+    # exists to refuse.
+    from engine.coordinate_framework.contract import ABSOLUTE_LAWS
+
+    ids = [law_id for law_id, _ in ABSOLUTE_LAWS]
+    assert ids == [f"Ω∞-{n:03d}" for n in range(21)]
+    assert ids == sorted(set(ids))
+
+
+def test_l07_refuses_a_law_the_register_no_longer_carries(tmp_path, document, monkeypatch):
+    altered = copy.deepcopy(document)
+    _swap_absolute_laws(monkeypatch, (("Ω∞-999", "A law the register does not carry."),))
+    assert _refusals(_measure(tmp_path, altered), "UCCFA-L-07") == [
+        "Ω∞-999: carried by no row of the absolute laws register"
+    ]
+
+
+def test_l07_refuses_a_register_row_whose_text_was_edited(tmp_path, document, monkeypatch):
+    altered = copy.deepcopy(document)
+    _swap_absolute_laws(
+        monkeypatch,
+        (("Ω∞-002", "Everything Is Registry Driven (amended)."),),
+    )
+    assert _refusals(_measure(tmp_path, altered), "UCCFA-L-07") == [
+        "Ω∞-002: its register row is not the verbatim statement"
+    ]
+
+
+def _swap_absolute_laws(monkeypatch, laws: tuple[tuple[str, str], ...]) -> None:
+    import engine.coordinate_framework.contract as contract_module
+
+    monkeypatch.setattr(contract_module, "ABSOLUTE_LAWS", laws, raising=True)
+
+
 # --- faults are not verdicts --------------------------------------------------------------
 
 
