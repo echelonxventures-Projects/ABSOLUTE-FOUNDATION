@@ -1159,7 +1159,7 @@
     }
   ],
   "gate": "OPEN",
-  "graph_digest": "8fd33bd562907e746378e20c1edbdeb97c16bb4aa29916a4e8c6ac04a99cfed9",
+  "graph_digest": "c98cb763868a1c4b7d70a0d47de24cb9e77f00084800fc58b558ab7035231035",
   "graphs": [
     {
       "edge_relations": [
@@ -14149,7 +14149,7 @@
       "goal": "Execute the Universal Constitutional Lifecycle over the Universal Constitutional Lifecycle itself.",
       "id": "GOAL-SELF",
       "note": "Self-application. The lifecycle is the first capability the lifecycle governs, which is what makes it a substrate rather than a description.",
-      "run_id": "c306f045e3194bb899e521ad9e76a5de719f9a9aaeae4e650a6655bd693042e3",
+      "run_id": "857dd93f86eedccc619e74c32dbca36195655a7c458fa11a487e3ae762e520af",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14655,7 +14655,7 @@
       "goal": "Engineer the Universal Constitutional Engineering Substrate required for the Autonomous Constitutional Engineering Engine.",
       "id": "GOAL-SUBSTRATE",
       "note": "The Ω-E04→Ω-E05 handover goal.",
-      "run_id": "d7a2e7ffe0d9a7e4bd819a6cdf0f8e89b31db6b3d91c75ff0161d02ce3a7636d",
+      "run_id": "ae0cb37e8a27fb8d2d2c737326fe867f46b699f6d76edc4dbe4b3a76f58eeefa",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15161,7 +15161,7 @@
       "goal": "Engineer an arbitrary future canonical capability that Repository Truth does not yet record.",
       "id": "GOAL-ARBITRARY-CAPABILITY",
       "note": "Proves universal applicability WITHOUT naming a capability: the traversal is identical for every goal, so no capability needs its own methodology and no capability list exists to be incomplete.",
-      "run_id": "6efd1ba089e2af2bff3f6f9eda80bc91155596b5b19e06d2b00bb17573eb8526",
+      "run_id": "472db6d27fc1bda70ac2cce4fb01216769e7fd9100aa3fd8f1c10925472ad487",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15663,7 +15663,7 @@
       ]
     }
   ],
-  "seal_sha256": "354c4a4ae1787fd9a776991ce35fffb7550f3c4b973932db377ff263cd4d2445",
+  "seal_sha256": "a0a9c1cd9b0a6c0153ae7031c9786b912179d336fb6521952730e1a063c8065f",
   "self_evolution": [
     {
       "anchor": "",

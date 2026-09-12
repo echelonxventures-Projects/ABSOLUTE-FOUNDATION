@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T10:37:40+00:00",
+  "generated_at": "2026-09-12T10:57:34+00:00",
   "generator_version": "1.0.0",
   "counts": {
     "change_events": 1823,
@@ -29162,12 +29162,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "cbc91bbe81d2",
-        "date": "2026-09-08T19:01:43+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Eighty-five compiler components specified in a source nobody had read into the repository"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001822",
@@ -29187,12 +29182,7 @@
       "snapshot_seq": 2,
       "from": "e9aa8e43ad071aab1cc97a781618428de91e113fec88fd27e31a0f29446eb890",
       "to": "8c073015281e86edd6d70a70acd179cee5ef5c2c7f08587eabda8e769100241f",
-      "commit": {
-        "commit": "cbc91bbe81d2",
-        "date": "2026-09-08T19:01:43+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Eighty-five compiler components specified in a source nobody had read into the repository"
-      }
+      "commit": null
     }
   ],
   "version_records": {
