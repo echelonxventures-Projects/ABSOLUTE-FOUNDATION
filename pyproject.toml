@@ -347,6 +347,7 @@ omit = [
 [tool.ucos.coverage_scope]
 excluded_packages = [
   { package = "engine.uicm", reason = "1,893 statements across ten modules with ZERO test files, and no module under engine/, platform/ or 00-MASTER/ imports it. Admitting it to the denominator would bake in ~1,893 permanently uncovered statements and convert a dead-code finding into a coverage figure, which is measurement laundering. Excluding it silently was how it stayed invisible. It is named here so the omission is arguable: the open question is whether this package is retired and should be deleted, or live and should be tested, and that is an owner decision rather than a coverage setting. Reviewed: 2026-08-28." },
+  { package = "engine.substrate", reason = "194 statements that no environment can execute until the substrate exists: the package imports uakp>=0.0.1, which sub-declaration records as publishing no release yet, so engine.substrate answers FAULT (exit 2) by design and engine/tests/unit/test_substrate_consumption.py importorskips on exactly that fact. The code is not untested because nobody looked; it is untestable while its subject is absent, and a percentage charged to an unpublished upstream is a number about the environment, not the repository. Named here so the omission is arguable, the same shape as engine.uicm: when uakp is installable, this entry is deleted and the suite runs for real. Reviewed: 2026-09-12." },
 ]
 
 
