@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1687
+**Total artifacts:** 1688
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1695,5 +1695,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1685 | `UCOS-MASTER-000043` | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER | EC-3 | 000 | UPN-000013174–UPN-000013175 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md) |
 | 1686 | `UCOS-CON-000086` | UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER | — | 002 | UPN-000013176–UPN-000013176 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md) |
 | 1687 | `UCOS-MASTER-000044` | UCOS Ω∞ — COMPILER COMPONENT REGISTER | — | 000 | UPN-000013177–UPN-000013179 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md) |
+| 1688 | `UCOS-MASTER-000045` | UCOS Ω∞ — PROGRAM FAMILY CONCEPT REGISTER | — | 000 | UPN-000013180–UPN-000013185 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

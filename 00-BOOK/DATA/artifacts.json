@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-12T10:37:41+00:00",
+  "generated_at": "2026-09-12T12:54:17+00:00",
   "generator_version": "1.0.0",
-  "count": 1687,
+  "count": 1688,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -55037,7 +55037,7 @@
       ],
       "path": "platform/universal_ownership/catalog/ucos-ownership-declarations.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "96aa2be26454f7d618ddebb00281bb195f8576f3dbc9521cc1081c40b95146cd",
+      "content_hash": "369dc75b0fad2747e469b983ce5e92914af9ddd0a0d78dc02549458561ecec23",
       "traceability": {
         "requirement": [],
         "architecture": [
@@ -75038,6 +75038,47 @@
       "path": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "4df6dbf01e0ca2e35c387e52b4f21b85ec6f703841d6082f1cb57971adeecf46",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-MASTER-000045",
+      "native_id": null,
+      "name": "UCOS Ω∞ — PROGRAM FAMILY CONCEPT REGISTER",
+      "description": "",
+      "category": "MASTER",
+      "volume": "VOL-000",
+      "page_start": 13180,
+      "page_end": 13185,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "MASTER",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "MASTER",
+        "MASTER",
+        "VOL-000"
+      ],
+      "path": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "987f0d68b4f52cbc8ca888048371bb39963dddffc641566cee895e6acac1ffda",
       "traceability": {
         "requirement": [],
         "architecture": [

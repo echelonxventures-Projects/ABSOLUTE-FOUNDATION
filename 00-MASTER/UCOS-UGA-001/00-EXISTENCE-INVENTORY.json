@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7150,
+  "total_objects": 7152,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -10036,6 +10036,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-003148",
       "first_seen": "commit:b239389ed9ff"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-MASTER-000045.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003149",
+      "first_seen": "commit:196ff6937ecc"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-MCRFST-000001.md",
@@ -30620,6 +30629,14 @@
       "lifecycle": "AUTHORED",
       "owner": "02-MASTER",
       "universal_id": "UCOS-GOV-000006",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "02-MASTER",
+      "universal_id": "UCOS-MASTER-000045",
       "identity_authority": "UMB-IMP-001"
     },
     {

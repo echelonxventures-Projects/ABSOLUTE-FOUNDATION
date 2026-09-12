@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 13179  ·  **Page cursor (next free):** UPN-000013180
+**Pages allocated:** 13185  ·  **Page cursor (next free):** UPN-000013186
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1695,5 +1695,6 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000013174 | UPN-000013175 | 2 | `UCOS-MASTER-000043` | 000 | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER |
 | UPN-000013176 | UPN-000013176 | 1 | `UCOS-CON-000086` | 002 | UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER |
 | UPN-000013177 | UPN-000013179 | 3 | `UCOS-MASTER-000044` | 000 | UCOS Ω∞ — COMPILER COMPONENT REGISTER |
+| UPN-000013180 | UPN-000013185 | 6 | `UCOS-MASTER-000045` | 000 | UCOS Ω∞ — PROGRAM FAMILY CONCEPT REGISTER |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

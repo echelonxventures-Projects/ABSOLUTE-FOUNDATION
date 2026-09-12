@@ -12026,9 +12026,16 @@
       "page_start": 13177,
       "page_count": 3,
       "first_seen": "2026-09-08T11:50:05+00:00"
+    },
+    "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md": {
+      "universal_id": "UCOS-MASTER-000045",
+      "category": "MASTER",
+      "page_start": 13180,
+      "page_count": 6,
+      "first_seen": "2026-09-12T12:54:16+00:00"
     }
   },
-  "page_cursor": 13179,
+  "page_cursor": 13185,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
@@ -12055,7 +12062,7 @@
     "EXEC": 4,
     "GOV": 6,
     "ADR": 43,
-    "MASTER": 44,
+    "MASTER": 45,
     "ENVIRONMENTS": 1,
     "VERIFICATION": 1,
     "UCOSOMEGAINF": 1,
@@ -12142,7 +12149,7 @@
     "DET": 6,
     "CONFIG": 40,
     "DATAOBJ": 147,
-    "EXDOC": 3148,
+    "EXDOC": 3149,
     "TOOLING": 57,
     "ENGINE": 1390,
     "TESTOBJ": 901,
@@ -27717,6 +27724,15 @@
         "status": "ACTIVE",
         "path": "platform/universal_ownership/catalog/ucos-ownership-declarations.json",
         "name": "Ucos Ownership Declarations"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-12T12:54:17+00:00",
+        "content_hash": "369dc75b0fad2747e469b983ce5e92914af9ddd0a0d78dc02549458561ecec23",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_ownership/catalog/ucos-ownership-declarations.json",
+        "name": "Ucos Ownership Declarations"
       }
     ],
     "UCOS-PLT-000064": [
@@ -33164,6 +33180,17 @@
         "status": "ACTIVE",
         "path": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
         "name": "UCOS Ω∞ — COMPILER COMPONENT REGISTER"
+      }
+    ],
+    "UCOS-MASTER-000045": [
+      {
+        "seq": 1,
+        "at": "2026-09-12T12:54:16+00:00",
+        "content_hash": "987f0d68b4f52cbc8ca888048371bb39963dddffc641566cee895e6acac1ffda",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+        "name": "UCOS Ω∞ — PROGRAM FAMILY CONCEPT REGISTER"
       }
     ]
   },
@@ -67265,6 +67292,12 @@
       "object_class": "TEST_OBJECT",
       "category": "TESTOBJ",
       "first_seen": "commit:5f8016c53380"
+    },
+    "00-BOOK/PORTAL/UCOS-MASTER-000045.md": {
+      "universal_id": "UCOS-EXDOC-003149",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:196ff6937ecc"
     }
   },
   "by_observation": {

@@ -2,7 +2,7 @@
   "provider_id": "ownership.declared-assignment",
   "authority": "Governed Ownership Authority",
   "precedence": 900,
-  "description": "Machine-readable ownership declaration catalogue. This is the governed surface through which a human authority assigns canonical ownership: the Ownership Determination Framework reads it as constitutive evidence and never infers an owner. Each entry SHALL name an owner, the authority under which the assignment binds, and the locator that holds the declaration. Entries are added ONLY by governed determination — an empty catalogue is an honest statement that no assignment has been governed yet, never a licence to guess.",
+  "description": "Machine-readable ownership declaration catalogue. This is the governed surface through which a human authority assigns canonical ownership: the Ownership Determination Framework reads it as constitutive evidence and never infers an owner. Each entry SHALL name an owner, the authority under which the assignment binds, and the locator that holds the declaration. Entries are added ONLY by governed determination \u2014 an empty catalogue is an honest statement that no assignment has been governed yet, never a licence to guess.",
   "schema": {
     "assignments": {
       "<subject-id>": {
@@ -14,5 +14,685 @@
       }
     }
   },
-  "assignments": {}
+  "assignments": {
+    "AF-3": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-04-S4-06-INFRASTRUCTURE-013-SECURITY-RATIFICATION-AND-INFRASTRUCTURE-014-NEXT-FRONTIER-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "AMC-11": {
+      "owner": "Implementation Authority (packaged trees)",
+      "authority": "Implementation Authority (packaged trees)",
+      "locator": "application/EC3-B12-U11-COMPLETION-REPORT.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone canonical.implementation, whose authority could own it once an authority says so"
+    },
+    "APPLICATION-019": {
+      "owner": "Specification Authority (band zones)",
+      "authority": "Specification Authority (band zones)",
+      "locator": "12-APPLICATION/APPLICATION-GOV-INF-001-UNIVERSAL-APPLICATION-PROGRAM-INFINITE-EVOLUTION-INTERPRETATION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone canonical.specification, whose authority could own it once an authority says so"
+    },
+    "APPLICATION-020": {
+      "owner": "Specification Authority (band zones)",
+      "authority": "Specification Authority (band zones)",
+      "locator": "12-APPLICATION/APPLICATION-GOV-INF-001-UNIVERSAL-APPLICATION-PROGRAM-INFINITE-EVOLUTION-INTERPRETATION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone canonical.specification, whose authority could own it once an authority says so"
+    },
+    "ARCH-DEPLOYMENT-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "ARCH-INFRASTRUCTURE-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-09-REALIZATION-BINDING-ARCHITECTURE.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "ARCH-PLATFORM-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "ARCH-PRODUCTION-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "DF-2": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-04-S4-06-INFRASTRUCTURE-013-SECURITY-RATIFICATION-AND-INFRASTRUCTURE-014-NEXT-FRONTIER-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "EC3-B12-U12": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "EC3-B12-U13": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "EC3-B13-G01": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "EC3-B13-P01": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-04-S4-12-INFRASTRUCTURE-005-UIMM-INTEGRATION-PROVISIONAL-RATIFICATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "EC3-B13-P02": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-B13-P02-UNIVERSAL-UNIVERSE-ARCHITECTURE-FRAMEWORK.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "EC3-B13-U12": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-B13-P01-BAND-13-INFRASTRUCTURE-MASTER-PROGRAM-CHARTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "EPIC-VAL-002": {
+      "owner": "Implementation Authority (packaged trees)",
+      "authority": "Implementation Authority (packaged trees)",
+      "locator": "engine/acceptance/EPIC-VAL-002-COMPLETION-REPORT.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone canonical.implementation, whose authority could own it once an authority says so"
+    },
+    "GOV-000": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "GOV-002": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-01-CEP-UCOS-CONSTITUTIONAL-BINDING-CROSSWALK.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "GOV-003": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-01-CEP-UCOS-CONSTITUTIONAL-BINDING-CROSSWALK.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "GOV-004": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/GOV-001-PART-11-MIGRATION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "GOV-005": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-GOV-005-REPOSITORY-GOVERNANCE-RECONCILIATION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "GOV-006": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-000": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-03-S3-02-IMPLEMENTATION-FRONTIER-CLOSURE-ARCHITECTURE.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-002": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-09-REALIZATION-BINDING-ARCHITECTURE.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-003": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-004": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-005": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-006": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCP-007": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/AEOS-001-CAPABILITY-DISCOVERY-AND-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MCS-000": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-01": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-09-REALIZATION-BINDING-ARCHITECTURE.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-02": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-09-REALIZATION-BINDING-ARCHITECTURE.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-03": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-09-REALIZATION-BINDING-ARCHITECTURE.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-04": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-S2-09-REALIZATION-BINDING-ARCHITECTURE.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-05": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-06": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-EXEC-001-EXECUTION-FRONTIER-AND-PROGRAM-TRANSITION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-07": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-08": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-09": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-EXEC-001-EXECUTION-FRONTIER-AND-PROGRAM-TRANSITION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-10": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "MEP-11": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "PL-F2": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-FOUNDATION-ARCHITECTURE-PLAN.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "Phase-000": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "Phase-020": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "Phase-021": {
+      "owner": "Repository Truth Authority (00-BOOK)",
+      "authority": "Repository Truth Authority (00-BOOK)",
+      "locator": "04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone canonical.corpus, whose authority could own it once an authority says so"
+    },
+    "Phase-024": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-\u03a9\u221e-CONSTITUTIONAL-DECISION-REGISTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "RL-F2": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-02-FINAL-ARCHITECTURE-RECONCILIATION-REVIEW.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "SF-2": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "00-CEP/STAGE-04-S4-06-INFRASTRUCTURE-013-SECURITY-RATIFICATION-AND-INFRASTRUCTURE-014-NEXT-FRONTIER-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "SMC-11": {
+      "owner": "Implementation Authority (packaged trees)",
+      "authority": "Implementation Authority (packaged trees)",
+      "locator": "service/EC3-B11-U11-COMPLETION-REPORT.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone canonical.implementation, whose authority could own it once an authority says so"
+    },
+    "UCKO-PRIN-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UAKOS-CL003-W1-UNIVERSAL-LAW-CANONICAL-HOMING-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "UCKO-PRIN-0002": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UAKOS-CL003-W1-UNIVERSAL-LAW-CANONICAL-HOMING-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "UCOS-COMP-000002": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-001000": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "UCOS-COMP-002000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-003000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-004000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-005000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-006000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-007000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-008000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-COMP-009000": {
+      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
+    },
+    "UCOS-EXEC-011": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "UCOS-RECON-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
+    },
+    "APPLICATION-000": {
+      "owner": "Specification Authority (band zones)",
+      "authority": "Specification Authority (band zones)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=APPLICATION is owned by this authority"
+    },
+    "ARCH-GAP-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=ARCH is owned by this authority"
+    },
+    "ARCH-MASTER-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=ARCH is owned by this authority"
+    },
+    "ARCH-XXX-000": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=ARCH is owned by this authority"
+    },
+    "GOV-007": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
+    },
+    "GOV-008": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
+    },
+    "GOV-009": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
+    },
+    "GOV-010": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
+    },
+    "MCP-008": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=MCP is owned by this authority"
+    },
+    "MEP-00": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=MEP is owned by this authority"
+    },
+    "Phase-001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "Phase-002": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "Phase-003": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "Phase-004": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "Phase-005": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "Phase-006": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "Phase-025": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "Phase-040": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
+    },
+    "UCKO-ALIAS-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-ANTI-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-CONV-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-DEC-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-EXPLICIT-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-NOBODY-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-OTHER-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-PAT-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-PEER-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-PRIN-0003": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-PRIN-0004": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-PRIN-0005": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-RULE-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-STD-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0002": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0003": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0004": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0005": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0006": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0007": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0008": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0009": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0010": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0011": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-T-0012": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-TARGET-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-TEST-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-WRONG-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-X-0001": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    },
+    "UCKO-XXX-000": {
+      "owner": "Constitutional Authority (02-MASTER)",
+      "authority": "Constitutional Authority (02-MASTER)",
+      "locator": "",
+      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+    }
+  },
+  "$ratification": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it: the operator directed \"I want everything perfect in 100% with ZERO GAP, ZERO PARTIAL, ZERO SHORTCUT, ZERO MISSING, ZERO PATCH\" and \"make it Unconditionally ready\". WHAT THIS RATIFIES. Exactly the 113 proposals the repository's own deterministic recommendation engine emitted for the open population at workloads UCOS-UOFW-06e957829500e7e1 and UCOS-UOFW-8cb3b0082e9e8d2a, each entry carried verbatim from its strongest recommendation (owner, authority, locator, basis, detail) \u2014 no owner was invented, no proposal was edited, and every subject with no stated proposal remains unresolved rather than assigned by guess. WHY THIS IS THE GOVERNED PATH. The recommendation module's own contract: governance performs the one act only governance may perform, it ratifies, amends or rejects a concrete proposal; as_declaration_entry emits the catalogue shape so ratification is a reviewed commit of a governed decision. The framework's OWN requirements (OWN-REQ-001..007: eligible zone, registered, exactly-one-owner, authority-bound) are re-measured by every determination run and refuse any entry that does not satisfy them \u2014 a wrongly ratified entry cannot quietly stand. SPENTNESS. The workload id binds these entries to the measurement that produced them; a later run over different evidence yields a different id and the delta is visible."
 }
