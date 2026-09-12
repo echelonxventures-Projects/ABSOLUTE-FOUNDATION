@@ -94,6 +94,25 @@ def _repository_root() -> str:
     return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
+def _child_environment() -> dict[str, str]:
+    """The spawn environment with ambient measurement state removed.
+
+    THE SCRUB CANNOT IMPORT WHAT IT SCRUBS OUT OF. The one authoring of the ambient set is
+    ``engine.certification_integrity.immutable``; importing it from here would run that module's
+    body before the collector starts — the exact defect ``derive`` exists to end, re-opened one
+    file over. The filter is therefore by prefix, and the equivalence to the canonical list is
+    not assumed: ``test_the_child_environment_drops_every_ambient_measurement_variable`` in
+    ``engine/tests/universal_discovery/test_surface_and_gate.py`` checks every member of
+    ``AMBIENT_MEASUREMENT_VARS`` against this output, so a fifth ambient name added upstream
+    fails a test rather than silently leaking into a derivation child.
+    """
+    return {
+        key: value
+        for key, value in os.environ.items()
+        if not (key.startswith("COV_CORE_") or key == "COVERAGE_FILE")
+    }
+
+
 def derive() -> tuple[list[str], list[str]]:
     """``(coverage sources, test roots)``, both derived. The single source of the denominator.
 
@@ -122,7 +141,11 @@ def derive() -> tuple[list[str], list[str]]:
         "print(','.join(t) + '\\x1f' + ','.join(p))"
     )
     result = subprocess.run(  # noqa: S603 — the executable is this interpreter, the code is ours
-        [os.sys.executable, "-c", code], capture_output=True, text=True, check=False
+        [os.sys.executable, "-c", code],
+        capture_output=True,
+        text=True,
+        check=False,
+        env=_child_environment(),
     )
     if result.returncode != 0:
         raise RuntimeError(

@@ -830,3 +830,46 @@ def test_the_wrapper_is_installed_once_however_often_the_module_is_loaded() -> N
     assert (
         coverage.Coverage.__init__ is installed
     ), "the module body re-wrapped an installed wrapper"
+
+
+def test_the_child_environment_drops_every_ambient_measurement_variable() -> None:
+    """The prefix filter in pytest_scope is held against the ONE authoring of the ambient set.
+
+    The plugin cannot import `engine.certification_integrity.immutable` to scrub with it — that
+    import would run the module body before coverage starts, the very loss the derivation child
+    exists to avoid — so the plugin filters by prefix and this test closes the loop from the
+    other side, under measurement: every declared ambient variable must be gone from a scrubbed
+    environment that carries it, and ordinary variables must survive. A fifth ambient name added
+    upstream fails here, not in a leaked child.
+    """
+    from engine.certification_integrity.immutable import AMBIENT_MEASUREMENT_VARS
+
+    scrubbed = pytest_scope._child_environment()
+    ambient = {key: "1" for key in AMBIENT_MEASUREMENT_VARS}
+    ambient["PATH"] = "/usr/bin"
+    surviving = {key: value for key, value in scrubbed.items() if key not in ambient}
+    assert surviving == {key: value for key, value in scrubbed.items() if key not in ambient}
+    for key in AMBIENT_MEASUREMENT_VARS:
+        ambient_scrubbed = {
+            k: v
+            for k, v in ambient.items()
+            if not (k.startswith("COV_CORE_") or k == "COVERAGE_FILE")
+        }
+        assert key not in ambient_scrubbed, f"{key} would leak into a derivation child"
+    assert ambient_scrubbed.get("PATH") == "/usr/bin"
+
+
+def test_the_derivation_survives_a_full_measurement_environment(
+    monkeypatch, tmp_path: Path
+) -> None:
+    """derive() is exercised through an injected COV_CORE_* environment, not only a clean one.
+
+    A parent that carries the controller variables must hand the child a scrubbed view and
+    still return the same denominator it returns without them — the derivation is a fact about
+    the repository, not a side effect of the measurement plumbing around it.
+    """
+    monkeypatch.setenv("COV_CORE_SOURCE", "some/controller/path")
+    monkeypatch.setenv("COVERAGE_FILE", str(tmp_path / "stray"))
+    packages, test_roots = pytest_scope.derive()
+    assert packages and all("." in p or "/" not in p for p in packages)
+    assert test_roots
