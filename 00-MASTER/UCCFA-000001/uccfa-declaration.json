@@ -133,7 +133,7 @@
     {
       "id": "UCCFA-L-07",
       "title": "Every absolute constitutional law the register carries is measured where it is carried",
-      "statement": "The canonical register 02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md carries the twenty-one ratified absolute laws Ω∞-000 through Ω∞-020, each as a verbatim row under its own heading. Each of those twenty-one shall be counted, numbered without gap or duplicate, and present with a non-empty statement, exactly as the register transcribes them. A law the register carries that this programme cannot count is a ratified law no executable measures, and a numbering that moves is a law whose identity silently changed.",
+      "statement": "The canonical register 02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md carries the twenty-one ratified absolute laws Ω∞-000 through Ω∞-020, each as its own verbatim row. Every one of the twenty-one shall be found, exactly once, carrying a non-empty statement; no row outside that set shall be counted. A law the register carries that this programme cannot count is a ratified law no executable measures, a row that appears twice is a home that competes with itself, and the texts live ONLY in the register — a second store of a verbatim law is the duplication UCKP-ART-03 voids.",
       "check": "every_absolute_law_is_counted_where_it_is_carried"
     }
   ],
