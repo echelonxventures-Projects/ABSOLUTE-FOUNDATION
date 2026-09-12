@@ -260,3 +260,117 @@ def test_a_third_party_classifier_needs_no_dependency_on_this_module() -> None:
     typed = pipeline.apply(_artifact("anything.py"))
     assert typed.artifact_type is DATASET
     assert typed.classification_rule == "CUSTOM-01"
+
+
+# -------------------------------------------------------------------------------------
+# the arms the whole-suite denominator still found unmeasured
+# -------------------------------------------------------------------------------------
+
+
+def test_a_classification_to_a_type_that_names_no_rule_is_refused() -> None:
+    with pytest.raises(ClassificationError, match="must name the rule"):
+        Classification(PYTHON, "   ")
+
+
+def test_the_protocol_defaults_are_inert_signatures() -> None:
+    """A Protocol body exists to be overridden; executing the defaults proves they answer.
+
+    Calling through the class is the only way to reach a body a conforming classifier never
+    runs, and an unreached body is a line no reader can trust to mean nothing.
+    """
+
+    class Bare:
+        pass
+
+    assert Classifier.identifier(Bare()) is None
+    assert Classifier.classify(Bare(), _artifact("x"), None) is None
+
+
+def test_the_longest_registered_suffix_wins_and_no_match_is_an_abstention() -> None:
+    vocab = TypeVocabulary(
+        {".gz": DATASET, ".tar.gz": CONFIGURATION, ".md": DOCUMENT},
+        {},
+    )
+    assert vocab.for_suffix("notes.TAR.GZ") is CONFIGURATION
+    assert vocab.for_suffix("plain.txt") is None
+
+
+def test_an_interpreter_token_respects_a_trailing_version_or_ignores_paths() -> None:
+    vocab = TypeVocabulary({}, {"python": PYTHON})
+    assert vocab.for_interpreter("/usr/bin/python3.12") is PYTHON
+    assert vocab.for_interpreter("ruby") is None
+
+
+def test_the_vocabulary_builders_return_new_values_and_keep_the_other_table() -> None:
+    base = seed_vocabulary()
+    extended = base.with_suffix(".zoz", DATASET).with_interpreter("zoz", CONFIGURATION)
+    assert ".zoz" in extended.suffixes and "zoz" in extended.interpreters
+    assert ".zoz" not in base.suffixes and "zoz" not in base.interpreters
+
+
+def test_a_declared_type_the_registry_does_not_know_is_a_fault_not_a_new_kind() -> None:
+    classifier = ProviderDeclaredClassifier(classification_module._resolve_declared)
+    assert classifier.classify(_artifact("a.bin"), None) is None
+    assert classifier.identifier() == "provider-declared"
+    with pytest.raises(ArtifactError, match="not a declared artifact type"):
+        classifier.classify(_artifact("a.bin", **{DECLARED_TYPE_KEY: "NOT-A-KIND"}), "bytes")
+
+
+def test_a_shebang_skips_the_env_wrapper_and_refuses_to_guess_an_unknown() -> None:
+    vocab = TypeVocabulary({}, {"python": PYTHON})
+    classifier = InterpreterClassifier(vocab)
+    assert classifier.identifier() == "content-interpreter"
+    assert classifier.classify(_artifact("bin/x"), "#!/usr/bin/env python3\n") is not None
+    assert classifier.classify(_artifact("bin/x"), "#!/usr/bin/ruby\n") is None
+    assert classifier.classify(_artifact("bin/x"), "") is None
+    assert classifier.classify(_artifact("bin/x"), "no shebang here\n") is None
+
+
+def test_the_structured_probe_needs_both_ends_of_the_shape() -> None:
+    probe = classification_module.structured_data_probe
+    assert probe('{"a": 1}') is DATASET
+    assert probe("[1,2]") is DATASET
+    assert probe('{"open": ') is None
+    assert probe("") is None
+
+
+def test_the_prose_probe_matches_markup_headings_not_any_hash() -> None:
+    probe = classification_module.prose_probe
+    assert probe("# Title\n") is DOCUMENT
+    assert probe("---\ntitle: x") is DOCUMENT
+    assert probe("#!shebang\n") is None
+
+
+def test_the_probe_pipeline_first_answer_wins_and_absence_abstains() -> None:
+    classifier = classification_module.ContentProbeClassifier(
+        (classification_module.structured_data_probe, classification_module.prose_probe)
+    )
+    assert classifier.identifier() == "content-structure"
+    assert classifier.classify(_artifact("d"), "# h").artifact_type is DOCUMENT
+    assert classifier.classify(_artifact("d"), "   ") is None
+    assert classifier.classify(_artifact("d"), None) is None
+
+
+def test_the_suffix_classifier_is_an_abstainer_when_the_name_says_nothing() -> None:
+    classifier = SuffixClassifier(TypeVocabulary({}, {}))
+    assert classifier.classify(_artifact("mystery"), None) is None
+
+
+def test_the_pipeline_names_every_classifier_in_order() -> None:
+    pipeline = default_pipeline()
+    assert pipeline.identifiers() == (
+        "provider-declared",
+        "content-interpreter",
+        "content-structure",
+        "suffix",
+    )
+
+
+def test_a_reader_is_optional_across_a_population() -> None:
+    pipeline = default_pipeline()
+    population = (_artifact("a.json", **{DECLARED_TYPE_KEY: "DATASET"}), _artifact("b"))
+    untouched = pipeline.apply_all(population)
+    assert [a.artifact_type for a in untouched] == [DATASET, UNKNOWN]
+    read = pipeline.apply_all(population, read=lambda a: "# h")
+    assert [a.artifact_type for a in read] == [DATASET, DOCUMENT]
+    assert unknown_population(read) == ()

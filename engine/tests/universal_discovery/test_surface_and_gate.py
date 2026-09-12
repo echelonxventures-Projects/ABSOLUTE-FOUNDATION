@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import coverage
 import pytest
 
 from engine.universal_discovery import __main__ as cli
@@ -782,8 +783,6 @@ def test_a_directory_named_as_a_source_is_routed_to_source_pkgs(tmp_path: Path) 
     THE DENOMINATOR IS UNCHANGED by the correction. The same packages are measured; they are
     simply declared as packages, so there is one implied root and a full path cannot collide.
     """
-    import coverage
-
     layer = tmp_path / "service"
     layer.mkdir()
     measured = coverage.Coverage(source=[str(layer), "engine.foundation"])
@@ -794,8 +793,6 @@ def test_a_directory_named_as_a_source_is_routed_to_source_pkgs(tmp_path: Path) 
 def test_a_source_list_of_only_directories_leaves_no_empty_root_behind(tmp_path: Path) -> None:
     """``remaining or None`` and not ``remaining``: coverage reads an EMPTY source list as "the
     caller declared a source and it selects nothing", which measures nothing at 100%."""
-    import coverage
-
     first, second = tmp_path / "data", tmp_path / "application"
     first.mkdir()
     second.mkdir()
@@ -808,8 +805,6 @@ def test_a_source_list_naming_no_directory_is_left_exactly_as_declared() -> None
     """The wrapper is a correction, not a rewrite. A dotted package was never the broken case —
     ``engine.foundation`` is not a directory, so it was already dispatched as a package and keyed
     from the repository root — and moving it would change a denominator that was correct."""
-    import coverage
-
     measured = coverage.Coverage(source=["engine.foundation", "engine.universal_discovery"])
     assert measured.config.source == ["engine.foundation", "engine.universal_discovery"]
     assert not measured.config.source_pkgs
@@ -825,8 +820,6 @@ def test_the_wrapper_is_installed_once_however_often_the_module_is_loaded() -> N
     real module's ``_COVERAGE_INIT`` to the wrapper and build exactly the recursion the guard
     prevents — the test would install the defect it is checking for.
     """
-    import coverage
-
     installed = coverage.Coverage.__init__
     assert getattr(installed, "__module__", None) == pytest_scope.__name__
 

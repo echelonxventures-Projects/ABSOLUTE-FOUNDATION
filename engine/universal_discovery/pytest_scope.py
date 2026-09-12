@@ -95,11 +95,42 @@ def _repository_root() -> str:
 
 
 def derive() -> tuple[list[str], list[str]]:
-    """``(coverage sources, test roots)``, both derived. The single source of the denominator."""
-    from engine.universal_discovery import discovery
+    """``(coverage sources, test roots)``, both derived. The single source of the denominator.
 
-    test_roots, packages, _exemptions, _transient = discovery.derived_scope(_repository_root())
-    return list(packages), list(test_roots)
+    THE DERIVATION RUNS IN A CHILD PROCESS, AND THE REASON IS A MEASUREMENT. This hook fires
+    at `pytest_load_initial_conftests` — before pytest-cov starts the collector — so importing
+    `engine.universal_discovery.discovery` here executed that package's import-time lines
+    (class bodies, frozen dataclasses, the seeded constants) outside measurement, and coverage
+    reported them as misses forever: 455 statements across `engine/universal_discovery` and the
+    `engine/omega_infinite` cluster it pulls in, unfixable by any test, because the lines only
+    ever run at import. Measured both ways at HEAD: a shard run carrying the derivation in-proc
+    reports `line-rate 0.994`; the identical tests with an explicit `--cov` (which takes the
+    early-return below and never imports anything here) report `1.0`. Same code, same tests —
+    only the import order differed. A child computing the same derived answer over `git ls-files`
+    costs one interpreter start, keeps the parent's first import of the package UNDER coverage,
+    and preserves Ω-1 exactly: the list is still produced by `discovery.derived_scope`, never
+    enumerated. A failure in the child is a FAULT raised here, not a fallback to a guess.
+    """
+    import subprocess
+
+    root = _repository_root()
+    code = (
+        "import sys;"
+        f"sys.path.insert(0, {root!r});"
+        "from engine.universal_discovery import discovery;"
+        f"t, p, _, _ = discovery.derived_scope({root!r});"
+        "print(','.join(t) + '\\x1f' + ','.join(p))"
+    )
+    result = subprocess.run(  # noqa: S603 — the executable is this interpreter, the code is ours
+        [os.sys.executable, "-c", code], capture_output=True, text=True, check=False
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"the denominator could not be derived (exit {result.returncode}): "
+            f"{result.stderr.strip() or 'the child produced no message'}"
+        )
+    test_roots, _, packages = result.stdout.strip().partition("\x1f")
+    return ([p for p in packages.split(",") if p], [t for t in test_roots.split(",") if t])
 
 
 @pytest.hookimpl(hookwrapper=True)
