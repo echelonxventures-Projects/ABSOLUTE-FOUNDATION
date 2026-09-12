@@ -13,6 +13,9 @@ import json
 
 import pytest
 
+# The private helpers belong to the module that defines them rather than to the package's
+# public surface, so they are named from there instead of being re-exported to suit a test.
+import engine.coordinate_framework.contract as contract_module
 from engine.coordinate_framework import (
     CoordinateAlignmentError,
     CoordinateContract,
@@ -22,9 +25,6 @@ from engine.coordinate_framework import (
     load_declaration,
     repo_root,
 )
-
-# The private helpers belong to the module that defines them rather than to the package's
-# public surface, so they are named from there instead of being re-exported to suit a test.
 from engine.coordinate_framework.contract import (
     _part,
     _primitive_elements,
@@ -148,8 +148,6 @@ def test_l07_counts_exactly_the_twenty_one_absolute_laws():
 
 
 def test_l07_refuses_a_law_the_register_no_longer_carries(tmp_path, monkeypatch):
-    import engine.coordinate_framework.contract as contract_module
-
     register = f"{repo_root()}/02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md"
     with open(register, encoding="utf-8") as handle:
         text = handle.read()
@@ -162,8 +160,6 @@ def test_l07_refuses_a_law_the_register_no_longer_carries(tmp_path, monkeypatch)
 
 
 def test_l07_refuses_a_duplicate_law_row(tmp_path, monkeypatch):
-    import engine.coordinate_framework.contract as contract_module
-
     register = f"{repo_root()}/02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md"
     with open(register, encoding="utf-8") as handle:
         lines = handle.read().splitlines()
