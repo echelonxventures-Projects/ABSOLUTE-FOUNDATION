@@ -873,3 +873,29 @@ def test_the_derivation_survives_a_full_measurement_environment(
     packages, test_roots = pytest_scope.derive()
     assert packages and all("." in p or "/" not in p for p in packages)
     assert test_roots
+
+
+def test_the_package_root_re_exports_model_lazily_and_resolves_its_own_body() -> None:
+    """__init__'s import-time statements run here, under measurement, and the re-exports answer.
+
+    The root is loaded by pytest before the collector starts (the plugin lives inside the
+    package), so without an execution like this its module body would be permanently unmeasured —
+    the same class of loss the derivation child removes for ``model``. Executing the source in a
+    namespace of its own costs the real module nothing and proves the contract the lazy re-export
+    owes: every name in ``__all__`` resolves, an unknown name raises AttributeError rather than
+    returning None, and ``dir()`` of the fresh namespace names what the package advertises.
+    """
+    source = Path(pytest_scope.__file__).with_name("__init__.py").read_text(encoding="utf-8")
+    namespace: dict[str, object] = {
+        "__name__": "engine.universal_discovery",
+        "__file__": str(Path(pytest_scope.__file__).with_name("__init__.py")),
+    }
+    exec(compile(source, namespace["__file__"], "exec"), namespace)  # noqa: S102
+    resolve = namespace["__getattr__"]
+    listing = namespace["__dir__"]
+    exported = namespace["__all__"]
+    assert exported and all(isinstance(resolve(name), object) for name in exported)
+    assert resolve("MEASURED") == MEASURED
+    assert set(listing()) >= set(exported)
+    with pytest.raises(AttributeError, match="no attribute"):
+        resolve("NOT_A_RE_EXPORT")
