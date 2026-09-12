@@ -129,7 +129,22 @@ PROJECTION = "00-BOOK/DATA/artifacts.json"
 #: every concept that moved went from unresolved to declared. None of those 106 was authored.
 #: Each was transcribed from a source document that already stated it, which is what keeps this
 #: an evidence delta rather than a resolver regression.
-RETIRED_MEASUREMENT = {"total": 549, "declared": 394, "contested": 0, "unresolved": 155}
+#: CLOSURE-HOME-004 closes the population, and it does so on the two instruments the
+#: framework itself provides — never on a resolver change. (a) The governed assignment
+#: catalogue, empty before this, carries the 113 proposals the deterministic recommender
+#: emitted over workloads UCOS-UOFW-06e957829500e7e1 and UCOS-UOFW-8cb3b0082e9e8d2a, each
+#: entry transcribed from its strongest recommendation (owner, authority, locator, basis)
+#: under operator authorization in session; declared moves 394 -> 507, and the movement is
+#: CONSERVED because no proposal was edited and no owner was invented. (b)
+#: 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md installs the definitional home the
+#: origin register could not be — 41 subjects move 507 -> 548, every row carried verbatim
+#: from 00-MASTER/UAKOS-PHASE-001A-R1/01-AUTHORITATIVE-ORIGIN-REGISTER.md and cited there.
+#: The last, UCOS-RECON-C1, resolves by a governed assignment whose locator is the eligible
+#: register: its operational-memory origin names ITSELF
+#: UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION and is the record of the exclusion the concept
+#: legislates, not a rival definition. declared 394 -> 549, unresolved 155 -> 0, total (549)
+#: and contested (0) hold, and the governance minimum measured 0 at every step.
+RETIRED_MEASUREMENT = {"total": 549, "declared": 549, "contested": 0, "unresolved": 0}
 
 
 def _home(*registered: str, **kwargs) -> CanonicalHomePolicy:
@@ -320,18 +335,79 @@ def test_the_converged_determination_reproduces_the_retired_measurement():
     assert determination.counts().items() >= RETIRED_MEASUREMENT.items()
 
 
-def test_the_converged_determination_still_refuses_to_infer():
-    """The residue is the point. A change that closed it silently would be the regression."""
+def _stripped_governed_assignments(tmp_path):
+    """The live Foundation with its ownership EVIDENCE emptied — never its resolver.
+
+    At CLOSURE-HOME-004 the repository's open population is fully declared, so the residue
+    the anti-inference guards watch can no longer be observed by looking at the repository
+    alone — and a guard that depends on repository residue is a guard repository evidence can
+    silently disarm. These tests therefore manufacture the residue instead: the same 549
+    subjects and the same declared policy, read through (a) an assignment catalogue stripped
+    of its governed decisions and (b) a projection of the population document with the
+    `def_homes`/`exact_homes` declaration evidence removed — the evidence state this
+    repository was in before CLOSURE-HOME-001…004. Nothing about the resolver changes. Every
+    subject that returns to UNRESOLVED must carry a named reason, and ownership that stands
+    after the stripping must stand on evidence the stripping did not touch.
+    """
+    with open(
+        "platform/universal_foundation/catalog/ucos-consolidation.json", encoding="utf-8"
+    ) as handle:
+        spec = json.load(handle)
+    with open(
+        "platform/universal_ownership/catalog/ucos-ownership-declarations.json", encoding="utf-8"
+    ) as handle:
+        catalogue = json.load(handle)
+    catalogue["assignments"] = {}
+    stripped_catalogue = tmp_path / "ucos-ownership-declarations.stripped.json"
+    stripped_catalogue.write_text(json.dumps(catalogue), encoding="utf-8")
+    with open("00-MASTER/UAKOS-CLOSURE-002/closure.json", encoding="utf-8") as handle:
+        population = json.load(handle)
+    for concept in population["concepts"]:
+        concept["def_homes"] = []
+        concept["exact_homes"] = []
+    stripped_population = tmp_path / "closure.stripped.json"
+    stripped_population.write_text(json.dumps(population), encoding="utf-8")
+    spec["ownership_declarations"] = str(stripped_catalogue)
+    spec["population_document"] = str(stripped_population)
+    stripped_spec = tmp_path / "ucos-consolidation.stripped.json"
+    stripped_spec.write_text(json.dumps(spec), encoding="utf-8")
+    return bootstrap_universal_foundation(str(stripped_spec))
+
+
+def test_the_converged_determination_still_refuses_to_infer(tmp_path):
+    """Every live declaration is evidenced; with the evidence gone, the residue reopens."""
     foundation = bootstrap_universal_foundation()
     subjects = foundation.project_population()
     determination = foundation.determine_ownership(subjects)
-    assert determination.unresolved, "residue empty — ownership would have been inferred"
-    assert all(record.reasons for record in determination.unresolved)
     assert all(
         record.declaration is not None and record.declaration.locator
         for record in determination.declared
     )
-    assert not determination.closed
+    assert determination.closed, "closure is the claim now; it must be explicit, not incidental"
+
+    stripped = _stripped_governed_assignments(tmp_path)
+    stripped_subjects = stripped.project_population()
+    residue = stripped.determine_ownership(stripped_subjects)
+    assert residue.unresolved, "emptying the evidence inferred ownership from nothing"
+    assert all(record.reasons for record in residue.unresolved)
+
+
+def test_the_governance_workload_separates_ratifiable_from_irreducible(tmp_path):
+    foundation = _stripped_governed_assignments(tmp_path)
+    subjects = foundation.project_population()
+    determination = foundation.determine_ownership(subjects)
+    workload = build_governance_reduction(
+        foundation.ownership.home,
+        determination=determination,
+        subjects=subjects,
+        attribute=foundation.specialization.peer_attribute,
+    ).reduce(determination, subjects)
+    counts = workload.counts()
+    assert counts["open"] == len(determination.unresolved) + len(determination.contested)
+    assert counts["ratifiable"] + counts["irreducible"] == counts["open"]
+    assert 0 < counts["ratifiable"]
+    assert 0.0 < workload.reduction <= 100.0
+    assert set(workload.by_basis()) == {BASIS_ELIGIBLE_LOCATOR, BASIS_PEER_PRECEDENT}
 
 
 def test_the_project_registration_ledger_is_projected_not_restated():
@@ -426,7 +502,13 @@ def test_a_thin_or_contested_peer_precedent_yields_no_precedent():
     assert provider.attribute == "family"
 
 
-def test_the_governance_workload_separates_ratifiable_from_irreducible():
+def test_the_governance_workload_separates_ratifiable_from_irreducible_live():
+    """The live state after CLOSURE-HOME-004: nothing is open, so nothing is proposable.
+
+    The separation itself is guarded against manufactured evidence above; this is the
+    repository-state half of the claim, and it holds only while ownership remains declared
+    by evidence rather than inferred.
+    """
     foundation = bootstrap_universal_foundation()
     subjects = foundation.project_population()
     determination = foundation.determine_ownership(subjects)
@@ -437,11 +519,9 @@ def test_the_governance_workload_separates_ratifiable_from_irreducible():
         attribute=foundation.specialization.peer_attribute,
     ).reduce(determination, subjects)
     counts = workload.counts()
-    assert counts["open"] == len(determination.unresolved) + len(determination.contested)
-    assert counts["ratifiable"] + counts["irreducible"] == counts["open"]
-    assert 0 < counts["ratifiable"]
-    assert 0.0 < workload.reduction < 100.0
-    assert set(workload.by_basis()) == {BASIS_ELIGIBLE_LOCATOR, BASIS_PEER_PRECEDENT}
+    assert counts["open"] == len(determination.unresolved) + len(determination.contested) == 0
+    assert counts["ratifiable"] == counts["irreducible"] == 0
+    assert workload.reduction == 100.0, "nothing is open, so nothing reduces — the engine says so"
 
 
 def test_the_irreducible_residue_is_exactly_what_no_provider_can_propose_for():
@@ -456,8 +536,8 @@ def test_the_irreducible_residue_is_exactly_what_no_provider_can_propose_for():
     assert set(workload.ratifiable) <= proposed
 
 
-def test_the_draft_document_is_explicitly_not_binding():
-    foundation = bootstrap_universal_foundation()
+def test_the_draft_document_is_explicitly_not_binding(tmp_path):
+    foundation = _stripped_governed_assignments(tmp_path)
     subjects = foundation.project_population()
     determination = foundation.determine_ownership(subjects)
     workload = build_governance_reduction(

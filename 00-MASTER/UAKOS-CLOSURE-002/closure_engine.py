@@ -253,6 +253,18 @@ def _new_rec(cid: str, fam: str) -> dict:
 DERIVED_SEG = ("_evidence/", "/outputs/", "outputs/", "determinism-evidence/",
                "CHECKPOINTS/", "/__pycache__/", ".egg-info/")
 
+# Governance data that names subjects is NOT implementation. The ownership declaration
+# catalogue lives under a code root because that is where the owning package keeps its
+# packaged documents, but its keys are the subjects a HUMAN authority has assigned owners —
+# counting them as `in_code` would let the act of ratifying an owner flip a concept's
+# engineering disposition, which is the circularity UCKP-ART-04 forbids: a persistence
+# mechanism of a decision is not evidence the decision was implemented. Measured at
+# a6af5ad1..196ff693: ratifying 113 assignments moved 47 concepts to IMPLEMENTED on no
+# evidence but their appearance in this file (e.g. GOV-007, whose only code-root mention
+# was its own assignment key). The exclusion is for this document's ROLE, not its path
+# accident: it is the governed assignments surface named by the Foundation specialization.
+GOVERNANCE_ASSIGNMENT = "platform/universal_ownership/catalog/ucos-ownership-declarations.json"
+
 
 # A heading that names an id, or a range containing it, is an AUTHORED DECLARATION of what
 # the document defines: `## SECTION 3 — META-RELATIONSHIPS (AMR-01…14)`. It is read, never
@@ -468,7 +480,7 @@ def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone:
                     rec["certified"] = True
                     cert_index.setdefault(cid, set()).update(certs_here)
                 if zone == "repo":
-                    in_derived = any(s in rel for s in DERIVED_SEG)
+                    in_derived = any(s in rel for s in DERIVED_SEG) or rel == GOVERNANCE_ASSIGNMENT
                     if top in TRUTH_ROOTS:
                         rec["homed"] = True
                     if top in CODE_ROOTS and not in_derived:

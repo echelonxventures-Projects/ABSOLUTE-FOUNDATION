@@ -2,6 +2,7 @@
 
 | Field | Value |
 |-------|-------|
+| ARTIFACT ID | UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION |
 | MISSION | UCOS-RECON-C1 — permanently separate Operational Memory from Repository Corpus |
 | CLASSIFICATION | RECONCILIATION CORRECTION — pipeline exclusion + append-only ledger reconciliation |
 | STATUS | **COMPLETE · RECON-C1 CLOSED** |

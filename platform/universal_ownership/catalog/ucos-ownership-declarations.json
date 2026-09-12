@@ -327,65 +327,11 @@
       "locator": "02-MASTER/UAKOS-CL003-W1-UNIVERSAL-LAW-CANONICAL-HOMING-DETERMINATION.md",
       "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
     },
-    "UCOS-COMP-000002": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
     "UCOS-COMP-001000": {
       "owner": "Constitutional Authority (02-MASTER)",
       "authority": "Constitutional Authority (02-MASTER)",
       "locator": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
       "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
-    },
-    "UCOS-COMP-002000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
-    "UCOS-COMP-003000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
-    "UCOS-COMP-004000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
-    "UCOS-COMP-005000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
-    "UCOS-COMP-006000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
-    "UCOS-COMP-007000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
-    "UCOS-COMP-008000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
-    },
-    "UCOS-COMP-009000": {
-      "owner": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "authority": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCOS-COMP is owned by this authority"
     },
     "UCOS-EXEC-011": {
       "owner": "Constitutional Authority (02-MASTER)",
@@ -399,300 +345,30 @@
       "locator": "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md",
       "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the subject is located in declared home zone declaration.constitution, whose authority could own it once an authority says so"
     },
-    "APPLICATION-000": {
-      "owner": "Specification Authority (band zones)",
-      "authority": "Specification Authority (band zones)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=APPLICATION is owned by this authority"
-    },
-    "ARCH-GAP-001": {
+    "UCOS-RECON-C1": {
       "owner": "Constitutional Authority (02-MASTER)",
       "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=ARCH is owned by this authority"
-    },
-    "ARCH-MASTER-001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=ARCH is owned by this authority"
-    },
-    "ARCH-XXX-000": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=ARCH is owned by this authority"
-    },
-    "GOV-007": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
-    },
-    "GOV-008": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
-    },
-    "GOV-009": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
-    },
-    "GOV-010": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=GOV is owned by this authority"
-    },
-    "MCP-008": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=MCP is owned by this authority"
-    },
-    "MEP-00": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=MEP is owned by this authority"
-    },
-    "Phase-001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "Phase-002": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "Phase-003": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "Phase-004": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "Phase-005": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "Phase-006": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "Phase-025": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "Phase-040": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=PHASE is owned by this authority"
-    },
-    "UCKO-ALIAS-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-ANTI-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-CONV-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-DEC-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-EXPLICIT-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-NOBODY-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-OTHER-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-PAT-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-PEER-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+      "locator": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the concept is declared by heading and delivered by row in 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md; its operational origin 00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md names itself UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION in its ARTIFACT ID field and is the exclusion record of the zone this concept legislates, not a rival definition of it."
     },
     "UCKO-PRIN-0003": {
       "owner": "Constitutional Authority (02-MASTER)",
       "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+      "locator": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the principle is declared by heading and delivered by row in 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md, transcribed from the authoritative origin register; the seed in engine/knowledge/seed.py is its implementation, which UCKP-ART-01/04 makes a view and never a rival definition."
     },
     "UCKO-PRIN-0004": {
       "owner": "Constitutional Authority (02-MASTER)",
       "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+      "locator": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the principle is declared by heading and delivered by row in 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md, transcribed from the authoritative origin register; the seed in engine/knowledge/seed.py is its implementation, which UCKP-ART-01/04 makes a view and never a rival definition."
     },
     "UCKO-PRIN-0005": {
       "owner": "Constitutional Authority (02-MASTER)",
       "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-RULE-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-STD-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0002": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0003": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0004": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0005": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0006": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0007": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0008": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0009": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0010": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0011": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-T-0012": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-TARGET-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-TEST-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-WRONG-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-X-0001": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
-    },
-    "UCKO-XXX-000": {
-      "owner": "Constitutional Authority (02-MASTER)",
-      "authority": "Constitutional Authority (02-MASTER)",
-      "locator": "",
-      "detail": "PEER-SUBJECTS-OF-THE-SAME-ATTRIBUTE-ARE-OWNED-BY-THIS-AUTHORITY: every declared peer with family=UCKO is owned by this authority"
+      "locator": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+      "detail": "SUBJECT-LOCATOR-IN-DECLARED-HOME-ZONE: the principle is declared by heading and delivered by row in 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md, transcribed from the authoritative origin register; the seed in engine/knowledge/seed.py is its implementation, which UCKP-ART-01/04 makes a view and never a rival definition."
     }
   },
-  "$ratification": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it: the operator directed \"I want everything perfect in 100% with ZERO GAP, ZERO PARTIAL, ZERO SHORTCUT, ZERO MISSING, ZERO PATCH\" and \"make it Unconditionally ready\". WHAT THIS RATIFIES. Exactly the 113 proposals the repository's own deterministic recommendation engine emitted for the open population at workloads UCOS-UOFW-06e957829500e7e1 and UCOS-UOFW-8cb3b0082e9e8d2a, each entry carried verbatim from its strongest recommendation (owner, authority, locator, basis, detail) \u2014 no owner was invented, no proposal was edited, and every subject with no stated proposal remains unresolved rather than assigned by guess. WHY THIS IS THE GOVERNED PATH. The recommendation module's own contract: governance performs the one act only governance may perform, it ratifies, amends or rejects a concrete proposal; as_declaration_entry emits the catalogue shape so ratification is a reviewed commit of a governed decision. The framework's OWN requirements (OWN-REQ-001..007: eligible zone, registered, exactly-one-owner, authority-bound) are re-measured by every determination run and refuse any entry that does not satisfy them \u2014 a wrongly ratified entry cannot quietly stand. SPENTNESS. The workload id binds these entries to the measurement that produced them; a later run over different evidence yields a different id and the delta is visible."
+  "$ratification": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it: the operator directed \"I want everything perfect in 100% with ZERO GAP, ZERO PARTIAL, ZERO SHORTCUT, ZERO MISSING, ZERO PATCH\" and \"make it Unconditionally ready\". WHAT THIS RATIFIES. Exactly the 113 proposals the repository's own deterministic recommendation engine emitted for the open population at workloads UCOS-UOFW-06e957829500e7e1 and UCOS-UOFW-8cb3b0082e9e8d2a, each entry carried verbatim from its strongest recommendation (owner, authority, locator, basis, detail) \u2014 no owner was invented, no proposal was edited, and every subject with no stated proposal remains unresolved rather than assigned by guess. WHY THIS IS THE GOVERNED PATH. The recommendation module's own contract: governance performs the one act only governance may perform, it ratifies, amends or rejects a concrete proposal; as_declaration_entry emits the catalogue shape so ratification is a reviewed commit of a governed decision. The framework's OWN requirements (OWN-REQ-001..007: eligible zone, registered, exactly-one-owner, authority-bound) are re-measured by every determination run and refuse any entry that does not satisfy them \u2014 a wrongly ratified entry cannot quietly stand. SPENTNESS. The workload id binds these entries to the measurement that produced them; a later run over different evidence yields a different id and the delta is visible. CLOSURE-HOME-004 REFINEMENT. The 58 assignments this catalogue first carried with an empty locator were withdrawn once their subjects received eligible definitional homes in 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md: an assignment whose locator is empty fails OWN-REQ-003 and competes with the home that does satisfy it, and the framework answered exactly that with 55 CONTESTED. Ownership of those subjects now rests on the transcribed declaration, not on a governed gesture around it."
 }
