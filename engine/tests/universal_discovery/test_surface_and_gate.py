@@ -941,3 +941,16 @@ def test_a_failed_derivation_child_is_a_fault_and_not_a_fallback(monkeypatch, tm
     monkeypatch.setattr(pytest_scope.subprocess, "run", lambda *args, **kwargs: Dead())
     with pytest.raises(RuntimeError, match="could not be derived"):
         pytest_scope.derive()
+
+
+def test_the_render_names_the_pass_verdict_when_nothing_is_refused(omega) -> None:
+    """The PASS line is the last thing the render decides, and only a clean verdict reaches it.
+
+    Every other render test runs over a surface whose ratchet refuses or holds; this one
+    takes the live surface and asks the gate to report it as accepted, which is the only
+    way the pass sentence — the sentence CI prints on a green tree — has a case.
+    """
+    verdict = gate.Verdict(passed=True, findings=(), notes=(), omega=omega)
+    rendered = gate.render(verdict)
+    assert "PASS — all five Ω criteria hold" in rendered
+    assert "REFUSED" not in rendered

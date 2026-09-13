@@ -26,6 +26,7 @@ from platform.universal_control_plane import (
     BacklogItem,
     Capability,
     CapabilityRegistry,
+    ControlPlane,
     DashboardEngine,
     Decision,
     DecisionEngine,
@@ -2196,9 +2197,6 @@ class TestDiscoveryArmsThatAssumeNothing:
     """
 
     def test_a_volumeless_artifact_contributes_no_milestone(self, tmp_path) -> None:
-        from platform.tests.control_plane_helpers import FIXTURE_ARTIFACTS, build_substrate
-        from platform.universal_control_plane.discovery import ControlPlane
-
         novolume = dict(FIXTURE_ARTIFACTS[0])
         novolume["universal_id"] = "UCOS-REG-NOVOL-1"
         novolume["name"] = "no-volume record"
@@ -2225,9 +2223,6 @@ class TestDiscoveryArmsThatAssumeNothing:
         universe exercises the skip — registering the universe a second time would duplicate
         the one identity every engine is bound to.
         """
-        from platform.tests.control_plane_helpers import FIXTURE_ARTIFACTS, build_substrate
-        from platform.universal_control_plane.discovery import ControlPlane
-
         probe_root, probe_data = build_substrate(tmp_path / "probe")
         probe = ControlPlane.discover(
             data_dir=probe_data,
