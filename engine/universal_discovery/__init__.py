@@ -17,50 +17,46 @@ THE PACKAGE ROOT IMPORTS NOTHING, AND THE REASON IS A MEASUREMENT. This file use
 that runs at import — the dispositions, the ratchet kinds, the frozen dataclasses — executed
 outside the collector and reported as a miss no test could reach: 62 statements, measured in the
 combined shard report while the same suite run with an explicit ``--cov`` (which takes the
-plugin's early return and imports nothing here) reported them covered. The names below are still
-importable as package attributes, in both spellings — ``from engine.universal_discovery import
-MEASURED`` and ``engine.universal_discovery.model`` — but they arrive through ``__getattr__``
-(PEP 562), so the package root now costs three statements and the modules measure themselves when
-real code first asks for them.
+plugin's early return and imports nothing here) reported them covered. The root now forwards on
+first use (PEP 562), and it forwards by ACCESSING the model rather than by restating a list of
+its names: the first attempt held a 16-member literal and ISD-L-01 counted it as the 889th closed
+enumeration against a ceiling of 888 — the law this package exists to honour refusing the fix
+that hid the measurement. What the root owns is therefore nothing but the route: names are
+``model``'s, membership of ``__all__`` is derived at first read, and a future constant needs no
+edit here because there is no list here to edit.
 """
 
-from typing import Any
-
-#: The model names this package re-exports, and the module that owns them. A mapping, because a
-#: second `from X import ...` here would be the eager import this file exists to end.
-_MODEL_NAMES = frozenset(
-    {
-        "ARCHIVED",
-        "AUTHORITY_REQUIRED",
-        "CONVERGENT",
-        "DENSITY",
-        "DISPOSITIONS",
-        "ENTROPY",
-        "EXEMPTED",
-        "GENERATED",
-        "MEASURED",
-        "MONOTONIC",
-        "RATCHET_KINDS",
-        "TRANSIENT",
-        "Artifact",
-        "Observation",
-        "OmegaError",
-        "Population",
-    }
-)
-
-__all__ = sorted(_MODEL_NAMES)
+#: The one module the root forwards to. A single name, not a set of what it exports.
+_FORWARD = "engine.universal_discovery.model"
 
 
-def __getattr__(name: str) -> Any:
-    """Resolve a re-exported name by importing its owning module, once, on first use."""
-    if name in _MODEL_NAMES:
-        from engine.universal_discovery import model
+def _model() -> object:
+    from importlib import import_module
 
-        return getattr(model, name)
-    msg = f"module {__name__!r} has no attribute {name!r}"
-    raise AttributeError(msg)
+    return import_module(_FORWARD)
+
+
+def __getattr__(name: str) -> object:
+    """Resolve a package attribute by importing ``model``, once, on first use.
+
+    ``__all__`` answers from the model's public surface rather than a list kept here, so the
+    star-import form cannot go stale against a constant added upstream. Private and dunder
+    names are refused without consulting the target: a forwarding root that answered
+    ``__wrapped__`` or ``__reduce__`` by accident would make the package pretend to be the
+    protocol it was asked about.
+    """
+    if name == "__all__":
+        return sorted(key for key in vars(_model()) if not key.startswith("_"))
+    if name.startswith("_"):
+        msg = f"module {__name__!r} has no attribute {name!r}"
+        raise AttributeError(msg)
+    try:
+        return getattr(_model(), name)
+    except AttributeError:
+        msg = f"module {__name__!r} has no attribute {name!r}"
+        raise AttributeError(msg) from None
 
 
 def __dir__() -> list[str]:
-    return sorted(set(__all__) | set(globals()))
+    """The public names come from the module they live in, never from a copy made here."""
+    return sorted({key for key in vars(_model()) if not key.startswith("_")} | {"__all__"})

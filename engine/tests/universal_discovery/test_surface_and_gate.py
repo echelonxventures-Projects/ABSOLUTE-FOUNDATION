@@ -876,14 +876,15 @@ def test_the_derivation_survives_a_full_measurement_environment(
 
 
 def test_the_package_root_re_exports_model_lazily_and_resolves_its_own_body() -> None:
-    """__init__'s import-time statements run here, under measurement, and the re-exports answer.
+    """__init__'s import-time statements run here, under measurement, and the route answers.
 
     The root is loaded by pytest before the collector starts (the plugin lives inside the
-    package), so without an execution like this its module body would be permanently unmeasured —
-    the same class of loss the derivation child removes for ``model``. Executing the source in a
-    namespace of its own costs the real module nothing and proves the contract the lazy re-export
-    owes: every name in ``__all__`` resolves, an unknown name raises AttributeError rather than
-    returning None, and ``dir()`` of the fresh namespace names what the package advertises.
+    package), so without an execution like this its module body would be permanently
+    unmeasured — the same class of loss the derivation child removes for ``model``. The
+    contract the root owes is a route, not a list: every public name of ``model`` resolves,
+    ``__all__`` is derived from the model's surface rather than restated here, private and
+    unknown names raise ``AttributeError`` rather than forwarding, and ``dir`` advertises
+    exactly what resolves.
     """
     source = Path(pytest_scope.__file__).with_name("__init__.py").read_text(encoding="utf-8")
     namespace: dict[str, object] = {
@@ -893,9 +894,12 @@ def test_the_package_root_re_exports_model_lazily_and_resolves_its_own_body() ->
     exec(compile(source, namespace["__file__"], "exec"), namespace)  # noqa: S102
     resolve = namespace["__getattr__"]
     listing = namespace["__dir__"]
-    exported = namespace["__all__"]
-    assert exported and all(isinstance(resolve(name), object) for name in exported)
+    exported = resolve("__all__")
+    assert exported and MEASURED in exported
+    assert all(resolve(name) is not None for name in exported)
     assert resolve("MEASURED") == MEASURED
     assert set(listing()) >= set(exported)
     with pytest.raises(AttributeError, match="no attribute"):
         resolve("NOT_A_RE_EXPORT")
+    with pytest.raises(AttributeError, match="no attribute"):
+        resolve("__wrapped__")
