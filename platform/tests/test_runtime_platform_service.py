@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from platform.runtime_platform.core import RuntimeKernel
 from platform.runtime_platform.errors import (
     ExecutionRegistryError,
     RuntimeAdmissionError,
@@ -113,3 +114,9 @@ def test_service_rejects_bad_inputs():
     svc = build_runtime_platform_service()
     with pytest.raises(RuntimePlatformServiceError):
         svc.run_workflow("bad")  # type: ignore[arg-type]
+
+
+def test_the_service_refuses_a_runner_that_is_not_a_workflow_runner() -> None:
+    """The second composition guard: a kernel without a governed runner is not a service."""
+    with pytest.raises(RuntimePlatformServiceError, match="WorkflowRunner"):
+        RuntimePlatformService(kernel=RuntimeKernel(), runner="bad")  # type: ignore[arg-type]

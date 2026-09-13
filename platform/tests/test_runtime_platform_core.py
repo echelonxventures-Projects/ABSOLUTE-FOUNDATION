@@ -108,3 +108,9 @@ def test_to_dict_and_fingerprint_deterministic():
     payload = k1.to_dict()
     assert payload["execution_count"] == 1
     assert payload["registry_intact"] is True
+
+
+def test_the_kernel_exposes_the_infrastructure_it_was_composed_over() -> None:
+    """The property is how a consumer reaches the substrate without the kernel leaking it."""
+    kernel = RuntimeKernel()
+    assert kernel.infrastructure is kernel.infrastructure

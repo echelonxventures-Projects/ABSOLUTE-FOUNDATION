@@ -756,3 +756,22 @@ def test_l07_refuses_a_probe_already_present_in_the_declared_binding(contract, r
         "the_primitive_set_admits_a_future_member", _AdmissionProxy(leaked, probe), repo
     )
     assert any("leaked into the declared binding" in line for line in findings), findings
+
+
+def _load_declaration_file():
+    from engine.root_ontology.declaration import load
+
+    return load()
+
+
+def _load_declaration_file():
+    from engine.root_ontology.declaration import load
+
+    return load()
+
+
+def test_load_reads_the_committed_declaration_through_the_public_helper() -> None:
+    """`load()` is the one-line entry the gate module calls; it must answer for the real tree."""
+    loaded = _load_declaration_file()
+    assert loaded.artifact_id == "UCPA-000001"
+    assert loaded.principle

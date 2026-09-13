@@ -125,3 +125,16 @@ class TestCertificationLedger:
             certify_construct(validation, version="1.0.0", ledger=ledger)
         d = ledger.to_dict()
         assert d["count"] == 2
+
+
+def test_the_traceability_record_fingerprints_its_own_projection() -> None:
+    """The fingerprint is how this band cites its lineage record without reserialising it.
+
+    Two builds of one construct agree to the byte; a different forward chain does not.
+    """
+    construct = make_availability_topology("t.resfp")
+    record_a = build_traceability(construct, unit="EC3-B13-U07", forward=("X",))
+    record_b = build_traceability(construct, unit="EC3-B13-U07", forward=("X",))
+    assert record_a.fingerprint() == record_b.fingerprint()
+    other = build_traceability(construct, unit="EC3-B13-U07", forward=("Y",))
+    assert record_a.fingerprint() != other.fingerprint()

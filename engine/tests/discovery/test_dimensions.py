@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from types import SimpleNamespace
+
 import pytest
 
 from engine.discovery.contracts import DiscoveryKind
@@ -212,3 +214,39 @@ def test_realized_statuses_are_registry_vocabulary():
     assert REALIZED_STATUSES <= set(LifecycleStatus)
     assert LifecycleStatus.PLANNED not in REALIZED_STATUSES
     assert LifecycleStatus.FROZEN in REALIZED_STATUSES
+
+
+def test_a_document_without_an_addressable_path_is_counted_as_a_gap() -> None:
+    """The schema forbids it, so a document with no path is malformed — and said so.
+
+    ``discover_documents`` treats absence-of-path as a shortfall rather than dropping the
+    artifact, because a silent drop is how a dimension reports completeness over records
+    that cannot be read back.
+    """
+    artifact = SimpleNamespace(
+        universal_id="UCOS-DOC-000001",
+        native_id="DOC-1",
+        name="a document",
+        path="",
+        return_link="#",
+        version="1.0.0",
+        status=SimpleNamespace(value="ACTIVE"),
+        volume="VOL-000",
+        category="DOC",
+        page_start=1,
+        page_end=1,
+        parent=None,
+    )
+    artifacts = SimpleNamespace(all=lambda: [artifact], count=lambda: 1)
+    result = discover_documents(artifacts)
+    assert result.gaps == ("UCOS-DOC-000001",)
+
+
+def test_a_registry_file_the_source_cannot_find_is_recorded_as_a_gap() -> None:
+    """A registry named by the dimension but missing from the source is a finding, not
+    an omission.
+    """
+    source = SimpleNamespace(exists=lambda name: False)
+    empty = SimpleNamespace(all=lambda: [], count=lambda: 0)
+    result = discover_registries(source, empty, empty, empty)
+    assert result.gaps

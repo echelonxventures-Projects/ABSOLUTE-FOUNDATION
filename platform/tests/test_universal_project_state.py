@@ -837,3 +837,17 @@ def test_a_journal_whose_chain_is_broken_does_not_replay(tmp_path: Path):
             return getattr(journal, name)
 
     assert replays(_Broken(), snapshot) is False
+
+
+def test_governance_evidence_accepts_a_sequence_as_well_as_a_string() -> None:
+    """A control-plane projection carries evidence as a list; a bare string is the other arm.
+
+    The resolver returns the first non-empty shape it finds for each declared key, and both
+    shapes are real: the string arrives from a hand-built record, the sequence from an
+    entity whose ontology renders a list.
+    """
+    from platform.universal_project_state.state_governance import _evidence
+
+    assert _evidence({"evidence_ids": ["E-1", " E-2 ", ""]}) == ("E-1", "E-2")
+    assert _evidence({"traceability": " T-1 "}) == ("T-1",)
+    assert _evidence({}) == ()

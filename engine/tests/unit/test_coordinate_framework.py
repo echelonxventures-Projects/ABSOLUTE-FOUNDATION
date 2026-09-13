@@ -172,6 +172,43 @@ def test_l07_refuses_a_duplicate_law_row(tmp_path, monkeypatch):
     assert any("Ω∞-020: carried by 2 rows" in f for f in findings), findings
 
 
+def test_l07_refuses_a_row_the_named_set_does_not_carry(tmp_path, monkeypatch) -> None:
+    """A row whose id is outside Ω∞-000…020 is refused, not counted.
+
+    The named expectation is what makes the count informative: a register that grew an
+    extra law would otherwise be "fully measured" while the programme silently ignored
+    one of its rows.
+    """
+    register = f"{repo_root()}/02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md"
+    with open(register, encoding="utf-8") as handle:
+        lines = handle.read().splitlines()
+    widened = "\n".join([*lines, "| **Ω∞-999** | A law outside the ratified set. |"])
+    monkeypatch.setattr(
+        contract_module, "_read", lambda repo, rel: widened if "LAWS-REGISTER" in rel else ""
+    )
+    findings = l07(load_contract(), ".")
+    assert any("Ω∞-999" in f and "does not carry" in f for f in findings), findings
+
+
+def test_l07_refuses_a_register_row_that_states_nothing(tmp_path, monkeypatch) -> None:
+    """An empty statement cell is not a ratified law; it is a lost one.
+
+    The check counts rows, and a row that carries no text would make the count right and
+    the knowledge absent — the exact shape UCKP-ART-06 refuses.
+    """
+    register = f"{repo_root()}/02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md"
+    with open(register, encoding="utf-8") as handle:
+        lines = handle.read().splitlines()
+    emptied = ["| **Ω∞-002** |  |" if "**Ω∞-002**" in ln else ln for ln in lines]
+    monkeypatch.setattr(
+        contract_module,
+        "_read",
+        lambda repo, rel: "\n".join(emptied) if "LAWS-REGISTER" in rel else "",
+    )
+    findings = l07(load_contract(), ".")
+    assert any("states nothing" in f for f in findings), findings
+
+
 # --- faults are not verdicts --------------------------------------------------------------
 
 

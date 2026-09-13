@@ -68,3 +68,23 @@ def test_lineage_and_record_fingerprints_hash_their_own_projection() -> None:
         dataclasses.replace(e, sequence=i + 5) for i, e in enumerate(kernel.registry.entries)
     ]
     assert broken.verify() is False
+
+
+def test_a_degraded_component_degrades_the_report_without_failing_it(monkeypatch) -> None:
+    """HEALTHY + DEGRADED folds to DEGRADED; only UNHEALTHY stops the walk.
+
+    A DEGRADED check is a component reporting through rather than failing, and the fold that
+    combines the three component statuses had never met one — a probe that silently promoted
+    or silently ignored it would misstate platform health in opposite directions.
+    """
+    from platform.runtime_platform.health import DEGRADED, HealthCheckResult
+
+    class _DegradedResult(HealthCheckResult):
+        pass
+
+    def degraded(self):  # type: ignore[no-untyped-def]
+        return HealthCheckResult(name="services", status=DEGRADED, detail="one component behind")
+
+    monkeypatch.setattr(RuntimePlatformHealth, "_services_check", degraded)
+    report = RuntimePlatformHealth(RuntimeKernel()).probe()
+    assert report.status == DEGRADED

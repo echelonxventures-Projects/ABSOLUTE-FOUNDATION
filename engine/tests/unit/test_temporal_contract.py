@@ -31,7 +31,7 @@ from engine.temporal import (
     convert,
     validate_ordering,
 )
-from engine.temporal.coordinate import CreationMethod, SystemType
+from engine.temporal.coordinate import Conversion, CreationMethod, SystemType
 from engine.temporal.operations import preserve_context
 
 
@@ -503,3 +503,21 @@ def test_qualified_preserves_a_non_default_system_version() -> None:
     )
     restored = parse_qualified(_coord("3", versioned).qualified, authority="t")
     assert restored.reference_system.system_version == "7"
+
+
+def test_a_conversion_projects_every_field_it_declares() -> None:
+    """A conversion row that is never serialised is a row nothing can verify.
+
+    The to_dict of the conversion history is what the coordinate's timeline renders and
+    what CMG-000002 Law 3 evidence carries; each field must appear, and the projection must
+    round-trip the same values the record holds.
+    """
+    conversion = Conversion(
+        source_system="epoch-ns",
+        target_system="iso-8601",
+        conversion_function="divide_by_1e9",
+        conversion_authority="CMG-000002",
+    )
+    projected = conversion.to_dict()
+    assert projected["source_system"] == "epoch-ns"
+    assert projected["conversion_authority"] == "CMG-000002"

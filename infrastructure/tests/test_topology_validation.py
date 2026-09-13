@@ -139,3 +139,32 @@ def test_every_check_can_refuse_something():
     assert_every_check_can_refuse(
         TopologyValidationSubject.from_construct(_c, _trace_for(_c)), topology_checks()
     )
+
+
+def test_the_host_check_answers_on_both_refusal_shapes() -> None:
+    """WF-8 refuses a distribution that hosts nothing by reference AND one with a zero count.
+
+    Two different ways a hosts clause can be empty, two different findings. A check that
+    folded them together would report the wrong reason for the wrong construct.
+    """
+    import dataclasses
+
+    from infrastructure.topology_validation import (
+        TopologyValidationSubject,
+        topology_checks,
+    )
+
+    d = make_distribution_arrangement("test.host", hosts=("ENG-005:AF-3:svc",))
+    trace = _trace_for(d)
+    base = TopologyValidationSubject.from_construct(d, trace)
+    check = next(c for c in topology_checks() if c.check_id == "infra-topology-distribution-hosts")
+
+    no_refs = dataclasses.replace(base, hosts_by_reference=False)
+    finding = check.evaluate(no_refs)
+    assert not finding.passed
+    assert "any capability by reference" in finding.message
+
+    zero = dataclasses.replace(base, hosts_by_reference=True, hosts_count=0)
+    finding = check.evaluate(zero)
+    assert not finding.passed
+    assert "multiplicity" in finding.message

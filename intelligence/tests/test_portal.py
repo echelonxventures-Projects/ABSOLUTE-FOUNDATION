@@ -343,3 +343,18 @@ def test_cli_defaults_the_output_directory_under_the_engine_output_root(
     assert portal_main(["--repo", str(REPO)]) == 0
     assert (tmp_path / "out" / "portal" / PORTAL_INDEX).is_file()
     capsys.readouterr()
+
+
+def test_the_search_page_renders_an_explicit_empty_index(monkeypatch) -> None:
+    """An empty corpus is stated in the table, not silently rendered as a blank section.
+
+    The inverted index is built from the documents the portal can read; with none, the page
+    must say `_empty_` rather than show a header over nothing — the difference between a
+    measured absence and an unrendered one.
+    """
+    portal = _portal()
+    monkeypatch.setattr(
+        type(portal), "_search_documents", lambda self: []
+    )
+    page = portal.search()
+    assert "_empty_" in page

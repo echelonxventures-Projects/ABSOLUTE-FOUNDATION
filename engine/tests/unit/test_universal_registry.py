@@ -29,6 +29,7 @@ from engine.registry.universal import (
     SequenceClock,
     UniversalRegistryPlatform,
     VersionConflictError,
+    cli,
     deterministic_id,
     identity,
     parse_kind,
@@ -700,4 +701,68 @@ def test_a_diamond_dependency_is_accepted_and_a_new_back_edge_is_refused():
                 attributes={"domain": "DOM-008"},
                 dependencies=(d.universal_id,),
             )
+        )
+
+
+def test_the_journal_iterates_and_refuses_a_broken_prev_hash() -> None:
+    """__iter__ is how a consumer walks the trail, and a severed link must raise, not warn.
+
+    The chain's whole contract is that `prev_hash` names the entry before it: an entry
+    rewritten in place still hashes itself, so only the link can show the tamper — and an
+    iterator nobody enumerates would hide the entries the loop is built to find.
+    """
+    journal = AuditJournal(clock=SequenceClock())
+    for i in range(3):
+        journal.record(
+            act=AuditAct.REGISTER,
+            universal_id=f"UCOS-SVC-00000{i}",
+            version="1.0.0",
+            content_hash=f"{i:064x}",
+            state="ACTIVE",
+            actor="tester",
+        )
+    assert [entry.sequence for entry in journal] == [0, 1, 2]
+
+    tampered = AuditJournal(clock=SequenceClock())
+    for i in range(2):
+        tampered.record(
+            act=AuditAct.REGISTER,
+            universal_id=f"UCOS-SVC-10000{i}",
+            version="1.0.0",
+            content_hash=f"{i:064x}",
+            state="ACTIVE",
+            actor="tester",
+        )
+    object.__setattr__(tampered._entries[1], "prev_hash", "f" * 64)
+    with pytest.raises(AuditIntegrityError, match="prev_hash mismatch"):
+        tampered.verify()
+
+
+def test_the_manifest_reader_refuses_a_body_that_is_not_json_or_not_a_manifest(tmp_path) -> None:
+    """`main` fails on unreadable input, not on whatever half-parsed of it.
+
+    A truncated file, an array where an object was expected, or a missing
+    'registrations' array all reach the same ValueError — and the CLI maps it to exit 2,
+    because a manifest the tool cannot read is not an empty manifest.
+    """
+    broken = tmp_path / "broken.json"
+    broken.write_text("{not json", encoding="utf-8")
+    with pytest.raises(ValueError, match="not valid JSON"):
+        cli._load_manifest(broken)
+
+    wrong_shape = tmp_path / "shape.json"
+    wrong_shape.write_text(json.dumps({"registrations": {}}), encoding="utf-8")
+    with pytest.raises(ValueError, match="must be an object"):
+        cli._load_manifest(wrong_shape)
+
+
+def test_a_blank_required_field_is_refused_on_the_way_in() -> None:
+    """_as_str is the single gate for every string field of a request."""
+    with pytest.raises(RegistrationValidationError, match="non-empty string"):
+        RegistrationRequest.build(
+            kind=RegistryKind.SERVICE,
+            namespace="ucos.service",
+            natural_key="ok",
+            name="   ",
+            version="1.0.0",
         )

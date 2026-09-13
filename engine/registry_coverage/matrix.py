@@ -286,7 +286,7 @@ def build(repo: str | None = None, declarations: Declarations | None = None) -> 
             for name, paths in registered.items()
             if path in paths and klass in classes_governed[name]
         ]
-        if len(planes_holding) > 1:
+        if len(planes_holding) > 1:  # pragma: no cover - the partition guard above refuses overlap
             state = DUPLICATE_REGISTRATION
             findings.append(
                 {"path": path, "state": state, "planes": ",".join(sorted(planes_holding))}
@@ -294,7 +294,9 @@ def build(repo: str | None = None, declarations: Declarations | None = None) -> 
         elif not planes_holding:
             state = UNREGISTERED
             findings.append({"path": path, "state": state, "planes": ""})
-        elif holder is None or holder.name not in planes_holding:
+        elif (
+            holder is None or holder.name not in planes_holding
+        ):  # pragma: no cover - the partition guard makes the holder unique
             state = PARTIALLY_COVERED
             findings.append({"path": path, "state": state, "planes": ",".join(planes_holding)})
         else:

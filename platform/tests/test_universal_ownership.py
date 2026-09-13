@@ -1181,3 +1181,36 @@ def test_a_typed_refusal_fault_passes_through_without_being_wrapped_again() -> N
 
     assert "the ledger this provider reads is unavailable" in str(raised.value)
     assert "failed while diagnosing" not in str(raised.value)
+
+
+def test_the_workload_rendering_prints_every_counted_section(capsys) -> None:
+    """The recommend summary prints deficits, owners, minimums — the arms with no empty state.
+
+    The live population is closed, so these lines only fire on a payload that still carries
+    open work; the renderer is exercised against one directly, exactly the shape the engine
+    emits before ratification.
+    """
+    from platform.universal_ownership.cli import _print_summary
+
+    payload = {
+        "counts": {
+            "subjects": 10,
+            "declared": 3,
+            "contested": 0,
+            "unresolved": 7,
+            "remediable": 6,
+            "open": 7,
+            "ratifiable": 5,
+            "irreducible": 2,
+            "governance_minimum": 1,
+        },
+        "reduction_percentage": 71.4,
+        "determinable_percentage": 100.0,
+        "by_deficit": {"ZONE-NOT-CANONICAL-HOME-ELIGIBLE": 4},
+        "by_proposed_owner": {"Constitutional Authority (02-MASTER)": 5},
+    }
+    _print_summary("recommend", payload, __import__("sys").stdout)
+    out = capsys.readouterr().out
+    assert "refused by declared rule" in out
+    assert "would be owned by" in out
+    assert "neither proposable nor remediable" in out

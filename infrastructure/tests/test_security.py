@@ -162,3 +162,14 @@ def test_technology_selection_is_detected() -> None:
         evaluates=("ENG-005:ENG-002:kubernetes.hosting",),
     )
     assert sf.selects_technology()
+def test_a_security_facet_refuses_a_blank_dependency_and_a_mistyped_transition() -> None:
+    """The same two ladders, on the security construct class."""
+    with pytest.raises(InfrastructureError, match="dependsOn"):
+        make_security_facet(
+            "t.blank-dep", SecurityFacetKind.CONFIDENTIALITY, depends_on=("   ",)
+        )
+    facet = make_security_facet(
+            "t.trans", SecurityFacetKind.CONFIDENTIALITY, state=InfrastructureState.ACTIVE
+        )
+    with pytest.raises(InfrastructureError, match="INFRASTRUCTURE-003"):
+        facet.transition("ACTIVE")  # type: ignore[arg-type]

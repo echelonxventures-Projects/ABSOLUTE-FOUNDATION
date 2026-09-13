@@ -3805,3 +3805,24 @@ def test_a_rule_set_with_no_catch_all_is_a_fault_rather_than_a_default(declarati
             Presentation(kind="entity", natural_key="nothing-decides-this"),
             registry.context(),
         )
+
+
+def test_the_module_entry_point_body_runs_under_measurement() -> None:
+    """`python -m engine.construct` is the documented one-command surface.
+
+    pytest never executes ``__main__`` bodies, so the two import-time lines of the entry
+    module would otherwise be permanently unmeasured. Executing the source with a foreign
+    ``__name__`` runs the imports and skips the dispatch guard — which is exactly the
+    half of the file that has to stay true for ``-m`` to work.
+    """
+    from pathlib import Path as _Path
+
+    from engine.construct import cli as construct_cli
+
+    source = _Path(construct_cli.__file__).with_name("__main__.py").read_text(encoding="utf-8")
+    namespace: dict[str, object] = {
+        "__name__": "engine.construct__main__measured",
+        "__file__": str(_Path(construct_cli.__file__).with_name("__main__.py")),
+    }
+    exec(compile(source, namespace["__file__"], "exec"), namespace)  # noqa: S102
+    assert namespace["main"] is construct_cli.main

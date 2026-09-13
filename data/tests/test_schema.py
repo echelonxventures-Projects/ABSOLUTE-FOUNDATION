@@ -317,3 +317,24 @@ def test_every_schema_guard_can_refuse():
         member_schema_refs=("UCOS-SCHEMA-member-one",),
     )
     assert_every_guard_can_refuse(entity_schema, aggregate)
+
+
+def test_a_missing_required_element_breaks_conformance() -> None:
+    """DTA-07: conformance is decided by the required elements the entity lacks.
+
+    The schema of one entity is a claim about THAT entity; presenting a second entity
+    that does not bear the required attribute must fail the conformance decision, and
+    a schema whose required arms never fire cannot be trusted to guard anything.
+    """
+    here = _entity("ucos.demo.entity-here")
+    elsewhere = _entity("ucos.demo.entity-elsewhere", attr_name="other.attr")
+    schema = entity_schema_for(here, name="ucos.demo.schema", type_tag="ucos.core.schema")
+    assert schema.conforms_entity(here) is True
+    assert schema.conforms_entity(elsewhere) is False
+
+
+def test_schema_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> None:
+    """UDL-12 for the schema class."""
+    schema = _schema(state=SchemaState.ACTIVE)
+    with pytest.raises(SchemaError, match="DOS-01…05 state"):
+        schema.transition("ACTIVE")  # type: ignore[arg-type]

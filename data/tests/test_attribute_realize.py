@@ -6,6 +6,8 @@ import json
 from dataclasses import replace
 
 from data.attribute_realize import (
+    CANONICAL_ATTRIBUTE_NAME,
+    CANONICAL_ATTRIBUTE_TYPE_TAG,
     UNIT_VERSION,
     determinism_check,
     emit_evidence,
@@ -136,3 +138,12 @@ def test_determination_refuses_a_result_that_was_never_accepted() -> None:
     hollow = _Hollow()
     weakened = replace(result, validation=hollow)
     assert weakened.determination(byte_identical=True) == "NOT COMPLETE"
+
+
+def test_the_canonical_attribute_is_constructible_directly_and_carries_its_own_anchors() -> None:
+    """The exemplar the band documents is built by a function nobody called directly."""
+    from data.attribute_realize import build_canonical_attribute
+
+    attribute = build_canonical_attribute()
+    assert attribute.name == CANONICAL_ATTRIBUTE_NAME
+    assert attribute.type_tag == CANONICAL_ATTRIBUTE_TYPE_TAG

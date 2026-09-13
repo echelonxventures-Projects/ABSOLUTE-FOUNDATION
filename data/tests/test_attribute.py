@@ -187,3 +187,22 @@ def test_every_datum_value_ref_guard_can_refuse():
 
 def test_every_attribute_guard_can_refuse():
     assert_every_guard_can_refuse(_attr())
+
+
+def test_attribute_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> None:
+    """UDL-12: a forward-only transition is a type fact before it is an order fact (DSS-01…05)."""
+    import pytest
+
+    from data.attribute import AttributeError_
+    from data.meta import AttributeState
+
+    attribute = make_attribute("ATTR-T-01", "TYPE", make_datum("t", "v"), state=AttributeState.ACTIVE)
+    with pytest.raises(AttributeError_, match="DOS-01…05 state"):
+        attribute.transition("ACTIVE")  # type: ignore[arg-type]
+
+
+def test_attribute_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> None:
+    """UDL-12: forward-only is a type fact first — a string naming ACTIVE is not the state."""
+    attribute = _attr(state=AttributeState.ACTIVE)
+    with pytest.raises(AttributeError_, match="DOS-01…05 state"):
+        attribute.transition("ACTIVE")  # type: ignore[arg-type]

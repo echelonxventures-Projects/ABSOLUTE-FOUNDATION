@@ -12,12 +12,12 @@ from __future__ import annotations
 
 import ast
 import copy
-import dataclasses
 import json
 import os
 import pathlib
 import re
 import subprocess
+from dataclasses import replace
 
 import pytest
 
@@ -238,10 +238,10 @@ def test_a_class_declared_by_two_planes_is_refused() -> None:
 
     declarations = load_declarations()
     planes = list(declarations.planes)
-    forged = dataclasses.replace(
+    forged = replace(
         declarations,
         planes=(
-            dataclasses.replace(
+            replace(
                 planes[0], object_classes=(*planes[0].object_classes, *planes[1].object_classes)
             ),
             *planes[1:],
@@ -261,11 +261,11 @@ def test_an_object_no_plane_governs_is_still_unregistered() -> None:
 
     declarations = load_declarations()
     planes = list(declarations.planes)
-    forged = dataclasses.replace(
+    forged = replace(
         declarations,
         planes=(
-            dataclasses.replace(planes[0], object_classes=("A_CLASS_NOTHING_HAS",)),
-            dataclasses.replace(planes[1], object_classes=("ANOTHER_CLASS_NOTHING_HAS",)),
+            replace(planes[0], object_classes=("A_CLASS_NOTHING_HAS",)),
+            replace(planes[1], object_classes=("ANOTHER_CLASS_NOTHING_HAS",)),
         ),
     )
     matrix = build(declarations=forged)

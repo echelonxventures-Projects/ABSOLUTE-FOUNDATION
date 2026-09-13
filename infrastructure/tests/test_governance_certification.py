@@ -63,3 +63,16 @@ def test_ledger_hash_chained() -> None:
     for i in range(1, len(entries)):
         assert entries[i]["prev_hash"] == entries[i - 1]["entry_hash"]
     assert d["head_hash"] == entries[-1]["entry_hash"]
+
+
+def test_the_traceability_record_fingerprints_its_own_projection() -> None:
+    """The fingerprint is how this band cites its lineage record without reserialising it.
+
+    Two builds of one construct agree to the byte; a different forward chain does not.
+    """
+    construct = make_governance_facet("t.govfp", GovernanceFacetKind.CONFORMANCE)
+    record_a = build_traceability(construct, unit="EC3-B13-U09", forward=("X",))
+    record_b = build_traceability(construct, unit="EC3-B13-U09", forward=("X",))
+    assert record_a.fingerprint() == record_b.fingerprint()
+    other = build_traceability(construct, unit="EC3-B13-U09", forward=("Y",))
+    assert record_a.fingerprint() != other.fingerprint()

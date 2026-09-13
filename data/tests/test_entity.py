@@ -210,3 +210,21 @@ def test_every_attribute_ref_guard_can_refuse():
 
 def test_every_entity_guard_can_refuse():
     assert_every_guard_can_refuse(_entity())
+
+
+def test_entity_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> None:
+    """UDL-12 for the entity class: a string that names a state is not one."""
+    import pytest
+
+    from data.meta import EntityState
+
+    entity = make_entity("ENT-T-01", "TYPE", state=EntityState.ACTIVE)
+    with pytest.raises(EntityError, match="DOS-01…05 state"):
+        entity.transition("ACTIVE")  # type: ignore[arg-type]
+
+
+def test_entity_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> None:
+    """UDL-12 for the entity: a mistyped target is refused before any ordering question."""
+    entity = _entity(state=EntityState.ACTIVE)
+    with pytest.raises(EntityError, match="DOS-01…05 state"):
+        entity.transition("ACTIVE")  # type: ignore[arg-type]

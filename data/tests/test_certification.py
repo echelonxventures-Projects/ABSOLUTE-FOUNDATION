@@ -71,3 +71,38 @@ def test_non_compliant_datum_is_not_certified():
     assert cert.decision.status is CertificationStatus.NOT_CERTIFIED
     assert cert.certified is False
     assert cert.compliance.compliant is False
+
+
+def test_a_gate_refuses_a_required_check_that_never_ran_or_blocked() -> None:
+    """_checks_ok answers in both directions — absent is not-run, failed is failed.
+
+    The gates are aggregations over validation output; each has an arm for a check that
+    was never executed and another for one that executed and blocked. Both must refuse:
+    a gate that only ever reported "not-run" would pass an artifact whose check ran and
+    failed, and a gate that ignored absence would certify an unmeasured subject.
+    """
+    from dataclasses import replace
+
+    from data.validation import validate_datum
+    from engine.certification.contracts import CertificationSubject
+
+    datum = make_datum("t", "v")
+    trace = build_traceability(datum, unit="EC3-B10-U01", forward=(datum.datum_id,))
+    validation = validate_datum(datum, trace)
+    base = CertificationSubject.from_validation(validation.report, None, version="1.0.0")
+    gate = next(g for g in cce_gates() if g.required_checks)
+
+    absent = replace(base, checks_run=())
+    ok, problems = gate._checks_ok(absent)
+    assert ok is False
+    assert all(p.endswith(":not-run") for p in problems)
+
+    blocked = replace(base, blocking_failures=tuple(gate.required_checks))
+    ok, problems = gate._checks_ok(blocked)
+    assert ok is False
+    assert all(p.endswith(":failed") for p in problems)
+
+    evidence_gate = next(g for g in cce_gates() if g.criterion_id == "CC-6")
+    finding = evidence_gate.evaluate(replace(base, evidence_present=False))
+    assert not finding.passed
+    assert "validation evidence absent" in finding.message

@@ -277,3 +277,9 @@ def test_every_storage_guard_can_refuse():
         _replace(local, persisted_refs=(misaligned,))
     with pytest.raises(StorageError, match="storage technology"):
         _storage(name="ucos.demo.postgres")
+
+
+def test_persisting_requires_a_schema_object_not_a_lookalike() -> None:
+    """DTA-07: the schema half of the pairing is refused on type, not duck-typed."""
+    with pytest.raises(StorageError, match="must reference a data.schema.Schema"):
+        PersistedEntityRef.from_entity(_entity(), "ucos.demo.schema")  # type: ignore[arg-type]
