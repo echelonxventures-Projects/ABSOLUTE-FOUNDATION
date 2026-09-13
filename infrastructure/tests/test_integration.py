@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import dataclasses
+
 import pytest
 
 from infrastructure.capability import InfrastructureError
@@ -237,3 +239,27 @@ def test_transition_refuses_a_target_that_is_not_a_lifecycle_state() -> None:
     )
     with _pytest.raises(InfrastructureError, match="InfrastructureState"):
         edge.transition("ACTIVE")  # type: ignore[arg-type]
+
+
+def test_duplicated_meta_class_ownership_is_reported_by_the_disjointness_check() -> None:
+    """Two concerns claiming one meta-class: `ownership_is_disjoint` answers False.
+
+    The shipped registry is disjoint, so the refusal arm is forced — a check that only
+    ever answers True has not been shown to see a collision.
+    """
+    import pytest
+
+    from infrastructure import integration_meta as meta
+    from infrastructure.integration_meta import ownership_is_disjoint
+
+    concerns = list(meta.CONCERN_REGISTRY)
+    twin = meta.ConcernUnit(
+        concerns[1].unit,
+        concerns[1].index,
+        concerns[1].module,
+        concerns[1].title,
+        (concerns[0].meta_classes[0],),
+    )
+    with pytest.MonkeyPatch.context() as mp:
+        mp.setattr(meta, "CONCERN_REGISTRY", tuple([concerns[0], twin, *concerns[2:]]))
+        assert ownership_is_disjoint() is False

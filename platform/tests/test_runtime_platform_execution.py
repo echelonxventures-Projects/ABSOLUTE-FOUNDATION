@@ -114,3 +114,11 @@ def test_a_running_execution_cannot_be_compensated_and_a_record_fingerprints_its
         engine.compensate(unsettled)
     assert running.fingerprint() == running.fingerprint()
     assert "execution_id" in running.to_dict()
+
+
+def test_a_request_fingerprints_itself_independently_of_the_record() -> None:
+    """ExecutionRequest.fingerprint is the request's own citation, not the record's."""
+    first = request("fp-a")
+    again = request("fp-a")
+    assert first.fingerprint() == again.fingerprint()
+    assert first.fingerprint() != request("fp-b").fingerprint()

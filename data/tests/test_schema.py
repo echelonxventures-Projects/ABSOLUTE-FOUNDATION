@@ -338,3 +338,20 @@ def test_schema_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> N
     schema = _schema(state=SchemaState.ACTIVE)
     with pytest.raises(SchemaError, match="DOS-01…05 state"):
         schema.transition("ACTIVE")  # type: ignore[arg-type]
+
+
+def test_a_type_mismatch_on_a_required_element_breaks_conformance() -> None:
+    """The second conformance refusal: the name is present, the type tag is not its own.
+
+    DTA-07 is decided by name AND type — an entity that carries the element but under a
+    different ENG-004 type is not the entity the schema describes, and the guard must say
+    so on that arm, not only on absence.
+    """
+    here = _entity("ucos.demo.entity-type")
+    same_name = _entity(
+        "ucos.demo.entity-typed",
+        attr_name="ucos.demo.attr",
+        attr_type="ucos.core.number",
+    )
+    schema = entity_schema_for(here, name="ucos.demo.schema-typemismatch", type_tag="ucos.core.schema")
+    assert schema.conforms_entity(same_name) is False

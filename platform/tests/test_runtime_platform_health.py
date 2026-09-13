@@ -88,3 +88,16 @@ def test_a_degraded_component_degrades_the_report_without_failing_it(monkeypatch
     monkeypatch.setattr(RuntimePlatformHealth, "_services_check", degraded)
     report = RuntimePlatformHealth(RuntimeKernel()).probe()
     assert report.status == DEGRADED
+
+
+def test_an_intact_registry_passes_the_gate_that_refuses_a_tampered_one() -> None:
+    """require_intact is called on every write path; its silent arm is the healthy one.
+
+    A guard whose only exercised branch raises cannot be told apart from one that never
+    returns — the probe walks this every cycle, and both directions must answer.
+    """
+    from platform.runtime_platform.registry import ExecutionRegistry
+
+    registry = ExecutionRegistry()
+    registry.require_intact()
+    assert registry.verify() is True

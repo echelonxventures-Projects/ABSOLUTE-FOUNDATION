@@ -505,3 +505,36 @@ def test_a_registry_document_that_is_not_an_object_declares_no_authority(declara
 
     for unreadable in (None, [], "authority: top", 7):
         assert locate_authority("some/registry.json", unreadable, declarations, {}) is None
+
+
+def test_a_list_populated_registry_is_projected_whole(declarations, tmp_path) -> None:
+    """A registry whose population is a LIST of records, not a dict, is a real shape.
+
+    The build path reads both; the list arm had never fired, so a plane that records
+    ``[{"path": ...}, ...]`` would have registered as holding nothing while holding all.
+    """
+    import json
+    import os
+
+    from engine.registry_coverage.matrix import Plane, build
+
+    repo = tmp_path / "listy"
+    os.makedirs(repo / "registries")
+    (repo / "registries").joinpath("a.json").write_text(
+        json.dumps({"records": [{"path": "x.py"}, {"path": "y.py"}]}), encoding="utf-8"
+    )
+    (repo / "registries").joinpath("b.json").write_text(json.dumps({"items": []}), encoding="utf-8")
+    os.makedirs(repo / "00-BOOK/DATA")
+    (repo / "00-BOOK/DATA").joinpath("canonical-observation-audit.json").write_text(
+        json.dumps({"entries": []}), encoding="utf-8"
+    )
+    handcrafted = replace(
+        declarations,
+        planes=(
+            Plane("A", "registries/a.json", "owner", frozenset({"X"}), "M", "records"),
+            Plane("B", "registries/b.json", "owner", frozenset({"Y"}), "M", "items"),
+        ),
+    )
+    matrix = build(str(repo), handcrafted)
+    by_name = {p["plane"]: p for p in matrix["planes"]}
+    assert by_name["A"]["registered"] == 2

@@ -546,3 +546,15 @@ class TestQueryEdges:
         links = {d: f"id-{d}" for d in default_manifest().linkage_dimensions}
         engine.link("S", links)
         assert engine.record_of("S").subject_id == "S"
+
+
+def test_a_blank_member_of_a_string_sequence_is_dropped_by_the_cleaner() -> None:
+    """_str_tuple skips "" and keeps the rest — the cleaning arm every list field runs.
+
+    A reference list that carried whitespace would otherwise be inherited whole and fail
+    somewhere far from where it was written.
+    """
+    from platform.universal_control_plane.manifest import _str_tuple
+
+    assert _str_tuple(["a", "  ", "b", ""], at="test") == ("a", "b")
+    assert _str_tuple([], at="test") == ()

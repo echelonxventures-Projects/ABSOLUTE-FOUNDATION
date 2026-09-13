@@ -1032,3 +1032,43 @@ def test_the_engine_projection_over_the_real_plane_is_complete(
     assert body["plan"]["plan_id"] == plan.plan_id
     assert body["registry"]["counts"]["nodes"] == len(plan.nodes)
     assert body["replayable"] is True
+
+
+def test_a_shared_child_is_only_counted_once_as_the_frontier_widens() -> None:
+    """Two goals containing one milestone: the second parent meets a child already placed.
+
+    The skip arm of the frontier walk is what keeps depths stable under a diamond — a
+    plan that re-discarded the shared child would report the shallower parent as deeper
+    than the first assignment proved it to be.
+    """
+    plan = compose_plan(
+        _snapshot(
+            _entity("Vision", "VIS-1"),
+            _entity("Goal", "GOAL-A", vision_id="VIS-1"),
+            _entity("Goal", "GOAL-B", vision_id="VIS-1"),
+            _entity("Milestone", "M-1", goal_id="GOAL-A"),
+        )
+    )
+    depths = plan.depths()
+    assert depths["Milestone::M-1"] == 2
+    assert depths["Goal::GOAL-B"] == 1
+
+
+def test_a_child_claimed_by_two_parents_is_placed_by_the_first_frontier_visit_only() -> None:
+    """The already-placed arm of the depths walk: two roots, one shared child.
+
+    A BacklogItem naming both a Milestone and an Objective has two containment parents.
+    The frontier meets it twice in one level; the second meeting must skip, so a node's
+    depth is decided once and a widened frontier cannot re-decide it.
+    """
+    plan = compose_plan(
+        _snapshot(
+            _entity("Milestone", "M-A"),
+            _entity("Objective", "O-B"),
+            _entity("BacklogItem", "C", milestone_id="M-A", objective_id="O-B"),
+        )
+    )
+    depths = plan.depths()
+    assert depths["BacklogItem::C"] == 1
+    assert depths["Milestone::M-A"] == 0
+    assert depths["Objective::O-B"] == 0

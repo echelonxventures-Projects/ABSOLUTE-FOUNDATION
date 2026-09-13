@@ -851,3 +851,16 @@ def test_governance_evidence_accepts_a_sequence_as_well_as_a_string() -> None:
     assert _evidence({"evidence_ids": ["E-1", " E-2 ", ""]}) == ("E-1", "E-2")
     assert _evidence({"traceability": " T-1 "}) == ("T-1",)
     assert _evidence({}) == ()
+
+
+def test_an_empty_evidence_sequence_falls_through_to_the_next_key() -> None:
+    """A list of blanks is not evidence; the resolver must keep looking and find nothing.
+
+    The ``found`` arm of the sequence branch had never met an all-blank list — the shape a
+    projection carries when the ontology declares the field and the subject has nothing to
+    cite. Refusing to treat it as evidence is the point.
+    """
+    from platform.universal_project_state.state_governance import _evidence
+
+    assert _evidence({"evidence_ids": ["", "  "], "traceability": "T-9"}) == ("T-9",)
+    assert _evidence({"evidence_ids": [], "traceability": ()}) == ()

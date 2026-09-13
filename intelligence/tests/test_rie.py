@@ -711,3 +711,21 @@ def test_the_census_walks_the_filesystem_and_survives_a_path_it_cannot_read(
     assert counted.test_files == 2
     assert counted.loc == 3
     assert counted.test_functions == 1
+
+
+def test_a_virtual_path_climbs_and_skips_dot_segments_without_touching_disk() -> None:
+    """_resolve_virtual answers for paths that do not exist yet; ``..`` must actually pop.
+
+    The pop arm fires only when a ``..`` arrives with something to remove, and the skip
+    arm only for ``.`` — a resolver that got either wrong would let a not-yet-created
+    directory escape the root it is confined to.
+    """
+    from pathlib import Path
+
+    from intelligence.kernel.config import NestedFileSink
+
+    resolve = NestedFileSink._resolve_virtual
+    assert resolve(Path("a/b/../c")) == Path("a/c")
+    dot = type("WithDot", (), {"parts": (".", "x")})()
+    assert resolve(dot) == Path("x")
+    assert resolve(Path("..")) == Path("/")

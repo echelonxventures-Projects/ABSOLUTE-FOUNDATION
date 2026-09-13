@@ -283,3 +283,10 @@ def test_persisting_requires_a_schema_object_not_a_lookalike() -> None:
     """DTA-07: the schema half of the pairing is refused on type, not duck-typed."""
     with pytest.raises(StorageError, match="must reference a data.schema.Schema"):
         PersistedEntityRef.from_entity(_entity(), "ucos.demo.schema")  # type: ignore[arg-type]
+
+
+def test_storage_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> None:
+    """UDL-12 for the storage class: a string naming a state is not one."""
+    stored = _storage(state=StorageState.ACTIVE)
+    with pytest.raises(StorageError, match="DOS-01…05 state"):
+        stored.transition("ACTIVE")  # type: ignore[arg-type]

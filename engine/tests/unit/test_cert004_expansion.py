@@ -433,3 +433,26 @@ def test_the_script_bootstraps_its_own_repo_root_into_sys_path() -> None:
         assert repo in sys.path
     finally:
         sys.path[:] = saved
+
+
+def test_the_cobertura_parser_tolerates_classes_without_line_tables(tmp_path) -> None:
+    """A ``<class>`` with no ``<lines>`` element and mixed branch lines parse without loss.
+
+    The 202->214 arm is a class that declares no lines at all (generated stubs do), and
+    209->203 is a non-branch line sitting among branch lines. Both shapes exist in real
+    reports, and a parser that skipped them would understate the denominator it measures.
+    """
+    xml = """<?xml version="1.0"?>
+<coverage>
+  <packages><package name="p"><classes>
+    <class name="a" filename="p/a.py"></class>
+    <class name="b" filename="p/b.py"><lines>
+      <line number="1" hits="1"/>
+      <line number="2" hits="0" branch="true" condition-coverage="50% (1/2)"/>
+    </lines></class>
+  </classes></package></packages>
+</coverage>"""
+    report = tmp_path / "cov.xml"
+    report.write_text(xml, encoding="utf-8")
+    parsed = band._parse_coverage_xml(report)
+    assert parsed["p/b.py"].branches_valid == 2
