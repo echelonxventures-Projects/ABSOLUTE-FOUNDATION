@@ -149,11 +149,6 @@ def test_the_host_check_answers_on_both_refusal_shapes() -> None:
     """
     import dataclasses
 
-    from infrastructure.topology_validation import (
-        TopologyValidationSubject,
-        topology_checks,
-    )
-
     d = make_distribution_arrangement("test.host", hosts=("ENG-005:AF-3:svc",))
     trace = _trace_for(d)
     base = TopologyValidationSubject.from_construct(d, trace)

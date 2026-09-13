@@ -160,8 +160,11 @@ def test_cli_main_reports_failure_when_not_complete(tmp_path, capsys, monkeypatc
 
 def test_determination_not_complete_for_rejected_resource():
     # A technology-selecting resource is rejected → determination NOT COMPLETE.
-    bad = make_storage_hosting_resource("t", "ENG-005:INFRASTRUCTURE-011:locality.foundation",
-                                        datum_ref="ENG-005:DF-2:postgres.table")
+    bad = make_storage_hosting_resource(
+        "t",
+        "ENG-005:INFRASTRUCTURE-011:locality.foundation",
+        datum_ref="ENG-005:DF-2:postgres.table",
+    )
     trace = build_traceability(bad, unit="EC3-B13-U04", forward=(bad.resource_id,))
     validation = validate_storage(bad, trace)
     certification = certify_storage(validation, version=UNIT_VERSION)

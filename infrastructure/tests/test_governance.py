@@ -163,12 +163,12 @@ def test_technology_selection_is_detected() -> None:
         evaluates=("ENG-005:ENG-002:kubernetes.hosting",),
     )
     assert gf.selects_technology()
+
+
 def test_a_governance_facet_refuses_a_blank_dependency_and_a_mistyped_transition() -> None:
     """The dependsOn ladder and INFRASTRUCTURE-003 §3 both answer before any ordering."""
     with pytest.raises(InfrastructureError, match="dependsOn"):
-        make_governance_facet(
-            "t.blank-dep", GovernanceFacetKind.CONFORMANCE, depends_on=("   ",)
-        )
+        make_governance_facet("t.blank-dep", GovernanceFacetKind.CONFORMANCE, depends_on=("   ",))
     facet = make_governance_facet(
         "t.trans", GovernanceFacetKind.CONFORMANCE, state=InfrastructureState.ACTIVE
     )

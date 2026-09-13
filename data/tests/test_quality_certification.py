@@ -46,9 +46,7 @@ def _quality(name=QUALITY_NAME):
 
 
 def _validate(quality):
-    trace = build_quality_traceability(
-        quality, unit="EC3-B10-U08", forward=(quality.quality_id,)
-    )
+    trace = build_quality_traceability(quality, unit="EC3-B10-U08", forward=(quality.quality_id,))
     return validate_quality(quality, trace)
 
 

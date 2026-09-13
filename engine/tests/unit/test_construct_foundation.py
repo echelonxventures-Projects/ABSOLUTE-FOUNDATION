@@ -38,9 +38,20 @@ import pytest
 
 from engine.ceu import catalog
 from engine.ceu.catalog import SEED_POPULATIONS
-from engine.construct import audit, contract, evidence, extension, reality, views
-from engine.construct import cli as construct_cli
-from engine.construct import gate as construct_gate
+from engine.construct import (
+    audit,
+    contract,
+    evidence,
+    extension,
+    reality,
+    views,
+)
+from engine.construct import (
+    cli as construct_cli,
+)
+from engine.construct import (
+    gate as construct_gate,
+)
 from engine.construct.contract import (
     HOLDS,
     LAW_CHECKS,

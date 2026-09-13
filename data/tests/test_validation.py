@@ -116,8 +116,6 @@ def test_a_traceability_record_fingerprints_its_own_projection() -> None:
     Two records of the same datum are one record; two different values are not. A
     fingerprint that failed either direction would let one lineage impersonate another.
     """
-    from data.datum import make_datum
-    from data.traceability import build_traceability
 
     record = build_traceability(
         make_datum("t", "v"), unit="EC3-B10-U01", forward=("UCOS-DATUM-x-0",)

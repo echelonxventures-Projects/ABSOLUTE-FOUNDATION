@@ -83,7 +83,6 @@ def test_a_gate_refuses_a_required_check_that_never_ran_or_blocked() -> None:
     """
     from dataclasses import replace
 
-    from data.validation import validate_datum
     from engine.certification.contracts import CertificationSubject
 
     datum = make_datum("t", "v")

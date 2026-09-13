@@ -20,14 +20,14 @@ def _validated():
         basis="reuses",
     )
     trace = build_traceability(
-        edge, unit=REALIZATION_UNIT,
+        edge,
+        unit=REALIZATION_UNIT,
         forward=(edge.construct_id, "V", "C", "EC3-B13-U10-COMPLETION-REPORT"),
     )
     return validate_dependency(edge, trace)
 
 
 class TestCertification:
-
     def test_ten_cce_gates(self):
         assert len(cce_gates()) == 10
 

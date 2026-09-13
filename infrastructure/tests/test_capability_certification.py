@@ -66,7 +66,9 @@ def _good_subject(**overrides) -> CertificationSubject:
 
 
 def test_cce_ten_gates_all_close_and_certify():
-    cert = certify_capability(_validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0")
+    cert = certify_capability(
+        _validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0"
+    )
     assert cert.decision.status is CertificationStatus.CERTIFIED
     assert {f.criterion_id for f in cert.decision.findings} == set(CCE_GATES)  # CC-1…CC-10
     assert all(f.passed for f in cert.decision.findings)
@@ -74,14 +76,18 @@ def test_cce_ten_gates_all_close_and_certify():
 
 
 def test_certification_record_is_immutable_and_self_verifying():
-    cert = certify_capability(_validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0")
+    cert = certify_capability(
+        _validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0"
+    )
     assert cert.decision.record.verify_integrity() is True
     assert cert.decision.record.authority == "ENGINEERING-EXECUTION-ONLY"  # DE-05
     assert cert.decision.record.disclosure["asserts_constitutional_finality"] is False
 
 
 def test_ledger_is_append_only_and_hash_chain_intact():
-    cert = certify_capability(_validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0")
+    cert = certify_capability(
+        _validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0"
+    )
     assert cert.ledger.verify() is True  # CC-10 chain intact
     assert len(cert.ledger) == 1
     assert cert.ledger_entry.sequence == 0
@@ -89,7 +95,9 @@ def test_ledger_is_append_only_and_hash_chain_intact():
 
 
 def test_infrastructure_compliance_c1_c7_all_hold():
-    compliance = evaluate_capability_compliance(_validate(make_infrastructure_capability("t", ENABLES)))
+    compliance = evaluate_capability_compliance(
+        _validate(make_infrastructure_capability("t", ENABLES))
+    )
     assert compliance.compliant is True
     assert {c["id"] for c in compliance.conditions} == {f"C{n}" for n in range(1, 8)}
     assert all(c["status"] == "pass" for c in compliance.conditions)
@@ -102,7 +110,9 @@ def test_infrastructure_compliance_c1_c7_all_hold():
 
 
 def test_overall_certification_is_sound():
-    cert = certify_capability(_validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0")
+    cert = certify_capability(
+        _validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0"
+    )
     assert cert.certified is True  # decision + ledger + compliance
 
 
@@ -126,7 +136,9 @@ def test_supplied_ledger_is_reused():
     from engine.certification.ledger import CertificationLedger
 
     ledger = CertificationLedger()
-    certify_capability(_validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0", ledger=ledger)
+    certify_capability(
+        _validate(make_infrastructure_capability("t", ENABLES)), version="1.0.0", ledger=ledger
+    )
     certify_capability(
         _validate(make_infrastructure_capability("t", "ENG-005:AF-3:app.experience")),
         version="1.0.0",
@@ -139,63 +151,84 @@ def test_supplied_ledger_is_reused():
 
 
 def test_gate1_fails_on_orphan():
-    assert Gate1Architecture().evaluate(
-        _good_subject(blocking_failures=("traceability-rooted",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate1Architecture()
+        .evaluate(_good_subject(blocking_failures=("traceability-rooted",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate2_fails_on_broken_substrate():
-    assert Gate2Dependencies().evaluate(
-        _good_subject(blocking_failures=("foundation-reuse-integrity",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate2Dependencies()
+        .evaluate(_good_subject(blocking_failures=("foundation-reuse-integrity",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate3_fails_on_structural_violation():
-    assert Gate3Coverage().evaluate(
-        _good_subject(blocking_failures=("founding-acyclic",), counts={"failed": 1})
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate3Coverage()
+        .evaluate(_good_subject(blocking_failures=("founding-acyclic",), counts={"failed": 1}))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate4_fails_when_validation_not_accepted():
-    assert Gate4Validation().evaluate(
-        _good_subject(validation_accepted=False, validation_verdict="fail")
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate4Validation()
+        .evaluate(_good_subject(validation_accepted=False, validation_verdict="fail"))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate5_fails_on_broken_lineage():
-    assert Gate5Traceability().evaluate(
-        _good_subject(blocking_failures=("traceability-rooted",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate5Traceability()
+        .evaluate(_good_subject(blocking_failures=("traceability-rooted",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate6_fails_when_evidence_absent():
-    assert Gate6Evidence().evaluate(
-        _good_subject(evidence_present=False, evidence_sha256="")
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate6Evidence().evaluate(_good_subject(evidence_present=False, evidence_sha256="")).status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate7_fails_when_disclosure_absent():
-    assert Gate7CertificationReady().evaluate(
-        _good_subject(blocking_failures=("provisional-state-disclosure",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate7CertificationReady()
+        .evaluate(_good_subject(blocking_failures=("provisional-state-disclosure",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate8_fails_on_blockers():
-    assert Gate8Readiness().evaluate(
-        _good_subject(blocking_failures=("some-check",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate8Readiness().evaluate(_good_subject(blocking_failures=("some-check",))).status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate9_fails_on_open_gap():
-    assert Gate9GapZero().evaluate(
-        _good_subject(counts={"failed": 2})
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate9GapZero().evaluate(_good_subject(counts={"failed": 2})).status is CriterionStatus.FAIL
+    )
 
 
 def test_gate10_fails_when_prerequisites_open():
-    assert Gate10Completeness().evaluate(
-        _good_subject(validation_accepted=False)
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate10Completeness().evaluate(_good_subject(validation_accepted=False)).status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_all_gates_pass_on_good_subject():
@@ -206,6 +239,4 @@ def test_all_gates_pass_on_good_subject():
 
 def test_gate_reports_a_required_check_that_did_not_run():
     # A required check absent from checks_run is a "not-run" defect (fail-closed).
-    assert Gate2Dependencies().evaluate(
-        _good_subject(checks_run=())
-    ).status is CriterionStatus.FAIL
+    assert Gate2Dependencies().evaluate(_good_subject(checks_run=())).status is CriterionStatus.FAIL

@@ -40,7 +40,6 @@ def _certify(construct):
 
 
 class TestCCEGates:
-
     def test_cce_gates_present(self):
         gates = cce_gates()
         assert len(gates) == 10
@@ -74,7 +73,6 @@ class TestCCEGates:
 
 
 class TestCompliance:
-
     def test_compliance_verdict_structure(self):
         d = make_distribution_arrangement("test.d", hosts=("ENG-005:AF-3:svc",))
         cert = _certify(d)
@@ -117,13 +115,10 @@ class TestCompliance:
 
 
 class TestCertificationLedger:
-
     def test_ledger_append(self):
         ledger = CertificationLedger()
         d = make_distribution_arrangement("test.d", hosts=("ENG-005:cap",))
-        trace = build_traceability(
-            d, unit=REALIZATION_UNIT, forward=(d.construct_id, "test")
-        )
+        trace = build_traceability(d, unit=REALIZATION_UNIT, forward=(d.construct_id, "test"))
         validation = validate_construct(d, trace)
         cert = certify_construct(validation, version="1.0.0", ledger=ledger)
         assert len(ledger.entries) == 1
@@ -131,9 +126,7 @@ class TestCertificationLedger:
     def test_ledger_head_hash(self):
         ledger = CertificationLedger()
         t = make_topology("test.topo")
-        trace = build_traceability(
-            t, unit=REALIZATION_UNIT, forward=(t.construct_id, "test")
-        )
+        trace = build_traceability(t, unit=REALIZATION_UNIT, forward=(t.construct_id, "test"))
         validation = validate_construct(t, trace)
         certify_construct(validation, version="1.0.0", ledger=ledger)
         assert ledger.head_hash is not None
@@ -147,9 +140,7 @@ class TestCertificationLedger:
             make_placement_rule("t3"),
         ]
         for c in constructs:
-            trace = build_traceability(
-                c, unit=REALIZATION_UNIT, forward=(c.construct_id, "test")
-            )
+            trace = build_traceability(c, unit=REALIZATION_UNIT, forward=(c.construct_id, "test"))
             validation = validate_construct(c, trace)
             certify_construct(validation, version="1.0.0", ledger=ledger)
         d = ledger.to_dict()

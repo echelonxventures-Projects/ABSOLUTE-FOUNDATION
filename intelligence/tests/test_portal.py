@@ -19,6 +19,7 @@ from dataclasses import replace
 import pytest
 
 from intelligence.portal import (
+    main as portal_main,
     ACCEPTANCE_PORTAL,
     CAPABILITY_PORTAL,
     CERTIFICATION_PORTAL,
@@ -40,7 +41,6 @@ from intelligence.portal import (
     _freeze_blockers,
     build_acceptance_facts,
 )
-from intelligence.portal import main as portal_main
 from intelligence.rie.config import RepoConfig
 from intelligence.rie.engine import RepositoryIntelligenceEngine
 
@@ -353,8 +353,6 @@ def test_the_search_page_renders_an_explicit_empty_index(monkeypatch) -> None:
     measured absence and an unrendered one.
     """
     portal = _portal()
-    monkeypatch.setattr(
-        type(portal), "_search_documents", lambda self: []
-    )
+    monkeypatch.setattr(type(portal), "_search_documents", lambda self: [])
     page = portal.search()
     assert "_empty_" in page

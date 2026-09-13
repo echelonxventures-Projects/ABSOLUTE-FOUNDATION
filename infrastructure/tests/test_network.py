@@ -42,7 +42,9 @@ def test_network_identity_is_deterministic_and_core_derived():
     b = make_network_resource("t", LOCALITY)
     c = make_network_resource("t", "ENG-005:INFRASTRUCTURE-011:locality.other")
     d = make_network_resource("t", LOCALITY, amount=2)
-    e = make_network_resource("t", LOCALITY, target_ref="ENG-005:INFRASTRUCTURE-007:compute.endpoint.c")
+    e = make_network_resource(
+        "t", LOCALITY, target_ref="ENG-005:INFRASTRUCTURE-007:compute.endpoint.c"
+    )
     assert a.resource_id == b.resource_id  # same core → same ENG-001 identity
     assert a.resource_id != c.resource_id  # different locality → different id
     assert a.resource_id != d.resource_id  # different capacity → different id
@@ -130,9 +132,7 @@ def test_non_cross_boundary_link_with_malformed_boundary_ref_rejected():
     # A non-cross-boundary link that nonetheless carries a malformed boundary_ref is
     # rejected fail-closed (the boundary reference, when present, must be well-formed).
     with pytest.raises(InfrastructureError):
-        ConnectivityLink(
-            source_ref=SRC, target_ref=TGT, cross_boundary=False, boundary_ref="   "
-        )
+        ConnectivityLink(source_ref=SRC, target_ref=TGT, cross_boundary=False, boundary_ref="   ")
 
 
 def test_cross_boundary_link_with_boundary_is_valid_and_honored():

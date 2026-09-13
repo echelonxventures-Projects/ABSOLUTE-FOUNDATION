@@ -37,7 +37,6 @@ def _certify(construct):
 
 
 class TestCCEGates:
-
     def test_cce_gates_present(self):
         gates = cce_gates()
         assert len(gates) == 10
@@ -56,7 +55,6 @@ class TestCCEGates:
 
 
 class TestCompliance:
-
     def test_compliance_verdict_structure(self):
         at = make_availability_topology("test.at")
         cert = _certify(at)
@@ -89,13 +87,10 @@ class TestCompliance:
 
 
 class TestCertificationLedger:
-
     def test_ledger_append(self):
         ledger = CertificationLedger()
         at = make_availability_topology("test.at")
-        trace = build_traceability(
-            at, unit=REALIZATION_UNIT, forward=(at.construct_id, "test")
-        )
+        trace = build_traceability(at, unit=REALIZATION_UNIT, forward=(at.construct_id, "test"))
         validation = validate_construct(at, trace)
         cert = certify_construct(validation, version="1.0.0", ledger=ledger)
         assert len(ledger.entries) == 1
@@ -103,9 +98,7 @@ class TestCertificationLedger:
     def test_ledger_head_hash(self):
         ledger = CertificationLedger()
         sa = make_scaling_arrangement("test.sa")
-        trace = build_traceability(
-            sa, unit=REALIZATION_UNIT, forward=(sa.construct_id, "test")
-        )
+        trace = build_traceability(sa, unit=REALIZATION_UNIT, forward=(sa.construct_id, "test"))
         validation = validate_construct(sa, trace)
         certify_construct(validation, version="1.0.0", ledger=ledger)
         assert ledger.head_hash is not None
@@ -118,9 +111,7 @@ class TestCertificationLedger:
             make_scaling_arrangement("t2"),
         ]
         for c in constructs:
-            trace = build_traceability(
-                c, unit=REALIZATION_UNIT, forward=(c.construct_id, "test")
-            )
+            trace = build_traceability(c, unit=REALIZATION_UNIT, forward=(c.construct_id, "test"))
             validation = validate_construct(c, trace)
             certify_construct(validation, version="1.0.0", ledger=ledger)
         d = ledger.to_dict()

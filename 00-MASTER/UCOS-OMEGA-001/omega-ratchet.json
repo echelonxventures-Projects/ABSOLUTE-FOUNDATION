@@ -3,7 +3,7 @@
   "best": {
     "authority_of_last_resort": 0.0,
     "declared_exemptions": 14.0,
-    "import_entropy": 7.993862,
+    "import_entropy": 7.998259,
     "statement_entropy": 6.362406,
     "unexplained_exemptions": 2.0,
     "unmeasured_surface_density": 0.094795,
@@ -27,6 +27,10 @@
     {
       "metric": "declared_exemptions",
       "reason": "Declared artifacts outside the measurement denominator, each with a written owner reason: 10 -> 14. The four are engine/substrate/__init__.py, __main__.py, adapter.py and gate.py (194 statements), admitted by the same rule that already carries engine.uicm and named in the same table where uicm is named: pyproject `[tool.ucos.coverage_scope]`. THE CAUSE IS EXTERNAL AND WRITTEN DOWN: the package consumes uakp>=0.0.1, which sub-declaration records as publishing no release yet, so `python -m engine.substrate` answers FAULT by design and its own suite `importorskip`s on exactly that fact. Those lines do not run in ANY environment until the upstream substrate exists; leaving them inside the denominator would bind the repository's coverage figure to a third party's release schedule, and deleting the code would destroy a consumer written against a declared contract. WHAT CLOSES THIS ENTRY: when uakp publishes, delete the pyproject entry \u2014 the files return to the denominator, the skip-guarded suite runs, and this metric falls back to 10. A correction, not a ceiling: the bound keeps binding at 14, so the next declared exemption is refused exactly as this one was argued."
+    },
+    {
+      "metric": "import_entropy",
+      "reason": "Import statements per tracked artifact: 7.993862 -> 7.998259, a rise of 0.004397 across 2297 tracked artifacts. RE-SEEDED for the measurement-tail programme: 48 permanently-unmeasured statements in 32 files were closed \u2014 transition guards that refuse a mistyped lifecycle state, the audit journal's iterator and its severed prev_hash, the manifest reader's two malformed inputs, the blank field at the door, both host-check shapes, the leaf closure that repeats a meta-class, the health fold meeting DEGRADED for the first time, the search page whose index is empty on purpose, two __main__ bodies executed under measurement, and the two arms of the absolute-law count. Every one needed a symbol its suite had never imported, so every one is an import statement. COMPENSATION WAS PERFORMED FIRST: fourteen duplicate imports in the touched files were collapsed \u2014 a local re-import of a name the module already binds at the top is a second statement for a fact already held \u2014 and five same-module top-level blocks were merged. What remains is the conflict the statement_entropy entry already records and the same file settled the same way: ruff's import sorting (I001) splits aliased imports back into separate statements, the lint gate is authoritative for style, and the ratchet is the instrument that yields \u2014 silently fighting the formatter would make every future `ruff format` a governance event. A JUSTIFICATION would have been the wrong instrument: it permits every future rise forever, and this was one bounded, law-driven admission. The bound now binds at 7.998259, so the next module that raises it is refused exactly as this one was."
     }
   ],
   "floors": [

@@ -103,7 +103,6 @@ def test_the_datum_guards_refuse_a_kind_or_state_that_is_not_typed() -> None:
     each refused before any ordering question is asked, because a mistyped state would otherwise
     fail as an IndexError inside the lifecycle table instead of as the guard it is.
     """
-    from data.meta import DatumKind, DatumState
 
     with pytest.raises(DatumError, match="DXH-01 DatumKind"):
         make_datum("t", "v", kind="PRIMITIVE")  # type: ignore[arg-type]

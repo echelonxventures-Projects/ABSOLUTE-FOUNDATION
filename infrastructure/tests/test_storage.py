@@ -230,7 +230,10 @@ def test_transition_rejects_non_state_target():
 
 def test_capacity_and_placements_may_be_supplied_directly():
     cap = StorageCapacity(amount=7, unit="storage-unit")
-    placements = (make_data_placement("ENG-005:DF-2:DATA-010.a"), make_data_placement("ENG-005:DF-2:DATA-010.b"))
+    placements = (
+        make_data_placement("ENG-005:DF-2:DATA-010.a"),
+        make_data_placement("ENG-005:DF-2:DATA-010.b"),
+    )
     r = make_storage_hosting_resource("t", LOCALITY, capacity=cap, placements=placements)
     assert r.capacity is cap
     assert r.capacity.amount == 7

@@ -90,7 +90,17 @@ def test_meta_validity_and_uil_conformance_complete():
     assert set(mv) == {"WF-1", "WF-2", "WF-3", "WF-4", "WF-6", "WF-11", "WF-12"}
     assert all(mv.values())
     uil = result.uil_conformance()
-    for law in ("UIL-01", "UIL-02", "UIL-03", "UIL-04", "UIL-05", "UIL-07", "UIL-09", "UIL-10", "UIL-15"):
+    for law in (
+        "UIL-01",
+        "UIL-02",
+        "UIL-03",
+        "UIL-04",
+        "UIL-05",
+        "UIL-07",
+        "UIL-09",
+        "UIL-10",
+        "UIL-15",
+    ):
         assert uil[law], law
 
 
@@ -241,7 +251,9 @@ def test_determination_complete_with_conditions_when_compliance_degraded():
 
 def test_traceability_record_fingerprint_and_flags():
     comp = build_canonical_composition()
-    trace = build_traceability(comp.environment, unit="EC3-B13-U05", forward=(comp.environment.construct_id,))
+    trace = build_traceability(
+        comp.environment, unit="EC3-B13-U05", forward=(comp.environment.construct_id,)
+    )
     assert trace.rooted is True
     assert trace.closed is True
     assert trace.meta_class == "Environment"

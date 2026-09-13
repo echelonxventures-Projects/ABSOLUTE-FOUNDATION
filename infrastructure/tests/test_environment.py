@@ -171,7 +171,11 @@ def test_environment_rejects_missing_boundary_locality_contains():
         Environment(type_tag="t", boundary_ref=BOUND, locality_ref=LOC, contains=())  # ≥1
     with pytest.raises(InfrastructureError):
         Environment(
-            type_tag="t", boundary_ref=BOUND, locality_ref=LOC, contains=(RES,), state="BAD"  # type: ignore[arg-type]
+            type_tag="t",
+            boundary_ref=BOUND,
+            locality_ref=LOC,
+            contains=(RES,),
+            state="BAD",  # type: ignore[arg-type]
         )
 
 

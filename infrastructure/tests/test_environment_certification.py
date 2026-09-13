@@ -169,63 +169,88 @@ def test_shared_ledger_chains_multiple_constructs():
 
 
 def test_gate1_fails_on_orphan():
-    assert Gate1Architecture().evaluate(
-        _good_subject(blocking_failures=("traceability-rooted",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate1Architecture()
+        .evaluate(_good_subject(blocking_failures=("traceability-rooted",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate2_fails_on_broken_substrate():
-    assert Gate2Dependencies().evaluate(
-        _good_subject(blocking_failures=("foundation-reuse-integrity",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate2Dependencies()
+        .evaluate(_good_subject(blocking_failures=("foundation-reuse-integrity",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate3_fails_on_structural_violation():
-    assert Gate3Coverage().evaluate(
-        _good_subject(blocking_failures=("infra-env-containment-acyclic",), counts={"failed": 1})
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate3Coverage()
+        .evaluate(
+            _good_subject(
+                blocking_failures=("infra-env-containment-acyclic",), counts={"failed": 1}
+            )
+        )
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate4_fails_when_validation_not_accepted():
-    assert Gate4Validation().evaluate(
-        _good_subject(validation_accepted=False, validation_verdict="fail")
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate4Validation()
+        .evaluate(_good_subject(validation_accepted=False, validation_verdict="fail"))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate5_fails_on_broken_lineage():
-    assert Gate5Traceability().evaluate(
-        _good_subject(blocking_failures=("traceability-rooted",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate5Traceability()
+        .evaluate(_good_subject(blocking_failures=("traceability-rooted",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate6_fails_when_evidence_absent():
-    assert Gate6Evidence().evaluate(
-        _good_subject(evidence_present=False, evidence_sha256="")
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate6Evidence().evaluate(_good_subject(evidence_present=False, evidence_sha256="")).status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate7_fails_when_disclosure_absent():
-    assert Gate7CertificationReady().evaluate(
-        _good_subject(blocking_failures=("provisional-state-disclosure",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate7CertificationReady()
+        .evaluate(_good_subject(blocking_failures=("provisional-state-disclosure",)))
+        .status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate8_fails_on_blockers():
-    assert Gate8Readiness().evaluate(
-        _good_subject(blocking_failures=("some-check",))
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate8Readiness().evaluate(_good_subject(blocking_failures=("some-check",))).status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_gate9_fails_on_open_gap():
-    assert Gate9GapZero().evaluate(
-        _good_subject(counts={"failed": 2})
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate9GapZero().evaluate(_good_subject(counts={"failed": 2})).status is CriterionStatus.FAIL
+    )
 
 
 def test_gate10_fails_when_prerequisites_open():
-    assert Gate10Completeness().evaluate(
-        _good_subject(validation_accepted=False)
-    ).status is CriterionStatus.FAIL
+    assert (
+        Gate10Completeness().evaluate(_good_subject(validation_accepted=False)).status
+        is CriterionStatus.FAIL
+    )
 
 
 def test_all_gates_pass_on_good_subject():
@@ -235,6 +260,4 @@ def test_all_gates_pass_on_good_subject():
 
 
 def test_gate_reports_a_required_check_that_did_not_run():
-    assert Gate2Dependencies().evaluate(
-        _good_subject(checks_run=())
-    ).status is CriterionStatus.FAIL
+    assert Gate2Dependencies().evaluate(_good_subject(checks_run=())).status is CriterionStatus.FAIL
