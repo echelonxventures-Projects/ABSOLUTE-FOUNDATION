@@ -360,21 +360,81 @@ def test_the_search_page_renders_an_explicit_empty_index(monkeypatch) -> None:
     assert "_empty_" in page
 
 
-def test_the_acceptance_page_survives_a_decision_without_the_validation_gate() -> None:
-    """The validation row is conditional; a decision that omits it renders without it.
+def test_a_validation_dimension_missing_from_the_projection_is_skipped_not_rendered() -> None:
+    """`per_dimension` is published data, not a contract with four keys.
 
-    The gate list is data, and a page that assumed the finding exists would raise on any
-    decision authored before that gate — the render must degrade to its absence.
+    A projection that has not yet evaluated a dimension must be skipped, and the page
+    must not present the absence as a verdict — while the gate finding, absent from the
+    decision, must leave its section out too.
     """
-    portal = _portal()
-    source = portal._acceptance_source if hasattr(portal, "_acceptance_source") else None
-    findings = tuple(
-        f for f in portal._decision.findings if f.gate_id != "validation-passed"
-    )
-    assert len(findings) < len(portal._decision.findings)
+    import copy
     import dataclasses
 
-    lean = dataclasses.replace(portal._decision, findings=findings)
-    portal._decision = lean
-    page = portal.acceptance()
-    assert "Validation passed" not in page
+    portal = _portal()
+    model = copy.deepcopy(portal._model)
+    model["progress"] = {
+        "unit_validation_pct": 50,
+        "per_dimension": {
+            "unit_testing": {
+                "status": "GREEN",
+                "source": "fixture",
+                "stale": False,
+                "reconciled_score": 1.0,
+            }
+        },
+    }
+    lean = dataclasses.replace(
+        portal._decision,
+        findings=tuple(
+            fl for fl in portal._decision.findings if fl.gate_id != "validation-passed"
+        ),
+    )
+    original_model, original_decision = portal._model, portal._decision
+    try:
+        object.__setattr__(portal, "_model", model)
+        object.__setattr__(portal, "_decision", lean)
+        page = portal.validation()
+    finally:
+        object.__setattr__(portal, "_model", original_model)
+        object.__setattr__(portal, "_decision", original_decision)
+    assert "integration_testing" not in page
+    assert "| unit_testing |" in page
+    assert "Acceptance validation gate" not in page
+
+
+def test_a_full_validation_projection_renders_every_dimension() -> None:
+    """The other side of the same loop: every named dimension that is present is a row.
+
+    The skip arm only means anything against the render arm — one projection with all
+    four dimensions must produce all four rows, so the walk is shown to include as well
+    as to omit.
+    """
+    import copy
+
+    portal = _portal()
+    model = copy.deepcopy(portal._model)
+    model["progress"] = {
+        "unit_validation_pct": 100,
+        "per_dimension": {
+            name: {
+                "status": "GREEN",
+                "source": "fixture",
+                "stale": False,
+                "reconciled_score": 1.0,
+            }
+            for name in (
+                "unit_testing",
+                "integration_testing",
+                "functional_testing",
+                "performance_testing",
+            )
+        },
+    }
+    original = portal._model
+    try:
+        object.__setattr__(portal, "_model", model)
+        page = portal.validation()
+    finally:
+        object.__setattr__(portal, "_model", original)
+    for name in ("unit_testing", "integration_testing", "functional_testing", "performance_testing"):
+        assert f"| {name} |" in page

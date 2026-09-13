@@ -830,3 +830,25 @@ def test_the_acyclicity_walk_skips_nodes_a_previous_root_already_coloured() -> N
         )
     )
     assert core.verify() is True
+
+
+def test_the_cli_reports_the_summary_without_exporting_anything(tmp_path, capsys) -> None:
+    """The no-export arm of main: report the summary, write nothing.
+
+    Export is opt-in; a CLI that required it could not be used as a check.
+    """
+    path = _manifest(
+        tmp_path,
+        [
+            {
+                "kind": "SERVICE",
+                "natural_key": "plain",
+                "name": "Plain Service",
+                "version": "1.0.0",
+                "attributes": {"domain": "DOM-007"},
+            }
+        ],
+    )
+    assert main([str(path)]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["ok"] is True

@@ -250,3 +250,17 @@ def test_a_registry_file_the_source_cannot_find_is_recorded_as_a_gap() -> None:
     empty = SimpleNamespace(all=lambda: [], count=lambda: 0)
     result = discover_registries(source, empty, empty, empty)
     assert result.gaps
+
+
+def test_the_slug_folds_runs_of_dashes_and_keeps_leading_and_trailing_clean() -> None:
+    """_slug collapses repeated separators and refuses to emit them at the ends.
+
+    The dash-state machine has three arms — start, flush, keep — and identifiers built
+    from names like "a--b " or "-x-" must normalise to one token, or the registry's slugs
+    would multiply under spacing that means nothing.
+    """
+    from engine.discovery.dimensions import _slug
+
+    assert _slug("a--b") == "A-B"
+    assert _slug("  spaced  out ") == "SPACED-OUT"
+    assert _slug("-lead and trail-") == "LEAD-AND-TRAIL"

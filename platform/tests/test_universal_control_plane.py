@@ -2215,32 +2215,34 @@ class TestDiscoveryArmsThatAssumeNothing:
         assert volumes == {"VOL-001", "VOL-002"}
         assert plane.roadmap.count() == len(volumes)
 
-    def test_a_universe_that_already_owns_is_not_registered_again(self, tmp_path) -> None:
-        from platform.tests.control_plane_helpers import build_substrate
+    def test_a_universe_that_already_owns_an_artifact_is_not_registered_again(
+        self, tmp_path
+    ) -> None:
+        """The skip arm of the universe rule: owners are derived from what the registry says.
+
+        Agents come from artifact owners, and the universe itself is appended as the agent
+        of its engines only when no artifact has already named it. An artifact owned by the
+        universe exercises the skip — registering the universe a second time would duplicate
+        the one identity every engine is bound to.
+        """
+        from platform.tests.control_plane_helpers import FIXTURE_ARTIFACTS, build_substrate
         from platform.universal_control_plane.discovery import ControlPlane
 
-        repository_root, data_dir = build_substrate(tmp_path / "u")
-        first = ControlPlane.discover(
+        probe_root, probe_data = build_substrate(tmp_path / "probe")
+        probe = ControlPlane.discover(
+            data_dir=probe_data,
+            repository_root=probe_root,
+            journal_root=tmp_path / "probe-runtime",
+        )
+        universe = probe.manifest.universe_id
+
+        claimed = [dict(a) for a in FIXTURE_ARTIFACTS]
+        claimed[0]["owner"] = universe
+        repository_root, data_dir = build_substrate(tmp_path / "own", artifacts=tuple(claimed))
+        plane = ControlPlane.discover(
             data_dir=data_dir,
             repository_root=repository_root,
-            journal_root=tmp_path / "r1",
-        )
-        universe = first.manifest.universe_id
-        capabilities = [
-            {
-                "capability_id": "FIXTURE-CAP-U",
-                "name": "universe-owned capability",
-                "owner": universe,
-                "description": "owned by the universe itself",
-                "inputs": [],
-                "outputs": [],
-            }
-        ]
-        repository_root2, data_dir2 = build_substrate(tmp_path / "u2", capabilities=capabilities)
-        plane = ControlPlane.discover(
-            data_dir=data_dir2,
-            repository_root=repository_root2,
-            journal_root=tmp_path / "r2",
+            journal_root=tmp_path / "own-runtime",
         )
         agents = [a.agent_id for a in plane.agents.all()]
         assert agents.count(universe) == 1
