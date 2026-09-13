@@ -85,6 +85,14 @@ def test_kernel_rejects_bad_components():
     with pytest.raises(RuntimeKernelError):
         RuntimeKernel(infrastructure="bad")  # type: ignore[arg-type]
     with pytest.raises(RuntimeKernelError):
+        RuntimeKernel(engine="bad")  # type: ignore[arg-type]
+    with pytest.raises(RuntimeKernelError):
+        RuntimeKernel(registry="bad")  # type: ignore[arg-type]
+    with pytest.raises(RuntimeKernelError):
+        RuntimeKernel(events="bad")  # type: ignore[arg-type]
+    with pytest.raises(RuntimeKernelError):
+        RuntimeKernel(services="bad")  # type: ignore[arg-type]
+    with pytest.raises(RuntimeKernelError):
         RuntimeKernel().submit("bad")  # type: ignore[arg-type]
     with pytest.raises(RuntimeKernelError):
         RuntimeKernel().record("bad")  # type: ignore[arg-type]

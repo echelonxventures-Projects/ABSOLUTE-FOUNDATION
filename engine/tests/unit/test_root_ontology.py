@@ -686,3 +686,74 @@ def test_the_gate_report_carries_the_certification_identity() -> None:
     report = measure()
     assert len(report["declaration_digest"]) == 64
     assert report["declaration_version"]
+
+
+def _arm_probe(contract):
+    return Primitive(
+        identifier=contract.openness.probe_id,
+        element=contract.openness.probe_element,
+        standing=LAYER,
+        layer_order=len(contract.primitives) + 1,
+        ratified_by=contract.artifact_id,
+        basis="synthetic probe",
+    )
+
+
+class _AdmissionProxy:
+    """A contract whose extended copy misbehaves in exactly one of the three measured ways."""
+
+    def __init__(self, real, probe, *, drop: bool = False, alter: bool = False) -> None:
+        self._real = real
+        self._probe = probe
+        self._drop = drop
+        self._alter = alter
+
+    def __getattr__(self, name):
+        return getattr(self._real, name)
+
+    def primitive(self, identifier):
+        return self._real.primitive(identifier)
+
+    def extended_with(self, probe):
+        real, target, drop, alter = self._real, self._probe, self._drop, self._alter
+
+        class _Extended:
+            def primitive(self, identifier):
+                if drop and identifier == target.identifier:
+                    return None
+                if alter and identifier == real.primitives[0].identifier:
+                    return dataclasses.replace(real.primitives[0], element="REWRITTEN")
+                if identifier == target.identifier:
+                    return target
+                return real.primitive(identifier)
+
+        return _Extended()
+
+
+def test_l07_refuses_an_admission_that_silently_drops_the_probe(contract, repo) -> None:
+    probe = _arm_probe(contract)
+    findings = _run(
+        "the_primitive_set_admits_a_future_member",
+        _AdmissionProxy(contract, probe, drop=True),
+        repo,
+    )
+    assert any("absent from the extended binding" in line for line in findings), findings
+
+
+def test_l07_refuses_an_admission_that_rewrites_an_existing_primitive(contract, repo) -> None:
+    probe = _arm_probe(contract)
+    findings = _run(
+        "the_primitive_set_admits_a_future_member",
+        _AdmissionProxy(contract, probe, alter=True),
+        repo,
+    )
+    assert any("altered an existing primitive" in line for line in findings), findings
+
+
+def test_l07_refuses_a_probe_already_present_in_the_declared_binding(contract, repo) -> None:
+    probe = _arm_probe(contract)
+    leaked = dataclasses.replace(contract, primitives=(*contract.primitives, probe))
+    findings = _run(
+        "the_primitive_set_admits_a_future_member", _AdmissionProxy(leaked, probe), repo
+    )
+    assert any("leaked into the declared binding" in line for line in findings), findings
