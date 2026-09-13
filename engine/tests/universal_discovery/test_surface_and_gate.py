@@ -903,3 +903,42 @@ def test_the_package_root_re_exports_model_lazily_and_resolves_its_own_body() ->
         resolve("NOT_A_RE_EXPORT")
     with pytest.raises(AttributeError, match="no attribute"):
         resolve("__wrapped__")
+
+
+def test_the_wrapper_installs_when_another_owner_holds_coverage_init(monkeypatch) -> None:
+    """The guard's other arm — install from an unpatched state — executed under measurement.
+
+    The idempotence test execs the source while the wrapper is already installed, so only the
+    guard's false branch ever ran and the install lines stayed unmeasured. Holding a
+    foreign-owner `Coverage.__init__` (the state a fresh interpreter has) makes the exec
+    execute the install itself, which is what the guard exists to do exactly once.
+    """
+
+    def foreign_init(self, *args, **kwargs):  # type: ignore[no-untyped-def]
+        del self, args, kwargs
+
+    foreign_init.__module__ = "somesite.other"  # type: ignore[attr-defined]
+    monkeypatch.setattr(coverage.Coverage, "__init__", foreign_init, raising=False)
+    source = Path(pytest_scope.__file__).read_text(encoding="utf-8")
+    namespace = {"__name__": pytest_scope.__name__, "__file__": str(Path(pytest_scope.__file__))}
+    exec(compile(source, namespace["__file__"], "exec"), namespace)  # noqa: S102
+    assert namespace["coverage"].Coverage.__init__ is not foreign_init
+    assert getattr(coverage.Coverage.__init__, "__module__", None) == pytest_scope.__name__
+
+
+def test_a_failed_derivation_child_is_a_fault_and_not_a_fallback(monkeypatch, tmp_path) -> None:
+    """The child's non-zero exit raises here rather than yielding a guessed denominator.
+
+    A derivation that fails and falls back to any previous or empty list would be the exact
+    silent-widening the Ω-1 property forbids, so the refusal must be exercised, not assumed.
+    """
+    import subprocess
+
+    class Dead:
+        returncode = 1
+        stdout = ""
+        stderr = "traceback: boom"
+
+    monkeypatch.setattr(subprocess, "run", lambda *args, **kwargs: Dead())
+    with pytest.raises(RuntimeError, match="could not be derived"):
+        pytest_scope.derive()
