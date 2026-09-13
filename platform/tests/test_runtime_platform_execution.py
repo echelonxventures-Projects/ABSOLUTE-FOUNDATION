@@ -122,3 +122,13 @@ def test_a_request_fingerprints_itself_independently_of_the_record() -> None:
     again = request("fp-a")
     assert first.fingerprint() == again.fingerprint()
     assert first.fingerprint() != request("fp-b").fingerprint()
+
+
+def test_a_request_that_names_itself_keeps_the_name_it_was_given() -> None:
+    """The minted-identity arm has a complement: an explicit request_id is never replaced.
+
+    Determinism of citation depends on this — a caller that already carries the identity
+    must see it preserved, not re-hashed.
+    """
+    named = dataclasses.replace(request("named"), request_id="UCOS-URPX-PRESET")
+    assert named.request_id == "UCOS-URPX-PRESET"

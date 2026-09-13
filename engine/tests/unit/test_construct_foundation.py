@@ -3828,5 +3828,8 @@ def test_the_entry_point_module_is_executed_under_measurement() -> None:
     closed and only the module's own two statements execute.
     """
 
+    import engine.construct.__main__ as construct_main
+
     result = runpy.run_module("engine.construct", run_name="_construct_probe")
     assert result["main"] is construct_cli.main
+    assert construct_main.main is construct_cli.main

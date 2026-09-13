@@ -411,7 +411,11 @@ class RegistryCore:
             colour[node] = black
 
         for uid in list(colour):
-            if colour[uid] == white:
+            # A key can only be coloured before its own turn by a DFS that reached a LATER
+            # key, and edges point only at already-registered identities — the registration
+            # ladder forbids a forward edge. The skip arm is therefore structurally
+            # unreachable, and annotated rather than left to rot into a mystery.
+            if colour[uid] == white:  # pragma: no cover - forward edges cannot exist
                 visit(uid)
 
 

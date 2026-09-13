@@ -46,7 +46,13 @@ from platform.universal_control_plane.errors import (
 )
 from platform.universal_control_plane.linkage import LinkageEngine
 from platform.universal_control_plane.manifest import default_manifest
-from platform.universal_control_plane.ontology import JournalEntry, payload_digest
+from platform.universal_control_plane.ontology import (
+    AgentRecord,
+    BacklogItem,
+    DependencyRecord,
+    JournalEntry,
+    payload_digest,
+)
 from platform.universal_control_plane.registration import (
     CONTROL_PLANE_PACKAGE,
     EXCLUDED_MODULES,
@@ -825,3 +831,26 @@ class TestEdges:
 
         assert _volume_sequence("VOL-007") == 7
         assert _volume_sequence("UNNUMBERED") == 0
+
+
+def test_a_diamond_dependency_is_scheduled_without_being_mistaken_for_a_cycle() -> None:
+    """a depends on b and c; b and c depend on leaf: the second visit must skip, not fail.
+
+    The DFS guard distinguishes "already finished" (skip) from "on the stack" (cycle).
+    A diamond exercises precisely the skip arm; a checker that only ever met back-edges
+    has not been shown to tolerate shared dependencies, which is the normal case.
+    """
+    from platform.universal_control_plane.execution import SchedulerEngine
+    from platform.universal_control_plane.registry import AgentRegistry, DependencyRegistry
+
+    deps = DependencyRegistry()
+    deps.register(DependencyRecord("D1", "a", "b"))
+    deps.register(DependencyRecord("D2", "a", "c"))
+    deps.register(DependencyRecord("D3", "b", "leaf"))
+    deps.register(DependencyRecord("D4", "c", "leaf"))
+    agents = AgentRegistry()
+    agents.register(AgentRecord(agent_id="AGT-1", name="one", capabilities=()))
+    items = [BacklogItem(item_id=i, universe_id="U", title=i) for i in ("leaf", "b", "c", "a")]
+    schedule = SchedulerEngine().schedule(items, deps, agents)
+    waves = {e.item_id: e.wave for e in schedule.entries}
+    assert waves["leaf"] < waves["b"] == waves["c"] < waves["a"]

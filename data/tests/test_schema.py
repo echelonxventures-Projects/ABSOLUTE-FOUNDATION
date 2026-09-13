@@ -327,10 +327,22 @@ def test_a_missing_required_element_breaks_conformance() -> None:
     a schema whose required arms never fire cannot be trusted to guard anything.
     """
     here = _entity("ucos.demo.entity-here")
-    elsewhere = _entity("ucos.demo.entity-elsewhere", attr_name="other.attr")
     schema = entity_schema_for(here, name="ucos.demo.schema", type_tag="ucos.core.schema")
     assert schema.conforms_entity(here) is True
-    assert schema.conforms_entity(elsewhere) is False
+
+    # The same subject described by a schema that demands an element it does not bear:
+    # this is the absence arm, and it must be reached through the *element* loop — the
+    # describe-guard fires first for any other entity and proves nothing about elements.
+    wider = make_schema(
+        "ucos.demo.schema-absence",
+        "ucos.core.schema",
+        (
+            SchemaElement(name="ucos.demo.attr", type_tag="ucos.core.string"),
+            SchemaElement(name="ucos.demo.extra", type_tag="ucos.core.string", required=True),
+        ),
+        (here,),
+    )
+    assert wider.conforms_entity(here) is False
 
 
 def test_schema_transition_refuses_a_state_that_is_not_a_lifecycle_member() -> None:
@@ -357,3 +369,20 @@ def test_a_type_mismatch_on_a_required_element_breaks_conformance() -> None:
         here, name="ucos.demo.schema-typemismatch", type_tag="ucos.core.schema"
     )
     assert schema.conforms_entity(same_name) is False
+
+
+def test_an_optional_element_may_be_absent_without_breaking_conformance() -> None:
+    """required=False is the other side of the same decision.
+
+    The conformance loop reads `el.required` for every element; without an optional
+    element walking past the guard, the predicate has only ever been seen refusing, and a
+    schema that cannot describe an entity missing an optional field is not optional at all.
+    """
+    entity = _entity("ucos.demo.entity-optional")
+    schema = make_schema(
+        "ucos.demo.schema-optional",
+        "ucos.core.schema",
+        (SchemaElement(name="ucos.demo.missing", type_tag="ucos.core.string", required=False),),
+        (entity,),
+    )
+    assert schema.conforms_entity(entity) is True

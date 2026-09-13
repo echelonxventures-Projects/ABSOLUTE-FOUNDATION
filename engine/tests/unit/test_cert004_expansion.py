@@ -456,3 +456,26 @@ def test_the_cobertura_parser_tolerates_classes_without_line_tables(tmp_path) ->
     report.write_text(xml, encoding="utf-8")
     parsed = band._parse_coverage_xml(report)
     assert parsed["p/b.py"].branches_valid == 2
+
+
+def test_a_branch_line_without_condition_coverage_does_not_break_the_parser(tmp_path) -> None:
+    """`branch=true` with no parsable condition-coverage is counted, not trusted.
+
+    The arm that skips the fraction parse fires on every hand-written report and on
+    coverage versions that omit the parenthesised fraction; without it the branch
+    totals would crash or silently mis-add.
+    """
+    xml = """<?xml version="1.0"?>
+<coverage>
+  <packages><package name="p"><classes>
+    <class name="c" filename="p/c.py"><lines>
+      <line number="1" hits="1" branch="true"/>
+      <line number="2" hits="0" branch="true" condition-coverage="50% (1/2)"/>
+    </lines></class>
+  </classes></package></packages>
+</coverage>"""
+    report = tmp_path / "cov2.xml"
+    report.write_text(xml, encoding="utf-8")
+    parsed = band._parse_coverage_xml(report)
+    assert parsed["p/c.py"].branches_valid == 2
+    assert parsed["p/c.py"].branches_covered == 1

@@ -519,20 +519,63 @@ def test_a_list_populated_registry_is_projected_whole(declarations, tmp_path) ->
     repo = tmp_path / "listy"
     os.makedirs(repo / "registries")
     (repo / "registries").joinpath("a.json").write_text(
-        json.dumps({"records": [{"path": "x.py"}, {"path": "y.py"}]}), encoding="utf-8"
+        json.dumps(
+            {
+                "records": [
+                    {"path": "x.py"},
+                    {"path": "y.py"},
+                    "not-a-record",
+                    {"no_path": True},
+                ]
+            }
+        ),
+        encoding="utf-8",
     )
     (repo / "registries").joinpath("b.json").write_text(json.dumps({"items": []}), encoding="utf-8")
     os.makedirs(repo / "00-BOOK/DATA")
     (repo / "00-BOOK/DATA").joinpath("canonical-observation-audit.json").write_text(
         json.dumps({"entries": []}), encoding="utf-8"
     )
+    (repo / "registries").joinpath("c.json").write_text(json.dumps({"count": 7}), encoding="utf-8")
     handcrafted = replace(
         declarations,
         planes=(
             Plane("A", "registries/a.json", "owner", frozenset({"X"}), "M", "records"),
             Plane("B", "registries/b.json", "owner", frozenset({"Y"}), "M", "items"),
+            Plane("C", "registries/c.json", "owner", frozenset({"Z"}), "M", "count"),
         ),
     )
     matrix = build(str(repo), handcrafted)
     by_name = {p["plane"]: p for p in matrix["planes"]}
     assert by_name["A"]["registered"] == 2
+    assert by_name["C"]["registered"] == 0
+
+
+def test_a_registry_that_declares_nothing_returns_no_mechanism(declarations) -> None:
+    """Every ranked mechanism answers None for a document that carries none of them.
+
+    The fall-through out of the ranked chain is the finding-side of the search: a registry
+    that names no authority is reported by the gap table, and the only way to know the
+    walk terminates honestly is to watch it terminate.
+    """
+    indexes = {"generated_paths": set(), "external_text": set(), "declarations": {}}
+    kinds = tuple({str(m.get("mechanism")) for m in declarations.mechanisms})
+    assert kinds, "the shipped declaration ranks no mechanisms at all"
+    assert locate_authority("00-BOOK/DATA/anything.json", {}, declarations, indexes) is None
+
+
+def test_an_unranked_kind_falls_through_the_search_without_matching(declarations) -> None:
+    """A mechanism whose kind this matcher does not know ends the search at None.
+
+    The ranked list is data; the walk must keep going past kinds it cannot evaluate and
+    answer None rather than guess the nearest mechanism's name.
+    """
+    handcrafted = replace(
+        declarations,
+        mechanisms=(
+            {"mechanism": "SOME_FUTURE_KIND", "rank": 1},
+            {"mechanism": "TOP_LEVEL_AUTHORITY_KEY", "rank": 2},
+        ),
+    )
+    indexes = {"generated_paths": set(), "external_text": set(), "declarations": {}}
+    assert locate_authority("whatever.json", {}, handcrafted, indexes) is None

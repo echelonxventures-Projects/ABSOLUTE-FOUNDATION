@@ -2184,3 +2184,63 @@ class TestCLI:
             == 0
         )
         assert capsys.readouterr().out.strip()
+
+
+class TestDiscoveryArmsThatAssumeNothing:
+    """Two arms that prove the discovery walk reads the substrate instead of trusting it.
+
+    A volumeless artifact must be passed by (milestones come only from volumes), and a
+    universe that already owns a capability must not be registered as an agent twice —
+    the second is the arm that keeps re-discovery idempotent, and neither fires on the
+    happy-path fixture.
+    """
+
+    def test_a_volumeless_artifact_contributes_no_milestone(self, tmp_path) -> None:
+        from platform.tests.control_plane_helpers import FIXTURE_ARTIFACTS, build_substrate
+        from platform.universal_control_plane.discovery import ControlPlane
+
+        novolume = dict(FIXTURE_ARTIFACTS[0])
+        novolume["universal_id"] = "UCOS-REG-NOVOL-1"
+        novolume["name"] = "no-volume record"
+        novolume["path"] = "00-BOOK/REGISTRIES/novol.md"
+        novolume.pop("volume", None)
+        artifacts = tuple([novolume, *FIXTURE_ARTIFACTS[1:]])
+        repository_root, data_dir = build_substrate(tmp_path / "vol", artifacts=artifacts)
+        plane = ControlPlane.discover(
+            data_dir=data_dir,
+            repository_root=repository_root,
+            journal_root=tmp_path / "runtime",
+        )
+        volumes = {a.volume for a in plane.truth.artifacts() if a.volume}
+        assert volumes == {"VOL-001", "VOL-002"}
+        assert plane.roadmap.count() == len(volumes)
+
+    def test_a_universe_that_already_owns_is_not_registered_again(self, tmp_path) -> None:
+        from platform.tests.control_plane_helpers import build_substrate
+        from platform.universal_control_plane.discovery import ControlPlane
+
+        repository_root, data_dir = build_substrate(tmp_path / "u")
+        first = ControlPlane.discover(
+            data_dir=data_dir,
+            repository_root=repository_root,
+            journal_root=tmp_path / "r1",
+        )
+        universe = first.manifest.universe_id
+        capabilities = [
+            {
+                "capability_id": "FIXTURE-CAP-U",
+                "name": "universe-owned capability",
+                "owner": universe,
+                "description": "owned by the universe itself",
+                "inputs": [],
+                "outputs": [],
+            }
+        ]
+        repository_root2, data_dir2 = build_substrate(tmp_path / "u2", capabilities=capabilities)
+        plane = ControlPlane.discover(
+            data_dir=data_dir2,
+            repository_root=repository_root2,
+            journal_root=tmp_path / "r2",
+        )
+        agents = [a.agent_id for a in plane.agents.all()]
+        assert agents.count(universe) == 1

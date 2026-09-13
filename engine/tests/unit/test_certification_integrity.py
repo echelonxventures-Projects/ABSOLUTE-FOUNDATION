@@ -1626,3 +1626,16 @@ def test_an_extraction_whose_interpreter_has_gone_is_rebuilt_rather_than_reused(
     )
     assert rebuilt.reused is False
     assert Path(rebuilt.python).exists()
+
+
+def test_an_owner_that_is_not_a_string_is_not_collected_into_the_binding_set() -> None:
+    """_owners_named_by must refuse a non-string canonical_owner without raising.
+
+    The corpus holds registries where a binding id appears in several places; a document
+    that carries an owner as a mapping or number is malformed for this walk, and the walk
+    must keep looking rather than poison the set or explode.
+    """
+    from engine.root_ontology.contract import _owners_named_by
+
+    assert _owners_named_by({"id": "BIND-X", "canonical_owner": 7}, "BIND-X") == set()
+    assert _owners_named_by({"id": "BIND-X", "canonical_owner": "Str"}, "BIND-X") == {"Str"}

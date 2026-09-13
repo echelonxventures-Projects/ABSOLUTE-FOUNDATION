@@ -766,3 +766,67 @@ def test_a_blank_required_field_is_refused_on_the_way_in() -> None:
             name="   ",
             version="1.0.0",
         )
+
+
+def test_the_cli_writes_the_export_only_when_asked(tmp_path) -> None:
+    """`--export` is the second half of the export branch in main()."""
+    manifest = tmp_path / "m.json"
+    manifest.write_text(json.dumps({"registrations": []}), encoding="utf-8")
+    out = tmp_path / "export.json"
+    assert cli.main([str(manifest), "--export", str(out)]) == 0
+
+
+def test_a_three_version_chain_supersedes_twice_and_a_shared_edge_is_not_a_cycle() -> None:
+    """The non-ACTIVE arm of supersession and the coloured arm of the acyclicity walk.
+
+    Registering three versions puts a SUPERSEDED record in the chain before the walk
+    reaches the active one; a shared dependency visited from two roots is coloured black
+    by the first DFS, so the second must skip it rather than re-enter.
+    """
+    core = _core()
+    core.register(_request(natural_key="chain", attributes={"domain": "DOM-A"}))
+    core.register(_request(natural_key="chain", version="1.1.0", attributes={"domain": "DOM-B"}))
+    third = core.register(
+        _request(natural_key="chain", version="1.2.0", attributes={"domain": "DOM-C"})
+    )
+    assert core.verify() is True
+    assert [str(r.version) for r in core.history(third.universal_id)] == [
+        "1.0.0",
+        "1.1.0",
+        "1.2.0",
+    ]
+
+    shared = _core()
+    a = shared.register(_request(natural_key="root-a", attributes={"domain": "DOM-D"}))
+    b = shared.register(_request(natural_key="root-b", attributes={"domain": "DOM-E"}))
+    leaf = shared.register(
+        _request(
+            natural_key="leaf",
+            attributes={"domain": "DOM-F"},
+            dependencies=(a.universal_id, b.universal_id),
+        )
+    )
+    assert shared.dependencies_of(leaf.universal_id) == (a.universal_id, b.universal_id)
+    assert shared.verify() is True
+
+
+def test_the_acyclicity_walk_skips_nodes_a_previous_root_already_coloured() -> None:
+    """The `colour[uid] == white` guard's false arm: a chain, not a fork.
+
+    A→B→C is acyclic; the walk starts at A, and by the time the outer loop reaches B and
+    C they are already black. Re-entering a black node would be the bug; skipping it is the
+    correctness of the three-colour scheme, so the skip must be exercised as itself.
+    """
+    core = _core()
+    c = core.register(_request(natural_key="leaf-c", attributes={"domain": "DOM-G"}))
+    b = core.register(
+        _request(
+            natural_key="mid-b", attributes={"domain": "DOM-H"}, dependencies=(c.universal_id,)
+        )
+    )
+    core.register(
+        _request(
+            natural_key="top-a", attributes={"domain": "DOM-I"}, dependencies=(b.universal_id,)
+        )
+    )
+    assert core.verify() is True

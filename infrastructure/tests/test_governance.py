@@ -174,3 +174,11 @@ def test_a_governance_facet_refuses_a_blank_dependency_and_a_mistyped_transition
     )
     with pytest.raises(InfrastructureError, match="INFRASTRUCTURE-003"):
         facet.transition("ACTIVE")  # type: ignore[arg-type]
+
+
+def test_the_governance_factory_accepts_explicit_references_over_the_defaults() -> None:
+    """The other side of the IGOV-05 defaulting arm: a caller may supply references."""
+    facet = make_governance_facet(
+        "t.explicit-refs", GovernanceFacetKind.CONFORMANCE, references=("ENG-005:custom",)
+    )
+    assert facet.references == ("ENG-005:custom",)

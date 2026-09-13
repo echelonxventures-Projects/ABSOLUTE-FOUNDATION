@@ -173,3 +173,11 @@ def test_a_security_facet_refuses_a_blank_dependency_and_a_mistyped_transition()
     )
     with pytest.raises(InfrastructureError, match="INFRASTRUCTURE-003"):
         facet.transition("ACTIVE")  # type: ignore[arg-type]
+
+
+def test_the_security_factory_accepts_explicit_references_over_the_defaults() -> None:
+    """The other side of the ISEC-05 defaulting arm: a caller may supply references."""
+    facet = make_security_facet(
+        "t.explicit-refs", SecurityFacetKind.CONFIDENTIALITY, references=("ENG-005:custom",)
+    )
+    assert facet.references == ("ENG-005:custom",)

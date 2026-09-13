@@ -358,3 +358,23 @@ def test_the_search_page_renders_an_explicit_empty_index(monkeypatch) -> None:
     monkeypatch.setattr(type(portal), "_search_documents", lambda self: [])
     page = portal.search()
     assert "_empty_" in page
+
+
+def test_the_acceptance_page_survives_a_decision_without_the_validation_gate() -> None:
+    """The validation row is conditional; a decision that omits it renders without it.
+
+    The gate list is data, and a page that assumed the finding exists would raise on any
+    decision authored before that gate — the render must degrade to its absence.
+    """
+    portal = _portal()
+    source = portal._acceptance_source if hasattr(portal, "_acceptance_source") else None
+    findings = tuple(
+        f for f in portal._decision.findings if f.gate_id != "validation-passed"
+    )
+    assert len(findings) < len(portal._decision.findings)
+    import dataclasses
+
+    lean = dataclasses.replace(portal._decision, findings=findings)
+    portal._decision = lean
+    page = portal.acceptance()
+    assert "Validation passed" not in page

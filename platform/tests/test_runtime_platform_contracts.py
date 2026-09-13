@@ -101,3 +101,19 @@ def test_runtime_service_view_to_dict():
 def test_platform_action_vocabulary():
     assert RuntimePlatformAction.SUBMIT.value == "submit"
     assert {a.value for a in RuntimePlatformAction} >= {"submit", "inspect", "discover"}
+
+
+def test_an_attestation_that_carries_its_own_id_is_left_alone() -> None:
+    """The second half of identity derivation: a supplied id survives __post_init__.
+
+    Registry-first attests to a known identifier; re-minting one that already names
+    itself would break the chain that cites it.
+    """
+    attested = WorkloadAttestation(
+        registry_id="UCOS-URPR-GIVEN",
+        workload_id="wl-given",
+        attestation_id="UCOS-URPA-PRESET",
+        validated=True,
+        certified=True,
+    )
+    assert attested.attestation_id == "UCOS-URPA-PRESET"
