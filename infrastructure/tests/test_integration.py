@@ -35,7 +35,6 @@ def _dep(**kw):
 
 
 class TestConstruction:
-
     def test_well_formed_dependency(self):
         d = _dep()
         assert d.meta_class == "InfrastructureDependency"
@@ -100,7 +99,6 @@ class TestConstruction:
 
 
 class TestPredicates:
-
     def test_downward_and_acyclic(self):
         d = _dep()
         assert d.is_downward_only()
@@ -135,7 +133,6 @@ class TestPredicates:
 
 
 class TestLifecycle:
-
     def test_forward_transition(self):
         d = _dep()
         moved = d.transition(InfrastructureState.PROVISIONED)
@@ -148,14 +145,103 @@ class TestLifecycle:
 
 
 class TestSerialization:
-
     def test_to_dict_shape(self):
         data = _dep().to_dict()
         for key in (
-            "construct_id", "meta_class", "type_tag", "value_digest", "state",
-            "source_ref", "target_ref", "relationship", "basis", "downward_only",
+            "construct_id",
+            "meta_class",
+            "type_tag",
+            "value_digest",
+            "state",
+            "source_ref",
+            "target_ref",
+            "relationship",
+            "basis",
+            "downward_only",
             "substrate_refs",
         ):
             assert key in data
         assert data["meta_class"] == "InfrastructureDependency"
         assert data["relationship"] == "dependsOn"
+
+
+def test_the_dependency_guard_refuses_a_misdirected_or_mistyped_edge() -> None:
+    """Every refusal in the dependency's post-init ladder, in order (WF-3, INFRASTRUCTURE-003).
+
+    Downward-only is the acyclicity invariant; each of its three shapes — a missing index, an
+    upward edge, a self-edge — was a branch nothing reached, and each is exactly the mistake a
+    composition author would otherwise make in good faith.
+    """
+    import pytest as _pytest
+
+    from infrastructure.capability import InfrastructureError
+    from infrastructure.integration import InfrastructureDependency
+    from infrastructure.integration_meta import InfrastructureState
+
+    with _pytest.raises(InfrastructureError, match="integer founding indices"):
+        InfrastructureDependency(
+            type_tag="IINT-BAD-01",
+            source_ref="cluster-a",
+            target_ref="cluster-b",
+            relationship="dependsOn",
+            basis="reuses",
+            downward_only=True,
+            source_index=None,
+            target_index=None,
+            state=InfrastructureState.DEFINED,
+        )
+    with _pytest.raises(InfrastructureError, match="not strictly downward"):
+        InfrastructureDependency(
+            type_tag="IINT-BAD-02",
+            source_ref="cluster-a",
+            target_ref="cluster-b",
+            relationship="dependsOn",
+            basis="reuses",
+            downward_only=True,
+            source_index=1,
+            target_index=2,
+            state=InfrastructureState.DEFINED,
+        )
+    with _pytest.raises(InfrastructureError, match="self-edge"):
+        InfrastructureDependency(
+            type_tag="IINT-BAD-03",
+            source_ref="cluster-a",
+            target_ref="cluster-a",
+            relationship="dependsOn",
+            basis="reuses",
+            downward_only=True,
+            source_index=2,
+            target_index=1,
+            state=InfrastructureState.DEFINED,
+        )
+    with _pytest.raises(InfrastructureError, match="InfrastructureState"):
+        InfrastructureDependency(
+            type_tag="IINT-BAD-04",
+            source_ref="cluster-a",
+            target_ref="cluster-b",
+            relationship="dependsOn",
+            basis="reuses",
+            downward_only=True,
+            source_index=2,
+            target_index=1,
+            state="DEFINED",  # type: ignore[arg-type]
+        )
+
+
+def test_transition_refuses_a_target_that_is_not_a_lifecycle_state() -> None:
+    """Forward-only lifecycle is a type fact before it is an order fact (INFRASTRUCTURE-003 §3)."""
+    import pytest as _pytest
+
+    from infrastructure.capability import InfrastructureError
+    from infrastructure.integration import InfrastructureDependency
+
+    edge = InfrastructureDependency(
+        type_tag="IINT-T-01",
+        source_ref="ENG-005:a",
+        target_ref="ENG-005:b",
+        source_index=2,
+        target_index=1,
+        basis="reuses",
+    )
+    with _pytest.raises(InfrastructureError, match="InfrastructureState"):
+        edge.transition("ACTIVE")  # type: ignore[arg-type]

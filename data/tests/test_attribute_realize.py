@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 
 from data.attribute_realize import (
     UNIT_VERSION,
@@ -104,3 +105,28 @@ def test_cli_main_returns_zero(tmp_path, capsys):
     bundle = json.loads((tmp_path / "realization-evidence.json").read_text())
     assert bundle["determination"] == "COMPLETE"
     assert bundle["meta_class"] == "DMC-03"
+
+
+def test_determination_falls_to_conditions_when_determinism_is_not_claimed() -> None:
+    """VC-4 is byte-identity, and the ladder below COMPLETE exists — both rungs must answer.
+
+    A determination that could only say COMPLETE or NOT COMPLETE would be a bool wearing a
+    name: `COMPLETE WITH CONDITIONS` is the honest middle state (accepted, certified and
+    traceable, determinism not re-proved in this call), and it had no case.
+    """
+    result = realize()
+    assert result.determination(byte_identical=False) == "COMPLETE WITH CONDITIONS"
+
+
+def test_determination_refuses_a_result_that_was_never_accepted() -> None:
+    """NOT COMPLETE: the roll-up must disagree loudly when the validation did not accept.
+
+    The real bundle is always accepted, so the arm is forced by a result whose validation
+    says otherwise — the same code path a future broken realization would take.
+    """
+    import types
+
+    result = realize()
+    hollow = types.SimpleNamespace(accepted=False, report=types.SimpleNamespace(findings=[]))
+    weakened = replace(result, validation=hollow)
+    assert weakened.determination(byte_identical=True) == "NOT COMPLETE"

@@ -322,3 +322,117 @@ def test_an_absent_report_is_a_usage_error_and_not_a_verdict(tmp_path: Path) -> 
     with pytest.raises(SystemExit) as raised:
         band.main(["--coverage-xml", str(tmp_path / "nope.xml"), "--out", str(tmp_path)])
     assert raised.value.code == 2, "argparse.error exits 2; the caller must not read it as a pass"
+
+
+def test_the_component_profile_skips_a_source_the_report_names_but_the_tree_lacks(tmp_path) -> None:
+    """A Cobertura report may name a file that no longer exists; the profile must skip, not crash.
+
+    The coverage XML is an artefact of a run, not a promise about the tree. Counting AST lines
+    for a missing file would turn a stale report into an exception on the acceptance path.
+    """
+    from scripts.cert004_expansion import FileCoverage
+
+    target = band.TARGETS[0]
+    coverage = {
+        f"{target.path}/ghost.py": FileCoverage(
+            filename=f"{target.path}/ghost.py",
+            hit_lines={1},
+            missed_lines=set(),
+            branches_covered=0,
+            branches_valid=0,
+        ),
+        f"{target.path}/real.py": FileCoverage(
+            filename=f"{target.path}/real.py",
+            hit_lines={1},
+            missed_lines=set(),
+            branches_covered=0,
+            branches_valid=0,
+        ),
+    }
+    real = tmp_path / target.path
+    real.mkdir(parents=True)
+    (real / "real.py").write_text("import sys\n", encoding="utf-8")
+    profile = band.measure_component_coverage(target, coverage, tmp_path)
+    assert profile is not None
+
+
+def test_the_module_inventory_skips_cached_bytecode_directories(tmp_path) -> None:
+    """A __pycache__/.py inside the component directory is not a module of the component.
+
+    The inventory is what the bundle content-addresses; a stale copy of a source under a
+    cache directory would make two builds of one tree produce two different inventories.
+    """
+    target = band.TARGETS[0]
+    comp = tmp_path / target.path
+    cache = comp / "__pycache__"
+    cache.mkdir(parents=True)
+    (cache / "stale.py").write_text("x = 1\n", encoding="utf-8")
+    (comp / "source.py").write_text("y = 2\n", encoding="utf-8")
+    inventory = band._module_inventory(target, tmp_path)
+    assert list(inventory) == [f"{target.path}/source.py"]
+
+
+def test_a_band_build_that_is_not_byte_identical_is_refused(monkeypatch, tmp_path, capsys) -> None:
+    """The CLI's final gate: determinism first, and a non-reproducible build exits REFUSED.
+
+    Everything above the guard presents verdicts; the guard is the only line between a report
+    about the band and a claim that it rebuilds byte-identically. The violation is forged here
+    by making the band builder disagree with itself — the exact state that must not exit 0.
+    """
+    report = tmp_path / "cobertura.xml"
+    report.write_text("<coverage/>", encoding="utf-8")
+    monkeypatch.setattr(band, "_parse_coverage_xml", lambda p: {})
+    monkeypatch.setattr(band, "unmeasured_targets", lambda cov: [])
+    base = {
+        "band_sha256": "0" * 64,
+        "expanded-certification-scope.json": {
+            "summary": {"certified": 0, "governed": 0, "units_total": 0}
+        },
+        "coverage-expansion-report.json": {
+            "added_to_primary_coverage_gate": 0,
+            "out_of_primary_gate_by_design": 0,
+            "components": [],
+        },
+        "acceptance-expansion-report.json": {"summary": {"accepted": 0, "units_total": 0}},
+        "repository-readiness-update.json": {
+            "summary": {"ready": 0, "units_total": 0},
+            "components": [],
+        },
+    }
+    calls = {"n": 0}
+
+    def drifting(root, xml):
+        calls["n"] += 1
+        return {**base, "band_sha256": f"{calls['n']:064x}"}
+
+    monkeypatch.setattr(band, "run_band", drifting)
+    monkeypatch.setattr(band, "emit", lambda *args, **kwargs: None)
+    assert (
+        band.main(["--coverage-xml", str(report), "--out", str(tmp_path / "e")])
+        == band.EXIT_REFUSED
+    )
+    assert "byte-identical" in capsys.readouterr().err
+    assert calls["n"] == 2
+
+
+def test_the_script_bootstraps_its_own_repo_root_into_sys_path() -> None:
+    """The path-insert guard line runs when the root is genuinely absent.
+
+    `scripts.cert004_expansion` is executed as a script too, where sys.path starts at
+    `scripts/`, not at the repository root; the insert at import is what lets it reach the
+    certified engines it reuses. With the root already present the guard is inert, so the
+    module body is re-executed with the entry withdrawn.
+    """
+    import importlib
+    import sys
+    from pathlib import Path
+
+    repo = str(Path(band.__file__).resolve().parents[1])
+    saved = sys.path[:]
+    try:
+        while repo in sys.path:
+            sys.path.remove(repo)
+        importlib.reload(band)
+        assert repo in sys.path
+    finally:
+        sys.path[:] = saved

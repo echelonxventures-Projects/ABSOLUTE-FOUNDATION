@@ -43,3 +43,29 @@ def test_check_result_ok_and_dict():
 def test_health_rejects_bad_kernel():
     with pytest.raises(RuntimePlatformError):
         RuntimePlatformHealth("bad")  # type: ignore[arg-type]
+
+
+def test_lineage_and_record_fingerprints_hash_their_own_projection() -> None:
+    """A lineage view's projection and fingerprint, and the registry's own refusal to trust order.
+
+    to_dict is how a lineage record leaves the process and fingerprint is what the chain
+    hashes; a projection nobody builds and a verify() whose False arm never fires certify
+    nothing. The order is broken here directly — the registry refuses a chain whose entries
+    are not the sequence they claim.
+    """
+    from platform.runtime_platform.registry import ExecutionRegistry
+
+    kernel = RuntimeKernel()
+    first = kernel.submit(request("a"))
+    kernel.submit(request("b"))
+    view = kernel.registry.lineage(first.execution_id)
+    projection = view.to_dict()
+    assert projection["lineage_id"] == view.lineage_id
+    assert projection["is_root"] is view.is_root
+    assert view.fingerprint() == view.fingerprint()
+
+    broken = ExecutionRegistry()
+    broken._entries = [
+        dataclasses.replace(e, sequence=i + 5) for i, e in enumerate(kernel.registry.entries)
+    ]
+    assert broken.verify() is False

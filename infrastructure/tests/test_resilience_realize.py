@@ -136,3 +136,36 @@ class TestEvidence:
                 if path.suffix == ".json":
                     data = json.loads(path.read_text(encoding="utf-8"))
                     assert data is not None
+
+
+def test_determination_ladder_answers_below_complete() -> None:
+    """The ladder below COMPLETE — conditions and refusal — had no case on this band.
+
+    The real bundle always realizes to COMPLETE, so the two lower rungs were never observed.
+    A determination with three outcomes and one measured path is two outcomes pretending.
+    The conditions rung is reached by withholding the determinism claim; the refusal rung by
+    a result whose acceptance roll-up says otherwise — the shape a broken future realization
+    would take, forced here rather than assumed.
+    """
+    import infrastructure.resilience_realize as band
+
+    result = band.realize()
+    assert result.determination(byte_identical=False) == "COMPLETE WITH CONDITIONS"
+
+    class _NeverAccepted(band.RealizationResult):
+        def all_accepted(self) -> bool:
+            return False
+
+    weakened = _NeverAccepted(result.composition, result.realizations, result.ledger)
+    assert weakened.determination(byte_identical=True) == "NOT COMPLETE"
+
+
+def test_unknown_lookup_raises_instead_of_returning_a_default() -> None:
+    """A lookup that answered None would turn a miss into a silent pass downstream."""
+    import pytest as _pytest
+
+    import infrastructure.resilience_realize as band
+
+    result = band.realize()
+    with _pytest.raises(KeyError):
+        result.by_meta_class("NO-SUCH-CLASS")

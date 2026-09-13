@@ -36,6 +36,7 @@ from infrastructure.topology_meta import InfrastructureState
 # Topology
 # ===========================================================================
 
+
 def test_topology_is_typed_identified_and_foundational() -> None:
     t = make_topology("test.topology.foundation")
     assert t.construct_id.startswith(INFRA_TOPOLOGY_ID_FAMILY)
@@ -59,8 +60,9 @@ def test_topology_rejects_bad_state() -> None:
 
 
 def test_topology_to_dict() -> None:
-    t = make_topology("test.topology", composition_ref="ENG-005:PL-F2:comp",
-                       contains=("ENG-005:node-1",))
+    t = make_topology(
+        "test.topology", composition_ref="ENG-005:PL-F2:comp", contains=("ENG-005:node-1",)
+    )
     d = t.to_dict()
     assert d["meta_class"] == "Topology"
     assert d["type_tag"] == "test.topology"
@@ -71,6 +73,7 @@ def test_topology_to_dict() -> None:
 # ===========================================================================
 # LocalityMap
 # ===========================================================================
+
 
 def test_locality_map_is_typed_and_evaluative() -> None:
     lm = make_locality_map("test.localitymap", locality_type="zone")
@@ -103,6 +106,7 @@ def test_locality_map_to_dict() -> None:
 # PlacementRule
 # ===========================================================================
 
+
 def test_placement_rule_is_typed_and_evaluative() -> None:
     pr = make_placement_rule("test.placement", rule_kind="anti-affinity")
     assert pr.construct_id.startswith(INFRA_TOPOLOGY_ID_FAMILY)
@@ -132,6 +136,7 @@ def test_placement_rule_with_targets() -> None:
 # ===========================================================================
 # DistributionArrangement
 # ===========================================================================
+
 
 def test_distribution_is_typed_and_hosts_by_reference() -> None:
     d = make_distribution_arrangement("test.distribution", hosts=("ENG-005:AF-3:exp",))
@@ -164,8 +169,9 @@ def test_distribution_rejects_bad_state() -> None:
 
 
 def test_distribution_to_dict() -> None:
-    d = make_distribution_arrangement("test.d", hosts=("ENG-005:AF-3:exp",),
-                                       strategy="geo-replicated")
+    d = make_distribution_arrangement(
+        "test.d", hosts=("ENG-005:AF-3:exp",), strategy="geo-replicated"
+    )
     di = d.to_dict()
     assert di["meta_class"] == "Distribution"
     assert di["strategy"] == "geo-replicated"
@@ -175,6 +181,7 @@ def test_distribution_to_dict() -> None:
 # ===========================================================================
 # DeliveryArrangement
 # ===========================================================================
+
 
 def test_delivery_is_typed_and_hosts_by_reference() -> None:
     dl = make_delivery_arrangement("test.delivery", hosts=("ENG-005:AF-3:exp",))
@@ -202,8 +209,9 @@ def test_delivery_rejects_empty_delivery_mode() -> None:
 
 
 def test_delivery_to_dict() -> None:
-    dl = make_delivery_arrangement("test.dl", hosts=("ENG-005:SF-2:svc",),
-                                    delivery_mode="push", channel_refs=("ENG-005:ch-1",))
+    dl = make_delivery_arrangement(
+        "test.dl", hosts=("ENG-005:SF-2:svc",), delivery_mode="push", channel_refs=("ENG-005:ch-1",)
+    )
     di = dl.to_dict()
     assert di["delivery_mode"] == "push"
     assert "channel_refs" in di
@@ -212,6 +220,7 @@ def test_delivery_to_dict() -> None:
 # ===========================================================================
 # Cross-construct / lifecycle
 # ===========================================================================
+
 
 def test_forward_lifecycle_transition() -> None:
     t = make_topology("test.topology")
@@ -248,3 +257,21 @@ def test_all_constructs_technology_neutral() -> None:
         assert not c.confers_authority(), f"{c.meta_class} confers authority"
         assert not c.redefines_foundation(), f"{c.meta_class} redefines foundation"
         assert not c.is_new_primitive(), f"{c.meta_class} is new primitive"
+
+
+def test_is_founding_acyclic_answers_false_when_the_core_cannot_be_canonicalised() -> None:
+    """The topology construct's except-arm must answer False, not raise, on a broken core."""
+    from infrastructure.topology import Topology
+
+    class _Broken(Topology):
+        def canonical_core(self):
+            return {"poison": object()}
+
+    broken = _Broken(type_tag="ITOP-BROKEN-01")
+    assert broken.is_founding_acyclic() is False
+
+
+def test_distribution_rejects_a_blank_strategy() -> None:
+    """A strategy that says nothing is no strategy; the guard refuses whitespace as well as ''."""
+    with pytest.raises(InfrastructureError, match="non-empty strategy"):
+        make_distribution_arrangement("test.d", hosts=("ENG-005:AF-3:exp",), strategy="   ")

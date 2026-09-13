@@ -275,3 +275,52 @@ def test_giving_the_artifact_a_birth_record_is_refused() -> None:
     forged["births"]["urn:ucos:ucko:ucos.master:" + local] = {}
     violations = SCOPE_LAW_CHECKS["no_derived_object_is_born"](policy, forged)
     assert any(DICTIONARY_ARTIFACT in v for v in violations)
+
+
+def test_reproduces_answers_false_for_an_identifier_that_cannot_be_reminted() -> None:
+    """The False side of reproduces() — an entry from outside the minting authority.
+
+    Every entry built by the dictionary reproduces by construction, so the except-arm is the
+    arm that answers for an imported identifier, and it had no case: a kind the mint refuses
+    must report False rather than raise through a health check.
+    """
+    from engine.registry.universal.dictionary import IdentifierEntry
+
+    forged = IdentifierEntry(
+        universal_id="UCOS-SVC-000001",
+        kind="NOT-A-KIND",
+        namespace="test",
+        natural_key="x",
+        owner="test",
+    )
+    assert forged.reproduces() is False
+
+
+def test_duplicated_natural_keys_names_a_triple_that_mints_two_identifiers() -> None:
+    """The clash arm: one triple under two identifiers is reported, not dropped.
+
+    The dictionary's whole purpose is that the triple determines the identifier; a pair that
+    disagrees is the finding, and an empty answer there would certify a lie.
+    """
+    from engine.registry.universal.dictionary import IdentifierDictionary, IdentifierEntry
+
+    dictionary = IdentifierDictionary(
+        (
+            IdentifierEntry(
+                universal_id="UCOS-SVC-000001",
+                kind="SERVICE",
+                namespace="ucos.service",
+                natural_key="alpha",
+                owner="test",
+            ),
+            IdentifierEntry(
+                universal_id="UCOS-SVC-000002",
+                kind="SERVICE",
+                namespace="ucos.service",
+                natural_key="alpha",
+                owner="test",
+            ),
+        )
+    )
+    clashes = dictionary.duplicated_natural_keys()
+    assert "SVC/ucos.service/alpha" in clashes

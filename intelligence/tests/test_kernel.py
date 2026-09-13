@@ -37,6 +37,7 @@ from intelligence.kernel.ids import (
     class_codes,
     parse_class,
 )
+from intelligence.kernel import knowledge as knowledge_module
 from intelligence.kernel.knowledge import (
     _METRICS,
     CONCEPT_FIELDS,
@@ -604,3 +605,60 @@ def test_resolve_all_resolves_each_reference_it_is_given(tmp_path):
     resolver = _concept_repo(tmp_path, [{"id": "C-1", field: "one"}, {"id": "C-2", field: "two"}])
     resolved = resolver.resolve_all([f"concept:C-1#{field}", f"concept:C-2#{field}"])
     assert [r.text for r in resolved] == ["one", "two"]
+
+
+def test_the_field_guard_refuses_an_unresolvable_name_and_both_empty_shapes(tmp_path):
+    """A field the space cannot answer, and a field that answers with nothing.
+
+    An empty value would resolve to a real locator and an empty content, and a consumer
+    that hashes it would believe the emptiness is evidence. Both list and prose shapes are
+    refused, and the field name itself is checked against the declared vocabulary first.
+    """
+    resolver = _resolver(tmp_path)
+    lists = sorted(knowledge_module.LIST_FIELDS["decision"])
+    prose = sorted(knowledge_module.PROSE_FIELDS["decision"])
+    with pytest.raises(UnresolvedReferenceError, match="not resolvable"):
+        resolver._field_content(
+            ref="decision:D-1#nope",
+            space="decision",
+            target="D-1",
+            field="nope",
+            record={},
+            content_sha256="x",
+            locator="here",
+            authority="test",
+        )
+    with pytest.raises(UnresolvedReferenceError, match="list field is empty"):
+        resolver._field_content(
+            ref=f"decision:D-1#{lists[0]}",
+            space="decision",
+            target="D-1",
+            field=lists[0],
+            record={lists[0]: []},
+            content_sha256="x",
+            locator="here",
+            authority="test",
+        )
+    with pytest.raises(UnresolvedReferenceError, match="prose field is empty"):
+        resolver._field_content(
+            ref=f"decision:D-1#{prose[0]}",
+            space="decision",
+            target="D-1",
+            field=prose[0],
+            record={prose[0]: "   "},
+            content_sha256="x",
+            locator="here",
+            authority="test",
+        )
+    resolved = resolver._field_content(
+        ref=f"decision:D-1#{prose[0]}",
+        space="decision",
+        target="D-1",
+        field=prose[0],
+        record={prose[0]: "stated"},
+        content_sha256="x",
+        locator="here",
+        authority="test",
+    )
+    assert resolved.text == "stated"
+    assert resolved.field == prose[0]

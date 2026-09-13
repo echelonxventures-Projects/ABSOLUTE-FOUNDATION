@@ -94,3 +94,25 @@ def test_attestation_object_reuse():
     att = WorkloadAttestation("w", "r", True, True)
     req = ExecutionRequest(workload_id="w", attestation=att)
     assert req.attestation is att
+
+
+def test_a_running_execution_cannot_be_compensated_and_a_record_fingerprints_itself() -> None:
+    """The unsettled rung of the compensation ladder, plus the record's own identity outputs.
+
+    Only a settled execution may reverse: the unsettled refusal is the guard a partial run
+    would otherwise slip through. `fingerprint` is how the record is referenced by the
+    registry's hash chain, and `infrastructure` is the composition the engine carries.
+    """
+    import dataclasses
+    from platform.runtime_platform.errors import ExecutionEngineError
+    from platform.runtime_platform.execution import ExecutionEngine
+
+    engine = ExecutionEngine()
+    assert engine.infrastructure is engine.infrastructure
+    running = engine.run(request("mid-flight"))
+    unsettled = dataclasses.replace(running, final_state="running")
+    assert unsettled.settled is False
+    with pytest.raises(ExecutionEngineError, match="only a settled execution"):
+        engine.compensate(unsettled)
+    assert running.fingerprint() == running.fingerprint()
+    assert "execution_id" in running.to_dict()

@@ -178,3 +178,66 @@ class TestEvidence:
                 p = evidence_dir / name
                 assert p.exists(), f"Missing: {name}"
                 assert json.loads(p.read_text(encoding="utf-8")) is not None
+
+
+def test_determination_ladder_answers_below_complete() -> None:
+    """The ladder below COMPLETE — conditions and refusal — had no case on this band.
+
+    The real bundle always realizes to COMPLETE, so the two lower rungs were never observed.
+    A determination with three outcomes and one measured path is two outcomes pretending.
+    The conditions rung is reached by withholding the determinism claim; the refusal rung by
+    a result whose acceptance roll-up says otherwise — the shape a broken future realization
+    would take, forced here rather than assumed.
+    """
+    import infrastructure.integration_realize as band
+
+    result = band.realize()
+    assert result.determination(byte_identical=False) == "COMPLETE WITH CONDITIONS"
+
+    class _NeverAccepted(band.RealizationResult):
+        def all_accepted(self) -> bool:
+            return False
+
+    weakened = _NeverAccepted(
+        result.composition,
+        result.realizations,
+        result.concern_bindings,
+        result.ledger,
+    )
+    assert weakened.determination(byte_identical=True) == "NOT COMPLETE"
+
+
+def test_unknown_lookup_raises_instead_of_returning_a_default() -> None:
+    """A lookup that answered None would turn a miss into a silent pass downstream."""
+    import pytest as _pytest
+
+    import infrastructure.integration_realize as band
+
+    result = band.realize()
+    with _pytest.raises(KeyError):
+        result.by_type_tag("NO-SUCH-TAG")
+
+
+def test_a_concern_that_fails_to_bind_is_recorded_as_an_error_not_a_halt(monkeypatch) -> None:
+    """Reuse-by-reference binding must survive a concern that raises, and SAY so.
+
+    The loop's except-arm converts any failure into `ERROR:<type>` so a broken concern cannot
+    silently vanish from the binding table — and cannot take the integration down with it.
+    Only a raised import makes that arm real, so the import is raised here for one concern.
+    """
+    import importlib as _il
+
+    from infrastructure import integration_realize as band
+
+    first = band.CONCERN_REGISTRY[0].module
+    real_import = _il.import_module
+
+    def flaky(name: str):
+        if name.endswith(f".{first}_realize"):
+            raise RuntimeError("concern unavailable")
+        return real_import(name)
+
+    monkeypatch.setattr(band.importlib, "import_module", flaky)
+    bindings = band.bind_certified_concerns()
+    assert bindings[0]["determination"] == "ERROR:RuntimeError"
+    assert all("unit" in b and "determination" in b for b in bindings)

@@ -94,3 +94,23 @@ def test_datum_to_dict_records_substrate_reuse():
 
 def test_datum_type_is_the_realized_construct():
     assert isinstance(make_datum("t", 1), Datum)
+
+
+def test_the_datum_guards_refuse_a_kind_or_state_that_is_not_typed() -> None:
+    """DXH-01 and UDL-12 are type facts first — both refusals and the transition guard (UDL-12).
+
+    A string that reads like an enum member is not one: kind, state and transition target are
+    each refused before any ordering question is asked, because a mistyped state would otherwise
+    fail as an IndexError inside the lifecycle table instead of as the guard it is.
+    """
+    from data.datum import make_datum
+    from data.meta import DatumKind, DatumState
+
+    with pytest.raises(DatumError, match="DXH-01 DatumKind"):
+        make_datum("t", "v", kind="PRIMITIVE")  # type: ignore[arg-type]
+    with pytest.raises(DatumError, match="DatumState"):
+        make_datum("t", "v", state="DEFINED")  # type: ignore[arg-type]
+    live = make_datum("t", "v")
+    live = live.transition(DatumState.ACTIVE)
+    with pytest.raises(DatumError, match="DOS-01"):
+        live.transition("ACTIVE")  # type: ignore[arg-type]

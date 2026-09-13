@@ -31,6 +31,7 @@ from infrastructure.resilience_meta import InfrastructureState
 # AvailabilityTopology
 # ===========================================================================
 
+
 def test_availability_topology_is_typed_identified_and_evaluative() -> None:
     at = make_availability_topology("test.availability.foundation")
     assert at.construct_id.startswith(INFRA_RESILIENCE_ID_FAMILY)
@@ -98,6 +99,7 @@ def test_availability_topology_to_dict() -> None:
 # ===========================================================================
 # ScalingArrangement
 # ===========================================================================
+
 
 def test_scaling_arrangement_is_typed_identified_and_evaluative() -> None:
     sa = make_scaling_arrangement("test.scaling.foundation")
@@ -178,6 +180,7 @@ def test_scaling_arrangement_to_dict() -> None:
 # Cross-construct / lifecycle
 # ===========================================================================
 
+
 def test_forward_lifecycle_transition() -> None:
     at = make_availability_topology("test.at")
     assert at.state == InfrastructureState.DEFINED
@@ -221,3 +224,65 @@ def test_all_constructs_evaluative_non_enforcing() -> None:
     for c in constructs:
         assert c.is_evaluative_facet(), f"{c.meta_class} is not evaluative"
         assert not c.enacts_enforcement(), f"{c.meta_class} enacts enforcement"
+
+
+def test_is_founding_acyclic_reports_false_when_the_core_is_not_canonicalisable() -> None:
+    """The except-arm is the answer to a broken core, and it must answer False, not raise.
+
+    A construct whose canonical_core cannot be serialised is not acyclic and not an
+    exception — the boolean is what the certification roll-up consumes, and a raise there
+    would replace one failure mode with another.
+    """
+    from infrastructure.resilience import AvailabilityTopology
+
+    class _Broken(AvailabilityTopology):
+        def canonical_core(self):
+            return {"poison": object()}
+
+    from infrastructure.resilience import DEFAULT_CLUSTER_REF
+
+    assert (
+        _Broken(
+            type_tag="RES-BROKEN-01",
+            resilience_posture="redundant",
+            sustains=(DEFAULT_CLUSTER_REF,),
+        ).is_founding_acyclic()
+        is False
+    )
+
+
+def test_the_base_construct_answers_posture_and_newness_before_any_override() -> None:
+    """Every honest arm of the base: an un-overridden construct says NO.
+
+    has_valid_posture and is_new_primitive default to False on the base — the value a future
+    construct inherits until it declares otherwise — and a default nobody executes is a
+    default nobody has shown to fire.
+    """
+    from infrastructure.resilience import _InfraConstruct
+
+    assert _InfraConstruct.__dict__["has_valid_posture"].__doc__ is not None
+    bare = _InfraConstruct()
+    assert bare.has_valid_posture() is False
+    assert bare.is_new_primitive() is False
+
+
+def test_the_resilience_guards_refuse_a_malformed_type_tag_posture_and_state() -> None:
+    """The three private guards, each on its refusal side — guards only count both ways.
+
+    _require_typed, _require_posture and _require_state protect invariants §3/WF-9/WF-10;
+    a guard with no measured raise is a guard that only reports agreement.
+    """
+    import pytest
+
+    from infrastructure.integration_meta import InfrastructureState
+    from infrastructure.resilience import _require_posture, _require_state, _require_typed
+
+    with pytest.raises(Exception, match="ENG-004 type_tag"):
+        _require_typed(None, "availability topology")
+    with pytest.raises(Exception, match="non-empty posture"):
+        _require_posture("   ", "AvailabilityTopology")
+    with pytest.raises(Exception, match="not in admitted set"):
+        _require_posture("floating", "AvailabilityTopology")
+    with pytest.raises(Exception, match="InfrastructureState"):
+        _require_state("DEFINED", "scaling arrangement")
+    assert _require_state(InfrastructureState.ACTIVE, "scaling arrangement") is None

@@ -499,3 +499,16 @@ def test_registry_paths_and_gap_ids_are_data_not_code(declarations) -> None:
     for literal in literals:
         for needle in forbidden:
             assert needle not in literal, f"matrix.py hard-codes {needle!r}"
+
+
+def test_a_registry_document_that_is_not_an_object_declares_no_authority(declarations) -> None:
+    """A register that is a list, a string or nothing is unreadable, and unreadable is None.
+
+    The mechanisms answer only when a document can be consulted; coercing a non-mapping would
+    turn a broken registry into a silent claim of authority, which is the reverse of the
+    finding the None return exists to raise.
+    """
+    from engine.registry_coverage.matrix import locate_authority
+
+    for unreadable in (None, [], "authority: top", 7):
+        assert locate_authority("some/registry.json", unreadable, declarations, {}) is None
