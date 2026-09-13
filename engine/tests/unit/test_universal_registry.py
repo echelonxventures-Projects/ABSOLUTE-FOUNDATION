@@ -611,3 +611,93 @@ def test_cli_malformed_registration_exit_two(tmp_path, capsys):
 def test_cli_entry_not_object_raises(tmp_path):
     with pytest.raises(ValueError):
         build_platform({"registrations": ["not-an-object"]})
+
+
+# --------------------------------------------------------------------------- #
+# core: verify's two internal invariants, refused in both directions            #
+# --------------------------------------------------------------------------- #
+
+
+def _core2():
+    return RegistryCore(clock=SequenceClock())
+
+
+def test_verify_refuses_a_second_active_version_of_one_identity():
+    """The chain is built to supersede, so two ACTIVE records can only arise from a fault.
+
+    verify() is the place that says so, and a refusal nobody has shown can fire is not a
+    guard. The second ACTIVE record is injected directly — constructing one through the
+    public path is exactly what the version rules make impossible, which is the point.
+    """
+    import dataclasses
+
+    core = _core2()
+    first = core.register(_request(natural_key="solo", attributes={"domain": "DOM-001"}))
+    forged = dataclasses.replace(
+        first, version=Version(9, 9, 9), state=RegistrationState.ACTIVE, sequence=first.sequence + 1
+    )
+    core._chains[first.universal_id].append(forged)
+    with pytest.raises(VersionConflictError, match="more than one ACTIVE"):
+        core.verify()
+
+
+def test_verify_refuses_an_injected_dependency_cycle():
+    """The three-colour DFS answers in both directions: a clean graph passes, a back edge raises.
+
+    The registering-time check refuses edges a caller can declare; this check refuses edges
+    that appear later — a rewritten `_edges`, the state a partial repair or a future
+    projection could leave behind — because acyclicity is a property of the graph as it is,
+    not of the moment a request was accepted.
+    """
+    core = _core2()
+    a = core.register(_request(natural_key="top", attributes={"domain": "DOM-002"}))
+    b = core.register(
+        _request(
+            natural_key="mid",
+            attributes={"domain": "DOM-003"},
+            dependencies=(a.universal_id,),
+        )
+    )
+    assert core.verify() is True
+    core._edges[a.universal_id] = (b.universal_id,)
+    with pytest.raises(VersionConflictError, match="dependency cycle"):
+        core.verify()
+
+
+def test_a_diamond_dependency_is_accepted_and_a_new_back_edge_is_refused():
+    """The `seen` arm of the dependency walk: a shared dependency is a diamond, not a cycle.
+
+    d -> (b, c), both -> a visits a twice; without the seen-check the second visit is a
+    silent re-walk and with it the registration proceeds. Then a new version of `a` that
+    depends on `d` closes the loop — the same walk must now refuse it.
+    """
+    core = _core2()
+    a = core.register(_request(natural_key="droot", attributes={"domain": "DOM-004"}))
+    b = core.register(
+        _request(
+            natural_key="dmid1", attributes={"domain": "DOM-005"}, dependencies=(a.universal_id,)
+        )
+    )
+    c = core.register(
+        _request(
+            natural_key="dmid2", attributes={"domain": "DOM-006"}, dependencies=(a.universal_id,)
+        )
+    )
+    d = core.register(
+        _request(
+            natural_key="dtop",
+            version="1.0.0",
+            attributes={"domain": "DOM-007"},
+            dependencies=(b.universal_id, c.universal_id),
+        )
+    )
+    assert core.dependencies_of(d.universal_id) == (b.universal_id, c.universal_id)
+    with pytest.raises(DependencyError):
+        core.register(
+            _request(
+                natural_key="droot",
+                version="2.0.0",
+                attributes={"domain": "DOM-008"},
+                dependencies=(d.universal_id,),
+            )
+        )
