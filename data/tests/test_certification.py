@@ -11,7 +11,7 @@ from data.datum import make_datum
 from data.meta import CCE_GATES
 from data.traceability import build_traceability
 from data.validation import validate_datum
-from engine.certification.contracts import CertificationStatus
+from engine.certification.contracts import CertificationStatus, CertificationSubject
 
 
 def _validate(datum):
@@ -82,8 +82,6 @@ def test_a_gate_refuses_a_required_check_that_never_ran_or_blocked() -> None:
     failed, and a gate that ignored absence would certify an unmeasured subject.
     """
     from dataclasses import replace
-
-    from engine.certification.contracts import CertificationSubject
 
     datum = make_datum("t", "v")
     trace = build_traceability(datum, unit="EC3-B10-U01", forward=(datum.datum_id,))

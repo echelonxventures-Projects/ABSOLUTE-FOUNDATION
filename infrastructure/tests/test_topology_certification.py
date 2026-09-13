@@ -8,19 +8,16 @@ Covers:
 
 from __future__ import annotations
 
-import pytest
-
-from engine.certification.ledger import CertificationLedger, CertificationLedgerEntry
+from engine.certification.ledger import CertificationLedger
 from infrastructure.topology import (
-    make_topology,
+    make_delivery_arrangement,
+    make_distribution_arrangement,
     make_locality_map,
     make_placement_rule,
-    make_distribution_arrangement,
-    make_delivery_arrangement,
+    make_topology,
 )
 from infrastructure.topology_certification import (
     ComplianceVerdict,
-    TopologyCertification,
     cce_gates,
     certify_construct,
 )

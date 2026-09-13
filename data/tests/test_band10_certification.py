@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
-
 from data.band10 import make_band10_completion
 from data.band10_certification import (
     DataComplianceReport,

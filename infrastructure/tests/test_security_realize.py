@@ -6,6 +6,8 @@ import json
 import tempfile
 from pathlib import Path
 
+import pytest as _pytest
+
 from infrastructure.security_realize import (
     NAMESAKE_FACET,
     REALIZATION_UNIT,
@@ -16,9 +18,6 @@ from infrastructure.security_realize import (
     emit_evidence,
     realize,
 )
-
-
-import pytest as _pytest
 
 
 class TestComposition:

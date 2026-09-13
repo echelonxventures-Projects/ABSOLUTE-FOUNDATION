@@ -18,9 +18,9 @@ import pytest
 
 from infrastructure.capability import InfrastructureError
 from infrastructure.resilience import (
-    AvailabilityTopology,
     DEFAULT_CLUSTER_REF,
     INFRA_RESILIENCE_ID_FAMILY,
+    AvailabilityTopology,
     ScalingArrangement,
     _InfraConstruct,
     _require_posture,
@@ -30,7 +30,6 @@ from infrastructure.resilience import (
     make_scaling_arrangement,
 )
 from infrastructure.resilience_meta import InfrastructureState
-
 
 # ===========================================================================
 # AvailabilityTopology

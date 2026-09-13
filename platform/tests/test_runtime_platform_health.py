@@ -5,7 +5,13 @@ from __future__ import annotations
 import dataclasses
 from platform.runtime_platform.core import RuntimeKernel
 from platform.runtime_platform.errors import RuntimePlatformError
-from platform.runtime_platform.health import HEALTHY, UNHEALTHY, RuntimePlatformHealth
+from platform.runtime_platform.health import (
+    DEGRADED,
+    HEALTHY,
+    UNHEALTHY,
+    HealthCheckResult,
+    RuntimePlatformHealth,
+)
 from platform.tests.runtime_platform_helpers import request
 
 import pytest
@@ -77,7 +83,6 @@ def test_a_degraded_component_degrades_the_report_without_failing_it(monkeypatch
     combines the three component statuses had never met one — a probe that silently promoted
     or silently ignored it would misstate platform health in opposite directions.
     """
-    from platform.runtime_platform.health import DEGRADED, HealthCheckResult
 
     class _DegradedResult(HealthCheckResult):
         pass

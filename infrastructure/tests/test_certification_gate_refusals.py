@@ -26,6 +26,11 @@ from typing import Any
 import pytest
 
 import infrastructure
+from engine.certification.contracts import (
+    CertificationClass,
+    CertificationSubject,
+    CriterionStatus,
+)
 from infrastructure import (  # noqa: F401 — imported so the walk below can resolve each one from sys.modules
     band13_certification,
     capability_certification,
@@ -38,11 +43,6 @@ from infrastructure import (  # noqa: F401 — imported so the walk below can re
     security_certification,
     storage_certification,
     topology_certification,
-)
-from engine.certification.contracts import (
-    CertificationClass,
-    CertificationSubject,
-    CriterionStatus,
 )
 
 

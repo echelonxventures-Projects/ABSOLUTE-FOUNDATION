@@ -720,7 +720,6 @@ def test_a_virtual_path_climbs_and_skips_dot_segments_without_touching_disk() ->
     arm only for ``.`` — a resolver that got either wrong would let a not-yet-created
     directory escape the root it is confined to.
     """
-    from pathlib import Path
 
     from intelligence.kernel.config import NestedFileSink
 

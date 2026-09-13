@@ -65,6 +65,7 @@ from platform.universal_master_plan import (
     replays,
 )
 from platform.universal_project_state import (
+    EVENT_STATE_PROJECTED,
     ProjectStateEngine,
     ProjectStateSnapshot,
     StateEntity,
@@ -189,7 +190,6 @@ def test_membership_is_decided_by_kind_alone():
 def test_a_declared_plan_kind_the_ontology_no_longer_defines_fails_closed(
     monkeypatch: pytest.MonkeyPatch,
 ):
-    """The drift guard: membership may not silently name an object that stopped existing."""
     from platform.universal_master_plan import master_plan as module
 
     monkeypatch.setattr(module, "PLAN_KINDS", (*PLAN_KINDS, "RenamedAwayEntity"))
@@ -1011,9 +1011,6 @@ def test_the_real_plan_replays_through_the_journal(
 
 
 def test_state_and_plan_share_one_chained_journal(plane: ControlPlane):
-    """Wave 11 and Wave 12 append to one journal; neither introduces a second chain."""
-    from platform.universal_project_state import EVENT_STATE_PROJECTED
-
     journal = DurableJournal.open(tempfile.mkdtemp())
     engine = MasterPlanEngine(journal=journal)
     engine.derive(plane, tick=1)

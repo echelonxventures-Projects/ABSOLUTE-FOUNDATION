@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from platform.universal_control_plane import ControlPlane
+from platform.universal_control_plane import ControlPlane, ontology
 from platform.universal_control_plane.certification import CertificationEngine
 from platform.universal_control_plane.durable import DurableJournal
 from platform.universal_control_plane.errors import StateTransitionError
@@ -695,7 +695,6 @@ def test_a_re_exported_name_is_discovered_only_where_it_is_declared():
     module it is declared in is the ordinary way to hit this — and without the skip the same
     frozen dataclass would enter the kind vocabulary under both paths.
     """
-    from platform.universal_control_plane import ontology
     from platform.universal_control_plane import state as lifecycle_module
 
     assert "Transition" in dir(lifecycle_module)

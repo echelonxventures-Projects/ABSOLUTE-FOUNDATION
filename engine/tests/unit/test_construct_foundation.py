@@ -30,6 +30,7 @@ import dataclasses
 import json
 import os
 import re
+import runpy
 import subprocess
 from dataclasses import replace
 from pathlib import Path
@@ -3818,27 +3819,6 @@ def test_a_rule_set_with_no_catch_all_is_a_fault_rather_than_a_default(declarati
         )
 
 
-def test_the_module_entry_point_body_runs_under_measurement() -> None:
-    """`python -m engine.construct` is the documented one-command surface.
-
-    pytest never executes ``__main__`` bodies, so the two import-time lines of the entry
-    module would otherwise be permanently unmeasured. Executing the source with a foreign
-    ``__name__`` runs the imports and skips the dispatch guard — which is exactly the
-    half of the file that has to stay true for ``-m`` to work.
-    """
-    from pathlib import Path as _Path
-
-    from engine.construct import cli as construct_cli
-
-    source = _Path(construct_cli.__file__).with_name("__main__.py").read_text(encoding="utf-8")
-    namespace: dict[str, object] = {
-        "__name__": "engine.construct__main__measured",
-        "__file__": str(_Path(construct_cli.__file__).with_name("__main__.py")),
-    }
-    exec(compile(source, namespace["__file__"], "exec"), namespace)  # noqa: S102
-    assert namespace["main"] is construct_cli.main
-
-
 def test_the_entry_point_module_is_executed_under_measurement() -> None:
     """runpy imports `engine.construct.__main__` so its two import-time lines are measured.
 
@@ -3847,9 +3827,6 @@ def test_the_entry_point_module_is_executed_under_measurement() -> None:
     way `python -m` does — under a name other than `__main__`, so the dispatch guard stays
     closed and only the module's own two statements execute.
     """
-    import runpy
-
-    from engine.construct import cli as construct_cli
 
     result = runpy.run_module("engine.construct", run_name="_construct_probe")
     assert result["main"] is construct_cli.main

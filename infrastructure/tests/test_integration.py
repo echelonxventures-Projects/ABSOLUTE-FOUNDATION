@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-import dataclasses
-
 import pytest
+import pytest as _pytest
 
 from infrastructure.capability import InfrastructureError
 from infrastructure.integration import (
@@ -12,8 +11,7 @@ from infrastructure.integration import (
     InfrastructureDependency,
     make_dependency,
 )
-from infrastructure.integration_meta import InfrastructureState
-import pytest as _pytest
+from infrastructure.integration_meta import InfrastructureState, ownership_is_disjoint
 
 
 def _dep(**kw):
@@ -250,7 +248,6 @@ def test_duplicated_meta_class_ownership_is_reported_by_the_disjointness_check()
     import pytest
 
     from infrastructure import integration_meta as meta
-    from infrastructure.integration_meta import ownership_is_disjoint
 
     concerns = list(meta.CONCERN_REGISTRY)
     twin = meta.ConcernUnit(

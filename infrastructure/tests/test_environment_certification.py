@@ -32,8 +32,8 @@ from infrastructure.environment_certification import (
     Gate8Readiness,
     Gate9GapZero,
     Gate10Completeness,
-    certify_construct,
     cce_gates,
+    certify_construct,
     evaluate_environment_compliance,
 )
 from infrastructure.environment_meta import CCE_GATES

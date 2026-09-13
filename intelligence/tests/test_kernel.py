@@ -38,12 +38,12 @@ from intelligence.kernel.ids import (
     parse_class,
 )
 from intelligence.kernel.knowledge import (
+    _METRICS,
     CONCEPT_FIELDS,
     COVERAGE_ATTRIBUTES,
-    CanonicalKnowledgeResolver,
     LIST_FIELDS,
     PROSE_FIELDS,
-    _METRICS,
+    CanonicalKnowledgeResolver,
     make_ref,
     parse_ref,
 )

@@ -27,6 +27,7 @@ from engine.registry_coverage.matrix import (
     UNREGISTERED,
     CoverageError,
     Declarations,
+    Plane,
     build,
     digest,
     load_declarations,
@@ -514,9 +515,6 @@ def test_a_list_populated_registry_is_projected_whole(declarations, tmp_path) ->
     ``[{"path": ...}, ...]`` would have registered as holding nothing while holding all.
     """
     import json
-    import os
-
-    from engine.registry_coverage.matrix import Plane, build
 
     repo = tmp_path / "listy"
     os.makedirs(repo / "registries")

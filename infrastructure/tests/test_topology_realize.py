@@ -13,21 +13,17 @@ import json
 import tempfile
 from pathlib import Path
 
-import pytest
+import pytest as _pytest
 
 from infrastructure.topology_realize import (
     REALIZATION_UNIT,
     Composition,
-    ConstructRealization,
     RealizationResult,
     build_canonical_composition,
     determinism_check,
     emit_evidence,
     realize,
 )
-
-
-import pytest as _pytest
 
 
 class TestComposition:

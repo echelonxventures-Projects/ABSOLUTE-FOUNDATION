@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import importlib as _il
 import json
 import tempfile
 from pathlib import Path
+
+import pytest as _pytest
 
 from infrastructure.integration_meta import (
     CONCERN_COUNT,
@@ -20,10 +23,6 @@ from infrastructure.integration_realize import (
     emit_evidence,
     realize,
 )
-
-
-import importlib as _il
-import pytest as _pytest
 
 
 class TestComposition:

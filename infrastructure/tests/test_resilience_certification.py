@@ -8,16 +8,13 @@ Covers:
 
 from __future__ import annotations
 
-import pytest
-
-from engine.certification.ledger import CertificationLedger, CertificationLedgerEntry
+from engine.certification.ledger import CertificationLedger
 from infrastructure.resilience import (
     make_availability_topology,
     make_scaling_arrangement,
 )
 from infrastructure.resilience_certification import (
     ComplianceVerdict,
-    ResilienceCertification,
     cce_gates,
     certify_construct,
 )

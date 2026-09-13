@@ -15,6 +15,7 @@ from engine.certification.contracts import (
 )
 from infrastructure.compute import make_compute_resource
 from infrastructure.compute_certification import (
+    ComputeComplianceReport,
     Gate1Architecture,
     Gate2Dependencies,
     Gate3Coverage,
@@ -25,7 +26,6 @@ from infrastructure.compute_certification import (
     Gate8Readiness,
     Gate9GapZero,
     Gate10Completeness,
-    ComputeComplianceReport,
     cce_gates,
     certify_compute,
     evaluate_compute_compliance,

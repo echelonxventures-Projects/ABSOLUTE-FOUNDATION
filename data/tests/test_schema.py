@@ -353,5 +353,7 @@ def test_a_type_mismatch_on_a_required_element_breaks_conformance() -> None:
         attr_name="ucos.demo.attr",
         attr_type="ucos.core.number",
     )
-    schema = entity_schema_for(here, name="ucos.demo.schema-typemismatch", type_tag="ucos.core.schema")
+    schema = entity_schema_for(
+        here, name="ucos.demo.schema-typemismatch", type_tag="ucos.core.schema"
+    )
     assert schema.conforms_entity(same_name) is False

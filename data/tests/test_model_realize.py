@@ -17,7 +17,6 @@ from data.model_realize import (
     realize_members,
 )
 
-
 # ---------------------------------------------------------------------------
 # Live integration of the ten CERTIFIED members
 # ---------------------------------------------------------------------------

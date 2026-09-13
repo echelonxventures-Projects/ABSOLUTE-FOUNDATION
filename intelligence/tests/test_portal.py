@@ -19,7 +19,6 @@ from dataclasses import replace
 import pytest
 
 from intelligence.portal import (
-    main as portal_main,
     ACCEPTANCE_PORTAL,
     CAPABILITY_PORTAL,
     CERTIFICATION_PORTAL,
@@ -40,6 +39,9 @@ from intelligence.portal import (
     RepositoryIntelligencePortal,
     _freeze_blockers,
     build_acceptance_facts,
+)
+from intelligence.portal import (
+    main as portal_main,
 )
 from intelligence.rie.config import RepoConfig
 from intelligence.rie.engine import RepositoryIntelligenceEngine
