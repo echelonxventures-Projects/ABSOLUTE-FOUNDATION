@@ -313,7 +313,6 @@ def test_forward_transitions_builds_the_full_chain():
     ]
 
 
-
 def test_transition_between_non_states_is_rejected():
     with pytest.raises(LifecycleError):  # DLA-02
         Transition(

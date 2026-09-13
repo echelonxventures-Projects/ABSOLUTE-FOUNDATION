@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import ast
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -330,18 +331,17 @@ def test_the_component_profile_skips_a_source_the_report_names_but_the_tree_lack
     The coverage XML is an artefact of a run, not a promise about the tree. Counting AST lines
     for a missing file would turn a stale report into an exception on the acceptance path.
     """
-    from scripts.cert004_expansion import FileCoverage
 
     target = band.TARGETS[0]
     coverage = {
-        f"{target.path}/ghost.py": FileCoverage(
+        f"{target.path}/ghost.py": band.FileCoverage(
             filename=f"{target.path}/ghost.py",
             hit_lines={1},
             missed_lines=set(),
             branches_covered=0,
             branches_valid=0,
         ),
-        f"{target.path}/real.py": FileCoverage(
+        f"{target.path}/real.py": band.FileCoverage(
             filename=f"{target.path}/real.py",
             hit_lines={1},
             missed_lines=set(),
@@ -423,16 +423,13 @@ def test_the_script_bootstraps_its_own_repo_root_into_sys_path() -> None:
     certified engines it reuses. With the root already present the guard is inert, so the
     module body is re-executed with the entry withdrawn.
     """
-    import importlib
-    import sys
-    from pathlib import Path
 
     repo = str(Path(band.__file__).resolve().parents[1])
     saved = sys.path[:]
     try:
         while repo in sys.path:
             sys.path.remove(repo)
-        importlib.reload(band)
+        __import__("importlib").reload(band)
         assert repo in sys.path
     finally:
         sys.path[:] = saved

@@ -28,6 +28,7 @@ hand pytest-cov an empty source list, and an empty source list measures everythi
 from __future__ import annotations
 
 import os
+import subprocess
 
 import coverage
 import pytest
@@ -130,7 +131,6 @@ def derive() -> tuple[list[str], list[str]]:
     and preserves Ω-1 exactly: the list is still produced by `discovery.derived_scope`, never
     enumerated. A failure in the child is a FAULT raised here, not a fallback to a guess.
     """
-    import subprocess
 
     root = _repository_root()
     code = (

@@ -10,8 +10,14 @@ The constraint under test throughout: the matrix must not become the 141st regis
 
 from __future__ import annotations
 
+import ast
 import copy
+import dataclasses
 import json
+import os
+import pathlib
+import re
+import subprocess
 
 import pytest
 
@@ -24,6 +30,7 @@ from engine.registry_coverage.matrix import (
     build,
     digest,
     load_declarations,
+    locate_authority,
     rendered,
     repo_root,
     validate,
@@ -43,8 +50,6 @@ def _declarations() -> Declarations:
 
 @pytest.fixture(name="document")
 def _document() -> dict:
-    import os
-
     path = os.path.join(repo_root(), "engine", "registry_coverage", "declarations.json")
     with open(path, encoding="utf-8") as handle:
         return json.load(handle)
@@ -66,8 +71,6 @@ def test_the_matrix_claims_no_authority(matrix) -> None:
 
 
 def test_the_matrix_writes_nothing() -> None:
-    import subprocess
-
     before = subprocess.run(  # noqa: S603
         ["git", "status", "--porcelain"],  # noqa: S607
         cwd=repo_root(),
@@ -207,7 +210,6 @@ def test_the_two_planes_are_disjoint_IN_GOVERNANCE() -> None:
     overlap is kept as a two-sided ratchet so the historical residue cannot grow silently and a
     reduction must be recorded here.
     """
-    import os
 
     root = repo_root()
     with open(os.path.join(root, "00-BOOK", "DATA", "artifacts.json"), encoding="utf-8") as h:
@@ -233,7 +235,6 @@ def test_a_class_declared_by_two_planes_is_refused() -> None:
     the last, and the duplicate rule would lose the ability to see a genuinely double-governed
     object. The refusal is what makes governance-disjointness enforceable rather than hopeful.
     """
-    import dataclasses
 
     declarations = load_declarations()
     planes = list(declarations.planes)
@@ -257,7 +258,6 @@ def test_an_object_no_plane_governs_is_still_unregistered() -> None:
     covered. It is not: a declaration under which no plane governs anything reports the whole
     population UNREGISTERED and `validate` refuses it.
     """
-    import dataclasses
 
     declarations = load_declarations()
     planes = list(declarations.planes)
@@ -293,7 +293,6 @@ def test_the_generated_registry_is_contained_in_the_repository_plane() -> None:
     leave the containment requirement only by declaring itself excluded, that declaration
     must be complete, and an excluded entry that acquires an identity anyway fails here.
     """
-    import os
 
     root = repo_root()
     with open(
@@ -434,8 +433,6 @@ def test_verify_reports_determinism_and_passes() -> None:
 
 
 def test_no_wall_clock_enters_the_matrix(matrix) -> None:
-    import re
-
     trimmed = {k: v for k, v in matrix.items() if k not in ("registries", "findings")}
     assert re.findall(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", json.dumps(trimmed)) == []
 
@@ -476,9 +473,6 @@ def test_an_unparseable_declaration_is_a_fault(tmp_path) -> None:
 
 
 def test_registry_paths_and_gap_ids_are_data_not_code(declarations) -> None:
-    import ast
-    import pathlib
-
     source = (pathlib.Path(repo_root()) / "engine" / "registry_coverage" / "matrix.py").read_text(
         "utf-8"
     )
@@ -508,7 +502,6 @@ def test_a_registry_document_that_is_not_an_object_declares_no_authority(declara
     turn a broken registry into a silent claim of authority, which is the reverse of the
     finding the None return exists to raise.
     """
-    from engine.registry_coverage.matrix import locate_authority
 
     for unreadable in (None, [], "authority: top", 7):
         assert locate_authority("some/registry.json", unreadable, declarations, {}) is None

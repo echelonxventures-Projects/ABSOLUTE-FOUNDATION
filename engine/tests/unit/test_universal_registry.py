@@ -9,6 +9,7 @@ never touches the read-only corpus (DP-03).
 
 from __future__ import annotations
 
+import dataclasses
 import json
 
 import pytest
@@ -29,10 +30,10 @@ from engine.registry.universal import (
     UniversalRegistryPlatform,
     VersionConflictError,
     deterministic_id,
+    identity,
     parse_kind,
     version_ref,
 )
-from engine.registry.universal import identity as ident
 from engine.registry.universal.audit import GENESIS_HASH, utc_clock
 from engine.registry.universal.cli import build_platform, main
 from engine.registry.universal.errors import AuditIntegrityError, DependencyError
@@ -67,19 +68,19 @@ def test_distinct_inputs_distinct_ids():
 
 
 def test_namespace_validation():
-    assert ident.normalize_namespace("ucos.platform.registry") == "ucos.platform.registry"
+    assert identity.normalize_namespace("ucos.platform.registry") == "ucos.platform.registry"
     with pytest.raises(NamespaceError):
-        ident.normalize_namespace("")
+        identity.normalize_namespace("")
     with pytest.raises(NamespaceError):
-        ident.normalize_namespace("Bad Namespace!")
+        identity.normalize_namespace("Bad Namespace!")
 
 
 def test_natural_key_validation():
-    assert ident.normalize_natural_key("  key-1 ") == "key-1"
+    assert identity.normalize_natural_key("  key-1 ") == "key-1"
     with pytest.raises(RegistrationValidationError):
-        ident.normalize_natural_key("has space")
+        identity.normalize_natural_key("has space")
     with pytest.raises(RegistrationValidationError):
-        ident.normalize_natural_key("")
+        identity.normalize_natural_key("")
 
 
 @pytest.mark.parametrize("bad", ["", "NOTUCOS-SVC-abc", "UCOS-XXX-abc", "UCOS-SVC", "UCOS-SVC-"])
@@ -89,7 +90,7 @@ def test_parse_kind_rejects_malformed(bad):
 
 
 def test_content_digest_stable():
-    assert ident.content_digest({"a": 1, "b": 2}) == ident.content_digest({"b": 2, "a": 1})
+    assert identity.content_digest({"a": 1, "b": 2}) == identity.content_digest({"b": 2, "a": 1})
 
 
 # --------------------------------------------------------------------------- #
@@ -629,7 +630,6 @@ def test_verify_refuses_a_second_active_version_of_one_identity():
     guard. The second ACTIVE record is injected directly — constructing one through the
     public path is exactly what the version rules make impossible, which is the point.
     """
-    import dataclasses
 
     core = _core2()
     first = core.register(_request(natural_key="solo", attributes={"domain": "DOM-001"}))

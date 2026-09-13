@@ -240,7 +240,10 @@ def test_subject_without_certified_construct_id_is_rejected():
     )
     with pytest.raises(SecurityError):  # DMR-09
         make_security(
-            "s", "ucos.core.security", bad_ref, POLICY_REF,
+            "s",
+            "ucos.core.security",
+            bad_ref,
+            POLICY_REF,
             classifications=_classifications(),
         )
 
@@ -255,7 +258,10 @@ def test_subject_without_structural_digest_is_rejected():
     )
     with pytest.raises(SecurityError):  # UDL-06
         make_security(
-            "s", "ucos.core.security", bad_ref, POLICY_REF,
+            "s",
+            "ucos.core.security",
+            bad_ref,
+            POLICY_REF,
             classifications=_classifications(),
         )
 

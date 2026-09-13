@@ -83,8 +83,12 @@ def test_unit_certification_ref_to_dict():
 def test_make_band10_completion_rejects_undeclared_unit():
     with pytest.raises(KeyError):
         make_band10_completion(
-            "n", "t", (("EC3-B10-U99", "cid", True),), meta_model_id="m",
-            integration=dict(_FULL_INTEGRATION), version="1.0.0",
+            "n",
+            "t",
+            (("EC3-B10-U99", "cid", True),),
+            meta_model_id="m",
+            integration=dict(_FULL_INTEGRATION),
+            version="1.0.0",
         )
 
 
@@ -102,8 +106,12 @@ def test_inventory_complete_true_and_false():
 def test_all_units_certified_true_false_and_empty():
     assert _completion().all_units_certified() is True
     uncert = make_band10_completion(
-        "n", "t", _unit_certs(certified=False), meta_model_id="m",
-        integration=dict(_FULL_INTEGRATION), version="1.0.0",
+        "n",
+        "t",
+        _unit_certs(certified=False),
+        meta_model_id="m",
+        integration=dict(_FULL_INTEGRATION),
+        version="1.0.0",
     )
     assert uncert.all_units_certified() is False
     empty = _completion(units=())
@@ -124,7 +132,12 @@ def test_integration_closed_true_and_false_and_empty():
     broken = dict(_FULL_INTEGRATION)
     broken["closure_DMI_01"] = False
     part = make_band10_completion(
-        "n", "t", _unit_certs(), meta_model_id="m", integration=broken, version="1.0.0",
+        "n",
+        "t",
+        _unit_certs(),
+        meta_model_id="m",
+        integration=broken,
+        version="1.0.0",
     )
     assert part.integration_closed() is False
     empty = _completion(integration=())

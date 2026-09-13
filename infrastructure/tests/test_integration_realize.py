@@ -22,8 +22,11 @@ from infrastructure.integration_realize import (
 )
 
 
-class TestComposition:
+import importlib as _il
+import pytest as _pytest
 
+
+class TestComposition:
     def test_build_canonical_composition(self):
         comp = build_canonical_composition()
         assert isinstance(comp, Composition)
@@ -40,7 +43,6 @@ class TestComposition:
 
 
 class TestRealization:
-
     def test_realize_returns_result(self):
         result = realize()
         assert isinstance(result, RealizationResult)
@@ -97,7 +99,6 @@ class TestRealization:
 
 
 class TestDeliverables:
-
     def test_dependency_graph(self):
         g = realize().dependency_graph()
         assert g["edge_count"] == 24
@@ -127,7 +128,6 @@ class TestDeliverables:
 
 
 class TestDeterminism:
-
     def test_determinism_check_passes(self):
         byte_identical, a, b = determinism_check()
         assert byte_identical
@@ -138,7 +138,6 @@ class TestDeterminism:
 
 
 class TestEvidence:
-
     def test_emit_evidence_complete(self):
         with tempfile.TemporaryDirectory() as tmp:
             summary = emit_evidence(Path(tmp) / "_evidence" / REALIZATION_UNIT)
@@ -189,12 +188,11 @@ def test_determination_ladder_answers_below_complete() -> None:
     a result whose acceptance roll-up says otherwise — the shape a broken future realization
     would take, forced here rather than assumed.
     """
-    import infrastructure.integration_realize as band
 
-    result = band.realize()
+    result = realize()
     assert result.determination(byte_identical=False) == "COMPLETE WITH CONDITIONS"
 
-    class _NeverAccepted(band.RealizationResult):
+    class _NeverAccepted(RealizationResult):
         def all_accepted(self) -> bool:
             return False
 
@@ -209,11 +207,8 @@ def test_determination_ladder_answers_below_complete() -> None:
 
 def test_unknown_lookup_raises_instead_of_returning_a_default() -> None:
     """A lookup that answered None would turn a miss into a silent pass downstream."""
-    import pytest as _pytest
 
-    import infrastructure.integration_realize as band
-
-    result = band.realize()
+    result = realize()
     with _pytest.raises(KeyError):
         result.by_type_tag("NO-SUCH-TAG")
 
@@ -225,7 +220,6 @@ def test_a_concern_that_fails_to_bind_is_recorded_as_an_error_not_a_halt(monkeyp
     silently vanish from the binding table — and cannot take the integration down with it.
     Only a raised import makes that arm real, so the import is raised here for one concern.
     """
-    import importlib as _il
 
     from infrastructure import integration_realize as band
 

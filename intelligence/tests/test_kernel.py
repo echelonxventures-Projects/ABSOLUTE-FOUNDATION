@@ -37,12 +37,13 @@ from intelligence.kernel.ids import (
     class_codes,
     parse_class,
 )
-from intelligence.kernel import knowledge as knowledge_module
 from intelligence.kernel.knowledge import (
-    _METRICS,
     CONCEPT_FIELDS,
     COVERAGE_ATTRIBUTES,
     CanonicalKnowledgeResolver,
+    LIST_FIELDS,
+    PROSE_FIELDS,
+    _METRICS,
     make_ref,
     parse_ref,
 )
@@ -615,8 +616,8 @@ def test_the_field_guard_refuses_an_unresolvable_name_and_both_empty_shapes(tmp_
     refused, and the field name itself is checked against the declared vocabulary first.
     """
     resolver = _resolver(tmp_path)
-    lists = sorted(knowledge_module.LIST_FIELDS["decision"])
-    prose = sorted(knowledge_module.PROSE_FIELDS["decision"])
+    lists = sorted(LIST_FIELDS["decision"])
+    prose = sorted(PROSE_FIELDS["decision"])
     with pytest.raises(UnresolvedReferenceError, match="not resolvable"):
         resolver._field_content(
             ref="decision:D-1#nope",

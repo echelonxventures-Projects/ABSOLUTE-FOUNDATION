@@ -73,7 +73,9 @@ def test_missing_capability_or_behavior_reference_is_rejected():
 def test_non_string_enables_reference_is_rejected():
     with pytest.raises(InfrastructureError):
         InfrastructureCapability(
-            type_tag="t", kind=InfrastructureCapabilityKind.HOSTING, enables_ref=object()  # type: ignore[arg-type]
+            type_tag="t",
+            kind=InfrastructureCapabilityKind.HOSTING,
+            enables_ref=object(),  # type: ignore[arg-type]
         )
 
 

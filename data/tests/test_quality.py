@@ -273,8 +273,12 @@ def test_subject_without_certified_construct_id_is_rejected():
     )
     with pytest.raises(QualityError):  # DMR-08
         make_quality(
-            "q", "ucos.core.quality", bad_ref, POLICY_REF,
-            measurements=_measurements(), schema_ref=SCHEMA_REF,
+            "q",
+            "ucos.core.quality",
+            bad_ref,
+            POLICY_REF,
+            measurements=_measurements(),
+            schema_ref=SCHEMA_REF,
         )
 
 
@@ -288,8 +292,12 @@ def test_subject_without_structural_digest_is_rejected():
     )
     with pytest.raises(QualityError):  # UDL-06
         make_quality(
-            "q", "ucos.core.quality", bad_ref, POLICY_REF,
-            measurements=_measurements(), schema_ref=SCHEMA_REF,
+            "q",
+            "ucos.core.quality",
+            bad_ref,
+            POLICY_REF,
+            measurements=_measurements(),
+            schema_ref=SCHEMA_REF,
         )
 
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import dataclasses
 from platform.runtime_platform.contracts import WorkloadAttestation
 from platform.runtime_platform.errors import ExecutionEngineError, ExecutionRequestError
 from platform.runtime_platform.execution import ExecutionEngine, ExecutionRequest
@@ -103,9 +104,6 @@ def test_a_running_execution_cannot_be_compensated_and_a_record_fingerprints_its
     would otherwise slip through. `fingerprint` is how the record is referenced by the
     registry's hash chain, and `infrastructure` is the composition the engine carries.
     """
-    import dataclasses
-    from platform.runtime_platform.errors import ExecutionEngineError
-    from platform.runtime_platform.execution import ExecutionEngine
 
     engine = ExecutionEngine()
     assert engine.infrastructure is engine.infrastructure

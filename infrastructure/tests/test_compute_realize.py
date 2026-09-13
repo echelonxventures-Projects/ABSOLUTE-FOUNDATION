@@ -160,8 +160,11 @@ def test_cli_main_reports_failure_when_not_complete(tmp_path, capsys, monkeypatc
 
 def test_determination_not_complete_for_rejected_resource():
     # A technology-selecting resource is rejected → determination NOT COMPLETE.
-    bad = make_compute_resource("t", "ENG-005:INFRASTRUCTURE-011:locality.foundation",
-                                execution_host_ref="ENG-005:RL-F2:kubernetes")
+    bad = make_compute_resource(
+        "t",
+        "ENG-005:INFRASTRUCTURE-011:locality.foundation",
+        execution_host_ref="ENG-005:RL-F2:kubernetes",
+    )
     trace = build_traceability(bad, unit="EC3-B13-U02", forward=(bad.resource_id,))
     validation = validate_compute(bad, trace)
     certification = certify_compute(validation, version=UNIT_VERSION)

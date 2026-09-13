@@ -26,9 +26,7 @@ SCHEMA_REF = "UCOS-SCHEMA-REF:ucos.demo.schema"
 
 def _result_for(quality):
     """Assemble a RealizationResult for an arbitrary quality object (test helper)."""
-    trace = build_quality_traceability(
-        quality, unit="EC3-B10-U08", forward=(quality.quality_id,)
-    )
+    trace = build_quality_traceability(quality, unit="EC3-B10-U08", forward=(quality.quality_id,))
     validation = validate_quality(quality, trace)
     certification = certify_quality(validation, version=UNIT_VERSION)
     return RealizationResult(

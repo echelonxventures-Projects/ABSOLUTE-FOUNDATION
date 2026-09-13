@@ -27,13 +27,20 @@ from infrastructure.resilience_realize import (
 )
 
 
-class TestComposition:
+import pytest as _pytest
 
+
+class TestComposition:
     def test_build_canonical_composition(self):
         comp = build_canonical_composition()
         assert isinstance(comp, Composition)
-        assert comp.availability_topology.type_tag == "ucos.infrastructure.availabilitytopology.foundation"
-        assert comp.scaling_arrangement.type_tag == "ucos.infrastructure.scalingarrangement.foundation"
+        assert (
+            comp.availability_topology.type_tag
+            == "ucos.infrastructure.availabilitytopology.foundation"
+        )
+        assert (
+            comp.scaling_arrangement.type_tag == "ucos.infrastructure.scalingarrangement.foundation"
+        )
 
     def test_composition_ordered(self):
         comp = build_canonical_composition()
@@ -44,7 +51,6 @@ class TestComposition:
 
 
 class TestRealization:
-
     def test_realize_returns_result(self):
         result = realize()
         assert isinstance(result, RealizationResult)
@@ -85,7 +91,6 @@ class TestRealization:
 
 
 class TestDeterminism:
-
     def test_determinism_check_passes(self):
         byte_identical, a, b = determinism_check()
         assert byte_identical, "determinism check failed"
@@ -98,7 +103,6 @@ class TestDeterminism:
 
 
 class TestEvidence:
-
     def test_emit_evidence(self):
         with tempfile.TemporaryDirectory() as tmp:
             evidence_dir = Path(tmp) / "_evidence" / REALIZATION_UNIT
@@ -147,12 +151,11 @@ def test_determination_ladder_answers_below_complete() -> None:
     a result whose acceptance roll-up says otherwise — the shape a broken future realization
     would take, forced here rather than assumed.
     """
-    import infrastructure.resilience_realize as band
 
-    result = band.realize()
+    result = realize()
     assert result.determination(byte_identical=False) == "COMPLETE WITH CONDITIONS"
 
-    class _NeverAccepted(band.RealizationResult):
+    class _NeverAccepted(RealizationResult):
         def all_accepted(self) -> bool:
             return False
 
@@ -162,10 +165,7 @@ def test_determination_ladder_answers_below_complete() -> None:
 
 def test_unknown_lookup_raises_instead_of_returning_a_default() -> None:
     """A lookup that answered None would turn a miss into a silent pass downstream."""
-    import pytest as _pytest
 
-    import infrastructure.resilience_realize as band
-
-    result = band.realize()
+    result = realize()
     with _pytest.raises(KeyError):
         result.by_meta_class("NO-SUCH-CLASS")

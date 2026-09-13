@@ -14,13 +14,18 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 
 import pytest
 
 from engine.nucleus.cli import DICTIONARY_ARTIFACT, _dictionary_document, main
 from engine.nucleus.registry import build_seed_registry
-from engine.registry.universal.dictionary import IdentifierDictionary, dictionary_for
+from engine.registry.universal.dictionary import (
+    IdentifierDictionary,
+    IdentifierEntry,
+    dictionary_for,
+)
 from engine.registry.universal.errors import (
     RegistrationError,
     RegistrationValidationError,
@@ -112,7 +117,6 @@ def test_the_artifact_stays_open() -> None:
 
 def test_the_artifact_carries_no_wall_clock() -> None:
     """A timestamp would make two runs of one state differ and destroy replay."""
-    import re
 
     blob = json.dumps(_committed())
     assert re.findall(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", blob) == []
@@ -284,7 +288,6 @@ def test_reproduces_answers_false_for_an_identifier_that_cannot_be_reminted() ->
     arm that answers for an imported identifier, and it had no case: a kind the mint refuses
     must report False rather than raise through a health check.
     """
-    from engine.registry.universal.dictionary import IdentifierEntry
 
     forged = IdentifierEntry(
         universal_id="UCOS-SVC-000001",
@@ -302,7 +305,6 @@ def test_duplicated_natural_keys_names_a_triple_that_mints_two_identifiers() -> 
     The dictionary's whole purpose is that the triple determines the identifier; a pair that
     disagrees is the finding, and an empty answer there would certify a lie.
     """
-    from engine.registry.universal.dictionary import IdentifierDictionary, IdentifierEntry
 
     dictionary = IdentifierDictionary(
         (

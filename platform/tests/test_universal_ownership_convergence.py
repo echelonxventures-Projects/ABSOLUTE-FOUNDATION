@@ -23,9 +23,12 @@ from platform.universal_foundation.bootstrap import (
 from platform.universal_ownership.contracts import (
     OwnershipDetermination,
     OwnershipGranularity,
+    OwnershipRecord,
     OwnershipStanding,
 )
+from platform.universal_ownership.determination import OwnershipDeterminationEngine
 from platform.universal_ownership.errors import (
+    OwnershipContractError,
     OwnershipEvidenceError,
     OwnershipRecommendationError,
 )
@@ -40,6 +43,7 @@ from platform.universal_ownership.recommendation import (
     BASIS_PEER_PRECEDENT,
     EligibleLocatorRecommendationProvider,
     GovernanceReductionEngine,
+    GovernanceWorkload,
     OwnershipRecommendation,
     PeerPrecedentRecommendationProvider,
     RecommendationProviderRegistry,
@@ -53,9 +57,10 @@ from platform.universal_truth.eligibility import (
     REASON_ZONE_INELIGIBLE,
     CanonicalHomePolicy,
     EligibilityLedger,
+    load_eligibility_ledger,
     open_ledger,
 )
-from platform.universal_truth.errors import TruthEligibilityError
+from platform.universal_truth.errors import RepositoryTruthError, TruthEligibilityError
 from platform.universal_truth.policy import default_truth_policy
 
 import pytest
@@ -223,8 +228,6 @@ def test_by_reason_groups_a_population_for_triage():
 
 
 def _determine(home, subject, granularity):
-    from platform.universal_ownership.determination import OwnershipDeterminationEngine
-
     providers = EvidenceProviderRegistry(
         (RoleLocatorProvider("definitional-home", home, granularity=granularity),)
     )
@@ -260,8 +263,6 @@ def test_a_contest_across_zones_is_settled_by_declared_precedence_not_a_special_
 
 
 def test_an_unknown_granularity_fails_closed():
-    from platform.universal_ownership.errors import OwnershipContractError
-
     with pytest.raises(OwnershipContractError):
         RoleLocatorProvider("definitional-home", _home(CONSTITUTION), granularity="sort-of")
 
@@ -449,7 +450,6 @@ def test_composing_ownership_from_the_declaration_needs_no_repository_knowledge(
 
 def test_a_recommendation_is_never_offered_for_a_declared_subject():
     """The one rule that keeps a proposal from displacing a determination."""
-    from platform.universal_ownership.contracts import OwnershipRecord
 
     home = _home(CONSTITUTION)
     provider = EligibleLocatorRecommendationProvider(home)
@@ -479,7 +479,6 @@ def test_a_recommendation_carries_no_field_by_which_it_could_pass_for_evidence()
 
 def test_a_recommendation_proposes_only_a_locator_an_authority_could_actually_ratify():
     """Proposing an ineligible home would waste the one act only governance may perform."""
-    from platform.universal_ownership.contracts import OwnershipRecord
 
     home = _home(CONSTITUTION)
     provider = EligibleLocatorRecommendationProvider(home)
@@ -613,7 +612,6 @@ def test_an_eligibility_ledger_is_loaded_from_a_declared_document(tmp_path):
     document.write_text(
         json.dumps({"ledger_id": "loaded", "admitted_suffixes": [".md"]}), encoding="utf-8"
     )
-    from platform.universal_truth.eligibility import load_eligibility_ledger
 
     ledger = load_eligibility_ledger(document, registered=(CONSTITUTION,))
     assert ledger.ledger_id == "loaded"
@@ -629,7 +627,6 @@ def test_an_empty_locator_is_refused_rather_than_defaulted():
         ledger.verdict("   ")
     # The composed policy classifies first, and an empty locator cannot be classified either,
     # so the refusal surfaces as a policy error rather than an eligibility one. Both refuse.
-    from platform.universal_truth.errors import RepositoryTruthError
 
     with pytest.raises(RepositoryTruthError):
         _home(CONSTITUTION).verdict("")
@@ -737,7 +734,6 @@ def test_the_draft_document_publishes_the_remediable_and_irreducible_split():
 
 def test_a_closed_population_reports_a_complete_determination():
     """The identity case: nothing open means nothing to propose and nothing to remedy."""
-    from platform.universal_ownership.recommendation import GovernanceWorkload
 
     foundation = bootstrap_universal_foundation()
     subjects = foundation.project_population()

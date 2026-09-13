@@ -7,8 +7,10 @@ tested only where it passes is a law nobody has shown can fail.
 
 from __future__ import annotations
 
+import ast
 import dataclasses
 import json
+import pathlib
 
 import pytest
 
@@ -212,8 +214,6 @@ def test_l03_refuses_a_reduction_to_an_unbound_primitive(contract, repo):
 
 
 def test_l03_covers_the_live_facet_enumeration_exactly(contract):
-    from engine.uckp.facets import Facet
-
     assert {r.facet for r in contract.reductions} == {f.value for f in Facet}
 
 
@@ -548,7 +548,6 @@ def _operative_strings(source_text: str) -> list[str]:
     must never happen is an ontology fact reaching *executable* code, where it would
     become an answer the gate gives without measuring anything.
     """
-    import ast
 
     tree = ast.parse(source_text)
     docstrings: set[int] = set()
@@ -577,7 +576,6 @@ def test_the_gate_holds_no_ontology_knowledge_in_its_executable_source():
     The declaration is data; the package is a measuring instrument. An instrument that
     already knows the answer is not measuring.
     """
-    import pathlib
 
     package = pathlib.Path(repo_root()) / "engine" / "root_ontology"
     forbidden = (
@@ -619,6 +617,7 @@ import copy as _copy  # noqa: E402
 from engine.root_ontology.declaration import DIGEST_EXCLUSIONS  # noqa: E402
 from engine.root_ontology.declaration import parse as parse_declaration  # noqa: E402
 from engine.uckp.canonical import content_hash  # noqa: E402
+from engine.uckp.facets import Facet  # noqa: E402
 
 IDENTITY_MUTATIONS = {
     "change the declared authority": lambda d: d.__setitem__("authority", "SOMETHING ELSE"),

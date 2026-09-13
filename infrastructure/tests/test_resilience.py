@@ -18,9 +18,14 @@ import pytest
 
 from infrastructure.capability import InfrastructureError
 from infrastructure.resilience import (
-    INFRA_RESILIENCE_ID_FAMILY,
     AvailabilityTopology,
+    DEFAULT_CLUSTER_REF,
+    INFRA_RESILIENCE_ID_FAMILY,
     ScalingArrangement,
+    _InfraConstruct,
+    _require_posture,
+    _require_state,
+    _require_typed,
     make_availability_topology,
     make_scaling_arrangement,
 )
@@ -233,13 +238,10 @@ def test_is_founding_acyclic_reports_false_when_the_core_is_not_canonicalisable(
     exception — the boolean is what the certification roll-up consumes, and a raise there
     would replace one failure mode with another.
     """
-    from infrastructure.resilience import AvailabilityTopology
 
     class _Broken(AvailabilityTopology):
         def canonical_core(self):
             return {"poison": object()}
-
-    from infrastructure.resilience import DEFAULT_CLUSTER_REF
 
     assert (
         _Broken(
@@ -258,7 +260,6 @@ def test_the_base_construct_answers_posture_and_newness_before_any_override() ->
     construct inherits until it declares otherwise — and a default nobody executes is a
     default nobody has shown to fire.
     """
-    from infrastructure.resilience import _InfraConstruct
 
     assert _InfraConstruct.__dict__["has_valid_posture"].__doc__ is not None
     bare = _InfraConstruct()
@@ -272,10 +273,6 @@ def test_the_resilience_guards_refuse_a_malformed_type_tag_posture_and_state() -
     _require_typed, _require_posture and _require_state protect invariants §3/WF-9/WF-10;
     a guard with no measured raise is a guard that only reports agreement.
     """
-    import pytest
-
-    from infrastructure.integration_meta import InfrastructureState
-    from infrastructure.resilience import _require_posture, _require_state, _require_typed
 
     with pytest.raises(Exception, match="ENG-004 type_tag"):
         _require_typed(None, "availability topology")

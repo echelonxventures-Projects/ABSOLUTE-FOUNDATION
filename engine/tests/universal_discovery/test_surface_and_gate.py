@@ -14,8 +14,9 @@ from pathlib import Path
 import coverage
 import pytest
 
-from engine.universal_discovery import __main__ as cli
+from engine.certification_integrity.immutable import AMBIENT_MEASUREMENT_VARS
 from engine.universal_discovery import (
+    __main__,
     classification,
     gate,
     pytest_scope,
@@ -312,18 +313,18 @@ def test_sealing_writes_exactly_two_paths_inside_the_programme_home(
 
 
 def test_the_cli_reports_and_exits_zero(capsys: pytest.CaptureFixture[str]) -> None:
-    assert cli.main([]) == 0
+    assert __main__.main([]) == 0
     assert "UNIVERSAL DISCOVERY GATE" in capsys.readouterr().out
 
 
 def test_the_cli_emits_the_surface_document(capsys: pytest.CaptureFixture[str]) -> None:
-    assert cli.main(["--json"]) == 0
+    assert __main__.main(["--json"]) == 0
     document = json.loads(capsys.readouterr().out)
     assert document["schema"] == surface.SCHEMA
 
 
 def test_the_cli_prints_the_derived_scope(capsys: pytest.CaptureFixture[str]) -> None:
-    assert cli.main(["--scope"]) == 0
+    assert __main__.main(["--scope"]) == 0
     document = json.loads(capsys.readouterr().out)
     assert document["measurable_packages"] and document["test_roots"]
 
@@ -331,7 +332,7 @@ def test_the_cli_prints_the_derived_scope(capsys: pytest.CaptureFixture[str]) ->
 def test_a_discovery_fault_exits_two_rather_than_reporting_a_pass(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert cli.main(["--root", str(tmp_path)]) == 2
+    assert __main__.main(["--root", str(tmp_path)]) == 2
     assert "FAULT" in capsys.readouterr().err
 
 
@@ -694,10 +695,10 @@ def test_sealing_is_reported_path_by_path_and_only_when_asked(
     monkeypatch.setattr(gate, "render", lambda verdict: "REPORT\n")
     monkeypatch.setattr(gate, "seal", lambda root, verdict: ("first.json", "second.json"))
 
-    assert cli.main([]) == 0
+    assert __main__.main([]) == 0
     assert "sealed" not in capsys.readouterr().out
 
-    assert cli.main(["--seal"]) == 0
+    assert __main__.main(["--seal"]) == 0
     out = capsys.readouterr().out
     assert "sealed first.json" in out
     assert "sealed second.json" in out
@@ -842,7 +843,6 @@ def test_the_child_environment_drops_every_ambient_measurement_variable() -> Non
     environment that carries it, and ordinary variables must survive. A fifth ambient name added
     upstream fails here, not in a leaked child.
     """
-    from engine.certification_integrity.immutable import AMBIENT_MEASUREMENT_VARS
 
     scrubbed = pytest_scope._child_environment()
     ambient = {key: "1" for key in AMBIENT_MEASUREMENT_VARS}
@@ -932,13 +932,12 @@ def test_a_failed_derivation_child_is_a_fault_and_not_a_fallback(monkeypatch, tm
     A derivation that fails and falls back to any previous or empty list would be the exact
     silent-widening the Ω-1 property forbids, so the refusal must be exercised, not assumed.
     """
-    import subprocess
 
     class Dead:
         returncode = 1
         stdout = ""
         stderr = "traceback: boom"
 
-    monkeypatch.setattr(subprocess, "run", lambda *args, **kwargs: Dead())
+    monkeypatch.setattr(pytest_scope.subprocess, "run", lambda *args, **kwargs: Dead())
     with pytest.raises(RuntimeError, match="could not be derived"):
         pytest_scope.derive()

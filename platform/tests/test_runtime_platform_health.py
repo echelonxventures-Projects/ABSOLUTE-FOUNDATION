@@ -53,7 +53,6 @@ def test_lineage_and_record_fingerprints_hash_their_own_projection() -> None:
     nothing. The order is broken here directly — the registry refuses a chain whose entries
     are not the sequence they claim.
     """
-    from platform.runtime_platform.registry import ExecutionRegistry
 
     kernel = RuntimeKernel()
     first = kernel.submit(request("a"))
@@ -64,7 +63,7 @@ def test_lineage_and_record_fingerprints_hash_their_own_projection() -> None:
     assert projection["is_root"] is view.is_root
     assert view.fingerprint() == view.fingerprint()
 
-    broken = ExecutionRegistry()
+    broken = type(kernel.registry)()
     broken._entries = [
         dataclasses.replace(e, sequence=i + 5) for i, e in enumerate(kernel.registry.entries)
     ]

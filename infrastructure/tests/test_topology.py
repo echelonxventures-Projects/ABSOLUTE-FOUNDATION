@@ -261,7 +261,6 @@ def test_all_constructs_technology_neutral() -> None:
 
 def test_is_founding_acyclic_answers_false_when_the_core_cannot_be_canonicalised() -> None:
     """The topology construct's except-arm must answer False, not raise, on a broken core."""
-    from infrastructure.topology import Topology
 
     class _Broken(Topology):
         def canonical_core(self):

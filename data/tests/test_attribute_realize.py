@@ -124,9 +124,15 @@ def test_determination_refuses_a_result_that_was_never_accepted() -> None:
     The real bundle is always accepted, so the arm is forced by a result whose validation
     says otherwise — the same code path a future broken realization would take.
     """
-    import types
 
     result = realize()
-    hollow = types.SimpleNamespace(accepted=False, report=types.SimpleNamespace(findings=[]))
+
+    class _Hollow:
+        accepted = False
+
+        class report:
+            findings = ()
+
+    hollow = _Hollow()
     weakened = replace(result, validation=hollow)
     assert weakened.determination(byte_identical=True) == "NOT COMPLETE"

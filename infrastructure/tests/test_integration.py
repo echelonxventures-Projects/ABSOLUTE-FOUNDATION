@@ -11,6 +11,7 @@ from infrastructure.integration import (
     make_dependency,
 )
 from infrastructure.integration_meta import InfrastructureState
+import pytest as _pytest
 
 
 def _dep(**kw):
@@ -172,11 +173,6 @@ def test_the_dependency_guard_refuses_a_misdirected_or_mistyped_edge() -> None:
     upward edge, a self-edge — was a branch nothing reached, and each is exactly the mistake a
     composition author would otherwise make in good faith.
     """
-    import pytest as _pytest
-
-    from infrastructure.capability import InfrastructureError
-    from infrastructure.integration import InfrastructureDependency
-    from infrastructure.integration_meta import InfrastructureState
 
     with _pytest.raises(InfrastructureError, match="integer founding indices"):
         InfrastructureDependency(
@@ -230,10 +226,6 @@ def test_the_dependency_guard_refuses_a_misdirected_or_mistyped_edge() -> None:
 
 def test_transition_refuses_a_target_that_is_not_a_lifecycle_state() -> None:
     """Forward-only lifecycle is a type fact before it is an order fact (INFRASTRUCTURE-003 §3)."""
-    import pytest as _pytest
-
-    from infrastructure.capability import InfrastructureError
-    from infrastructure.integration import InfrastructureDependency
 
     edge = InfrastructureDependency(
         type_tag="IINT-T-01",
