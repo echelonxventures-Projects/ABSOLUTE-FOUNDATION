@@ -15,7 +15,7 @@
 | Canonical input resolution is recorded | Register 03 + `corpus.json` (`canonical_archive`, `canonical_document`) |
 | Stale corpus is rejected automatically | CC-04/CC-05/CC-06/CC-07 are blocking; `make corpus-gate` exits non-zero |
 | Assimilation cannot run against an unverified corpus | `assimilate`, `assimilate-replay` and `assimilate-gate` depend on `corpus-gate` |
-| Determinism | no timestamps are emitted; regeneration is byte-identical; seal `ec4012d5565cf0d9` |
+| Determinism | no timestamps are emitted; regeneration is byte-identical; seal `7865284947d038c7` |
 | Knowledge Once | an export discovered at several locations is one export (content identity); no corpus is counted or assimilated twice |
 | Repository Truth | consumption is measured from committed in-repo baselines only; the external corpus is read-only |
 

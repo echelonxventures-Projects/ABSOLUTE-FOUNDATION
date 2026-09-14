@@ -19,7 +19,7 @@ Recency key: `(newest conversation time recorded inside the export, conversation
 
 | Rank | Export | Commit | Commit time | History position | Canonical |
 |---|---|---|---|---|---|
-| 0 | `04-REFERENCE/ChatGPT Chat.docx` | `2bf5312` | 1784807832 | 161 |  |
-| 1 | `04-REFERENCE/ChatGPT Chat-1.docx` | `a091722` | 1784890504 | 166 | CANONICAL |
+| 0 | `04-REFERENCE/ChatGPT Chat.docx` | `2bf5312` | 1784807832 | 164 |  |
+| 1 | `04-REFERENCE/ChatGPT Chat-1.docx` | `a091722` | 1784890504 | 169 | CANONICAL |
 
 Recency key: `(commit time of the last commit touching the path, history position counted from the root commit, content sha256)`. Git history is Repository Truth; position is counted from the ROOT so it cannot shift when a new commit is appended. An untracked export has no commit and therefore no recency — it fails CC-02 rather than being ranked on an unverifiable signal.
