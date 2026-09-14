@@ -869,13 +869,29 @@ def measure(document: dict) -> dict:  # noqa: C901 - one measurement per declare
     vacancies, vacancy_reason = read_json_collection(
         ceiling["vacancy_owner"], ceiling["vacancy_pointer"]
     )
+    # The vacancy corroborates the cap in EITHER of its two recorded dispositions, because
+    # UCOS-RAT-002 retired VAC-01 and the located projection now records no OPEN vacancy at
+    # all. A discharged obligation is not a missing one: the declaration names the tier field
+    # carrying the closing act, and a tier holding it proves the question was governed rather
+    # than lost. The cap itself rests on the anchor clause, which is measured separately above.
+    discharges, discharge_reason = read_json_collection(
+        ceiling["vacancy_owner"], ceiling["discharge_pointer"]
+    )
+    discharged = [
+        entry for entry in discharges if str(entry.get(ceiling["discharge_field"]) or "").strip()
+    ]
     ceiling_problems: list[str] = []
     if not ceiling_bound:
         ceiling_problems.append(f"{ceiling['id']}: anchor absent in {ceiling['owner']}")
     if vacancy_reason:
         ceiling_problems.append(f"{ceiling['id']}: {vacancy_reason}")
-    elif not vacancies:
-        ceiling_problems.append(f"{ceiling['id']}: no vacancy is located, so the ceiling is unbacked")
+    elif discharge_reason:
+        ceiling_problems.append(f"{ceiling['id']}: {discharge_reason}")
+    elif not vacancies and not discharged:
+        ceiling_problems.append(
+            f"{ceiling['id']}: the projection records neither an open vacancy nor a located "
+            "discharge, so the ceiling is unbacked"
+        )
     if ceiling["disclosure_token"] not in register_text:
         ceiling_problems.append(f"{ceiling['id']}: the register does not disclose the ceiling token")
 
@@ -1112,6 +1128,7 @@ def measure(document: dict) -> dict:  # noqa: C901 - one measurement per declare
             "disclosure_token": ceiling["disclosure_token"],
             "terminal_token": ceiling["terminal_token"],
             "vacancies_located": len(vacancies),
+            "vacancies_discharged": len(discharged),
             "elevated": [],
         },
         "currency_claims": claims,
@@ -1442,6 +1459,7 @@ def render(model: dict) -> dict[str, str]:  # noqa: C901 - one page per measured
                     ["Disclosure token", f"`{model['ceiling']['disclosure_token']}`"],
                     ["Terminal token (prohibited in a record)", f"`{model['ceiling']['terminal_token']}`"],
                     ["Vacancies located", model["ceiling"]["vacancies_located"]],
+                    ["Vacancies discharged", model["ceiling"]["vacancies_discharged"]],
                     ["Baselines elevated by this measurement", ", ".join(model["ceiling"]["elevated"]) or "**none**"],
                 ],
             ),

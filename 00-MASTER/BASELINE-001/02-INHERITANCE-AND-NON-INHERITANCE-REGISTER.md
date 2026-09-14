@@ -65,4 +65,5 @@ measurement confers no state on any baseline.
 | Disclosure token | `CERTIFIED-PROVISIONAL` |
 | Terminal token (prohibited in a record) | `FINALIZED` |
 | Vacancies located | 0 |
+| Vacancies discharged | 1 |
 | Baselines elevated by this measurement | **none** |

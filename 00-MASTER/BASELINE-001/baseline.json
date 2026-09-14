@@ -39,10 +39,7 @@
       "state": "CERTIFIED — CURRENT CONSTITUTIONAL BASELINE"
     }
   ],
-  "blocking_failures": [
-    "BLN-VAL-16",
-    "BLN-VAL-26"
-  ],
+  "blocking_failures": [],
   "capabilities": [
     {
       "capability": "Baseline Registry",
@@ -136,12 +133,12 @@
     },
     {
       "capability": "Baseline Ratification",
-      "discharged": false,
+      "discharged": true,
       "id": "BLN-CAP-11",
       "measure": "ceiling_disclosed",
       "measured": true,
       "obligation": "the located ratification ceiling is bound and every registered baseline discloses it; no baseline is recorded ratified beyond that ceiling",
-      "value": 0
+      "value": 1
     },
     {
       "capability": "Baseline Certification",
@@ -232,6 +229,7 @@
     "id": "BLN-CEI-01",
     "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md",
     "terminal_token": "FINALIZED",
+    "vacancies_discharged": 1,
     "vacancies_located": 0
   },
   "chain": {
@@ -262,7 +260,7 @@
   "counts": {
     "baselines": 2,
     "capabilities": 20,
-    "capabilities_discharged": 19,
+    "capabilities_discharged": 20,
     "chain_length": 2,
     "criteria": 5,
     "criteria_corroborated": 5,
@@ -341,7 +339,7 @@
   "current": [
     "UCOS-BASELINE-002"
   ],
-  "determination": "BASELINE-INHERITANCE-INCOMPLETE",
+  "determination": "BASELINE-INHERITANCE-BOUND",
   "divergences_referred": [
     "BLN-CUR-01: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
     "BLN-CUR-02: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
@@ -478,8 +476,8 @@
       "title": "A tag exists in the baseline tag namespace under a convention the located scheme does not declare"
     }
   ],
-  "gate": "CLOSED",
-  "gate_exit": 1,
+  "gate": "OPEN",
+  "gate_exit": 0,
   "immutability": {
     "disjoint": true,
     "intersection": [],
@@ -747,7 +745,7 @@
       "rule": "a baseline shall be recomputable and shall yield a byte-identical result on recomputation"
     }
   ],
-  "seal_sha256": "7ad172fe7f7ecd5b61f595d6ebf474398d2f8163dbbd42087c2b4951785bb4af",
+  "seal_sha256": "96c1ee3382b4a344578b30a8a3a75559b2c1dfaaf3e74e45263cf57b77b2b435",
   "unrecorded_citations": [],
   "validations": [
     {
@@ -903,14 +901,12 @@
     {
       "blocking": true,
       "dimension": "CEILING-DISCLOSED",
-      "failure_count": 1,
-      "failures": [
-        "BLN-CEI-01: no vacancy is located, so the ceiling is unbacked"
-      ],
+      "failure_count": 0,
+      "failures": [],
       "id": "BLN-VAL-16",
       "measured": true,
-      "obligation": "the located ceiling clause is present, the recorded vacancy is located, and the register discloses the ceiling token",
-      "satisfied": false
+      "obligation": "the located ceiling clause is present, the recorded vacancy is disposed — open in the projection or discharged by a located closing act — and the register discloses the ceiling token",
+      "satisfied": true
     },
     {
       "blocking": true,
@@ -1005,14 +1001,12 @@
     {
       "blocking": true,
       "dimension": "CAPABILITY-DISCHARGED",
-      "failure_count": 1,
-      "failures": [
-        "BLN-CAP-11: ceiling_disclosed"
-      ],
+      "failure_count": 0,
+      "failures": [],
       "id": "BLN-VAL-26",
       "measured": true,
       "obligation": "every declared capability is discharged by a measure that ran",
-      "satisfied": false
+      "satisfied": true
     }
   ],
   "version_progressions": [

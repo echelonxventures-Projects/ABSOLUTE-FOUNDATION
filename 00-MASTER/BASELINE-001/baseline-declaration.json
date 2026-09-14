@@ -502,10 +502,25 @@
     }
   ],
   "$ceiling_comment": [
-    "The ratification ceiling. Every determination in this corpus is capped at provisional standing",
-    "while the superior tier is vacant, and no in-repository act can lift the cap. A baseline that",
-    "recorded the terminal token would be an elevation, which is why the token is declared here as",
-    "a PROHIBITED value and measured as such rather than as an accepted state."
+    "The ratification ceiling. Every determination in this corpus is capped at provisional standing,",
+    "and no in-repository act can lift the cap. A baseline that recorded the terminal token would be",
+    "an elevation, which is why the token is declared here as a PROHIBITED value and measured as such",
+    "rather than as an accepted state.",
+    "",
+    "WHAT BACKS THE CAP, AFTER UCOS-RAT-002. This comment used to say the cap holds `while the superior",
+    "tier is vacant`, and that reading did not survive the constituent act. UCOS-RAT-002 located T1,",
+    "recorded UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS as its occupant and RETIRED VAC-01, so the located",
+    "projection now records no open vacancy at all. THE CAP DID NOT MOVE WITH IT. Its force comes from",
+    "the anchor clause measured here — finality requires an authority OUTSIDE the corpus — and that",
+    "clause still holds: 00-MASTER/UCOS-URAT-001/urat.json continues to record FINALIZED as unreachable",
+    "in corpus, and the EC-1 gate remains open.",
+    "",
+    "So the vacancy is CORROBORATION, never the basis, and it is measured as DISPOSED rather than as",
+    "PRESENT: an open vacancy backs the cap, and so does a vacancy the tier register records as located,",
+    "because each proves the question is governed rather than lost. Absence of BOTH is still a refusal.",
+    "A projection recording neither an open vacancy nor a located discharge has dropped the record, and",
+    "that is the condition this measure exists to catch. Reading an empty vacancy list as `unbacked`",
+    "read a discharged obligation as a missing one, and refused a corpus that had just satisfied it."
   ],
   "ceiling": {
     "id": "BLN-CEI-01",
@@ -515,7 +530,9 @@
     "terminal_token": "FINALIZED",
     "vacancy_owner": "00-CMG/CMG-REGISTRY.json",
     "vacancy_pointer": "vacancies",
-    "basis": "00-CEP/CEP-006 ARTICLE I.4 — where finality requires an authority outside the corpus, in-corpus ratification confers only PROVISIONAL acceptance; the vacancy is recorded in the located meta-constitutional projection."
+    "discharge_pointer": "tiers",
+    "discharge_field": "closure_record",
+    "basis": "00-CEP/CEP-006 ARTICLE I.4 — where finality requires an authority outside the corpus, in-corpus ratification confers only PROVISIONAL acceptance. The vacancy that corroborates the cap is read from the located meta-constitutional projection in either of its two recorded dispositions: OPEN, as an entry under `vacancies`, or LOCATED, as a tier carrying the `closure_record` of the act that discharged it (UCOS-RAT-002 for T1). The cap itself rests on the anchor clause, not on the disposition."
   },
   "$certification_comment": [
     "Certification states. The state of a baseline is READ from the register's state cell and",
@@ -777,7 +794,7 @@
     {
       "id": "BLN-VAL-16",
       "dimension": "CEILING-DISCLOSED",
-      "obligation": "the located ceiling clause is present, the recorded vacancy is located, and the register discloses the ceiling token",
+      "obligation": "the located ceiling clause is present, the recorded vacancy is disposed — open in the projection or discharged by a located closing act — and the register discloses the ceiling token",
       "blocking": true
     },
     {
