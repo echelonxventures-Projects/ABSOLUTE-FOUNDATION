@@ -25,6 +25,7 @@ overrides.
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -33,7 +34,7 @@ import sys
 import tempfile
 from dataclasses import dataclass
 
-from engine.verification_intelligence.constitution import repo_root
+from engine.verification_intelligence.constitution import DECLARATION, repo_root
 from engine.verification_intelligence.model import (
     Coverage,
     Shard,
@@ -44,6 +45,100 @@ from engine.verification_intelligence.registry import TestObjectRegistry
 #: Used when the declaration names no ceiling. Not a policy — a fallback for a
 #: declaration that has not yet been read.
 FALLBACK_MAX_WORKERS = 8
+
+#: Used when the declaration names no per-shard budget, for the same reason as above.
+FALLBACK_SHARD_MEMORY_BUDGET_MB = 1536
+
+
+def shard_memory_budget_bytes(root: str | None = None) -> int:
+    """The declared per-shard memory assumption, in bytes.
+
+    Read rather than assumed, because it IS an assumption: a number that decides how many
+    interpreters may run at once does not belong hidden in code. A declaration that cannot
+    be read falls back, exactly as the worker ceiling does — a bound nobody can read is
+    still better than no bound at all.
+    """
+    target = os.path.join(root or repo_root(), DECLARATION)
+    try:
+        with open(target, encoding="utf-8") as handle:
+            declared = json.load(handle)
+        sharding = declared["execution"]["test_sharding"]
+        budget = sharding["shard_memory_budget_mb"]
+    except (OSError, json.JSONDecodeError, KeyError, TypeError):
+        budget = FALLBACK_SHARD_MEMORY_BUDGET_MB
+    if not isinstance(budget, int | float) or isinstance(budget, bool) or budget <= 0:
+        budget = FALLBACK_SHARD_MEMORY_BUDGET_MB
+    return int(budget) * 1024 * 1024
+
+
+def memory_headroom_bytes() -> int | None:
+    """Memory the host can hand a new process right now, or None where it cannot be read.
+
+    NOT USABLE BY THE PLANNER, AND THE DISTINCTION IS THE POINT. UVI-L-10 requires that
+    planning twice over one repository state produce byte-identical bytes, and this value
+    moves between two reads, so a plan derived from it would not be reproducible. Execution
+    is under no such obligation: how fast a host is willing to run the partition changes no
+    measured obligation (UVI-L-08), so the schedule may observe what the plan may not.
+
+    None means "unknown", never "none available", and every caller must read it that way —
+    an unreadable host gets the previous unbounded behaviour rather than a guess that
+    serialises a healthy machine.
+    """
+    if sys.platform == "linux":
+        try:
+            with open("/proc/meminfo", encoding="utf-8") as handle:
+                for line in handle:
+                    if line.startswith("MemAvailable:"):
+                        return int(line.split()[1]) * 1024
+        except (OSError, IndexError, ValueError):
+            return None
+        return None
+    if sys.platform == "darwin":
+        try:
+            result = subprocess.run(  # noqa: S603 — fixed argv, no shell, no user input
+                ["/usr/bin/vm_stat"], capture_output=True, text=True, check=False, timeout=10
+            )
+            if result.returncode != 0:
+                return None
+            page = 4096
+            free = 0
+            for line in result.stdout.splitlines():
+                if "page size of" in line:
+                    page = int(re.search(r"page size of (\d+) bytes", line).group(1))
+                # Inactive and speculative pages are reclaimable on demand, so counting
+                # only the free list understates headroom badly on a warm machine and
+                # would serialise a host with gigabytes genuinely available.
+                elif line.startswith(("Pages free:", "Pages inactive:", "Pages speculative:")):
+                    free += int(line.split(":")[1].strip().rstrip("."))
+            return free * page
+        except (OSError, subprocess.SubprocessError, AttributeError, IndexError, ValueError):
+            return None
+    return None
+
+
+def concurrency_limit(wave_size: int, *, root: str | None = None) -> int:
+    """How many shard processes this host may run at once, never fewer than one.
+
+    ``UVI_CONCURRENCY`` pins it. Otherwise it is the host's readable headroom divided by
+    the declared per-shard budget. The floor of one is what makes this a throttle and not
+    a refusal: a host too small for two shards still runs every one of them, in turn.
+    """
+    override = os.environ.get("UVI_CONCURRENCY")
+    if override:
+        try:
+            pinned = int(override)
+        except ValueError as exc:
+            raise VerificationIntelligenceError(
+                f"UVI_CONCURRENCY is not a number: {override}"
+            ) from exc
+        if pinned < 1:
+            raise VerificationIntelligenceError("UVI_CONCURRENCY must be at least 1")
+        return max(1, min(pinned, wave_size)) if wave_size else 1
+    headroom = memory_headroom_bytes()
+    if headroom is None:
+        return max(1, wave_size)
+    admits = headroom // shard_memory_budget_bytes(root)
+    return max(1, min(wave_size, admits))
 
 
 def resolve_workers(count: int, *, max_workers: int, override: str | None = None) -> int:
@@ -459,8 +554,14 @@ def run_tests(
         # nothing from an earlier wave is still running when it starts.
         for wave in sorted({shard.wave for shard in shards}):
             in_wave = [shard for shard in shards if shard.wave == wave]
-            processes: list[tuple[Shard, subprocess.Popen, str]] = []
-            for shard in in_wave:
+            processes: list[tuple[Shard, subprocess.Popen, str] | None] = [None] * len(in_wave)
+
+            def _start(
+                position: int,
+                _in_wave: list[Shard] = in_wave,
+                _processes: list[tuple[Shard, subprocess.Popen, str] | None] = processes,
+            ) -> None:
+                shard = _in_wave[position]
                 env = dict(os.environ)
                 if coverage is Coverage.FLOOR_90:
                     env["COVERAGE_FILE"] = os.path.join(data_dir, f".coverage.{shard.index}")
@@ -483,17 +584,42 @@ def run_tests(
                     stderr=subprocess.STDOUT,
                 )
                 process.stdout = handle  # type: ignore[assignment] - kept alive for closing
-                processes.append((shard, process, log_path))
+                _processes[position] = (shard, process, log_path)
+
+            # BOUNDED, BECAUSE THE PLAN IS A PARTITION AND NOT A PERMISSION TO OVERSUBSCRIBE.
+            # Every shard in the wave used to start at once, so on one host the shard count
+            # WAS the concurrency — and a fourteen-core workstation planning twelve
+            # coverage-instrumented interpreters is killed by the operating system rather
+            # than refused by a gate. CI never saw it: there each shard is its own job on its
+            # own runner. The partition is untouched, so the plan digest and UVI-L-08 are
+            # untouched; only the rate of starting changes, which UVI-L-08 says changes no
+            # obligation. A shard starts as its predecessor finishes, so the wave costs more
+            # wall clock and still measures exactly the same units.
+            limit = concurrency_limit(len(in_wave), root=base)
+            for position in range(min(limit, len(in_wave))):
+                _start(position)
+            unstarted = min(limit, len(in_wave))
             print(
                 f"UVI: wave {wave} — {len(in_wave)} shard(s) running concurrently over "
                 f"{sum(len(s.test_paths) for s in in_wave)} unit(s)"
-                + (" (exclusive)" if len(in_wave) == 1 and len(shards) > 1 and wave == 0 else ""),
+                + (" (exclusive)" if len(in_wave) == 1 and len(shards) > 1 and wave == 0 else "")
+                + (f" [throttled to {limit} at once]" if limit < len(in_wave) else ""),
                 file=out,
             )
-            for shard, process, log_path in processes:
+            for position in range(len(in_wave)):
+                entry = processes[position]
+                assert entry is not None  # noqa: S101 - every position is started before its wait
+                shard, process, log_path = entry
                 code = process.wait()
                 if process.stdout is not None:
                     process.stdout.close()
+                # A seat came free, so the next shard takes it before this one's log is
+                # rendered. Waiting in index order keeps the transcript deterministic
+                # whatever order the shards actually finish in, which is why the output of
+                # a throttled wave is byte-identical to the output of an unthrottled one.
+                if unstarted < len(in_wave):
+                    _start(unstarted)
+                    unstarted += 1
                 print(
                     f"\n----- shard {shard.index} ({len(shard.test_paths)} unit(s), "
                     f"wave {shard.wave}) -----",

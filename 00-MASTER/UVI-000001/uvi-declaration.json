@@ -23,6 +23,7 @@
     "test_sharding": {
       "$isolated": "Path prefixes MEASURED to be unsafe to run beside anything else — typically because they assert a property of the whole working tree, or mutate one. Each entry must carry the measurement that justifies it. This is scheduling isolation and never selection: an isolated object still runs, in exactly one shard, and UVI-L-08 measures the union exactly as it does for every other unit. It is deliberately expensive — an isolated object serialises its own cost onto the wall clock — so the bar for adding one is a measurement, not a suspicion.",
       "$max_workers": "A CEILING, not a count. The planner takes the smaller of this and the machine's own CPU count, so a two-core CI runner plans two shards and a fourteen-core workstation plans twelve. UVI_WORKERS overrides both, for measurement.",
+      "$shard_memory_budget_mb": "WHAT ONE SHARD IS ASSUMED TO COST IN RESIDENT MEMORY, declared because it is an assumption and an assumption may not be hidden in code. It bounds EXECUTION and never the PLAN: the partition stays a pure function of tracked inputs, so the plan digest is unchanged and CI's matrix — where each shard is a separate job on its own runner, and nothing contends — is unaffected. It governs only how many shard processes ./verify.sh starts at once ON ONE HOST. Measured cause: a fourteen-core workstation plans twelve shards, and twelve coverage-instrumented interpreters against 8.4 GiB of free memory were killed by the operating system mid-wave, which reports as a truncated run rather than as a refusal. The launcher now admits a further shard only while the host still holds this much headroom, and always runs at least one, so a constrained host runs the identical selection more slowly instead of dying. UVI_CONCURRENCY pins the ceiling explicitly.",
       "$why_not_a_plugin": "pytest-xdist would add an unpinned distributed-execution dependency and move shard assignment inside a scheduler this repository does not own. Sharding by process keeps the assignment declared, deterministic and auditable, and adds no dependency to a toolchain that is pinned on purpose (DE-04).",
       "assignment": "DETERMINISTIC LONGEST-PROCESSING-TIME. Test files are ordered by measured cost descending, ties broken by path, and each is placed in the least-loaded shard. Given one cost table and one selection the assignment is a pure function, so two planners on two machines produce identical shards.",
       "cost_source": "00-MASTER/UVI-000001/test-cost-model.json — measured durations, absent entries priced at the declared default",
@@ -45,7 +46,8 @@
         }
       ],
       "isolation": "Every shard is a separate process with its own COVERAGE_FILE. Coverage data is combined before the floor is evaluated, so the floor is evaluated exactly once, over the union, by the coverage tool itself.",
-      "max_workers": 12
+      "max_workers": 12,
+      "shard_memory_budget_mb": 1536
     },
     "topology": {
       "EXTENDED": "serial, after POST",

@@ -24,6 +24,7 @@ engine that mutates state or calls ``sys.exit`` on import cannot be exercised by
 
 from __future__ import annotations
 
+import json
 import subprocess
 from pathlib import Path
 
@@ -146,3 +147,48 @@ def test_the_loader_refuses_an_absent_program() -> None:
 def test_the_loader_refuses_an_absent_engine() -> None:
     with pytest.raises(AssertionError, match="no engine at"):
         load_governance_engine(ENGINES[0].parent.name, "not_an_engine")
+
+
+# --- BASELINE-001: the ratification ceiling survives its own vacancy being discharged ---
+#
+# A REGRESSION THIS SUITE COULD NOT SEE. UCOS-RAT-002 located T1 and retired VAC-01, and
+# BLN-CEI-01 read the open-vacancy collection alone: it found nothing, called the ceiling
+# unbacked, and took the gate from 20/20 OPEN to 19/20 CLOSED on a corpus that had just
+# SATISFIED the obligation. Nothing failed except the engine's own gate, because no test
+# here asserted anything about what a measurement concluded.
+
+
+def _baseline() -> dict:
+    return json.loads((GOVERNANCE_ROOT / "BASELINE-001" / "baseline.json").read_text("utf-8"))
+
+
+def _baseline_declaration() -> dict:
+    path = GOVERNANCE_ROOT / "BASELINE-001" / "baseline-declaration.json"
+    return json.loads(path.read_text("utf-8"))
+
+
+def test_the_ceiling_binds_both_recorded_dispositions_of_its_vacancy() -> None:
+    """Open under `vacancies`, or discharged by a located closing act. Either backs it."""
+    ceiling = _baseline_declaration()["ceiling"]
+    assert ceiling["vacancy_pointer"], "the open disposition must stay declared"
+    assert ceiling["discharge_pointer"], "the discharged disposition must be declared too"
+    assert ceiling["discharge_field"], "the field carrying the closing act must be named"
+
+
+def test_a_discharged_vacancy_still_backs_the_ratification_ceiling() -> None:
+    """The measured state after UCOS-RAT-002: no vacancy is OPEN, and the cap still holds."""
+    measured = _baseline()
+    ceiling = measured["ceiling"]
+    assert ceiling["vacancies_located"] == 0, "VAC-01 was retired; an open one would be news"
+    assert ceiling["vacancies_discharged"] >= 1, "the closing act must be located"
+    assert ceiling["bound"] is True
+    assert measured["gate"] == "OPEN"
+    assert measured["blocking_failures"] == []
+
+
+def test_the_ceiling_is_disclosed_and_no_baseline_is_elevated() -> None:
+    """What the fix must NOT have relaxed: the cap itself, and the prohibition under it."""
+    ceiling = _baseline()["ceiling"]
+    assert ceiling["disclosure_token"] == "CERTIFIED-PROVISIONAL"
+    assert ceiling["terminal_token"] == "FINALIZED"
+    assert ceiling["elevated"] == [], "an elevated baseline would be a finality this corpus lacks"

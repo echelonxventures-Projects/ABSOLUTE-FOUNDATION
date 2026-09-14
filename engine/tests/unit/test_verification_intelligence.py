@@ -22,6 +22,7 @@ The four that matter most:
 
 from __future__ import annotations
 
+import builtins
 import dataclasses
 import io
 import itertools
@@ -34,6 +35,7 @@ import subprocess
 import subprocess as subprocess_module
 import sys
 import textwrap
+import types
 from dataclasses import replace
 
 import pytest
@@ -45,6 +47,7 @@ from engine.verification_impact.graph import ImpactError
 from engine.verification_intelligence import cli, evidence
 from engine.verification_intelligence import evidence as evidence_module
 from engine.verification_intelligence import execution as execution_module
+from engine.verification_intelligence import execution as uvi_execution
 from engine.verification_intelligence import gate as gate_module
 from engine.verification_intelligence import gate as uvi_gate
 from engine.verification_intelligence import plan as plan_module
@@ -69,15 +72,19 @@ from engine.verification_intelligence.evidence import (
     resolve_prefix,
 )
 from engine.verification_intelligence.execution import (
+    FALLBACK_SHARD_MEMORY_BUDGET_MB,
     _combine_and_evaluate,
     _export_shard_data,
     _shard_argv,
     assert_topology_neutral,
     combine_shards,
+    concurrency_limit,
+    memory_headroom_bytes,
     plan_shards,
     resolve_workers,
     run_tests,
     shard_indices_present,
+    shard_memory_budget_bytes,
     split_currency,
     unit_file,
 )
@@ -395,6 +402,153 @@ def test_worker_resolution_never_exceeds_the_work_or_the_ceiling() -> None:
 def test_a_shard_plan_with_no_workers_is_refused(tests_registry) -> None:
     with pytest.raises(VerificationIntelligenceError, match="at least one worker"):
         plan_shards(tests_registry.paths, tests_registry, 0)
+
+
+# --- execution concurrency ----------------------------------------------------------
+#
+# The planner may not read these, and that separation is the whole point: UVI-L-10 binds
+# the PLAN to byte-identical reproduction, while UVI-L-08 says the schedule changes no
+# obligation. So headroom — which moves between two reads — may bound execution and may
+# never reach a plan.
+
+
+def test_the_declared_shard_budget_is_read_from_the_declaration() -> None:
+    assert shard_memory_budget_bytes() == 1536 * 1024 * 1024
+
+
+@pytest.mark.parametrize(
+    "document",
+    [
+        "{ not json",
+        json.dumps({"execution": {}}),
+        json.dumps({"execution": {"test_sharding": {"shard_memory_budget_mb": 0}}}),
+        json.dumps({"execution": {"test_sharding": {"shard_memory_budget_mb": True}}}),
+        json.dumps({"execution": {"test_sharding": {"shard_memory_budget_mb": "big"}}}),
+    ],
+)
+def test_an_unreadable_budget_falls_back_rather_than_removing_the_bound(tmp_path, document) -> None:
+    """A bound nobody can read is still better than no bound at all."""
+    target = tmp_path / "00-MASTER" / "UVI-000001"
+    target.mkdir(parents=True)
+    (target / "uvi-declaration.json").write_text(document, encoding="utf-8")
+    budget = shard_memory_budget_bytes(root=str(tmp_path))
+    assert budget == FALLBACK_SHARD_MEMORY_BUDGET_MB * 1024 * 1024
+
+
+def test_a_missing_declaration_falls_back(tmp_path) -> None:
+    assert shard_memory_budget_bytes(root=str(tmp_path)) > 0
+
+
+def test_concurrency_is_pinned_by_the_environment(monkeypatch) -> None:
+    monkeypatch.setenv("UVI_CONCURRENCY", "3")
+    assert concurrency_limit(12) == 3
+    assert concurrency_limit(2) == 2, "the pin never exceeds the wave"
+    assert concurrency_limit(0) == 1
+
+
+@pytest.mark.parametrize("value", ["not-a-number", "0", "-4"])
+def test_a_malformed_concurrency_pin_is_refused(monkeypatch, value) -> None:
+    monkeypatch.setenv("UVI_CONCURRENCY", value)
+    with pytest.raises(VerificationIntelligenceError):
+        concurrency_limit(8)
+
+
+def test_unknown_headroom_leaves_the_wave_unbounded(monkeypatch) -> None:
+    """None means UNKNOWN, never `none available` — a healthy host is not serialised."""
+    monkeypatch.delenv("UVI_CONCURRENCY", raising=False)
+    monkeypatch.setattr(uvi_execution, "memory_headroom_bytes", lambda: None)
+    assert concurrency_limit(12) == 12
+
+
+def test_headroom_bounds_the_wave_and_never_reaches_zero(monkeypatch) -> None:
+    monkeypatch.delenv("UVI_CONCURRENCY", raising=False)
+    monkeypatch.setattr(uvi_execution, "shard_memory_budget_bytes", lambda root=None: 1024)
+    monkeypatch.setattr(uvi_execution, "memory_headroom_bytes", lambda: 4096)
+    assert concurrency_limit(12) == 4
+    monkeypatch.setattr(uvi_execution, "memory_headroom_bytes", lambda: 0)
+    assert concurrency_limit(12) == 1, "a host too small for one shard still runs them in turn"
+
+
+def test_headroom_is_read_on_this_host_or_reported_unknown() -> None:
+    headroom = memory_headroom_bytes()
+    assert headroom is None or headroom >= 0
+
+
+def test_linux_headroom_is_read_from_meminfo(monkeypatch, tmp_path) -> None:
+    meminfo = tmp_path / "meminfo"
+    meminfo.write_text("MemTotal: 100 kB\nMemAvailable: 2048 kB\n", encoding="utf-8")
+    monkeypatch.setattr(uvi_execution.sys, "platform", "linux")
+    real_open = builtins.open
+    monkeypatch.setattr(
+        builtins,
+        "open",
+        lambda path, *a, **k: real_open(meminfo if path == "/proc/meminfo" else path, *a, **k),
+    )
+    assert memory_headroom_bytes() == 2048 * 1024
+
+
+def test_linux_headroom_without_the_field_is_unknown(monkeypatch, tmp_path) -> None:
+    meminfo = tmp_path / "meminfo"
+    meminfo.write_text("MemTotal: 100 kB\n", encoding="utf-8")
+    monkeypatch.setattr(uvi_execution.sys, "platform", "linux")
+    real_open = builtins.open
+    monkeypatch.setattr(
+        builtins,
+        "open",
+        lambda path, *a, **k: real_open(meminfo if path == "/proc/meminfo" else path, *a, **k),
+    )
+    assert memory_headroom_bytes() is None
+
+
+def test_linux_headroom_that_cannot_be_read_is_unknown(monkeypatch) -> None:
+    monkeypatch.setattr(uvi_execution.sys, "platform", "linux")
+    monkeypatch.setattr(
+        builtins, "open", lambda *a, **k: (_ for _ in ()).throw(OSError("no /proc here"))
+    )
+    assert memory_headroom_bytes() is None
+
+
+def test_darwin_headroom_counts_reclaimable_pages(monkeypatch) -> None:
+    """Free alone understates a warm machine badly, so inactive and speculative count."""
+    stdout = (
+        "Mach Virtual Memory Statistics: (page size of 4096 bytes)\n"
+        "Pages free:                     100.\n"
+        "Pages inactive:                 200.\n"
+        "Pages speculative:               50.\n"
+        "Pages wired down:              9999.\n"
+    )
+    monkeypatch.setattr(uvi_execution.sys, "platform", "darwin")
+    monkeypatch.setattr(
+        uvi_execution.subprocess,
+        "run",
+        lambda *a, **k: types.SimpleNamespace(returncode=0, stdout=stdout),
+    )
+    assert memory_headroom_bytes() == 350 * 4096
+
+
+def test_darwin_headroom_is_unknown_when_vm_stat_fails(monkeypatch) -> None:
+    monkeypatch.setattr(uvi_execution.sys, "platform", "darwin")
+    monkeypatch.setattr(
+        uvi_execution.subprocess,
+        "run",
+        lambda *a, **k: types.SimpleNamespace(returncode=1, stdout=""),
+    )
+    assert memory_headroom_bytes() is None
+
+
+def test_darwin_headroom_is_unknown_when_vm_stat_is_absent(monkeypatch) -> None:
+    monkeypatch.setattr(uvi_execution.sys, "platform", "darwin")
+    monkeypatch.setattr(
+        uvi_execution.subprocess,
+        "run",
+        lambda *a, **k: (_ for _ in ()).throw(OSError("no vm_stat")),
+    )
+    assert memory_headroom_bytes() is None
+
+
+def test_an_unrecognised_platform_reports_unknown(monkeypatch) -> None:
+    monkeypatch.setattr(uvi_execution.sys, "platform", "sunos5")
+    assert memory_headroom_bytes() is None
 
 
 # --- evidence -----------------------------------------------------------------------
@@ -1168,6 +1322,32 @@ def test_run_tests_executes_every_shard_and_passes_when_they_pass(tmp_path) -> N
     body = stream.getvalue()
     assert "shard 0" in body and "shard 1" in body
     assert "2 shard(s) running concurrently" in body
+
+
+def test_a_throttled_wave_runs_every_shard_and_says_so(tmp_path, monkeypatch) -> None:
+    """The bound changes the rate, never the selection — UVI-L-08 over one host.
+
+    Pinned to one seat, so the second shard can only start once the first has finished:
+    this is the path that was missing when twelve interpreters started together and the
+    operating system, not a gate, decided which of them survived.
+    """
+    monkeypatch.setenv("UVI_CONCURRENCY", "1")
+    shards = _throwaway_suite(tmp_path)
+    stream = io.StringIO()
+    code = run_tests(
+        shards,
+        Coverage.NOT_EVALUATED,
+        root=str(tmp_path),
+        python=sys.executable,
+        selection=("test_alpha.py", "test_beta.py"),
+        stream=stream,
+    )
+    assert code == 0
+    body = stream.getvalue()
+    assert "[throttled to 1 at once]" in body
+    # Every unit still ran, and the transcript is still in index order.
+    assert "shard 0" in body and "shard 1" in body
+    assert body.index("shard 0") < body.index("shard 1")
 
 
 def test_run_tests_fails_when_any_shard_fails(tmp_path) -> None:
