@@ -221,7 +221,6 @@ def _vacant_twin(tmp_path, engine):
     manufactured here, deterministically, from the committed registry, and both
     vacancy guards run against it.
     """
-    import copy
     import json
 
     registry = json.loads((engine.REPO / "00-CMG/CMG-REGISTRY.json").read_text(encoding="utf-8"))
