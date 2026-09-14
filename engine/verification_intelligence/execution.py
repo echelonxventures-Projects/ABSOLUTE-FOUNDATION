@@ -25,7 +25,6 @@ overrides.
 
 from __future__ import annotations
 
-import json
 import os
 import re
 import shutil
@@ -34,7 +33,11 @@ import sys
 import tempfile
 from dataclasses import dataclass
 
-from engine.verification_intelligence.constitution import DECLARATION, repo_root
+from engine.verification_intelligence.constitution import (
+    DECLARATION,
+    load_declaration,
+    repo_root,
+)
 from engine.verification_intelligence.model import (
     Coverage,
     Shard,
@@ -56,15 +59,16 @@ def shard_memory_budget_bytes(root: str | None = None) -> int:
     Read rather than assumed, because it IS an assumption: a number that decides how many
     interpreters may run at once does not belong hidden in code. A declaration that cannot
     be read falls back, exactly as the worker ceiling does — a bound nobody can read is
-    still better than no bound at all.
+    still better than no bound at all. The reading itself is the constitution's own
+    (UCKP-ART-18): a second parser here would be a second opinion about what the
+    declaration says, and the two could disagree.
     """
-    target = os.path.join(root or repo_root(), DECLARATION)
     try:
-        with open(target, encoding="utf-8") as handle:
-            declared = json.load(handle)
-        sharding = declared["execution"]["test_sharding"]
+        sharding = load_declaration(os.path.join(root, DECLARATION) if root else None)["execution"][
+            "test_sharding"
+        ]
         budget = sharding["shard_memory_budget_mb"]
-    except (OSError, json.JSONDecodeError, KeyError, TypeError):
+    except (VerificationIntelligenceError, KeyError, TypeError):
         budget = FALLBACK_SHARD_MEMORY_BUDGET_MB
     if not isinstance(budget, int | float) or isinstance(budget, bool) or budget <= 0:
         budget = FALLBACK_SHARD_MEMORY_BUDGET_MB

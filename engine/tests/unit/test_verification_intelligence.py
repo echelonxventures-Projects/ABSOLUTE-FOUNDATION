@@ -22,7 +22,6 @@ The four that matter most:
 
 from __future__ import annotations
 
-import builtins
 import dataclasses
 import io
 import itertools
@@ -32,10 +31,8 @@ import re
 import runpy
 import stat
 import subprocess
-import subprocess as subprocess_module
 import sys
 import textwrap
-import types
 from dataclasses import replace
 
 import pytest
@@ -47,7 +44,6 @@ from engine.verification_impact.graph import ImpactError
 from engine.verification_intelligence import cli, evidence
 from engine.verification_intelligence import evidence as evidence_module
 from engine.verification_intelligence import execution as execution_module
-from engine.verification_intelligence import execution as uvi_execution
 from engine.verification_intelligence import gate as gate_module
 from engine.verification_intelligence import gate as uvi_gate
 from engine.verification_intelligence import plan as plan_module
@@ -456,16 +452,16 @@ def test_a_malformed_concurrency_pin_is_refused(monkeypatch, value) -> None:
 def test_unknown_headroom_leaves_the_wave_unbounded(monkeypatch) -> None:
     """None means UNKNOWN, never `none available` — a healthy host is not serialised."""
     monkeypatch.delenv("UVI_CONCURRENCY", raising=False)
-    monkeypatch.setattr(uvi_execution, "memory_headroom_bytes", lambda: None)
+    monkeypatch.setattr(execution_module, "memory_headroom_bytes", lambda: None)
     assert concurrency_limit(12) == 12
 
 
 def test_headroom_bounds_the_wave_and_never_reaches_zero(monkeypatch) -> None:
     monkeypatch.delenv("UVI_CONCURRENCY", raising=False)
-    monkeypatch.setattr(uvi_execution, "shard_memory_budget_bytes", lambda root=None: 1024)
-    monkeypatch.setattr(uvi_execution, "memory_headroom_bytes", lambda: 4096)
+    monkeypatch.setattr(execution_module, "shard_memory_budget_bytes", lambda root=None: 1024)
+    monkeypatch.setattr(execution_module, "memory_headroom_bytes", lambda: 4096)
     assert concurrency_limit(12) == 4
-    monkeypatch.setattr(uvi_execution, "memory_headroom_bytes", lambda: 0)
+    monkeypatch.setattr(execution_module, "memory_headroom_bytes", lambda: 0)
     assert concurrency_limit(12) == 1, "a host too small for one shard still runs them in turn"
 
 
@@ -477,11 +473,10 @@ def test_headroom_is_read_on_this_host_or_reported_unknown() -> None:
 def test_linux_headroom_is_read_from_meminfo(monkeypatch, tmp_path) -> None:
     meminfo = tmp_path / "meminfo"
     meminfo.write_text("MemTotal: 100 kB\nMemAvailable: 2048 kB\n", encoding="utf-8")
-    monkeypatch.setattr(uvi_execution.sys, "platform", "linux")
-    real_open = builtins.open
+    monkeypatch.setattr(execution_module.sys, "platform", "linux")
+    real_open = open
     monkeypatch.setattr(
-        builtins,
-        "open",
+        "builtins.open",
         lambda path, *a, **k: real_open(meminfo if path == "/proc/meminfo" else path, *a, **k),
     )
     assert memory_headroom_bytes() == 2048 * 1024
@@ -490,20 +485,19 @@ def test_linux_headroom_is_read_from_meminfo(monkeypatch, tmp_path) -> None:
 def test_linux_headroom_without_the_field_is_unknown(monkeypatch, tmp_path) -> None:
     meminfo = tmp_path / "meminfo"
     meminfo.write_text("MemTotal: 100 kB\n", encoding="utf-8")
-    monkeypatch.setattr(uvi_execution.sys, "platform", "linux")
-    real_open = builtins.open
+    monkeypatch.setattr(execution_module.sys, "platform", "linux")
+    real_open = open
     monkeypatch.setattr(
-        builtins,
-        "open",
+        "builtins.open",
         lambda path, *a, **k: real_open(meminfo if path == "/proc/meminfo" else path, *a, **k),
     )
     assert memory_headroom_bytes() is None
 
 
 def test_linux_headroom_that_cannot_be_read_is_unknown(monkeypatch) -> None:
-    monkeypatch.setattr(uvi_execution.sys, "platform", "linux")
+    monkeypatch.setattr(execution_module.sys, "platform", "linux")
     monkeypatch.setattr(
-        builtins, "open", lambda *a, **k: (_ for _ in ()).throw(OSError("no /proc here"))
+        "builtins.open", lambda *a, **k: (_ for _ in ()).throw(OSError("no /proc here"))
     )
     assert memory_headroom_bytes() is None
 
@@ -517,29 +511,29 @@ def test_darwin_headroom_counts_reclaimable_pages(monkeypatch) -> None:
         "Pages speculative:               50.\n"
         "Pages wired down:              9999.\n"
     )
-    monkeypatch.setattr(uvi_execution.sys, "platform", "darwin")
+    monkeypatch.setattr(execution_module.sys, "platform", "darwin")
     monkeypatch.setattr(
-        uvi_execution.subprocess,
+        execution_module.subprocess,
         "run",
-        lambda *a, **k: types.SimpleNamespace(returncode=0, stdout=stdout),
+        lambda *a, **k: subprocess.CompletedProcess([], 0, stdout=stdout),
     )
     assert memory_headroom_bytes() == 350 * 4096
 
 
 def test_darwin_headroom_is_unknown_when_vm_stat_fails(monkeypatch) -> None:
-    monkeypatch.setattr(uvi_execution.sys, "platform", "darwin")
+    monkeypatch.setattr(execution_module.sys, "platform", "darwin")
     monkeypatch.setattr(
-        uvi_execution.subprocess,
+        execution_module.subprocess,
         "run",
-        lambda *a, **k: types.SimpleNamespace(returncode=1, stdout=""),
+        lambda *a, **k: subprocess.CompletedProcess([], 1, stdout=""),
     )
     assert memory_headroom_bytes() is None
 
 
 def test_darwin_headroom_is_unknown_when_vm_stat_is_absent(monkeypatch) -> None:
-    monkeypatch.setattr(uvi_execution.sys, "platform", "darwin")
+    monkeypatch.setattr(execution_module.sys, "platform", "darwin")
     monkeypatch.setattr(
-        uvi_execution.subprocess,
+        execution_module.subprocess,
         "run",
         lambda *a, **k: (_ for _ in ()).throw(OSError("no vm_stat")),
     )
@@ -547,7 +541,7 @@ def test_darwin_headroom_is_unknown_when_vm_stat_is_absent(monkeypatch) -> None:
 
 
 def test_an_unrecognised_platform_reports_unknown(monkeypatch) -> None:
-    monkeypatch.setattr(uvi_execution.sys, "platform", "sunos5")
+    monkeypatch.setattr(execution_module.sys, "platform", "sunos5")
     assert memory_headroom_bytes() is None
 
 
@@ -3026,7 +3020,7 @@ def test_a_shard_whose_process_reports_no_stdout_is_still_reaped(tmp_path, monke
     so it can be closed. A shard whose process does not carry it must still be waited on and
     still have its log read, or a removed line of bookkeeping would turn into a leaked handle."""
 
-    real_popen = subprocess_module.Popen
+    real_popen = subprocess.Popen
 
     class _NoStdout(real_popen):  # type: ignore[misc,valid-type]
         @property
@@ -3087,7 +3081,7 @@ def _canned_coverage(monkeypatch, results):
     def fake(argv, **kwargs):
         calls.append(list(argv))
         returncode, stdout, stderr = next(scripted)
-        return subprocess_module.CompletedProcess(argv, returncode, stdout, stderr)
+        return subprocess.CompletedProcess(argv, returncode, stdout, stderr)
 
     monkeypatch.setattr(execution_module.subprocess, "run", fake)
     return calls
