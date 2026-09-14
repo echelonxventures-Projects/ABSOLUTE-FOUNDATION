@@ -6709,7 +6709,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 6,
+        "measure_value": 3,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -6717,7 +6717,7 @@
       "invariant": "Universal Execution Coordination",
       "measure": "independent_view.00-MASTER/ACEE-000001.gate_blocking",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 6,
+      "measure_value": 3,
       "ordinal": 180,
       "owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
       "properties": {
@@ -6897,7 +6897,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 6,
+        "measure_value": 3,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -6905,7 +6905,7 @@
       "invariant": "Universal Validation",
       "measure": "independent_view.00-MASTER/ACEE-000001.blocking_failures",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 6,
+      "measure_value": 3,
       "ordinal": 220,
       "owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "properties": {
@@ -8072,7 +8072,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 6,
+        "measure_value": 3,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -8080,7 +8080,7 @@
       "invariant": "Auto Integration",
       "measure": "independent_view.00-MASTER/ACEE-000001.blocking_failures",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 6,
+      "measure_value": 3,
       "ordinal": 470,
       "owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
       "properties": {
@@ -24156,7 +24156,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "09a3ec0a4f0bd03d5f7c3df8d51ecbb02890b7e8b5b4a47b12f6a9a7269c5de6",
+  "seal_sha256": "7ecafc6c6638b7e627b90f4baf0b80f18187d70f428d6dc7fc000c76f540a124",
   "self_evolution": [
     {
       "anchor": "determination",
