@@ -64,5 +64,5 @@ measurement confers no state on any baseline.
 | Clause bound | YES |
 | Disclosure token | `CERTIFIED-PROVISIONAL` |
 | Terminal token (prohibited in a record) | `FINALIZED` |
-| Vacancies located | 1 |
+| Vacancies located | 0 |
 | Baselines elevated by this measurement | **none** |

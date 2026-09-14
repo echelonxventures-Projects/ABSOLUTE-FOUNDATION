@@ -22,14 +22,14 @@ Every dimension is computed from Repository Truth. `UNVERIFIED` is **fail-closed
 | ID | Measured dimension | Verdict | Measured evidence |
 |---|---|---|---|
 | UCEF-VAL-01 | Zero architectural redesign required | PASS | 124/124 bindings pre-exist outside this programme — the framework authored no foundational authority, so no foundational redesign was required |
-| UCEF-VAL-02 | Zero constitutional conflicts | PASS | 44 recognized artifacts with unique identity and path; 61 concerns each allocated to exactly one owner — no parallel authority |
+| UCEF-VAL-02 | Zero constitutional conflicts | PASS | 45 recognized artifacts with unique identity and path; 62 concerns each allocated to exactly one owner — no parallel authority |
 | UCEF-VAL-03 | Zero duplication | PASS | every declared identity is unique and every bound authority is reused rather than re-authored — no competing model, registry or lifecycle is created |
 | UCEF-VAL-04 | Zero orphan constitutional assets | PASS | 157/157 references resolve against Repository Truth — zero orphans |
 | UCEF-VAL-05 | Zero circular dependencies | PASS | 15 stages form an acyclic graph — no stage depends upon itself |
 | UCEF-VAL-06 | Complete dependency closure | PASS | 15/15 stages reachable from a single entry stage; every dependency is itself a declared stage — closure is complete |
 | UCEF-VAL-07 | Complete ontology synchronization | PASS | the ontology owner is located at 00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md |
 | UCEF-VAL-08 | Complete taxonomy synchronization | PASS | 24 kinds recognized and the kind set is absent from the 4 closed enumerations — the taxonomy remains open to append |
-| UCEF-VAL-09 | Complete registry synchronization | PASS | 1687 registered artifacts, declared count agrees, identities unique — the registry projection is internally synchronized |
+| UCEF-VAL-09 | Complete registry synchronization | PASS | 1689 registered artifacts, declared count agrees, identities unique — the registry projection is internally synchronized |
 | UCEF-VAL-10 | Complete constitutional traceability | PASS | 139/139 traceability links closed — zero orphan links |
 | UCEF-VAL-11 | Construct register is open | PASS | the register is declared open and non-exhaustive over 33 named classes; an unnamed class is admitted by the same procedure, and absence is no ground of rejection |
 | UCEF-VAL-12 | No expansion axis declares a finite bound | PASS | 17/17 expansion axes declare no finite bound |

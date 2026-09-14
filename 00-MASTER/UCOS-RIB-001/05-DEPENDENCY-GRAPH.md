@@ -41,7 +41,7 @@
 |---|---|
 | Kind | `python_module_graph` |
 | Nodes | 2226 |
-| Edges | 9913 |
+| Edges | 9916 |
 | Unresolved edges | 0 |
 | Cycles | 13 |
 | Cycles of a non-benign class | 0 |

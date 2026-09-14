@@ -405,7 +405,7 @@
 | `UCOS-RIB-001-CAP-0375` | `engine.uckp` | IMPLEMENTATION | `engine/uckp` | 27 | 1 | 29 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0376` | `engine.uicm` | IMPLEMENTATION | `engine/uicm` | 9 | 4 | 1 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0377` | `engine.universal_certification` | IMPLEMENTATION | `engine/universal_certification` | 9 | 12 | 13 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
-| `UCOS-RIB-001-CAP-0378` | `engine.universal_discovery` | IMPLEMENTATION | `engine/universal_discovery` | 11 | 2 | 18 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
+| `UCOS-RIB-001-CAP-0378` | `engine.universal_discovery` | IMPLEMENTATION | `engine/universal_discovery` | 11 | 1 | 18 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0379` | `engine.validation` | IMPLEMENTATION | `engine/validation` | 6 | 7 | 19 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0380` | `engine.verification_impact` | IMPLEMENTATION | `engine/verification_impact` | 5 | 3 | 3 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0381` | `engine.verification_intelligence` | IMPLEMENTATION | `engine/verification_intelligence` | 11 | 7 | 4 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |

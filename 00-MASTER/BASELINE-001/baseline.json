@@ -39,7 +39,10 @@
       "state": "CERTIFIED — CURRENT CONSTITUTIONAL BASELINE"
     }
   ],
-  "blocking_failures": [],
+  "blocking_failures": [
+    "BLN-VAL-16",
+    "BLN-VAL-26"
+  ],
   "capabilities": [
     {
       "capability": "Baseline Registry",
@@ -84,7 +87,7 @@
       "measure": "lineage_measured",
       "measured": true,
       "obligation": "the constitutional lineage population is measured, every recorded predecessor resolves, and the declared inheritance relationship type is located rather than assumed",
-      "value": 44
+      "value": 45
     },
     {
       "capability": "Baseline Succession",
@@ -133,12 +136,12 @@
     },
     {
       "capability": "Baseline Ratification",
-      "discharged": true,
+      "discharged": false,
       "id": "BLN-CAP-11",
       "measure": "ceiling_disclosed",
       "measured": true,
       "obligation": "the located ratification ceiling is bound and every registered baseline discloses it; no baseline is recorded ratified beyond that ceiling",
-      "value": 1
+      "value": 0
     },
     {
       "capability": "Baseline Certification",
@@ -229,7 +232,7 @@
     "id": "BLN-CEI-01",
     "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md",
     "terminal_token": "FINALIZED",
-    "vacancies_located": 1
+    "vacancies_located": 0
   },
   "chain": {
     "acyclic": true,
@@ -249,7 +252,7 @@
     "CEP-001 1.1",
     "CEP-002 1.2",
     "CEP-009 1.1",
-    "CMG-000001 1.2"
+    "CMG-000001 1.3"
   ],
   "continuation": {
     "bound": true,
@@ -259,7 +262,7 @@
   "counts": {
     "baselines": 2,
     "capabilities": 20,
-    "capabilities_discharged": 20,
+    "capabilities_discharged": 19,
     "chain_length": 2,
     "criteria": 5,
     "criteria_corroborated": 5,
@@ -267,7 +270,7 @@
     "currency_claims": 4,
     "currency_diverges": 3,
     "inheritance_rules": 12,
-    "lineage_population": 44,
+    "lineage_population": 45,
     "lineage_with_predecessor": 0,
     "non_inheritance_rules": 6,
     "pointers": 68,
@@ -338,7 +341,7 @@
   "current": [
     "UCOS-BASELINE-002"
   ],
-  "determination": "BASELINE-INHERITANCE-BOUND",
+  "determination": "BASELINE-INHERITANCE-INCOMPLETE",
   "divergences_referred": [
     "BLN-CUR-01: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
     "BLN-CUR-02: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
@@ -475,8 +478,8 @@
       "title": "A tag exists in the baseline tag namespace under a convention the located scheme does not declare"
     }
   ],
-  "gate": "OPEN",
-  "gate_exit": 0,
+  "gate": "CLOSED",
+  "gate_exit": 1,
   "immutability": {
     "disjoint": true,
     "intersection": [],
@@ -576,7 +579,7 @@
     "edges": [],
     "inheritance_type_located": true,
     "owner": "00-CMG/CMG-REGISTRY.json",
-    "population": 44,
+    "population": 45,
     "vacuous": true,
     "with_predecessor": 0
   },
@@ -744,7 +747,7 @@
       "rule": "a baseline shall be recomputable and shall yield a byte-identical result on recomputation"
     }
   ],
-  "seal_sha256": "1b7d50aebef5f93c2e39de8d3249c097924f6b01c67ed3e9c1a03b84a7182d9e",
+  "seal_sha256": "7ad172fe7f7ecd5b61f595d6ebf474398d2f8163dbbd42087c2b4951785bb4af",
   "unrecorded_citations": [],
   "validations": [
     {
@@ -900,12 +903,14 @@
     {
       "blocking": true,
       "dimension": "CEILING-DISCLOSED",
-      "failure_count": 0,
-      "failures": [],
+      "failure_count": 1,
+      "failures": [
+        "BLN-CEI-01: no vacancy is located, so the ceiling is unbacked"
+      ],
       "id": "BLN-VAL-16",
       "measured": true,
       "obligation": "the located ceiling clause is present, the recorded vacancy is located, and the register discloses the ceiling token",
-      "satisfied": true
+      "satisfied": false
     },
     {
       "blocking": true,
@@ -1000,12 +1005,14 @@
     {
       "blocking": true,
       "dimension": "CAPABILITY-DISCHARGED",
-      "failure_count": 0,
-      "failures": [],
+      "failure_count": 1,
+      "failures": [
+        "BLN-CAP-11: ceiling_disclosed"
+      ],
       "id": "BLN-VAL-26",
       "measured": true,
       "obligation": "every declared capability is discharged by a measure that ran",
-      "satisfied": true
+      "satisfied": false
     }
   ],
   "version_progressions": [
@@ -1013,7 +1020,7 @@
       "id": "CMG-000001",
       "identity": "UCOS-CON-000050",
       "increment_recorded": true,
-      "version": "1.2"
+      "version": "1.3"
     },
     {
       "id": "CEP-001",

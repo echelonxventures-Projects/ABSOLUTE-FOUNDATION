@@ -41,13 +41,13 @@
 
 | Substrate | Path | Kind | Tracked | Parses | Pointers | Records | Content |
 |---|---|---|---|---|---|---|---|
-| `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `c51a5ecbc75d` |
+| `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `62789dfca038` |
 | `SUB-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure.json` | json | **NO** | YES | 4/4 | 556 | `not recorded` |
-| `SUB-CONTROL` | `00-BOOK/DATA/control-tower.json` | json | YES | YES | 3/3 | 201 | `42f039e7f78b` |
-| `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 13807 | `858485e06db6` |
+| `SUB-CONTROL` | `00-BOOK/DATA/control-tower.json` | json | YES | YES | 3/3 | 201 | `3afbb9b01091` |
+| `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 13811 | `0786e2944fff` |
 | `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
-| `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 41 | `5b38c1b7ce3a` |
-| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1687 | `ae9c1f6ad146` |
+| `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 41 | `fda29024b94a` |
+| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1689 | `e4a61a90f9ae` |
 | `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 173 | `0fa4739d6dd3` |
 | `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 148 | `20f95b5e2124` |
 | `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `73168e9bc928` |
@@ -93,7 +93,7 @@
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 7150 |
+| Version-controlled files | 7154 |
 
 ---
 

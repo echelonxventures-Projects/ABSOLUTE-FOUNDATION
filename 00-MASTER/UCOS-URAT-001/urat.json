@@ -5,16 +5,16 @@
   },
   "blocking_failures": [],
   "by_state": {
-    "PROVISIONAL": 5
+    "PROVISIONAL": 6
   },
   "counts": {
     "attributions_derived": 4,
-    "attributions_recorded": 1,
-    "discovered": 16,
+    "attributions_recorded": 2,
+    "discovered": 17,
     "excluded": 11,
-    "records": 5,
-    "records_admitting_freeze": 5,
-    "records_valid": 5,
+    "records": 6,
+    "records_admitting_freeze": 6,
+    "records_valid": 6,
     "registry_rules": 6,
     "registry_rules_bound": 6,
     "states_declared": 9,
@@ -39,6 +39,7 @@
       "00-MASTER/UCOS-CRAT-001/06-GOVERNANCE-RATIFICATION.md",
       "00-MASTER/UCOS-CRAT-001/09-RATIFICATION-CERTIFICATE.md",
       "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
+      "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md",
       "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-RATIFICATION-REPORT.md"
     ],
     "excluded": [
@@ -103,7 +104,8 @@
       "00-CEP/STAGE-04-S4-11-INFRASTRUCTURE-014-GOVERNANCE-PROVISIONAL-RATIFICATION.md",
       "00-CEP/STAGE-04-S4-12-INFRASTRUCTURE-005-UIMM-INTEGRATION-PROVISIONAL-RATIFICATION.md",
       "00-MASTER/UCOS-CRAT-001/09-RATIFICATION-CERTIFICATE.md",
-      "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md"
+      "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
+      "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md"
     ],
     "unaccounted": []
   },
@@ -491,6 +493,60 @@
       "state_declared": true,
       "valid": true,
       "verdict_anchor_located": true
+    },
+    {
+      "admits_to_freeze": true,
+      "artifact": "CMG-000001 and the Tier-1 occupancy — the meta-governance constitution ratified by the Constituent Authority, the vacant tier located, and the standing of the T1M/T2/T2I instruments elevated with it",
+      "authority": "AUTH-13",
+      "authority_attribution": "RECORDED",
+      "authority_basis_located": true,
+      "authority_resolved": true,
+      "evidence": [
+        {
+          "digest": "845f59b91a33648c",
+          "reference": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+          "resolved": true
+        },
+        {
+          "digest": "5116dbe43f40b6c8",
+          "reference": "00-CMG/CMG-REGISTRY.json",
+          "resolved": true
+        },
+        {
+          "digest": "c7c3aadf1090c797",
+          "reference": "09-DR-RAT-11-ASSESSMENT.md",
+          "resolved": true
+        },
+        {
+          "digest": "3625ea5f92c8acc1",
+          "reference": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
+          "resolved": true
+        }
+      ],
+      "evidence_resolved": 4,
+      "id": "URAT-REC-06",
+      "lineage_predecessor": null,
+      "outcome": "RATIFIED at the derived-truth layer by the Constituent Authority (AUTH-13) through RA-Ω∞ (AUTH-14): T1 occupied, VAC-01 retired, dependent standing elevated, the readiness ceiling re-issued READY by the located certification owner; constitutional finality remains CEP-006 I.4's reservation",
+      "preconditions_claimed": true,
+      "preconditions_satisfied": [
+        "URAT-PRE-01",
+        "URAT-PRE-02",
+        "URAT-PRE-03",
+        "URAT-PRE-04"
+      ],
+      "program_state_hash": "fbaf6c0f6989ebb4ec721924fb8e2cc4eea6fdf59c28fa0a09927b7dc5f41d82",
+      "record": "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md",
+      "record_digest": "edd6083c67567f28",
+      "record_resolved": true,
+      "state": "PROVISIONAL",
+      "state_basis": {
+        "anchor": "readiness IS READY under LXXX.3",
+        "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md"
+      },
+      "state_basis_located": true,
+      "state_declared": true,
+      "valid": true,
+      "verdict_anchor_located": true
     }
   ],
   "registry_rules": [
@@ -531,7 +587,7 @@
       "rule": "ratification authority is never self-conferred by execution authority"
     }
   ],
-  "seal_sha256": "1717a90977e3abfd27b3b881960baea3fae07249a6321958bd0a3f36c7b5efcc",
+  "seal_sha256": "70b45633b0e8764fc7a898d554f6f23897c62b6748ae0c430aab08c271b3e7ce",
   "states": [
     {
       "admits_to_freeze": false,

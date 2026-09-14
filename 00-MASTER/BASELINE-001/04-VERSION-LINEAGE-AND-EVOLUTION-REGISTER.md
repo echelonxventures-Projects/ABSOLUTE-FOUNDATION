@@ -10,7 +10,7 @@ identity, and the change ledger that records the increment event.
 
 | Artifact | Recorded version | Universal identity | Increment recorded |
 |---|---|---|---|
-| `CMG-000001` | 1.2 | `UCOS-CON-000050` | YES |
+| `CMG-000001` | 1.3 | `UCOS-CON-000050` | YES |
 | `CEP-001` | 1.1 | `UCOS-CON-000033` | YES |
 | `CEP-002` | 1.2 | `UCOS-CON-000034` | YES |
 | `CEP-009` | 1.1 | `UCOS-CON-000041` | YES |
@@ -20,7 +20,7 @@ identity, and the change ledger that records the increment event.
 - `CEP-001 1.1`
 - `CEP-002 1.2`
 - `CEP-009 1.1`
-- `CMG-000001 1.2`
+- `CMG-000001 1.3`
 
 ## Constitutional lineage
 
@@ -33,7 +33,7 @@ measurement reports the population. It does not populate the field.
 | Property | Value |
 |---|---|
 | Owner | `00-CMG/CMG-REGISTRY.json` |
-| Registered artifacts | 44 |
+| Registered artifacts | 45 |
 | Artifacts recording a predecessor | 0 |
 | Inheritance relationship type located | YES |
 | Invariant vacuously satisfied | **YES** |

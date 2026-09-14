@@ -70,4 +70,4 @@ Current result: **0 findings**, readiness **`READY-PROVISIONAL`**.
 
 ## The one thing to know
 
-CMG-000001 is **PROVISIONAL, not ratified**, and says so. Tier T1 — the substantive constitutional authority that the located charter already presupposes — is **vacant**, and the corpus contains no authority competent to ratify anything. Both facts pre-date this zone; CMG-000001 is simply the first instrument to record them, and the validator enforces the resulting `READY-PROVISIONAL` ceiling so that provisional standing cannot quietly be read as final.
+CMG-000001 recorded itself PROVISIONAL while its ratifying authority was unidentified, and said so; UCOS-RAT-002 records that authority's act and the instrument stands RATIFIED. Tier T1 — the substantive constitutional authority presupposed by CEP-000 §5.5 — was recorded **vacant** and is now **occupied** by the ratified constitution of substance. The validator computes readiness from the Registry, and the outcome for this state is READY; the ceiling rule of LXXX.4 stands against any future reopening.

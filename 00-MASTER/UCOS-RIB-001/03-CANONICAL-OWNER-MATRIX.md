@@ -486,9 +486,9 @@
 
 | Probe | Probed | Present | Result |
 |---|---|---|---|
-| `PRB-BENEFIT` | 1687 | 0 | 0 of 1687 records carry the field |
-| `PRB-PHASE` | 1687 | 0 | 0 of 1687 records carry the field |
-| `PRB-SUPERSEDE` | 13807 | 5 | 5 of 13807 records carry the value 'Evolves-From' |
+| `PRB-BENEFIT` | 1689 | 0 | 0 of 1689 records carry the field |
+| `PRB-PHASE` | 1689 | 0 | 0 of 1689 records carry the field |
+| `PRB-SUPERSEDE` | 13811 | 5 | 5 of 13811 records carry the value 'Evolves-From' |
 
 ---
 

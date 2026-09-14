@@ -1324,7 +1324,7 @@ the measured dependency, consumer and provider degree of every unit
 | UCOS-RIB-001-CAP-0375 | engine.uckp | 1 | 29 | 1 |
 | UCOS-RIB-001-CAP-0376 | engine.uicm | 4 | 1 | 4 |
 | UCOS-RIB-001-CAP-0377 | engine.universal_certification | 12 | 13 | 12 |
-| UCOS-RIB-001-CAP-0378 | engine.universal_discovery | 2 | 18 | 2 |
+| UCOS-RIB-001-CAP-0378 | engine.universal_discovery | 1 | 18 | 1 |
 | UCOS-RIB-001-CAP-0379 | engine.validation | 7 | 19 | 7 |
 | UCOS-RIB-001-CAP-0380 | engine.verification_impact | 3 | 3 | 3 |
 | UCOS-RIB-001-CAP-0381 | engine.verification_intelligence | 7 | 4 | 7 |

@@ -476,7 +476,7 @@ XVI.2 The lattice SHALL be defined by **rank tiers**, descending:
 | Tier | Name | Content | Located status |
 |---|---|---|---|
 | T0 | **Constitutional Source Corpus** | The frozen source material from which constitutional intent derives | Located, frozen, non-normative-as-law |
-| T1 | **Constitutional Authority** | The ratified constitution of substance presupposed by CEP-000 §5.5 Tier 1 | **VACANT** — see XVII.4 and CMG-OQ-02 |
+| T1 | **Constitutional Authority** | The ratified constitution of substance presupposed by CEP-000 §5.5 Tier 1 | **OCCUPIED** — by the ratified law canon registered at `02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md` (UCOS-RAT-002 D-RAT-02-02; the VAC-01 record retired at LXXVIII.9) |
 | T1M | **Meta-Constitutional Authority** | This instrument — recognition of constitutionality; orthogonal to T1, not superior to it | Located (PROVISIONAL) |
 | T2 | **Program Authority** | CEP-000 and its derived CEP instruments; supreme over constitutional-engineering process | Located |
 | T2I | **Interpretive Authority** | AUTH-INF-001; binds reading, enacts nothing; orthogonal to T2 | Located |
@@ -1998,7 +1998,7 @@ LXXXVI.2 Every constitutional artifact of UCOS Ω∞ — every Constitution, Law
 
 LXXXVI.3 This instrument creates no parallel authority, no parallel registry, no parallel lifecycle, no parallel governance, and no parallel enforcement. Its entire engagement with the existing corpus is recognition, recording, ranking, and referral.
 
-LXXXVI.4 This instrument declares its own limits honestly: its standing IS PROVISIONAL; Tier T1 IS VACANT; seven open constitutional questions are enumerated, of which **five remain open** (CMG-OQ-01, 02, 03, 05, 07) while CMG-OQ-06 IS **closed** (LXXVIII.7) and CMG-OQ-04 IS **closed** (LXXVIII.8); **one gap remains unclosed** (CMG-GAP-06) and one IS recorded as a vacancy (CMG-GAP-04), each enumerated with its reasons; and its readiness IS READY-PROVISIONAL at most until CMG-OQ-01 and CMG-OQ-02 are ratified.
+LXXXVI.4 This instrument declares its own limits honestly, and this is the record as amended by LXXVIII.9: its standing IS RATIFIED (D-RAT-02-01); Tier T1 IS occupied (D-RAT-02-02); of the seven constitutional questions enumerated, **all seven are closed** — OQ-01…03, 05 and 07 at LXXVIII.9, OQ-04 at LXXVIII.8, OQ-06 at LXXVIII.7; every gap is dispositioned CLOSED; and readiness IS READY under LXXX.3, with the LXXX.4 rule standing against any future reopening.
 
 LXXXVI.5 This instrument SHALL govern meta-constitutional matter until amended, superseded, or frozen under its own rules, and — within the bounds of its declared jurisdiction and subject to the vacancies and open questions it records — it is complete, normative, and binding.
 

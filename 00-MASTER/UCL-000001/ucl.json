@@ -60,7 +60,7 @@
       "kind": "registry-artifact",
       "name": "Universal Registry adapter",
       "note": "Supplies the registration graph and the capability category space.",
-      "objects": 1687,
+      "objects": 1689,
       "pointer": "artifacts",
       "provider": "PRV-REGISTRY",
       "providers_matched": 1,
@@ -71,7 +71,7 @@
       "kind": "lineage-record",
       "name": "Universal Lineage adapter",
       "note": "Supplies the lineage graph as a derived projection over recorded snapshot history. An empty id mapping means the collection key IS the identity, so a keyed store needs no engine change. No new lineage store is created (UCI-001 Part XVI.5).",
-      "objects": 1718,
+      "objects": 1720,
       "pointer": "history",
       "provider": "PRV-LEDGER",
       "providers_matched": 1,
@@ -595,11 +595,11 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "capability_artifacts_unresolved": 0,
-    "capability_nodes_discovered": 1708,
+    "capability_nodes_discovered": 1710,
     "cko_identity_collisions": 0,
     "cko_kind_registry_closed": 0,
     "cko_reference_ambiguities": 0,
-    "ckos_discovered": 4452,
+    "ckos_discovered": 4456,
     "ckos_of_unknown_kind": 0,
     "ckos_without_provenance": 0,
     "ckos_without_semantic_identity": 0,
@@ -619,7 +619,7 @@
     "knowledge_objects_discovered": 159,
     "lifecycle_authorities_unresolved": 0,
     "limit_tokens_present": 0,
-    "lineage_records_discovered": 1718,
+    "lineage_records_discovered": 1720,
     "parallel_authority_claims": 0,
     "providers_not_open": 0,
     "providers_unlocated": 0,
@@ -628,7 +628,7 @@
     "readiness_owners_unresolved": 0,
     "record_write_intersections": 0,
     "reentry_declarations_absent": 0,
-    "registry_artifacts_discovered": 1687,
+    "registry_artifacts_discovered": 1689,
     "relations_discovered": 548,
     "relations_of_unknown_type": 0,
     "relationship_ckos_discovered": 548,
@@ -1159,7 +1159,7 @@
     }
   ],
   "gate": "OPEN",
-  "graph_digest": "c98cb763868a1c4b7d70a0d47de24cb9e77f00084800fc58b558ab7035231035",
+  "graph_digest": "b4e7d548abf21899bf5a57804533eec0cf43b6e3ba186bcefdaa6213e2f62ccf",
   "graphs": [
     {
       "edge_relations": [
@@ -1189,7 +1189,7 @@
         "governance-programme",
         "registry-artifact"
       ],
-      "nodes": 1708,
+      "nodes": 1710,
       "relations_known": true
     },
     {
@@ -1286,7 +1286,7 @@
       "node_kinds": [
         "registry-artifact"
       ],
-      "nodes": 1687,
+      "nodes": 1689,
       "relations_known": true
     },
     {
@@ -1298,7 +1298,7 @@
       "node_kinds": [
         "lineage-record"
       ],
-      "nodes": 1718,
+      "nodes": 1720,
       "relations_known": true
     },
     {
@@ -1961,7 +1961,7 @@
       "owner": "00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md",
       "owner_located": true,
       "ready": true,
-      "value": 1718
+      "value": 1720
     },
     {
       "comparator": ">=",
@@ -14149,7 +14149,7 @@
       "goal": "Execute the Universal Constitutional Lifecycle over the Universal Constitutional Lifecycle itself.",
       "id": "GOAL-SELF",
       "note": "Self-application. The lifecycle is the first capability the lifecycle governs, which is what makes it a substrate rather than a description.",
-      "run_id": "857dd93f86eedccc619e74c32dbca36195655a7c458fa11a487e3ae762e520af",
+      "run_id": "eda2627982d4a516c5386eec5b54fc4ba517b6ba603ab2befc239a8492179945",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14655,7 +14655,7 @@
       "goal": "Engineer the Universal Constitutional Engineering Substrate required for the Autonomous Constitutional Engineering Engine.",
       "id": "GOAL-SUBSTRATE",
       "note": "The Ω-E04→Ω-E05 handover goal.",
-      "run_id": "ae0cb37e8a27fb8d2d2c737326fe867f46b699f6d76edc4dbe4b3a76f58eeefa",
+      "run_id": "86ae94628cb59f754da5fdf5690c2ad3a13a9526846a199ab6f2b881100eaebd",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15161,7 +15161,7 @@
       "goal": "Engineer an arbitrary future canonical capability that Repository Truth does not yet record.",
       "id": "GOAL-ARBITRARY-CAPABILITY",
       "note": "Proves universal applicability WITHOUT naming a capability: the traversal is identical for every goal, so no capability needs its own methodology and no capability list exists to be incomplete.",
-      "run_id": "472db6d27fc1bda70ac2cce4fb01216769e7fd9100aa3fd8f1c10925472ad487",
+      "run_id": "93b94430e35b024c7f81066518305e94cfda029d03fcac0735c036d56c0d6eed",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15663,7 +15663,7 @@
       ]
     }
   ],
-  "seal_sha256": "a0a9c1cd9b0a6c0153ae7031c9786b912179d336fb6521952730e1a063c8065f",
+  "seal_sha256": "2a3d40d6c08afda03a5fea7f6e374983959fddb9399043f1ecd21dcfc65b18cb",
   "self_evolution": [
     {
       "anchor": "",
@@ -19530,7 +19530,7 @@
       "measure": "capability_nodes_discovered",
       "requirement": "the capability graph is discovered, never enumerated by this programme",
       "satisfied": true,
-      "value": 1708
+      "value": 1710
     },
     {
       "blocking": true,

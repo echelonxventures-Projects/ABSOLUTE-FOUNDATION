@@ -1076,7 +1076,7 @@
    "subordinate_to": [
     "T0"
    ],
-   "occupancy": "OCCUPIED",
+   "occupancy": "LOCATED",
    "closure_record": "UCOS-RAT-002 (Constituent Authority AUTH-13 via RA-Omega-Infinity)",
    "occupant": "UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS"
   },

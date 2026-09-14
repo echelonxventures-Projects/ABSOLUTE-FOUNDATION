@@ -4352,7 +4352,7 @@
         }
       ],
       "edge_sites": {},
-      "edges": 9913,
+      "edges": 9916,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
       "nodes": 2226,
@@ -4375,27 +4375,27 @@
   ],
   "probes": [
     {
-      "headline": "0 of 1687 records carry the field",
+      "headline": "0 of 1689 records carry the field",
       "id": "PRB-BENEFIT",
       "kind": "substrate_field_absence",
       "present": 0,
-      "probed": 1687,
+      "probed": 1689,
       "purpose": "count the registered artifacts that record a measured benefit"
     },
     {
-      "headline": "0 of 1687 records carry the field",
+      "headline": "0 of 1689 records carry the field",
       "id": "PRB-PHASE",
       "kind": "substrate_field_absence",
       "present": 0,
-      "probed": 1687,
+      "probed": 1689,
       "purpose": "count the registered artifacts that record a ratified phase"
     },
     {
-      "headline": "5 of 13807 records carry the value 'Evolves-From'",
+      "headline": "5 of 13811 records carry the value 'Evolves-From'",
       "id": "PRB-SUPERSEDE",
       "kind": "substrate_field_value_count",
       "present": 5,
-      "probed": 13807,
+      "probed": 13811,
       "purpose": "count the evolution edges that exist, and at which granularity they exist"
     }
   ],
@@ -5915,7 +5915,7 @@
     "fsck_errors": [],
     "interrupted_operations": [],
     "modified": "UCOS-OBS-000003",
-    "tracked_files": 7150,
+    "tracked_files": 7154,
     "untracked": "UCOS-OBS-000003",
     "working_tree": "UCOS-OBS-000003"
   },
@@ -5948,7 +5948,7 @@
   ],
   "substrate": [
     {
-      "content_sha256": "c51a5ecbc75dbca8561d03fef31971205ef3176a18da41cfcabe1194c672c28d",
+      "content_sha256": "62789dfca0387b931fea3c137e65713212485da70c6342bbf9514a1ea1a4edc8",
       "exists": true,
       "generated": false,
       "id": "SUB-CERT",
@@ -6000,7 +6000,7 @@
       "tracked": false
     },
     {
-      "content_sha256": "42f039e7f78b728a212b4e1d95dd2db8d12b1486a1658973d0872b6b28c036d6",
+      "content_sha256": "3afbb9b010911fad12eaca81793e7039935140f58930fefb00784a04d48fdaec",
       "exists": true,
       "generated": false,
       "id": "SUB-CONTROL",
@@ -6024,7 +6024,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "858485e06db6454b0439af1118c77ce339a660694b4ea0e5dc774629bc66f0af",
+      "content_sha256": "0786e2944fff5eb13c03542340b055c22fe6b57dbf736ab353bf0ac4bea7233c",
       "exists": true,
       "generated": false,
       "id": "SUB-EDGES",
@@ -6041,7 +6041,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the canonical typed graph over registered artifacts",
-      "records": 13807,
+      "records": 13811,
       "required": true,
       "tracked": true
     },
@@ -6072,7 +6072,7 @@
       "tracked": false
     },
     {
-      "content_sha256": "5b38c1b7ce3a0487274b94e0b6235ea0344e7de02fe352e493f58d7102c02b80",
+      "content_sha256": "fda29024b94abfe66611182e554165e17197aad632f833aaba336754019c410c",
       "exists": true,
       "generated": false,
       "id": "SUB-PROJECT",
@@ -6096,7 +6096,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "ae9c1f6ad146b351d181226eee163b54e23d049c17cb5cf02932e51aa00cf15f",
+      "content_sha256": "e4a61a90f9aed83dc10d5929fcc2a3636deee6c756307aba4e210ba88d39cca2",
       "exists": true,
       "generated": false,
       "id": "SUB-REGISTER",
@@ -6113,7 +6113,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the registration register — every version-controlled corpus artifact with owner, program, category, status, dependencies and traceability",
-      "records": 1687,
+      "records": 1689,
       "required": true,
       "tracked": true
     },
@@ -13432,7 +13432,7 @@
       "canonical_name": "CONSOLIDATION",
       "consumer_units": [],
       "consumers": 0,
-      "corpus_artifacts": 80,
+      "corpus_artifacts": 81,
       "corpus_status": "UNDER_REVIEW",
       "declared": "CONSOLIDATION",
       "degree": 0,
@@ -16696,7 +16696,7 @@
       "canonical_name": "MASTER",
       "consumer_units": [],
       "consumers": 0,
-      "corpus_artifacts": 30,
+      "corpus_artifacts": 31,
       "corpus_status": "ACTIVE",
       "declared": "MASTER",
       "degree": 0,
@@ -27323,11 +27323,10 @@
       "consumers": 18,
       "corpus_artifacts": 0,
       "declared": "engine.universal_discovery",
-      "degree": 20,
-      "dependencies": 2,
+      "degree": 19,
+      "dependencies": 1,
       "dependency_units": [
-        "engine.omega_infinite",
-        "engine.universal_discovery.model"
+        "engine.omega_infinite"
       ],
       "dependents": 5,
       "disposition": "EXTEND",
@@ -27352,7 +27351,7 @@
         "PLN-MODULE"
       ],
       "program": "engine",
-      "providers": 2,
+      "providers": 1,
       "reachable": true,
       "reachable_by": [
         "consumers",

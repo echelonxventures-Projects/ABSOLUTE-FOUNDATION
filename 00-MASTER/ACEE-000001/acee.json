@@ -137,7 +137,7 @@
       "kind": "registered-artifact",
       "name": "Registered artifacts",
       "note": "the source of REGISTERED constitutional identity for a relationship target",
-      "objects": 1687,
+      "objects": 1689,
       "pointer": "artifacts",
       "provider": "PRV-REGISTRY",
       "providers_matched": 1,
@@ -148,7 +148,7 @@
       "kind": "lineage-record",
       "name": "Lineage and bookkeeping records",
       "note": "a keyed store: the mapping key IS the identity, which needs no adapter change and no engine change",
-      "objects": 1718,
+      "objects": 1720,
       "pointer": "by_path",
       "provider": "PRV-LEDGER",
       "providers_matched": 1,
@@ -170,7 +170,7 @@
       "kind": "truth-concept",
       "name": "Repository Truth concepts",
       "note": "the concept closure a goal is judged against, so a goal is measured against the repository and not against an assumption about it",
-      "objects": 549,
+      "objects": 550,
       "pointer": "concepts",
       "provider": "PRV-TRUTH",
       "providers_matched": 1,
@@ -712,7 +712,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 4438,
+    "ckos_discovered": 4443,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -752,7 +752,7 @@
     "objects_from_invariants": 48,
     "objects_from_lifecycle": 45,
     "objects_from_pipeline": 35,
-    "objects_from_registry": 1687,
+    "objects_from_registry": 1689,
     "parallel_authority_claims": 0,
     "privileged_branches": 0,
     "providers_not_open": 0,
@@ -1614,7 +1614,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 4438
+      "value": 4443
     },
     {
       "id": "EK-05",
@@ -5672,7 +5672,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "693444a72f15c70a5fbff224d26d902086b7b1fd4dedac07b00e006ba38c1b8b",
+  "graph_digest": "cb48bea4a3de720651628096584fe1a99488d0bfa7c3cd3fa1c150bbc2d8dab3",
   "graphs": [
     {
       "composed": true,
@@ -5957,7 +5957,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 549,
+        "measure_value": 550,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -5965,7 +5965,7 @@
       "invariant": "Universal Context Assimilation",
       "measure": "concept_total",
       "measure_source": "00-MASTER/UAKOS-CLOSURE-002/closure.json",
-      "measure_value": 549,
+      "measure_value": 550,
       "ordinal": 20,
       "owner": "platform/universal_pipeline/catalog/uapf-pipelines.json",
       "properties": {
@@ -6098,7 +6098,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1708,
+        "measure_value": 1710,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6106,7 +6106,7 @@
       "invariant": "Universal Capability Discovery",
       "measure": "counters.capability_nodes_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1708,
+      "measure_value": 1710,
       "ordinal": 50,
       "owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "properties": {
@@ -6709,7 +6709,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 2,
+        "measure_value": 6,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -6717,7 +6717,7 @@
       "invariant": "Universal Execution Coordination",
       "measure": "independent_view.00-MASTER/ACEE-000001.gate_blocking",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 2,
+      "measure_value": 6,
       "ordinal": 180,
       "owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
       "properties": {
@@ -6897,7 +6897,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 2,
+        "measure_value": 6,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -6905,7 +6905,7 @@
       "invariant": "Universal Validation",
       "measure": "independent_view.00-MASTER/ACEE-000001.blocking_failures",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 2,
+      "measure_value": 6,
       "ordinal": 220,
       "owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "properties": {
@@ -7038,7 +7038,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1687,
+        "measure_value": 1689,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7046,7 +7046,7 @@
       "invariant": "Universal Registration",
       "measure": "counters.registry_artifacts_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1687,
+      "measure_value": 1689,
       "ordinal": 250,
       "owner": "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md",
       "properties": {
@@ -8072,7 +8072,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 2,
+        "measure_value": 6,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -8080,7 +8080,7 @@
       "invariant": "Auto Integration",
       "measure": "independent_view.00-MASTER/ACEE-000001.blocking_failures",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 2,
+      "measure_value": 6,
       "ordinal": 470,
       "owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
       "properties": {
@@ -24156,7 +24156,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "fbc3656414bc640de868692ab5fd160b813d01e51333d7539a88c808d6ae27c4",
+  "seal_sha256": "09a3ec0a4f0bd03d5f7c3df8d51ecbb02890b7e8b5b4a47b12f6a9a7269c5de6",
   "self_evolution": [
     {
       "anchor": "determination",

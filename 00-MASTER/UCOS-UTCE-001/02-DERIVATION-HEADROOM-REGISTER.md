@@ -8,13 +8,13 @@ located edge identifiers so the count is auditable against the corpus.
 
 | Rule | Located type | Read | Lane | Artifacts supported | Already written | Derivable, not written | Cited edges |
 |---|---|---|---|---|---|---|---|
-| `UTCE-DR-01` | `Parent` | from | `architecture` | 1686 | 1686 | 0 | `UEDGE-000000002`, `UEDGE-000000005`, `UEDGE-000000915` |
+| `UTCE-DR-01` | `Parent` | from | `architecture` | 1688 | 1688 | 0 | `UEDGE-000000002`, `UEDGE-000000005`, `UEDGE-000000919` |
 | `UTCE-DR-02` | `Depends-On` | from | `architecture` | 298 | 298 | 0 | `UEDGE-000000001`, `UEDGE-000000004`, `UEDGE-000000007` |
-| `UTCE-DR-03` | `Authorized-By` | from | `requirement` | 38 | 38 | 0 | `UEDGE-000004439`, `UEDGE-000004441`, `UEDGE-000004445` |
-| `UTCE-DR-04` | `Implements` | from | `architecture` | 36 | 36 | 0 | `UEDGE-000003903`, `UEDGE-000003971`, `UEDGE-000004041` |
-| `UTCE-DR-05` | `Implemented-By` | from | `implementation` | 17 | 17 | 0 | `UEDGE-000003904`, `UEDGE-000003906`, `UEDGE-000003972` |
-| `UTCE-DR-06` | `Consumes` | from | `architecture` | 24 | 24 | 0 | `UEDGE-000003583`, `UEDGE-000003625`, `UEDGE-000003645` |
-| `UTCE-DR-07` | `Traces-To` | from | `requirement` | 5 | 5 | 0 | `UEDGE-000003953`, `UEDGE-000004025`, `UEDGE-000004091` |
+| `UTCE-DR-03` | `Authorized-By` | from | `requirement` | 38 | 38 | 0 | `UEDGE-000004443`, `UEDGE-000004445`, `UEDGE-000004449` |
+| `UTCE-DR-04` | `Implements` | from | `architecture` | 36 | 36 | 0 | `UEDGE-000003907`, `UEDGE-000003975`, `UEDGE-000004045` |
+| `UTCE-DR-05` | `Implemented-By` | from | `implementation` | 17 | 17 | 0 | `UEDGE-000003908`, `UEDGE-000003910`, `UEDGE-000003976` |
+| `UTCE-DR-06` | `Consumes` | from | `architecture` | 24 | 24 | 0 | `UEDGE-000003587`, `UEDGE-000003629`, `UEDGE-000003649` |
+| `UTCE-DR-07` | `Traces-To` | from | `requirement` | 5 | 5 | 0 | `UEDGE-000003957`, `UEDGE-000004029`, `UEDGE-000004095` |
 
 ## Basis of each rule
 
