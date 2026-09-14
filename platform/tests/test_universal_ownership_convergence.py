@@ -149,7 +149,7 @@ PROJECTION = "00-BOOK/DATA/artifacts.json"
 #: UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION and is the record of the exclusion the concept
 #: legislates, not a rival definition. declared 394 -> 549, unresolved 155 -> 0, total (549)
 #: and contested (0) hold, and the governance minimum measured 0 at every step.
-RETIRED_MEASUREMENT = {"total": 549, "declared": 549, "contested": 0, "unresolved": 0}
+RETIRED_MEASUREMENT = {"total": 550, "declared": 550, "contested": 0, "unresolved": 0}
 
 
 def _home(*registered: str, **kwargs) -> CanonicalHomePolicy:
@@ -346,7 +346,7 @@ def _stripped_governed_assignments(tmp_path):
     subjects and the same declared policy, read through (a) an assignment catalogue stripped
     of its governed decisions and (b) a projection of the population document with the
     `def_homes`/`exact_homes` declaration evidence removed — the evidence state this
-    repository was in before CLOSURE-HOME-001…004. Nothing about the resolver changes. Every
+    repository was in before CLOSURE-HOME-001…005. Nothing about the resolver changes. Every
     subject that returns to UNRESOLVED must carry a named reason, and ownership that stands
     after the stripping must stand on evidence the stripping did not touch.
     """

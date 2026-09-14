@@ -5,7 +5,7 @@
     "declared_admitted_to_meta_registry": false,
     "disposition": "COMPOSE-AND-EXTEND OVER LOCATED OWNERS",
     "measured_admitted_to_meta_registry": false,
-    "meta_identifiers_read": 61,
+    "meta_identifiers_read": 62,
     "namespace_basis": "No namespace token is claimed in the meta-constitutional registry. Article XLI.5 forbids an EXTEND from introducing a new authority, registry, lifecycle or namespace, and Article LXXVI reserves namespace admission to the meta layer for meta-constitutional constructs only. This programme's identifier is a programme home under 00-MASTER/, which is the convention every other substantive programme in this repository already follows.",
     "rejected_alternatives": [
       "CREATE a new architectural reasoning engine in engine/ or platform/ — rejected: the eleven located owners bound below already realise all ten faculties, and a new engine would be a parallel authority over architectural reasoning, which 00-CMG/CMG-000001 CMG-INV-02 forbids.",
@@ -439,7 +439,7 @@
     "ontology_anchors": 3,
     "ontology_anchors_present": 3,
     "owners": 10,
-    "register_references": 1950,
+    "register_references": 1952,
     "register_references_unresolved": 0,
     "registers": 20,
     "registers_resolved": 20,
@@ -808,7 +808,7 @@
       "owner": "00-BOOK/tools/ukb.py",
       "path": "00-BOOK/DATA/artifacts.json",
       "problem": "",
-      "references": 1688,
+      "references": 1689,
       "references_unresolved": 0,
       "resolves": true,
       "role": "artifact-registry",
@@ -840,7 +840,7 @@
       "owner": "00-CMG/tools/cmg_validate.py",
       "path": "00-CMG/CMG-REGISTRY.json",
       "problem": "",
-      "references": 44,
+      "references": 45,
       "references_unresolved": 0,
       "resolves": true,
       "role": "meta-constitutional-registry",
@@ -1104,7 +1104,7 @@
       "subject": "every baseline"
     }
   ],
-  "seal_sha256": "bfcb8caf6517da30ae4f43b142f48d562b0a1603f49dacdb7b2880913a10d90b",
+  "seal_sha256": "536a400ed87491c8acb60c4dc231a711d24aa0fa48a165460f453b2b275da280",
   "validations": [
     {
       "blocking": true,

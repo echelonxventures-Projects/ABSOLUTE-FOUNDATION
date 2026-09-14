@@ -198,7 +198,7 @@ UCAF_MUTATIONS = {
     "vacancy-record-incomplete": (
         lambda d: d["tier_source"]["vacancy_required_fields"].append("ratified_occupant"),
         "UCAF-VAL-06",
-    ),
+    ),  # exercised over the vacant-registry twin below — the live registry has no vacancy
     "undefined-authority-reference": (
         lambda d: d["authority_sources"][1].__setitem__("id_pattern", "GOV-[0-9]{2,3}"),
         "UCAF-VAL-07",
@@ -212,8 +212,80 @@ UCAF_MUTATIONS = {
 }
 
 
+def _vacant_twin(tmp_path, engine):
+    """The live Registry with T1 vacant again and one incomplete VAC-01 record restored.
+
+    UCOS-RAT-002 retired the vacancy, so the guards that watch how a vacancy is
+    handled can no longer borrow their residue from repository state — a guard that
+    depends on a retired condition is a guard that quietly stops guarding. The twin is
+    manufactured here, deterministically, from the committed registry, and both
+    vacancy guards run against it.
+    """
+    import copy
+    import json
+
+    registry = json.loads((engine.REPO / "00-CMG/CMG-REGISTRY.json").read_text(encoding="utf-8"))
+    for tier in registry["tiers"]:
+        if tier["id"] == "T1":
+            tier["occupancy"] = "VACANT"
+            tier["vacancy"] = "VAC-01"
+    registry["vacancies"] = [
+        {
+            "id": "VAC-01",
+            "tier": "T1",
+            "declared_superior": "twin",
+            "located": False,
+            "evidence": "twin",
+            "closure_procedure": "twin",
+            "open_question": "CMG-OQ-02",
+            "provisional_consequence": "twin",
+        }
+    ]
+    for question in registry.get("open_questions", []):
+        if question.get("id") == "CMG-OQ-02":
+            question["status"] = "OPEN"
+    twin = engine.REPO / ".runtime" / "CMG-REGISTRY.vacant.json"
+    twin.parent.mkdir(parents=True, exist_ok=True)
+    twin.write_text(json.dumps(registry), encoding="utf-8")
+    document = copy.deepcopy(engine.load_declaration())
+    document["tier_source"]["owner"] = ".runtime/CMG-REGISTRY.vacant.json"
+    return document
+
+
+def test_ucaf_vacancy_guards_still_fire_on_a_vacant_twin(tmp_path) -> None:
+    """VAL-06 and the no-promotion rule are alive: they fire on the manufactured vacancy.
+
+    The live registry records no vacancy — UCOS-RAT-002 closed VAC-01 — so the residue
+    these guards watch is manufactured here instead. The mutation that demands a further
+    field on the vacancy record must still refuse (UCAF-VAL-06), and no instrument may be
+    promoted into the vacant tier (CMG-000001 XVII.4).
+    """
+    engine = _load("ucaf")
+
+    document = _vacant_twin(tmp_path, engine)
+    model = engine.measure(document)
+    assert model["vacant_tiers"], "the twin reports no vacancy — the guard would be vacuous"
+    for tier in model["tiers"]:
+        if tier["id"] in set(model["vacant_tiers"]):
+            assert str(tier["occupancy"]).upper() in {"VACANT", "NONE", ""}
+    for record in model["reconciliations"]:
+        assert record["ratifies"] is False
+        assert record["closes_vacancy"] is False
+
+    document = _vacant_twin(tmp_path, engine)
+    document["tier_source"]["vacancy_required_fields"].append("ratified_occupant")
+    model = engine.measure(document)
+    val = next(v for v in model["validations"] if v["id"] == "UCAF-VAL-06")
+    assert val["measured"] is True
+    assert val["satisfied"] is False, "a vacancy missing a required field went unrefused"
+
+
 @pytest.mark.parametrize("scenario", sorted(UCAF_MUTATIONS))
 def test_ucaf_gate_is_non_vacuous(scenario: str) -> None:
+    if scenario == "vacancy-record-incomplete":
+        pytest.skip(
+            "exercised over the vacant twin in test_ucaf_vacancy_guards_still_fire_on_a_vacant_twin"
+        )
     engine = _load("ucaf")
     document = engine.load_declaration()
     mutate, expected = UCAF_MUTATIONS[scenario]
@@ -233,12 +305,16 @@ def test_ucaf_aborts_fail_closed_on_an_unimplemented_reader() -> None:
         engine.measure(document)
 
 
-def test_ucaf_never_promotes_an_instrument_into_a_vacant_tier() -> None:
-    """CMG-000001 XVII.4 forbids promotion; LXXXI.5 voids any reading that does."""
+def test_ucaf_never_promotes_an_instrument_into_a_vacant_tier(tmp_path) -> None:
+    """CMG-000001 XVII.4 forbids promotion; LXXXI.5 voids any reading that does.
+
+    The live registry carries no vacancy (UCOS-RAT-002 retired VAC-01), so the residue is
+    manufactured over the vacant twin rather than borrowed from repository state.
+    """
     engine = _load("ucaf")
-    model = engine.measure(engine.load_declaration())
+    model = engine.measure(_vacant_twin(tmp_path, engine))
     vacant = set(model["vacant_tiers"])
-    assert vacant, "the located projection records no vacancy — this assertion would be vacuous"
+    assert vacant, "the twin records no vacancy — this assertion would be vacuous"
     for tier in model["tiers"]:
         if tier["id"] in vacant:
             assert str(tier["occupancy"]).upper() in {"VACANT", "NONE", ""}
