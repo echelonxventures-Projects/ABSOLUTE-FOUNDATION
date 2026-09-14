@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-12T12:54:17+00:00",
+  "generated_at": "2026-09-13T23:56:07+00:00",
   "generator_version": "1.0.0",
-  "count": 1688,
+  "count": 1689,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -53775,7 +53775,7 @@
       ],
       "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
+      "content_hash": "a0db883bf6e376a81b526d40398040376fe6350bd41f79b82b8a1815507a522c",
       "traceability": {
         "requirement": [
           "UCOS-CON-000032",
@@ -53879,7 +53879,7 @@
       ],
       "path": "00-CMG/CMG-REGISTRY.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
+      "content_hash": "5116dbe43f40b6c828498e9357611c12907bf2c6a847f20c7947032042aa298e",
       "traceability": {
         "requirement": [],
         "architecture": [
@@ -55037,7 +55037,7 @@
       ],
       "path": "platform/universal_ownership/catalog/ucos-ownership-declarations.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "369dc75b0fad2747e469b983ce5e92914af9ddd0a0d78dc02549458561ecec23",
+      "content_hash": "5e6f1f7c06b8c8357184419b5a729fb66508b40c8e97ecf3dbb1d87271c948a3",
       "traceability": {
         "requirement": [],
         "architecture": [
@@ -75078,11 +75078,56 @@
       ],
       "path": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "987f0d68b4f52cbc8ca888048371bb39963dddffc641566cee895e6acac1ffda",
+      "content_hash": "744f12c41c604cd4a5a45d37c8955582a994e8bc0cb96e89e06b8cda0d2324b6",
       "traceability": {
         "requirement": [],
         "architecture": [
           "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000087",
+      "native_id": "UCOS-RAT-002",
+      "name": "UCOS Ω∞ — Constituent Ratification of the Meta-Governance Constitution and Closure of the Tier-1 Vacancy",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 13186,
+      "page_end": 13187,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "edd6083c67567f28e829711af0c43a0750ca871e2b492cd82f86443b1babbb46",
+      "traceability": {
+        "requirement": [
+          "EC-1",
+          "UCOS-RAT-001",
+          "CMG-0000"
+        ],
+        "architecture": [
+          "UCOS-IDX-000001"
         ],
         "design": [],
         "implementation": [],

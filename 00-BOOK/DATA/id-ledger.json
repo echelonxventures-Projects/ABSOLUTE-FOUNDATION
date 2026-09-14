@@ -12033,15 +12033,22 @@
       "page_start": 13180,
       "page_count": 6,
       "first_seen": "2026-09-12T12:54:16+00:00"
+    },
+    "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000087",
+      "category": "CON",
+      "page_start": 13186,
+      "page_count": 2,
+      "first_seen": "2026-09-13T23:56:06+00:00"
     }
   },
-  "page_cursor": 13185,
+  "page_cursor": 13187,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
     "SRC": 2,
     "ARCH": 25,
-    "CON": 86,
+    "CON": 87,
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
@@ -12149,7 +12156,7 @@
     "DET": 6,
     "CONFIG": 40,
     "DATAOBJ": 147,
-    "EXDOC": 3149,
+    "EXDOC": 3150,
     "TOOLING": 57,
     "ENGINE": 1390,
     "TESTOBJ": 901,
@@ -27189,6 +27196,15 @@
         "status": "UNDER_REVIEW",
         "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 9,
+        "at": "2026-09-13T23:56:07+00:00",
+        "content_hash": "a0db883bf6e376a81b526d40398040376fe6350bd41f79b82b8a1815507a522c",
+        "version": "1.3",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
       }
     ],
     "UCOS-CON-000051": [
@@ -27279,6 +27295,15 @@
         "seq": 8,
         "at": "2026-09-08T07:21:19+00:00",
         "content_hash": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      },
+      {
+        "seq": 9,
+        "at": "2026-09-13T23:56:07+00:00",
+        "content_hash": "5116dbe43f40b6c828498e9357611c12907bf2c6a847f20c7947032042aa298e",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-CMG/CMG-REGISTRY.json",
@@ -27729,6 +27754,15 @@
         "seq": 2,
         "at": "2026-09-12T12:54:17+00:00",
         "content_hash": "369dc75b0fad2747e469b983ce5e92914af9ddd0a0d78dc02549458561ecec23",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_ownership/catalog/ucos-ownership-declarations.json",
+        "name": "Ucos Ownership Declarations"
+      },
+      {
+        "seq": 3,
+        "at": "2026-09-13T23:56:07+00:00",
+        "content_hash": "5e6f1f7c06b8c8357184419b5a729fb66508b40c8e97ecf3dbb1d87271c948a3",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "platform/universal_ownership/catalog/ucos-ownership-declarations.json",
@@ -33191,6 +33225,26 @@
         "status": "ACTIVE",
         "path": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
         "name": "UCOS Ω∞ — PROGRAM FAMILY CONCEPT REGISTER"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-13T23:56:07+00:00",
+        "content_hash": "744f12c41c604cd4a5a45d37c8955582a994e8bc0cb96e89e06b8cda0d2324b6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md",
+        "name": "UCOS Ω∞ — PROGRAM FAMILY CONCEPT REGISTER"
+      }
+    ],
+    "UCOS-CON-000087": [
+      {
+        "seq": 1,
+        "at": "2026-09-13T23:56:06+00:00",
+        "content_hash": "edd6083c67567f28e829711af0c43a0750ca871e2b492cd82f86443b1babbb46",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — Constituent Ratification of the Meta-Governance Constitution and Closure of the Tier-1 Vacancy"
       }
     ]
   },
@@ -67298,6 +67352,12 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:196ff6937ecc"
+    },
+    "00-BOOK/PORTAL/UCOS-CON-000087.md": {
+      "universal_id": "UCOS-EXDOC-003150",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:696b18c47365"
     }
   },
   "by_observation": {

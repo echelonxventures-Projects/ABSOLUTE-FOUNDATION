@@ -244,7 +244,7 @@
       "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39789,
+  "count": 39805,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -7763,6 +7763,26 @@
     },
     {
       "from": "UCOS-CON-000086",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-CON-000087",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CON-000087",
+      "kind": "owned_by",
+      "to": "02-MASTER"
+    },
+    {
+      "from": "UCOS-CON-000087",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CON-000087",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -75753,11 +75773,6 @@
     },
     {
       "from": "UCOS-ENGINE-001361",
-      "kind": "depends_on",
-      "to": "engine/universal_discovery/model.py"
-    },
-    {
-      "from": "UCOS-ENGINE-001361",
       "kind": "evidenced_by",
       "to": "VALIDATION"
     },
@@ -76030,16 +76045,6 @@
       "from": "UCOS-ENGINE-001368",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
-    },
-    {
-      "from": "UCOS-ENGINE-001369",
-      "kind": "depends_on",
-      "to": "engine/universal_discovery/__init__.py"
-    },
-    {
-      "from": "UCOS-ENGINE-001369",
-      "kind": "depends_on",
-      "to": "engine/universal_discovery/discovery.py"
     },
     {
       "from": "UCOS-ENGINE-001369",
@@ -135992,6 +135997,26 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-EXDOC-003150",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003150",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003150",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003150",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-EXEC-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -169139,6 +169164,11 @@
     {
       "from": "UCOS-TESTOBJ-000379",
       "kind": "depends_on",
+      "to": "infrastructure/__init__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000379",
+      "kind": "depends_on",
       "to": "infrastructure/capability.py"
     },
     {
@@ -169220,6 +169250,11 @@
       "from": "UCOS-TESTOBJ-000380",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000381",
+      "kind": "depends_on",
+      "to": "infrastructure/__init__.py"
     },
     {
       "from": "UCOS-TESTOBJ-000381",
@@ -170520,6 +170555,11 @@
       "from": "UCOS-TESTOBJ-000407",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000408",
+      "kind": "depends_on",
+      "to": "intelligence/kernel/config.py"
     },
     {
       "from": "UCOS-TESTOBJ-000408",
@@ -174329,6 +174369,11 @@
     {
       "from": "UCOS-TESTOBJ-000482",
       "kind": "depends_on",
+      "to": "platform/universal_control_plane/execution.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000482",
+      "kind": "depends_on",
       "to": "platform/universal_control_plane/linkage.py"
     },
     {
@@ -174350,6 +174395,11 @@
       "from": "UCOS-TESTOBJ-000482",
       "kind": "depends_on",
       "to": "platform/universal_control_plane/registration.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000482",
+      "kind": "depends_on",
+      "to": "platform/universal_control_plane/registry.py"
     },
     {
       "from": "UCOS-TESTOBJ-000482",
@@ -180754,6 +180804,11 @@
     {
       "from": "UCOS-TESTOBJ-000623",
       "kind": "depends_on",
+      "to": "platform/runtime_platform/registry.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000623",
+      "kind": "depends_on",
       "to": "platform/tests/runtime_platform_helpers.py"
     },
     {
@@ -180910,6 +180965,11 @@
       "from": "UCOS-TESTOBJ-000627",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000628",
+      "kind": "depends_on",
+      "to": "platform/runtime_platform/core.py"
     },
     {
       "from": "UCOS-TESTOBJ-000628",
@@ -184360,6 +184420,11 @@
       "from": "UCOS-TESTOBJ-000696",
       "kind": "depends_on",
       "to": "platform/universal_project_state/__init__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000696",
+      "kind": "depends_on",
+      "to": "platform/universal_project_state/state_governance.py"
     },
     {
       "from": "UCOS-TESTOBJ-000696",
@@ -190814,6 +190879,11 @@
     {
       "from": "UCOS-TESTOBJ-000838",
       "kind": "depends_on",
+      "to": "engine/construct/__main__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
       "to": "engine/construct/audit.py"
     },
     {
@@ -191155,6 +191225,11 @@
       "from": "UCOS-TESTOBJ-000842",
       "kind": "depends_on",
       "to": "engine/certification_integrity/surface.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000842",
+      "kind": "depends_on",
+      "to": "engine/root_ontology/contract.py"
     },
     {
       "from": "UCOS-TESTOBJ-000842",
@@ -191805,6 +191880,11 @@
       "from": "UCOS-TESTOBJ-000858",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000859",
+      "kind": "depends_on",
+      "to": "engine/certification_integrity/immutable.py"
     },
     {
       "from": "UCOS-TESTOBJ-000859",

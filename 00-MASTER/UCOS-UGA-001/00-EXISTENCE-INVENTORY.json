@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7152,
+  "total_objects": 7154,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -4618,6 +4618,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-003147",
       "first_seen": "commit:b239389ed9ff"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-CON-000087.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003150",
+      "first_seen": "commit:696b18c47365"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-COVERA-000001.md",
@@ -30645,6 +30654,14 @@
       "lifecycle": "AUTHORED",
       "owner": "02-MASTER",
       "universal_id": "UCOS-MASTER-000037",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "02-MASTER",
+      "universal_id": "UCOS-CON-000087",
       "identity_authority": "UMB-IMP-001"
     },
     {

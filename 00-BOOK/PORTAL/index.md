@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-09-12T12:54:17+00:00 by ukbx portal. 1688 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-09-13T23:56:08+00:00 by ukbx portal. 1689 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1692,3 +1692,4 @@
 | [UCOS-CON-000086](UCOS-CON-000086.md) | UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER | VOL-002 | ACTIVE |
 | [UCOS-MASTER-000044](UCOS-MASTER-000044.md) | UCOS Ω∞ — COMPILER COMPONENT REGISTER | VOL-000 | ACTIVE |
 | [UCOS-MASTER-000045](UCOS-MASTER-000045.md) | UCOS Ω∞ — PROGRAM FAMILY CONCEPT REGISTER | VOL-000 | ACTIVE |
+| [UCOS-CON-000087](UCOS-CON-000087.md) | UCOS Ω∞ — Constituent Ratification of the Meta-Governance Co | VOL-002 | ACTIVE |

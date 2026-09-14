@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-09-12T12:54:17+00:00",
+  "generated_at": "2026-09-13T23:56:07+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1825,
-    "versioned_artifacts": 1688,
-    "lineage_nodes": 1688,
+    "change_events": 1831,
+    "versioned_artifacts": 1689,
+    "lineage_nodes": 1689,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 1688,
-    "Modified": 131,
-    "Version-Incremented": 6
+    "Created": 1689,
+    "Modified": 135,
+    "Version-Incremented": 7
   },
   "evolution_timeline": [
     {
@@ -10961,6 +10961,42 @@
     {
       "change_id": "UCHG-000001825",
       "at": "2026-09-12T12:54:17+00:00",
+      "subject": "UCOS-PLT-000063",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001826",
+      "at": "2026-09-13T23:56:06+00:00",
+      "subject": "UCOS-CON-000087",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001827",
+      "at": "2026-09-13T23:56:07+00:00",
+      "subject": "UCOS-CMG-000001",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001828",
+      "at": "2026-09-13T23:56:07+00:00",
+      "subject": "UCOS-CON-000050",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001829",
+      "at": "2026-09-13T23:56:07+00:00",
+      "subject": "UCOS-CON-000050",
+      "kind": "Version-Incremented"
+    },
+    {
+      "change_id": "UCHG-000001830",
+      "at": "2026-09-13T23:56:07+00:00",
+      "subject": "UCOS-MASTER-000045",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001831",
+      "at": "2026-09-13T23:56:07+00:00",
       "subject": "UCOS-PLT-000063",
       "kind": "Modified"
     }
@@ -23154,7 +23190,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "UNDER_REVIEW",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001220",
@@ -23164,7 +23205,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001221",
@@ -23184,7 +23230,12 @@
       "snapshot_seq": 2,
       "from": "2e7faa98d98b0ededf84603fcca99175b7e389df4e5fad0cb8e012d1cec8e678",
       "to": "2a4870609d6bbe087d19a12cca77d6c289cb93369cbb86ce995fc4029e6620d0",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001223",
@@ -23444,7 +23495,12 @@
       "snapshot_seq": 2,
       "from": "5d472654434b4b42e912f35015e4199c6f221dbf2105b75b3ebc35d4a020cf0f",
       "to": "3b47ff9b18d346d41323016cc0c0470724ba289931a645f0930bee1ac721dbb6",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001249",
@@ -23464,7 +23520,12 @@
       "snapshot_seq": 3,
       "from": "2a4870609d6bbe087d19a12cca77d6c289cb93369cbb86ce995fc4029e6620d0",
       "to": "0e4637e30bfb9e812e415acdaf96626c20b977febfbadb3b3d36588d31afdac4",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001251",
@@ -23474,7 +23535,12 @@
       "snapshot_seq": 4,
       "from": "0e4637e30bfb9e812e415acdaf96626c20b977febfbadb3b3d36588d31afdac4",
       "to": "20124cbed5ae21befc465709a0c30e152cbf5397b39ad2fd97e31e125d543864",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001252",
@@ -23484,7 +23550,12 @@
       "snapshot_seq": 5,
       "from": "20124cbed5ae21befc465709a0c30e152cbf5397b39ad2fd97e31e125d543864",
       "to": "cbaeb49da4394082c291559e46237d6a009a2150966cf84ad2eefe4e367b7740",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001253",
@@ -23504,7 +23575,12 @@
       "snapshot_seq": 6,
       "from": "cbaeb49da4394082c291559e46237d6a009a2150966cf84ad2eefe4e367b7740",
       "to": "55bb086f5642f7c68bda89a1c202469b9873567347200132698880ab5c47f2cf",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001255",
@@ -23514,7 +23590,12 @@
       "snapshot_seq": 3,
       "from": "3b47ff9b18d346d41323016cc0c0470724ba289931a645f0930bee1ac721dbb6",
       "to": "56f1bbd99b48a34ab481cacb58ae43164974efdae66b21647357e2d829189f60",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001256",
@@ -23594,7 +23675,12 @@
       "snapshot_seq": 4,
       "from": "56f1bbd99b48a34ab481cacb58ae43164974efdae66b21647357e2d829189f60",
       "to": "2cc67f867a2bd07e685a57fd812653ccb8f0eb682ca77a7589dc14b291514d27",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001264",
@@ -23614,7 +23700,12 @@
       "snapshot_seq": 7,
       "from": "55bb086f5642f7c68bda89a1c202469b9873567347200132698880ab5c47f2cf",
       "to": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001266",
@@ -23714,7 +23805,12 @@
       "snapshot_seq": 5,
       "from": "2cc67f867a2bd07e685a57fd812653ccb8f0eb682ca77a7589dc14b291514d27",
       "to": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001276",
@@ -23944,7 +24040,12 @@
       "snapshot_seq": 6,
       "from": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
       "to": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001299",
@@ -24125,10 +24226,10 @@
       "from": null,
       "to": "ACTIVE",
       "commit": {
-        "commit": "04366c302344",
-        "date": "2026-08-05T16:20:06+05:30",
+        "commit": "9bb47a8d01bb",
+        "date": "2026-09-12T20:00:28+05:30",
         "author": "Echelon Ventures",
-        "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
+        "subject": "Ownership closed at 549/549 — evidence, not inference, both ways"
       }
     },
     {
@@ -26789,7 +26890,12 @@
       "snapshot_seq": 7,
       "from": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
       "to": "83fe5ce03b42b87465267ff6604d7b5a7ac6e7256908219852e4ddfd4feca879",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001583",
@@ -26799,7 +26905,12 @@
       "snapshot_seq": 8,
       "from": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
       "to": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001584",
@@ -29149,7 +29260,12 @@
       "snapshot_seq": 8,
       "from": "83fe5ce03b42b87465267ff6604d7b5a7ac6e7256908219852e4ddfd4feca879",
       "to": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
-      "commit": null
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
     },
     {
       "change_id": "UCHG-000001819",
@@ -29209,7 +29325,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "9bb47a8d01bb",
+        "date": "2026-09-12T20:00:28+05:30",
+        "author": "Echelon Ventures",
+        "subject": "Ownership closed at 549/549 — evidence, not inference, both ways"
+      }
     },
     {
       "change_id": "UCHG-000001825",
@@ -29220,10 +29341,90 @@
       "from": "96aa2be26454f7d618ddebb00281bb195f8576f3dbc9521cc1081c40b95146cd",
       "to": "369dc75b0fad2747e469b983ce5e92914af9ddd0a0d78dc02549458561ecec23",
       "commit": {
-        "commit": "04366c302344",
-        "date": "2026-08-05T16:20:06+05:30",
+        "commit": "9bb47a8d01bb",
+        "date": "2026-09-12T20:00:28+05:30",
         "author": "Echelon Ventures",
-        "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
+        "subject": "Ownership closed at 549/549 — evidence, not inference, both ways"
+      }
+    },
+    {
+      "change_id": "UCHG-000001826",
+      "subject": "UCOS-CON-000087",
+      "kind": "Created",
+      "at": "2026-09-13T23:56:06+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001827",
+      "subject": "UCOS-CMG-000001",
+      "kind": "Modified",
+      "at": "2026-09-13T23:56:07+00:00",
+      "snapshot_seq": 9,
+      "from": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
+      "to": "5116dbe43f40b6c828498e9357611c12907bf2c6a847f20c7947032042aa298e",
+      "commit": {
+        "commit": "0df90e1a7c19",
+        "date": "2026-09-07T21:24:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "One artifact of forty-four wrote its version with three components, and two gates failed for it"
+      }
+    },
+    {
+      "change_id": "UCHG-000001828",
+      "subject": "UCOS-CON-000050",
+      "kind": "Modified",
+      "at": "2026-09-13T23:56:07+00:00",
+      "snapshot_seq": 9,
+      "from": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
+      "to": "a0db883bf6e376a81b526d40398040376fe6350bd41f79b82b8a1815507a522c",
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
+    },
+    {
+      "change_id": "UCHG-000001829",
+      "subject": "UCOS-CON-000050",
+      "kind": "Version-Incremented",
+      "at": "2026-09-13T23:56:07+00:00",
+      "snapshot_seq": 9,
+      "from": "1.2",
+      "to": "1.3",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001830",
+      "subject": "UCOS-MASTER-000045",
+      "kind": "Modified",
+      "at": "2026-09-13T23:56:07+00:00",
+      "snapshot_seq": 2,
+      "from": "987f0d68b4f52cbc8ca888048371bb39963dddffc641566cee895e6acac1ffda",
+      "to": "744f12c41c604cd4a5a45d37c8955582a994e8bc0cb96e89e06b8cda0d2324b6",
+      "commit": {
+        "commit": "9bb47a8d01bb",
+        "date": "2026-09-12T20:00:28+05:30",
+        "author": "Echelon Ventures",
+        "subject": "Ownership closed at 549/549 — evidence, not inference, both ways"
+      }
+    },
+    {
+      "change_id": "UCHG-000001831",
+      "subject": "UCOS-PLT-000063",
+      "kind": "Modified",
+      "at": "2026-09-13T23:56:07+00:00",
+      "snapshot_seq": 3,
+      "from": "369dc75b0fad2747e469b983ce5e92914af9ddd0a0d78dc02549458561ecec23",
+      "to": "5e6f1f7c06b8c8357184419b5a729fb66508b40c8e97ecf3dbb1d87271c948a3",
+      "commit": {
+        "commit": "9bb47a8d01bb",
+        "date": "2026-09-12T20:00:28+05:30",
+        "author": "Echelon Ventures",
+        "subject": "Ownership closed at 549/549 — evidence, not inference, both ways"
       }
     }
   ],
@@ -45633,10 +45834,10 @@
       ]
     },
     "UCOS-CON-000050": {
-      "current_version": "1.2",
+      "current_version": "1.3",
       "first_version": "1.0",
-      "version_depth": 3,
-      "content_baseline": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
+      "version_depth": 4,
+      "content_baseline": "a0db883bf6e376a81b526d40398040376fe6350bd41f79b82b8a1815507a522c",
       "history": [
         {
           "version": "1.0",
@@ -45655,6 +45856,12 @@
           "content_hash": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
           "at": "2026-08-23T13:32:45+00:00",
           "snapshot_seq": 8
+        },
+        {
+          "version": "1.3",
+          "content_hash": "a0db883bf6e376a81b526d40398040376fe6350bd41f79b82b8a1815507a522c",
+          "at": "2026-09-13T23:56:07+00:00",
+          "snapshot_seq": 9
         }
       ]
     },
@@ -45676,7 +45883,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
+      "content_baseline": "5116dbe43f40b6c828498e9357611c12907bf2c6a847f20c7947032042aa298e",
       "history": [
         {
           "version": "1.0.0",
@@ -46054,7 +46261,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "369dc75b0fad2747e469b983ce5e92914af9ddd0a0d78dc02549458561ecec23",
+      "content_baseline": "5e6f1f7c06b8c8357184419b5a729fb66508b40c8e97ecf3dbb1d87271c948a3",
       "history": [
         {
           "version": "1.0.0",
@@ -52886,12 +53093,26 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "987f0d68b4f52cbc8ca888048371bb39963dddffc641566cee895e6acac1ffda",
+      "content_baseline": "744f12c41c604cd4a5a45d37c8955582a994e8bc0cb96e89e06b8cda0d2324b6",
       "history": [
         {
           "version": "1.0.0",
           "content_hash": "987f0d68b4f52cbc8ca888048371bb39963dddffc641566cee895e6acac1ffda",
           "at": "2026-09-12T12:54:16+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000087": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "edd6083c67567f28e829711af0c43a0750ca871e2b492cd82f86443b1babbb46",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "edd6083c67567f28e829711af0c43a0750ca871e2b492cd82f86443b1babbb46",
+          "at": "2026-09-13T23:56:06+00:00",
           "snapshot_seq": 1
         }
       ]
@@ -54669,6 +54890,14 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-MASTER-000037"
+    },
+    "UCOS-CON-000087": {
+      "birth": "2026-09-13T23:56:06+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000087"
     },
     "UCOS-IMP-000024": {
       "birth": "2026-07-18T04:07:00+00:00",

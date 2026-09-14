@@ -539,6 +539,38 @@
       "expires_at": null,
       "single_use": true,
       "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it: the operator directed \"get everything 100% perfect, and make it Unconditionally ready\". WHAT IT ALLOCATES. Exactly one by_object identity, for 00-BOOK/PORTAL/UCOS-MASTER-000045.md \u2014 the navigation page the registration transaction under P-UCOS-CORPUS-012 emitted for 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md (EXECUTABLE-class projection? no: EXDOC, category_seq 3148->3149), the same shape every portal page carries. WHY IT IS NEEDED. UGA-INV-01 refuses a tracked file without a Universal ID, and the pre-commit hook held the registration commit for exactly this reason. WHAT THIS DOES NOT DO. No other allocation; the portal page inherits the identity discipline of its family and mints no knowledge of its own. IRREVERSIBILITY. Permanent, not operator-remediable (UCKP-ART-05). The digests bind this permit to this manifest, this pre-image and HEAD 196ff693."
+    },
+    {
+      "permit_id": "P-UCOS-CORPUS-013",
+      "actor": "UMB-IMP-001 :: ukb.py build --mint",
+      "manifest_digest": "98db26a2bba18579c3d047ce5fb092f7738a6fb910fb2337045cdd8c396eaf88",
+      "preimage_digest": "9b5ec214326516022f5c054fce8d719ecc9f408bb5846722f129b0e891615728",
+      "head": "696b18c473654391a59303a0beb6a294263a0ef2",
+      "scope": {
+        "maps": [
+          "by_path"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it: the operator directed \"Make 549/549 subjects declared, 100.0% coverage, unconditional ready.\" WHAT IT ALLOCATES. One by_path identity for 02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md (CON, seq 86->87, pages 13185-13187) - the record of the constituent act that ratifies CMG-000001, occupies T1, and closes the questions and the vacancy that held readiness provisional. WHY IT IS NEEDED. A tracked constitutional artifact without an identity is an anonymous object and UGA-INV-01 refuses it; the registration transaction is the one authority that allocates identities. IRREVERSIBILITY. Permanent, not operator-remediable (UCKP-ART-05). The digests bind this permit to this manifest, this pre-image and HEAD 696b18c4."
+    },
+    {
+      "permit_id": "P-UCOS-UGA-019",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "ac953b935b484f54db7efc6dfbdfc86a99736ee1ecf76a59ed0cfbbeb89f38a0",
+      "preimage_digest": "3d4fe09dd2d44d9f3cc43f11ef5898f6d13c2b64bdcb566614554505e1aa0285",
+      "head": "696b18c473654391a59303a0beb6a294263a0ef2",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION (\"Make 549/549 subjects declared, 100.0% coverage, unconditional ready\"), transcribed by the agent rather than composed by it. WHAT IT ALLOCATES. Exactly one by_object identity for 00-BOOK/PORTAL/UCOS-CON-000087.md, the navigation page emitted by the registration transaction under P-UCOS-CORPUS-013 for 02-MASTER/UCOS-RAT-002 (EXDOC, seq 3149->3150) - the same shape every portal page carries. WHY IT IS NEEDED. UGA-INV-01 refuses a tracked file without a Universal ID; the pre-commit held the commit for exactly this. WHAT IT DOES NOT COVER. No other identity; no knowledge is minted here. IRREVERSIBILITY. Permanent (UCKP-ART-05); bound to this manifest, pre-image and HEAD 696b18c4."
     }
   ]
 }

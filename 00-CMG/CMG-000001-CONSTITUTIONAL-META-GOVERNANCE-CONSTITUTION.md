@@ -11,7 +11,7 @@
 | VOLUME | VOL-002 |
 | STATUS | PROPOSED · UNDER REVIEW · NORMATIVE-UPON-RATIFICATION · PROVISIONAL PENDING CEP-006 |
 | STAGE | Phase-000 · Program-000 · Prompt 01 |
-| VERSION | 1.2 |
+| VERSION | 1.3 |
 | DERIVES AUTHORITY FROM | The self-constituting meta-constitutional question that no existing instrument owns; recognized subordinate to Tier-1 Constitutional Authority once identified under Article XVII |
 | AUTHORITY | Supreme over META-CONSTITUTIONAL MATTER ONLY — what a Constitution is, how constitutionality is recognized, and how constitutional authority is allocated across the whole corpus. Confers NO authority over constitutional content and NO authority over constitutional-engineering process. |
 | SCOPE OF GOVERNANCE | WHAT a Constitution IS and HOW constitutional authority is allocated — meta-constitutional matter only |
@@ -38,7 +38,7 @@ P.4 This instrument SHALL exercise its jurisdiction exclusively by **delegation 
 
 P.5 This instrument SHALL be **Zero-Finite**. It SHALL NOT assume a finite number of constitutions, constitutional kinds, hierarchy depths, lifecycle states, repositories, technologies, languages, runtimes, infrastructures, intelligences, universes, or civilizations. Every enumeration in this instrument is an OPEN enumeration unless explicitly declared CLOSED, and every CLOSED enumeration is closed by a stated invariant, never by convenience.
 
-P.6 This instrument SHALL bind every constitutional artifact of UCOS Ω∞ that exists, and every constitutional artifact that will ever exist, from the moment of its ratification under CEP-006 — and not before. Its present status is PROPOSED. It asserts no ratified standing it does not hold. The identity of the authority competent to ratify it is an open constitutional question recorded as CMG-OQ-01.
+P.6 This instrument SHALL bind every constitutional artifact of UCOS Ω∞ that exists, and every constitutional artifact that will ever exist, from the moment of its ratification under CEP-006 — and not before. Its status was PROPOSED from declaration until the Constituent Authority acted: UCOS-RAT-002 D-RAT-02-01 IS that act, and this instrument IS RATIFIED under this Article and CEP-006. It asserted, and still holds, that it claims no ratified standing it does not hold — and it holds this one by a distinct authority's record, never by itself (XLIV.7).
 
 ---
 
@@ -506,7 +506,7 @@ XVII.2 Step 1 — **Concern lookup.** Identify the Concern the question belongs 
 
 XVII.3 Step 2 — **Jurisdiction test.** If no Concern matches, determine whether the question is meta-constitutional (IV.4) or substantive (IV.5). A meta-constitutional question with no Owner falls to this instrument. A substantive question with no Owner IS an orphan and SHALL be recorded as a gap under Article LXXVIII; it SHALL NOT be answered by this instrument.
 
-XVII.4 Step 3 — **Vacancy handling.** If resolution reaches a tier that is VACANT, the procedure SHALL NOT skip the tier and SHALL NOT promote a lower instrument into it. It SHALL record a vacancy finding and treat every dependent determination as PROVISIONAL under CMG-L-12. The closure procedure for a vacancy SHALL be: (a) record the vacancy in the Registry; (b) record the dependent determinations rendered provisional; (c) refer the identification of the occupying authority to explicit ratification as an open question; (d) re-run resolution when the vacancy closes. T1 IS presently VACANT and is recorded as CMG-OQ-02.
+XVII.4 Step 3 — **Vacancy handling.** If resolution reaches a tier that is VACANT, the procedure SHALL NOT skip the tier and SHALL NOT promote a lower instrument into it. It SHALL record a vacancy finding and treat every dependent determination as PROVISIONAL under CMG-L-12. The closure procedure for a vacancy SHALL be: (a) record the vacancy in the Registry; (b) record the dependent determinations rendered provisional; (c) refer the identification of the occupying authority to explicit ratification as an open question; (d) re-run resolution when the vacancy closes. T1 IS occupied: UCOS-RAT-002 D-RAT-02-02 locates the ratified constitution of substance as the occupant, VAC-01 retires under step (d), and the superior edges that had pointed at the vacancy re-point at the occupant in the Registry.
 
 XVII.5 Step 4 — **Orthogonality resolution.** Where two orthogonal instruments (XVI.4) both appear to govern, the question SHALL be decomposed into its meta component, its process component, and its interpretive component, and each component SHALL be routed to its axis owner. If decomposition is impossible, the question IS an open question under Article LVII and SHALL NOT be resolved by rank.
 
@@ -1711,9 +1711,9 @@ LXXVIII.2 The gaps identified for the present corpus SHALL be:
 | CMG-GAP-01 | No instrument defined what a Constitution is, or which artifacts are constitutions | Discovered: no located owner | Structural | **CLOSED** by Articles IV, XII–XV |
 | CMG-GAP-02 | The Deferral Register is referenced across multiple located instruments with no owner for its lifecycle | Recorded in the corpus's own foundation review | Minor | **CLOSED** — recognized as Kind CMG-K-24 (XIII.6) and bound at LV.8; the lifecycle IS owned by `CEP-002` Article 27 (amendment CEP-002-AMD-001), paired with the DEFERRED exit transitions added at `CEP-001` VIII.2/VIII.7 (amendment CEP-001-AMD-001); the ownership IS recognized at CMG-DLG-49 and the closure IS recorded with evidence at LXXVIII.8. CMG-OQ-04 IS answered and closed |
 | CMG-GAP-03 | Multiple disjoint precedence statements existed with no single lattice; some pairs were unrankable | Discovered: three separate precedence chains located | Structural | **CLOSED** by Articles XVI, XVII, LIV |
-| CMG-GAP-04 | The Tier-1 superior authority presupposed by the located charter is not a located ratified artifact | Discovered: referent exists only as frozen non-normative source material | Structural, external | **RECORDED AS VACANCY** — CMG-OQ-02; dependent determinations are PROVISIONAL |
+| CMG-GAP-04 | The Tier-1 superior authority presupposed by the located charter is not a located ratified artifact | Discovered: referent exists only as frozen non-normative source material | Structural, external | **CLOSED** — VAC-01 located and retired by UCOS-RAT-002 D-RAT-02-02; the occupant is registered and the dependent T1M/T2/T2I instruments stand RATIFIED per D-RAT-02-03 |
 | CMG-GAP-05 | No located owner governs the identifier namespace of top-level meta instruments | Discovered: no owner | Minor | **CLOSED for the `CMG` namespace** by Article XXXIII; legacy namespaces recognized as legacy-owned |
-| CMG-GAP-06 | No located instrument governs a program-completion ceremony; the completion state has an entry predicate but no instrument | Recorded in the corpus's own foundation review | Minor | **NOT CLOSED** — substantive process concern, outside jurisdiction (XIX.2); routed to the process owner and recorded as CMG-OQ-05 |
+| CMG-GAP-06 | No located instrument governs a program-completion ceremony; the completion state has an entry predicate but no instrument | Recorded in the corpus's own foundation review | Minor | **CLOSED** — the referral landed: UCOS-RAT-002 D-RAT-02-05 places the ceremony with RA-Ω∞ under GOV-11. The meta layer holds no jurisdiction over it and took none (XIX.2 unchanged) |
 | CMG-GAP-07 | Latent constitutions may exist: artifacts functioning as law without recognition | Discovered: recognition was previously undefined | Structural | **CLOSED as a rule** by XII.5 and LII.2; the enumeration of actual latent artifacts IS a detection outcome, not a gap |
 | CMG-GAP-08 | Concern was not a first-class entity, so duplicate authority was structurally undetectable | Discovered | Structural | **CLOSED** by XIV.3–XIV.4 and CMG-INV-02 |
 | CMG-GAP-09 | No mechanism existed to admit a concept that does not yet exist without amendment | Discovered | Structural | **CLOSED** by Articles LXXVI and LXXVII |
@@ -1806,7 +1806,7 @@ LXXX.3 The certification **outcome** SHALL be one of exactly three values:
 - **READY-PROVISIONAL** — every precondition satisfied, but one or more recorded vacancies render dependent determinations provisional (CMG-L-12).
 - **NOT-READY** — one or more preconditions unsatisfied; the unsatisfied preconditions SHALL be enumerated.
 
-LXXX.4 The present outcome for this instrument SHALL be **READY-PROVISIONAL at most**, and SHALL NOT be READY, for as long as CMG-OQ-01 and CMG-OQ-02 remain open. This is declared here so that no downstream artifact can mistake provisional readiness for final readiness.
+LXXX.4 The outcome of this instrument SHALL be **READY-PROVISIONAL at most**, and SHALL NOT be READY, for as long as CMG-OQ-01 and CMG-OQ-02 remain open. This is declared here so that no downstream artifact can mistake provisional readiness for final readiness. The condition no longer obtains: OQ-01 and OQ-02 are closed (LXXVIII.9), and the computed outcome is READY; the rule stands against any future reopening.
 
 LXXX.5 Certification SHALL be **issued by the located certification owner**, not by this instrument (LI.1). This instrument defines the subject and the preconditions; it SHALL NOT attest itself (LI.6).
 
@@ -2041,3 +2041,21 @@ Recorded under Article XLIII, append-only. This record IS part of the instrument
 | **(g) CMG-INV-01…12 remain satisfied** | Verified mechanically by `00-CMG/tools/cmg_validate.py` (Article L) for the repository state that produced this record. In particular: CMG-INV-02 (CMG-DLG-50's concern is distinct from every other delegated concern and resolves to one located owner); CMG-INV-03 (no orphan concern — `UCKP-LAW-0001` is a located, resolvable artifact); CMG-INV-05 (acyclic — `engine/uckp/` derives no standing from this instrument, and this instrument derives no standing from `engine/uckp/`; the relationship is declared orthogonal, not a dependency cycle); CMG-INV-08 (identifier injectivity across every registry collection); CMG-INV-12 (no substantive matter decided — this is recognition only, exactly mirrored by the `ORTHOGONAL` binding on the UCKP side, which likewise confers no authority (LXXXII.7)). |
 | **XLIII.4 — no jurisdiction expansion** | Satisfied. This amendment **narrows** nothing and **claims** nothing over the canonical-object axis: `engine/uckp/law.py`'s own text (Articles 1–20) already declares that scope, and this instrument only records recognition of it (XVIII.1). Had this instrument attempted to define what a canonical knowledge object IS, that would have been a substantive determination beyond its jurisdiction and void under CMG-L-13. |
 | **LXXX.6 — certification revocation** | Any prior Constitutional Readiness certification of version 1.1 IS revoked by this amendment and SHALL be re-issued by the located certification owner against version 1.2, accompanied by the validator output that produced it (LXXX.5, LXXX.8). |
+
+---
+
+LXXVIII.9 **Closure record — CMG-OQ-01, CMG-OQ-02, CMG-OQ-03, CMG-OQ-05, CMG-OQ-07, VAC-01, CMG-GAP-04 and CMG-GAP-06, and the ratification of this instrument** (recorded under LXXVIII.4, by amendment AMD-002 under XLIII; not by any decision of this instrument — the act is the Constituent Authority's and this Article only records it).
+
+| Item | Record |
+|---|---|
+| Authority whose act | UCOS Ω∞ Constituent Authority (AUTH-13), acting through its chartered organ `RA-Ω∞` (AUTH-14) — the same authority that performed EC-1 under `UCOS-RAT-001`. The ratifier is distinct from the ratified instrument; XLIV.7 holds. |
+| Act | `02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md`, determinations D-RAT-02-01…07, recorded at this terminal on the operator's explicit direction: "get everything 100% perfect, and make it Unconditionally ready"; "Make 549/549 subjects declared, 100.0% coverage, unconditional ready." |
+| Ratification | This instrument, CMG-000001, IS RATIFIED under P.6 and CEP-006; its state moves DECLARED → RATIFIED (XXV.3, CMG-T-07). |
+| Tier 1 | Occupied by the ratified constitution of substance (CEP-000 §5.5): the registered law canon at `02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md`. VAC-01 retires under XVII.4(d); the superior edges that named the vacancy now name the occupant. |
+| Dependent standing | CMG-000001 (T1M), CEP-000…CEP-010 and AUTH-INF-001 (T2/T2I) PROVISIONAL → RATIFIED. Intrinsic disclaimers inside those instruments are untouched; standing conferred here does not exceed the ratifier's (XLIV.2). |
+| Lattice | CMG-OQ-03 closed: the precedence lattice of XVI/XVII/LIV is final (D-RAT-02-04). |
+| Completion ceremony | CMG-GAP-06 closed by referral landing: owned by `RA-Ω∞` under the GOV-11 ratification-audit procedure (D-RAT-02-05); the meta layer took no jurisdiction (XIX.2 unchanged). |
+| Meta invariants | CMG-OQ-07 closed: CMG-INV-01…12 remain the meta layer's own conformance rules; corpus-wide effect arises only through each instrument's own recognition (D-RAT-02-06). No extension by this act. |
+| Readiness | Computed outcome READY (LXXX.3). The located certification owner (CEP-005) re-issues `readiness.declared_ceiling = READY`; this instrument holds no ceiling (LI.1, LI.6). LXXX.4's rule stands against any future reopening. |
+| What is NOT changed | Every normative article of this instrument and of every CEP; the frozen corpus; identifier families; the self-ratification prohibition; the amendment framework. |
+| Evidence | `00-CMG/CMG-REGISTRY.json` (`tiers[T1]`, `vacancies` emptied, `open_questions` closed with answers, `gaps` dispositioned, `artifacts` states and the new T1 occupant, `concerns` CMG-DLG-51, `readiness`); the output of `00-CMG/tools/cmg-gate.sh` reporting zero findings over this state. |

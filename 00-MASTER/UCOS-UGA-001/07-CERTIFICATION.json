@@ -8,16 +8,16 @@
   "blocking_deviations": [],
   "declared_open": [],
   "proof": {
-    "existence_digest": "4884d2f1f594116f3eab896d3568d608827f6ef8d49359283cee4f00613514a6",
-    "identity_digest": "9ae57a09f89b3b163b3c446183c7777d70b66763a15b1a2896dfe0f19fc80900",
-    "registry_digest": "26faf14c02075d8594955dd8b97ed669056cb2590d841c91d23237e57046cc7e",
-    "graph_digest": "417194503ae8d3256d659525640b2102112c42e5ff1bf20ef95a48d753c40fbe",
-    "invariant_digest": "fd97b347cec1c486ee439dde232c48411dac74f095501951d8790ac4b91cce3e"
+    "existence_digest": "a6d7e3194d0a5085598fbcce18e8a18bb39b86454587610efdacf23360f0659b",
+    "identity_digest": "6a749d6b6057d42a0a38881cb5731e9e6f4191c56bfbbf137d2fdd4b46a4137f",
+    "registry_digest": "ddda2d71d7d5bd0ec4b3379f4b2e9fdb409d43045a20842e5e5fd5458fe45eec",
+    "graph_digest": "9615dc22fae017ec57131aab24bf817c850d4e88f58da7ec3b9133b4604683ba",
+    "invariant_digest": "c063177da886734a013bca49a397336d88ba7d9395baa35535849f4ef0878353"
   },
   "fixed_point_property": "Outputs contain no wall clock, so a second run over an unchanged repository rewrites no byte. Fixed point is checkable by comparison.",
   "scope": {
-    "objects_governed": 7152,
-    "minted_by_this_programme": 5464,
+    "objects_governed": 7154,
+    "minted_by_this_programme": 5465,
     "corpus_bytes_touched": 0
   }
 }

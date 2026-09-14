@@ -8,7 +8,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 |--------|--------|------|----------|--------|-----------|------------|
 | `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 469 | UPN-000000001–UPN-000013185 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
-| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 124 | UPN-000001327–UPN-000013176 |
+| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 125 | UPN-000001327–UPN-000013187 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 108 | UPN-000000022–UPN-000013173 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 24 | UPN-000004194–UPN-000012593 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
@@ -524,7 +524,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-002 — CONSTITUTION <a id="vol-002"></a>
 
 *Constitutional corpus, consolidation program, freeze, and registers.*  \
-**Category:** CON · **Status:** ACTIVE · **Artifacts:** 124
+**Category:** CON · **Status:** ACTIVE · **Artifacts:** 125
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -652,6 +652,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-CON-000084` | PHASE R4 — BASIS MEMBER EXHAUSTION, MOVABILITY DETERMINATION,… | — | ACTIVE |
 | `UCOS-CON-000085` | CONSTITUTIONAL INTEGRATION ANALYSIS — MCRF / STREAM-00 / WP-001A | — | ACTIVE |
 | `UCOS-CON-000086` | UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER | — | ACTIVE |
+| `UCOS-CON-000087` | UCOS Ω∞ — Constituent Ratification of the Meta-Governance Con… | UCOS-RAT-002 | ACTIVE |
 
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 

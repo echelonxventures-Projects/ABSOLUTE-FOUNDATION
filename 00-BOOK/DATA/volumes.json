@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T12:54:17+00:00",
+  "generated_at": "2026-09-13T23:56:07+00:00",
   "count": 25,
   "volumes": [
     {
@@ -33,9 +33,9 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 124,
+      "artifact_count": 125,
       "page_range_start": 1327,
-      "page_range_end": 13176,
+      "page_range_end": 13187,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
     },
     {
