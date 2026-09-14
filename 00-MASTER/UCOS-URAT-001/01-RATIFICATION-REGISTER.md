@@ -22,7 +22,7 @@ verified by an anchor present in that act's own text. This registry confers noth
 | `URAT-REC-03` | `00-CEP/STAGE-04-S4-06-INFRASTRUCTURE-013-SECURITY-RATIFICATION-AND-INFRASTRUCTURE-014-NEXT-FRONTIER-DETERMINATION.md` | admitted as a member of the constitutional corpus at PROVISIONAL acceptance, pending out-of-corpus finality | 49bd9552a81482a0 | c2ee260add54522b |
 | `URAT-REC-04` | `00-CEP/STAGE-04-S4-11-INFRASTRUCTURE-014-GOVERNANCE-PROVISIONAL-RATIFICATION.md` | provisionally ratified; in-corpus ratification authority is engineering-readiness only | fd0bafb2c8d184fe | 50b9928cfab95531 |
 | `URAT-REC-05` | `00-CEP/STAGE-04-S4-12-INFRASTRUCTURE-005-UIMM-INTEGRATION-PROVISIONAL-RATIFICATION.md` | provisionally ratified; in-corpus ratification authority is engineering-readiness only | 93ddde8a64507b90 | a89e6457095f41f7 |
-| `URAT-REC-06` | `02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md` | RATIFIED at the derived-truth layer by the Constituent Authority (AUTH-13) through RA-Ω∞ (AUTH-14): T1 occupied, VAC-01 retired, dependent standing elevated, the readiness ceiling re-issued READY by the located certification owner; constitutional finality remains CEP-006 I.4's reservation | edd6083c67567f28 | fbaf6c0f6989ebb4 |
+| `URAT-REC-06` | `02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md` | RATIFIED at the derived-truth layer by the Constituent Authority (AUTH-13) through RA-Ω∞ (AUTH-14): T1 occupied, VAC-01 retired, dependent standing elevated, the readiness ceiling re-issued READY by the located certification owner; constitutional finality remains CEP-006 I.4's reservation | edd6083c67567f28 | 0dc072f2ada80af6 |
 
 ## Evidence referenced
 
@@ -45,7 +45,7 @@ verified by an anchor present in that act's own text. This registry confers noth
 | `URAT-REC-04` | `00-CEP/STAGE-04-S4-10-INFRASTRUCTURE-014-GOVERNANCE-CERTIFICATION.md` | YES | 346983b508e4ebf6 |
 | `URAT-REC-04` | `00-CEP/STAGE-04-S4-07-INFRASTRUCTURE-014-GOVERNANCE-FACTORY-ADMISSION.md` | YES | 0c65160ca13e63ad |
 | `URAT-REC-05` | `00-CEP/STAGE-04-S4-06-INFRASTRUCTURE-013-SECURITY-RATIFICATION-AND-INFRASTRUCTURE-014-NEXT-FRONTIER-DETERMINATION.md` | YES | 49bd9552a81482a0 |
-| `URAT-REC-06` | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES | 845f59b91a33648c |
-| `URAT-REC-06` | `00-CMG/CMG-REGISTRY.json` | YES | 5116dbe43f40b6c8 |
+| `URAT-REC-06` | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES | b4382690af20e657 |
+| `URAT-REC-06` | `00-CMG/CMG-REGISTRY.json` | YES | a17e0a0ab88a50af |
 | `URAT-REC-06` | `09-DR-RAT-11-ASSESSMENT.md` | YES | c7c3aadf1090c797 |
 | `URAT-REC-06` | `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md` | YES | 3625ea5f92c8acc1 |

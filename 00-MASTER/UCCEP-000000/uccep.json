@@ -6,9 +6,6 @@
     "CK-ACEE",
     "CK-BASELINE",
     "CK-REG-DRIFT",
-    "CK-UCAF",
-    "CK-URAT",
-    "CK-URAT-SELF",
     "CK-VERIFY"
   ],
   "blocking_not_executed": [],
@@ -276,13 +273,13 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 3,
+      "exit_code": 1,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
       "in_scope": true,
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "uncommitted-registration drift — source split from projections",
+      "reason": "registration transaction failed",
       "tier": "full",
       "verdict": "FAIL",
       "write_scope": "projections"
@@ -606,15 +603,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-UCAF",
       "in_scope": true,
       "name": "Authority model bound: every located authority registered, resolvable, scoped, evidenced and audited; no authority-shaped reference undefined; the tier projection every gate reads faithful to the canonical lattice and to the charter vesting; every tier reported occupied corroborated by a located occupant; every authority token minted in the executable plane classified and colliding with no registered constitutional authority; every declared realization bound to the module, the enforcement symbol and the vesting clause it names",
       "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
-      "reason": "gate CLOSED",
+      "reason": "",
       "tier": "standard",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
@@ -636,30 +633,30 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-URAT",
       "in_scope": true,
       "name": "Ratification registry bound (CEP-006 Art XVI/XVII): every record verified against the located act that determined it, uniqueness and lineage legal, in-corpus ceiling enforced",
       "owner": "00-MASTER/UCOS-URAT-001/urat_engine.py",
-      "reason": "gate CLOSED",
+      "reason": "",
       "tier": "standard",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-URAT-SELF",
       "in_scope": true,
       "name": "URAT self-guards: declaration integrity, zero-enumeration, write scope, determinism, discovery coverage, no-conferral",
       "owner": "00-MASTER/UCOS-URAT-001/urat_engine.py",
-      "reason": "gate CLOSED",
+      "reason": "",
       "tier": "standard",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
@@ -802,9 +799,6 @@
     "CK-ACEE",
     "CK-BASELINE",
     "CK-REG-DRIFT",
-    "CK-UCAF",
-    "CK-URAT",
-    "CK-URAT-SELF",
     "CK-VERIFY"
   ],
   "gate_exit": 1,
@@ -1169,16 +1163,14 @@
         "CK-UCAF",
         "CK-UCAF-SELF"
       ],
-      "failed": [
-        "CK-UCAF"
-      ],
+      "failed": [],
       "id": "G-18",
       "name": "Constitutional Authority Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCOS-UCAF-001 (the authority model CEP-002 Art 19 and CEP-006 Art I presuppose; extended under 00-CMG/CMG-000001 Art LXXVII.2(b) to cover execution authority and tier governance — CEP-003 Art I/VIII vests the first and CMG-000001 Art XVI legislates the second, so both are REUSED and neither is created here)",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1190,17 +1182,14 @@
         "CK-URAT",
         "CK-URAT-SELF"
       ],
-      "failed": [
-        "CK-URAT",
-        "CK-URAT-SELF"
-      ],
+      "failed": [],
       "id": "G-19",
       "name": "Ratification Registry Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCOS-URAT-001 (the registry CEP-006 Art XVI mandates)",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1347,9 +1336,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -1359,9 +1345,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -1468,21 +1451,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -1675,9 +1653,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -1687,9 +1662,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -1808,21 +1780,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2013,9 +1980,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -2024,9 +1988,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -2130,21 +2091,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2335,9 +2291,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -2346,10 +2299,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -2442,21 +2392,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2634,9 +2579,6 @@
       "advisory_failures": [],
       "blocking_failures": [
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -2644,10 +2586,7 @@
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-ACEE",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -2694,21 +2633,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2846,9 +2780,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -2858,9 +2789,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -2973,21 +2901,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3189,9 +3112,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -3200,9 +3120,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -3300,21 +3217,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3497,9 +3409,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -3509,9 +3418,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -3624,21 +3530,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3834,9 +3735,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -3845,10 +3743,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -3953,21 +3848,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4156,9 +4046,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -4167,10 +4054,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -4239,21 +4123,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4417,9 +4296,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -4429,9 +4305,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -4538,21 +4411,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4740,9 +4608,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -4752,9 +4617,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -4867,21 +4729,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5073,9 +4930,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -5085,9 +4939,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -5206,21 +5057,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5412,9 +5258,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -5424,9 +5267,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -5539,21 +5379,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5753,9 +5588,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -5765,9 +5597,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -5856,21 +5685,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6051,9 +5875,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -6062,9 +5883,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -6174,21 +5992,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6382,9 +6195,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -6394,9 +6204,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -6497,21 +6304,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6707,9 +6509,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -6718,9 +6517,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -6800,21 +6596,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6980,9 +6771,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -6992,9 +6780,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -7107,21 +6892,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7322,9 +7102,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -7333,9 +7110,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -7439,21 +7213,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7645,9 +7414,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -7657,9 +7423,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -7748,21 +7511,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7944,9 +7702,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -7956,9 +7711,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -8071,21 +7823,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8284,9 +8031,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -8296,9 +8040,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -8405,21 +8146,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8611,10 +8347,7 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
@@ -8622,9 +8355,6 @@
       "gate_blocking": [
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -8743,21 +8473,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8944,10 +8669,7 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
@@ -8955,9 +8677,6 @@
       "gate_blocking": [
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -9076,21 +8795,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9277,9 +8991,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -9288,9 +8999,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -9409,21 +9117,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9618,9 +9321,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -9629,9 +9329,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -9750,21 +9447,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9960,9 +9652,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -9972,9 +9661,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -10087,21 +9773,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10303,9 +9984,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -10315,9 +9993,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -10430,21 +10105,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10645,9 +10315,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -10657,9 +10324,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -10772,21 +10436,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10987,9 +10646,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -10999,9 +10655,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -11114,21 +10767,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11331,9 +10979,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -11343,9 +10988,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -11452,21 +11094,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11651,9 +11288,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -11663,9 +11297,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -11784,21 +11415,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11995,9 +11621,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -12007,9 +11630,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -12122,21 +11742,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12334,9 +11949,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -12346,9 +11958,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -12467,21 +12076,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12679,9 +12283,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -12691,9 +12292,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -12812,21 +12410,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13024,9 +12617,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -13036,9 +12626,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -13127,21 +12714,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13325,9 +12907,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -13337,9 +12916,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -13452,21 +13028,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13664,9 +13235,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -13676,9 +13244,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -13791,21 +13356,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14001,9 +13561,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -14013,9 +13570,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -14092,21 +13646,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14262,9 +13811,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -14274,9 +13820,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -14383,21 +13926,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14593,9 +14131,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -14605,9 +14140,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -14720,21 +14252,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14936,9 +14463,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -14948,9 +14472,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -15063,21 +14584,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15277,20 +14793,14 @@
       ],
       "blocking_failures": [
         "CK-REG-DRIFT",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -15371,21 +14881,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15544,10 +15049,7 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
@@ -15555,9 +15057,6 @@
       "gate_blocking": [
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -15676,21 +15175,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15868,9 +15362,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -15880,9 +15371,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -16001,21 +15489,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -16206,10 +15689,7 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
@@ -16217,9 +15697,6 @@
       "gate_blocking": [
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -16338,21 +15815,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -16539,10 +16011,7 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
@@ -16550,9 +16019,6 @@
       "gate_blocking": [
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -16671,21 +16137,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -16873,9 +16334,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -16885,9 +16343,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -17000,21 +16455,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17212,9 +16662,6 @@
       ],
       "blocking_failures": [
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -17222,10 +16669,7 @@
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-ACEE",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -17314,21 +16758,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17508,9 +16947,6 @@
       ],
       "blocking_failures": [
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -17518,10 +16954,7 @@
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-ACEE",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -17610,21 +17043,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17804,9 +17232,6 @@
       ],
       "blocking_failures": [
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -17814,10 +17239,7 @@
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-ACEE",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -17906,21 +17328,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18090,9 +17507,6 @@
       ],
       "blocking_failures": [
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -18100,10 +17514,7 @@
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-ACEE",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -18192,21 +17603,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18388,8 +17794,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -18399,8 +17803,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -18519,13 +17921,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18729,8 +18128,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -18740,8 +18137,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -18860,13 +18255,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19070,9 +18462,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -19082,9 +18471,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -19203,21 +18589,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19414,9 +18795,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -19426,9 +18804,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -19547,21 +18922,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19758,9 +19128,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -19770,9 +19137,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -19879,21 +19243,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20091,7 +19450,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -20101,7 +19459,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -20220,12 +19577,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20429,7 +19784,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -20439,7 +19793,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -20558,12 +19911,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20767,9 +20118,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -20779,9 +20127,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -20900,21 +20245,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21112,9 +20452,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -21124,9 +20461,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -21245,21 +20579,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21457,9 +20786,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -21469,9 +20795,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -21590,21 +20913,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21802,9 +21120,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -21814,9 +21129,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -21935,21 +21247,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22147,9 +21454,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -22159,9 +21463,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -22268,21 +21569,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22481,10 +21777,7 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-REG-DRIFT",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
@@ -22492,9 +21785,6 @@
       "gate_blocking": [
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -22613,21 +21903,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22815,9 +22100,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -22827,9 +22109,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -22942,21 +22221,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23153,9 +22427,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -23165,9 +22436,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -23280,21 +22548,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23491,9 +22754,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -23503,9 +22763,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -23618,21 +22875,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23833,9 +23085,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -23845,9 +23094,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -23960,21 +23206,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24173,9 +23414,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -24185,9 +23423,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -24300,21 +23535,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24518,9 +23748,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -24530,9 +23757,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -24645,21 +23869,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24853,9 +24072,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -24864,10 +24080,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -24966,21 +24179,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25167,9 +24375,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -25179,9 +24384,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -25294,21 +24496,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25509,9 +24706,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -25521,9 +24715,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -25642,21 +24833,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25854,9 +25040,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -25866,9 +25049,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -25987,21 +25167,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26197,9 +25372,6 @@
       ],
       "blocking_failures": [
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -26207,10 +25379,7 @@
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-ACEE",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -26299,21 +25468,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26487,9 +25651,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -26498,9 +25659,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -26568,21 +25726,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26721,9 +25874,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -26733,9 +25883,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -26854,21 +26001,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27064,9 +26206,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -27076,9 +26215,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -27191,21 +26327,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27390,9 +26521,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -27402,9 +26530,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -27493,21 +26618,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27672,9 +26792,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -27684,9 +26801,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -27799,21 +26913,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -28014,9 +27123,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -28026,9 +27132,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -28141,21 +27244,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -28353,9 +27451,6 @@
       "blocking_failures": [
         "CK-VERIFY",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -28364,9 +27459,6 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -28476,21 +27568,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -28681,9 +27768,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -28692,10 +27776,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -28794,21 +27875,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -28994,9 +28070,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -29005,10 +28078,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -29113,21 +28183,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -29317,9 +28382,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -29329,9 +28391,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -29438,21 +28497,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -29633,9 +28687,6 @@
         "CK-VERIFY",
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -29645,9 +28696,6 @@
         "CK-ACEE",
         "CK-BASELINE",
         "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-VERIFY"
       ],
       "gate_exit": 1,
@@ -29766,21 +28814,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -29976,9 +29019,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -29987,10 +29027,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -30059,21 +29096,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -30221,9 +29253,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -30232,10 +29261,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -30340,21 +29366,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -30545,9 +29566,6 @@
       "blocking_failures": [
         "CK-REG-DRIFT",
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -30556,10 +29574,7 @@
       "gate_blocking": [
         "CK-ACEE",
         "CK-BASELINE",
-        "CK-REG-DRIFT",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-REG-DRIFT"
       ],
       "gate_exit": 1,
       "gates": [
@@ -30664,21 +29679,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -30866,9 +29876,6 @@
       "advisory_failures": [],
       "blocking_failures": [
         "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
@@ -30876,10 +29883,7 @@
       "blocking_unavailable": [],
       "gate_blocking": [
         "CK-ACEE",
-        "CK-BASELINE",
-        "CK-UCAF",
-        "CK-URAT",
-        "CK-URAT-SELF"
+        "CK-BASELINE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -30944,21 +29948,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-UCAF"
-          ],
+          "failed": [],
           "id": "G-18",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-URAT",
-            "CK-URAT-SELF"
-          ],
+          "failed": [],
           "id": "G-19",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -31746,7 +30745,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "be21d602af729e5ea422e378347f1527fb7b176b66835799e820086f9f5c3990",
+  "seal_sha256": "6d2f91c7f23be9dbdc634d73a226d2f32f75c37a052bb1200f43927de5156a97",
   "tier": "full",
   "unavailable": [],
   "unproven": []

@@ -503,12 +503,12 @@
       "authority_resolved": true,
       "evidence": [
         {
-          "digest": "845f59b91a33648c",
+          "digest": "b4382690af20e657",
           "reference": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
           "resolved": true
         },
         {
-          "digest": "5116dbe43f40b6c8",
+          "digest": "a17e0a0ab88a50af",
           "reference": "00-CMG/CMG-REGISTRY.json",
           "resolved": true
         },
@@ -534,7 +534,7 @@
         "URAT-PRE-03",
         "URAT-PRE-04"
       ],
-      "program_state_hash": "fbaf6c0f6989ebb4ec721924fb8e2cc4eea6fdf59c28fa0a09927b7dc5f41d82",
+      "program_state_hash": "0dc072f2ada80af657111aafb76a22089b4c0e9f880a9e6f43a5993475b8e996",
       "record": "02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md",
       "record_digest": "edd6083c67567f28",
       "record_resolved": true,
@@ -587,7 +587,7 @@
       "rule": "ratification authority is never self-conferred by execution authority"
     }
   ],
-  "seal_sha256": "70b45633b0e8764fc7a898d554f6f23897c62b6748ae0c430aab08c271b3e7ce",
+  "seal_sha256": "546c2f5b1027d3d0dfeef685549801311517d5b649b49c324b3e95a29fb1494f",
   "states": [
     {
       "admits_to_freeze": false,
