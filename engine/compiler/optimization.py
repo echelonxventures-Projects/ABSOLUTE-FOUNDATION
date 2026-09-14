@@ -66,9 +66,7 @@ class Optimizer:
                 optimized = CompiledArtifact(
                     path=artifact.path, kind=artifact.kind, content=normalized
                 )
-                self._assert_traceability(
-                    optimized, compiled.blueprint_id, canonical_source
-                )
+                self._assert_traceability(optimized, compiled.blueprint_id, canonical_source)
                 new_artifacts.append(optimized)
         result = CompiledBlueprint(
             blueprint_id=compiled.blueprint_id,

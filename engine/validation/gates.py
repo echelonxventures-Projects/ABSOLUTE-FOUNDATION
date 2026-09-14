@@ -45,9 +45,7 @@ class AcceptanceDecision:
         }
 
 
-def enforce_acceptance(
-    report: ValidationReport, *, strict: bool = False
-) -> AcceptanceDecision:
+def enforce_acceptance(report: ValidationReport, *, strict: bool = False) -> AcceptanceDecision:
     """Decide acceptance from ``report``; in strict mode raise on rejection.
 
     Raises:

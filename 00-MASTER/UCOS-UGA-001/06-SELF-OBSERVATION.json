@@ -1,0 +1,95 @@
+{
+  "artifact_id": "UCOS-UGA-001",
+  "authority": "NONE — DERIVED TRUTH. Measurement of repository state.",
+  "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+  "determinism": "No wall clock. Timestamps are ledger first_seen values.",
+  "epoch": "6-9 — Self Observation / Analysis / Planning / Evolution",
+  "evidence_class": "IMPROVEMENT",
+  "may_influence_certification": false,
+  "observation": {
+    "total_objects": 7154,
+    "by_object_class": {
+      "CONFIGURATION_OBJECT": 40,
+      "DATA_OBJECT": 141,
+      "DOCUMENT_ARTIFACT": 1689,
+      "EXCLUDED_DOCUMENT": 2942,
+      "EXECUTABLE_OBJECT": 1385,
+      "TEST_OBJECT": 901,
+      "TOOLING_OBJECT": 56
+    },
+    "by_lifecycle": {
+      "AUTHORED": 6809,
+      "GENERATED": 345
+    },
+    "distinct_owners": 299,
+    "top_owners": [
+      {
+        "owner": "00-BOOK/PORTAL",
+        "objects": 1696
+      },
+      {
+        "owner": "UCOS-REPOSITORY-ROOT",
+        "objects": 515
+      },
+      {
+        "owner": "platform/tests",
+        "objects": 351
+      },
+      {
+        "owner": "engine/tests",
+        "objects": 349
+      },
+      {
+        "owner": "service/_evidence",
+        "objects": 136
+      },
+      {
+        "owner": "data/_evidence",
+        "objects": 123
+      },
+      {
+        "owner": "infrastructure/_evidence",
+        "objects": 121
+      },
+      {
+        "owner": "application/_evidence",
+        "objects": 110
+      },
+      {
+        "owner": "UCOS-USIS-WAVE2",
+        "objects": 102
+      },
+      {
+        "owner": "service",
+        "objects": 92
+      }
+    ],
+    "objects_with_dependencies": 2110,
+    "dependency_edges": 10804,
+    "producers_bound_to_outputs": 43,
+    "retired_identities": 8
+  },
+  "analysis": {
+    "deviations": []
+  },
+  "planning": {
+    "plans": []
+  },
+  "evolution": {
+    "model": [
+      "Observation",
+      "Analysis",
+      "Proposal",
+      "Impact Assessment",
+      "Approval",
+      "Implementation",
+      "Verification",
+      "Certification",
+      "Knowledge Update"
+    ],
+    "stage_reached": "Proposal",
+    "rule": "This engine emits proposals as evidence (IMPROVEMENT class). It holds no approval authority and mutates no object outside its own surfaces and the append-only identity ledger. Uncontrolled evolution is structurally impossible because the engine has no write path to any other object.",
+    "approval_authority": "HUMAN_AUTHORED_DECISION",
+    "proposals": []
+  }
+}

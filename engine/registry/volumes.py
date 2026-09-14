@@ -58,9 +58,7 @@ class VolumeRepository:
         try:
             return self._by_id[volume_id]
         except KeyError as exc:
-            raise VolumeNotFoundError(
-                "no volume with that volume_id", volume_id=volume_id
-            ) from exc
+            raise VolumeNotFoundError("no volume with that volume_id", volume_id=volume_id) from exc
 
     def find(self, volume_id: str) -> Volume | None:
         """Return the volume with ``volume_id`` or ``None``."""

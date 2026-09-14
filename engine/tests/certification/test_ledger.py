@@ -87,8 +87,6 @@ def test_verify_detects_broken_prev_link(certified_decision):
     ledger.append(certified_decision.record)
     ledger.append(certified_decision.record)
     # break the second entry's back-link to its predecessor
-    tampered = CertificationLedgerEntry(
-        **{**ledger.entries[1].to_dict(), "prev_hash": "f" * 64}
-    )
+    tampered = CertificationLedgerEntry(**{**ledger.entries[1].to_dict(), "prev_hash": "f" * 64})
     ledger._entries[1] = tampered  # noqa: SLF001 — test reaches into internals
     assert ledger.verify() is False

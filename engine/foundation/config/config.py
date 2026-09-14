@@ -53,9 +53,7 @@ class Environment(str, Enum):
             return cls(str(value).strip().lower())
         except ValueError as exc:
             valid = ", ".join(member.value for member in cls)
-            raise ConfigurationError(
-                "unknown environment", value=value, valid=valid
-            ) from exc
+            raise ConfigurationError("unknown environment", value=value, valid=valid) from exc
 
 
 class SecretRef:
@@ -257,7 +255,7 @@ def load_config(
 
     for name, value in source_environ.items():
         if name.startswith(_ENV_PREFIX) and name != _ENV_VAR:
-            values[name[len(_ENV_PREFIX):].lower()] = value
+            values[name[len(_ENV_PREFIX) :].lower()] = value
 
     return Config(_coerce_secrets(values), env)
 

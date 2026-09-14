@@ -107,8 +107,10 @@ class ArtifactRepository:
 
     def by_status(self, status: LifecycleStatus | str) -> tuple[Artifact, ...]:
         """All artifacts in the given lifecycle ``status``."""
-        wanted = status if isinstance(status, LifecycleStatus) else LifecycleStatus.coerce(
-            status, context="filter"
+        wanted = (
+            status
+            if isinstance(status, LifecycleStatus)
+            else LifecycleStatus.coerce(status, context="filter")
         )
         return tuple(a for a in self._artifacts if a.status is wanted)
 

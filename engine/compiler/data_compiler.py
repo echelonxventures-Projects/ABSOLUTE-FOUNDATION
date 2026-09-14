@@ -164,9 +164,7 @@ class DataBlueprintCompiler:
         for index in entity.indexes:
             unique = "UNIQUE " if index.unique else ""
             columns = ", ".join(index.columns)
-            lines.append(
-                f"CREATE {unique}INDEX {index.name} ON {entity.table} ({columns});"
-            )
+            lines.append(f"CREATE {unique}INDEX {index.name} ON {entity.table} ({columns});")
         return "\n".join(lines) + "\n"
 
     @staticmethod
@@ -185,8 +183,7 @@ class DataBlueprintCompiler:
         entity = ir.entity
         class_name = self._class_name(entity)
         fields = [
-            f"    {a.name}: {python_type(a.data_type)}"
-            + (" | None" if a.nullable else "")
+            f"    {a.name}: {python_type(a.data_type)}" + (" | None" if a.nullable else "")
             for a in entity.attributes
         ]
         primary = entity.primary_key[0]

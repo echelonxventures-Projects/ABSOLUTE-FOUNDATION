@@ -96,9 +96,7 @@ class DirectoryBlueprintProvider(BlueprintProvider):
 
     def get(self, blueprint_id: str) -> Mapping[str, Any]:
         if not _BP_ID.match(blueprint_id):
-            raise BlueprintResolutionError(
-                "invalid blueprint id", blueprint_id=blueprint_id
-            )
+            raise BlueprintResolutionError("invalid blueprint id", blueprint_id=blueprint_id)
         path = self._directory / f"{blueprint_id}.json"
         if not path.is_file():
             raise BlueprintResolutionError(
@@ -169,8 +167,7 @@ class ReproducibilityResult:
         target = Path(path)
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(
-            json.dumps(self.to_report_dict(), sort_keys=True, indent=2, ensure_ascii=False)
-            + "\n",
+            json.dumps(self.to_report_dict(), sort_keys=True, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
         return target
@@ -326,9 +323,7 @@ def double_build(
         diffs=diffs,
     )
     if byte_identical:
-        _logger.info(
-            "determinism.reproducible", blueprint=bp_id, files=len(diffs)
-        )
+        _logger.info("determinism.reproducible", blueprint=bp_id, files=len(diffs))
     else:
         _logger.error(
             "determinism.divergence",

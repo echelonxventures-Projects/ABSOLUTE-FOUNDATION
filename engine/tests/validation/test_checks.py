@@ -49,9 +49,7 @@ def test_provenance_nonstring_link_fails(valid_subject):
 
 
 def test_provenance_wrong_head_fails(valid_subject):
-    finding = ProvenanceCheck().evaluate(
-        mutate(valid_subject, provenance_chain=("WRONG", "x"))
-    )
+    finding = ProvenanceCheck().evaluate(mutate(valid_subject, provenance_chain=("WRONG", "x")))
     assert finding.status is CheckStatus.FAIL
     assert finding.details["head"] == "WRONG"
 
