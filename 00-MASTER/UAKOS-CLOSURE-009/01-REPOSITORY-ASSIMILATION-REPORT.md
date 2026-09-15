@@ -137,4 +137,4 @@ No object type receives privileged treatment: the same eight participations are 
 | Hard-coded limits / object types / zones / dimensions | CLEAN | families, zones, dimensions and lattice levels are all read or configured, never enumerated as a closed set in the engine |
 | Silent repair | CLEAN | absent optional inputs are recorded as ABSENT and degrade the measurement visibly |
 
-*Seal `14299934a1cf6b4a` · END 01 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `992220648f7e23a7` · END 01 · AUTHORITY = NONE (DERIVED TRUTH).*

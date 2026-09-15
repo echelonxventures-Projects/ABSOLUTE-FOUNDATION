@@ -13,8 +13,8 @@
 | 3 | constitution | 463 | 84.18% | INCOMPLETE |
 | 4 | capability | 79 | 14.36% | INCOMPLETE |
 | 5 | requirement | 550 | 100.0% | COMPLETE |
-| 6 | implementation | 338 | 61.45% | INCOMPLETE |
-| 7 | test | 225 | 40.91% | INCOMPLETE |
+| 6 | implementation | 339 | 61.64% | INCOMPLETE |
+| 7 | test | 226 | 41.09% | INCOMPLETE |
 | 8 | evidence | 261 | 47.45% | INCOMPLETE |
 | 9 | certification | 241 | 43.82% | INCOMPLETE |
 
@@ -543,7 +543,7 @@ Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full con
 | RR-UCOS-GOV-006 | UCOS-GOV-006 | · | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 4/9 |
 | RR-UCOS-RAT-000 | UCOS-RAT-000 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
 | RR-UCOS-RAT-001 | UCOS-RAT-001 | · | ✓ | ✓ | ✓ | ✓ | ✓ | · | · | · | 5/9 |
-| RR-UCOS-RAT-002 | UCOS-RAT-002 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
+| RR-UCOS-RAT-002 | UCOS-RAT-002 | · | ✓ | ✓ | · | ✓ | ✓ | ✓ | · | · | 5/9 |
 | RR-UCOS-RECON-0000 | UCOS-RECON-0000 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
 | RR-UCOS-RECON-0001 | UCOS-RECON-0001 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
 | RR-UCOS-RECON-001 | UCOS-RECON-001 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
@@ -575,4 +575,4 @@ Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full con
 | RR-Ω∞-019 | Ω∞-019 | ✓ | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 5/9 |
 | RR-Ω∞-020 | Ω∞-020 | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | · | · | 6/9 |
 
-*Seal `14299934a1cf6b4a` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `992220648f7e23a7` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*

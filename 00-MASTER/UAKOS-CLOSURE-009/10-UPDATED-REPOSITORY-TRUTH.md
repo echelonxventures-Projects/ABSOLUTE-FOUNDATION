@@ -35,12 +35,12 @@
 
 | # | Precondition | Verdict | Measured |
 |---|---|---|---|
-| BC-01 | 100% implementation | FAIL | 338/550 present in code; 16 absent, 154 deferred, 42 rejected |
+| BC-01 | 100% implementation | FAIL | 339/550 present in code; 16 absent, 154 deferred, 41 rejected |
 | BC-02 | 100% validation | FAIL | 103 implemented requirements without validation evidence |
-| BC-03 | 100% verification | FAIL | 84 implemented requirements without verification evidence |
-| BC-04 | 100% certification | FAIL | 113 code-without-certification, 16 certified-without-located-code |
+| BC-03 | 100% verification | FAIL | 85 implemented requirements without verification evidence |
+| BC-04 | 100% certification | FAIL | 114 code-without-certification, 16 certified-without-located-code |
 | BC-05 | 100% audit | FAIL | 6 of 6 systemic audit findings open: RG-S01, RG-S02, RG-S03, RG-S04, RG-S05, RG-S06 |
-| BC-06 | 100% deterministic replay | FAIL | 47 of 338 implemented requirements carry determinism evidence; 1 blueprint result(s) recorded |
+| BC-06 | 100% deterministic replay | FAIL | 47 of 339 implemented requirements carry determinism evidence; 1 blueprint result(s) recorded |
 | BC-07 | 100% fixed point | FAIL | planning fixed point reached; assimilation fixed point 488/550 |
 | BC-08 | 100% dependency closure | FAIL | 62 requirements whose canonical home carries no universal identity and therefore no graph participation |
 | BC-09 | 100% lineage closure | FAIL | lineage_with_predecessor=0 of lineage_population=45 |
@@ -78,7 +78,7 @@
 | Determination | **ASSIMILATION-INCOMPLETE** |
 | Implementation continuation | **BARRED** until assimilation reaches 100% |
 | Certified baseline | **WITHHELD** |
-| Seal | `14299934a1cf6b4a2a3fdac951808f7409a5a9374376f54f99355975c1a28df9` |
+| Seal | `992220648f7e23a740972f3a87e989bc59b644bd9de6e519eba99268f4884831` |
 
 ## 6. Regeneration
 

@@ -24,8 +24,8 @@
 | W05 | WP-UAKOS-CLOSURE-009-005 | 1 | 62 | REGISTRY |
 | W06 | WP-UAKOS-CLOSURE-009-006, WP-UAKOS-CLOSURE-009-007 | 2 | 170 | IMPLEMENTATION |
 | W07 | WP-UAKOS-CLOSURE-009-008 | 1 | 103 | VALIDATION |
-| W08 | WP-UAKOS-CLOSURE-009-009 | 1 | 84 | VERIFICATION |
-| W09 | WP-UAKOS-CLOSURE-009-010 | 1 | 113 | CERTIFICATION |
+| W08 | WP-UAKOS-CLOSURE-009-009 | 1 | 85 | VERIFICATION |
+| W09 | WP-UAKOS-CLOSURE-009-010 | 1 | 114 | CERTIFICATION |
 | W10 | WP-UAKOS-CLOSURE-009-011 | 1 | 550 | RUNTIME |
 
 Wave order is constitutional precedence, not convenience: ownership and authority must be settled before traceability, traceability before realization, realization before validation, validation before verification, verification before certification, and certification before runtime.
@@ -46,12 +46,12 @@ Wave order is constitutional precedence, not convenience: ownership and authorit
 
 | Criterion | Measured now | Required |
 |---|---|---|
-| 100% implementation | 338/550 present in code; 16 absent, 154 deferred, 42 rejected | PASS |
+| 100% implementation | 339/550 present in code; 16 absent, 154 deferred, 41 rejected | PASS |
 | 100% validation | 103 implemented requirements without validation evidence | PASS |
-| 100% verification | 84 implemented requirements without verification evidence | PASS |
-| 100% certification | 113 code-without-certification, 16 certified-without-located-code | PASS |
+| 100% verification | 85 implemented requirements without verification evidence | PASS |
+| 100% certification | 114 code-without-certification, 16 certified-without-located-code | PASS |
 | 100% audit | 6 of 6 systemic audit findings open: RG-S01, RG-S02, RG-S03, RG-S04, RG-S05, RG-S06 | PASS |
-| 100% deterministic replay | 47 of 338 implemented requirements carry determinism evidence; 1 blueprint result(s) recorded | PASS |
+| 100% deterministic replay | 47 of 339 implemented requirements carry determinism evidence; 1 blueprint result(s) recorded | PASS |
 | 100% fixed point | planning fixed point reached; assimilation fixed point 488/550 | PASS |
 | 100% dependency closure | 62 requirements whose canonical home carries no universal identity and therefore no graph participation | PASS |
 | 100% lineage closure | lineage_with_predecessor=0 of lineage_population=45 | PASS |
@@ -59,4 +59,4 @@ Wave order is constitutional precedence, not convenience: ownership and authorit
 | 100% knowledge extraction | 159 canonical knowledge objects against 550 requirements | PASS |
 | 100% capability elevation | 471 requirements with an unpopulated capability tier | PASS |
 
-*Seal `14299934a1cf6b4a` · END 08 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `992220648f7e23a7` · END 08 · AUTHORITY = NONE (DERIVED TRUTH).*

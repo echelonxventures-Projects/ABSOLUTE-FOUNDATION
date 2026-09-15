@@ -36,18 +36,18 @@
 
 | Value | Requirements | Share |
 |---|---|---|
-| PRESENT-IN-CODE | 338 | 61.45% |
+| PRESENT-IN-CODE | 339 | 61.64% |
 | DEFERRED | 154 | 28.0% |
-| REJECTED | 42 | 7.64% |
+| REJECTED | 41 | 7.45% |
 | ABSENT | 16 | 2.91% |
 
 ### Validation
 
 | Value | Requirements | Share |
 |---|---|---|
-| NOT-EVIDENCED | 315 | 57.27% |
+| NOT-EVIDENCED | 314 | 57.09% |
 | EVIDENCED | 142 | 25.82% |
-| TEST-ONLY | 93 | 16.91% |
+| TEST-ONLY | 94 | 17.09% |
 
 ### Verification
 
@@ -73,7 +73,7 @@
 
 | Axis | Measured | Basis |
 |---|---|---|
-| Autonomous coverage | 83/550 requirements carry engine-generated evidence | evidence classified as engine output |
+| Autonomous coverage | 84/550 requirements carry engine-generated evidence | evidence classified as engine output |
 | Evolution coverage | 550/550 requirements carry a maturity level on the open lattice | every requirement is evolvable by construction |
 | Replay coverage | 17 declared inputs re-derive the whole model byte-identically | deterministic engine, no timestamps |
 
@@ -104,10 +104,10 @@
 | UCOS-COMP | 97 | 96 | 3 | 0 | 99.0% |
 | UCOS-EXEC | 12 | 11 | 3 | 9 | 91.7% |
 | UCOS-GOV | 7 | 7 | 3 | 0 | 100.0% |
-| UCOS-RAT | 3 | 3 | 1 | 0 | 100.0% |
+| UCOS-RAT | 3 | 3 | 2 | 0 | 100.0% |
 | UCOS-RECON | 5 | 5 | 2 | 0 | 100.0% |
 | UKDA-DEC | 4 | 4 | 3 | 0 | 100.0% |
 
 No family receives privileged treatment; an unrecognized family would appear here automatically with the same axes.
 
-*Seal `14299934a1cf6b4a` · END 03 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `992220648f7e23a7` · END 03 · AUTHORITY = NONE (DERIVED TRUTH).*

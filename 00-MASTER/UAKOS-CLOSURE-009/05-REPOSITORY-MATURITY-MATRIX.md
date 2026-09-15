@@ -8,11 +8,11 @@
 
 | Level | Label | Predicate | Requirements | Share | Cumulative |
 |---|---|---|---|---|---|
-| M0 | REJECTED | rejected | 42 | 7.64% | 42 |
-| M1 | DEFERRED | deferred | 154 | 28.0% | 196 |
-| M2 | SPECIFIED | specified | 16 | 2.91% | 212 |
-| M3 | IMPLEMENTED | implemented | 113 | 20.55% | 325 |
-| M4 | TEST-EVIDENCED | tested | 45 | 8.18% | 370 |
+| M0 | REJECTED | rejected | 41 | 7.45% | 41 |
+| M1 | DEFERRED | deferred | 154 | 28.0% | 195 |
+| M2 | SPECIFIED | specified | 16 | 2.91% | 211 |
+| M3 | IMPLEMENTED | implemented | 113 | 20.55% | 324 |
+| M4 | TEST-EVIDENCED | tested | 46 | 8.36% | 370 |
 | M5 | VALIDATED-OR-VERIFIED | checked | 17 | 3.09% | 387 |
 | M6 | CERTIFIED-PROVISIONAL | certified | 163 | 29.64% | 550 |
 | M7 | RUNTIME-PROVEN | runtime | 0 | 0.0% | 550 |
@@ -46,7 +46,7 @@ The population is monotone by construction: a requirement occupies the highest l
 | UCOS-COMP | 97 | 0 | 94 | 0 | 0 | 3 | 0 | 0 | 0 |
 | UCOS-EXEC | 12 | 0 | 1 | 8 | 3 | 0 | 0 | 0 | 0 |
 | UCOS-GOV | 7 | 3 | 1 | 0 | 3 | 0 | 0 | 0 | 0 |
-| UCOS-RAT | 3 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 |
+| UCOS-RAT | 3 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | 0 |
 | UCOS-RECON | 5 | 3 | 0 | 0 | 0 | 1 | 1 | 0 | 0 |
 | UKDA-DEC | 4 | 0 | 1 | 0 | 2 | 1 | 0 | 0 | 0 |
 
@@ -57,7 +57,7 @@ The population is monotone by construction: a requirement occupies the highest l
 | 00-BOOK | 41 | 12 | 5 | 4 | 8 | 1 | 5 | 6 | 0 |
 | 00-CEP | 15 | 0 | 1 | 1 | 8 | 0 | 4 | 1 | 0 |
 | 00-MASTER | 27 | 4 | 9 | 4 | 9 | 0 | 1 | 0 | 0 |
-| 02-MASTER | 268 | 13 | 126 | 7 | 32 | 41 | 1 | 48 | 0 |
+| 02-MASTER | 268 | 12 | 126 | 7 | 32 | 42 | 1 | 48 | 0 |
 | 07-ENGINEERING | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 |
 | 08-RUNTIME | 14 | 8 | 0 | 0 | 1 | 0 | 1 | 4 | 0 |
 | 09-PLATFORM | 18 | 2 | 9 | 0 | 6 | 0 | 0 | 1 | 0 |
@@ -72,9 +72,9 @@ The population is monotone by construction: a requirement occupies the highest l
 | Check | Measured | Verdict |
 |---|---|---|
 | Requirements certified without located implementation | 16 | FINDING — certification asserts a realization the repository does not locate |
-| Requirements implemented without certification | 113 | FINDING — realization outruns certification |
+| Requirements implemented without certification | 114 | FINDING — realization outruns certification |
 | Requirements at the certification ceiling | 163 | bounded by the repository's declared disclosure token |
 | Requirements carrying certification but seated below M6 | 78 | FINDING — certification precedes the test or validation evidence the lattice requires beneath it |
 | Requirements above the certification ceiling | 0 | CLEAN — none, as required |
 
-*Seal `14299934a1cf6b4a` · END 05 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `992220648f7e23a7` · END 05 · AUTHORITY = NONE (DERIVED TRUTH).*
