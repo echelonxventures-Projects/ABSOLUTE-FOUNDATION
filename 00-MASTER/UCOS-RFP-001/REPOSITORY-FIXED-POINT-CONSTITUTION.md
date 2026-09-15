@@ -15,7 +15,7 @@
 | AUTHORITY | NONE — DERIVED TRUTH. This programme legislates the closure CONDITION; it ratifies nothing, freezes nothing and owns no capability. |
 | ORIGIN | CK-REG-DRIFT. A generated artifact carrying repository-derived state (HEAD, commit metadata, projection hashes) was admitted into the registration corpus, creating a registration relation with no fixed point. This declaration makes that class of topology constitutionally impossible rather than individually repaired. |
 | DECLARATION | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` |
-| SEAL | `f569eccaf7c04672` |
+| SEAL | `bc6c6c730cb82c88` |
 
 ## Vocabulary
 

@@ -434,6 +434,53 @@
     "reentrancy_env": "UCOS_RFP_ACTIVE",
     "stages": [
       {
+        "id": "STAGE-PREREQUISITES",
+        "name": "Declared prerequisite generation (knowledge · determinism · closure 1-3)",
+        "owner": "scripts/generate-prerequisites.sh",
+        "argv": [
+          "bash",
+          "scripts/generate-prerequisites.sh"
+        ],
+        "writes": [],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "the generated inputs later stages and probed candidates read; FIRST because a prerequisite generated after the thing that consumes it is not a prerequisite",
+        "$discovery": "ADMITTED TO FIX CYC-UNPROBED AT ITS CAUSE RATHER THAN AT ITS SYMPTOM. The probe seeds a worktree by running the declared stages, and seed_skips_heavy drops the heavy ones — but STAGE-VERIFY is heavy and verify.sh is what invoked this script, so the seeded worktree had NO generated prerequisites and every candidate needing them failed for want of an input the pipeline owed it. 00-BOOK/tools/ufi.py was reported unprobed for exactly that reason (--all: exit 1), while the identical command exits 0 against a tree where these artifacts exist. The probe's own rationale names this case: 'a producer that consumes an earlier stage's output would otherwise fail for want of its input and be misread as harmless'. Declaring the generation as its own NON-heavy stage is what makes that sentence true for it. Measured before admission: exit 0, 82 seconds against a 900-second probe timeout, and zero tracked writes — it materialises only gitignored artifacts, so writes is empty and RFP-6 does not reach it."
+      },
+      {
+        "id": "STAGE-CERTIFICATION-INTEGRITY",
+        "name": "Certification integrity gate",
+        "owner": "engine/certification_integrity",
+        "argv": [
+          "$PY",
+          "-m",
+          "engine.certification_integrity.gate"
+        ],
+        "writes": [],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "measures certification integrity and refuses; writes nothing, so it is declared to be RUN rather than to own a zone",
+        "$discovery": "ADMITTED AFTER CYC-UNPROBED, and the finding was an INVOCATION artefact rather than a defect. The probe executes a candidate by path, and a module run by path puts its own directory on sys.path instead of the repository root, so this gate died with ModuleNotFoundError: No module named 'engine' and whether it writes tracked content could not be determined. The canonical invocation is the one verify.sh uses for every engine gate — python -m — and declared here it runs clean. Measured: exit 0, zero tracked writes, so the classification is INERT and RFP-6 does not bind it."
+      },
+      {
+        "id": "STAGE-RECURSIVE-KNOWLEDGE",
+        "name": "Recursive knowledge foundation gate",
+        "owner": "engine/recursive_knowledge",
+        "argv": [
+          "$PY",
+          "-m",
+          "engine.recursive_knowledge.gate"
+        ],
+        "writes": [],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "measures the recursive-knowledge contract and refuses; writes nothing, so it is declared to be RUN rather than to own a zone",
+        "$discovery": "ADMITTED AFTER CYC-UNPROBED, same invocation artefact as STAGE-CERTIFICATION-INTEGRITY: run by path it died with ModuleNotFoundError before reaching its own code, so the probe could assert nothing about it and failed closed, correctly. Run as python -m it exits 0 and writes nothing. Measured before admission."
+      },
+      {
         "id": "STAGE-VERIFY",
         "name": "Verification and validation",
         "owner": "verify.sh (CEP-004)",
