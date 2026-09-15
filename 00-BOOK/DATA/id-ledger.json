@@ -27205,6 +27205,15 @@
         "status": "UNDER_REVIEW",
         "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 10,
+        "at": "2026-09-15T02:29:59+00:00",
+        "content_hash": "b4382690af20e657a090d1ba561e036ad0a0a38c5aee317e7b6af88dd1561743",
+        "version": "1.3",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
       }
     ],
     "UCOS-CON-000051": [
@@ -27304,6 +27313,15 @@
         "seq": 9,
         "at": "2026-09-13T23:56:07+00:00",
         "content_hash": "5116dbe43f40b6c828498e9357611c12907bf2c6a847f20c7947032042aa298e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      },
+      {
+        "seq": 10,
+        "at": "2026-09-15T02:29:59+00:00",
+        "content_hash": "a17e0a0ab88a50afae3404a25c52f69c7e787f26f2c084b6f901f7e8f8b843b4",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-CMG/CMG-REGISTRY.json",
@@ -27564,6 +27582,15 @@
         "seq": 3,
         "at": "2026-07-26T03:19:07+00:00",
         "content_hash": "dda836f253dc5c07fcfb0d980372c3133ab0c215e866615892ff83ce43420750",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/README.md",
+        "name": "00-CMG — CONSTITUTIONAL META GOVERNANCE"
+      },
+      {
+        "seq": 4,
+        "at": "2026-09-15T02:29:59+00:00",
+        "content_hash": "e6c6946e965101e6f335857bcc8f27fcf8a5d62358e5569498d3d07815230d80",
         "version": "1.0",
         "status": "UNDER_REVIEW",
         "path": "00-CMG/README.md",

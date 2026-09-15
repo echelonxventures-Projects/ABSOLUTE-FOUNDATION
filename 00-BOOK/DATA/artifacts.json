@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T23:56:07+00:00",
+  "generated_at": "2026-09-15T02:29:59+00:00",
   "generator_version": "1.0.0",
   "count": 1689,
   "artifacts": [
@@ -53775,7 +53775,7 @@
       ],
       "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "a0db883bf6e376a81b526d40398040376fe6350bd41f79b82b8a1815507a522c",
+      "content_hash": "b4382690af20e657a090d1ba561e036ad0a0a38c5aee317e7b6af88dd1561743",
       "traceability": {
         "requirement": [
           "UCOS-CON-000032",
@@ -53879,7 +53879,7 @@
       ],
       "path": "00-CMG/CMG-REGISTRY.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "5116dbe43f40b6c828498e9357611c12907bf2c6a847f20c7947032042aa298e",
+      "content_hash": "a17e0a0ab88a50afae3404a25c52f69c7e787f26f2c084b6f901f7e8f8b843b4",
       "traceability": {
         "requirement": [],
         "architecture": [
@@ -54448,7 +54448,7 @@
       ],
       "path": "00-CMG/README.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "dda836f253dc5c07fcfb0d980372c3133ab0c215e866615892ff83ce43420750",
+      "content_hash": "e6c6946e965101e6f335857bcc8f27fcf8a5d62358e5569498d3d07815230d80",
       "traceability": {
         "requirement": [
           "CMG-0000"

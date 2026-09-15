@@ -571,6 +571,20 @@
       "expires_at": null,
       "single_use": true,
       "$authorization": "OPERATOR-AUTHORIZED IN SESSION (\"Make 549/549 subjects declared, 100.0% coverage, unconditional ready\"), transcribed by the agent rather than composed by it. WHAT IT ALLOCATES. Exactly one by_object identity for 00-BOOK/PORTAL/UCOS-CON-000087.md, the navigation page emitted by the registration transaction under P-UCOS-CORPUS-013 for 02-MASTER/UCOS-RAT-002 (EXDOC, seq 3149->3150) - the same shape every portal page carries. WHY IT IS NEEDED. UGA-INV-01 refuses a tracked file without a Universal ID; the pre-commit held the commit for exactly this. WHAT IT DOES NOT COVER. No other identity; no knowledge is minted here. IRREVERSIBILITY. Permanent (UCKP-ART-05); bound to this manifest, pre-image and HEAD 696b18c4."
+    },
+    {
+      "permit_id": "P-UCOS-CORPUS-014",
+      "actor": "UMB-IMP-001 :: ukb.py build --mint",
+      "manifest_digest": "34d7709cd1c099baa26ecad31c6a6d51c43e73e0a0e69744350dac38a3c6a354",
+      "preimage_digest": "d5c9e5672d2a067388bd69c62db1a83334bb4e70ee1e250249bcf7df003b4640",
+      "head": "dc992b929eecda241a4d0f922e111d862438dc86",
+      "scope": {
+        "maps": [],
+        "max_allocations": 0
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION (\"issue the registration permit\"), transcribed by the agent rather than composed by it. The three bindings below are a transcription of `ukb.py build --plan` at HEAD dc992b92, which is what that command exists to produce. WHAT IT ALLOCATES. NOTHING. The plan measures total_allocations=0 and `scope.maps` is empty, so this permit cannot authorize a single identity: the moment the manifest allocates anything it stops matching the digest and is refused. WHAT IT AUTHORIZES INSTEAD. The ledger MUTATION the NO_ALLOCATION sentinel correctly refused - `history` gains a content_hash entry for each registered artifact whose bytes moved. WHY IT IS NEEDED. Registered artifacts drifted from the ledger across the 82 commits between fccb5119, the last commit CI observed, and this HEAD; `register.sh --guard` refused with \"top-level key(s) ['history'] differ from the pre-image\", and CK-REG-DRIFT has blocked UCCEP and, through it, ACEE ever since. WHAT IT DOES NOT COVER. No identity, no new artifact, no knowledge, and no other head: `preimage_digest` self-invalidates the moment the ledger moves and `head` binds it to this commit, so it is spent by its own use. IRREVERSIBILITY. The history append is permanent (UCKP-ART-12, append-only); no identity is minted, so UCKP-ART-05 is not engaged."
     }
   ]
 }
