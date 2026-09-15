@@ -452,8 +452,24 @@ def test_coverage_is_read_when_present_and_reported_unavailable_when_it_is_not(
     degrades to unavailable rather than aborting a caller that is not asking about coverage.
     An unreadable report degrades the same way, because an environmental artifact that
     cannot be parsed must never take down an observational surface.
+
+    THE PRESENT CASE BUILDS ITS OWN REPORT, AND THE DOCSTRING ABOVE IS WHY. It used to read
+    the repository's own coverage.xml and assert it was there, which asserts the presence of
+    exactly the environmental artifact this test exists to say may be absent. It passed on
+    any machine that had run the suite before and failed on a pristine checkout: measured in
+    CI, shard 1 of a sharded --full run, where every shard writes its coverage data to a
+    private path OUTSIDE the repository and the combined report is emitted later, so
+    coverage.xml genuinely did not exist yet. A fixture makes the assertion about the READER,
+    which is the subject, rather than about whether someone has run the tests here before.
     """
-    present = _reader().coverage()
+    report = tmp_path / "present" / "coverage.xml"
+    report.parent.mkdir()
+    report.write_text(
+        '<coverage line-rate="0.94" branch-rate="0.88" lines-covered="47" '
+        'lines-valid="50" branches-covered="22" branches-valid="25"/>',
+        encoding="utf-8",
+    )
+    present = EvidenceReader(RepoConfig.create(report.parent)).coverage()
     assert present.available is True
     assert present.lines_valid > 0
 
