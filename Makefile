@@ -1986,7 +1986,19 @@ closure009-baseline-gate: closure-phase3
 # function of the declared inputs plus that record and can be diffed byte-for-byte. Without
 # the replayed head every register would drift by exactly one field on every commit, and the
 # check would be permanently red for a reason that has nothing to do with truth.
+# THE REPLAY GENERATES WHAT IT READS, BECAUSE OTHERWISE IT ANSWERS A DIFFERENT QUESTION
+# THAN CI ASKS. `.github/workflows/closure009-gate.yml` runs generate-prerequisites.sh
+# immediately before invoking this target, and the requirement engine counts the artifacts
+# that script writes as evidence — so a bare `make closure009-replay` renders against
+# whatever generated state the working tree happens to hold. Measured: RR-UCOS-RAT-002 at
+# 25 evidence files locally against 26 in CI, from a STALE prerequisite set left by an
+# earlier run. That reads as a drift in the registers and is a drift in the environment.
+# The workflow comment one step above its own invocation states the rule this obeys —
+# "a prerequisite generated after the gate that consumes it is not a prerequisite" — and
+# the target now obeys it too, so local and CI agree by construction rather than by the
+# operator remembering the ordering.
 closure009-replay:
+	@env PYTHON=python3 bash scripts/generate-prerequisites.sh >/dev/null
 	@python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --render --quiet
 	@git diff --exit-code -- 00-MASTER/UAKOS-CLOSURE-009 \
 	  || { echo "UAKOS-CLOSURE-009 REPLAY DRIFT — committed registers are not the product of the declared inputs" >&2; exit 1; }

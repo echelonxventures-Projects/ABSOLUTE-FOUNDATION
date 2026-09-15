@@ -192,3 +192,93 @@ def test_the_ceiling_is_disclosed_and_no_baseline_is_elevated() -> None:
     assert ceiling["disclosure_token"] == "CERTIFIED-PROVISIONAL"
     assert ceiling["terminal_token"] == "FINALIZED"
     assert ceiling["elevated"] == [], "an elevated baseline would be a finality this corpus lacks"
+
+
+# --- no governance gate closes unnoticed --------------------------------------------
+#
+# THE FAILURE THIS REFUSES IS SILENCE, NOT CLOSURE. A programme is entitled to close its
+# gate; what it is not entitled to do is close it and have nobody know. Measured twice in
+# one span: BASELINE-001 fell from 20/20 OPEN to 19/20 CLOSED inside a commit titled "the
+# ratification reconciled at its claim owners" and stayed closed for five days, and UFEP
+# was re-measured into a CLOSED gate under the subject line "eligibility TRUE, 5/5,
+# drift 0". Both messages read as success. Neither was checked by anything, because a
+# closed gate is a value in a generated file and no test read it.
+#
+# The table below is the whole mechanism: a programme measuring CLOSED must be named here
+# with a reason, so closing a gate costs a reviewable diff instead of nothing. It is
+# checked in BOTH directions — an entry naming a programme that has since reopened is a
+# stale permission, and a stale permission is how the next silent closure would pass.
+
+ACKNOWLEDGED_CLOSED: dict[str, str] = {
+    "UCOS-UFEP-001": (
+        "CORRECT AND NOT STALE. UFEP-VAL-11 requires every valid record of the located "
+        "ratification registry to be a declared freeze subject. URAT carries six records "
+        "and UFEP declares five, and the sixth CANNOT become the missing subject: "
+        "URAT-REC-06 records UCOS-RAT-002, which states in its own text that it 'does not "
+        "certify anything (certification has its own owners)' and 'does not freeze "
+        "anything (CEP-007 reserves that to Freeze Authority)', and the record carries no "
+        "admits_freeze. A freeze subject requires located validation AND certification "
+        "evidence; the certification evidence does not exist because the act declined to "
+        "produce it. The gate is therefore reporting a true incompleteness, and closing "
+        "it would require either the Freeze Authority to act or a declared exclusion — "
+        "both determinations this repository does not hold."
+    ),
+}
+
+
+def _programme_states() -> dict[str, tuple[Path, object, object]]:
+    """Every programme publishing a gate STATE, keyed by programme.
+
+    `gate` is not one vocabulary. UCOS-UGA-001 publishes `gate: FAIL_CLOSED` as a POLICY
+    descriptor — how the gate behaves — while reporting `result: PASS` at 30/30, so a
+    reading that treated the string as a state would refuse a passing programme. Only the
+    exact value CLOSED, or a non-zero gate_exit, is read as closure here.
+    """
+    found: dict[str, tuple[Path, object, object]] = {}
+    for path in sorted(GOVERNANCE_ROOT.glob("*/*.json")):
+        if "declaration" in path.name or "manifest" in path.name:
+            continue
+        try:
+            document = json.loads(path.read_text("utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(document, dict):
+            continue
+        gate, exit_code = document.get("gate"), document.get("gate_exit")
+        closed = (isinstance(gate, str) and gate.upper() == "CLOSED") or (
+            isinstance(exit_code, int) and not isinstance(exit_code, bool) and exit_code != 0
+        )
+        if closed:
+            found[path.parent.name] = (path, gate, exit_code)
+    return found
+
+
+def test_no_governance_gate_is_closed_without_an_acknowledgement() -> None:
+    """A gate may close. It may not close silently."""
+    closed = _programme_states()
+    unacknowledged = sorted(set(closed) - set(ACKNOWLEDGED_CLOSED))
+    assert not unacknowledged, (
+        "governance gate(s) measured CLOSED with no acknowledgement: "
+        + ", ".join(
+            f"{p} ({closed[p][0].relative_to(REPO)}: gate={closed[p][1]!r}, "
+            f"gate_exit={closed[p][2]!r})"
+            for p in unacknowledged
+        )
+        + " — record why in ACKNOWLEDGED_CLOSED, or reopen the gate."
+    )
+
+
+def test_no_acknowledgement_outlives_the_closure_it_explains() -> None:
+    """The other direction. A permission nobody needs is a permission nobody notices."""
+    stale = sorted(set(ACKNOWLEDGED_CLOSED) - set(_programme_states()))
+    assert not stale, (
+        "ACKNOWLEDGED_CLOSED names programme(s) whose gate is no longer closed: "
+        + ", ".join(stale)
+        + " — delete the entry; it would silently admit the next closure."
+    )
+
+
+def test_every_acknowledgement_states_a_reason() -> None:
+    """An entry that says nothing is an exemption wearing a table's clothes."""
+    for programme, reason in ACKNOWLEDGED_CLOSED.items():
+        assert len(reason.split()) >= 25, f"{programme}: acknowledgement is not a reason"
