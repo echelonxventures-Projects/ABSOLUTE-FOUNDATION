@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "6c0c46f2503129510d323d944dfbc5415318baaeb6a6fa0d17db1900c132f89b",
+  "declaration_seal_sha256": "f569eccaf7c046729a12279a14b107e3d07b4837c970b222c8dd181a1e22770c",
   "findings": [],
   "lifecycle": [
     {
@@ -608,6 +608,26 @@
         "required": true,
         "writes": [
           "00-MASTER/UAKOS-CLOSURE-008/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED AFTER UCOS-RFP-001 REPORTED IT AS CYC-UNGOVERNED, on the first verdict this gate has ever returned. repo-ops.sh was observed writing 00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json with identical bytes while no declared write zone covered the path, so a tracked output had no constitutional owner. The ARTIFACT was never homeless: engine/nucleus/cli.py names UCOS-NUCLEUS-001 as 'the programme home that owns it', stamps that owner into the document, and the document carries its own regeneration_command — which is the command declared here. What was missing is the STAGE, and every other programme in this pipeline has exactly one whose write zone is its own home, so this completes a uniform pattern rather than introducing a policy. Measured before admission: two consecutive runs exit 0 and leave the tree byte-identical, so the stage is reentrant and admitting it keeps the pipeline convergent.",
+        "argv": [
+          "$PY",
+          "-m",
+          "engine.nucleus.cli",
+          "dictionary",
+          "--write"
+        ],
+        "heavy": false,
+        "id": "STAGE-NUCLEUS",
+        "name": "Nucleus identifier dictionary",
+        "owner": "00-MASTER/UCOS-NUCLEUS-001",
+        "purpose": "the identifier dictionary, re-minted from the structural registry through the grammar UCKP-ART-05 already owns; it proves agreement rather than asserting it, so the pipeline regenerates it rather than trusting the committed bytes",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-NUCLEUS-001/"
         ]
       },
       {
