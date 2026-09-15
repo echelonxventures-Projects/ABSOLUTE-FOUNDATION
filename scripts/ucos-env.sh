@@ -455,6 +455,61 @@ ucos_ruff_gate() {
 }
 
 
+# --- UCOS-GOV-REFORMAT-VISIBILITY: substance hidden inside reformatting -----------
+#
+# WHAT THIS REPORTS AND WHY IT DOES NOT REFUSE. A staged registry whose whitespace churn
+# dwarfs its semantic change is not wrong — it is UNREVIEWABLE, which is a different and
+# quieter problem. Measured on 0900cb48: 5,181 changed lines in 00-CMG/CMG-REGISTRY.json
+# carrying 118 insertions and 77 deletions of substance, and inside that reformatting the
+# T1 vacancy was retired. BASELINE-001's ceiling broke on exactly that retirement and
+# nobody saw it for five days, because reading the diff meant reading five thousand
+# re-indented lines. `git diff --ignore-all-space` shows it in seconds — if you know to
+# ask, and the point of this report is that you should not have to know.
+#
+# It REPORTS rather than refuses, on the same determination EEG-08 records: a blocking
+# check that must be suppressed to get work done is a check people delete, and splitting a
+# reformat from its substance is a judgement about how to present a change, not a
+# correctness property this script is entitled to enforce.
+ucos_reformat_report() {
+  local repo py
+  repo="$(ucos_repo_root)" || return 0
+  py="$(command -v git)" || return 0
+  [ -n "$py" ] || return 0
+
+  # Constitutional registries and their projections: the documents where a buried
+  # semantic change costs the most, because a gate somewhere reads every field.
+  local staged
+  staged="$(git -C "$repo" diff --cached --name-only --diff-filter=ACM 2>/dev/null \
+    | grep -E '^(00-CMG/.*\.json|00-BOOK/DATA/.*\.json|00-MASTER/.*-declaration\.json)$' || true)"
+  [ -n "$staged" ] || return 0
+
+  local noisy=""
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    local total semantic
+    total="$(git -C "$repo" diff --cached --numstat -- "$f" 2>/dev/null \
+      | awk '{print $1+$2}')"
+    semantic="$(git -C "$repo" diff --cached --numstat --ignore-all-space -- "$f" 2>/dev/null \
+      | awk '{print $1+$2}')"
+    [ -n "$total" ] && [ -n "$semantic" ] || continue
+    # Only interesting when there IS substance to hide and the churn buries it: a pure
+    # reformat (semantic 0) hides nothing, and a small diff is readable whatever it is.
+    [ "$semantic" -gt 0 ] || continue
+    [ "$total" -ge 400 ] || continue
+    if [ "$total" -ge $((semantic * 5)) ]; then
+      noisy="${noisy}    ${f}: ${total} changed lines carry ${semantic} of substance"$'\n'
+    fi
+  done <<< "$staged"
+
+  [ -n "$noisy" ] || return 0
+  ucos_warn "reformat visibility: substance is buried in whitespace churn"
+  printf '%s' "$noisy" >&2
+  ucos_warn "  read it with: git diff --cached --ignore-all-space -- <path>"
+  ucos_warn "  consider splitting the reformat from the change it carries."
+  return 0
+}
+
+
 # --- UEG-000001 · the environment integrity gate (OBSERVE ONLY) ------------------
 # THE VERIFICATION HALF OF THE SEPARATION OF POWERS. ucos_ensure_venv above is the REPAIR
 # half: it deletes, creates and installs, and bootstrap.sh (plus `doctor.sh --fix`) are the

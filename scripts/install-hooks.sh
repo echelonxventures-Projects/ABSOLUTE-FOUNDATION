@@ -94,6 +94,10 @@ ucos_ruff_gate
 # a file would become permanent. 153ms measured, so it costs the commit nothing.
 ucos_log "pre-commit: every tracked object carries a Universal ID"
 ucos_identity_gate
+# REPORTS, NEVER REFUSES. A constitutional registry whose whitespace churn buries its
+# substance is unreviewable rather than wrong, and how a change is presented is not a
+# correctness property this hook may enforce. Named at the moment it can still be split.
+ucos_reformat_report
 ucos_ok "pre-commit: OK"
 HOOK_EOF
 
