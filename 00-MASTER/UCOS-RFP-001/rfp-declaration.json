@@ -732,6 +732,42 @@
         "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). self-contained replay: re-renders every register from the in-repo assimilation.json, so no external evidence tree is required. Ordered after the corpus stage it consumes."
       },
       {
+        "id": "STAGE-PHASE-001B",
+        "name": "Constitutional provenance reconstruction registers",
+        "owner": "00-MASTER/UAKOS-PHASE-001B",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-001B/emit_registers.py",
+          "--render"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-001B/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "the thirteen provenance registers, reconstructed from the declared model; BEFORE PHASE-001A-R1, which certifies against the provenance.json this programme owns",
+        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE. RFP reported thirteen CYC-UNGOVERNED paths here, and a stage alone would not have closed them: the engine stamped the LIVE closure baseline into every register header, so a committed artifact could never match a re-render and this gate could never pass over it. `--render` now replays the recorded baseline, which is what makes the stage admissible. Measured after the fix: two consecutive replay renders produce byte-identical output, and the twenty-one count changes the corpus had accumulated are committed alongside."
+      },
+      {
+        "id": "STAGE-PHASE-001A-R1",
+        "name": "Constitutional baseline re-certification registers",
+        "owner": "00-MASTER/UAKOS-PHASE-001A-R1",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py",
+          "--render"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-001A-R1/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "the twelve certification registers, derived from the provenance model PHASE-001B emits, which is why it is ordered after it",
+        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE, for the same reason as STAGE-PHASE-001B and by the same fix. RFP reported twelve CYC-UNGOVERNED paths; two drifted on the stamped baseline alone and ten on counts the corpus had moved. `--render` replays the recorded baseline and the counts are committed, so the engine now reproduces what is committed. Measured: two consecutive replay renders byte-identical."
+      },
+      {
         "id": "STAGE-CLOSURE-009",
         "name": "Repository requirement closure registers",
         "owner": "00-MASTER/UAKOS-CLOSURE-009",

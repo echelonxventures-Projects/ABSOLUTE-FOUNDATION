@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "2d86f75a24a369bdc67617b061a1e3490d582d074368324e79f9f919e3787169",
+  "declaration_seal_sha256": "755915cd78f7d9a68a60fb47427ca10939aa9b4fdbc61730afe43a2e5a341080",
   "findings": [],
   "lifecycle": [
     {
@@ -655,6 +655,42 @@
         "required": true,
         "writes": [
           "00-MASTER/UAKOS-CLOSURE-008/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE. RFP reported thirteen CYC-UNGOVERNED paths here, and a stage alone would not have closed them: the engine stamped the LIVE closure baseline into every register header, so a committed artifact could never match a re-render and this gate could never pass over it. `--render` now replays the recorded baseline, which is what makes the stage admissible. Measured after the fix: two consecutive replay renders produce byte-identical output, and the twenty-one count changes the corpus had accumulated are committed alongside.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-001B/emit_registers.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-PHASE-001B",
+        "name": "Constitutional provenance reconstruction registers",
+        "owner": "00-MASTER/UAKOS-PHASE-001B",
+        "purpose": "the thirteen provenance registers, reconstructed from the declared model; BEFORE PHASE-001A-R1, which certifies against the provenance.json this programme owns",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-001B/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE, for the same reason as STAGE-PHASE-001B and by the same fix. RFP reported twelve CYC-UNGOVERNED paths; two drifted on the stamped baseline alone and ten on counts the corpus had moved. `--render` replays the recorded baseline and the counts are committed, so the engine now reproduces what is committed. Measured: two consecutive replay renders byte-identical.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-PHASE-001A-R1",
+        "name": "Constitutional baseline re-certification registers",
+        "owner": "00-MASTER/UAKOS-PHASE-001A-R1",
+        "purpose": "the twelve certification registers, derived from the provenance model PHASE-001B emits, which is why it is ordered after it",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-001A-R1/"
         ]
       },
       {
