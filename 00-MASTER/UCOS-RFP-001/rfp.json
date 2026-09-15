@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "755915cd78f7d9a68a60fb47427ca10939aa9b4fdbc61730afe43a2e5a341080",
+  "declaration_seal_sha256": "e12bf595537015ec6f7d9af4053104c15bbd7c50ad4cc9f539752b05c7ddc911",
   "findings": [],
   "lifecycle": [
     {
@@ -709,23 +709,6 @@
         "required": true,
         "writes": [
           "00-MASTER/UAKOS-CLOSURE-009/"
-        ]
-      },
-      {
-        "$discovery": "ADMITTED AFTER CYC-UNGOVERNED NAMED TEN OF ITS OUTPUTS. RFP itself measured every one of them as 'rewritten with identical bytes', so the engine was ALREADY at a fixed point and only its stage was missing — the cheapest possible admission, changing no committed byte. All ten paths are inside its own programme home. Measured before admission: two consecutive runs exit 0 and leave the tree byte-identical.",
-        "argv": [
-          "$PY",
-          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py"
-        ],
-        "heavy": false,
-        "id": "STAGE-LIFECYCLE-CLOSURE",
-        "name": "Lifecycle closure registers",
-        "owner": "00-MASTER/P0-LIFECYCLE-CLOSURE-001",
-        "purpose": "the lifecycle coverage, knowledge-elevation and autonomous-evolution registers",
-        "reentrant": true,
-        "required": true,
-        "writes": [
-          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/"
         ]
       },
       {

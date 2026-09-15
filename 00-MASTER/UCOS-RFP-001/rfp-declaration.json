@@ -786,23 +786,6 @@
         "$discovery": "ADMITTED AFTER CYC-UNGOVERNED NAMED ELEVEN OF ITS OUTPUTS AND CYC-PRODUCER NAMED THE ENGINE. Every path it writes lies inside its own programme home, so this is the pattern every other stage in this pipeline already follows and not a new claim about ownership. It renders with --render, which REPLAYS the head recorded in requirements.json rather than re-reading the live one: a committed artifact can never carry the sha of the commit that carries it, and an engine that embeds the live HEAD can never be a fixed point. Measured before admission: two consecutive renders exit 0 and leave the tree byte-identical."
       },
       {
-        "id": "STAGE-LIFECYCLE-CLOSURE",
-        "name": "Lifecycle closure registers",
-        "owner": "00-MASTER/P0-LIFECYCLE-CLOSURE-001",
-        "argv": [
-          "$PY",
-          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py"
-        ],
-        "writes": [
-          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/"
-        ],
-        "heavy": false,
-        "reentrant": true,
-        "required": true,
-        "purpose": "the lifecycle coverage, knowledge-elevation and autonomous-evolution registers",
-        "$discovery": "ADMITTED AFTER CYC-UNGOVERNED NAMED TEN OF ITS OUTPUTS. RFP itself measured every one of them as 'rewritten with identical bytes', so the engine was ALREADY at a fixed point and only its stage was missing — the cheapest possible admission, changing no committed byte. All ten paths are inside its own programme home. Measured before admission: two consecutive runs exit 0 and leave the tree byte-identical."
-      },
-      {
         "id": "STAGE-URKE",
         "name": "Recursive knowledge declaration",
         "owner": "00-MASTER/URKE-000001",
