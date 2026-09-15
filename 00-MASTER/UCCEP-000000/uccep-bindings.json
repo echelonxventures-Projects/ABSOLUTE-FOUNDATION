@@ -616,7 +616,7 @@
       "owner": "verify.sh",
       "argv": [
         "./verify.sh",
-        "--full"
+        "--integration"
       ],
       "write_scope": "read-only",
       "tier": "full",
