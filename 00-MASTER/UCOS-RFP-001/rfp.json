@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "bc6c6c730cb82c88b38399fc3ab89bd8e53bd2184bc092cd30157fab9aebeb46",
+  "declaration_seal_sha256": "2d86f75a24a369bdc67617b061a1e3490d582d074368324e79f9f919e3787169",
   "findings": [],
   "lifecycle": [
     {
@@ -655,6 +655,58 @@
         "required": true,
         "writes": [
           "00-MASTER/UAKOS-CLOSURE-008/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED AFTER CYC-UNGOVERNED NAMED ELEVEN OF ITS OUTPUTS AND CYC-PRODUCER NAMED THE ENGINE. Every path it writes lies inside its own programme home, so this is the pattern every other stage in this pipeline already follows and not a new claim about ownership. It renders with --render, which REPLAYS the head recorded in requirements.json rather than re-reading the live one: a committed artifact can never carry the sha of the commit that carries it, and an engine that embeds the live HEAD can never be a fixed point. Measured before admission: two consecutive renders exit 0 and leave the tree byte-identical.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-CLOSURE-009",
+        "name": "Repository requirement closure registers",
+        "owner": "00-MASTER/UAKOS-CLOSURE-009",
+        "purpose": "the requirement, coverage, gap, maturity and readiness registers, rendered from the declared inputs",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-CLOSURE-009/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED AFTER CYC-UNGOVERNED NAMED TEN OF ITS OUTPUTS. RFP itself measured every one of them as 'rewritten with identical bytes', so the engine was ALREADY at a fixed point and only its stage was missing — the cheapest possible admission, changing no committed byte. All ten paths are inside its own programme home. Measured before admission: two consecutive runs exit 0 and leave the tree byte-identical.",
+        "argv": [
+          "$PY",
+          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-LIFECYCLE-CLOSURE",
+        "name": "Lifecycle closure registers",
+        "owner": "00-MASTER/P0-LIFECYCLE-CLOSURE-001",
+        "purpose": "the lifecycle coverage, knowledge-elevation and autonomous-evolution registers",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED AFTER CYC-PRODUCER NAMED IT. The same gate's first verdict also proved the builder was NOT idempotent despite its docstring's claim: it emitted 32 laws where the declaration carried 33, silently deleting URKE-L-33, a blocking law. That is fixed, and admitting the stage is what keeps it fixed — the pipeline now runs the builder on every pass, so a builder that stops reproducing its own declaration refuses here instead of waiting for someone to run it by hand. Measured after the fix: two consecutive runs exit 0 and leave the tree byte-identical.",
+        "argv": [
+          "$PY",
+          "00-MASTER/URKE-000001/build-declaration.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-URKE",
+        "name": "Recursive knowledge declaration",
+        "owner": "00-MASTER/URKE-000001",
+        "purpose": "the recursive-knowledge declaration, authored by the script kept beside it so the shape asserted is readable rather than reverse-engineered",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/URKE-000001/"
         ]
       },
       {
