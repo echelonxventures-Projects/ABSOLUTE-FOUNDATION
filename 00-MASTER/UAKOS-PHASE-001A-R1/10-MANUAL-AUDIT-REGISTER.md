@@ -11,7 +11,7 @@
 
 - **Authoritative origin** → 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md
 - **Origin evidence** → repository canonical home 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md (registered)
-- **Repository mapping** → 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md (129 files cite it)
+- **Repository mapping** → 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md (130 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=True · provenance certification=PASS
 
@@ -28,17 +28,17 @@
 
 #### GOV-000 · family GOV · origin **GOVERNANCE_DETERMINATION** · confidence MEDIUM
 
-- **Authoritative origin** → 02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md
-- **Origin evidence** → governance determination (GOV) at 02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md
-- **Repository mapping** → 02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md (381 files cite it)
+- **Authoritative origin** → 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md
+- **Origin evidence** → governance determination (GOV) at 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md
+- **Repository mapping** → 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md (383 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=True · provenance certification=PASS
 
-#### MEP-00 · family MEP · origin **CONSTITUTIONAL_EVOLUTION_PROPOSAL** · confidence MEDIUM
+#### MEP-00 · family MEP · origin **CONSTITUTIONAL_EVOLUTION_PROPOSAL** · confidence HIGH
 
-- **Authoritative origin** → 00-MASTER/UCOS-MXR-001/roadmap.json
-- **Origin evidence** → master evolution path proposal (MEP) at 00-MASTER/UCOS-MXR-001/roadmap.json
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (35 files cite it)
+- **Authoritative origin** → 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md
+- **Origin evidence** → master evolution path proposal (MEP) at 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md
+- **Repository mapping** → 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md (36 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -49,7 +49,7 @@
   - Document → `04-REFERENCE/UCOS Ω - references.docx`
   - Page → 1 · Section → (preamble/unsectioned) · Paragraph → 4
   - Original text → "<w:tab w:val="right" w:pos="360"/><w:tab w:val="left" w:pos="520"/></w:tabs><w:autoSpaceDE w:val="0"/><w:autoSpaceDN w:val="0"/><w:adjustRightInd w:va"
-- **Repository mapping** → 02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md (48 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md (49 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -60,15 +60,15 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2043 · Section → PHASE-002 COMPLETE / UCOS-COMP-000001 · Paragraph → 76904
   - Original text → "UCOS-COMP-000001"
-- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (130 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (129 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=False · provenance certification=PASS
 
-#### UCOS-RAT-000 · family UCOS-RAT · origin **RATIFIED_DETERMINATION** · confidence MEDIUM
+#### UCOS-RAT-000 · family UCOS-RAT · origin **RATIFIED_DETERMINATION** · confidence HIGH
 
-- **Authoritative origin** → 00-MASTER/UCOS-MXR-001/roadmap.json
-- **Origin evidence** → ratified determination / decision authority (UCOS-RAT) at 00-MASTER/UCOS-MXR-001/roadmap.json
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (34 files cite it)
+- **Authoritative origin** → 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md
+- **Origin evidence** → ratified determination / decision authority (UCOS-RAT) at 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md
+- **Repository mapping** → 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md (35 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -79,7 +79,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2043 · Section → PHASE-002 COMPLETE / UCOS-COMP-000001 · Paragraph → 76904
   - Original text → "UCOS-COMP-000001"
-- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (130 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (129 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -90,7 +90,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2057 · Section → Stage 9 / 17. DOCUMENT STATUS / UCOS-COMP-001000 · Paragraph → 77638
   - Original text → "UCOS-COMP-001000"
-- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (44 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (45 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -112,7 +112,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2064 · Section → Stage 9 / 6. ONTOLOGY LEXER / UCOS-COMP-001002 · Paragraph → 77924
   - Original text → "UCOS-COMP-001002"
-- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (25 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (31 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -123,6 +123,6 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2065 · Section → Stage 9 / 7. ONTOLOGY PARSER / UCOS-COMP-001003 · Paragraph → 77963
   - Original text → "UCOS-COMP-001003"
-- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (25 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (31 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS

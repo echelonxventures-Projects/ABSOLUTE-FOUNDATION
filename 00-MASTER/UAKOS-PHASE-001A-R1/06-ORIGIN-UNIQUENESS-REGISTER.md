@@ -14,6 +14,6 @@
 | Objects with CONFLICTING origins | 0 | PASS |
 | Objects with CIRCULAR origins | 0 | PASS |
 | Objects with INVALID origins | 0 | PASS |
-| Objects with EXACTLY ONE valid origin | 549 | PASS |
+| Objects with EXACTLY ONE valid origin | 550 | PASS |
 
-**Origin Integrity = 100.0%** (549/549 objects with exactly one valid authoritative origin).
+**Origin Integrity = 100.0%** (550/550 objects with exactly one valid authoritative origin).

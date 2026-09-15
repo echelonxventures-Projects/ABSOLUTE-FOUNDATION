@@ -10,16 +10,16 @@
 
 | Dimension | Value |
 |---|---|
-| Knowledge objects | 549 |
+| Knowledge objects | 550 |
 | Source-derived | 176 |
-| Repository-derived | 373 |
+| Repository-derived | 374 |
 | — SOURCE_DOCUMENT | 116 |
 | — REFERENCE_ARCHITECTURE | 57 |
 | — IMPORTED_REFERENCE | 3 |
 | — HISTORICAL_DISCUSSION | 0 |
 | — REPOSITORY_CANONICAL_HOME | 340 |
 | — GOVERNANCE_DETERMINATION | 15 |
-| — RATIFIED_DETERMINATION | 6 |
+| — RATIFIED_DETERMINATION | 7 |
 | — CONSTITUTIONAL_EVOLUTION_PROPOSAL | 12 |
 | — CATALOG | 0 |
 | — ADR | 0 |
@@ -32,7 +32,7 @@
 | Machine Verification | PASS |
 | Knowledge Loss | 0 |
 | Origin Integrity | 100.0% |
-| Certification seal (sha256) | `57a948f2791d0d4bb9a36a4c8725fb2df5586195c3c3ad965335fa98d8bdf6cd` |
+| Certification seal (sha256) | `7f881aa65545be8b9e1ae4b06947f97a34c52f4ca214a62f4926c78143fdee5d` |
 
 ## Success criteria
 

@@ -11,7 +11,7 @@
 1. **Source normalization** — enumerated all frozen DOCX under 00-SOURCE/** and 04-REFERENCE/** (incl. ARCHITECTURAL-SOURCES/** and the ChatGPT discussion), SHA-256 pinned, extracted `word/document.xml`, verified integrity.
 2. **Page reconstruction** — deterministic logical page map from explicit + `lastRenderedPageBreak` markers (native page metadata rejected as unreliable).
 3. **Section reconstruction** — disclosed structural heading heuristic (no paragraph styles exist).
-4. **Knowledge-object provenance** — matched all 447 canonical identifiers (families verbatim from `closure_engine.py`) to their first occurrence per document with page/section/paragraph/original-text; merged with repository/validation/certification evidence from `closure.json`.
+4. **Knowledge-object provenance** — matched all 550 canonical identifiers (families verbatim from `closure_engine.py`) to their first occurrence per document with page/section/paragraph/original-text; merged with repository/validation/certification evidence from `closure.json`.
 5. **ChatGPT assimilation, recommendations, decisions, identifier families, gap analysis, reconstruction quality** — Registers 05–11.
 
 ## Outputs produced (13)
@@ -36,9 +36,9 @@
 
 | Bucket | Count |
 |---|---|
-| RECOVERED | 27 |
+| RECOVERED | 116 |
 | PARTIALLY_RECOVERED | 60 |
-| REPOSITORY_ONLY | 360 |
+| REPOSITORY_ONLY | 374 |
 | CONVERSATION_ONLY | 0 |
 | NOT_RECOVERABLE | 0 |
 | MISSING_SOURCE | 0 |
@@ -57,7 +57,7 @@
 | Every knowledge object has reproducible provenance | PASS — deterministic engine, re-runnable |
 | Every recommendation has provenance | PASS — Register 06 (doc/page/paragraph) |
 | Every architectural decision has provenance | PASS — Register 07 (ADRs + ARCH/EPIC/UKDA-DEC) |
-| Every identifier belongs to a canonical family | PASS — 447/447 in 26 families (Register 08) |
+| Every identifier belongs to a canonical family | PASS — 550/550 in 26 families (Register 08) |
 | Manual objects traceable end-to-end | PASS — Register 11 worked traces |
 | No unresolved gaps except missing/corrupt source | PASS — only disclosed repo-minted + 1 empty source |
 

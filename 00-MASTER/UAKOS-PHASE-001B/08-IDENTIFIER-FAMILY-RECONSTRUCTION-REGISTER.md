@@ -11,31 +11,31 @@
 | Family | Canonical pattern | Owner root | Concepts | Source-recovered | Repo-only | Classification |
 |---|---|---|---|---|---|---|
 | APPLICATION | `\bAPPLICATION-\d{3}\b` | 00-MASTER | 21 | 0 | 21 | EXISTING · CANONICAL |
-| ARCH | `\bARCH-[A-Z0-9]+-\d{3}\b` | 00-MASTER | 22 | 0 | 22 | EXISTING · CANONICAL |
+| ARCH | `\bARCH-[A-Z0-9]+-\d{3}\b` | 00-MASTER | 25 | 0 | 25 | EXISTING · CANONICAL |
 | BAND-UNIT | `\bEC3-B\d{2}-[A-Z]?\d{2}\b` | 00-MASTER | 53 | 0 | 53 | EXISTING · CANONICAL |
 | CEP | `\bCEP-\d{3}\b` | 00-CEP | 12 | 0 | 12 | EXISTING · CANONICAL |
-| DATA | `\bDATA-\d{3}\b` | 00-MASTER | 20 | 14 | 6 | EXISTING · CANONICAL |
+| DATA | `\bDATA-\d{3}\b` | 10-DATA | 20 | 14 | 6 | EXISTING · CANONICAL |
 | EC3-GATE | `\bEC-3-AP-\d\b` | 02-MASTER | 5 | 0 | 5 | EXISTING · CANONICAL |
 | EPIC | `\bEPIC-[A-Z]+-\d{3}\b` | 00-MASTER | 16 | 0 | 16 | EXISTING · CANONICAL |
 | FOUNDATION | `(?:EL-1\|RL-F2\|PL-F2\|DF-2\|SF-2\|AF-3)` | application | 6 | 0 | 6 | EXISTING · CANONICAL |
 | GOV | `\bGOV-\d{3}\b` | 00-MASTER | 11 | 3 | 8 | EXISTING · CANONICAL |
-| INFRASTRUCTURE | `\bINFRASTRUCTURE-\d{3}\b` | 00-MASTER | 19 | 0 | 19 | EXISTING · CANONICAL |
-| LAW | `Ω∞-\d{3}\b` | 00-MASTER | 21 | 21 | 0 | EXISTING · CANONICAL |
+| INFRASTRUCTURE | `\bINFRASTRUCTURE-\d{3}\b` | 13-INFRASTRUCTURE | 19 | 0 | 19 | EXISTING · CANONICAL |
+| LAW | `Ω∞-\d{3}\b` | 02-MASTER | 21 | 21 | 0 | EXISTING · CANONICAL |
 | MCP | `\bMCP-\d{3}\b` | 00-MASTER | 9 | 0 | 9 | EXISTING · CANONICAL |
 | MCS | `\bMCS-\d{3}\b` | 00-MASTER | 1 | 0 | 1 | EXISTING · CANONICAL |
 | MEP | `\bMEP-\d{2}\b` | 00-MASTER | 12 | 0 | 12 | EXISTING · CANONICAL |
 | METACLASS | `(?:AMC\|AMR\|DMC\|DMR\|SMC\|SMR\|ICMP\|ICNW\|ISTO\|ICAP)-\d{2}` | 00-MASTER | 91 | 0 | 91 | EXISTING · CANONICAL |
 | PHASE | `\bPhase-\d{3}\b` | 00-MASTER | 12 | 3 | 9 | EXISTING · CANONICAL |
-| PLATFORM | `\bPLATFORM-\d{3}\b` | 00-MASTER | 19 | 14 | 5 | EXISTING · CANONICAL |
-| RUNTIME | `\bRUNTIME-\d{3}\b` | 00-MASTER | 16 | 14 | 2 | EXISTING · CANONICAL |
-| SERVICE | `\bSERVICE-\d{3}\b` | 00-MASTER | 19 | 12 | 7 | EXISTING · CANONICAL |
-| UCKO | `\bUCKO-[A-Z]+-\d{3,4}\b` | 00-MASTER | 25 | 0 | 25 | EXISTING · CANONICAL |
-| UCOS-COMP | `\bUCOS-COMP-\d{6}\b` | 00-MASTER | 7 | 6 | 1 | EXISTING · CANONICAL |
+| PLATFORM | `\bPLATFORM-\d{3}\b` | 09-PLATFORM | 19 | 14 | 5 | EXISTING · CANONICAL |
+| RUNTIME | `\bRUNTIME-\d{3}\b` | 08-RUNTIME | 17 | 14 | 3 | EXISTING · CANONICAL |
+| SERVICE | `\bSERVICE-\d{3}\b` | 11-SERVICE | 19 | 12 | 7 | EXISTING · CANONICAL |
+| UCKO | `\bUCKO-[A-Z]+-\d{3,4}\b` | 02-MASTER | 33 | 0 | 33 | EXISTING · CANONICAL |
+| UCOS-COMP | `\bUCOS-COMP-\d{6}\b` | 02-MASTER | 97 | 95 | 2 | EXISTING · CANONICAL |
 | UCOS-EXEC | `\bUCOS-EXEC-\d{3}\b` | 00-MASTER | 12 | 0 | 12 | EXISTING · CANONICAL |
-| UCOS-GOV | `\bUCOS-GOV-\d{3}\b` | 00-MASTER | 7 | 0 | 7 | EXISTING · CANONICAL |
-| UCOS-RAT | `\bUCOS-RAT-\d{3}\b` | 00-MASTER | 2 | 0 | 2 | EXISTING · CANONICAL |
-| UCOS-RECON | `\bUCOS-RECON-[A-Z0-9]+\b` | 00-MASTER | 5 | 0 | 5 | EXISTING · CANONICAL |
-| UKDA-DEC | `\bUKDA-DEC-\d{3,4}\b` | 00-MASTER | 4 | 0 | 4 | EXISTING · CANONICAL |
+| UCOS-GOV | `\bUCOS-GOV-\d{3}\b` | 02-MASTER | 7 | 0 | 7 | EXISTING · CANONICAL |
+| UCOS-RAT | `\bUCOS-RAT-\d{3}\b` | 02-MASTER | 3 | 0 | 3 | EXISTING · CANONICAL |
+| UCOS-RECON | `\bUCOS-RECON-[A-Z0-9]+\b` | 02-MASTER | 5 | 0 | 5 | EXISTING · CANONICAL |
+| UKDA-DEC | `\bUKDA-DEC-\d{3,4}\b` | 02-MASTER | 4 | 0 | 4 | EXISTING · CANONICAL |
 
 ### Families present in corpus/repo but ABSENT from the canonical catalog
 
@@ -73,5 +73,5 @@ Per UAKOS-CLOSURE-007 §3, the catalog is a closed, hand-curated 26-family set; 
 
 ### Determination
 
-- Every one of the **447** knowledge objects belongs to exactly one of the **26** canonical families (Register 04) — **no concept is unclassified**.
+- Every one of the **550** knowledge objects belongs to exactly one of the **26** canonical families (Register 04) — **no concept is unclassified**.
 - The canonical family set is **closed** (extension requires a source-code edit), so the unrecognized families above cannot enter the baseline without an authorized catalog change (out of scope for this read-only phase).

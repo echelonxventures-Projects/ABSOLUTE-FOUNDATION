@@ -21,6 +21,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -32,7 +34,42 @@ CLOSURE_PATH = REPO / "00-MASTER" / "UAKOS-CLOSURE-002" / "closure.json"
 PB = json.loads(PROV_PATH.read_text("utf-8"))
 CLOSURE = json.loads(CLOSURE_PATH.read_text("utf-8"))
 CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
-BASE = PB["closure_baseline"]
+#: The header every register carries, and the two fields in it that move on their own.
+_BASELINE_IN_HEADER = re.compile(r"closure baseline `([0-9a-f]+)` \(branch `([^`]+)`\)")
+
+
+def _baseline(live: dict) -> dict:
+    """The closure baseline these registers are rendered against.
+
+    A COMMITTED ARTIFACT CANNOT CARRY THE SHA OF THE COMMIT THAT CARRIES IT. `closure_baseline`
+    comes from provenance.json, which is gitignored and rebuilt by whichever site ran last, so
+    re-reading it stamps a different commit and branch into all twelve register headers on every
+    commit and on every runner. UCOS-RFP-001 reported twelve CYC-UNGOVERNED paths here, and two
+    of them drift for this reason alone.
+
+    `--render` therefore REPLAYS the baseline this programme already recorded in its own
+    certification register, so re-rendering an unchanged repository reproduces it. Without the
+    flag the live baseline is read and the registers advance, which is what a genuine
+    re-certification is. The mechanism is UAKOS-CLOSURE-009's `_head_commit`, which solved this
+    first; this is that pattern applied, not a new one.
+
+    WHAT IT DOES NOT FIX, MEASURED: the other eleven registers drift on COUNTS — 549 knowledge
+    objects to 550 — because the corpus grew. That is ordinary staleness and is cured by
+    committing a regeneration, not by replaying a sha.
+    """
+    if "--render" not in sys.argv:
+        return live
+    try:
+        recorded = (HERE / "00-FINAL-CONSTITUTIONAL-BASELINE-CERTIFICATION.md").read_text("utf-8")
+    except OSError:
+        return live
+    found = _BASELINE_IN_HEADER.search(recorded)
+    if not found:
+        return live
+    return {**live, "commit": found.group(1), "branch": found.group(2)}
+
+
+BASE = _baseline(PB["closure_baseline"])
 PROV = {p["id"]: p for p in PB["provenance"]}
 
 ALLOWED_ORIGINS = (

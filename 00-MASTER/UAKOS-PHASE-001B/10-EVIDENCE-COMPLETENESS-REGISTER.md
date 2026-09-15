@@ -6,31 +6,31 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py && python3 00-MASTER/UAKOS-PHASE-001B/emit_registers.py`.
 
-### Chain-link fill rates (across all 447 objects)
+### Chain-link fill rates (across all 550 objects)
 
 | Chain link | Objects with link | Fill rate |
 |---|---|---|
-| source_document | 447 | 100.0% |
-| page | 87 | 19.5% |
-| section | 84 | 18.8% |
-| paragraph | 87 | 19.5% |
-| original_text | 87 | 19.5% |
-| knowledge_object | 447 | 100.0% |
-| repository_evidence | 447 | 100.0% |
-| validation_evidence | 447 | 100.0% |
-| certification_evidence | 242 | 54.1% |
+| source_document | 550 | 100.0% |
+| page | 176 | 32.0% |
+| section | 173 | 31.5% |
+| paragraph | 176 | 32.0% |
+| original_text | 176 | 32.0% |
+| knowledge_object | 550 | 100.0% |
+| repository_evidence | 550 | 100.0% |
+| validation_evidence | 550 | 100.0% |
+| certification_evidence | 241 | 43.8% |
 
 ### Completeness distribution (fraction of 9 links present)
 
 | Completeness | Objects |
 |---|---|
 | 1.000 | 32 |
-| 0.889 | 52 |
+| 0.889 | 141 |
 | 0.778 | 3 |
-| 0.556 | 210 |
-| 0.444 | 150 |
+| 0.556 | 209 |
+| 0.444 | 165 |
 
-Objects with a **complete** 9-link chain: **32 / 447**. The dominant missing links are the source-document layer (page/section/paragraph/original_text) for repository-minted identifiers — consistent with Register 09.
+Objects with a **complete** 9-link chain: **32 / 550**. The dominant missing links are the source-document layer (page/section/paragraph/original_text) for repository-minted identifiers — consistent with Register 09.
 
 ### Objects with a fully complete provenance chain
 

@@ -9,6 +9,8 @@ markdown. READ-ONLY; writes only into this operational-memory folder.
 from __future__ import annotations
 
 import json
+import re
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -17,7 +19,38 @@ REPO = HERE.parent.parent
 M = json.loads((HERE / "provenance.json").read_text("utf-8"))
 CLOSURE = json.loads((REPO / "00-MASTER" / "UAKOS-CLOSURE-002" / "closure.json").read_text("utf-8"))
 CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
-BASE = M["closure_baseline"]
+#: The header every register carries, and the two fields in it that move on their own.
+_BASELINE_IN_HEADER = re.compile(r"closure baseline `([0-9a-f]+)` \(branch `([^`]+)`\)")
+
+
+def _baseline(live: dict) -> dict:
+    """The closure baseline these registers are rendered against.
+
+    THE HEADER BELOW CLAIMS REGENERATION IS BYTE-IDENTICAL AND NAMES THE REASON IT IS NOT:
+    "the closure baseline commit is the only temporal anchor". An anchor that moves is not an
+    anchor. `closure_baseline` is read from provenance.json, which is gitignored and rebuilt by
+    whichever site ran last, so the commit and branch stamped into all thirteen register headers
+    change on every commit and on every runner — and a committed artifact can never carry the
+    sha of the commit that carries it. UCOS-RFP-001 reported thirteen CYC-UNGOVERNED paths here.
+
+    `--render` REPLAYS the baseline this programme already recorded in its own first register,
+    so re-rendering an unchanged repository reproduces it and the docstring's claim becomes true.
+    Without the flag the live baseline is read and the registers advance, which is what a genuine
+    reconstruction is. The mechanism is UAKOS-CLOSURE-009's `_head_commit`, applied here.
+    """
+    if "--render" not in sys.argv:
+        return live
+    try:
+        recorded = (HERE / "01-SOURCE-PROVENANCE-REGISTER.md").read_text("utf-8")
+    except OSError:
+        return live
+    found = _BASELINE_IN_HEADER.search(recorded)
+    if not found:
+        return live
+    return {**live, "commit": found.group(1), "branch": found.group(2)}
+
+
+BASE = _baseline(M["closure_baseline"])
 # Concept/family totals are DERIVED from the closure baseline the model was reconstructed
 # against — never hardcoded — so a corpus-currency regeneration that changes the concept
 # universe can never leave a stale literal in a rendered register.

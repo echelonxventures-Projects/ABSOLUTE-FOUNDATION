@@ -17,7 +17,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **76904**
 - **Original text** → "UCOS-COMP-000001"
 - **Knowledge object** → `UCOS-COMP-000001` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md`; **109** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md`; **129** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=False
 
@@ -29,8 +29,8 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77638**
 - **Original text** → "UCOS-COMP-001000"
 - **Knowledge object** → `UCOS-COMP-001000` (disposition DEFERRED)
-- **Repository evidence** → home `00-MASTER/UCOS-MXR-001/roadmap.json`; **35** repository files cite it
-- **Validation evidence** → constitution=False, specification=True, implementation=False
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **45** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
 #### UCOS-COMP-001001  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
@@ -41,8 +41,104 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77873**
 - **Original text** → "UCOS-COMP-001001"
 - **Knowledge object** → `UCOS-COMP-001001` (disposition DEFERRED)
-- **Repository evidence** → home `00-MASTER/UCOS-MXR-001/roadmap.json`; **11** repository files cite it
-- **Validation evidence** → constitution=False, specification=True, implementation=False
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **40** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001002  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2064** (render/explicit-break map)
+- **Section** → Stage 9 / 6. ONTOLOGY LEXER / UCOS-COMP-001002
+- **Paragraph** → index **77924**
+- **Original text** → "UCOS-COMP-001002"
+- **Knowledge object** → `UCOS-COMP-001002` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **31** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001003  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2065** (render/explicit-break map)
+- **Section** → Stage 9 / 7. ONTOLOGY PARSER / UCOS-COMP-001003
+- **Paragraph** → index **77963**
+- **Original text** → "UCOS-COMP-001003"
+- **Knowledge object** → `UCOS-COMP-001003` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **31** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001004  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2065** (render/explicit-break map)
+- **Section** → Stage 9 / 8. ONTOLOGY ABSTRACT SYNTAX TREE (AST) / UCOS-COMP-001004
+- **Paragraph** → index **77999**
+- **Original text** → "UCOS-COMP-001004"
+- **Knowledge object** → `UCOS-COMP-001004` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001005  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2066** (render/explicit-break map)
+- **Section** → Stage 9 / 9. ONTOLOGY SEMANTIC ANALYZER / UCOS-COMP-001005
+- **Paragraph** → index **78038**
+- **Original text** → "UCOS-COMP-001005"
+- **Knowledge object** → `UCOS-COMP-001005` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001006  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2066** (render/explicit-break map)
+- **Section** → Stage 9 / 10. ONTOLOGY VALIDATOR / UCOS-COMP-001006
+- **Paragraph** → index **78073**
+- **Original text** → "UCOS-COMP-001006"
+- **Knowledge object** → `UCOS-COMP-001006` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001007  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2066** (render/explicit-break map)
+- **Section** → Stage 9 / 11. ONTOLOGY OPTIMIZER / UCOS-COMP-001007
+- **Paragraph** → index **78108**
+- **Original text** → "UCOS-COMP-001007"
+- **Knowledge object** → `UCOS-COMP-001007` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001008  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2067** (render/explicit-break map)
+- **Section** → Stage 9 / 12. ONTOLOGY CODE GENERATOR / UCOS-COMP-001008
+- **Paragraph** → index **78141**
+- **Original text** → "UCOS-COMP-001008"
+- **Knowledge object** → `UCOS-COMP-001008` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001009  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2068** (render/explicit-break map)
+- **Section** → Stage 9 / 13. ONTOLOGY FEDERATION COMPILER / UCOS-COMP-001009
+- **Paragraph** → index **78180**
+- **Original text** → "UCOS-COMP-001009"
+- **Knowledge object** → `UCOS-COMP-001009` (disposition DEFERRED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
 #### UCOS-COMP-001010  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
@@ -53,103 +149,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78213**
 - **Original text** → "UCOS-COMP-001010"
 - **Knowledge object** → `UCOS-COMP-001010` (disposition DEFERRED)
-- **Repository evidence** → home `00-MASTER/UCOS-MXR-001/roadmap.json`; **31** repository files cite it
-- **Validation evidence** → constitution=False, specification=True, implementation=False
-- **Certification evidence** → certified=False
-
-#### UCOS-COMP-009009  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
-- **Page** → logical page **2211** (render/explicit-break map)
-- **Section** → Stage 9 / 13. UNIVERSAL DEPLOYMENT ENGINE / UCOS-COMP-009009
-- **Paragraph** → index **84092**
-- **Original text** → "UCOS-COMP-009009"
-- **Knowledge object** → `UCOS-COMP-009009` (disposition DEFERRED)
-- **Repository evidence** → home `00-MASTER/UCOS-MXR-001/roadmap.json`; **8** repository files cite it
-- **Validation evidence** → constitution=False, specification=True, implementation=False
-- **Certification evidence** → certified=False
-
-#### UCOS-COMP-009010  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
-- **Page** → logical page **2212** (render/explicit-break map)
-- **Section** → Stage 9 / 14. UNIVERSAL CERTIFICATION ENGINE / UCOS-COMP-009010
-- **Paragraph** → index **84129**
-- **Original text** → "UCOS-COMP-009010"
-- **Knowledge object** → `UCOS-COMP-009010` (disposition DEFERRED)
-- **Repository evidence** → home `00-MASTER/UCOS-MXR-001/roadmap.json`; **31** repository files cite it
-- **Validation evidence** → constitution=False, specification=True, implementation=False
-- **Certification evidence** → certified=False
-
-#### Ω∞-000  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ UNIVERSAL REALITY COMPILER CONSTITUTION.docx`
-- **Page** → logical page **8** (render/explicit-break map)
-- **Section** → LAW Ω∞-000
-- **Paragraph** → index **317**
-- **Original text** → "LAW Ω∞-000"
-- **Knowledge object** → `Ω∞-000` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/EC-3-B13-P02-UNIVERSAL-UNIVERSE-ARCHITECTURE-FRAMEWORK.md`; **119** repository files cite it
-- **Validation evidence** → constitution=True, specification=True, implementation=True
-- **Certification evidence** → certified=False
-
-#### Ω∞-001  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
-- **Page** → logical page **12** (render/explicit-break map)
-- **Section** → LAW Ω∞-001
-- **Paragraph** → index **475**
-- **Original text** → "LAW Ω∞-001"
-- **Knowledge object** → `Ω∞-001` (disposition SPECIFIED)
-- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **83** repository files cite it
-- **Validation evidence** → constitution=True, specification=True, implementation=False
-- **Certification evidence** → certified=False
-
-#### Ω∞-002  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
-- **Page** → logical page **12** (render/explicit-break map)
-- **Section** → LAW Ω∞-002
-- **Paragraph** → index **477**
-- **Original text** → "LAW Ω∞-002"
-- **Knowledge object** → `Ω∞-002` (disposition SPECIFIED)
-- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **36** repository files cite it
-- **Validation evidence** → constitution=True, specification=True, implementation=False
-- **Certification evidence** → certified=False
-
-#### Ω∞-003  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
-- **Page** → logical page **12** (render/explicit-break map)
-- **Section** → LAW Ω∞-003
-- **Paragraph** → index **479**
-- **Original text** → "LAW Ω∞-003"
-- **Knowledge object** → `Ω∞-003` (disposition SPECIFIED)
-- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **36** repository files cite it
-- **Validation evidence** → constitution=True, specification=True, implementation=False
-- **Certification evidence** → certified=False
-
-#### Ω∞-004  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
-- **Page** → logical page **12** (render/explicit-break map)
-- **Section** → LAW Ω∞-004
-- **Paragraph** → index **481**
-- **Original text** → "LAW Ω∞-004"
-- **Knowledge object** → `Ω∞-004` (disposition SPECIFIED)
-- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **36** repository files cite it
-- **Validation evidence** → constitution=True, specification=True, implementation=False
-- **Certification evidence** → certified=False
-
-#### Ω∞-005  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
-
-- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
-- **Page** → logical page **12** (render/explicit-break map)
-- **Section** → LAW Ω∞-005
-- **Paragraph** → index **483**
-- **Original text** → "LAW Ω∞-005"
-- **Knowledge object** → `Ω∞-005` (disposition SPECIFIED)
-- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **38** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **38** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -161,7 +161,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **115**
 - **Original text** → "DATA-001 Constitution"
 - **Knowledge object** → `DATA-001` (disposition IMPLEMENTED)
-- **Repository evidence** → home `10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md`; **255** repository files cite it
+- **Repository evidence** → home `10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md`; **338** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -172,8 +172,8 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Section** → PHASE-004 / DATA FOUNDATION
 - **Paragraph** → index **116**
 - **Original text** → "DATA-002 Theory"
-- **Knowledge object** → `DATA-002` (disposition DEFERRED)
-- **Repository evidence** → home `10-DATA/DATA-002-UNIVERSAL-DATA-THEORY.md`; **44** repository files cite it
+- **Knowledge object** → `DATA-002` (disposition REJECTED)
+- **Repository evidence** → home `10-DATA/DATA-002-UNIVERSAL-DATA-THEORY.md`; **46** repository files cite it
 - **Validation evidence** → constitution=False, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -185,7 +185,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **117**
 - **Original text** → "DATA-003 Ontology"
 - **Knowledge object** → `DATA-003` (disposition IMPLEMENTED)
-- **Repository evidence** → home `10-DATA/DATA-003-UNIVERSAL-DATA-ONTOLOGY.md`; **56** repository files cite it
+- **Repository evidence** → home `10-DATA/DATA-003-UNIVERSAL-DATA-ONTOLOGY.md`; **71** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=False
 
@@ -197,7 +197,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **118**
 - **Original text** → "DATA-004 Taxonomy"
 - **Knowledge object** → `DATA-004` (disposition IMPLEMENTED)
-- **Repository evidence** → home `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md`; **70** repository files cite it
+- **Repository evidence** → home `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md`; **85** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=False
 
@@ -206,7 +206,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AF-3` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md`; **121** repository files cite it
+- **Repository evidence** → home `02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md`; **130** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -215,7 +215,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AMC-01` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md`; **126** repository files cite it
+- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **136** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -224,7 +224,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AMC-02` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md`; **105** repository files cite it
+- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **114** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -233,7 +233,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AMC-03` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md`; **110** repository files cite it
+- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **118** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 

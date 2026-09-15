@@ -10,11 +10,11 @@
 
 | Metric | Value |
 |---|---|
-| Knowledge objects | 447 |
-| Source-document provenance recovered | 87 (19.5%) |
-| — fully RECOVERED (page+section+para+text) | 27 |
+| Knowledge objects | 550 |
+| Source-document provenance recovered | 176 (32.0%) |
+| — fully RECOVERED (page+section+para+text) | 116 |
 | — PARTIALLY_RECOVERED (page+para+text; heuristic/absent section) | 60 |
-| Repository-derived (origin = canonical home) | 360 (80.5%) |
+| Repository-derived (origin = canonical home) | 374 (68.0%) |
 | Conversation-only | 0 |
 | NOT_RECOVERABLE (no source, no home) | 0 |
 | Source documents normalized + hashed | 24 |
@@ -22,7 +22,7 @@
 
 ## Findings
 
-1. **Every** knowledge object has an originating source and reproducible provenance: 87 trace to a frozen document (Document→Page→Section→Paragraph→Text); the remaining 360 trace to a repository canonical home with full repository/validation/certification evidence. **NOT_RECOVERABLE = 0**.
+1. **Every** knowledge object has an originating source and reproducible provenance: 176 trace to a frozen document (Document→Page→Section→Paragraph→Text); the remaining 374 trace to a repository canonical home with full repository/validation/certification evidence. **NOT_RECOVERABLE = 0**.
 2. The 21 sources are identity-pinned (SHA-256), extractable, and structurally reconstructed into a deterministic page/section/paragraph model. Native page metadata was proven unreliable and rejected in favour of the reproducible break-map.
 3. The dominant provenance gap is structural and expected: ~80% of canonical identifiers (METACLASS, BAND-UNIT, UCKO, ARCH, CEP, APPLICATION, …) were **engineered in the repository**, not transcribed from the uploaded documents — precisely the Phase-001A observation.
 

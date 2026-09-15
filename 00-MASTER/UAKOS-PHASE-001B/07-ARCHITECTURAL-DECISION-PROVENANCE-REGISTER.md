@@ -6,59 +6,102 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py && python3 00-MASTER/UAKOS-PHASE-001B/emit_registers.py`.
 
-### ADR records (`adr/`): **3**
+### ADR records (`adr/`): **43**
 
 | ADR | Path |
 |---|---|
 | 0000-template.md | adr/0000-template.md |
 | 0001-foundation-technology-stack.md | adr/0001-foundation-technology-stack.md |
 | 0002-aeos-phase-1-architectural-determination.md | adr/0002-aeos-phase-1-architectural-determination.md |
+| 0003-constitutional-binding-of-ceu-and-ucxi.md | adr/0003-constitutional-binding-of-ceu-and-ucxi.md |
+| 0004-uisd-scope-extension-to-entity-applicability.md | adr/0004-uisd-scope-extension-to-entity-applicability.md |
+| 0005-measurement-as-a-context-and-entity.md | adr/0005-measurement-as-a-context-and-entity.md |
+| 0006-entity-classification-authority-moves-to-ceu.md | adr/0006-entity-classification-authority-moves-to-ceu.md |
+| 0007-disclose-every-finite-enumeration.md | adr/0007-disclose-every-finite-enumeration.md |
+| 0008-unified-unknown-admission-verification.md | adr/0008-unified-unknown-admission-verification.md |
+| 0009-technology-independence-is-already-canonical.md | adr/0009-technology-independence-is-already-canonical.md |
+| 0010-platform-composition-is-already-canonical.md | adr/0010-platform-composition-is-already-canonical.md |
+| 0011-self-learning-and-evolution-are-already-canonical.md | adr/0011-self-learning-and-evolution-are-already-canonical.md |
+| 0012-remove-residual-planetary-default.md | adr/0012-remove-residual-planetary-default.md |
+| 0013-universal-persistent-evolutionary-graph-memory.md | adr/0013-universal-persistent-evolutionary-graph-memory.md |
+| 0014-retighten-the-ucl-unadmitted-target-ratchet.md | adr/0014-retighten-the-ucl-unadmitted-target-ratchet.md |
+| 0015-uckp-art-07-relationship-temporal-validity.md | adr/0015-uckp-art-07-relationship-temporal-validity.md |
+| 0016-uckp-knowledge-confidence-via-ucxi-context.md | adr/0016-uckp-knowledge-confidence-via-ucxi-context.md |
+| 0017-ucl-f-006-identity-minting-authorization.md | adr/0017-ucl-f-006-identity-minting-authorization.md |
+| 0018-ucl-f-006-follow-on-identity-minting-authorization.md | adr/0018-ucl-f-006-follow-on-identity-minting-authorization.md |
+| 0019-residual-phase4-finding-disposition.md | adr/0019-residual-phase4-finding-disposition.md |
+| 0020-state-aware-verification-purity-restoration.md | adr/0020-state-aware-verification-purity-restoration.md |
+| 0021-uap-001-universal-agnostic-architecture-principle.md | adr/0021-uap-001-universal-agnostic-architecture-principle.md |
+| 0022-uiep-001-universal-infinite-evolution-principle.md | adr/0022-uiep-001-universal-infinite-evolution-principle.md |
+| 0023-ceu-supersession-append-only-history.md | adr/0023-ceu-supersession-append-only-history.md |
+| 0024-ucda-append-only-decision-history.md | adr/0024-ucda-append-only-decision-history.md |
+| 0025-knowledgestore-archive-and-provenance-persistence.md | adr/0025-knowledgestore-archive-and-provenance-persistence.md |
+| 0026-ceu-context-binding-identity-and-governance.md | adr/0026-ceu-context-binding-identity-and-governance.md |
+| 0027-mutation-classification-authored-document-class.md | adr/0027-mutation-classification-authored-document-class.md |
+| 0028-requirement-authority-is-plane-b.md | adr/0028-requirement-authority-is-plane-b.md |
+| 0029-requirement-identifier-scheme-survives-the-join.md | adr/0029-requirement-identifier-scheme-survives-the-join.md |
+| 0030-declared-absent-is-a-lawful-disposition.md | adr/0030-declared-absent-is-a-lawful-disposition.md |
+| 0031-capture-obligations-as-candidates.md | adr/0031-capture-obligations-as-candidates.md |
+| 0032-merge-classes-for-concurrent-actors.md | adr/0032-merge-classes-for-concurrent-actors.md |
+| 0033-identity-minting-is-scheduled.md | adr/0033-identity-minting-is-scheduled.md |
+| 0034-one-authority-home-per-actor.md | adr/0034-one-authority-home-per-actor.md |
+| 0035-verification-lane-per-role.md | adr/0035-verification-lane-per-role.md |
+| 0036-determination-documents-default-to-archive.md | adr/0036-determination-documents-default-to-archive.md |
+| 0037-only-the-operator-decides.md | adr/0037-only-the-operator-decides.md |
+| 0038-what-counts-as-hardcoding.md | adr/0038-what-counts-as-hardcoding.md |
+| 0039-agnosticism-axis-dispositions.md | adr/0039-agnosticism-axis-dispositions.md |
+| 0040-agnosticism-is-measured-not-declared.md | adr/0040-agnosticism-is-measured-not-declared.md |
+| 0041-a-rule-whose-measurement-does-not-reach-it.md | adr/0041-a-rule-whose-measurement-does-not-reach-it.md |
+| 0042-the-sequencing-rule-and-what-zero-means.md | adr/0042-the-sequencing-rule-and-what-zero-means.md |
 
 ### Decision & architecture concepts (UKDA-DEC / ARCH / EPIC)
 
 | Concept | Family | Disposition | Quality | Conf | Origin | Repo files | Cert |
 |---|---|---|---|---|---|---|---|
-| ARCH-AI-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-BOOK/PORTAL/UCOS-ARCH-000004.md | 36 | · |
-| ARCH-API-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md | 36 | · |
-| ARCH-APPLICATION-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 102 | ★ |
-| ARCH-BCDR-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-BOOK/PORTAL/UCOS-ARCH-000007.md | 29 | · |
-| ARCH-CERT-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-BOOK/PORTAL/UCOS-ARCH-000009.md | 31 | · |
-| ARCH-DATA-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 104 | ★ |
-| ARCH-EVENT-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md | 34 | · |
-| ARCH-GAP-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 27 | · |
-| ARCH-GOV-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 49 | · |
-| ARCH-INFRA-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 35 | · |
-| ARCH-INFRASTRUCTURE-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md | 78 | ★ |
-| ARCH-INTEGRATION-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-BOOK/PORTAL/UCOS-ARCH-000016.md | 29 | · |
-| ARCH-MASTER-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 28 | · |
-| ARCH-OBS-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md | 31 | · |
-| ARCH-OPS-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-CEP/STAGE-03-FOUNDATION-EVOLUTION-PLAN.md | 27 | · |
-| ARCH-QUALITY-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-BOOK/PORTAL/UCOS-MISC-000004.md | 29 | · |
-| ARCH-RUNTIME-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 40 | · |
-| ARCH-SECURITY-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 47 | · |
-| ARCH-SERVICE-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 108 | ★ |
-| ARCH-TEST-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-BOOK/PORTAL/UCOS-ARCH-000021.md | 30 | · |
-| ARCH-WORKFLOW-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 37 | · |
-| ARCH-XXX-000 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 23 | · |
-| EPIC-DOC-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 24 | · |
-| EPIC-DOC-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 19 | · |
-| EPIC-GOV-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 5 | · |
-| EPIC-OBS-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 5 | · |
-| EPIC-PLAT-002 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 6 | · |
-| EPIC-PLAT-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UEI-000001/uei.json | 63 | · |
-| EPIC-RTE-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 5 | · |
-| EPIC-RTE-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UER-000001/uer.json | 68 | · |
-| EPIC-RTE-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 23 | · |
-| EPIC-UKDA-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 38 | · |
-| EPIC-UKDA-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 24 | · |
-| EPIC-UKDA-004 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 24 | · |
-| EPIC-VAL-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 5 | · |
-| EPIC-VAL-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-BOOK/PORTAL/index.md | 54 | · |
-| EPIC-VAL-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 35 | · |
-| EPIC-XXX-000 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 23 | · |
-| UKDA-DEC-000 | UKDA-DEC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 29 | · |
-| UKDA-DEC-0001 | UKDA-DEC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | knowledge/decisions.json | 37 | · |
-| UKDA-DEC-0002 | UKDA-DEC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 19 | · |
-| UKDA-DEC-0003 | UKDA-DEC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 00-MASTER/UCOS-MXR-001/roadmap.json | 6 | · |
+| ARCH-AI-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 76 | · |
+| ARCH-API-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 66 | · |
+| ARCH-APPLICATION-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 130 | ★ |
+| ARCH-BCDR-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 66 | · |
+| ARCH-CERT-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 77 | · |
+| ARCH-DATA-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 150 | ★ |
+| ARCH-DEPLOYMENT-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md | 21 | · |
+| ARCH-EVENT-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 65 | · |
+| ARCH-GAP-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 31 | · |
+| ARCH-GOV-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 120 | · |
+| ARCH-INFRA-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 62 | · |
+| ARCH-INFRASTRUCTURE-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md | 86 | ★ |
+| ARCH-INTEGRATION-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 51 | · |
+| ARCH-MASTER-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 35 | · |
+| ARCH-OBS-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 78 | · |
+| ARCH-OPS-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 65 | · |
+| ARCH-PLATFORM-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md | 21 | · |
+| ARCH-PRODUCTION-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md | 21 | · |
+| ARCH-QUALITY-001 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 38 | · |
+| ARCH-RUNTIME-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 97 | · |
+| ARCH-SECURITY-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 124 | · |
+| ARCH-SERVICE-001 | ARCH | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 135 | ★ |
+| ARCH-TEST-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md | 77 | · |
+| ARCH-WORKFLOW-001 | ARCH | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md | 61 | · |
+| ARCH-XXX-000 | ARCH | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 30 | · |
+| EPIC-DOC-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 31 | · |
+| EPIC-DOC-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 28 | · |
+| EPIC-GOV-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 23 | · |
+| EPIC-OBS-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 23 | · |
+| EPIC-PLAT-002 | EPIC | REJECTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 20 | · |
+| EPIC-PLAT-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 76 | · |
+| EPIC-RTE-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 23 | · |
+| EPIC-RTE-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 89 | · |
+| EPIC-RTE-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 36 | · |
+| EPIC-UKDA-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 52 | · |
+| EPIC-UKDA-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 50 | · |
+| EPIC-UKDA-004 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 33 | · |
+| EPIC-VAL-001 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 23 | · |
+| EPIC-VAL-002 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | knowledge/canonical-knowledge.json | 70 | · |
+| EPIC-VAL-003 | EPIC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 50 | · |
+| EPIC-XXX-000 | EPIC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 30 | · |
+| UKDA-DEC-000 | UKDA-DEC | DEFERRED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 35 | · |
+| UKDA-DEC-0001 | UKDA-DEC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 46 | · |
+| UKDA-DEC-0002 | UKDA-DEC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 34 | · |
+| UKDA-DEC-0003 | UKDA-DEC | IMPLEMENTED | REPOSITORY_ONLY | REPOSITORY | 02-MASTER/UCOS-PROGRAM-FAMILY-CONCEPT-REGISTER.md | 25 | · |
 
 _Provenance of decisions is reconstructed, not authored. The 3 ADRs are repository-native decision records; ARCH/EPIC/UKDA-DEC identifiers are repository-minted (see Register 09)._

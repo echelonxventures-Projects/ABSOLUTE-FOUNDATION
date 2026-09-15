@@ -6,9 +6,9 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py`.
 
-- Input `provenance.json` SHA-256: `bb893ab79813f7dd297177f12a509478defc4c06f1bd0897995e225c0abbcb45`
-- Input `closure.json` SHA-256: `3af7ecf16e4d066b67f3c5b8a4acbdac9789d491354938a8da18cc53c19c9668`
-- Objects certified: **549** (== closure concept_total **549**)
+- Input `provenance.json` SHA-256: `dab0659c1a12301a456552b765168e76a57dfabf60b6586fb90aac04a4e90372`
+- Input `closure.json` SHA-256: `6e995dbfe69893740ab4b3fceba67c169d00c80a8b093cd43654e0b41084bf61`
+- Objects certified: **550** (== closure concept_total **550**)
 
 | Machine assertion | Result |
 |---|---|
