@@ -1021,6 +1021,21 @@ LAWS = [
      "live measurement, every detected instability is admitted as a governed subject eligible for "
      "research, and no stability mechanism is exempt from review.",
      "stability_is_measured_and_instability_is_governed"),
+    # THIS LAW WAS IN THE DECLARATION AND NOT IN THE BUILDER, WHICH MADE THE BUILDER A DELETION.
+    # 6ad461ef added URKE-L-33 to urke-declaration.json directly; this list was not extended with
+    # it, so the declaration carried 33 laws while `python3 build-declaration.py` produced 32 —
+    # and the docstring above promises the run is idempotent. Anyone taking that promise at its
+    # word silently removed a blocking law. UCOS-RFP-001 found it as CYC-UNGOVERNED on the first
+    # verdict that gate has ever returned, and it is the reason the two disagree at all: a
+    # declaration is the artifact of record, a builder is how it is written, and the moment the
+    # two diverge the one that runs wins.
+    ("URKE-L-33",
+     "The declared vocabulary is not hardcoded: no module compares against, tests membership "
+     "against, or enumerates a declared state, domain, relation or reality member. A member may "
+     "be spelled in code as a serialization key or a label, which decides nothing; deciding from "
+     "one forces a code change whenever the declaration gains a member, which is the harm this "
+     "law names.",
+     "vocabulary_is_not_hardcoded"),
 ]
 
 def build() -> OD:
