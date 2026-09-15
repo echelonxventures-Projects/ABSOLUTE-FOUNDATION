@@ -90,6 +90,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      # GATE-02 REPORTS THE TREE IT IS HANDED, AND DETACHMENT IS ONE OF THE THINGS IT REPORTS.
+      # That is right for a working tree, where a detached HEAD is how commits are lost, and it
+      # is meaningless here — so the gate was answering a question about `actions/checkout`
+      # rather than about this repository. Measured on one commit, ce46709f: the `push` run
+      # landed on a branch and certified 12/12 OPEN; the `pull_request` run checked out the
+      # ephemeral merge ref detached and refused at 11/12 with integrity_findings=1. Same tree,
+      # same engine, two verdicts, decided by the event name. Naming the HEAD restores the
+      # premise the gate is entitled to assume. It does not relax the gate: every other
+      # integrity condition — conflicts, interrupted operations, broken symlinks, git fsck —
+      # is still measured, and still fail-closed.
+      - name: Present a named HEAD (GATE-02 measures the tree it is handed)
+        run: git checkout -B ci/rib-gate-head
+
       - name: Set up Python 3.12 (canonical toolchain series, DE-04)
         uses: actions/setup-python@v5
         with:

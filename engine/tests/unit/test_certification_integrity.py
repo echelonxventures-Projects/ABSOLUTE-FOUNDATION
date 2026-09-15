@@ -1350,9 +1350,18 @@ def test_an_archive_process_that_offers_no_pipe_is_still_reaped(
         return _NoPipe(process) if argv[:2] == ["git", "archive"] else process
 
     monkeypatch.setattr(immutable.subprocess, "Popen", _pipeless)
-    immutable.extract(str(root), immutable.resolve_sha(str(root)), str(destination))
-    # Nothing was piped, so nothing was unpacked — and the extractor reaped both processes and
-    # returned rather than raising on a pipe it was never given.
+    # WHAT IS UNDER TEST IS THE GUARD, NOT TAR'S OPINION OF EMPTY INPUT. Handed no pipe, the
+    # extractor must reach `if archive.stdout is not None` and decline to close what it was
+    # never given; whether the tar it then reaps calls empty input acceptable is a property of
+    # the tar on the machine, not of this repository. bsdtar exits 0 and GNU tar exits non-zero
+    # with "This does not look like a tar archive", so asserting the quiet return asserted macOS.
+    # Either outcome proves the guard held: the failure this test exists to catch is an
+    # AttributeError on None, which neither branch below can reach.
+    try:
+        immutable.extract(str(root), immutable.resolve_sha(str(root)), str(destination))
+    except IntegrityError as exc:
+        assert "extracting" in str(exc), f"the guard raised on the pipe, not on tar: {exc}"
+    # Nothing was piped, so nothing was unpacked, on either tar.
     assert list(destination.iterdir()) == []
 
 

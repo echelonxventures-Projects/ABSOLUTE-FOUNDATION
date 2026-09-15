@@ -615,7 +615,8 @@
       "name": "Canonical verification (lint · tests · coverage · enforcement)",
       "owner": "verify.sh",
       "argv": [
-        "./verify.sh"
+        "./verify.sh",
+        "--full"
       ],
       "write_scope": "read-only",
       "tier": "full",
