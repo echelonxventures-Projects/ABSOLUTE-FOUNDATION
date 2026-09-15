@@ -2445,7 +2445,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 2737,
+      "total": 2740,
       "units_with_value": 93
     },
     {
@@ -5948,7 +5948,7 @@
   ],
   "substrate": [
     {
-      "content_sha256": "62789dfca0387b931fea3c137e65713212485da70c6342bbf9514a1ea1a4edc8",
+      "content_sha256": "493c11ef1c1a084a7afad786296384857d8333160458e019fcfe3a3d132261a1",
       "exists": true,
       "generated": false,
       "id": "SUB-CERT",
@@ -5995,7 +5995,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the constitutional concept closure — knowledge-once evidence. GENERATED operational memory, not version-controlled: its value depends on how its owner was last invoked, and the reading bound here is the repository-only pass (CLOSURE_SKIP_CORPUS=1) that the session anchor records, because an external corpus is not Repository Truth",
-      "records": 556,
+      "records": 557,
       "required": true,
       "tracked": false
     },
@@ -6096,7 +6096,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "e4a61a90f9aed83dc10d5929fcc2a3636deee6c756307aba4e210ba88d39cca2",
+      "content_sha256": "aa096e10c9cc0b9ff0a04da62746892dea54153893b3f9633783072584fb4abe",
       "exists": true,
       "generated": false,
       "id": "SUB-REGISTER",
@@ -6280,7 +6280,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "e6f2e5685f5f3bdd019b85b30b0acd3705545926748ae1b8975e1b47d9345142",
+      "content_sha256": "8fe2c0896cce64e51906c4a3c630de72dd184a692c2029302fe35e42f8715860",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -21533,7 +21533,7 @@
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
       "duplicate_responsibility": false,
-      "entrypoint_references": 909,
+      "entrypoint_references": 912,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,

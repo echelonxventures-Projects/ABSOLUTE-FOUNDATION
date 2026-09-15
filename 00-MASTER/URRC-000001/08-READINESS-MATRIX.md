@@ -53,23 +53,22 @@ Readiness bound to its owners, plus the blocked-by set.
 **`DV-26`** — Constitutional tier occupancy.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 1 distinct value(s)
 - **Substrate evidence** — `S-06`
 
 | Key | Value |
 |---|---|
-| `LOCATED` | 7 |
-| `VACANT` | 1 |
+| `LOCATED` | 8 |
 
 **`DV-25`** — Declared constitutional vacancies.
 
 - **Primitive** — `record_count`
-- **Result** — 1 records
+- **Result** — 0 records
 - **Substrate evidence** — `S-06`
 
 | Key | Value |
 |---|---|
-| records | 1 |
+| records | 0 |
 
 **`DV-34`** — Findings composing the certification ceiling.
 
@@ -92,12 +91,12 @@ Readiness bound to its owners, plus the blocked-by set.
 **`DV-25`** — Declared constitutional vacancies.
 
 - **Primitive** — `record_count`
-- **Result** — 1 records
+- **Result** — 0 records
 - **Substrate evidence** — `S-06`
 
 | Key | Value |
 |---|---|
-| records | 1 |
+| records | 0 |
 
 **`DV-24`** — Open constitutional questions.
 

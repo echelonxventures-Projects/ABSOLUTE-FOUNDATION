@@ -686,18 +686,18 @@
   ],
   "derivations": [
     {
-      "count": 1687,
+      "count": 1689,
       "evidence": [
         "S-01"
       ],
-      "headline": "1687 records",
+      "headline": "1689 records",
       "id": "DV-01",
       "primitive": "record_count",
       "purpose": "Registered artifact records present in the registration projection.",
       "rows": [
         [
           "records",
-          "1687"
+          "1689"
         ]
       ],
       "unknown": false
@@ -707,18 +707,18 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "declared 1687 · present 1687 · delta 0",
+      "headline": "declared 1689 · present 1689 · delta 0",
       "id": "DV-02",
       "primitive": "declared_vs_actual",
       "purpose": "Declared registration count against the records actually present.",
       "rows": [
         [
           "declared",
-          "1687"
+          "1689"
         ],
         [
           "present",
-          "1687"
+          "1689"
         ],
         [
           "delta",
@@ -733,18 +733,18 @@
         "S-01",
         "S-03"
       ],
-      "headline": "1687 vs 1687 · delta 0",
+      "headline": "1689 vs 1689 · delta 0",
       "id": "DV-03",
       "primitive": "cross_count_delta",
       "purpose": "Registration census against the portfolio rollup.",
       "rows": [
         [
           "`S-01` count",
-          "1687"
+          "1689"
         ],
         [
           "`S-03` portfolio.total_artifacts",
-          "1687"
+          "1689"
         ],
         [
           "delta",
@@ -759,18 +759,18 @@
         "S-01",
         "S-04"
       ],
-      "headline": "1687 vs 1687 · delta 0",
+      "headline": "1689 vs 1689 · delta 0",
       "id": "DV-04",
       "primitive": "cross_count_delta",
       "purpose": "Registration census against the certified scope.",
       "rows": [
         [
           "`S-01` count",
-          "1687"
+          "1689"
         ],
         [
           "`S-04` scope.artifacts",
-          "1687"
+          "1689"
         ],
         [
           "delta",
@@ -784,7 +784,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "2 value(s) shared by more than one record (over 1685 distinct value(s))",
+      "headline": "2 value(s) shared by more than one record (over 1687 distinct value(s))",
       "id": "DV-05",
       "primitive": "duplicate_field_values",
       "purpose": "Content identity: distinct artifacts sharing one content hash.",
@@ -805,7 +805,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "23 value(s) shared by more than one record (over 1216 distinct value(s))",
+      "headline": "23 value(s) shared by more than one record (over 1218 distinct value(s))",
       "id": "DV-06",
       "primitive": "duplicate_field_values",
       "purpose": "Name identity: distinct artifacts sharing one name.",
@@ -902,7 +902,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "0 value(s) shared by more than one record (over 1687 distinct value(s))",
+      "headline": "0 value(s) shared by more than one record (over 1689 distinct value(s))",
       "id": "DV-07",
       "primitive": "duplicate_field_values",
       "purpose": "Identity collision: one universal identifier claimed by more than one record.",
@@ -914,7 +914,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "0 value(s) shared by more than one record (over 1687 distinct value(s))",
+      "headline": "0 value(s) shared by more than one record (over 1689 distinct value(s))",
       "id": "DV-08",
       "primitive": "duplicate_field_values",
       "purpose": "Multi-home concepts: one path registered more than once.",
@@ -933,7 +933,7 @@
       "rows": [
         [
           "`ACTIVE`",
-          "1566"
+          "1568"
         ],
         [
           "`COMPLETE`",
@@ -971,7 +971,7 @@
       "rows": [
         [
           "`ACTIVE`",
-          "1566"
+          "1568"
         ],
         [
           "`COMPLETE`",
@@ -989,26 +989,26 @@
       "unknown": false
     },
     {
-      "count": 20134,
+      "count": 20157,
       "evidence": [
         "S-01"
       ],
-      "headline": "1797/21931 dimension slots populated (8.19%) · 1686/1687 record(s) carry at least one trace (99.94%) · 0 record(s) fully traced · 1 with none",
+      "headline": "1800/21957 dimension slots populated (8.19%) · 1688/1689 record(s) carry at least one trace (99.94%) · 0 record(s) fully traced · 1 with none",
       "id": "DV-11",
       "primitive": "subdict_fill_ratio",
       "purpose": "Traceability completeness across the thirteen traceability dimensions of every registered artifact.",
       "rows": [
         [
           "records measured",
-          "1687"
+          "1689"
         ],
         [
           "dimension slots",
-          "21931"
+          "21957"
         ],
         [
           "slots populated",
-          "1797"
+          "1800"
         ],
         [
           "populated share (%)",
@@ -1024,7 +1024,7 @@
         ],
         [
           "records with at least one trace",
-          "1686"
+          "1688"
         ],
         [
           "traced-record share (%)",
@@ -1032,72 +1032,72 @@
         ],
         [
           "dimension `architecture`",
-          "1686/1687"
+          "1688/1689"
         ],
         [
           "dimension `certification`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `deployment`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `design`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `functional_test`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `implementation`",
-          "17/1687"
+          "17/1689"
         ],
         [
           "dimension `integration_test`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `operations`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `production`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `requirement`",
-          "94/1687"
+          "95/1689"
         ],
         [
           "dimension `security_test`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `source_code`",
-          "0/1687"
+          "0/1689"
         ],
         [
           "dimension `unit_test`",
-          "0/1687"
+          "0/1689"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 13807,
+      "count": 13811,
       "evidence": [
         "S-02"
       ],
-      "headline": "13807 records",
+      "headline": "13811 records",
       "id": "DV-12",
       "primitive": "record_count",
       "purpose": "Graph edges present in the graph projection.",
       "rows": [
         [
           "records",
-          "13807"
+          "13811"
         ]
       ],
       "unknown": false
@@ -1108,18 +1108,18 @@
         "S-02",
         "S-03"
       ],
-      "headline": "13807 vs 13807 · delta 0",
+      "headline": "13811 vs 13811 · delta 0",
       "id": "DV-13",
       "primitive": "cross_count_delta",
       "purpose": "Edge census against the portfolio rollup.",
       "rows": [
         [
           "`S-02` count",
-          "13807"
+          "13811"
         ],
         [
           "`S-03` portfolio.total_edges",
-          "13807"
+          "13811"
         ],
         [
           "delta",
@@ -1134,18 +1134,18 @@
         "S-02",
         "S-04"
       ],
-      "headline": "13807 vs 13807 · delta 0",
+      "headline": "13811 vs 13811 · delta 0",
       "id": "DV-14",
       "primitive": "cross_count_delta",
       "purpose": "Edge census against the certified scope.",
       "rows": [
         [
           "`S-02` count",
-          "13807"
+          "13811"
         ],
         [
           "`S-04` scope.edges",
-          "13807"
+          "13811"
         ],
         [
           "delta",
@@ -1174,11 +1174,11 @@
         ],
         [
           "`Child`",
-          "1686"
+          "1688"
         ],
         [
           "`Parent`",
-          "1686"
+          "1688"
         ],
         [
           "`Consumed-By`",
@@ -1237,14 +1237,14 @@
         "S-01",
         "S-02"
       ],
-      "headline": "0 live dependency/dependencies on a superseded target (over 13807 edge(s); 0 endpoint(s) not registered)",
+      "headline": "0 live dependency/dependencies on a superseded target (over 13811 edge(s); 0 endpoint(s) not registered)",
       "id": "DV-16",
       "primitive": "edge_status_join",
       "purpose": "Live dependency on superseded truth: an edge whose target is superseded and whose source is not.",
       "rows": [
         [
           "edges examined",
-          "13807"
+          "13811"
         ],
         [
           "endpoints not registered",
@@ -1402,28 +1402,28 @@
       "unknown": false
     },
     {
-      "count": 61,
+      "count": 62,
       "evidence": [
         "S-06"
       ],
-      "headline": "61 records",
+      "headline": "62 records",
       "id": "DV-21",
       "primitive": "record_count",
       "purpose": "Declared meta-constitutional concerns.",
       "rows": [
         [
           "records",
-          "61"
+          "62"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 2,
+      "count": 3,
       "evidence": [
         "S-06"
       ],
-      "headline": "2 distinct value(s)",
+      "headline": "3 distinct value(s)",
       "id": "DV-22",
       "primitive": "field_histogram",
       "purpose": "Concern disposition distribution — the located-owner census.",
@@ -1435,34 +1435,30 @@
         [
           "`RETAIN`",
           "11"
+        ],
+        [
+          "`RETAINED`",
+          "1"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 4,
+      "count": 2,
       "evidence": [
         "S-06"
       ],
-      "headline": "4 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-23",
       "primitive": "field_histogram",
       "purpose": "Meta-constitutional gap disposition distribution.",
       "rows": [
         [
           "`CLOSED`",
-          "6"
+          "8"
         ],
         [
           "`CLOSED-FOR-CMG-NAMESPACE`",
-          "1"
-        ],
-        [
-          "`NOT-CLOSED`",
-          "1"
-        ],
-        [
-          "`RECORDED-AS-VACANCY`",
           "1"
         ]
       ],
@@ -1486,39 +1482,35 @@
       "unknown": false
     },
     {
-      "count": 1,
+      "count": 0,
       "evidence": [
         "S-06"
       ],
-      "headline": "1 records",
+      "headline": "0 records",
       "id": "DV-25",
       "primitive": "record_count",
       "purpose": "Declared constitutional vacancies.",
       "rows": [
         [
           "records",
-          "1"
+          "0"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 2,
+      "count": 1,
       "evidence": [
         "S-06"
       ],
-      "headline": "2 distinct value(s)",
+      "headline": "1 distinct value(s)",
       "id": "DV-26",
       "primitive": "field_histogram",
       "purpose": "Constitutional tier occupancy.",
       "rows": [
         [
           "`LOCATED`",
-          "7"
-        ],
-        [
-          "`VACANT`",
-          "1"
+          "8"
         ]
       ],
       "unknown": false
@@ -1609,22 +1601,18 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-32",
       "primitive": "field_histogram",
       "purpose": "Computed gate verdicts.",
       "rows": [
         [
           "`PASS`",
-          "24"
-        ],
-        [
-          "`FAIL`",
-          "1"
+          "25"
         ],
         [
           "`PASS-WITH-ADVISORY`",
@@ -1634,26 +1622,22 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-33",
       "primitive": "field_histogram",
       "purpose": "Computed programme verdicts.",
       "rows": [
         [
           "`PASS`",
-          "16"
+          "17"
         ],
         [
           "`PASS-WITH-ADVISORY`",
           "4"
-        ],
-        [
-          "`FAIL`",
-          "1"
         ]
       ],
       "unknown": false
@@ -2340,8 +2324,8 @@
           "YES",
           "YES",
           "2/2",
-          "3374",
-          "`ae9c1f6ad146`"
+          "3378",
+          "`aa096e10c9cc`"
         ],
         [
           "`S-02`",
@@ -2350,8 +2334,8 @@
           "YES",
           "YES",
           "2/2",
-          "27614",
-          "`858485e06db6`"
+          "27622",
+          "`0786e2944fff`"
         ],
         [
           "`S-03`",
@@ -2361,7 +2345,7 @@
           "YES",
           "3/3",
           "201",
-          "`42f039e7f78b`"
+          "`3afbb9b01091`"
         ],
         [
           "`S-04`",
@@ -2371,7 +2355,7 @@
           "YES",
           "5/5",
           "45",
-          "`c51a5ecbc75d`"
+          "`493c11ef1c1a`"
         ],
         [
           "`S-05`",
@@ -2380,8 +2364,8 @@
           "YES",
           "YES",
           "2/2",
-          "1955",
-          "`2a078c64fa28`"
+          "1957",
+          "`7f6b11760cc3`"
         ],
         [
           "`S-06`",
@@ -2390,8 +2374,8 @@
           "YES",
           "YES",
           "9/9",
-          "166",
-          "`19d8602a8e1a`"
+          "167",
+          "`a17e0a0ab88a`"
         ],
         [
           "`S-07`",
@@ -2401,7 +2385,7 @@
           "YES",
           "5/5",
           "112",
-          "`badb4ece1290`"
+          "`d9980d0890cf`"
         ],
         [
           "`S-08`",
@@ -2410,8 +2394,8 @@
           "YES",
           "YES",
           "6/6",
-          "129",
-          "`16e80a5122dc`"
+          "137",
+          "`2a9f45b2ddfb`"
         ],
         [
           "`S-09`",
@@ -2602,18 +2586,18 @@
       "unknown": false
     },
     {
-      "count": 44,
+      "count": 45,
       "evidence": [
         "S-06"
       ],
-      "headline": "44 records",
+      "headline": "45 records",
       "id": "DV-54",
       "primitive": "record_count",
       "purpose": "Meta-constitutional artifacts under registry control.",
       "rows": [
         [
           "records",
-          "44"
+          "45"
         ]
       ],
       "unknown": false
@@ -3388,7 +3372,7 @@
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
     {
-      "content_sha256": "ae9c1f6ad146b351d181226eee163b54e23d049c17cb5cf02932e51aa00cf15f",
+      "content_sha256": "aa096e10c9cc0b9ff0a04da62746892dea54153893b3f9633783072584fb4abe",
       "exists": true,
       "id": "S-01",
       "kind": "registration projection",
@@ -3404,12 +3388,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The registered artifact census: identity, status, content hash, traceability.",
-      "records": 3374,
+      "records": 3378,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "858485e06db6454b0439af1118c77ce339a660694b4ea0e5dc774629bc66f0af",
+      "content_sha256": "0786e2944fff5eb13c03542340b055c22fe6b57dbf736ab353bf0ac4bea7233c",
       "exists": true,
       "id": "S-02",
       "kind": "graph projection",
@@ -3425,12 +3409,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The knowledge-graph edge set.",
-      "records": 27614,
+      "records": 27622,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "42f039e7f78b728a212b4e1d95dd2db8d12b1486a1658973d0872b6b28c036d6",
+      "content_sha256": "3afbb9b010911fad12eaca81793e7039935140f58930fefb00784a04d48fdaec",
       "exists": true,
       "id": "S-03",
       "kind": "portfolio projection",
@@ -3453,7 +3437,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "c51a5ecbc75dbca8561d03fef31971205ef3176a18da41cfcabe1194c672c28d",
+      "content_sha256": "493c11ef1c1a084a7afad786296384857d8333160458e019fcfe3a3d132261a1",
       "exists": true,
       "id": "S-04",
       "kind": "certification projection",
@@ -3480,7 +3464,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "2a078c64fa284ca735a970d5c36e675c3c484b605b23124339b26becf495cbd5",
+      "content_sha256": "7f6b11760cc367228b90d1fad73704c9bbde963e449e4383ccabf40bfdddb638",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3496,12 +3480,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Forward-only identity allocation ledger.",
-      "records": 1955,
+      "records": 1957,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
+      "content_sha256": "a17e0a0ab88a50afae3404a25c52f69c7e787f26f2c084b6f901f7e8f8b843b4",
       "exists": true,
       "id": "S-06",
       "kind": "meta-constitutional registry",
@@ -3531,12 +3515,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The machine-readable projection of the meta-governance constitution.",
-      "records": 166,
+      "records": 167,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "badb4ece1290fffecf06afe6d68c50ff98b21778c7f04c70116266d3031d78d5",
+      "content_sha256": "d9980d0890cf5374d6c7ec5acd6d78b2ab1a2a8e2effb66c06ede11b189be410",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3563,7 +3547,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
+      "content_sha256": "2a9f45b2ddfb81da125955868e9e77f289d19dff17591c8dc99aa387f707d3e3",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3587,7 +3571,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 129,
+      "records": 137,
       "required": true,
       "tracked": true
     },

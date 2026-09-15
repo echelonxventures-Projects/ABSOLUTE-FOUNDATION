@@ -35,12 +35,12 @@
 **`DV-25`** — Declared constitutional vacancies.
 
 - **Primitive** — `record_count`
-- **Result** — 1 records
+- **Result** — 0 records
 - **Substrate evidence** — `S-06`
 
 | Key | Value |
 |---|---|
-| records | 1 |
+| records | 0 |
 
 ## N-02 — The master execution sequence in machine-readable form.
 

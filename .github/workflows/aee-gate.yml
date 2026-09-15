@@ -111,6 +111,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      # THE LOOP OBSERVES UCOS-RIB-001, AND RIB REPORTS THE TREE IT IS HANDED. RIB's GATE-02
+      # counts a detached HEAD as a repository-integrity finding — right for a working tree,
+      # where detachment is how commits are lost, and meaningless in CI. `actions/checkout`
+      # detaches on `pull_request` (it checks out the ephemeral merge ref) and does not on
+      # `push`, so this job inherited RIB's verdict and, through it, the event name: measured
+      # on 219917fe and again on 4c4ba21a, the push run converged and the pull_request run
+      # reported 36/38 observations and refused at CONV-02, for the same commit. Locally the
+      # same tier converges at 37/38 with nothing unsatisfied. Naming the HEAD restores the
+      # premise every engine in the loop is entitled to assume. No observation is relaxed:
+      # all 38 are still measured and CONV-02 is still fail-closed.
+      - name: Present a named HEAD (the loop's observed engines measure the tree they are handed)
+        run: git checkout -B ci/aee-gate-head
+
       - name: Set up Python 3.12 (canonical toolchain series, DE-04)
         uses: actions/setup-python@v5
         with:

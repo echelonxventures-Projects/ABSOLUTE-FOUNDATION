@@ -96,7 +96,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1566 |
+| `ACTIVE` | 1568 |
 | `COMPLETE` | 63 |
 | `FROZEN` | 27 |
 | `UNDER_REVIEW` | 15 |
@@ -111,7 +111,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1566 |
+| `ACTIVE` | 1568 |
 | `COMPLETE` | 63 |
 | `UNDER_REVIEW` | 15 |
 | `FINAL` | 9 |
@@ -126,12 +126,12 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-16`** — Live dependency on superseded truth: an edge whose target is superseded and whose source is not.
 
 - **Primitive** — `edge_status_join`
-- **Result** — 0 live dependency/dependencies on a superseded target (over 13807 edge(s); 0 endpoint(s) not registered)
+- **Result** — 0 live dependency/dependencies on a superseded target (over 13811 edge(s); 0 endpoint(s) not registered)
 - **Substrate evidence** — `S-01`, `S-02`
 
 | Key | Value |
 |---|---|
-| edges examined | 13807 |
+| edges examined | 13811 |
 | endpoints not registered | 0 |
 | live dependencies on superseded targets | 0 |
 
@@ -145,41 +145,26 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-32`** — Computed gate verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 3 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 24 |
-| `FAIL` | 1 |
+| `PASS` | 25 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 3 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 16 |
+| `PASS` | 17 |
 | `PASS-WITH-ADVISORY` | 4 |
-| `FAIL` | 1 |
 
 **`DV-23`** — Meta-constitutional gap disposition distribution.
-
-- **Primitive** — `field_histogram`
-- **Result** — 4 distinct value(s)
-- **Substrate evidence** — `S-06`
-
-| Key | Value |
-|---|---|
-| `CLOSED` | 6 |
-| `CLOSED-FOR-CMG-NAMESPACE` | 1 |
-| `NOT-CLOSED` | 1 |
-| `RECORDED-AS-VACANCY` | 1 |
-
-**`DV-26`** — Constitutional tier occupancy.
 
 - **Primitive** — `field_histogram`
 - **Result** — 2 distinct value(s)
@@ -187,8 +172,18 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `LOCATED` | 7 |
-| `VACANT` | 1 |
+| `CLOSED` | 8 |
+| `CLOSED-FOR-CMG-NAMESPACE` | 1 |
+
+**`DV-26`** — Constitutional tier occupancy.
+
+- **Primitive** — `field_histogram`
+- **Result** — 1 distinct value(s)
+- **Substrate evidence** — `S-06`
+
+| Key | Value |
+|---|---|
+| `LOCATED` | 8 |
 
 
 ---

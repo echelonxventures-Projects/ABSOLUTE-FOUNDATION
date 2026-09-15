@@ -76,32 +76,32 @@ Per-dimension completeness, declared as a lower bound.
 **`DV-11`** — Traceability completeness across the thirteen traceability dimensions of every registered artifact.
 
 - **Primitive** — `subdict_fill_ratio`
-- **Result** — 1797/21931 dimension slots populated (8.19%) · 1686/1687 record(s) carry at least one trace (99.94%) · 0 record(s) fully traced · 1 with none
+- **Result** — 1800/21957 dimension slots populated (8.19%) · 1688/1689 record(s) carry at least one trace (99.94%) · 0 record(s) fully traced · 1 with none
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records measured | 1687 |
-| dimension slots | 21931 |
-| slots populated | 1797 |
+| records measured | 1689 |
+| dimension slots | 21957 |
+| slots populated | 1800 |
 | populated share (%) | 8.19 |
 | records fully traced | 0 |
 | records with no trace | 1 |
-| records with at least one trace | 1686 |
+| records with at least one trace | 1688 |
 | traced-record share (%) | 99.94 |
-| dimension `architecture` | 1686/1687 |
-| dimension `certification` | 0/1687 |
-| dimension `deployment` | 0/1687 |
-| dimension `design` | 0/1687 |
-| dimension `functional_test` | 0/1687 |
-| dimension `implementation` | 17/1687 |
-| dimension `integration_test` | 0/1687 |
-| dimension `operations` | 0/1687 |
-| dimension `production` | 0/1687 |
-| dimension `requirement` | 94/1687 |
-| dimension `security_test` | 0/1687 |
-| dimension `source_code` | 0/1687 |
-| dimension `unit_test` | 0/1687 |
+| dimension `architecture` | 1688/1689 |
+| dimension `certification` | 0/1689 |
+| dimension `deployment` | 0/1689 |
+| dimension `design` | 0/1689 |
+| dimension `functional_test` | 0/1689 |
+| dimension `implementation` | 17/1689 |
+| dimension `integration_test` | 0/1689 |
+| dimension `operations` | 0/1689 |
+| dimension `production` | 0/1689 |
+| dimension `requirement` | 95/1689 |
+| dimension `security_test` | 0/1689 |
+| dimension `source_code` | 0/1689 |
+| dimension `unit_test` | 0/1689 |
 
 **`DV-20`** — Certification domains passed against domains declared.
 
