@@ -44,6 +44,8 @@ def test_generate_records_evidence(orchestrator):
     ("blueprint_id", "blueprint_class", "factory_name"),
     [
         ("BP-API-0001", "BP-API", "api-factory"),
+        ("BP-EVENT-0001", "BP-EVENT", "event-factory"),
+        ("BP-WORKFLOW-0001", "BP-WORKFLOW", "workflow-factory"),
         ("BP-SERVICE-0001", "BP-SERVICE", "service-factory"),
         ("BP-APPLICATION-0001", "BP-APPLICATION", "application-factory"),
     ],
@@ -70,9 +72,7 @@ def test_unresolvable_blueprint_raises(orchestrator):
         orchestrator.generate(FactoryRequest("BP-DATA-9999"))
 
 
-def test_classification_uses_document_metadata_when_unregistered(
-    orchestrator, compiler_registry
-):
+def test_classification_uses_document_metadata_when_unregistered(orchestrator, compiler_registry):
     # BP-DATA-0001 is NOT a registered artifact, so the document's declared
     # metadata drives classification (both paths are metadata-driven).
     assert compiler_registry.artifacts.find("BP-DATA-0001") is None

@@ -78,9 +78,8 @@ def test_provenance_preserved(published_package, runtime_signer):
     assert deployment.provenance_chain == unit.provenance_chain
     # provenance is stamped onto every generated manifest annotation
     for manifest in deployment.kubernetes:
-        assert (
-            manifest["metadata"]["annotations"]["ucos.dev/provenance-chain"]
-            == ",".join(unit.provenance_chain)
+        assert manifest["metadata"]["annotations"]["ucos.dev/provenance-chain"] == ",".join(
+            unit.provenance_chain
         )
 
 

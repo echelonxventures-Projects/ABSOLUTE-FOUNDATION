@@ -55,9 +55,7 @@ def test_finding_properties():
 
 
 def test_subject_from_validation_is_pure_projection(valid_report, valid_evidence):
-    subject = CertificationSubject.from_validation(
-        valid_report, valid_evidence, version="1.0.0"
-    )
+    subject = CertificationSubject.from_validation(valid_report, valid_evidence, version="1.0.0")
     assert subject.target_id == valid_report.target_id
     assert subject.blueprint_id == valid_report.blueprint_id
     assert subject.version == "1.0.0"
@@ -97,9 +95,7 @@ def dataclass_replace_target(evidence, target_id):
 
 
 def test_record_is_content_addressed_and_deterministic():
-    findings = (
-        CertificationFinding("x", CriterionSeverity.BLOCKING, CriterionStatus.PASS),
-    )
+    findings = (CertificationFinding("x", CriterionSeverity.BLOCKING, CriterionStatus.PASS),)
     kwargs = dict(
         target_id="UCOS-RUN-BP-DATA-0001-abc",
         blueprint_id="BP-DATA-0001",

@@ -68,9 +68,7 @@ def test_config_is_valid_json_with_provenance(data_blueprint):
 def test_compile_is_deterministic(data_blueprint):
     first = _compile(data_blueprint)
     second = _compile(data_blueprint)
-    assert [a.content_hash for a in first.artifacts] == [
-        a.content_hash for a in second.artifacts
-    ]
+    assert [a.content_hash for a in first.artifacts] == [a.content_hash for a in second.artifacts]
 
 
 def test_default_and_bigint_columns(data_blueprint):

@@ -6,7 +6,13 @@ import json
 
 import pytest
 
-from engine.foundation.config.config import Config, Environment, SecretRef, load_config
+from engine.foundation.config.config import (
+    Config,
+    Environment,
+    SecretRef,
+    _coerce_secrets,
+    load_config,
+)
 from engine.foundation.obs.errors import ConfigurationError, SecurityViolation
 
 
@@ -150,3 +156,40 @@ def test_config_repr_and_contains():
     cfg = Config({"a": 1}, Environment.DEVELOPMENT)
     assert "development" in repr(cfg)
     assert "a" in cfg
+
+
+def test_secret_ref_equality_and_hash():
+    a = SecretRef("env://X")
+    b = SecretRef("env://X")
+    c = SecretRef("env://Y")
+    # __eq__ true path, false path (differing locator), and non-SecretRef branch
+    assert a == b
+    assert a != c
+    assert a != "env://X"
+    # __hash__ makes equal refs interchangeable in sets/dicts
+    assert hash(a) == hash(b)
+    assert {a, b, c} == {a, c}
+
+
+def test_secret_ref_resolve_rejects_unsupported_scheme():
+    # The scheme is validated in __init__, so this defensive branch in resolve()
+    # is only reachable if the slot is mutated after construction.
+    ref = SecretRef("env://X")
+    ref.scheme = "vault"
+    with pytest.raises(ConfigurationError):
+        ref.resolve()
+
+
+def test_get_bool_returns_native_bool():
+    # Values sourced from env are always strings; a Config built directly may hold
+    # native booleans, which get_bool must return unchanged.
+    cfg = Config({"on": True, "off": False}, Environment.DEVELOPMENT)
+    assert cfg.get_bool("on") is True
+    assert cfg.get_bool("off") is False
+
+
+def test_coerce_secrets_preserves_existing_secret_ref():
+    # A secret-typed key already carrying a SecretRef is passed through untouched.
+    ref = SecretRef("env://DB")
+    result = _coerce_secrets({"db_password": ref})
+    assert result["db_password"] is ref

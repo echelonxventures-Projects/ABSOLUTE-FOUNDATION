@@ -143,8 +143,14 @@ def test_traceability_bad_stage_value():
 
 def test_relationship_ok():
     edge = Relationship.from_dict(
-        {"edge_id": "UEDGE-000000001", "from": "UCOS-A-000001", "to": "UCOS-B-000001",
-         "type": "Depends-On", "inverse_of": None, "note": "n"}
+        {
+            "edge_id": "UEDGE-000000001",
+            "from": "UCOS-A-000001",
+            "to": "UCOS-B-000001",
+            "type": "Depends-On",
+            "inverse_of": None,
+            "note": "n",
+        }
     )
     assert edge.source == "UCOS-A-000001"
     assert edge.target == "UCOS-B-000001"
@@ -174,8 +180,16 @@ def test_relationship_bad_inverse_type():
 
 def test_volume_ok():
     vol = Volume.from_dict(
-        {"volume_id": "VOL-000", "serial": 0, "name": "IDX", "category": "IDX",
-         "status": "ACTIVE", "artifact_count": 4, "page_range_start": 1, "page_range_end": 9}
+        {
+            "volume_id": "VOL-000",
+            "serial": 0,
+            "name": "IDX",
+            "category": "IDX",
+            "status": "ACTIVE",
+            "artifact_count": 4,
+            "page_range_start": 1,
+            "page_range_end": 9,
+        }
     )
     assert vol.serial == 0
     assert vol.page_range_end == 9
@@ -183,8 +197,15 @@ def test_volume_ok():
 
 def test_volume_nullable_pages():
     vol = Volume.from_dict(
-        {"volume_id": "VOL-001", "serial": 1, "name": "V", "category": "VSN",
-         "status": "PLANNED", "page_range_start": None, "page_range_end": None}
+        {
+            "volume_id": "VOL-001",
+            "serial": 1,
+            "name": "V",
+            "category": "VSN",
+            "status": "PLANNED",
+            "page_range_start": None,
+            "page_range_end": None,
+        }
     )
     assert vol.page_range_start is None
     assert vol.artifact_count == 0
@@ -198,6 +219,12 @@ def test_volume_not_a_mapping():
 def test_volume_bad_page_type():
     with pytest.raises(RegistryValidationError):
         Volume.from_dict(
-            {"volume_id": "VOL-000", "serial": 0, "name": "V", "category": "IDX",
-             "status": "ACTIVE", "page_range_start": "x"}
+            {
+                "volume_id": "VOL-000",
+                "serial": 0,
+                "name": "V",
+                "category": "IDX",
+                "status": "ACTIVE",
+                "page_range_start": "x",
+            }
         )

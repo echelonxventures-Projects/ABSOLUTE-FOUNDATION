@@ -28,7 +28,7 @@ Sources: SRC-01 (L601–628), SRC-09 (L2167–2194), SRC-10 (L601–628). Extend
 
 Extension Ω-LAW-11..20 (SRC-09 L1420–1490, L2091–2161; SRC-10 L2091–2161): Everything Exists Within [Reality]; Every Existence Possesses [Identity]; Reality May Span [scales]; Time Is Navigable; Location Is Multi-Dimensional; No Component Shall Assume [fixed scale]; Every Entity Must Be [Governable / Traceable / Explainable / Evolvable].
 
-> **CONFLICT (see DUP-02 / SUP-02):** Ω-LAW-02 asserts "Every Existence Occupies Space-Time," embedding SPACE-TIME as a root obligation. SRC-02/SRC-03 omit this law and demote Space-Time to a *coordinate framework*, not a root primitive.
+> **CONFLICT (see DUP-02 / SUP-02) — ✅ RATIFIED (UCOS-RAT-001 / RAT-03):** Ω-LAW-02 "Every Existence Occupies Space-Time" is **retired as a root law**; SPACE-TIME is ratified as a *coordinate framework* (SRC-02/03), not a root primitive. Ω-LAW-02's content is preserved as a *coordinate-applicability* statement (spatio-temporal existences are addressed via the Space/Time axes). The SRC-01/09/10 "Ten Absolute Laws" set is thereby nine root laws + a coordinate note (renumber flows via RAT-08 concordance).
 
 ---
 
@@ -83,26 +83,26 @@ Sources: SRC-02 (L687–782), SRC-06.
 
 ---
 
-### LAW-R05 — Universal Laws (LAW Ω∞-001..015, SRC-07 variant)
-Source: SRC-07 (Section 9). **Same ID prefix as LAW-R04 but different set / numbering — conflict (DUP-03 / SUP-03).**
+### LAW-R05 — Universal Laws (SRC-07 variant) — ✅ RENUMBERED to `ROA-LAW-001..015`
+Source: SRC-07 (Section 9). **Formerly reused the `LAW Ω∞` prefix (conflict DUP-03 / SUP-03).** ✅ **RATIFIED (UCOS-RAT-001 / RAT-09):** this 15-law set is renumbered **out of** the `LAW Ω∞` namespace to the alias family **`ROA-LAW-001..015`** ("Root Ontological Architecture", SRC-07's title). `LAW Ω∞-001..020` unambiguously denotes the SRC-02 set (LAW-R04). No law text is changed; only the identifiers are re-tagged in the registers (the frozen source is untouched). Alias mapping is carried by the RAT-08 concordance. The `ROA-LAW-*` IDs below are the ratified identifiers; the original `LAW Ω∞-0xx` labels are shown parenthetically for source traceability.
 
-| ID | Text (verbatim) |
+| ID (ratified) | Text (verbatim) |
 |----|-----------------|
-| LAW Ω∞-001 | Everything Is An Existence |
-| LAW Ω∞-002 | Every Existence Participates In Relationships |
-| LAW Ω∞-003 | Every Relationship Undergoes Transformation |
-| LAW Ω∞-004 | Identity Precedes Participation |
-| LAW Ω∞-005 | Authority Precedes Action |
-| LAW Ω∞-006 | Governance Precedes Execution |
-| LAW Ω∞-007 | Memory Precedes Intelligence |
-| LAW Ω∞-008 | Intelligence Precedes Evolution |
-| LAW Ω∞-009 | Nothing May Violate Invariants |
-| LAW Ω∞-010 | Nothing May Bypass Sovereignty |
-| LAW Ω∞-011 | Everything Must Be Traceable |
-| LAW Ω∞-012 | Everything Must Be Auditable |
-| LAW Ω∞-013 | Everything Must Be Governable |
-| LAW Ω∞-014 | Everything Must Be Evolvable |
-| LAW Ω∞-015 | Everything Must Be Derivable From Root Ontology |
+| ROA-LAW-001 (was `LAW Ω∞-001`) | Everything Is An Existence |
+| ROA-LAW-002 (was `LAW Ω∞-002`) | Every Existence Participates In Relationships |
+| ROA-LAW-003 (was `LAW Ω∞-003`) | Every Relationship Undergoes Transformation |
+| ROA-LAW-004 (was `LAW Ω∞-004`) | Identity Precedes Participation |
+| ROA-LAW-005 (was `LAW Ω∞-005`) | Authority Precedes Action |
+| ROA-LAW-006 (was `LAW Ω∞-006`) | Governance Precedes Execution |
+| ROA-LAW-007 (was `LAW Ω∞-007`) | Memory Precedes Intelligence |
+| ROA-LAW-008 (was `LAW Ω∞-008`) | Intelligence Precedes Evolution |
+| ROA-LAW-009 (was `LAW Ω∞-009`) | Nothing May Violate Invariants |
+| ROA-LAW-010 (was `LAW Ω∞-010`) | Nothing May Bypass Sovereignty |
+| ROA-LAW-011 (was `LAW Ω∞-011`) | Everything Must Be Traceable |
+| ROA-LAW-012 (was `LAW Ω∞-012`) | Everything Must Be Auditable |
+| ROA-LAW-013 (was `LAW Ω∞-013`) | Everything Must Be Governable |
+| ROA-LAW-014 (was `LAW Ω∞-014`) | Everything Must Be Evolvable |
+| ROA-LAW-015 (was `LAW Ω∞-015`) | Everything Must Be Derivable From Root Ontology |
 
 ---
 
@@ -205,7 +205,11 @@ Source: SRC-02, UCOS-DOC-0046 (L34473–34518).
 
 Identity Integrity · Reality Consistency · Governance Legitimacy · Knowledge Integrity · Intelligence Alignment · Economic Accountability · Security Assurance · Civilization Continuity · Evolution Validity · Constitutional Supremacy.
 
-> **CONFLICT (DUP-06 / SUP-06):** Three distinct 10-element sets all titled "invariants." LAW-INV01 and LAW-INV02 share members (Authority Before Action, Governance Before Execution, Identity Before Participation) but differ in composition and ordering; LAW-INV02 adds Constitution/Sovereignty/Audit/Ratification. LAW-INV03 is a different (noun-form) taxonomy. Reconciliation of the authoritative invariant set is required.
+> **CONFLICT (DUP-06 / SUP-06) — ✅ RATIFIED (UCOS-RAT-001 / RAT-04): layered coexistence.**
+> - **LAW-INV02 (Eternal Invariants)** is the **canonical, entrenched ordering-invariant set** (its self-declared immutability is ratified/entrenched by the constituent act, AMD-08). Its ordering is selected as canonical where it diverges from LAW-INV01 — **the first invariant is "Constitution Before Governance."**
+> - **LAW-INV01 ("X Before Y")** is a **concurring subset/restatement** of the same ordering family (non-canonical where it diverges).
+> - **LAW-INV03 (noun form)** is the **integrity-property invariant layer** (proof/consistency, Constitutional-Mathematics origin), not competing with the ordering invariants.
+> The RAT-04 residual ordering divergence is resolved; no invariant set is deleted. See `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`.
 
 ---
 
@@ -267,4 +271,4 @@ Phase law families (SRC-12/SRC-13): the Universal Time Universe documents carry 
 ## TRACEABILITY SUMMARY
 - Foundational reconciled sets: LAW-R01..R10, LAW-INV01..03, LAW-AX01..05 — all with source + line citations.
 - Architectural families: ~65 (SRC-02) + phase families (SRC-10/12/13) — catalogued by prefix + source.
-- Conflicts flagged: LAW-R01↔R02 (Space-Time), LAW-R04↔R05 (LAW Ω∞ dual numbering), LAW-INV01↔INV02↔INV03 (invariant sets), LAW-AX01↔AX04 (BEING vs triad). Cross-referenced in DUPLICATE-REGISTER and SUPERSESSION-REGISTER.
+- Conflicts flagged and **now RATIFIED (UCOS-RAT-001, Phase 10):** LAW-R01↔R02 Space-Time (RAT-03: Ω-LAW-02 retired as root law), LAW-R04↔R05 `LAW Ω∞` dual numbering (RAT-09: SRC-07 set → `ROA-LAW-001..015`), LAW-INV01↔INV02↔INV03 invariant sets (RAT-04: layered, LAW-INV02 canonical/entrenched), LAW-AX01↔AX04 BEING vs triad (RAT-01: BEING axiom-only). Canonical law scheme = `LAW Ω∞` (RAT-08) with concordance; commerce = `LAW-COMM-01..07` (RAT-10). Cross-referenced in DUPLICATE-REGISTER and SUPERSESSION-REGISTER.

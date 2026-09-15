@@ -65,12 +65,10 @@ def metrics_snapshot() -> dict[str, dict[str, Any]]:
     with _lock:
         return {
             "counters": {
-                name: dict(labels) | {"value": value}
-                for (name, labels), value in _counters.items()
+                name: dict(labels) | {"value": value} for (name, labels), value in _counters.items()
             },
             "gauges": {
-                name: dict(labels) | {"value": value}
-                for (name, labels), value in _gauges.items()
+                name: dict(labels) | {"value": value} for (name, labels), value in _gauges.items()
             },
             "histograms": {
                 name: {**dict(labels), "count": len(samples), "sum": sum(samples)}

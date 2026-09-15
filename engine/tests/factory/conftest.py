@@ -48,6 +48,23 @@ def api_blueprint(data_blueprint) -> dict:
 
 
 @pytest.fixture
+def event_blueprint(data_blueprint) -> dict:
+    return _reclass(
+        data_blueprint, blueprint_id="BP-EVENT-0001", family="BP-EVENT", name="CustomerEvent"
+    )
+
+
+@pytest.fixture
+def workflow_blueprint(data_blueprint) -> dict:
+    return _reclass(
+        data_blueprint,
+        blueprint_id="BP-WORKFLOW-0001",
+        family="BP-WORKFLOW",
+        name="CustomerWorkflow",
+    )
+
+
+@pytest.fixture
 def service_blueprint(data_blueprint) -> dict:
     return _reclass(
         data_blueprint, blueprint_id="BP-SERVICE-0001", family="BP-SERVICE", name="CustomerService"
@@ -66,11 +83,18 @@ def application_blueprint(data_blueprint) -> dict:
 
 @pytest.fixture
 def blueprint_documents(
-    data_blueprint, api_blueprint, service_blueprint, application_blueprint
+    data_blueprint,
+    api_blueprint,
+    event_blueprint,
+    workflow_blueprint,
+    service_blueprint,
+    application_blueprint,
 ) -> dict[str, dict]:
     return {
         "BP-DATA-0001": data_blueprint,
         "BP-API-0001": api_blueprint,
+        "BP-EVENT-0001": event_blueprint,
+        "BP-WORKFLOW-0001": workflow_blueprint,
         "BP-SERVICE-0001": service_blueprint,
         "BP-APPLICATION-0001": application_blueprint,
     }

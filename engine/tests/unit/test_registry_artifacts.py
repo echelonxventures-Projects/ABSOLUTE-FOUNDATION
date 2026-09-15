@@ -54,9 +54,7 @@ def test_by_volume(repo):
 
 
 def test_by_status_enum_and_str(repo):
-    assert {a.universal_id for a in repo.by_status(LifecycleStatus.FROZEN)} == {
-        "UCOS-ENG-000001"
-    }
+    assert {a.universal_id for a in repo.by_status(LifecycleStatus.FROZEN)} == {"UCOS-ENG-000001"}
     assert {a.universal_id for a in repo.by_status("ACTIVE")} == {
         "UCOS-BOOK-000000",
         "UCOS-REG-000001",
@@ -106,8 +104,16 @@ def test_status_counts(repo):
 
 def test_duplicate_universal_id_rejected():
     dup = Artifact.from_dict(
-        {"universal_id": "UCOS-A-000001", "name": "x", "volume": "VOL-000",
-         "page_start": 1, "page_end": 1, "status": "ACTIVE", "version": "1.0.0", "path": "p"}
+        {
+            "universal_id": "UCOS-A-000001",
+            "name": "x",
+            "volume": "VOL-000",
+            "page_start": 1,
+            "page_end": 1,
+            "status": "ACTIVE",
+            "version": "1.0.0",
+            "path": "p",
+        }
     )
     with pytest.raises(RegistryValidationError):
         ArtifactRepository([dup, dup])

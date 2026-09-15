@@ -158,9 +158,7 @@ class HermeticEnvironment:
 
     # -- dependency locking verification ---------------------------------------
 
-    def verify_dependency_lock(
-        self, pyproject: str | Path | None = None
-    ) -> DependencyLockReport:
+    def verify_dependency_lock(self, pyproject: str | Path | None = None) -> DependencyLockReport:
         """Verify runtime deps are absent and dev deps are exactly pinned (``==``)."""
         path = Path(pyproject) if pyproject is not None else _repository_root() / "pyproject.toml"
         if not path.is_file():
@@ -182,9 +180,7 @@ class HermeticEnvironment:
                 runtime=list(runtime),
                 unpinned_dev=unpinned_dev,
             )
-        return DependencyLockReport(
-            runtime_dependencies=runtime, dev_dependencies=dev, locked=True
-        )
+        return DependencyLockReport(runtime_dependencies=runtime, dev_dependencies=dev, locked=True)
 
     # -- deterministic serialization validation --------------------------------
 

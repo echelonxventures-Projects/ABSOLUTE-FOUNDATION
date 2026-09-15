@@ -64,9 +64,7 @@ def test_build_set_with_dependency_orders_and_publishes_both(
     assert build.result_for("BP-DATA-9999") is None
 
 
-def test_pipeline_reproducible_artifact_identity(
-    compiler_registry, data_blueprint, tmp_path
-):
+def test_pipeline_reproducible_artifact_identity(compiler_registry, data_blueprint, tmp_path):
     def run(sub: str) -> str:
         pipe = CompilerPipeline(
             compiler_registry,
@@ -97,9 +95,7 @@ def test_unregistered_provenance_halts_at_validate(pipeline, data_blueprint):
     assert build.gap_report.stage is Stage.VALIDATE
 
 
-def test_cyclic_dependencies_fail_the_build(
-    pipeline, data_blueprint, dependency_blueprint
-):
+def test_cyclic_dependencies_fail_the_build(pipeline, data_blueprint, dependency_blueprint):
     data_blueprint["dependencies"] = ["BP-DATA-0002"]
     dependency_blueprint["dependencies"] = ["BP-DATA-0001"]
     build = pipeline.compile([data_blueprint, dependency_blueprint])
@@ -147,7 +143,6 @@ def test_pipeline_publishes_versioned_contract(pipeline):
     assert resolved is COMPILE_CONTRACT
     assert resolved.version == Version(1, 0, 0)
     assert pipeline.contract.name == "compiler.compile"
-
 
 
 # -- downstream stage failures map to the right Gap Report stage --------------

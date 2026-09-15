@@ -140,17 +140,13 @@ def test_double_build_writes_report(compiler_registry, tmp_path):
 
 
 def test_double_build_accepts_explicit_signing_key(compiler_registry):
-    result = double_build(
-        "BP-DATA-0001", registry=compiler_registry, signing_key=b"custom-key"
-    )
+    result = double_build("BP-DATA-0001", registry=compiler_registry, signing_key=b"custom-key")
     assert result.byte_identical
 
 
 def test_double_build_accepts_key_ref(compiler_registry, monkeypatch):
     monkeypatch.setenv("UCOS_DET_KEY", "ref-key")
-    result = double_build(
-        "BP-DATA-0001", registry=compiler_registry, key_ref="env://UCOS_DET_KEY"
-    )
+    result = double_build("BP-DATA-0001", registry=compiler_registry, key_ref="env://UCOS_DET_KEY")
     assert result.byte_identical
 
 
