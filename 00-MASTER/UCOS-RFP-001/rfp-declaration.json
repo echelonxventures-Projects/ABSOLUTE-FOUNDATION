@@ -556,6 +556,8 @@
         "name": "Knowledge closure",
         "owner": "00-MASTER/UAKOS-CLOSURE-002",
         "argv": [
+          "env",
+          "CLOSURE_SKIP_CORPUS=1",
           "$PY",
           "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
         ],
@@ -569,7 +571,8 @@
         "heavy": false,
         "reentrant": true,
         "required": false,
-        "purpose": "constitutional concept closure — knowledge-once evidence"
+        "purpose": "constitutional concept closure — knowledge-once evidence",
+        "$scope": "CLOSURE_SKIP_CORPUS=1 IS A SCOPE DECLARATION, NOT A SPEED OPTION, AND THIS SITE WAS THE ONE THAT DID NOT MAKE IT. closure_engine bounds its population by the external corpus at ../UCOS, which exists in no clone; an undeclared run therefore records 'repo-only (undeclared — corpus absent)' with population_complete=False — the same concepts, bounded by accident rather than by a constituent act. scripts/generate-prerequisites.sh declares it and this stage did not, so one pipeline pass produced closure.json twice with two different substances and the registers that read it oscillated between them forever. That is the whole of the residual CLO-03/CLO-06: measured at two files moving on every pass, with cycles=0 and 11/13 criteria otherwise holding. The engine is idempotent — three consecutive runs give one digest; it was the two invocation MODES that disagreed."
       },
       {
         "id": "STAGE-UCDA",

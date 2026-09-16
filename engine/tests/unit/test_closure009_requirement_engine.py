@@ -360,11 +360,31 @@ def test_every_closure_engine_invocation_declares_the_repo_only_scope():
                 if re.match(r"\s*-\s+(name|uses):", text):
                     return False
             return False
+        if rel.endswith(".json"):
+            # a declaration carries the invocation as an argv ARRAY, so the env prefix is a
+            # sibling element a few lines above the engine path. Walk back only to the start
+            # of this argv, so a neighbouring stage's declaration cannot vouch for this one.
+            for earlier in range(index, -1, -1):
+                text = lines[earlier]
+                if "CLOSURE_SKIP_CORPUS" in text:
+                    return True
+                if '"argv"' in text:
+                    return False
+            return False
         # a Makefile runs every recipe line in a SEPARATE shell, so nothing but the line itself
         return False
 
     sites = []
-    for rel in ["Makefile", "scripts/generate-prerequisites.sh"] + [
+    # THE SURFACE LIST IS ITSELF A SURFACE, AND IT WAS INCOMPLETE. This test names the
+    # places an invocation can live, and the RFP pipeline declaration was not one of them
+    # — so STAGE-CLOSURE invoked the engine undeclared for as long as it has existed, and
+    # the disagreement this test exists to prevent ran unobserved: one pass produced
+    # closure.json twice with two substances, and two registers oscillated between them.
+    for rel in [
+        "Makefile",
+        "scripts/generate-prerequisites.sh",
+        "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    ] + [
         str(path.relative_to(REPO)) for path in sorted((REPO / ".github/workflows").glob("*.yml"))
     ]:
         path = REPO / rel

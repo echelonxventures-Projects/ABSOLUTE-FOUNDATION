@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "5f792c424189853a2caf22105062042587407b051aea6180a689d7693b64baea",
+  "declaration_seal_sha256": "7b11aa44b2bd146d9158b458224b177e02aa2e695b07ff1d78600339ccfd7b7b",
   "findings": [],
   "lifecycle": [
     {
@@ -479,7 +479,10 @@
       },
       {
         "$env_comment": "The repository-only pass. Without it the engine also scans a corpus directory OUTSIDE the repository, so its output becomes a function of the machine rather than of the tracked tree — and a stage whose output is not a function of the repository can have no fixed point in the repository. Measured consequence of omitting it: the closure reading was 89 gaps here and 0 gaps in the certifier's own closure checks, which declare this same env, so the blueprint recorded a gap count that the next stage immediately contradicted. This is the identical reading the session anchor records and the integration blueprint binds.",
+        "$scope": "CLOSURE_SKIP_CORPUS=1 IS A SCOPE DECLARATION, NOT A SPEED OPTION, AND THIS SITE WAS THE ONE THAT DID NOT MAKE IT. closure_engine bounds its population by the external corpus at ../UCOS, which exists in no clone; an undeclared run therefore records 'repo-only (undeclared — corpus absent)' with population_complete=False — the same concepts, bounded by accident rather than by a constituent act. scripts/generate-prerequisites.sh declares it and this stage did not, so one pipeline pass produced closure.json twice with two different substances and the registers that read it oscillated between them forever. That is the whole of the residual CLO-03/CLO-06: measured at two files moving on every pass, with cycles=0 and 11/13 criteria otherwise holding. The engine is idempotent — three consecutive runs give one digest; it was the two invocation MODES that disagreed.",
         "argv": [
+          "env",
+          "CLOSURE_SKIP_CORPUS=1",
           "$PY",
           "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
         ],
