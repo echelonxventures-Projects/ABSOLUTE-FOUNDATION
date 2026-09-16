@@ -8,16 +8,16 @@
 
 | Criticality | Objects | Share |
 |---|---|---|
-| CRITICAL | 143 | 26.0% |
-| HIGH | 71 | 12.9% |
+| CRITICAL | 144 | 26.2% |
+| HIGH | 72 | 13.1% |
 | MEDIUM | 52 | 9.5% |
 | LOW | 0 | 0.0% |
-| INFORMATIONAL | 283 | 51.5% |
+| INFORMATIONAL | 282 | 51.3% |
 
 ### Criticality of OPEN gaps only
 
 | Criticality | Open gaps | By gap type |
 |---|---|---|
-| CRITICAL | 143 | CERTIFICATION_GAP:26; IMPLEMENTATION_GAP:117 |
-| HIGH | 71 | CERTIFICATION_GAP:31; IMPLEMENTATION_GAP:40 |
+| CRITICAL | 144 | CERTIFICATION_GAP:46; IMPLEMENTATION_GAP:98 |
+| HIGH | 72 | CERTIFICATION_GAP:32; IMPLEMENTATION_GAP:40 |
 | MEDIUM | 52 | CERTIFICATION_GAP:36; IMPLEMENTATION_GAP:16 |

@@ -17,4 +17,4 @@
 | Rollback | MEDIUM | partial-package failure risk | package-atomic rollback (Register 05) | Governance Authority |
 | Governance | MEDIUM | 133 governance-deferred units | GOVERNANCE-RELEASE approval gate | Governance Authority |
 
-**Highest-concentration control point:** 120 CRITICAL-tier units gate all downstream waves; their Execution Authorizations require Governance-Authority approval before any HIGH/MEDIUM package may start.
+**Highest-concentration control point:** 101 CRITICAL-tier units gate all downstream waves; their Execution Authorizations require Governance-Authority approval before any HIGH/MEDIUM package may start.

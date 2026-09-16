@@ -10,19 +10,19 @@
 
 | Dimension | Value |
 |---|---|
-| Certified knowledge objects | 549 |
-| NO_GAP (complete / governance-terminal) | 283 |
-| Open gaps | 266 |
-| IMPLEMENTATION_GAP | 173 |
-| CERTIFICATION_GAP | 93 |
+| Certified knowledge objects | 550 |
+| NO_GAP (complete / governance-terminal) | 282 |
+| Open gaps | 268 |
+| IMPLEMENTATION_GAP | 154 |
+| CERTIFICATION_GAP | 114 |
 | READY | 233 |
-| PARTIALLY_READY | 93 |
-| NOT_READY | 19 |
+| PARTIALLY_READY | 114 |
+| NOT_READY | 0 |
 | DEFERRED | 154 |
 | SUPERSEDED | 8 |
-| REJECTED | 42 |
-| CRITICAL open gaps | 143 |
-| HIGH open gaps | 71 |
+| REJECTED | 41 |
+| CRITICAL open gaps | 144 |
+| HIGH open gaps | 72 |
 | Dependency closure | CLOSED |
 
 The gap baseline is derived deterministically from FREEZE A + FREEZE B; every object carries exactly one evidence-backed gap status. This is the immutable FREEZE C content.

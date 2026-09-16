@@ -10,14 +10,14 @@
 
 | Dimension | Value |
 |---|---|
-| Certified knowledge objects | 549 |
+| Certified knowledge objects | 550 |
 | Realization types | 23 |
 | Realization lifecycles | 6 |
 | Execution streams | 6 |
 | Software-eligible objects | 224 |
-| Corrected IMPLEMENTATION_GAP | 127 (was 173) |
-| Objects reclassified (gap changed) | 136 |
-| FREEZE C2 seal (sha256) | `aefcf6003ea909339c60c7810199aa9b4f0d71939a178f6c9a589ca17315a421` |
+| Corrected IMPLEMENTATION_GAP | 127 (was 154) |
+| Objects reclassified (gap changed) | 138 |
+| FREEZE C2 seal (sha256) | `6897a87a4926c2197a5458fadbaee66737e94f473d26e595929c61b4f2b4b898` |
 
 ### Corrected gap distribution
 
@@ -25,16 +25,16 @@
 |---|---|
 | CERTIFICATION_GAP | 21 |
 | IMPLEMENTATION_GAP | 127 |
-| NO_GAP | 366 |
+| NO_GAP | 386 |
 | POPULATION_GAP | 6 |
-| RATIFICATION_GAP | 29 |
+| RATIFICATION_GAP | 10 |
 
 ### Streams
 
 | Stream | Objects |
 |---|---|
 | Documentation | 53 |
-| Governance | 85 |
+| Governance | 86 |
 | Infrastructure | 19 |
 | Knowledge | 134 |
 | Registry | 53 |

@@ -13,7 +13,7 @@
 | RD-03 | Authority declaration | 275/550 declared at the canonical home | FAIL |
 | RD-04 | Implementation | 339/550 in code | FAIL |
 | RD-05 | Validation | 139/550 evidenced | FAIL |
-| RD-06 | Verification | 260/550 evidenced | FAIL |
+| RD-06 | Verification | 255/550 evidenced | FAIL |
 | RD-07 | Certification | 241/550 carry the declared disclosure token | FAIL |
 | RD-08 | Runtime | 0/550 runtime-proven | FAIL |
 | RD-09 | Traceability spine | capability tier 79/550 | FAIL |
@@ -54,7 +54,7 @@
 | requirement | 550 | 100.0% | COMPLETE |
 | implementation | 339 | 61.64% | INCOMPLETE |
 | test | 226 | 41.09% | INCOMPLETE |
-| evidence | 260 | 47.27% | INCOMPLETE |
+| evidence | 255 | 46.36% | INCOMPLETE |
 | certification | 241 | 43.82% | INCOMPLETE |
 
 ## 4. Determination
@@ -64,4 +64,4 @@ Repository readiness is **NOT ESTABLISHED**. 12 of
 (488/550), which the mission makes a
 precondition for continuing implementation at all.
 
-*Seal `b68322676bb6bf77` · END 06 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `84140fa64e5f3749` · END 06 · AUTHORITY = NONE (DERIVED TRUTH).*

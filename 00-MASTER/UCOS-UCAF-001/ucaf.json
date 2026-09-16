@@ -937,8 +937,8 @@
       "id": "T1",
       "located": false,
       "name": "Constitutional Authority",
-      "status": "VACANT — see XVII.4 and CMG-OQ-02",
-      "vacant": true
+      "status": "OCCUPIED — by the ratified law canon registered at `02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md` (UCOS-RAT-002 D-RAT-02-02; the VAC-01 record retired at LXXVIII.9)",
+      "vacant": false
     },
     {
       "content": "This instrument — recognition of constitutionality; orthogonal to T1, not superior to it",
@@ -1006,7 +1006,7 @@
       "measure": "delegations_registered",
       "measured": true,
       "obligation": "every located delegation of a concern to an owner is registered, and its owner resolves",
-      "value": 61
+      "value": 62
     },
     {
       "capability": "Authority Resolution",
@@ -1105,7 +1105,7 @@
       "measure": "tiers_corroborated",
       "measured": true,
       "obligation": "the machine tier projection is faithful to the canonical constitutional precedence lattice in membership, name and located status; every tier the projection reports located is corroborated by a located occupant; and every authority tier the charter vests is present in the lattice",
-      "value": 7
+      "value": 8
     },
     {
       "capability": "Authority Admission",
@@ -1125,7 +1125,7 @@
     "capabilities": 14,
     "capabilities_discharged": 14,
     "concepts_admitted": 6,
-    "delegations": 61,
+    "delegations": 62,
     "dispositions_owned": 6,
     "minted_collisions": 0,
     "minted_token_classes": 9,
@@ -1133,20 +1133,20 @@
     "minted_unclassified": 0,
     "realizations": 1,
     "realizations_bound": 1,
-    "reconciliation_required": 3,
+    "reconciliation_required": 0,
     "reconciliations": 3,
     "resolutions": 17,
     "resolutions_answered": 17,
     "scope_rules": 17,
     "scope_rules_bound": 17,
     "successions": 15,
-    "surfaces_scanned": 194,
+    "surfaces_scanned": 196,
     "tiers": 8,
-    "tiers_corroborated": 7,
+    "tiers_corroborated": 8,
     "tiers_faithful": 8,
     "tiers_vested": 4,
     "undefined_references": 0,
-    "vacant_tiers": 1
+    "vacant_tiers": 0
   },
   "delegations": [
     {
@@ -1546,6 +1546,14 @@
       "disposition": "REUSE",
       "id": "CMG-DLG-50",
       "owner": "UCKP-LAW-0001",
+      "owner_named": true,
+      "owner_resolved": false
+    },
+    {
+      "concern": "absolute-constitutional-laws-canonicity",
+      "disposition": "RETAINED",
+      "id": "CMG-DLG-51",
+      "owner": "UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS",
       "owner_named": true,
       "owner_resolved": false
     },
@@ -2107,7 +2115,7 @@
     {
       "claim": "no located authority is competent to ratify",
       "claim_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
-      "claim_stands": true,
+      "claim_stands": false,
       "closes_vacancy": false,
       "evidence_absent": [],
       "evidence_located": [
@@ -2116,14 +2124,14 @@
         "09-DR-RAT-11-ASSESSMENT.md"
       ],
       "id": "UCAF-RC-01",
-      "outcome": "RECONCILIATION-REQUIRED",
+      "outcome": "CLAIM-NO-LONGER-LOCATED",
       "ratifies": false,
       "referred_to": "00-MASTER/UCCEP-000000/uccep-bindings.json"
     },
     {
       "claim": "no ratified normative artifact occupies the vacant constitutional tier",
       "claim_owner": "00-CMG/CMG-REGISTRY.json",
-      "claim_stands": true,
+      "claim_stands": false,
       "closes_vacancy": false,
       "evidence_absent": [],
       "evidence_located": [
@@ -2132,14 +2140,14 @@
         "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md"
       ],
       "id": "UCAF-RC-02",
-      "outcome": "RECONCILIATION-REQUIRED",
+      "outcome": "CLAIM-NO-LONGER-LOCATED",
       "ratifies": false,
       "referred_to": "00-CMG/CMG-REGISTRY.json"
     },
     {
       "claim": "the corpus contains no authority competent to ratify anything",
       "claim_owner": "00-CMG/README.md",
-      "claim_stands": true,
+      "claim_stands": false,
       "closes_vacancy": false,
       "evidence_absent": [],
       "evidence_located": [
@@ -2147,7 +2155,7 @@
         "01-WORKING/AUTHORITY-REGISTER.md"
       ],
       "id": "UCAF-RC-03",
-      "outcome": "RECONCILIATION-REQUIRED",
+      "outcome": "CLAIM-NO-LONGER-LOCATED",
       "ratifies": false,
       "referred_to": "00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md"
     }
@@ -2436,7 +2444,7 @@
       "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter"
     }
   ],
-  "seal_sha256": "41b025c4e8a97d686b081f68eeaa970687abdb203efcf874caa0c7b899567fa5",
+  "seal_sha256": "f93e2920c15edaf80c08abd1007bbf0cd478565f7fe2e95de49970145709f9c8",
   "source_token_registers": [
     {
       "id": "UCAF-TOK-01",
@@ -2611,14 +2619,18 @@
     {
       "canonical_name": "Constitutional Authority",
       "canonical_occupant": "The ratified constitution of substance presupposed by CEP-000 §5.5 Tier 1",
-      "canonical_status": "VACANT — see XVII.4 and CMG-OQ-02",
-      "corroborated": false,
-      "corroboration": [],
+      "canonical_status": "OCCUPIED — by the ratified law canon registered at `02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md` (UCOS-RAT-002 D-RAT-02-02; the VAC-01 record retired at LXXVIII.9)",
+      "corroborated": true,
+      "corroboration": [
+        "canonical-lattice-content",
+        "registered-artifact",
+        "charter-vesting"
+      ],
       "faithful": true,
       "id": "T1",
       "projected_name": "Constitutional Authority",
-      "projected_occupancy": "VACANT",
-      "vacant": true
+      "projected_occupancy": "LOCATED",
+      "vacant": false
     },
     {
       "canonical_name": "Meta-Constitutional Authority",
@@ -2755,11 +2767,11 @@
     {
       "id": "T1",
       "name": "Constitutional Authority",
-      "occupancy": "VACANT",
+      "occupancy": "LOCATED",
       "subordinate_to": [
         "T0"
       ],
-      "vacancy": "VAC-01"
+      "vacancy": null
     },
     {
       "id": "T1M",
@@ -2820,19 +2832,8 @@
   ],
   "undefined_references": [],
   "unverified_sources": [],
-  "vacancies": [
-    {
-      "complete": true,
-      "id": "VAC-01",
-      "located": false,
-      "missing_fields": [],
-      "open_question": "CMG-OQ-02",
-      "tier": "T1"
-    }
-  ],
-  "vacant_tiers": [
-    "T1"
-  ],
+  "vacancies": [],
+  "vacant_tiers": [],
   "validations": [
     {
       "blocking": true,
@@ -3089,7 +3090,7 @@
       "owner": "00-CEP/CEP-010-CONSTITUTIONAL-AUDIT-COMPLIANCE-ASSURANCE-CONSTITUTION.md"
     },
     {
-      "digest": "19d8602a8e1acb47",
+      "digest": "a17e0a0ab88a50af",
       "owner": "00-CMG/CMG-REGISTRY.json"
     },
     {

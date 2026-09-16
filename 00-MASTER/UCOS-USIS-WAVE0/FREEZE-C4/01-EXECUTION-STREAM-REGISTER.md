@@ -9,7 +9,7 @@
 | Execution stream | Eligibility | Objects (current closure) | Origin |
 |---|---|---|---|
 | Documentation | not software | 53 | C2 |
-| Governance | not software | 85 | C2 |
+| Governance | not software | 86 | C2 |
 | Infrastructure | software-eligible | 19 | C2 |
 | Knowledge | not software | 134 | C2 |
 | Registry | not software | 53 | C2 |

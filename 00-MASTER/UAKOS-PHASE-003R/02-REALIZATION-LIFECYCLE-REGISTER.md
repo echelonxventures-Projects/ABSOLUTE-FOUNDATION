@@ -23,7 +23,7 @@
 - Valid gap categories: SPECIFICATION_GAP, GOVERNANCE_GAP, RATIFICATION_GAP, ENFORCEMENT_GAP
 - Evidence requirement: governance determination document + ratification + enforcement reference
 - Realization types: ADMISSION_GATE, CONSTITUTIONAL_EVOLUTION_PROPOSAL, GOVERNANCE_DECISION, GOVERNANCE_DETERMINATION, RATIFICATION_DETERMINATION, RECONCILIATION_DETERMINATION
-- Objects: 46
+- Objects: 47
 
 ### KNOWLEDGE lifecycle
 

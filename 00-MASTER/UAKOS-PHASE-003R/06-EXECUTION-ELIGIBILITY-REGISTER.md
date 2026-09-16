@@ -26,7 +26,7 @@
 | ONTOLOGY | 33 | · | · | ✓ | · | · | · | · |
 | PLATFORM_COMPONENT | 19 | ✓ | · | · | · | ✓ | ✓ | ✓ |
 | PROGRAM_EPIC | 16 | · | · | · | ✓ | · | · | · |
-| RATIFICATION_DETERMINATION | 2 | · | ✓ | · | · | · | · | · |
+| RATIFICATION_DETERMINATION | 3 | · | ✓ | · | · | · | · | · |
 | RECONCILIATION_DETERMINATION | 5 | · | ✓ | · | · | · | · | · |
 | RUNTIME_COMPONENT | 17 | ✓ | · | · | · | ✓ | ✓ | ✓ |
 | SERVICE | 19 | ✓ | · | · | · | ✓ | ✓ | ✓ |

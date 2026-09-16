@@ -15,7 +15,7 @@
 | 5 | requirement | 550 | 100.0% | COMPLETE |
 | 6 | implementation | 339 | 61.64% | INCOMPLETE |
 | 7 | test | 226 | 41.09% | INCOMPLETE |
-| 8 | evidence | 260 | 47.27% | INCOMPLETE |
+| 8 | evidence | 255 | 46.36% | INCOMPLETE |
 | 9 | certification | 241 | 43.82% | INCOMPLETE |
 
 Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full constitution→requirement→implementation→test→evidence→certification chain: **120/550**.
@@ -320,11 +320,11 @@ Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full con
 | RR-PLATFORM-018 | PLATFORM-018 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
 | RR-Phase-000 | Phase-000 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
 | RR-Phase-001 | Phase-001 | · | ✓ | ✓ | ✓ | ✓ | · | · | · | · | 4/9 |
-| RR-Phase-002 | Phase-002 | · | ✓ | ✓ | · | ✓ | · | · | ✓ | · | 4/9 |
-| RR-Phase-003 | Phase-003 | · | ✓ | ✓ | ✓ | ✓ | · | · | ✓ | · | 5/9 |
-| RR-Phase-004 | Phase-004 | · | ✓ | ✓ | · | ✓ | · | · | ✓ | · | 4/9 |
-| RR-Phase-005 | Phase-005 | · | ✓ | ✓ | · | ✓ | · | · | ✓ | · | 4/9 |
-| RR-Phase-006 | Phase-006 | · | ✓ | ✓ | · | ✓ | · | · | ✓ | · | 4/9 |
+| RR-Phase-002 | Phase-002 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
+| RR-Phase-003 | Phase-003 | · | ✓ | ✓ | ✓ | ✓ | · | · | · | · | 4/9 |
+| RR-Phase-004 | Phase-004 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
+| RR-Phase-005 | Phase-005 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
+| RR-Phase-006 | Phase-006 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
 | RR-Phase-020 | Phase-020 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
 | RR-Phase-021 | Phase-021 | · | · | · | · | ✓ | · | · | · | · | 1/9 |
 | RR-Phase-024 | Phase-024 | · | ✓ | ✓ | · | ✓ | · | · | · | · | 3/9 |
@@ -575,4 +575,4 @@ Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full con
 | RR-Ω∞-019 | Ω∞-019 | ✓ | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 5/9 |
 | RR-Ω∞-020 | Ω∞-020 | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | · | · | 6/9 |
 
-*Seal `b68322676bb6bf77` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `84140fa64e5f3749` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*

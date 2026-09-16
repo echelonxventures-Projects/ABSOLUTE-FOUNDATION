@@ -5,7 +5,7 @@
 | Tier | Name | Subordinate to | Occupancy | Vacancy |
 |---|---|---|---|---|
 | `T0` | Constitutional Source Corpus | — | LOCATED | — |
-| `T1` | Constitutional Authority | `T0` | VACANT | `VAC-01` |
+| `T1` | Constitutional Authority | `T0` | LOCATED | — |
 | `T1M` | Meta-Constitutional Authority | `T1` | LOCATED | — |
 | `T2` | Program Authority | `T1` | LOCATED | — |
 | `T2I` | Interpretive Authority | `T1` | LOCATED | — |
@@ -27,7 +27,7 @@ which the meta-constitution forbids and whose disposal belongs to the claim owne
 | Tier | Projected name | Canonical name | Projected | Canonical status | Faithful | Occupant named by the canonical owner | Corroboration |
 |---|---|---|---|---|---|---|---|
 | `T0` | Constitutional Source Corpus | Constitutional Source Corpus | LOCATED | Located, frozen, non-normative-as-law | YES | The frozen source material from which constitutional intent derives | canonical-lattice-content |
-| `T1` | Constitutional Authority | Constitutional Authority | VACANT | VACANT — see XVII.4 and CMG-OQ-02 | YES | The ratified constitution of substance presupposed by CEP-000 §5.5 Tier 1 | n/a — vacancy recorded |
+| `T1` | Constitutional Authority | Constitutional Authority | LOCATED | OCCUPIED — by the ratified law canon registered at `02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md` (UCOS-RAT-002 D-RAT-02-02; the VAC-01 record retired at LXXVIII.9) | YES | The ratified constitution of substance presupposed by CEP-000 §5.5 Tier 1 | canonical-lattice-content, registered-artifact, charter-vesting |
 | `T1M` | Meta-Constitutional Authority | Meta-Constitutional Authority | LOCATED | Located (PROVISIONAL) | YES | This instrument — recognition of constitutionality; orthogonal to T1, not superior to it | canonical-lattice-content, registered-artifact |
 | `T2` | Program Authority | Program Authority | LOCATED | Located | YES | CEP-000 and its derived CEP instruments; supreme over constitutional-engineering process | canonical-lattice-content, registered-artifact, charter-vesting |
 | `T2I` | Interpretive Authority | Interpretive Authority | LOCATED | Located | YES | AUTH-INF-001; binds reading, enacts nothing; orthogonal to T2 | canonical-lattice-content, registered-artifact |
@@ -51,7 +51,6 @@ its located owner records it.
 
 | Vacancy | Tier | Occupant located | Open question | Record complete |
 |---|---|---|---|---|
-| `VAC-01` | `T1` | NO | `CMG-OQ-02` | YES |
 
 ## Delegation (CEP-002 Article 13 / Article 14)
 
@@ -107,6 +106,7 @@ its located owner records it.
 | `CMG-DLG-48` | constitutional-engineering-operational-law-invariants-and-artifact-state-model | `CEP-001` | REUSE | no (named, unresolved path) |
 | `CMG-DLG-49` | deferral-register-lifecycle-states-entry-exit-review-cadence-and-custody | `CEP-002` | REUSE | no (named, unresolved path) |
 | `CMG-DLG-50` | canonical-object-identity-registry-relationship-graph-and-invariant-validation | `UCKP-LAW-0001` | REUSE | no (named, unresolved path) |
+| `CMG-DLG-51` | absolute-constitutional-laws-canonicity | `UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS` | RETAINED | no (named, unresolved path) |
 | `CMG-RET-01` | definition-of-constitution-and-constitutional-artifact | `CMG-000001` | RETAIN | no (named, unresolved path) |
 | `CMG-RET-02` | recognition-of-constitutionality-and-the-constitution-registry | `CMG-000001` | RETAIN | no (named, unresolved path) |
 | `CMG-RET-03` | classification-taxonomy-and-ontology-of-constitutional-objects | `CMG-000001` | RETAIN | no (named, unresolved path) |

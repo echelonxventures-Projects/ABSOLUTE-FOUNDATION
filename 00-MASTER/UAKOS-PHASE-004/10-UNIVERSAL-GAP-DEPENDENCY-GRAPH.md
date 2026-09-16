@@ -10,7 +10,7 @@
 
 | Wave (node) | Class | Units |
 |---|---|---|
-| 2 | CRITICAL / Realization | 117 |
+| 2 | CRITICAL / Realization | 98 |
 | 3 | CRITICAL / Certification | 3 |
 | 5 | HIGH / Realization | 34 |
 | 6 | HIGH / Certification | 18 |

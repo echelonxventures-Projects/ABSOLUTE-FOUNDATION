@@ -10,13 +10,13 @@
 
 | Dimension | Value |
 |---|---|
-| Certified knowledge objects | 549 |
-| Objects with exactly one gap status | 549 |
-| Open gaps | 266 · NO_GAP: 283 |
-| Dependency closure | CLOSED (1687 nodes / 13807 edges) |
+| Certified knowledge objects | 550 |
+| Objects with exactly one gap status | 550 |
+| Open gaps | 268 · NO_GAP: 282 |
+| Dependency closure | CLOSED (1689 nodes / 13811 edges) |
 | Circular dependencies | 0 node(s) |
-| CRITICAL/HIGH open gaps | 214 |
-| FREEZE C seal (sha256) | `6e3bcd506c72c88c8cb6426310842d0113739d5cea86724137425b3105cf5a37` |
+| CRITICAL/HIGH open gaps | 216 |
+| FREEZE C seal (sha256) | `fa4ea82d01bbe9f45bf12155c84d60da8c59f4c44e9ea94d9b769cf9421c4b8d` |
 
 ## Method
 
@@ -56,6 +56,6 @@ Consumed FREEZE A (certified `closure.json`) + FREEZE B (Phase-002 status) + the
 
 ## FREEZE C — Implementation Gap Baseline
 
-**FREEZE C is CERTIFIED and IMMUTABLE at seal `6e3bcd506c72c88c8cb6426310842d0113739d5cea86724137425b3105cf5a37`.** The complete Constitutional Implementation Gap Baseline (gap register, classification, dependency closure, readiness, criticality, blockers, completeness, capability + repository gap matrices) is established. Implementation planning (Phase-004) SHALL consume FREEZE A + FREEZE B + FREEZE C as authoritative governance inputs. **Phase-004 Implementation Planning may begin.**
+**FREEZE C is CERTIFIED and IMMUTABLE at seal `fa4ea82d01bbe9f45bf12155c84d60da8c59f4c44e9ea94d9b769cf9421c4b8d`.** The complete Constitutional Implementation Gap Baseline (gap register, classification, dependency closure, readiness, criticality, blockers, completeness, capability + repository gap matrices) is established. Implementation planning (Phase-004) SHALL consume FREEZE A + FREEZE B + FREEZE C as authoritative governance inputs. **Phase-004 Implementation Planning may begin.**
 
 _READ-ONLY: no implementation, repository modification, task generation, implementation plan, refactor, constitution change, or new knowledge objects were produced._

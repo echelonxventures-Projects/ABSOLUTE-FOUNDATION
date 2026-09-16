@@ -59,4 +59,4 @@ Wave order is constitutional precedence, not convenience: ownership and authorit
 | 100% knowledge extraction | 159 canonical knowledge objects against 550 requirements | PASS |
 | 100% capability elevation | 471 requirements with an unpopulated capability tier | PASS |
 
-*Seal `b68322676bb6bf77` · END 08 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `84140fa64e5f3749` · END 08 · AUTHORITY = NONE (DERIVED TRUTH).*

@@ -8,11 +8,11 @@
 
 | Blocker category | Count |
 |---|---|
-| Architectural Blockers | 157 |
+| Architectural Blockers | 138 |
 | Dependency Blockers | 0 |
-| Governance Blockers | 314 |
+| Governance Blockers | 315 |
 | Validation Blockers | 0 |
-| Certification Blockers | 93 |
+| Certification Blockers | 114 |
 | Repository Blockers | 0 |
 | Runtime Blockers | 0 |
 | Security Blockers | 0 |
@@ -109,12 +109,33 @@
 | UCOS-GOV-004 |
 | UCOS-GOV-006 |
 | UCOS-RAT-001 |
+| UCOS-RAT-002 |
 | UCOS-RECON-C1 |
 | UCOS-RECON-C2 |
 | UKDA-DEC-0001 |
 | UKDA-DEC-0002 |
 | UKDA-DEC-0003 |
 | Ω∞-000 |
+| Ω∞-001 |
+| Ω∞-002 |
+| Ω∞-003 |
+| Ω∞-004 |
+| Ω∞-005 |
+| Ω∞-006 |
+| Ω∞-007 |
+| Ω∞-008 |
+| Ω∞-009 |
+| Ω∞-010 |
+| Ω∞-011 |
+| Ω∞-012 |
+| Ω∞-013 |
+| Ω∞-014 |
+| Ω∞-015 |
+| Ω∞-016 |
+| Ω∞-017 |
+| Ω∞-018 |
+| Ω∞-019 |
+| Ω∞-020 |
 
 ### Architectural blockers (critical/high specified-not-implemented)
 

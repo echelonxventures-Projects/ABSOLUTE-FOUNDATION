@@ -6,16 +6,15 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-006/phase6_certify.py`.
 
-- Implementation units (FREEZE D): **266**
-- Execution authorizations (FREEZE E, 1:1): **266**
-- Authorizations verified valid: **266**
-- Authorized executor roles: **4**
+- Implementation units (FREEZE D): **268**
+- Execution authorizations (FREEZE E, 1:1): **268**
+- Authorizations verified valid: **268**
+- Authorized executor roles: **3**
 
 | Authorized executor | Units |
 |---|---|
-| Certified Implementation Engine (EC-1) | 17 |
-| Constitutional Completeness Engine (CCE) + Certification Authority | 93 |
-| Constitutional Governance Authority | 128 |
-| Knowledge Authority | 28 |
+| Certified Implementation Engine (EC-1) | 16 |
+| Constitutional Completeness Engine (CCE) + Certification Authority | 114 |
+| Constitutional Governance Authority | 138 |
 
 Every unit maps to exactly one authorization; no unit is unauthorized → **VERIFIED**.

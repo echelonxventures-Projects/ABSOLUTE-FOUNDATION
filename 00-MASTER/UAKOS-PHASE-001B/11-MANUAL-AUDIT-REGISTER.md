@@ -17,7 +17,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **76904**
 - **Original text** → "UCOS-COMP-000001"
 - **Knowledge object** → `UCOS-COMP-000001` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md`; **127** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md`; **82** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=False
 
@@ -29,7 +29,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77638**
 - **Original text** → "UCOS-COMP-001000"
 - **Knowledge object** → `UCOS-COMP-001000` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **45** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **15** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -41,7 +41,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77873**
 - **Original text** → "UCOS-COMP-001001"
 - **Knowledge object** → `UCOS-COMP-001001` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **40** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **12** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -53,7 +53,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77924**
 - **Original text** → "UCOS-COMP-001002"
 - **Knowledge object** → `UCOS-COMP-001002` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **33** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -65,7 +65,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77963**
 - **Original text** → "UCOS-COMP-001003"
 - **Knowledge object** → `UCOS-COMP-001003` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **33** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -77,7 +77,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77999**
 - **Original text** → "UCOS-COMP-001004"
 - **Knowledge object** → `UCOS-COMP-001004` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -89,7 +89,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78038**
 - **Original text** → "UCOS-COMP-001005"
 - **Knowledge object** → `UCOS-COMP-001005` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -101,7 +101,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78073**
 - **Original text** → "UCOS-COMP-001006"
 - **Knowledge object** → `UCOS-COMP-001006` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -113,7 +113,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78108**
 - **Original text** → "UCOS-COMP-001007"
 - **Knowledge object** → `UCOS-COMP-001007` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -125,7 +125,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78141**
 - **Original text** → "UCOS-COMP-001008"
 - **Knowledge object** → `UCOS-COMP-001008` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -137,7 +137,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78180**
 - **Original text** → "UCOS-COMP-001009"
 - **Knowledge object** → `UCOS-COMP-001009` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **5** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -149,7 +149,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78213**
 - **Original text** → "UCOS-COMP-001010"
 - **Knowledge object** → `UCOS-COMP-001010` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **38** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **10** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -161,7 +161,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **115**
 - **Original text** → "DATA-001 Constitution"
 - **Knowledge object** → `DATA-001` (disposition IMPLEMENTED)
-- **Repository evidence** → home `10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md`; **338** repository files cite it
+- **Repository evidence** → home `10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md`; **306** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -173,7 +173,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **116**
 - **Original text** → "DATA-002 Theory"
 - **Knowledge object** → `DATA-002` (disposition REJECTED)
-- **Repository evidence** → home `10-DATA/DATA-002-UNIVERSAL-DATA-THEORY.md`; **46** repository files cite it
+- **Repository evidence** → home `10-DATA/DATA-002-UNIVERSAL-DATA-THEORY.md`; **28** repository files cite it
 - **Validation evidence** → constitution=False, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -185,7 +185,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **117**
 - **Original text** → "DATA-003 Ontology"
 - **Knowledge object** → `DATA-003` (disposition IMPLEMENTED)
-- **Repository evidence** → home `10-DATA/DATA-003-UNIVERSAL-DATA-ONTOLOGY.md`; **71** repository files cite it
+- **Repository evidence** → home `10-DATA/DATA-003-UNIVERSAL-DATA-ONTOLOGY.md`; **42** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=False
 
@@ -197,7 +197,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **118**
 - **Original text** → "DATA-004 Taxonomy"
 - **Knowledge object** → `DATA-004` (disposition IMPLEMENTED)
-- **Repository evidence** → home `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md`; **85** repository files cite it
+- **Repository evidence** → home `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md`; **54** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=False
 
@@ -206,7 +206,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AF-3` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md`; **130** repository files cite it
+- **Repository evidence** → home `02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md`; **110** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -215,7 +215,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AMC-01` (disposition IMPLEMENTED)
-- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **136** repository files cite it
+- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **114** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -224,7 +224,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AMC-02` (disposition IMPLEMENTED)
-- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **114** repository files cite it
+- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **94** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 
@@ -233,7 +233,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Document** → _no frozen-document origin_; originating source = repository canonical home
 - **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
 - **Knowledge object** → `AMC-03` (disposition IMPLEMENTED)
-- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **118** repository files cite it
+- **Repository evidence** → home `12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md`; **99** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=True
 

@@ -7,9 +7,9 @@ Article 23. It performs no disposal, closes no vacancy and ratifies nothing.
 
 | Reconciliation | Claim | Claim owner | Claim stands | Evidence located | Outcome | Referred to |
 |---|---|---|---|---|---|---|
-| `UCAF-RC-01` | no located authority is competent to ratify | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | `01-WORKING/AUTHORITY-REGISTER.md`, `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`, `09-DR-RAT-11-ASSESSMENT.md` | RECONCILIATION-REQUIRED | `00-MASTER/UCCEP-000000/uccep-bindings.json` |
-| `UCAF-RC-02` | no ratified normative artifact occupies the vacant constitutional tier | `00-CMG/CMG-REGISTRY.json` | YES | `01-WORKING/AUTHORITY-REGISTER.md`, `01-WORKING/SUPERSESSION-REGISTER.md`, `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md` | RECONCILIATION-REQUIRED | `00-CMG/CMG-REGISTRY.json` |
-| `UCAF-RC-03` | the corpus contains no authority competent to ratify anything | `00-CMG/README.md` | YES | `01-WORKING/AUTHORITY-REGISTER.md`, `01-WORKING/AUTHORITY-REGISTER.md` | RECONCILIATION-REQUIRED | `00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md` |
+| `UCAF-RC-01` | no located authority is competent to ratify | `00-MASTER/UCCEP-000000/uccep-bindings.json` | NO | `01-WORKING/AUTHORITY-REGISTER.md`, `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`, `09-DR-RAT-11-ASSESSMENT.md` | CLAIM-NO-LONGER-LOCATED | `00-MASTER/UCCEP-000000/uccep-bindings.json` |
+| `UCAF-RC-02` | no ratified normative artifact occupies the vacant constitutional tier | `00-CMG/CMG-REGISTRY.json` | NO | `01-WORKING/AUTHORITY-REGISTER.md`, `01-WORKING/SUPERSESSION-REGISTER.md`, `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md` | CLAIM-NO-LONGER-LOCATED | `00-CMG/CMG-REGISTRY.json` |
+| `UCAF-RC-03` | the corpus contains no authority competent to ratify anything | `00-CMG/README.md` | NO | `01-WORKING/AUTHORITY-REGISTER.md`, `01-WORKING/AUTHORITY-REGISTER.md` | CLAIM-NO-LONGER-LOCATED | `00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md` |
 
 ## Undefined authority references
 

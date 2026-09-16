@@ -37,4 +37,4 @@ Identity follows the governing convention `WP-<PROGRAMME>-<NNN>` owned by
 deterministic: constitutional precedence, then descending measured magnitude, then gap
 identifier. Re-running the engine at the same commit reproduces the same ordering.
 
-*Seal `b68322676bb6bf77` · END 09 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `84140fa64e5f3749` · END 09 · AUTHORITY = NONE (DERIVED TRUTH).*

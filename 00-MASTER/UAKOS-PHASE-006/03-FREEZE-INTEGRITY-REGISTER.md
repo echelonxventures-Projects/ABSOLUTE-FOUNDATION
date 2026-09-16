@@ -8,10 +8,10 @@
 
 | Freeze | Baseline | Recorded seal | Recomputed seal | Integrity |
 |---|---|---|---|---|
-| A | Constitutional Knowledge Baseline | 6561a96a959d9dee… | 5fae40e76ad60852… | **INVALID** |
-| B | Repository Implementation Baseline | 41a0fec77b295e3c… | 41a0fec77b295e3c… | VALID ✓ |
-| C | Implementation Gap Baseline | 6e3bcd506c72c88c… | 6e3bcd506c72c88c… | VALID ✓ |
-| D | Implementation Execution Blueprint | b2e7f1e406c49961… | e58c5d3720581eed… | **INVALID** |
-| E | Implementation Execution Governance | 2a9578bf3f7e0c7b… | f5d961abab0b24b0… | **INVALID** |
+| A | Constitutional Knowledge Baseline | 7f881aa65545be8b… | ef95fe81fcb6f04b… | **INVALID** |
+| B | Repository Implementation Baseline | 9c25a0754dc1179a… | 9c25a0754dc1179a… | VALID ✓ |
+| C | Implementation Gap Baseline | fa4ea82d01bbe9f4… | fa4ea82d01bbe9f4… | VALID ✓ |
+| D | Implementation Execution Blueprint | 116417c41dda0a69… | b16b0b1c37c12bab… | **INVALID** |
+| E | Implementation Execution Governance | e449ab3c1a71b77d… | 5f318c0b3d0c8f6f… | **INVALID** |
 
 All freeze seals recompute-match recorded: **NO**. Each match proves the freeze is deterministically reproducible and unmodified since certification.

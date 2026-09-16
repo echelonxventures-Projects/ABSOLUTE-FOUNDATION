@@ -9,11 +9,11 @@
 | Execution stream | Objects | Eligibility | Realization types |
 |---|---|---|---|
 | Documentation | 53 | not software | ARCHITECTURE_SPECIFICATION, LIFECYCLE_PHASE, PROGRAM_EPIC |
-| Governance | 85 | not software | ADMISSION_GATE, CONSTITUTIONAL_EVIDENCE_PRINCIPLE, CONSTITUTIONAL_EVOL |
+| Governance | 86 | not software | ADMISSION_GATE, CONSTITUTIONAL_EVIDENCE_PRINCIPLE, CONSTITUTIONAL_EVOL |
 | Infrastructure | 19 | software-eligible | INFRASTRUCTURE_COMPONENT |
 | Knowledge | 134 | not software | MASTER_CONTEXT_PROTOCOL, META_MODEL, ONTOLOGY |
 | Registry | 53 | not software | EXECUTION_BAND_UNIT |
 | Software | 205 | software-eligible | APPLICATION, DATA_MODEL, PLATFORM_COMPONENT, RUNTIME_COMPONENT, SERVIC |
 
 - **Software-eligible streams:** Software, Infrastructure → **224** objects.
-- **Non-software streams:** Governance, Knowledge, Registry, Documentation → **325** objects (never software-implemented).
+- **Non-software streams:** Governance, Knowledge, Registry, Documentation → **326** objects (never software-implemented).

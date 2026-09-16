@@ -11,11 +11,11 @@
 | Dimension | Value |
 |---|---|
 | Freeze seals verified (recompute==recorded) | 2/5 |
-| Execution authorizations valid | 266/266 |
-| Execution packages | 28 |
+| Execution authorizations valid | 268/268 |
+| Execution packages | 22 |
 | Dependency closure | CLOSED |
 | Execution Authorization | **NOT_AUTHORIZED** |
-| FREEZE F seal (sha256) | `25d015ad468facab2716ad330bd949b518e4851fd799f528741bfc8dd655b890` |
+| FREEZE F seal (sha256) | `84d904b3e3e5d1a486eaeb8af89fad05bc54a4e3e0176d9256ffec5b6e922086` |
 
 ## Method
 

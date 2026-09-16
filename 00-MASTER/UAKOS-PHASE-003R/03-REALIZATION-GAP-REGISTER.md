@@ -30,8 +30,8 @@
 |---|---|
 | CERTIFICATION_GAP | 21 |
 | IMPLEMENTATION_GAP | 127 |
-| NO_GAP | 366 |
+| NO_GAP | 386 |
 | POPULATION_GAP | 6 |
-| RATIFICATION_GAP | 29 |
+| RATIFICATION_GAP | 10 |
 
 **IMPLEMENTATION_GAP objects (corrected): 127** — only SOFTWARE-lifecycle objects genuinely lacking code. All non-software objects previously mislabelled IMPLEMENTATION_GAP now carry their correct gap (RATIFICATION/ENFORCEMENT/POPULATION/…).

@@ -77,4 +77,4 @@ The population is monotone by construction: a requirement occupies the highest l
 | Requirements carrying certification but seated below M6 | 78 | FINDING — certification precedes the test or validation evidence the lattice requires beneath it |
 | Requirements above the certification ceiling | 0 | CLEAN — none, as required |
 
-*Seal `b68322676bb6bf77` · END 05 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `84140fa64e5f3749` · END 05 · AUTHORITY = NONE (DERIVED TRUTH).*
