@@ -44,6 +44,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -474,6 +475,34 @@ def emit(name: str, payload: dict[str, Any]) -> str:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    # --- The declared re-entrancy guard (UCOS-RFP-001, CYC-RECURSE) -------------------
+    #
+    # THIS ENGINE MEASURES CONVERGENCE BY RE-RUNNING DECLARED PRODUCERS. `PRODUCERS` names
+    # 00-MASTER/UCOS-RIB-001/rib_engine.py and the prerequisite script, and it executes both
+    # as subprocesses in the working tree to observe whether their output varies. Inside the
+    # fixed-point pipeline that is a recursive generator: STAGE-RIB already runs rib_engine,
+    # and this engine runs it again through a path the pipeline does not declare.
+    #
+    # MEASURED, NOT HYPOTHETICAL. UCOS-RFP-001 reported this file as CYC-PRODUCER writing 16
+    # tracked paths, every one of them inside 00-MASTER/UCOS-RIB-001/ -- a write zone
+    # STAGE-RIB already owns. It counted in undeclared_producers and closed CLO-07/CLO-09.
+    #
+    # WHY THE GUARD RATHER THAN A STAGE DECLARATION. The bytes are not authored here; they
+    # are authored by the declared producer this engine invokes to measure it. Declaring
+    # this as a stage would put two stages in one write zone, trading CLO-09 for CLO-11 and
+    # CLO-13. The aggregate excluding itself is what RFP-6's own remediation asks for.
+    #
+    # The guard name is printed because rfp_engine.py::honours_guard requires BOTH a
+    # non-zero exit AND the declared guard name in the output before recording exclusion.
+    if os.environ.get("UCOS_RFP_ACTIVE"):
+        sys.stderr.write(
+            "final_closure_engine: refusing to run — UCOS_RFP_ACTIVE is set.\n"
+            "  This engine re-executes declared pipeline producers (rib_engine.py,\n"
+            "  generate-prerequisites.sh) to measure their convergence. Running it inside\n"
+            "  the fixed-point pipeline is a recursive generator (RFP-6 / CYC-RECURSE).\n"
+        )
+        return 3
+
     parser = argparse.ArgumentParser(
         prog="final_closure_engine",
         description=(
