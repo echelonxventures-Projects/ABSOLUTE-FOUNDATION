@@ -282,3 +282,158 @@ def test_every_acknowledgement_states_a_reason() -> None:
     """An entry that says nothing is an exemption wearing a table's clothes."""
     for programme, reason in ACKNOWLEDGED_CLOSED.items():
         assert len(reason.split()) >= 25, f"{programme}: acknowledgement is not a reason"
+
+
+# --- UCOS-RFP-001: the budget a closure criterion turns on is declared, not hardcoded ---
+#
+# THE DEFECT THIS CLOSES, STATED AS THE MEASUREMENT THAT FOUND IT. RFP run 35001284335
+# reported CLO-02 FAIL with `stage_failures=2`, and one of those two was
+# `STAGE-VERIFY: exit 255 — Command '['bash', 'verify.sh']' timed out after 3600 seconds`.
+# That 3600 was a literal inside `rfp_engine.run_stage`. So a closure criterion — whether
+# every required stage exits successfully — turned on a number the declaration governing
+# the pipeline could not see, could not diff and could not refuse. The engine states the
+# principle four lines above where it broke it: "which keys a stage declares is DECLARED,
+# never decided here (PR-07 Zero Enumeration)", and the probe's own budget was already
+# under declaration as `probe.timeout_seconds`.
+#
+# WHAT THIS DOES NOT CLAIM. Declaring the budget does not make STAGE-VERIFY fit inside it.
+# Whether verify.sh should run twice inside the fixed-point gate at all is a real capacity
+# question with an owner, and raising the declared number to make the overrun disappear
+# would be the weakening this instrument exists to refuse. The value was carried over
+# unchanged at 3600 precisely so that declaring it moved no verdict.
+
+
+def _rfp() -> object:
+    return load_governance_engine("UCOS-RFP-001", "rfp_engine.py")
+
+
+def _rfp_declaration() -> dict:
+    path = GOVERNANCE_ROOT / "UCOS-RFP-001" / "rfp-declaration.json"
+    return json.loads(path.read_text("utf-8"))
+
+
+def test_the_stage_execution_budget_is_declared() -> None:
+    """The pipeline carries the budget; an absent one would return it to the engine."""
+    pipeline = _rfp_declaration()["pipeline"]
+    assert "stage_timeout_seconds" in pipeline, (
+        "the pipeline declares no stage_timeout_seconds, so the budget CLO-02 turns on "
+        "lives wherever the engine happens to put it"
+    )
+    assert isinstance(pipeline["stage_timeout_seconds"], int)
+    assert pipeline["stage_timeout_seconds"] > 0
+
+
+def test_the_engine_reads_the_budget_from_the_declaration() -> None:
+    """Behavioural, not textual: a different declared value must produce a different budget."""
+    resolve = _rfp().stage_timeout
+    assert resolve({"pipeline": {"stage_timeout_seconds": 777}}, {}) == 777
+    assert resolve({"pipeline": {"stage_timeout_seconds": 11}}, {}) == 11
+
+
+def test_a_stage_may_name_a_budget_of_its_own() -> None:
+    """A heavy stage and a two-second stage do not share a budget."""
+    resolve = _rfp().stage_timeout
+    decl = {"pipeline": {"stage_timeout_seconds": 3600}}
+    assert resolve(decl, {"timeout_seconds": 120}) == 120, "a stage's own budget must win"
+    assert resolve(decl, {}) == 3600, "a stage naming none must fall back to the pipeline's"
+
+
+def test_every_declared_stage_resolves_to_a_positive_budget() -> None:
+    """No stage may end up with a budget of zero, which would refuse it before it ran."""
+    decl = _rfp_declaration()
+    resolve = _rfp().stage_timeout
+    for stage in decl["pipeline"]["stages"]:
+        budget = resolve(decl, stage)
+        assert budget > 0, f"{stage.get('id')} resolves to a non-positive budget {budget}"
+
+
+def test_both_stage_call_sites_pass_the_resolved_budget() -> None:
+    """The resolver is worth nothing if a call site still carries its own literal."""
+    source = (GOVERNANCE_ROOT / "UCOS-RFP-001" / "rfp_engine.py").read_text("utf-8")
+    assert source.count("timeout=stage_timeout(") == 2, (
+        "a run_stage call site does not pass the resolved budget; one of the two paths "
+        "that executes a stage is still deciding its own limit"
+    )
+    assert (
+        "            timeout=3600," not in source
+    ), "the subprocess call still carries a hardcoded budget"
+
+
+# --- P0-LIFECYCLE-CLOSURE-001: an absent instrument is refused, not published as zero ---
+#
+# THE STATE THIS WAS FOUND IN. `measure_coverage` runs the suite under `coverage` in a
+# subprocess. When that subprocess cannot start — `coverage` absent from the interpreter,
+# which is the case for any run not made through the canonical venv — it returned
+# `{"measured": False, ...}`, and the engine carried on and published a full artifact set
+# with 0.0 in every coverage dimension, exiting 0. Nothing refused the zeros.
+#
+# That is why the committed corpus reads the way it does. UCOS-LIFECYCLE-COVERAGE.json
+# carries `coverage_measured: false` with every percentage at 0.0, and the committed
+# determination reads `CLOSURE CLAIMS PROVEN | 2 / 12` — where all ten failures name
+# `coverage_measured=False` or a 0.0% derived from it ("100% Capability Coverage |
+# NOT_PROVEN | lifecycle 0.0%, capability 0.0%"). Re-measured on the same tree with the
+# instrument present: 12/12, lifecycle 100.0%. The programme was understating itself
+# because its engine lost its instrument quietly and answered anyway.
+#
+# A false negative in governance is not the safe direction of failure. It is indistinguishable
+# from a true one, and it is what makes a gate stop meaning anything.
+
+
+def _lifecycle() -> object:
+    return load_governance_engine("P0-LIFECYCLE-CLOSURE-001", "lifecycle_closure_engine.py")
+
+
+def _without_instrument(module: object, reason: str = "stubbed absent") -> None:
+    """Take the coverage instrument away the way a missing module takes it away."""
+    module.measure_coverage = lambda targets: {  # type: ignore[attr-defined]
+        "measured": False,
+        "reason": reason,
+        "files": {},
+        "totals": {},
+    }
+
+
+def test_the_engine_refuses_when_coverage_was_asked_for_and_did_not_run() -> None:
+    """The measurement did not happen. That is not a measurement of zero."""
+    module = _lifecycle()
+    _without_instrument(module)
+    with pytest.raises(module.Abort):
+        module.run(2, True)
+
+
+def test_the_refusal_names_why_the_instrument_did_not_run() -> None:
+    """A fail-closed that does not say what failed sends the operator looking blind."""
+    module = _lifecycle()
+    _without_instrument(module, reason="No module named coverage")
+    with pytest.raises(module.Abort, match="No module named coverage"):
+        module.run(2, True)
+
+
+def test_the_operators_own_no_coverage_request_is_still_honoured() -> None:
+    """The other direction, and the one that would make this guard a nuisance.
+
+    `measured` is False on the --no-coverage path too. Asking only for the structural
+    phases is a different question from losing the instrument mid-answer, and a guard that
+    could not tell them apart would refuse a request the engine deliberately offers.
+    """
+    module = _lifecycle()
+    artifacts = module.run(2, False)
+    assert artifacts, "--no-coverage returned nothing"
+    assert not artifacts["coverage"]["measurements"]["coverage_measured"]
+
+
+def test_nothing_is_emitted_on_the_refusing_path() -> None:
+    """The refusal is worth little if the zeros are already on disk when it fires.
+
+    Structural because it is a property of the order main() does things in: every emit()
+    follows run() returning, so an Abort out of run() reaches the operator with the tree
+    untouched.
+    """
+    source = (
+        GOVERNANCE_ROOT / "P0-LIFECYCLE-CLOSURE-001" / "lifecycle_closure_engine.py"
+    ).read_text("utf-8")
+    run_call = source.index("artifacts = run(")
+    assert source.index("except Abort as exc:") > run_call
+    assert source.index("written = [rel(emit(") > source.index(
+        "except Abort as exc:"
+    ), "an emit() precedes the Abort handler, so a refused run can still write"

@@ -70,6 +70,7 @@ from engine.foundation.composition.ordering import (  # noqa: E402
     derive_order,
     unresolved_keys,
 )
+from engine.certification_integrity import immutable  # noqa: E402
 from engine.uckp.canonical import content_hash  # noqa: E402
 
 #: How many consecutive replay rounds Phase 5 requires before asserting stability.
@@ -313,6 +314,27 @@ def discharge_map(rounds: int) -> dict[str, dict[str, Any]]:
     return result
 
 
+def instrument_interpreter() -> str:
+    """The interpreter that carries the coverage instrument, not the one that happens to run.
+
+    WHY THIS EXISTS, AS THE FAILURE IT PREVENTS. `measure_coverage` used `sys.executable`,
+    which is whatever interpreter invoked this engine. Every declared RFP pipeline stage is
+    launched through `$PY`, and `rfp_engine.resolve_argv` maps that token to its own
+    `sys.executable` — the hosted CI interpreter, not the pinned venv. `coverage` and
+    `pytest` are installed into `.ec1-venv` by bootstrap.sh and are absent from that
+    interpreter, so the measurement would abort in CI while succeeding on any developer
+    machine that happened to run the engine through the venv.
+
+    Resolved the way the two sibling engines already resolve it — aee_engine.py::interpreters
+    and uccep_engine.py::interpreters both read `REPO/.ec1-venv/bin/python` and fall back when
+    it is absent — rather than by inventing a third convention (UCKP-ART-18). scripts/ucos-env.sh
+    states the underlying rule: never depend on PATH, always call the venv interpreter by
+    absolute path.
+    """
+    venv = REPO / ".ec1-venv" / "bin" / "python"
+    return str(venv) if venv.is_file() else sys.executable
+
+
 def measure_coverage(targets: Sequence[str]) -> dict[str, Any]:
     """Run the repository test suite under coverage and report per-target statement data.
 
@@ -328,11 +350,12 @@ def measure_coverage(targets: Sequence[str]) -> dict[str, Any]:
     roots = sorted({t.split("/", 1)[0] for t in targets if "/" in t} | {"engine", "platform"})
     with tempfile.TemporaryDirectory() as tmp:
         data = Path(tmp) / "cov.json"
-        # S603: every argument is a literal or `sys.executable`; nothing here is derived
-        # from repository content, so there is no untrusted input to inject.
+        # S603: every argument is a literal or the resolved interpreter path; nothing here
+        # is derived from repository content, so there is no untrusted input to inject.
+        interpreter = instrument_interpreter()
         run = subprocess.run(  # noqa: S603
             [
-                sys.executable,
+                interpreter,
                 "-m",
                 "coverage",
                 "run",
@@ -350,12 +373,14 @@ def measure_coverage(targets: Sequence[str]) -> dict[str, Any]:
             cwd=REPO,
             capture_output=True,
             text=True,
+            env=immutable.clean_environment(),
         )
         report = subprocess.run(  # noqa: S603 - literal argv; see above
-            [sys.executable, "-m", "coverage", "json", "-o", str(data), "--pretty-print"],
+            [interpreter, "-m", "coverage", "json", "-o", str(data), "--pretty-print"],
             cwd=REPO,
             capture_output=True,
             text=True,
+            env=immutable.clean_environment(),
         )
         if not data.exists():
             return {
@@ -1269,6 +1294,29 @@ def run(rounds: int, with_coverage: bool) -> dict[str, dict[str, Any]]:
         if with_coverage
         else {"measured": False, "reason": "--no-coverage", "files": {}, "totals": {}}
     )
+    # A measurement that did not happen is not a measurement of zero.
+    #
+    # WHAT THIS REFUSES, STATED AS THE STATE IT WAS FOUND IN. Without this, an environment
+    # where `coverage` is not importable still produces the full artifact set — every
+    # coverage dimension published as 0.0 with `coverage_measured: false` beside it — and
+    # exits 0, so nothing anywhere refuses the zeros. That is not hypothetical: the
+    # committed UCOS-LIFECYCLE-COVERAGE.json carries exactly those zeros, and the committed
+    # determination reads 2/12 CLOSURE CLAIMS PROVEN where every one of the ten failures
+    # names `coverage_measured=False` or a 0.0% derived from it. Re-measured with the
+    # instrument present, the same tree proves 12/12. The corpus was understating itself
+    # because an engine lost its instrument quietly.
+    #
+    # Refusing is the shape the provider check above already uses: the subject is
+    # unmeasurable, so no verdict is issued and — because every emit() happens after run()
+    # returns — no artifact is written. `--no-coverage` remains a pass, because an operator
+    # asking only for the structural phases is asking a different question than an engine
+    # silently losing its instrument and answering anyway.
+    if with_coverage and not coverage.get("measured"):
+        raise Abort(
+            "the coverage instrument did not run, so every coverage dimension would be "
+            "published as 0.0 and read as measured: "
+            f"{coverage.get('reason') or 'no reason reported'}"
+        )
 
     realization = phase3_realization(inventory, discharges, coverage)
     graph = phase4_graph(nodes)

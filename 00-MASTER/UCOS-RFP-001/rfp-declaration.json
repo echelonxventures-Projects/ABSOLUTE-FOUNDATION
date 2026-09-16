@@ -432,6 +432,8 @@
   "pipeline": {
     "convergence_passes": 2,
     "reentrancy_env": "UCOS_RFP_ACTIVE",
+    "stage_timeout_seconds": 3600,
+    "$stage_timeout_comment": "The execution budget one stage gets before it is reported as a failed stage. CLO-02 turns on this number, so it is declared here rather than decided inside rfp_engine.py: a budget the declaration cannot see is a limit no operator can govern, and PR-07 Zero Enumeration already puts the probe's own budget under declaration (probe.timeout_seconds). 3600 is the value the engine hardcoded before it was declared, carried over unchanged so that declaring it moved no verdict. A stage may override it with its own timeout_seconds, because a heavy stage and a two-second stage do not share a budget. NOTE: declaring the budget does not by itself resolve STAGE-VERIFY exceeding it — that is a real capacity question about running verify.sh twice inside the gate, and raising this number to hide the overrun would be exactly the weakening this instrument exists to refuse.",
     "stages": [
       {
         "id": "STAGE-PREREQUISITES",

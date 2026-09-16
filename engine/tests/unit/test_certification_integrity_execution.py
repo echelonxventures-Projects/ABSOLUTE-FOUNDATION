@@ -1931,7 +1931,22 @@ def _unscrubbed_spawn_sites() -> list[str]:
 
 
 #: Measured at the commit that introduced this check. IT MAY FALL AND MAY NEVER RISE.
-UNSCRUBBED_SPAWN_CEILING = 16
+#:
+#: LOWERED 16 -> 14 BECAUSE THE DEBT WAS REPAID. Both coverage spawns in
+#: 00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py now pass
+#: `env=immutable.clean_environment()`. That engine runs `coverage run -m pytest`, so it
+#: was the most exposed inheritor of COV_CORE_* in the tree: the very child it spawns to
+#: measure coverage was the one most likely to bind sys.modules["platform"] to the stdlib.
+#:
+#: A BLIND SPOT WAS INTRODUCED IN THE SAME EDIT, AND IS RECORDED RATHER THAN LEFT TO BE
+#: REDISCOVERED. Those two sites also stopped passing `sys.executable` literally — they
+#: now pass an interpreter resolved by `instrument_interpreter()`, because `$PY` in the
+#: RFP pipeline is the hosted interpreter and not the pinned venv. `_unscrubbed_spawn_sites`
+#: keys on the literal `sys.executable`, so it can no longer see them AT ALL, scrubbed or
+#: not. The ceiling fell for a real repair, but the detector would not notice if the scrub
+#: were removed tomorrow. Widening it to follow a resolved interpreter is the next
+#: tightening, and it is a change to the DETECTOR rather than to this number.
+UNSCRUBBED_SPAWN_CEILING = 14
 
 
 def test_no_new_subprocess_inherits_the_measurement_environment() -> None:
@@ -1960,9 +1975,7 @@ def test_a_repaid_spawn_site_tightens_the_ceiling() -> None:
 _KNOWN_UNSCRUBBED = (
     "00-BOOK/tools/ukctx_assimilate.py:170",
     "00-BOOK/tools/ukctx_certify.py:116",
-    "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py:280",
-    "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py:333",
-    "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py:354",
+    "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py:281",
     "engine/tests/uckp/test_cli_and_package.py:238",
     "engine/tests/unit/test_enforcement_closure.py:615",
     "engine/tests/unit/test_verification_intelligence.py:826",

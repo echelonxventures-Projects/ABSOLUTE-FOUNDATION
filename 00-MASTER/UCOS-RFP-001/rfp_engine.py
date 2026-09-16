@@ -187,7 +187,22 @@ def resolve_argv(argv: list[str]) -> list[str]:
     return [sys.executable if token == _PY_TOKEN else str(token) for token in argv]
 
 
-def run_stage(stage: dict, env: dict[str, str], root: Path | None = None) -> tuple[int, str]:
+def stage_timeout(decl: dict, stage: dict) -> int:
+    """Execution budget for one stage: the stage's own declaration, else the pipeline's.
+
+    Declared rather than decided here, for the same reason the probe's budget is
+    (PR-07 Zero Enumeration). CLO-02 turns on this number: a stage that exceeds it
+    is reported as a failed stage, so a budget living only in this engine is a
+    limit the declaration cannot see and an operator cannot govern. A stage may
+    name its own, because a heavy stage and a two-second one do not share a budget.
+    """
+    pipeline = decl.get("pipeline") or {}
+    return int(stage.get("timeout_seconds") or pipeline.get("stage_timeout_seconds") or 3600)
+
+
+def run_stage(
+    stage: dict, env: dict[str, str], root: Path | None = None, timeout: int = 3600
+) -> tuple[int, str]:
     argv = resolve_argv(list(stage.get("argv") or []))
     if not argv:
         fail_closed(f"stage declares no argv: {stage.get('id')}")
@@ -206,7 +221,7 @@ def run_stage(stage: dict, env: dict[str, str], root: Path | None = None) -> tup
             cwd=root or REPO,
             capture_output=True,
             text=True,
-            timeout=3600,
+            timeout=timeout,
             check=False,
             env=env,
         )
@@ -564,7 +579,7 @@ def probe_producers(decl: dict, disc: dict) -> dict:
             for stage in stages:
                 if probe.get("seed_skips_heavy") and stage.get("heavy"):
                     continue
-                run_stage(stage, env, root=tree)
+                run_stage(stage, env, root=tree, timeout=stage_timeout(decl, stage))
             # Tracked content returns to HEAD; content an excluded location holds
             # is deliberately kept, because that is what a producer downstream of a
             # declared stage legitimately consumes.
@@ -914,7 +929,7 @@ def run_pipeline_pass(decl: dict, stages: list[dict], env: dict[str, str], skip_
         ident = str(stage.get("id"))
         if skip_heavy and stage.get("heavy"):
             continue
-        code, output = run_stage(stage, env)
+        code, output = run_stage(stage, env, timeout=stage_timeout(decl, stage))
         if code != 0 and stage.get("required"):
             tail = output.strip().splitlines()[-1:] or [""]
             failures.append(f"{ident}: exit {code} — {tail[0][:160]}")
