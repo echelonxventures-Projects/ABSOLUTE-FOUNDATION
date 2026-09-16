@@ -5,7 +5,7 @@
       "kind": "executable-stage",
       "name": "Executable pipeline stage adapter",
       "note": "Supplies executability, write zones, reentrancy and fixed-point membership.",
-      "objects": 35,
+      "objects": 43,
       "pointer": "pipeline.stages",
       "provider": "PRV-RFP",
       "providers_matched": 1,
@@ -599,7 +599,7 @@
     "cko_identity_collisions": 0,
     "cko_kind_registry_closed": 0,
     "cko_reference_ambiguities": 0,
-    "ckos_discovered": 4456,
+    "ckos_discovered": 4464,
     "ckos_of_unknown_kind": 0,
     "ckos_without_provenance": 0,
     "ckos_without_semantic_identity": 0,
@@ -1159,7 +1159,7 @@
     }
   ],
   "gate": "OPEN",
-  "graph_digest": "fb848049082ebce3046ac4dd09480b13c8228cbdf7e88ebf1d2378ea5c055ed5",
+  "graph_digest": "78666a4977217094cd69206cec6c53798b9f6daf699a75cb028626ea07bf557e",
   "graphs": [
     {
       "edge_relations": [
@@ -1174,7 +1174,7 @@
         "executable-stage",
         "constitutional-lifecycle-step"
       ],
-      "nodes": 94,
+      "nodes": 102,
       "relations_known": true
     },
     {
@@ -14149,7 +14149,7 @@
       "goal": "Execute the Universal Constitutional Lifecycle over the Universal Constitutional Lifecycle itself.",
       "id": "GOAL-SELF",
       "note": "Self-application. The lifecycle is the first capability the lifecycle governs, which is what makes it a substrate rather than a description.",
-      "run_id": "0b66ec890b104073ddb6eb8c3586529f9b57247b0cde943e47446ed12270ab1c",
+      "run_id": "948d34ceb5e4fb7d4752d089c15d4cfff830fabe4cd96dde248e4de49258814a",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14655,7 +14655,7 @@
       "goal": "Engineer the Universal Constitutional Engineering Substrate required for the Autonomous Constitutional Engineering Engine.",
       "id": "GOAL-SUBSTRATE",
       "note": "The Ω-E04→Ω-E05 handover goal.",
-      "run_id": "b65af26b1674afdabbbf3c300a753556c9820e678b313f89c4dd9e11b95a4a0f",
+      "run_id": "f361b7d7944c262877ce55d1a600bc440255d33d7c8542ed0b3030ec808fb187",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15161,7 +15161,7 @@
       "goal": "Engineer an arbitrary future canonical capability that Repository Truth does not yet record.",
       "id": "GOAL-ARBITRARY-CAPABILITY",
       "note": "Proves universal applicability WITHOUT naming a capability: the traversal is identical for every goal, so no capability needs its own methodology and no capability list exists to be incomplete.",
-      "run_id": "0844a587da9164ee75c85434b4b04043b2c7d8fb4e924afd186b1cfd9ad505e5",
+      "run_id": "de7442744ffc894d75db09db98b806fbf36597dc58f81e91a206775ba86eea49",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15663,7 +15663,7 @@
       ]
     }
   ],
-  "seal_sha256": "a5926d18d722f3b536667edd46dfe3f07ce31aec4a17c31456704fa41a7ab5a5",
+  "seal_sha256": "77bc141e26838d95c3f8742d90bc7630001c181d9f0a2523d43932a5c70f71be",
   "self_evolution": [
     {
       "anchor": "",

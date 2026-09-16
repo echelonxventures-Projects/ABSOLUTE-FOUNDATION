@@ -181,7 +181,7 @@
       "kind": "executable-stage",
       "name": "Executable pipeline stages",
       "note": "the located owners that ACTUATE the lifecycle. This programme discovers them so a plan can name the actuator of each stage; it invokes none of them, because invoking a capability it measures would make it observe a run of itself.",
-      "objects": 35,
+      "objects": 43,
       "pointer": "pipeline.stages",
       "provider": "PRV-PIPELINE",
       "providers_matched": 1,
@@ -709,7 +709,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 4443,
+    "ckos_discovered": 4451,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -748,7 +748,7 @@
     "objects_from_goals": 6,
     "objects_from_invariants": 48,
     "objects_from_lifecycle": 45,
-    "objects_from_pipeline": 35,
+    "objects_from_pipeline": 43,
     "objects_from_registry": 1689,
     "parallel_authority_claims": 0,
     "privileged_branches": 0,
@@ -1611,7 +1611,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 4443
+      "value": 4451
     },
     {
       "id": "EK-05",
@@ -5669,7 +5669,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "cb48bea4a3de720651628096584fe1a99488d0bfa7c3cd3fa1c150bbc2d8dab3",
+  "graph_digest": "9ccbcefb26759c9e487257b85d9ec7065c4d5c534b67a159d6b71b437e2a0f63",
   "graphs": [
     {
       "composed": true,
@@ -5862,7 +5862,7 @@
         "executable-stage",
         "lifecycle-stage"
       ],
-      "nodes": 80
+      "nodes": 88
     }
   ],
   "immutability": {
@@ -24153,7 +24153,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "2f33fdcfd7ea3e1374afc99b8f1fcf01c0b604f80e1febb0b9523719d3c994c2",
+  "seal_sha256": "6ea2a866dd789cd5948bef3cd8cdd6f50c5fae6c51f01a87aebbb28712439fcc",
   "self_evolution": [
     {
       "anchor": "determination",
