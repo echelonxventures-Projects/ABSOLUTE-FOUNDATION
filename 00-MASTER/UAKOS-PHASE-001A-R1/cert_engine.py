@@ -230,9 +230,11 @@ def fence(rows, header):
 
 
 
-#: The two fields a generated input carries that move on their own: the commit it was built
-#: at, and the branch it was built on.
-_ANCHOR_KEYS = ("baseline_commit", "branch")
+#: The fields a generated input carries that move on their own. closure.json holds its
+#: anchor at the top level as `baseline_commit` / `branch`; provenance.json COPIES the same
+#: anchor nested under `closure_baseline`, so stripping only the flat names left the commit
+#: inside the hash and the digest moved on every commit regardless.
+_ANCHOR_KEYS = ("baseline_commit", "branch", "closure_baseline")
 
 
 def _stable_input_sha(path) -> str:

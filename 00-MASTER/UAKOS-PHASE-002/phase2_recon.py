@@ -42,7 +42,11 @@ BASE = {"commit": CLOSURE.get("baseline_commit"), "branch": CLOSURE.get("branch"
 # the fingerprint would move on every commit, so the artifact could never be
 # reproduced and would evidence nothing. Excluding the anchor keys the fingerprint to
 # the input's SUBSTANCE, which is what the audit is actually attesting.
-_ANCHOR_KEYS = ("baseline_commit", "branch")
+#: The fields a generated input carries that move on their own. closure.json holds its
+#: anchor at the top level as `baseline_commit` / `branch`; provenance.json COPIES the same
+#: anchor nested under `closure_baseline`, so stripping only the flat names left the commit
+#: inside the hash and the digest moved on every commit regardless.
+_ANCHOR_KEYS = ("baseline_commit", "branch", "closure_baseline")
 
 
 def _stable_input_sha(path):
