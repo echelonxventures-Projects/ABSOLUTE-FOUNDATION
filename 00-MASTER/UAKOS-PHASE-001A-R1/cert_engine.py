@@ -229,6 +229,31 @@ def fence(rows, header):
     return "\n".join(out)
 
 
+
+#: The two fields a generated input carries that move on their own: the commit it was built
+#: at, and the branch it was built on.
+_ANCHOR_KEYS = ("baseline_commit", "branch")
+
+
+def _stable_input_sha(path) -> str:
+    """sha256 of a JSON input with its commit anchor removed.
+
+    A REGISTER MAY RECORD WHAT IT READ, BUT NOT A VALUE THAT MOVES ON ITS OWN. closure.json and
+    provenance.json are gitignored and rebuilt by whichever site ran last, so a raw digest of
+    either stamps a different hex string into this tracked register on every run and on every
+    runner — the moving anchor RFP-4 forbids, and the same defect commit 8aba1951 removed from
+    the twelve register HEADERS while leaving it in these two digest lines.
+
+    Stripping the anchor keys leaves the SUBSTANCE of the input, which is what the digest was
+    always meant to attest: two runs over the same knowledge produce the same hash, and a real
+    change to the knowledge still moves it.
+    """
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(data, dict):
+        data = {k: v for k, v in data.items() if k not in _ANCHOR_KEYS}
+    canonical = json.dumps(data, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
 def hdr(title, answers):
     return (f"# {title}\n\n"
             f"> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · "
@@ -449,8 +474,8 @@ def r10():  # Manual Audit Register
 
 
 def r11():  # Machine Audit Register
-    prov_sha = hashlib.sha256(PROV_PATH.read_bytes()).hexdigest()
-    closure_sha = hashlib.sha256(CLOSURE_PATH.read_bytes()).hexdigest()
+    prov_sha = _stable_input_sha(PROV_PATH)
+    closure_sha = _stable_input_sha(CLOSURE_PATH)
     unknown = BY_TYPE.get("UNKNOWN", 0)
     assertions = [
         ["every object has exactly one origin", "PASS" if unknown == 0 else "FAIL"],
@@ -463,8 +488,8 @@ def r11():  # Machine Audit Register
     ]
     body = hdr("11 — Machine Audit Register",
                "Automated verification: input identity (SHA-256), deterministic assertions, machine reproducibility.")
-    body += (f"- Input `provenance.json` SHA-256: `{prov_sha}`\n"
-             f"- Input `closure.json` SHA-256: `{closure_sha}`\n"
+    body += (f"- Input `provenance.json` SHA-256 (substance, commit anchor excluded): `{prov_sha}`\n"
+             f"- Input `closure.json` SHA-256 (substance, commit anchor excluded): `{closure_sha}`\n"
              f"- Objects certified: **{N}** (== closure concept_total **{CLOSURE['concept_total']}**)\n\n"
              + fence(assertions, ["Machine assertion", "Result"])
              + "\n\nAll assertions are recomputed on every run from the two hash-pinned inputs; the audit "

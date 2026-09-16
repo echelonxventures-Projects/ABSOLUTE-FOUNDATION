@@ -445,10 +445,10 @@ def main():
                       and CLOSURE["gap_total"] == 0)
     b = hdr("09 — Repository Integrity Report",
             "Machine-verified integrity determination for the reconciliation baseline.")
-    prov_sha = hashlib.sha256(PROV_PATH.read_bytes()).hexdigest()
+    prov_sha = _stable_input_sha(PROV_PATH)
     closure_sha = _stable_input_sha(CLOSURE_PATH)
     b += (f"- Input `closure.json` SHA-256 (substance, commit anchor excluded): `{closure_sha}`\n"
-          f"- Input `provenance.json` SHA-256: `{prov_sha}`\n\n"
+          f"- Input `provenance.json` SHA-256 (substance, commit anchor excluded): `{prov_sha}`\n\n"
           + fence([
               ["every object has exactly one status", "PASS" if single_status else "FAIL"],
               ["no UNKNOWN status", "PASS" if unknown == 0 else "FAIL"],
