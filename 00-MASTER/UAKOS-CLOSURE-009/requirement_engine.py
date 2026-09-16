@@ -86,6 +86,9 @@ INPUTS = {
     "cko": ("knowledge/canonical-knowledge.json", False),
     "decisions": ("knowledge/decisions.json", False),
     "determinism": ("determinism-evidence/determinism-evidence.json", False),
+    # The declared list of every artifact a producer regenerates. Read so that a DERIVED
+    # register is never counted as evidence OF the concept it merely mentions.
+    "generated": ("00-BOOK/DATA/generated-artifact-registry.json", True),
 }
 
 # Evidence-kind classifiers. Patterns are declarative and additive: adding a kind
@@ -265,6 +268,30 @@ def classify(rules, rel: str):
     return ("UNCLASSIFIED", "UNCLASSIFIED", "UNCLASSIFIED")
 
 
+
+def derived_paths(generated: dict | None) -> frozenset[str]:
+    """Every path a declared producer regenerates.
+
+    A DERIVED REGISTER IS NOT EVIDENCE OF A CONCEPT; IT IS A PROJECTION THAT MENTIONS ONE.
+    Counting it inflates the evidence and, worse, makes the count depend on when a sibling
+    register last ran. UCOS-RFP-001 measured that directly: this programme, PHASE-001A-R1,
+    PHASE-001B and PHASE-002 each rewrote on pass TWO of the fixed-point pipeline, because
+    each was counting files the others had just written. APPLICATION-000 alone appears in 26
+    files inside sibling UAKOS register directories. Reordering the stages could not fix it —
+    the reference is mutual, not sequential — and CI showed the signature plainly: every
+    evidence count differing by exactly one, uniformly.
+
+    The population is DECLARED, never enumerated here: 00-BOOK/DATA/generated-artifact-registry
+    .json is the repository's own record of what a producer regenerates, so an artifact that
+    becomes generated tomorrow leaves this count with no edit to this engine.
+    """
+    entries = (generated or {}).get("entries") or []
+    return frozenset(
+        str(e["canonical_path"])
+        for e in entries
+        if isinstance(e, dict) and e.get("canonical_path")
+    )
+
 def declared_authority(rel: str, cache: dict) -> str:
     """Read the AUTHORITY the canonical home declares about itself, verbatim."""
     if not rel:
@@ -349,10 +376,11 @@ def build(inputs: dict, replay: dict | None = None) -> dict:
         s in runtime_ok_states for s in runtime_dims.values()
     )
 
+    derived = derived_paths(inputs.get("generated"))
     reqs = []
     for c in sorted(concepts, key=lambda r: r["id"]):
         cid = c["id"]
-        files = c.get("files", []) or []
+        files = [f for f in (c.get("files", []) or []) if f not in derived]
         def_homes = sorted(c.get("def_homes", []) or [])
         exact_homes = sorted(c.get("exact_homes", []) or [])
         tops = sorted(c.get("tops", []) or [])

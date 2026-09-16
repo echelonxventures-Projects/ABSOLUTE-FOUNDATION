@@ -45,16 +45,16 @@
 
 | Value | Requirements | Share |
 |---|---|---|
-| NOT-EVIDENCED | 314 | 57.09% |
-| EVIDENCED | 142 | 25.82% |
-| TEST-ONLY | 94 | 17.09% |
+| NOT-EVIDENCED | 315 | 57.27% |
+| EVIDENCED | 139 | 25.27% |
+| TEST-ONLY | 96 | 17.45% |
 
 ### Verification
 
 | Value | Requirements | Share |
 |---|---|---|
-| NOT-EVIDENCED | 289 | 52.55% |
-| EVIDENCED | 261 | 47.45% |
+| NOT-EVIDENCED | 290 | 52.73% |
+| EVIDENCED | 260 | 47.27% |
 
 ### Certification
 
@@ -75,7 +75,7 @@
 |---|---|---|
 | Autonomous coverage | 84/550 requirements carry engine-generated evidence | evidence classified as engine output |
 | Evolution coverage | 550/550 requirements carry a maturity level on the open lattice | every requirement is evolvable by construction |
-| Replay coverage | 17 declared inputs re-derive the whole model byte-identically | deterministic engine, no timestamps |
+| Replay coverage | 18 declared inputs re-derive the whole model byte-identically | deterministic engine, no timestamps |
 
 ## 5. Coverage by identifier family
 
@@ -110,4 +110,4 @@
 
 No family receives privileged treatment; an unrecognized family would appear here automatically with the same axes.
 
-*Seal `992220648f7e23a7` · END 03 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `b68322676bb6bf77` · END 03 · AUTHORITY = NONE (DERIVED TRUTH).*

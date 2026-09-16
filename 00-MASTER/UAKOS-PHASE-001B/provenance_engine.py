@@ -38,6 +38,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 CLOSURE = REPO / "00-MASTER" / "UAKOS-CLOSURE-002" / "closure.json"
+#: The declared record of every artifact a producer regenerates — see :func:`derived_paths`.
+GENERATED = REPO / "00-BOOK" / "DATA" / "generated-artifact-registry.json"
 
 # --- concept anchor families: verbatim copy of closure_engine.py FAMILIES so the
 # --- concept namespace this phase reconstructs is IDENTICAL to the one Phase-001 closed.
@@ -268,9 +270,32 @@ def scan_concepts(docs: list[dict]) -> dict:
 
 
 # --------------------------------------------------------------- main reconstruction
+def derived_paths() -> frozenset[str]:
+    """Every path a declared producer regenerates.
+
+    A DERIVED REGISTER IS NOT EVIDENCE OF A CONCEPT; IT IS A PROJECTION THAT MENTIONS ONE.
+    Counting one makes this measurement depend on when a SIBLING register last ran, which
+    UCOS-RFP-001 measured as non-convergence: this programme, PHASE-001A-R1, CLOSURE-009 and
+    PHASE-002 each rewrote on pass TWO of the fixed-point pipeline because each counted files
+    the others had just written. The reference is mutual rather than sequential, so no stage
+    ordering resolves it.
+
+    The population is DECLARED, never enumerated here, so an artifact that becomes generated
+    tomorrow leaves this count with no edit to this engine.
+    """
+    if not GENERATED.is_file():
+        return frozenset()
+    entries = (json.loads(GENERATED.read_text("utf-8")) or {}).get("entries") or []
+    return frozenset(
+        str(e["canonical_path"])
+        for e in entries
+        if isinstance(e, dict) and e.get("canonical_path")
+    )
+
 def reconstruct() -> dict:
     closure = json.loads(CLOSURE.read_text("utf-8"))
     concepts = {c["id"]: c for c in closure["concepts"]}
+    derived = derived_paths()
 
     # Enumerate ALL frozen source DOCX from the filesystem (mission consumes every
     # source under 00-SOURCE/** and 04-REFERENCE/** incl ARCHITECTURAL-SOURCES/**,
@@ -353,7 +378,9 @@ def reconstruct() -> dict:
             "id": cid, "family": c["family"], "disposition": c["disposition"],
             "origin": origin,
             "repository_home": repo_home,
-            "repository_evidence_files": len(c.get("files") or []),
+            "repository_evidence_files": len(
+                [f for f in (c.get("files") or []) if f not in derived]
+            ),
             "def_homes": defh, "exact_homes": exact,
             "trace": trace, "certified": bool(c.get("certified")),
             "conversation_only": bool(c.get("conversation_only")),

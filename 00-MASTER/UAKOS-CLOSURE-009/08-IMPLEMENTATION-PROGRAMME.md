@@ -23,8 +23,8 @@
 | W04 | WP-UAKOS-CLOSURE-009-004 | 1 | 471 | TRACEABILITY |
 | W05 | WP-UAKOS-CLOSURE-009-005 | 1 | 62 | REGISTRY |
 | W06 | WP-UAKOS-CLOSURE-009-006, WP-UAKOS-CLOSURE-009-007 | 2 | 170 | IMPLEMENTATION |
-| W07 | WP-UAKOS-CLOSURE-009-008 | 1 | 103 | VALIDATION |
-| W08 | WP-UAKOS-CLOSURE-009-009 | 1 | 85 | VERIFICATION |
+| W07 | WP-UAKOS-CLOSURE-009-008 | 1 | 104 | VALIDATION |
+| W08 | WP-UAKOS-CLOSURE-009-009 | 1 | 86 | VERIFICATION |
 | W09 | WP-UAKOS-CLOSURE-009-010 | 1 | 114 | CERTIFICATION |
 | W10 | WP-UAKOS-CLOSURE-009-011 | 1 | 550 | RUNTIME |
 
@@ -47,8 +47,8 @@ Wave order is constitutional precedence, not convenience: ownership and authorit
 | Criterion | Measured now | Required |
 |---|---|---|
 | 100% implementation | 339/550 present in code; 16 absent, 154 deferred, 41 rejected | PASS |
-| 100% validation | 103 implemented requirements without validation evidence | PASS |
-| 100% verification | 85 implemented requirements without verification evidence | PASS |
+| 100% validation | 104 implemented requirements without validation evidence | PASS |
+| 100% verification | 86 implemented requirements without verification evidence | PASS |
 | 100% certification | 114 code-without-certification, 16 certified-without-located-code | PASS |
 | 100% audit | 6 of 6 systemic audit findings open: RG-S01, RG-S02, RG-S03, RG-S04, RG-S05, RG-S06 | PASS |
 | 100% deterministic replay | 47 of 339 implemented requirements carry determinism evidence; 1 blueprint result(s) recorded | PASS |
@@ -59,4 +59,4 @@ Wave order is constitutional precedence, not convenience: ownership and authorit
 | 100% knowledge extraction | 159 canonical knowledge objects against 550 requirements | PASS |
 | 100% capability elevation | 471 requirements with an unpopulated capability tier | PASS |
 
-*Seal `992220648f7e23a7` · END 08 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `b68322676bb6bf77` · END 08 · AUTHORITY = NONE (DERIVED TRUTH).*

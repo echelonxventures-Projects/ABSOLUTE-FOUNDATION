@@ -25,8 +25,8 @@
 | WP-UAKOS-CLOSURE-009-005 | 5 | W05 | CANONICAL-HOME-UNREGISTERED | REGISTRY | 62 | RG-E03 | 00-BOOK/tools/register.sh | Register the canonical home so it carries a universal identity and can participate in the typed graph. |
 | WP-UAKOS-CLOSURE-009-006 | 6 | W06 | DEFERRED-AND-UNREALIZED | IMPLEMENTATION | 154 | RG-C04 | 00-MASTER/UAKOS-CLOSURE-002/43-IMPLEMENTATION-CONTRACT-REGISTER.md | A governed defer is a standing, not a closure: each must eventually be realized or superseded before 100% implementation can be proven. |
 | WP-UAKOS-CLOSURE-009-007 | 7 | W06 | IMPLEMENTATION-ABSENT | IMPLEMENTATION | 16 | RG-C01 | 00-MASTER/UAKOS-CLOSURE-002/43-IMPLEMENTATION-CONTRACT-REGISTER.md | Realize through the existing factory/composition path, or record a governed defer. |
-| WP-UAKOS-CLOSURE-009-008 | 8 | W07 | NO-VALIDATION-EVIDENCE | VALIDATION | 103 | RG-D01 | 00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md | Attach validation evidence at the canonical evidence location. |
-| WP-UAKOS-CLOSURE-009-009 | 9 | W08 | NO-VERIFICATION-EVIDENCE | VERIFICATION | 85 | RG-D02 | 00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md | Attach verification / realization evidence at the canonical evidence location. |
+| WP-UAKOS-CLOSURE-009-008 | 8 | W07 | NO-VALIDATION-EVIDENCE | VALIDATION | 104 | RG-D01 | 00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md | Attach validation evidence at the canonical evidence location. |
+| WP-UAKOS-CLOSURE-009-009 | 9 | W08 | NO-VERIFICATION-EVIDENCE | VERIFICATION | 86 | RG-D02 | 00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md | Attach verification / realization evidence at the canonical evidence location. |
 | WP-UAKOS-CLOSURE-009-010 | 10 | W09 | CODE-WITHOUT-CERTIFICATION | CERTIFICATION | 114 | RG-C03 | 00-MASTER/UAKOS-CLOSURE-004 | Route through the certification programme; certification ceiling remains the declared disclosure token. |
 | WP-UAKOS-CLOSURE-009-011 | 11 | W10 | NO-RUNTIME-EVIDENCE | RUNTIME | 550 | RG-E01 | 00-BOOK/DATA/control-tower.json | Ledger real executions; runtime dimensions must leave BLOCKED/NOT_STARTED before any requirement can be runtime-proven. |
 
@@ -37,4 +37,4 @@ Identity follows the governing convention `WP-<PROGRAMME>-<NNN>` owned by
 deterministic: constitutional precedence, then descending measured magnitude, then gap
 identifier. Re-running the engine at the same commit reproduces the same ordering.
 
-*Seal `992220648f7e23a7` · END 09 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `b68322676bb6bf77` · END 09 · AUTHORITY = NONE (DERIVED TRUTH).*

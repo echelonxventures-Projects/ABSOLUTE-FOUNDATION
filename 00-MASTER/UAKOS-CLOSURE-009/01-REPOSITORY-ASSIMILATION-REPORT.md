@@ -38,6 +38,7 @@ rather than by inference. Presence is complete. Declaration is not.
 | control_tower | 00-BOOK/DATA/control-tower.json | yes | PRESENT |
 | decisions | knowledge/decisions.json | no | PRESENT |
 | determinism | determinism-evidence/determinism-evidence.json | no | PRESENT |
+| generated | 00-BOOK/DATA/generated-artifact-registry.json | yes | PRESENT |
 | id_ledger | 00-BOOK/DATA/id-ledger.json | yes | PRESENT |
 | phase2 | 00-MASTER/UAKOS-CLOSURE-002/phase2.json | yes | PRESENT |
 | phase3 | 00-MASTER/UAKOS-CLOSURE-002/phase3.json | yes | PRESENT |
@@ -137,4 +138,4 @@ No object type receives privileged treatment: the same eight participations are 
 | Hard-coded limits / object types / zones / dimensions | CLEAN | families, zones, dimensions and lattice levels are all read or configured, never enumerated as a closed set in the engine |
 | Silent repair | CLEAN | absent optional inputs are recorded as ABSENT and degrade the measurement visibly |
 
-*Seal `992220648f7e23a7` · END 01 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `b68322676bb6bf77` · END 01 · AUTHORITY = NONE (DERIVED TRUTH).*

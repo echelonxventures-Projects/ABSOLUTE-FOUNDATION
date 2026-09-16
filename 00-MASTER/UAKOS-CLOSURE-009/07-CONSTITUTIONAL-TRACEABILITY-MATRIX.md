@@ -15,7 +15,7 @@
 | 5 | requirement | 550 | 100.0% | COMPLETE |
 | 6 | implementation | 339 | 61.64% | INCOMPLETE |
 | 7 | test | 226 | 41.09% | INCOMPLETE |
-| 8 | evidence | 261 | 47.45% | INCOMPLETE |
+| 8 | evidence | 260 | 47.27% | INCOMPLETE |
 | 9 | certification | 241 | 43.82% | INCOMPLETE |
 
 Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full constitution→requirement→implementation→test→evidence→certification chain: **120/550**.
@@ -554,7 +554,7 @@ Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full con
 | RR-UKDA-DEC-0002 | UKDA-DEC-0002 | · | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 4/9 |
 | RR-UKDA-DEC-0003 | UKDA-DEC-0003 | · | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 4/9 |
 | RR-Ω∞-000 | Ω∞-000 | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | ✓ | · | 7/9 |
-| RR-Ω∞-001 | Ω∞-001 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | · | ✓ | · | 7/9 |
+| RR-Ω∞-001 | Ω∞-001 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | · | · | · | 6/9 |
 | RR-Ω∞-002 | Ω∞-002 | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | · | · | 6/9 |
 | RR-Ω∞-003 | Ω∞-003 | ✓ | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 5/9 |
 | RR-Ω∞-004 | Ω∞-004 | ✓ | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 5/9 |
@@ -575,4 +575,4 @@ Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full con
 | RR-Ω∞-019 | Ω∞-019 | ✓ | ✓ | ✓ | · | ✓ | ✓ | · | · | · | 5/9 |
 | RR-Ω∞-020 | Ω∞-020 | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | · | · | 6/9 |
 
-*Seal `992220648f7e23a7` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `b68322676bb6bf77` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*
