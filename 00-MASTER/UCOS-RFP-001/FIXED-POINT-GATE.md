@@ -77,7 +77,8 @@ It executes the declared pipeline **2 times** over the committed HEAD and requir
 | 40 | `STAGE-FREEZE-C4` Freeze C4 execution streams (operational memory) | 00-MASTER/UCOS-USIS-WAVE0 | no | yes | yes |
 | 41 | `STAGE-UCL` Universal Constitutional Lifecycle (discover, order and execute the constitutional stage graph) | 00-MASTER/UCL-000001 | no | yes | yes |
 | 42 | `STAGE-ACEE` Autonomous constitutional engineering (bind an engineering goal to the consumed lifecycle) | 00-MASTER/ACEE-000001 | no | yes | yes |
-| 43 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 43 | `STAGE-LIFECYCLE-CLOSURE` Universal Constitutional Lifecycle realization measurement | 00-MASTER/P0-LIFECYCLE-CLOSURE-001 | yes | yes | yes |
+| 44 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
 
 ## Exit semantics
 

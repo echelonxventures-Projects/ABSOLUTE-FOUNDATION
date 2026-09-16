@@ -1134,6 +1134,25 @@
         "$discovery": "Declared by Ω-E05 as an EXTEND of the located engineering plane. It CONSUMES the constitutional lifecycle from 00-MASTER/UCL-000001/ucl-stage-manifest.json and derives no lifecycle of its own, so it is not a parallel lifecycle. Measured DETERMINISTIC over two runs at one commit: the registers and every derived plan identity are a pure function of the declaration, the two discovered manifests and the located constitutional metadata it reads, so re-execution reproduces them byte for byte and admitting the stage keeps the pipeline convergent. It reads the pipeline declaration it is a member of, which is a read of DECLARED metadata and not an observation of the working tree, so RFP-3 is unaffected. It INVOKES NO CAPABILITY and re-runs no owner — actuation is discharged by the located owners of the stages declared here — so it never observes a run of itself and creates no second execution surface."
       },
       {
+        "id": "STAGE-LIFECYCLE-CLOSURE",
+        "name": "Universal Constitutional Lifecycle realization measurement",
+        "owner": "00-MASTER/P0-LIFECYCLE-CLOSURE-001",
+        "argv": [
+          "$PY",
+          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/P0-LIFECYCLE-CLOSURE-001/"
+        ],
+        "heavy": true,
+        "reentrant": true,
+        "required": true,
+        "timeout_seconds": 5400,
+        "purpose": "measures whether each of the 45 declared lifecycle stages is realized, by five executed probes rather than by reading the manifest's own claims",
+        "$discovery": "RE-ADMITTED ON THE MEASUREMENT ITS WITHDRAWAL SAID IT DID NOT HAVE. (No commit identity is named here: RFP-2 forbids a tracked artifact embedding one, and this declaration is projected into rfp.json. The withdrawal is the commit titled 'STAGE-LIFECYCLE-CLOSURE is withdrawn: I declared it on evidence a later run contradicted'.) That withdrawal named three faults and this entry answers each with a measurement rather than a restatement. (1) `heavy: false` was provably wrong -- one run was still going at 44 minutes against the probe's 900s budget. Measured now at 2927s and 3695s, so `heavy: true`, which is exactly what keeps it out of the probe's seeding (seed_skips_heavy). (2) 'changing no committed byte' was false -- a later run moved 916 insertions and 1,036 deletions across six files in branch_coverage_percent, branches_covered and capability_coverage_percent. That was the engine resolving its coverage instrument through sys.executable: absent from any interpreter that is not the pinned venv, it published zeros. The engine now resolves .ec1-venv explicitly and refuses outright when the instrument did not run, so those fields are a function of tracked content again. (3) `reentrant` was UNMEASURED. Two consecutive full runs in one tree are now byte-identical across all ten artifacts, which is the property the flag asserts.",
+        "$timeout_comment": "5400s against measured runs of 2927s and 3695s -- 1.46x the slower observation. Not rounded up further ON PURPOSE: this stage runs in BOTH convergence passes, so the declared budget is spent twice. At 5400 the worst case is 10,800s on top of the gate's measured 6,718s, which is 4h52m and fits inside the CI job limit with margin. A budget generous enough to never refuse would put the gate itself at risk of being killed, and a gate that cannot finish refuses nothing."
+      },
+      {
         "id": "STAGE-UCCEP",
         "name": "Aggregate constitutional certification",
         "owner": "00-MASTER/UCCEP-000000",
