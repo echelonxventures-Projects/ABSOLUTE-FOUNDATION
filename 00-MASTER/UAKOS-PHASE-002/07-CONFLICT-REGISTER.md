@@ -6,7 +6,7 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.
 
-- Total conflicts detected: **317**
+- Total conflicts detected: **313**
 - Traceability conflicts (orphans): **0** · unhomed: **0** · in-repo-unhomed: **0**
 
 | Concept | Conflict type | Evidence |
@@ -311,20 +311,16 @@
 | UCOS-COMP-000001 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | UCOS-COMP-000001 | LIFECYCLE_VS_IMPLEMENTATION | DEPRECATED,SUPERSEDED marker with active code implementation |
 | UCOS-EXEC-003 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
-| UCOS-EXEC-004 | CERTIFIED_WITHOUT_SPEC_OR_CODE | certification evidence without specification or implementation |
-| UCOS-EXEC-005 | CERTIFIED_WITHOUT_SPEC_OR_CODE | certification evidence without specification or implementation |
-| UCOS-EXEC-006 | CERTIFIED_WITHOUT_SPEC_OR_CODE | certification evidence without specification or implementation |
-| UCOS-EXEC-007 | CERTIFIED_WITHOUT_SPEC_OR_CODE | certification evidence without specification or implementation |
-| UCOS-EXEC-008 | CERTIFIED_WITHOUT_SPEC_OR_CODE | certification evidence without specification or implementation |
-| UCOS-EXEC-009 | CERTIFIED_WITHOUT_SPEC_OR_CODE | certification evidence without specification or implementation |
-| UCOS-EXEC-010 | CERTIFIED_WITHOUT_SPEC_OR_CODE | certification evidence without specification or implementation |
 | UCOS-GOV-002 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | UCOS-GOV-002 | LIFECYCLE_VS_IMPLEMENTATION | DEPRECATED,SUPERSEDED marker with active code implementation |
 | UCOS-GOV-006 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | UCOS-GOV-006 | LIFECYCLE_VS_IMPLEMENTATION | SUPERSEDED marker with active code implementation |
 | UCOS-RAT-001 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | UCOS-RAT-001 | LIFECYCLE_VS_IMPLEMENTATION | DEPRECATED,SUPERSEDED marker with active code implementation |
+| UCOS-RAT-002 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | UCOS-RECON-C2 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | UCOS-RECON-C2 | LIFECYCLE_VS_IMPLEMENTATION | DEPRECATED,SUPERSEDED marker with active code implementation |
 | Ω∞-000 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | Ω∞-000 | LIFECYCLE_VS_IMPLEMENTATION | DEPRECATED,SUPERSEDED marker with active code implementation |
+| Ω∞-001 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
+| Ω∞-001 | LIFECYCLE_VS_IMPLEMENTATION | DEPRECATED,SUPERSEDED marker with active code implementation |

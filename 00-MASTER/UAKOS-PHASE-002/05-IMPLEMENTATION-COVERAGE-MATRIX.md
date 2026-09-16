@@ -7,8 +7,8 @@
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.
 
 - Implemented: **233** (42.4%)
-- Partial/Experimental: **93** (16.9%)
-- Specified: **19** · Scheduled: **0** · Deferred: **154** · Rejected: **42**
+- Partial/Experimental: **114** (20.7%)
+- Specified: **0** · Scheduled: **0** · Deferred: **154** · Rejected: **41**
 - Missing (NOT_IMPLEMENTED): **0** · Superseded: **8** · Deprecated: **0** · Unknown: **0**
 
 ### Coverage by family
@@ -25,7 +25,7 @@
 | FOUNDATION | 6 | 6 | 100% | IMPLEMENTED:6 |
 | GOV | 11 | 2 | 18% | DEFERRED:2; IMPLEMENTED:2; PARTIALLY_IMPLEMENTED:5; REJECTED:2 |
 | INFRASTRUCTURE | 19 | 13 | 68% | DEFERRED:2; IMPLEMENTED:13; PARTIALLY_IMPLEMENTED:3; REJECTED:1 |
-| LAW | 21 | 0 | 0% | PARTIALLY_IMPLEMENTED:1; REJECTED:1; SPECIFIED:19 |
+| LAW | 21 | 0 | 0% | PARTIALLY_IMPLEMENTED:21 |
 | MCP | 9 | 3 | 33% | DEFERRED:2; IMPLEMENTED:3; REJECTED:2; SUPERSEDED:2 |
 | MCS | 1 | 0 | 0% | REJECTED:1 |
 | MEP | 12 | 7 | 58% | DEFERRED:4; IMPLEMENTED:7; SUPERSEDED:1 |
@@ -38,6 +38,6 @@
 | UCOS-COMP | 97 | 0 | 0% | DEFERRED:94; PARTIALLY_IMPLEMENTED:3 |
 | UCOS-EXEC | 12 | 9 | 75% | DEFERRED:1; IMPLEMENTED:9; PARTIALLY_IMPLEMENTED:2 |
 | UCOS-GOV | 7 | 0 | 0% | DEFERRED:1; PARTIALLY_IMPLEMENTED:3; REJECTED:3 |
-| UCOS-RAT | 2 | 0 | 0% | DEFERRED:1; PARTIALLY_IMPLEMENTED:1 |
+| UCOS-RAT | 3 | 0 | 0% | DEFERRED:1; PARTIALLY_IMPLEMENTED:2 |
 | UCOS-RECON | 5 | 0 | 0% | PARTIALLY_IMPLEMENTED:2; REJECTED:3 |
 | UKDA-DEC | 4 | 0 | 0% | DEFERRED:1; PARTIALLY_IMPLEMENTED:3 |

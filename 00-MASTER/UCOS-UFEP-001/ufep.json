@@ -16,8 +16,7 @@
     "UFEP-SUB-05": "169a912c8313cef063b63168110d20721e44c02359f4b1e353e43cccefabf360"
   },
   "blocking_failures": [
-    "UFEP-VAL-11",
-    "UFEP-VAL-14"
+    "UFEP-VAL-11"
   ],
   "clauses": [
     {
@@ -81,8 +80,8 @@
       "blocking": true,
       "criterion": "no engineering blocker — the aggregate constitutional certifier reports a passing gate",
       "id": "UFEP-CC-01",
-      "observed": 1,
-      "outcome": "UNSATISFIED",
+      "observed": 0,
+      "outcome": "SATISFIED",
       "owner": "00-MASTER/UCCEP-000000/uccep.json",
       "source": "UFEP-SRC-CERTIFICATION"
     },
@@ -90,8 +89,8 @@
       "blocking": true,
       "criterion": "no certification blocker — the aggregate certifier reports no blocking failure",
       "id": "UFEP-CC-02",
-      "observed": 7,
-      "outcome": "UNSATISFIED",
+      "observed": 0,
+      "outcome": "SATISFIED",
       "owner": "00-MASTER/UCCEP-000000/uccep.json",
       "source": "UFEP-SRC-CERTIFICATION-BLOCKING"
     },
@@ -99,7 +98,7 @@
       "blocking": true,
       "criterion": "an active certification standing is recorded",
       "id": "UFEP-CC-03",
-      "observed": "NOT-CERTIFIED",
+      "observed": "CERTIFIED-PROVISIONAL",
       "outcome": "SATISFIED",
       "owner": "00-MASTER/UCCEP-000000/uccep.json",
       "source": "UFEP-SRC-CERTIFICATION-STANDING"
@@ -182,7 +181,7 @@
     "clauses": 11,
     "clauses_bound": 11,
     "completion_criteria": 11,
-    "completion_satisfied": 9,
+    "completion_satisfied": 11,
     "eligible": 5,
     "frozen_drifted": 0,
     "frozen_entries": 13,
@@ -359,7 +358,7 @@
     "operational_home": "00-MASTER/UCOS-UFEP-001/",
     "version": "1.0"
   },
-  "seal_sha256": "b165fb4fb1266b288a1d79a1e2422c231c21629b413c9f1a11d97348f2913340",
+  "seal_sha256": "9624de01e161334eab2c81fde3a7e4f297d074a30cc7b83524715bff76f5a6de",
   "sources": [
     {
       "id": "UFEP-SRC-AUTHORITY",
@@ -379,19 +378,19 @@
     },
     {
       "id": "UFEP-SRC-CERTIFICATION",
-      "observed": 1,
-      "outcome": "UNSATISFIED",
+      "observed": 0,
+      "outcome": "SATISFIED",
       "owner": "00-MASTER/UCCEP-000000/uccep.json",
       "readable": true,
-      "reason": "the observed value does not meet the declared expectation"
+      "reason": null
     },
     {
       "id": "UFEP-SRC-CERTIFICATION-BLOCKING",
-      "observed": 7,
-      "outcome": "UNSATISFIED",
+      "observed": 0,
+      "outcome": "SATISFIED",
       "owner": "00-MASTER/UCCEP-000000/uccep.json",
       "readable": true,
-      "reason": "the observed value does not meet the declared expectation"
+      "reason": null
     },
     {
       "id": "UFEP-SRC-CERTIFICATION-CEILING",
@@ -403,7 +402,7 @@
     },
     {
       "id": "UFEP-SRC-CERTIFICATION-STANDING",
-      "observed": "NOT-CERTIFIED",
+      "observed": "CERTIFIED-PROVISIONAL",
       "outcome": "SATISFIED",
       "owner": "00-MASTER/UCCEP-000000/uccep.json",
       "readable": true,
@@ -897,15 +896,12 @@
     {
       "blocking": true,
       "dimension": "CONSTITUTIONAL-COMPLETION",
-      "failure_count": 2,
-      "failures": [
-        "UFEP-CC-01: unsatisfied",
-        "UFEP-CC-02: unsatisfied"
-      ],
+      "failure_count": 0,
+      "failures": [],
       "id": "UFEP-VAL-14",
       "measured": true,
       "obligation": "every blocking completion criterion is satisfied",
-      "satisfied": false
+      "satisfied": true
     }
   ]
 }

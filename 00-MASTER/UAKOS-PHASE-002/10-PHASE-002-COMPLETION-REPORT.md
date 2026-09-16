@@ -10,24 +10,24 @@
 
 | Dimension | Value |
 |---|---|
-| Certified knowledge objects | 549 |
+| Certified knowledge objects | 550 |
 | IMPLEMENTED | 233 |
-| PARTIALLY_IMPLEMENTED | 93 |
-| SPECIFIED | 19 |
+| PARTIALLY_IMPLEMENTED | 114 |
+| SPECIFIED | 0 |
 | SCHEDULED | 0 |
 | NOT_IMPLEMENTED | 0 |
 | DEFERRED | 154 |
-| REJECTED | 42 |
+| REJECTED | 41 |
 | SUPERSEDED | 8 |
 | DEPRECATED | 0 |
 | EXPERIMENTAL | 0 |
 | UNKNOWN | 0 |
-| Implementation coverage (impl+partial) | 59.4% |
+| Implementation coverage (impl+partial) | 63.1% |
 | Duplicate implementations | 0 |
-| Conflicts detected | 317 |
+| Conflicts detected | 313 |
 | Capability classes | 17 |
 | Repository Integrity | PASS |
-| Seal (sha256) | `41a0fec77b295e3c79bede32e570b23766715196df828890d02feb3da19cb17d` |
+| Seal (sha256) | `9c25a0754dc1179af5be9373b75bf7502b782761f795362d9044ee19786d4a5f` |
 
 ## Method
 

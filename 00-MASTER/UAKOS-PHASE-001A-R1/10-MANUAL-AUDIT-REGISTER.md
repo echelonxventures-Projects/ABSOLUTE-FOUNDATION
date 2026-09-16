@@ -60,7 +60,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2043 · Section → PHASE-002 COMPLETE / UCOS-COMP-000001 · Paragraph → 76904
   - Original text → "UCOS-COMP-000001"
-- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (129 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (127 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -79,7 +79,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2043 · Section → PHASE-002 COMPLETE / UCOS-COMP-000001 · Paragraph → 76904
   - Original text → "UCOS-COMP-000001"
-- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (129 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (127 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -112,7 +112,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2064 · Section → Stage 9 / 6. ONTOLOGY LEXER / UCOS-COMP-001002 · Paragraph → 77924
   - Original text → "UCOS-COMP-001002"
-- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (31 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (33 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -123,6 +123,6 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2065 · Section → Stage 9 / 7. ONTOLOGY PARSER / UCOS-COMP-001003 · Paragraph → 77963
   - Original text → "UCOS-COMP-001003"
-- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (31 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (33 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS

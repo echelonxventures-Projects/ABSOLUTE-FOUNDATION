@@ -2445,7 +2445,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 2740,
+      "total": 2747,
       "units_with_value": 93
     },
     {
@@ -6118,7 +6118,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "0fa4739d6dd36dbe9d875cfb3837d613cc26ef677e59f1cebd559ec472a5882d",
+      "content_sha256": "ce3ffe5e54147a3e5c17deafbc9a8e3ec693d56900c14155fb6670815e6bfc9a",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -6144,7 +6144,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "20f95b5e212467e4abf182dc73c25a11f2b27fcd7a49cb025e4375ba58a94bf0",
+      "content_sha256": "c4ce86b6bc700e7c3cd1fc8c160408752eb3b8383ea93fb42ca49b0a6023f9ad",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -6166,7 +6166,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "73168e9bc928ee3adfc5c24719403139b033123b1f6dac72d5def720bf51305f",
+      "content_sha256": "0ef6e966cd241938e200265b102b372c6c0f9195915940d6a9bbf50cb8218f87",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-DEPS",
@@ -6190,7 +6190,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "38c4931de443a7754bf16237206240d7b7e4c6ce4dfba1456bb3d185c1fbc6c1",
+      "content_sha256": "3da50a9584b12e55becafc66f98dde170df141db5225a75236eecc287f1dceac",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-FRONTIER",
@@ -6280,7 +6280,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "8fe2c0896cce64e51906c4a3c630de72dd184a692c2029302fe35e42f8715860",
+      "content_sha256": "c73a6599780af0033f07e9386156709a374fc6f213f8276edf3319fec6e579d5",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -9693,7 +9693,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 4,
+      "entrypoint_references": 6,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -9794,7 +9794,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 646,
+      "entrypoint_references": 648,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -21533,7 +21533,7 @@
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
       "duplicate_responsibility": false,
-      "entrypoint_references": 912,
+      "entrypoint_references": 914,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
@@ -27706,7 +27706,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 10,
+      "entrypoint_references": 11,
       "evidence_assets": 121,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,

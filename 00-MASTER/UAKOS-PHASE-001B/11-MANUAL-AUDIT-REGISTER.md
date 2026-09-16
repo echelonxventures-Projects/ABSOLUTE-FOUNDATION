@@ -17,7 +17,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **76904**
 - **Original text** → "UCOS-COMP-000001"
 - **Knowledge object** → `UCOS-COMP-000001` (disposition IMPLEMENTED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md`; **129** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md`; **127** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=True
 - **Certification evidence** → certified=False
 
@@ -53,7 +53,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77924**
 - **Original text** → "UCOS-COMP-001002"
 - **Knowledge object** → `UCOS-COMP-001002` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **31** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **33** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -65,7 +65,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77963**
 - **Original text** → "UCOS-COMP-001003"
 - **Knowledge object** → `UCOS-COMP-001003` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **31** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **33** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -77,7 +77,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **77999**
 - **Original text** → "UCOS-COMP-001004"
 - **Knowledge object** → `UCOS-COMP-001004` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -89,7 +89,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78038**
 - **Original text** → "UCOS-COMP-001005"
 - **Knowledge object** → `UCOS-COMP-001005` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -101,7 +101,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78073**
 - **Original text** → "UCOS-COMP-001006"
 - **Knowledge object** → `UCOS-COMP-001006` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -113,7 +113,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78108**
 - **Original text** → "UCOS-COMP-001007"
 - **Knowledge object** → `UCOS-COMP-001007` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -125,7 +125,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78141**
 - **Original text** → "UCOS-COMP-001008"
 - **Knowledge object** → `UCOS-COMP-001008` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 
@@ -137,7 +137,7 @@ The following objects are traced link-by-link against `provenance.json` and `clo
 - **Paragraph** → index **78180**
 - **Original text** → "UCOS-COMP-001009"
 - **Knowledge object** → `UCOS-COMP-001009` (disposition DEFERRED)
-- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **30** repository files cite it
+- **Repository evidence** → home `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md`; **32** repository files cite it
 - **Validation evidence** → constitution=True, specification=True, implementation=False
 - **Certification evidence** → certified=False
 

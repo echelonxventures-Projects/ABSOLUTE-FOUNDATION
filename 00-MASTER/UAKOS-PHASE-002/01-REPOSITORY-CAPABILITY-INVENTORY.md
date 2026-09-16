@@ -6,12 +6,12 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.
 
-- Git-tracked files at baseline: **7150**
+- Git-tracked files at baseline: **7154**
 - Capability classes: **17**
 
 | Capability class | Files | Owning roots |
 |---|---|---|
-| Knowledge/Registries | 1847 | 00-BOOK, 03-CATALOGS |
+| Knowledge/Registries | 1849 | 00-BOOK, 03-CATALOGS |
 | Master/Operational-Memory | 1403 | 00-MASTER, 01-WORKING |
 | Engines/Compilers/Validators/Certifiers | 975 | engine, intelligence |
 | Platform | 867 | 09-PLATFORM, platform |
@@ -20,7 +20,7 @@
 | Data | 275 | 10-DATA, data |
 | Infrastructure | 266 | 13-INFRASTRUCTURE, infrastructure |
 | Applications | 255 | 12-APPLICATION, application |
-| Governance/Constitutions | 174 | 00-CEP, 02-MASTER, adr |
+| Governance/Constitutions | 176 | 00-CEP, 02-MASTER, adr |
 | Automation/Testing | 43 | .github, scripts |
 | Source/Reference | 37 | 00-SOURCE, 00-SOURCE-MANIFEST, 04-REFERENCE |
 | Implementation | 29 | 06-IMPLEMENTATION, 07-ENGINEERING |
@@ -33,7 +33,7 @@
 
 | Root | Files |
 |---|---|
-| 00-BOOK | 1840 |
+| 00-BOOK | 1842 |
 | 00-MASTER | 1396 |
 | engine | 892 |
 | platform | 847 |
@@ -41,7 +41,7 @@
 | data | 256 |
 | infrastructure | 246 |
 | application | 233 |
-| 02-MASTER | 83 |
+| 02-MASTER | 85 |
 | intelligence | 83 |
 | 00-CEP | 48 |
 | adr | 43 |

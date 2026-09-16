@@ -11,20 +11,20 @@
 | Completeness | Objects |
 |---|---|
 | FULLY_COMPLETE | 223 |
-| SPECIFICATION_ONLY | 174 |
-| PARTIALLY_COMPLETE | 57 |
-| CERTIFICATION_MISSING | 50 |
-| IMPLEMENTATION_ONLY | 45 |
+| SPECIFICATION_ONLY | 210 |
+| PARTIALLY_COMPLETE | 115 |
+| IMPLEMENTATION_ONLY | 1 |
+| CERTIFICATION_MISSING | 1 |
 
 ### Integrity dimensions (Step 8)
 
 | Dimension | Status | Evidence basis |
 |---|---|---|
-| Repository Integrity | PASS | 7150 tracked files; closure structural closure PROVEN |
-| Knowledge Integrity | PASS | 549 objects, all homed, orphans=0 |
-| Implementation Integrity | PASS | 233 implemented + 93 partial, evidence-based, 0 UNKNOWN |
-| Validation Integrity | PASS | 549/549 carry validation evidence |
-| Certification Integrity | PASS | 241/549 certified; baseline certified (Phase-001A-R1) |
+| Repository Integrity | PASS | 7154 tracked files; closure structural closure PROVEN |
+| Knowledge Integrity | PASS | 550 objects, all homed, orphans=0 |
+| Implementation Integrity | PASS | 233 implemented + 114 partial, evidence-based, 0 UNKNOWN |
+| Validation Integrity | PASS | 550/550 carry validation evidence |
+| Certification Integrity | PASS | 241/550 certified; baseline certified (Phase-001A-R1) |
 | Traceability Integrity | PASS | orphans=0, unhomed=0; every object origin-typed (Phase-001A-R1) |
 | Governance Integrity | PASS | rejected/deferred dispositions preserved from certified baseline |
 | Evidence Integrity | PASS | every status carries repository evidence; deterministic re-run |
