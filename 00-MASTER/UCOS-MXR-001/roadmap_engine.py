@@ -276,6 +276,20 @@ def parse_next_authorized(md: str) -> dict:
                 statement=clip(live.split("**Next Authorized Capability:**")[-1], 320))
 
 
+
+def hygiene_status(state: str) -> str:
+    """Map a register state onto an implementation status, terminal states included.
+
+    DATA, not a literal ladder: the words come from MCP-003 §02's own state column, so a
+    register that starts saying PERFORMED needs no edit here.
+    """
+    text = str(state or "").upper()
+    if any(token in text for token in ("PERFORMED", "SATISFIED", "COMPLETE", "DONE")):
+        return "IMPLEMENTED"
+    if "PENDING" in text:
+        return "AUTHORIZED_PENDING"
+    return "PLANNED"
+
 def parse_blockers(md: str) -> list[dict]:
     seg = md.split("## SECTION 02 — BLOCKERS")[-1].split("## SECTION 03")[0]
     out = []
@@ -399,7 +413,14 @@ def build_backlog(data: dict) -> list[dict]:
             id=iid, title=r["capability"], item_class="HYG",
             source=f"{SRC['mep']} §02 {mep_id}", location="00-BOOK/DATA",
             owner=r["owner"], priority="P2", risk="MEDIUM",
-            implementation_status="AUTHORIZED_PENDING" if "PENDING" in r["state"] else "PLANNED",
+            # A HYGIENE ITEM MUST BE ABLE TO READ AS DONE. This mapping had exactly two
+            # outcomes -- AUTHORIZED_PENDING when the register said PENDING, PLANNED
+            # otherwise -- and neither is terminal. So W0 could never close no matter what
+            # MCP-003 recorded, and the roadmap's own fourth condition ("the repository
+            # fixed point (W0) must be committed first") was unsatisfiable by construction
+            # rather than by fact. Measured: MEP-07 was performed on 2026-09-15 and still
+            # reported PLANNED. The register's word is honoured here instead of collapsed.
+            implementation_status=hygiene_status(r["state"]),
             readiness=READY, wave=wave,
             success_criteria=clip(r["exit"], 200) or clip(r["acceptance"], 200),
             note=f"register readiness={r['readiness']} · state={r['state']}"))

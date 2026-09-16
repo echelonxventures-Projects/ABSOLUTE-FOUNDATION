@@ -51,9 +51,9 @@ Remaining executable capabilities only. Completed programs (EC-1 certified, EC-2
 | MEP-04 | EC-3 Band 13 (Infrastructure) realization | EC-3 Executor | CIOA substrate order; ARCH-INFRA-001; **Band 12 FROZEN (SATISFIED)** | P3 | **SATISFIED (AP-5)** — Band 12 frozen; substrate available by reference | **OPEN** (admitted; RUNNABLE root; realization NOT_STARTED) | Execution substrate realized per ARCH-INFRA-001; per-unit CCE COMPLETE | Band-13 CCE-COMPLETE + certification + freeze | 0 |
 | MEP-05 | EC-3 lane go-live + closure certification | EC-3 Lane Authority | MEP-01…04 | P4 | pending | PLANNED | Lane go-live acceptance; EC-3 Program Closure Certification (EC-2 analogue) | EC-3 frozen | 0 |
 | MEP-06 | SEC-CLASS dedicated certification report | EC-2 security owner | EC-2 (closed) | P3 (non-blocking) | READY | PLANNED | SEC-CLASS report authored (implemented+tested+100% cov) | Report registered; PC-7 observation cleared | 0 |
-| MEP-07 | REG-AUTO-001 registration commit | UKB tooling | working-tree regeneration | P2 (hygiene) | READY | AUTHORIZED (PENDING commit) | Registries/portal/control-tower/data regeneration committed | Clean working tree | 0 |
-| MEP-08 | CI signal refresh (build/unit/security) | CI (GitHub Actions/Trivy) | current HEAD | P2 | READY | PLANNED (STALE signal) | Signals re-run on current HEAD; reconcile with 2,677-pass local evidence | Control-Tower build/test/security signals current | 0 |
-| MEP-09 | **Constitutional finality (DR-RAT-11 → EC-1…EC-6)** | Ratification Authority (to be constituted) | out-of-corpus stakeholder act | P0 (blocker, external) | **BLOCKED** | PLANNED (BLOCKED) | Ratification body constituted; RAT-01…10 ratified; supremacy resolved | EC-1…EC-6 closed; provisional disclosure lifted | 0 |
+| MEP-07 | REG-AUTO-001 registration commit | UKB tooling | working-tree regeneration | P2 (hygiene) | SATISFIED | **PERFORMED** | Registries/portal/control-tower/data regeneration committed under permit `P-UCOS-CORPUS-014` (commit *"The corpus registration transaction is performed under P-UCOS-CORPUS-014"*, 2026-09-15) | Clean working tree — MET | 0 |
+| MEP-08 | CI signal refresh (build/unit/security) | CI (GitHub Actions/Trivy) | current HEAD | P2 | READY | **EXECUTING** (branch pushed 2026-09-16; signals running on the pushed head) | Signals re-run on current HEAD; reconcile with local evidence | Control-Tower build/test/security signals current — NOT YET CONFIRMED; this row records the push, never the verdict | 0 |
+| MEP-09 | **Constitutional finality (DR-RAT-11 → EC-1…EC-6)** | Ratification Authority — **CONSTITUTED** | in-corpus constituent act, performed | P0 → **NOT A BLOCKER; A DESIGNED CEILING** | **AMENDED** | **AUTHORITY CONSTITUTED · PROVISIONAL CAP RETAINED BY DESIGN** | Constituent act enacted at `02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md` (STATUS `ACTIVE · ENACTED`), recorded at `CMG-000001` LXXVIII.9; CMG tier T1 occupancy `LOCATED`, 8/8 tiers, zero vacancies; `UCOS-URAT-001` reports `RATIFICATION-REGISTRY-BOUND`, gate OPEN | `CEP-006` I.4 caps every in-corpus determination at provisional acceptance, so `CERTIFIED-PROVISIONAL` remains the maximum attainable verdict **and that is correct**. `UCCEP-F-004` is deliberately retained as blocking for exactly this reason. "Provisional disclosure lifted" is therefore NOT an outstanding condition — it is a cap the constitution imposes | 0 |
 | MEP-10 | **MCS establishment (Mission MCP-002)** | MCS Architect | MCP-001 monolith | P1 | READY | ACTIVE → IMPLEMENTED (this session) | `00-MASTER/` MCS-000 + MCP-001…007 authored; entry point rewired; zero content loss | Committed; MCP-002 accurate; monolith redirected | ~95 |
 
 ---
@@ -69,7 +69,7 @@ EC-2 (closed) ─▶ MEP-06 SEC-CLASS report        (independent, non-blocking)
 current HEAD ─▶ MEP-08 CI signal refresh         (independent, hygiene)
 working tree ─▶ MEP-07 REG-AUTO-001 commit       (independent, hygiene)
 MCP-001 monolith ─▶ MEP-10 MCS establishment     (independent, this session)
-out-of-corpus act ─▶ MEP-09 constitutional finality  (external, BLOCKED, non-blocking to EC-3)
+constituent act (PERFORMED) ─▶ MEP-09 finality  (authority CONSTITUTED; provisional cap by CEP-006 I.4)
 ```
 
 Graph is acyclic (CIOA-enforced). Band chain is strictly ordered (10→11→12, 13 by substrate order → 05). Hygiene/report/finality items are independent and do not gate the band chain.
@@ -91,7 +91,7 @@ Highest priority first. Dependencies gate order; nothing runs outside this progr
 | 7 | EC-3 Band 12 (Application) realization (MEP-03) | P3 | Band 11 | EC-3 Executor | Band-12 CCE-COMPLETE |
 | 8 | EC-3 Band 13 (Infrastructure) realization (MEP-04) | P3 | CIOA substrate order | EC-3 Executor | Band-13 CCE-COMPLETE |
 | 9 | EC-3 go-live + closure certification (MEP-05) | P4 | Bands 10–13 | EC-3 Lane Authority | EC-3 closed & frozen |
-| — | Constitutional finality (MEP-09) | P0 (external) | out-of-corpus act | Ratification Authority | EC-1…EC-6 closed |
+| — | Constitutional finality (MEP-09) | P0 → ceiling, not a step | constituent act PERFORMED | Ratification Authority (constituted) | Authority constituted; `CERTIFIED-PROVISIONAL` remains the cap by `CEP-006` I.4, deliberately |
 
 ---
 
