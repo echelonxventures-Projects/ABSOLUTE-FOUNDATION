@@ -933,9 +933,15 @@ def build() -> dict:
     conditions = []
     if rat:
         conditions.append(
-            f"{len(rat)} item(s) WAITING_FOR_RATIFICATION — constitutional finality "
-            "(DR-RAT-11 / MEP-09 / WP-UCDA-001) is an out-of-corpus act; the certification "
-            "ceiling stays READY-PROVISIONAL until it is performed")
+            # NOT "an out-of-corpus act". UCCEP-F-004 amended exactly that wording: the
+            # constituent act was performed IN corpus (UCOS-RAT-002, CMG T1 LOCATED), and
+            # what remains is CEP-006 I.4's cap on in-corpus determinations -- a ceiling,
+            # not an errand. Describing a designed cap as an outstanding act reports the
+            # programme as waiting on something nobody is going to do.
+            f"{len(rat)} item(s) WAITING_FOR_RATIFICATION — the ratification AUTHORITY is "
+            "constituted (UCOS-RAT-002 enacted; CMG T1 LOCATED). These items await their own "
+            "ratification record; the certification ceiling stays CERTIFIED-PROVISIONAL by "
+            "CEP-006 I.4 regardless, which is a designed cap and not an open condition")
     auth = [i for i in items if i["authorization_required"] and i["wave"] != "WF"]
     if auth:
         conditions.append(
@@ -946,10 +952,16 @@ def build() -> dict:
             f"{len(blocked)} item(s) BLOCKED — a prerequisite is authorization-gated or awaiting "
             "ratification, so the successor cannot start until that prerequisite is released; "
             "releasing the prerequisite releases the successor with no further act")
-    if any(i["item_class"] == "HYG" for i in items):
+    # FIRES ON WHAT IS OUTSTANDING, NOT ON WHAT EXISTS. This tested only whether a
+    # hygiene item was PRESENT, so W0 was reported as an open condition even with every
+    # item discharged -- and the text asserted both were "recorded as pending" whatever
+    # the register said. MEP-07 was performed on 2026-09-15 and this line still claimed it.
+    open_hyg = [i for i in items
+                if i["item_class"] == "HYG" and i["implementation_status"] != "IMPLEMENTED"]
+    if open_hyg:
         conditions.append(
-            "the repository fixed point (W0) must be committed first: the registration "
-            "transaction and CI signals are recorded as pending in MCP-003 §02")
+            f"the repository fixed point (W0) is not closed: {len(open_hyg)} hygiene item(s) "
+            f"outstanding in MCP-003 §02 ({', '.join(i['title'] for i in open_hyg)})")
 
     if blocking_fail:
         verdict = "NO-GO"

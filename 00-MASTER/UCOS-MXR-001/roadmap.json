@@ -40,10 +40,10 @@
   "blocked_count": 2,
   "blockers": [
     {
-      "blocker": "Constitutional finality (MEP-09 / DR-RAT-11): no ratification authority in the frozen corpus; out-of-corpus stakeholder act required",
-      "blocking": "Not blocking to EC-3 engineering realization (finality-only)",
+      "blocker": "Constitutional finality (MEP-09 / DR-RAT-11): AMENDED \u2014 authority is CONSTITUTED (UCOS-RAT-002 enacted; CMG T1 LOCATED, 8/8 tiers). What remains is the CEP-006 I.4 provisional cap, which is by design",
+      "blocking": "No \u2014 retained as the record of a closed vacancy, exactly as UCCEP-F-004 is retained as the record of the ceiling",
       "id": "B-RAT-11",
-      "scope": "Constitutional finality only"
+      "scope": "Finality ceiling, not a vacancy"
     }
   ],
   "class_totals": {
@@ -74,10 +74,10 @@
     "total": 550
   },
   "conditions": [
-    "2 item(s) WAITING_FOR_RATIFICATION \u2014 constitutional finality (DR-RAT-11 / MEP-09 / WP-UCDA-001) is an out-of-corpus act; the certification ceiling stays READY-PROVISIONAL until it is performed",
+    "2 item(s) WAITING_FOR_RATIFICATION \u2014 the ratification AUTHORITY is constituted (UCOS-RAT-002 enacted; CMG T1 LOCATED). These items await their own ratification record; the certification ceiling stays CERTIFIED-PROVISIONAL by CEP-006 I.4 regardless, which is a designed cap and not an open condition",
     "421 active-wave item(s) require explicit authorization before start (the repository's standing STOP rule: no capability begins unauthorized)",
     "2 item(s) BLOCKED \u2014 a prerequisite is authorization-gated or awaiting ratification, so the successor cannot start until that prerequisite is released; releasing the prerequisite releases the successor with no further act",
-    "the repository fixed point (W0) must be committed first: the registration transaction and CI signals are recorded as pending in MCP-003 \u00a702"
+    "the repository fixed point (W0) is not closed: 1 hygiene item(s) outstanding in MCP-003 \u00a702 (CI signal refresh (build/unit/security))"
   ],
   "declared_frontier": {
     "blocked": [
@@ -7461,7 +7461,7 @@
       ]
     ]
   },
-  "head_commit": "ea970e6c",
+  "head_commit": "bdb7044c",
   "implementation_classes": [
     "SPINE",
     "AEOS",
@@ -7497,7 +7497,7 @@
     },
     "state": {
       "path": "00-MASTER/MCP-002-MASTER-STATE.md",
-      "sha256": "3355a0d3379276cf78bd2513a2128347d0060f26c6ba0ffec44263e91abe24ac"
+      "sha256": "3528cb162f89b7c96d94bde66c285d5bd69fda7dc90f7b61e1e8fb514a690cb6"
     },
     "ucda": {
       "path": "00-MASTER/UCDA-000001/ucda-decisions.json",
@@ -7552,7 +7552,7 @@
     "LOW": 751,
     "MEDIUM": 135
   },
-  "seal_sha256": "a5721ea0ea2a93a3cda75dbb3c1ef520215ca14589ad050396d6b2a1a1bf8d2b",
+  "seal_sha256": "1bbacf5884ed8e919a3d50c2470e222b3f070b62ab5f47873f9bb3534825bbaa",
   "total_effort_points": 1422,
   "total_items": 893,
   "verdict": "CONDITIONAL GO",

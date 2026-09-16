@@ -41,7 +41,7 @@
 | ID | Blocker | Scope | Blocking? |
 |----|---------|-------|:---------:|
 | — | *(none for Band 10 engineering)* | EC-3 Band 10 | No — AP-1 & AP-2 SATISFIED |
-| B-RAT-11 | Constitutional finality (MEP-09 / DR-RAT-11): no ratification authority in the frozen corpus; out-of-corpus stakeholder act required | Constitutional finality only | **Not blocking** to EC-3 engineering realization (finality-only) |
+| B-RAT-11 | Constitutional finality (MEP-09 / DR-RAT-11): **AMENDED** — authority is CONSTITUTED (`UCOS-RAT-002` enacted; CMG T1 `LOCATED`, 8/8 tiers). What remains is the `CEP-006` I.4 provisional cap, which is by design | Finality ceiling, not a vacancy | **No** — retained as the record of a closed vacancy, exactly as `UCCEP-F-004` is retained as the record of the ceiling |
 
 ---
 
