@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "0fc9c753984d79faf10c210d422f8d21ca6dfa43fdb64e54838ae01cc4efd0fd",
+  "declaration_seal_sha256": "5f792c424189853a2caf22105062042587407b051aea6180a689d7693b64baea",
   "findings": [],
   "lifecycle": [
     {
@@ -660,60 +660,6 @@
         ]
       },
       {
-        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE. RFP reported thirteen CYC-UNGOVERNED paths here, and a stage alone would not have closed them: the engine stamped the LIVE closure baseline into every register header, so a committed artifact could never match a re-render and this gate could never pass over it. `--render` now replays the recorded baseline, which is what makes the stage admissible. Measured after the fix: two consecutive replay renders produce byte-identical output, and the twenty-one count changes the corpus had accumulated are committed alongside.",
-        "argv": [
-          "$PY",
-          "00-MASTER/UAKOS-PHASE-001B/emit_registers.py",
-          "--render"
-        ],
-        "heavy": false,
-        "id": "STAGE-PHASE-001B",
-        "name": "Constitutional provenance reconstruction registers",
-        "owner": "00-MASTER/UAKOS-PHASE-001B",
-        "purpose": "the thirteen provenance registers, reconstructed from the declared model; BEFORE PHASE-001A-R1, which certifies against the provenance.json this programme owns",
-        "reentrant": true,
-        "required": true,
-        "writes": [
-          "00-MASTER/UAKOS-PHASE-001B/"
-        ]
-      },
-      {
-        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE, for the same reason as STAGE-PHASE-001B and by the same fix. RFP reported twelve CYC-UNGOVERNED paths; two drifted on the stamped baseline alone and ten on counts the corpus had moved. `--render` replays the recorded baseline and the counts are committed, so the engine now reproduces what is committed. Measured: two consecutive replay renders byte-identical.",
-        "argv": [
-          "$PY",
-          "00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py",
-          "--render"
-        ],
-        "heavy": false,
-        "id": "STAGE-PHASE-001A-R1",
-        "name": "Constitutional baseline re-certification registers",
-        "owner": "00-MASTER/UAKOS-PHASE-001A-R1",
-        "purpose": "the twelve certification registers, derived from the provenance model PHASE-001B emits, which is why it is ordered after it",
-        "reentrant": true,
-        "required": true,
-        "writes": [
-          "00-MASTER/UAKOS-PHASE-001A-R1/"
-        ]
-      },
-      {
-        "$discovery": "ADMITTED AFTER CYC-UNGOVERNED NAMED ELEVEN OF ITS OUTPUTS AND CYC-PRODUCER NAMED THE ENGINE. Every path it writes lies inside its own programme home, so this is the pattern every other stage in this pipeline already follows and not a new claim about ownership. It renders with --render, which REPLAYS the head recorded in requirements.json rather than re-reading the live one: a committed artifact can never carry the sha of the commit that carries it, and an engine that embeds the live HEAD can never be a fixed point. Measured before admission: two consecutive renders exit 0 and leave the tree byte-identical.",
-        "argv": [
-          "$PY",
-          "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
-          "--render"
-        ],
-        "heavy": false,
-        "id": "STAGE-CLOSURE-009",
-        "name": "Repository requirement closure registers",
-        "owner": "00-MASTER/UAKOS-CLOSURE-009",
-        "purpose": "the requirement, coverage, gap, maturity and readiness registers, rendered from the declared inputs",
-        "reentrant": true,
-        "required": true,
-        "writes": [
-          "00-MASTER/UAKOS-CLOSURE-009/"
-        ]
-      },
-      {
         "$discovery": "ADMITTED AFTER CYC-PRODUCER NAMED IT. The same gate's first verdict also proved the builder was NOT idempotent despite its docstring's claim: it emitted 32 laws where the declaration carried 33, silently deleting URKE-L-33, a blocking law. That is fixed, and admitting the stage is what keeps it fixed — the pipeline now runs the builder on every pass, so a builder that stops reproducing its own declaration refuses here instead of waiting for someone to run it by hand. Measured after the fix: two consecutive runs exit 0 and leave the tree byte-identical.",
         "argv": [
           "$PY",
@@ -917,22 +863,6 @@
         "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent.",
         "argv": [
           "$PY",
-          "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
-        ],
-        "heavy": false,
-        "id": "STAGE-PHASE2",
-        "name": "Repository reconciliation (operational memory)",
-        "owner": "00-MASTER/UAKOS-PHASE-002",
-        "reentrant": true,
-        "required": true,
-        "writes": [
-          "00-MASTER/UAKOS-PHASE-002/"
-        ]
-      },
-      {
-        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent.",
-        "argv": [
-          "$PY",
           "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
         ],
         "heavy": false,
@@ -1095,6 +1025,80 @@
         "required": true,
         "writes": [
           "00-MASTER/UCCEP-000000/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE. RFP reported thirteen CYC-UNGOVERNED paths here, and a stage alone would not have closed them: the engine stamped the LIVE closure baseline into every register header, so a committed artifact could never match a re-render and this gate could never pass over it. `--render` now replays the recorded baseline, which is what makes the stage admissible. Measured after the fix: two consecutive replay renders produce byte-identical output, and the twenty-one count changes the corpus had accumulated are committed alongside.",
+        "$ordering": "REPOSITIONED AFTER EVERY CORPUS WRITER. This stage counts evidence across the corpus, and it sat at position 18 while 22 later stages wrote into 00-MASTER/. It therefore counted the PREVIOUS pass's output every pass, which is why UCOS-RFP-001 measured it rewriting on pass 2 and not only pass 1 -- a read-after-write ordering violation, not staleness and not a moving anchor, and one no amount of regeneration could close. RFP-6's own remediation states the rule: a producer is 'positioned after the stages whose output it consumes'. The declaration carries no depends_on field, so stage order is positional and its rationale was unrecorded; this note is that rationale.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-001B/emit_registers.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-PHASE-001B",
+        "name": "Constitutional provenance reconstruction registers",
+        "owner": "00-MASTER/UAKOS-PHASE-001B",
+        "purpose": "the thirteen provenance registers, reconstructed from the declared model; BEFORE PHASE-001A-R1, which certifies against the provenance.json this programme owns",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-001B/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED ONLY AFTER THE ENGINE COULD CONVERGE, for the same reason as STAGE-PHASE-001B and by the same fix. RFP reported twelve CYC-UNGOVERNED paths; two drifted on the stamped baseline alone and ten on counts the corpus had moved. `--render` replays the recorded baseline and the counts are committed, so the engine now reproduces what is committed. Measured: two consecutive replay renders byte-identical.",
+        "$ordering": "REPOSITIONED AFTER EVERY CORPUS WRITER. This stage counts evidence across the corpus, and it sat at position 19 while 22 later stages wrote into 00-MASTER/. It therefore counted the PREVIOUS pass's output every pass, which is why UCOS-RFP-001 measured it rewriting on pass 2 and not only pass 1 -- a read-after-write ordering violation, not staleness and not a moving anchor, and one no amount of regeneration could close. RFP-6's own remediation states the rule: a producer is 'positioned after the stages whose output it consumes'. The declaration carries no depends_on field, so stage order is positional and its rationale was unrecorded; this note is that rationale.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-PHASE-001A-R1",
+        "name": "Constitutional baseline re-certification registers",
+        "owner": "00-MASTER/UAKOS-PHASE-001A-R1",
+        "purpose": "the twelve certification registers, derived from the provenance model PHASE-001B emits, which is why it is ordered after it",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-001A-R1/"
+        ]
+      },
+      {
+        "$discovery": "ADMITTED AFTER CYC-UNGOVERNED NAMED ELEVEN OF ITS OUTPUTS AND CYC-PRODUCER NAMED THE ENGINE. Every path it writes lies inside its own programme home, so this is the pattern every other stage in this pipeline already follows and not a new claim about ownership. It renders with --render, which REPLAYS the head recorded in requirements.json rather than re-reading the live one: a committed artifact can never carry the sha of the commit that carries it, and an engine that embeds the live HEAD can never be a fixed point. Measured before admission: two consecutive renders exit 0 and leave the tree byte-identical.",
+        "$ordering": "REPOSITIONED AFTER EVERY CORPUS WRITER. This stage counts evidence across the corpus, and it sat at position 20 while 22 later stages wrote into 00-MASTER/. It therefore counted the PREVIOUS pass's output every pass, which is why UCOS-RFP-001 measured it rewriting on pass 2 and not only pass 1 -- a read-after-write ordering violation, not staleness and not a moving anchor, and one no amount of regeneration could close. RFP-6's own remediation states the rule: a producer is 'positioned after the stages whose output it consumes'. The declaration carries no depends_on field, so stage order is positional and its rationale was unrecorded; this note is that rationale.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-CLOSURE-009",
+        "name": "Repository requirement closure registers",
+        "owner": "00-MASTER/UAKOS-CLOSURE-009",
+        "purpose": "the requirement, coverage, gap, maturity and readiness registers, rendered from the declared inputs",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-CLOSURE-009/"
+        ]
+      },
+      {
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent.",
+        "$ordering": "REPOSITIONED AFTER EVERY CORPUS WRITER. This stage counts evidence across the corpus, and it sat at position 33 while 10 later stages wrote into 00-MASTER/. It therefore counted the PREVIOUS pass's output every pass, which is why UCOS-RFP-001 measured it rewriting on pass 2 and not only pass 1 -- a read-after-write ordering violation, not staleness and not a moving anchor, and one no amount of regeneration could close. RFP-6's own remediation states the rule: a producer is 'positioned after the stages whose output it consumes'. The declaration carries no depends_on field, so stage order is positional and its rationale was unrecorded; this note is that rationale.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-PHASE2",
+        "name": "Repository reconciliation (operational memory)",
+        "owner": "00-MASTER/UAKOS-PHASE-002",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-002/"
         ]
       }
     ]

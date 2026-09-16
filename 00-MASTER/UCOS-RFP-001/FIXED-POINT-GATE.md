@@ -53,32 +53,32 @@ It executes the declared pipeline **2 times** over the committed HEAD and requir
 | 16 | `STAGE-RIB` Repository integration blueprint | 00-MASTER/UCOS-RIB-001 | no | yes | yes |
 | 17 | `STAGE-UKAP` Corpus currency | 00-MASTER/UKAP-001 | no | yes | yes |
 | 18 | `STAGE-ASSIMILATE` Constitutional assimilation | 00-MASTER/UAKOS-CLOSURE-008 | no | yes | yes |
-| 19 | `STAGE-PHASE-001B` Constitutional provenance reconstruction registers | 00-MASTER/UAKOS-PHASE-001B | no | yes | yes |
-| 20 | `STAGE-PHASE-001A-R1` Constitutional baseline re-certification registers | 00-MASTER/UAKOS-PHASE-001A-R1 | no | yes | yes |
-| 21 | `STAGE-CLOSURE-009` Repository requirement closure registers | 00-MASTER/UAKOS-CLOSURE-009 | no | yes | yes |
-| 22 | `STAGE-URKE` Recursive knowledge declaration | 00-MASTER/URKE-000001 | no | yes | yes |
-| 23 | `STAGE-NUCLEUS` Nucleus identifier dictionary | 00-MASTER/UCOS-NUCLEUS-001 | no | yes | yes |
-| 24 | `STAGE-UAR` Analysis registry | 00-MASTER/UCOS-UAR-001 | no | yes | yes |
-| 25 | `STAGE-UCAF` Constitutional authority | 00-MASTER/UCOS-UCAF-001 | no | yes | yes |
-| 26 | `STAGE-BASELINE` Baseline inheritance | 00-MASTER/BASELINE-001 | no | yes | yes |
-| 27 | `STAGE-URAT` Ratification registry | 00-MASTER/UCOS-URAT-001 | no | yes | yes |
-| 28 | `STAGE-UTCE` Traceability closure | 00-MASTER/UCOS-UTCE-001 | no | yes | yes |
-| 29 | `STAGE-UFEP` Freeze eligibility | 00-MASTER/UCOS-UFEP-001 | no | yes | yes |
-| 30 | `STAGE-UAEP` Platform capability binding | 00-MASTER/UAEP-000001 | no | yes | yes |
-| 31 | `STAGE-UAIE` Architectural intelligence | 00-MASTER/UAIE-000001 | no | yes | yes |
-| 32 | `STAGE-UCEF` Constitutional evolution | 00-MASTER/UCEF-000001 | no | yes | yes |
-| 33 | `STAGE-MXR` Master execution roadmap | 00-MASTER/UCOS-MXR-001 | no | yes | yes |
-| 34 | `STAGE-PHASE2` Repository reconciliation (operational memory) | 00-MASTER/UAKOS-PHASE-002 | no | yes | yes |
-| 35 | `STAGE-PHASE3` Implementation gap baseline (operational memory) | 00-MASTER/UAKOS-PHASE-003 | no | yes | yes |
-| 36 | `STAGE-PHASE3R` Realization correction (operational memory) | 00-MASTER/UAKOS-PHASE-003R | no | yes | yes |
-| 37 | `STAGE-PHASE4` Implementation planning (operational memory) | 00-MASTER/UAKOS-PHASE-004 | no | yes | yes |
-| 38 | `STAGE-PHASE5` Execution governance (operational memory) | 00-MASTER/UAKOS-PHASE-005 | no | yes | yes |
-| 39 | `STAGE-PHASE6` Execution readiness certification (operational memory) | 00-MASTER/UAKOS-PHASE-006 | no | yes | yes |
-| 40 | `STAGE-FREEZE-C4` Freeze C4 execution streams (operational memory) | 00-MASTER/UCOS-USIS-WAVE0 | no | yes | yes |
-| 41 | `STAGE-UCL` Universal Constitutional Lifecycle (discover, order and execute the constitutional stage graph) | 00-MASTER/UCL-000001 | no | yes | yes |
-| 42 | `STAGE-ACEE` Autonomous constitutional engineering (bind an engineering goal to the consumed lifecycle) | 00-MASTER/ACEE-000001 | no | yes | yes |
-| 43 | `STAGE-LIFECYCLE-CLOSURE` Universal Constitutional Lifecycle realization measurement | 00-MASTER/P0-LIFECYCLE-CLOSURE-001 | yes | yes | yes |
-| 44 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 19 | `STAGE-URKE` Recursive knowledge declaration | 00-MASTER/URKE-000001 | no | yes | yes |
+| 20 | `STAGE-NUCLEUS` Nucleus identifier dictionary | 00-MASTER/UCOS-NUCLEUS-001 | no | yes | yes |
+| 21 | `STAGE-UAR` Analysis registry | 00-MASTER/UCOS-UAR-001 | no | yes | yes |
+| 22 | `STAGE-UCAF` Constitutional authority | 00-MASTER/UCOS-UCAF-001 | no | yes | yes |
+| 23 | `STAGE-BASELINE` Baseline inheritance | 00-MASTER/BASELINE-001 | no | yes | yes |
+| 24 | `STAGE-URAT` Ratification registry | 00-MASTER/UCOS-URAT-001 | no | yes | yes |
+| 25 | `STAGE-UTCE` Traceability closure | 00-MASTER/UCOS-UTCE-001 | no | yes | yes |
+| 26 | `STAGE-UFEP` Freeze eligibility | 00-MASTER/UCOS-UFEP-001 | no | yes | yes |
+| 27 | `STAGE-UAEP` Platform capability binding | 00-MASTER/UAEP-000001 | no | yes | yes |
+| 28 | `STAGE-UAIE` Architectural intelligence | 00-MASTER/UAIE-000001 | no | yes | yes |
+| 29 | `STAGE-UCEF` Constitutional evolution | 00-MASTER/UCEF-000001 | no | yes | yes |
+| 30 | `STAGE-MXR` Master execution roadmap | 00-MASTER/UCOS-MXR-001 | no | yes | yes |
+| 31 | `STAGE-PHASE3` Implementation gap baseline (operational memory) | 00-MASTER/UAKOS-PHASE-003 | no | yes | yes |
+| 32 | `STAGE-PHASE3R` Realization correction (operational memory) | 00-MASTER/UAKOS-PHASE-003R | no | yes | yes |
+| 33 | `STAGE-PHASE4` Implementation planning (operational memory) | 00-MASTER/UAKOS-PHASE-004 | no | yes | yes |
+| 34 | `STAGE-PHASE5` Execution governance (operational memory) | 00-MASTER/UAKOS-PHASE-005 | no | yes | yes |
+| 35 | `STAGE-PHASE6` Execution readiness certification (operational memory) | 00-MASTER/UAKOS-PHASE-006 | no | yes | yes |
+| 36 | `STAGE-FREEZE-C4` Freeze C4 execution streams (operational memory) | 00-MASTER/UCOS-USIS-WAVE0 | no | yes | yes |
+| 37 | `STAGE-UCL` Universal Constitutional Lifecycle (discover, order and execute the constitutional stage graph) | 00-MASTER/UCL-000001 | no | yes | yes |
+| 38 | `STAGE-ACEE` Autonomous constitutional engineering (bind an engineering goal to the consumed lifecycle) | 00-MASTER/ACEE-000001 | no | yes | yes |
+| 39 | `STAGE-LIFECYCLE-CLOSURE` Universal Constitutional Lifecycle realization measurement | 00-MASTER/P0-LIFECYCLE-CLOSURE-001 | yes | yes | yes |
+| 40 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 41 | `STAGE-PHASE-001B` Constitutional provenance reconstruction registers | 00-MASTER/UAKOS-PHASE-001B | no | yes | yes |
+| 42 | `STAGE-PHASE-001A-R1` Constitutional baseline re-certification registers | 00-MASTER/UAKOS-PHASE-001A-R1 | no | yes | yes |
+| 43 | `STAGE-CLOSURE-009` Repository requirement closure registers | 00-MASTER/UAKOS-CLOSURE-009 | no | yes | yes |
+| 44 | `STAGE-PHASE2` Repository reconciliation (operational memory) | 00-MASTER/UAKOS-PHASE-002 | no | yes | yes |
 
 ## Exit semantics
 
