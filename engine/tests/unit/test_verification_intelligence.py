@@ -42,9 +42,7 @@ from engine.universal_discovery import discovery as discovery_module
 from engine.universal_discovery.discovery import clear_derived_scope_cache
 from engine.verification_impact.graph import ImpactError
 from engine.verification_intelligence import cli, evidence
-from engine.verification_intelligence import evidence as evidence_module
 from engine.verification_intelligence import execution as execution_module
-from engine.verification_intelligence import gate as gate_module
 from engine.verification_intelligence import gate as uvi_gate
 from engine.verification_intelligence import plan as plan_module
 from engine.verification_intelligence import registry as registry_module
@@ -2843,7 +2841,7 @@ def test_a_stage_that_produces_no_key_is_executed_rather_than_reused(
 
     mode = next(m for m in constitution.modes if m.evidence_reuse)
     stage = next(s for s in constitution.stages if s.reusable and s.reads)
-    monkeypatch.setattr(evidence_module, "input_digest", lambda *a, **k: None)
+    monkeypatch.setattr(evidence, "input_digest", lambda *a, **k: None)
     reuse, reason, digest = decide(mode, stage, substrates, home=str(tmp_path), root=REPO)
     assert reuse is False
     assert digest is None
@@ -3332,7 +3330,7 @@ def test_l07_reports_a_selection_that_faults_rather_than_crashing(tmp_path, monk
     def refusing(*args, **kwargs):
         raise VerificationIntelligenceError("the substrate is unreadable")
 
-    monkeypatch.setattr(gate_module, "select", refusing)
+    monkeypatch.setattr(uvi_gate, "select", refusing)
     findings = uvi_gate.fail_wide(_ctx(tmp_path, lambda document: None))
     assert any("selection faulted on" in f for f in findings)
 
@@ -3355,7 +3353,7 @@ def test_l07_refuses_an_unbounded_change_that_produced_a_narrow_plan(tmp_path, m
         layers=(),
     )
 
-    monkeypatch.setattr(gate_module, "select", lambda *a, **k: narrow)
+    monkeypatch.setattr(uvi_gate, "select", lambda *a, **k: narrow)
     findings = uvi_gate.fail_wide(_ctx(tmp_path, lambda document: None))
     assert any("produced a narrow plan" in f for f in findings)
     assert any("widened without naming a reason" in f for f in findings)
@@ -3365,7 +3363,7 @@ def test_l08_reports_a_partition_that_is_refused_rather_than_crashing(tmp_path, 
     """The partitioner refusing is a finding about the plan. Letting it out as an exception would
     take the whole gate down with no verdict on any law after this one."""
 
-    real = gate_module.plan_shards
+    real = uvi_gate.plan_shards
     calls = {"n": 0}
 
     def refusing(*args, **kwargs):
@@ -3374,7 +3372,7 @@ def test_l08_reports_a_partition_that_is_refused_rather_than_crashing(tmp_path, 
             raise VerificationIntelligenceError("no partition is possible")
         return real(*args, **kwargs)
 
-    monkeypatch.setattr(gate_module, "plan_shards", refusing)
+    monkeypatch.setattr(uvi_gate, "plan_shards", refusing)
     findings = uvi_gate.topology_neutrality(_ctx(tmp_path, lambda document: None))
     assert any("was refused" in f for f in findings)
 
@@ -3398,9 +3396,9 @@ def test_l08_refuses_a_partition_that_loses_duplicates_or_misaddresses_a_test(
             ),
         )
 
-    monkeypatch.setattr(gate_module, "plan_shards", drifting)
-    monkeypatch.setattr(gate_module, "run_tests", lambda *a, **k: 1)
-    monkeypatch.setattr(gate_module, "combine_shards", lambda *a, **k: 1)
+    monkeypatch.setattr(uvi_gate, "plan_shards", drifting)
+    monkeypatch.setattr(uvi_gate, "run_tests", lambda *a, **k: 1)
+    monkeypatch.setattr(uvi_gate, "combine_shards", lambda *a, **k: 1)
     findings = uvi_gate.topology_neutrality(_ctx(tmp_path, lambda document: None))
     assert any("does not cover exactly the suite" in f for f in findings)
     assert any("places a unit twice" in f for f in findings)
@@ -3424,9 +3422,9 @@ def test_l08_refuses_a_partition_a_job_at_a_time_cannot_reproduce(tmp_path, monk
             Shard(index=0, test_paths=("a/test_y.py",), cost_seconds=1.0),
         )
 
-    monkeypatch.setattr(gate_module, "plan_shards", colliding)
-    monkeypatch.setattr(gate_module, "run_tests", lambda *a, **k: 0)
-    monkeypatch.setattr(gate_module, "combine_shards", lambda *a, **k: 0)
+    monkeypatch.setattr(uvi_gate, "plan_shards", colliding)
+    monkeypatch.setattr(uvi_gate, "run_tests", lambda *a, **k: 0)
+    monkeypatch.setattr(uvi_gate, "combine_shards", lambda *a, **k: 0)
     findings = uvi_gate.topology_neutrality(_ctx(tmp_path, lambda document: None))
     assert any("one shard per job does not cover" in f for f in findings)
     assert any("was not refused" in f for f in findings)
@@ -3437,7 +3435,7 @@ def test_l09_refuses_a_certification_mode_that_reached_a_reuse_decision(tmp_path
     """A certification that reuses a result certifies a cache. Nothing in the declaration can
     make this true today, which is exactly why the law has to be shown to fire."""
 
-    monkeypatch.setattr(gate_module, "decide", lambda *a, **k: (True, "a cached PASS", "d" * 64))
+    monkeypatch.setattr(uvi_gate, "decide", lambda *a, **k: (True, "a cached PASS", "d" * 64))
     findings = uvi_gate.evidence_reuse_integrity(_ctx(tmp_path, lambda document: None))
     assert any("reached a reuse decision" in f for f in findings)
     assert any("is not reusable but was reused" in f for f in findings)
@@ -3449,7 +3447,7 @@ def test_l10_refuses_a_plan_carrying_a_clock_or_a_machine_path(tmp_path, monkeyp
 
     ctx = _ctx(tmp_path, lambda document: None)
     monkeypatch.setattr(
-        gate_module,
+        uvi_gate,
         "plan_json",
         lambda plan: f'{{"at": "2026-09-09T10:00", "root": "{ctx.root}"}}',
     )
@@ -3521,7 +3519,7 @@ def test_l14_refuses_a_key_that_does_not_move_with_the_read_set(tmp_path, monkey
     """The read-set is what the key is taken over. A key indifferent to it would hit across two
     stages reading different things, which is a cache answering for a run that never happened."""
 
-    monkeypatch.setattr(gate_module, "input_digest", lambda *a, **k: "a-key-that-never-moves")
+    monkeypatch.setattr(uvi_gate, "input_digest", lambda *a, **k: "a-key-that-never-moves")
     findings = uvi_gate.evidence_identity_depends_on_the_read_set(
         _ctx(tmp_path, lambda document: None)
     )
@@ -3533,7 +3531,7 @@ def test_l14_refuses_a_registry_in_which_no_stage_produces_a_key(tmp_path, monke
     """A law measuring nothing reports HOLDS, and HOLDS over an empty population is the shape
     every check in this package is written to refuse."""
 
-    monkeypatch.setattr(gate_module, "input_digest", lambda *a, **k: None)
+    monkeypatch.setattr(uvi_gate, "input_digest", lambda *a, **k: None)
     findings = uvi_gate.evidence_identity_depends_on_the_read_set(
         _ctx(tmp_path, lambda document: None)
     )

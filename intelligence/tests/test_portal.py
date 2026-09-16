@@ -14,6 +14,7 @@ Run: .ec1-venv/bin/python -m pytest intelligence/tests -q
 
 from __future__ import annotations
 
+import copy
 from dataclasses import replace
 
 import pytest
@@ -367,9 +368,6 @@ def test_a_validation_dimension_missing_from_the_projection_is_skipped_not_rende
     must not present the absence as a verdict — while the gate finding, absent from the
     decision, must leave its section out too.
     """
-    import copy
-    import dataclasses
-
     portal = _portal()
     model = copy.deepcopy(portal._model)
     model["progress"] = {
@@ -383,11 +381,9 @@ def test_a_validation_dimension_missing_from_the_projection_is_skipped_not_rende
             }
         },
     }
-    lean = dataclasses.replace(
+    lean = replace(
         portal._decision,
-        findings=tuple(
-            fl for fl in portal._decision.findings if fl.gate_id != "validation-passed"
-        ),
+        findings=tuple(fl for fl in portal._decision.findings if fl.gate_id != "validation-passed"),
     )
     original_model, original_decision = portal._model, portal._decision
     try:
@@ -409,8 +405,6 @@ def test_a_full_validation_projection_renders_every_dimension() -> None:
     four dimensions must produce all four rows, so the walk is shown to include as well
     as to omit.
     """
-    import copy
-
     portal = _portal()
     model = copy.deepcopy(portal._model)
     model["progress"] = {

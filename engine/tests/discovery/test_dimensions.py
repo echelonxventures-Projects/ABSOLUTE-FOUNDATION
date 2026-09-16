@@ -9,6 +9,7 @@ import pytest
 from engine.discovery.contracts import DiscoveryKind
 from engine.discovery.dimensions import (
     REALIZED_STATUSES,
+    _slug,
     discover_capabilities,
     discover_components,
     discover_dependencies,
@@ -259,8 +260,6 @@ def test_the_slug_folds_runs_of_dashes_and_keeps_leading_and_trailing_clean() ->
     from names like "a--b " or "-x-" must normalise to one token, or the registry's slugs
     would multiply under spacing that means nothing.
     """
-    from engine.discovery.dimensions import _slug
-
     assert _slug("a--b") == "A-B"
     assert _slug("  spaced  out ") == "SPACED-OUT"
     assert _slug("-lead and trail-") == "LEAD-AND-TRAIL"

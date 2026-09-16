@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import json
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -221,8 +222,6 @@ def _vacant_twin(tmp_path, engine):
     manufactured here, deterministically, from the committed registry, and both
     vacancy guards run against it.
     """
-    import json
-
     registry = json.loads((engine.REPO / "00-CMG/CMG-REGISTRY.json").read_text(encoding="utf-8"))
     for tier in registry["tiers"]:
         if tier["id"] == "T1":
@@ -553,13 +552,11 @@ def test_ufep_gate_is_non_vacuous(scenario: str) -> None:
 
 def test_ufep_aborts_when_no_subject_is_declared(tmp_path: Path) -> None:
     """An empty subject set would make eligibility vacuously true, so it must abort fail-closed."""
-    import json as _json
-
     engine = _load("ufep")
     document = copy.deepcopy(engine.load_declaration())
     document["subjects"] = []
     empty = tmp_path / "ufep-declaration.json"
-    empty.write_text(_json.dumps(document), encoding="utf-8")
+    empty.write_text(json.dumps(document), encoding="utf-8")
     original = engine.DECLARATION
     try:
         engine.DECLARATION = empty
