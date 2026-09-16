@@ -421,7 +421,14 @@
   ],
   "blocking_failures": [],
   "bound_hits": [],
-  "bounds_slack": [],
+  "bounds_slack": [
+    {
+      "bound": 4,
+      "id": "UCL-V-24",
+      "measure": "stage_obligation_failures",
+      "value": 1
+    }
+  ],
   "capabilities": [
     {
       "action": "EXTEND",
@@ -591,7 +598,7 @@
     "adapters_unresolved": 0,
     "admission_paths_unresolved": 0,
     "authority_claims": 0,
-    "bounds_slack": 0,
+    "bounds_slack": 1,
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "capability_artifacts_unresolved": 0,
@@ -599,7 +606,7 @@
     "cko_identity_collisions": 0,
     "cko_kind_registry_closed": 0,
     "cko_reference_ambiguities": 0,
-    "ckos_discovered": 4464,
+    "ckos_discovered": 4465,
     "ckos_of_unknown_kind": 0,
     "ckos_without_provenance": 0,
     "ckos_without_semantic_identity": 0,
@@ -629,9 +636,9 @@
     "record_write_intersections": 0,
     "reentry_declarations_absent": 0,
     "registry_artifacts_discovered": 1689,
-    "relations_discovered": 548,
+    "relations_discovered": 549,
     "relations_of_unknown_type": 0,
-    "relationship_ckos_discovered": 548,
+    "relationship_ckos_discovered": 549,
     "relationships_without_target_identity": 291,
     "runs_nondeterministic": 0,
     "self_evolution_steps_unbound": 0,
@@ -642,7 +649,7 @@
     "stage_nodes_discovered": 45,
     "stage_nodes_unauthorized": 0,
     "stage_nodes_unowned": 0,
-    "stage_obligation_failures": 4,
+    "stage_obligation_failures": 1,
     "stage_obligations_conditional_active": 102,
     "stage_obligations_not_applicable": 168,
     "stage_property_failures": 0,
@@ -687,7 +694,7 @@
       "measure": "relationship_ckos_discovered",
       "measured": true,
       "statement": "governed relationships now first-class and composable into graphs without new machinery",
-      "value": 548
+      "value": 549
     },
     {
       "evidenced": true,
@@ -1068,7 +1075,7 @@
       "registration_owner": "knowledge/canonical-knowledge.json",
       "registration_owner_located": true,
       "reusable_as": "the referred work queue for the owners that must bind them",
-      "value": 4
+      "value": 1
     },
     {
       "id": "EK-04",
@@ -1088,7 +1095,7 @@
       "registration_owner": "knowledge/canonical-knowledge.json",
       "registration_owner_located": true,
       "reusable_as": "the relationship substrate a future graph type composes over without new machinery",
-      "value": 548
+      "value": 549
     },
     {
       "id": "EK-06",
@@ -1159,13 +1166,13 @@
     }
   ],
   "gate": "OPEN",
-  "graph_digest": "78666a4977217094cd69206cec6c53798b9f6daf699a75cb028626ea07bf557e",
+  "graph_digest": "e32b04e0fd0eefff95feb4ecdc8d4fe9de0f402628cff63cfb7faf3f810b2f29",
   "graphs": [
     {
       "edge_relations": [
         "binds-to"
       ],
-      "edges": 62,
+      "edges": 63,
       "graph": "executable stage graph",
       "id": "GT-STAGE",
       "kinds_known": true,
@@ -1226,7 +1233,7 @@
       "edge_relations": [
         "binds-to"
       ],
-      "edges": 53,
+      "edges": 54,
       "graph": "obligation graph",
       "id": "GT-OBLIGATION",
       "kinds_known": true,
@@ -1337,7 +1344,7 @@
       "node_kinds": [
         "constitutional-relationship"
       ],
-      "nodes": 548,
+      "nodes": 549,
       "relations_known": true
     }
   ],
@@ -2016,7 +2023,7 @@
       "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "owner_located": true,
       "ready": true,
-      "value": 548
+      "value": 549
     }
   ],
   "records": [
@@ -10824,6 +10831,28 @@
       "attributes": {
         "relation": "binds-to",
         "source": "SRC-MANIFEST::UCL-S-0100",
+        "target": "G-06",
+        "target_class": "cko"
+      },
+      "cko_id": "constitutional-relationship::42df2654cc9863762f49ba7ef3e9315d",
+      "kind": "constitutional-relationship",
+      "name": "binds-to",
+      "provenance": {
+        "adapter": "SRC-MANIFEST",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-MANIFEST",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "binds-to|bb3d06b6bda47f53d239d7e40ea255264e4ae1abb9a258e16b02b42d07c1bf44|6d18fb1b730f82f6a5a829455a9c7c0b4d0becabb797ab52022693ae8f596eed",
+      "relations": [],
+      "semantic_id": "ccbf7915078298d039117bc37eb55ac5d786413e54576d712a56f5fc0eb6d035",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "binds-to",
+        "source": "SRC-MANIFEST::UCL-S-0100",
         "target": "STAGE-URRC",
         "target_class": "cko"
       },
@@ -14149,7 +14178,7 @@
       "goal": "Execute the Universal Constitutional Lifecycle over the Universal Constitutional Lifecycle itself.",
       "id": "GOAL-SELF",
       "note": "Self-application. The lifecycle is the first capability the lifecycle governs, which is what makes it a substrate rather than a description.",
-      "run_id": "948d34ceb5e4fb7d4752d089c15d4cfff830fabe4cd96dde248e4de49258814a",
+      "run_id": "1fb9939673c84b67afcd8e1b1f834d825820c5648b7fa2b62cbd7448f62fc220",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14255,7 +14284,7 @@
         {
           "admitted": true,
           "cko_id": "SRC-MANIFEST::UCL-S-0100",
-          "obligations_bound": 8,
+          "obligations_bound": 11,
           "obligations_total": 11,
           "owner": "04-REPOSITORY-GAP-ANALYSIS.md",
           "position": 10,
@@ -14655,7 +14684,7 @@
       "goal": "Engineer the Universal Constitutional Engineering Substrate required for the Autonomous Constitutional Engineering Engine.",
       "id": "GOAL-SUBSTRATE",
       "note": "The Ω-E04→Ω-E05 handover goal.",
-      "run_id": "f361b7d7944c262877ce55d1a600bc440255d33d7c8542ed0b3030ec808fb187",
+      "run_id": "54df26930af0358ff1865af3ec3939e5baed54087761158c65252d3a6b83b278",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14761,7 +14790,7 @@
         {
           "admitted": true,
           "cko_id": "SRC-MANIFEST::UCL-S-0100",
-          "obligations_bound": 8,
+          "obligations_bound": 11,
           "obligations_total": 11,
           "owner": "04-REPOSITORY-GAP-ANALYSIS.md",
           "position": 10,
@@ -15161,7 +15190,7 @@
       "goal": "Engineer an arbitrary future canonical capability that Repository Truth does not yet record.",
       "id": "GOAL-ARBITRARY-CAPABILITY",
       "note": "Proves universal applicability WITHOUT naming a capability: the traversal is identical for every goal, so no capability needs its own methodology and no capability list exists to be incomplete.",
-      "run_id": "de7442744ffc894d75db09db98b806fbf36597dc58f81e91a206775ba86eea49",
+      "run_id": "829ec25e37c3cf31be058120bafc9800aea87eb4e020471867ef19ce0fb346ee",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15267,7 +15296,7 @@
         {
           "admitted": true,
           "cko_id": "SRC-MANIFEST::UCL-S-0100",
-          "obligations_bound": 8,
+          "obligations_bound": 11,
           "obligations_total": 11,
           "owner": "04-REPOSITORY-GAP-ANALYSIS.md",
           "position": 10,
@@ -15663,7 +15692,7 @@
       ]
     }
   ],
-  "seal_sha256": "77bc141e26838d95c3f8742d90bc7630001c181d9f0a2523d43932a5c70f71be",
+  "seal_sha256": "2468293f85ca9d206472391eb3dea3f594bc3da43a16da66dfee6141b3432f5a",
   "self_evolution": [
     {
       "anchor": "",
@@ -16637,7 +16666,7 @@
       "group": "DISCOVERY",
       "obligations": {
         "OBL-AUTHORITY": true,
-        "OBL-CERTIFICATION": false,
+        "OBL-CERTIFICATION": true,
         "OBL-DECLARATION": true,
         "OBL-EVIDENCE": true,
         "OBL-FIXED-POINT": true,
@@ -16645,8 +16674,8 @@
         "OBL-OWNER": true,
         "OBL-REGISTRATION": true,
         "OBL-REPLAY": true,
-        "OBL-VALIDATION": false,
-        "OBL-VERIFICATION": false
+        "OBL-VALIDATION": true,
+        "OBL-VERIFICATION": true
       },
       "ordinal": 100,
       "owner": "04-REPOSITORY-GAP-ANALYSIS.md",
@@ -16674,6 +16703,11 @@
         {
           "relation": "depends-on",
           "target": "UCL-S-0090",
+          "target_class": "cko"
+        },
+        {
+          "relation": "binds-to",
+          "target": "G-06",
           "target_class": "cko"
         },
         {
@@ -19818,7 +19852,7 @@
       "id": "UCL-V-24",
       "measure": "stage_obligation_failures",
       "satisfied": true,
-      "value": 4
+      "value": 1
     },
     {
       "blocking": true,
@@ -19939,7 +19973,7 @@
       "id": "UCL-V-35",
       "measure": "relationship_ckos_discovered",
       "satisfied": true,
-      "value": 548
+      "value": 549
     },
     {
       "blocking": true,

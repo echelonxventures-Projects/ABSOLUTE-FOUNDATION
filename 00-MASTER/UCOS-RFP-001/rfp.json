@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "e12bf595537015ec6f7d9af4053104c15bbd7c50ad4cc9f539752b05c7ddc911",
+  "declaration_seal_sha256": "ccd619c7425f7222e911c505bad3e12c1f7a4dd3477e7f30b383cb3fdfb5e010",
   "findings": [],
   "lifecycle": [
     {
@@ -356,8 +356,10 @@
     }
   ],
   "pipeline": {
+    "$stage_timeout_comment": "The execution budget one stage gets before it is reported as a failed stage. CLO-02 turns on this number, so it is declared here rather than decided inside rfp_engine.py: a budget the declaration cannot see is a limit no operator can govern, and PR-07 Zero Enumeration already puts the probe's own budget under declaration (probe.timeout_seconds). 3600 is the value the engine hardcoded before it was declared, carried over unchanged so that declaring it moved no verdict. A stage may override it with its own timeout_seconds, because a heavy stage and a two-second stage do not share a budget. NOTE: declaring the budget does not by itself resolve STAGE-VERIFY exceeding it — that is a real capacity question about running verify.sh twice inside the gate, and raising this number to hide the overrun would be exactly the weakening this instrument exists to refuse.",
     "convergence_passes": 2,
     "reentrancy_env": "UCOS_RFP_ACTIVE",
+    "stage_timeout_seconds": 3600,
     "stages": [
       {
         "$discovery": "ADMITTED TO FIX CYC-UNPROBED AT ITS CAUSE RATHER THAN AT ITS SYMPTOM. The probe seeds a worktree by running the declared stages, and seed_skips_heavy drops the heavy ones — but STAGE-VERIFY is heavy and verify.sh is what invoked this script, so the seeded worktree had NO generated prerequisites and every candidate needing them failed for want of an input the pipeline owed it. 00-BOOK/tools/ufi.py was reported unprobed for exactly that reason (--all: exit 1), while the identical command exits 0 against a tree where these artifacts exist. The probe's own rationale names this case: 'a producer that consumes an earlier stage's output would otherwise fail for want of its input and be misread as harmless'. Declaring the generation as its own NON-heavy stage is what makes that sentence true for it. Measured before admission: exit 0, 82 seconds against a 900-second probe timeout, and zero tracked writes — it materialises only gitignored artifacts, so writes is empty and RFP-6 does not reach it.",
@@ -1058,7 +1060,7 @@
         ]
       },
       {
-        "$reentrant_comment": "Declared non-reentrant as standing defence in depth. The gate graph is a DAG — this engine is a stage of the fixed-point pipeline and the fixed-point condition is NOT one of its checks — so no recursion occurs today. It was briefly bound as a check of this engine, and the measured consequence was that this engine's emitted verdict depended on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids: the repository could not converge. Keeping the guard armed means a future re-binding degrades to a no-op instead of to non-termination.",
+        "$reentrant_comment": "Declared non-reentrant as standing defence in depth. The gate graph is a DAG — this engine is a stage of the fixed-point pipeline and the fixed-point condition is NOT one of its checks — so no recursion occurs today. It was briefly bound as a check of this engine, and the measured consequence was that this engine's emitted verdict depended on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids: the repository could not converge. Keeping the guard armed means a future re-binding degrades to a no-op instead of to non-termination. THE PRICE OF THIS GUARD IS ONE UNBOUND OBLIGATION, PAID KNOWINGLY. UCL-000001 binds its Certify stage (UCL-S-0280) to this stage, and OBL-REPLAY requires the bound executable stage to declare reentrant: true. It does not, so Certify measures 9/10 and UCL reports obligations=1unbound — permanently, by choice, not by oversight. The trade was put to the owner and decided: a declared deficiency that names its cause is worth more than a guard flipped to make a counter read zero. Reversing it is one boolean, and this sentence is where a future reader should start.",
         "argv": [
           "$PY",
           "00-MASTER/UCCEP-000000/uccep_engine.py",

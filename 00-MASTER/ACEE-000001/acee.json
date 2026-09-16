@@ -759,8 +759,8 @@
     "reduction_owners_unresolved": 0,
     "reductions_unachieved": 0,
     "reentry_declarations_absent": 0,
-    "relations_discovered": 695,
-    "relationship_ckos_discovered": 695,
+    "relations_discovered": 696,
+    "relationship_ckos_discovered": 696,
     "relationships_without_target_identity": 313,
     "self_evolution_steps_owned_here": 0,
     "self_evolution_steps_unbound": 0,
@@ -1619,7 +1619,7 @@
       "measure": "relationship_ckos_discovered",
       "measured": true,
       "reusable_as": "first-class relationship objects, so a relationship is governed rather than implied",
-      "value": 695
+      "value": 696
     },
     {
       "id": "EK-06",
@@ -5669,7 +5669,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "9ccbcefb26759c9e487257b85d9ec7065c4d5c534b67a159d6b71b437e2a0f63",
+  "graph_digest": "499be88fcd7b92747b13d663e908f3d3f184c91fd7e3f2468e7ded341b88bb15",
   "graphs": [
     {
       "composed": true,
@@ -5729,7 +5729,7 @@
       "edge_relations": [
         "binds"
       ],
-      "edges": 33,
+      "edges": 34,
       "graph": "Lifecycle stage to governing gate",
       "id": "GT-LIFECYCLE-GOVERNANCE",
       "node_kinds": [
@@ -7693,7 +7693,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 548,
+        "measure_value": 549,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7701,7 +7701,7 @@
       "invariant": "Universal Engineering Capability Elevation",
       "measure": "counters.relationship_ckos_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 548,
+      "measure_value": 549,
       "ordinal": 390,
       "owner": "00-MASTER/UCL-000001/ucl-declaration.json",
       "properties": {
@@ -9674,6 +9674,28 @@
       "record_id": "requires|bb3d06b6bda47f53d239d7e40ea255264e4ae1abb9a258e16b02b42d07c1bf44|10fa45fd1d8555b080e0aee1c1cf2282475993cec0f206dc3686a8d8f591e51e",
       "relations": [],
       "semantic_id": "f0d7423e0fff2389c82f5aec3258561982a897b7e975edaec79d8afd9d919358",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "binds",
+        "source": "SRC-LIFECYCLE::UCL-S-0100",
+        "target": "G-06",
+        "target_class": "cko"
+      },
+      "cko_id": "engineering-relationship::3bddcace3ad987c58d667563c503555e",
+      "kind": "engineering-relationship",
+      "name": "binds",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "binds|bb3d06b6bda47f53d239d7e40ea255264e4ae1abb9a258e16b02b42d07c1bf44|6d18fb1b730f82f6a5a829455a9c7c0b4d0becabb797ab52022693ae8f596eed",
+      "relations": [],
+      "semantic_id": "a619c40e6f6218d9df63b1188a43cce042c2db7d91b08b9e71aff1e15716296d",
       "target_identified": true
     },
     {
@@ -24153,7 +24175,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "6ea2a866dd789cd5948bef3cd8cdd6f50c5fae6c51f01a87aebbb28712439fcc",
+  "seal_sha256": "8297a97c81e895a9cc7fc2869eeb6ba309df2b1db033e7ec012d3ec38ea09c86",
   "self_evolution": [
     {
       "anchor": "determination",
@@ -25852,7 +25874,7 @@
       "id": "ACEE-V-54",
       "measure": "relationship_ckos_discovered",
       "satisfied": true,
-      "value": 695
+      "value": 696
     },
     {
       "blocking": true,

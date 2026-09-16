@@ -227,6 +227,10 @@
       ],
       "binds": [
         {
+          "source": "SRC-GOVERNANCE-GATES",
+          "ref": "G-06"
+        },
+        {
           "source": "SRC-EXECUTABLE-STAGES",
           "ref": "STAGE-URRC"
         }
