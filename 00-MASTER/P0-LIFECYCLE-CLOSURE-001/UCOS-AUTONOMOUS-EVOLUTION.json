@@ -2,92 +2,76 @@
   "authority": "NONE — DERIVED TRUTH",
   "capabilities": [
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Observe",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Observe",
       "stage_id": "UCL-S-0120"
     },
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Learn",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Learn",
       "stage_id": "UCL-S-0180"
     },
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Reason",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Reason",
       "stage_id": "UCL-S-0190"
     },
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Reflect",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Reflect",
       "stage_id": "UCL-S-0200"
     },
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Challenge",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Challenge",
       "stage_id": "UCL-S-0210"
     },
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Correct",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Correct",
       "stage_id": "UCL-S-0220"
     },
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Improve",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Improve",
       "stage_id": "UCL-S-0230"
     },
     {
-      "basis": "an executable provider discharges it; realization is incomplete",
+      "basis": "executably discharged, deterministic and tested",
       "capability": "Elevate",
-      "failed_probes": [
-        "test_coverage"
-      ],
-      "level": "ASSISTED",
+      "failed_probes": [],
+      "level": "AUTONOMOUS",
       "stage": "Elevate",
       "stage_id": "UCL-S-0410"
     }
   ],
-  "digest": "4faf522267e0531556f3546e6666f192ae476aaf8218b5ef84247e9b3c1e292c",
+  "digest": "5399bbe1bf3fb3baf0495c8f2e8d81bdebd0b4f4c9decc37b920210252935149",
   "measurements": {
-    "assisted": 8,
-    "autonomous": 0,
+    "assisted": 0,
+    "autonomous": 8,
     "capabilities": 8,
-    "fully_autonomous": false,
+    "fully_autonomous": true,
     "manual": 0,
     "none": 0
   },
