@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 
 from engine.kernel import compliance
@@ -329,3 +330,126 @@ def test_the_stakeholder_section_is_declared_an_audience_not_a_construct() -> No
     assert kinds.get("MI-017") == "DOMAIN"
     stakeholders = [a["label"] for a in corpus["atoms"] if a["section"] == "MI-016"]
     assert len(stakeholders) >= 25
+
+
+# ----------------------------------------------------------- the corpus itself, held total
+#
+# Every binding in this module reads `06-MANDATE-CORPUS.json` and trusts it to be a
+# complete, faithful transcription of the six governing documents. Nothing checked that.
+# A transcription that silently lost a section would make every conformance suite built on
+# it read GREEN over a smaller corpus than the one the documents mandate -- the exact
+# failure mode a "zero missing" claim exists to refuse, and one no downstream test could
+# detect, because each of them only ever sees the atoms the corpus still carries.
+#
+# This gate is deliberately written WITHOUT quoting a single section identifier. The
+# disposition engine credits a mandate as discharged when a test names its id or its
+# section in quotes, so a totality gate that listed all 103 sections would mark all 1,449
+# mandates bound while proving nothing about any of them. The census below is per SOURCE,
+# and a source key is not a section id.
+
+#: Atoms per source document, as transcribed. A drop here is a lost mandate; a rise is an
+#: un-reviewed addition. Either way the corpus stopped matching the documents it claims to
+#: transcribe, and every suite reading it is measuring the wrong universe.
+CORPUS_CENSUS = {
+    "PRD": 188,  # Product Requirements Document (Constitutional Foundation v1.0)
+    "MI": 345,  # Master Constitution / Master Index / Master Knowledge Map (000-018)
+    "ARCH": 176,  # Absolute Universal Constitutional Architecture
+    "UAKP": 350,  # Universal Autonomous Knowledge Platform foundation
+    "QM": 163,  # Absolute Universal Constitutional Model (interrogative)
+    "LYR": 227,  # Self-Evolving Constitutional Substrate Architecture (Layers 0-15)
+}
+CORPUS_SECTION_COUNT = 103
+
+
+def _corpus() -> dict:
+    repo = Path(__file__).resolve().parents[3]
+    return json.loads(
+        (repo / "00-MASTER" / "CAEM-001" / "06-MANDATE-CORPUS.json").read_text(encoding="utf-8")
+    )
+
+
+def test_the_mandate_corpus_transcribes_every_source_document_completely() -> None:
+    """TOTALITY. The census is asserted per source, never assumed."""
+    corpus = _corpus()
+    atoms = corpus["atoms"]
+
+    assert corpus["atom_count"] == len(atoms), (
+        f"the corpus declares {corpus['atom_count']} atoms and carries {len(atoms)}; "
+        "a declared count that does not match the payload is the drift this gate exists for"
+    )
+    assert set(corpus["sources"]) == set(CORPUS_CENSUS), (
+        "the corpus transcribes a different set of source documents than this gate "
+        f"censuses: corpus={sorted(corpus['sources'])} gate={sorted(CORPUS_CENSUS)}"
+    )
+
+    measured = Counter(atom["source"] for atom in atoms)
+    assert dict(measured) == CORPUS_CENSUS, (
+        f"per-source atom census changed: measured={dict(sorted(measured.items()))} "
+        f"declared={dict(sorted(CORPUS_CENSUS.items()))}"
+    )
+    assert sum(CORPUS_CENSUS.values()) == len(atoms) == 1449
+
+
+def test_every_mandate_carries_a_distinct_identity_and_a_transcribed_label() -> None:
+    """UCKP-ART-05 at corpus scale: two mandates sharing an id are one mandate, and a
+    mandate with no label transcribes nothing."""
+    atoms = _corpus()["atoms"]
+
+    identifiers = [atom["atom_id"] for atom in atoms]
+    duplicated = sorted({i for i in identifiers if identifiers.count(i) > 1})
+    assert not duplicated, f"mandate identifiers used twice: {duplicated}"
+
+    malformed = sorted(
+        atom["atom_id"]
+        for atom in atoms
+        if not atom["atom_id"].startswith(atom["section"] + "/")
+        or not atom["atom_id"][len(atom["section"]) + 1 :]
+    )
+    assert not malformed, (
+        "every mandate id is <section>/<local>, so the section a mandate belongs to can "
+        f"never disagree with the id it carries; these disagree: {malformed}"
+    )
+
+    unlabelled = sorted(a["atom_id"] for a in atoms if not str(a.get("label", "")).strip())
+    assert not unlabelled, f"mandates transcribed without the document's wording: {unlabelled}"
+
+
+def test_every_section_belongs_to_one_source_and_the_section_set_is_whole() -> None:
+    """A section spanning two sources would make the per-source census unfalsifiable."""
+    atoms = _corpus()["atoms"]
+
+    sources_by_section: dict[str, set[str]] = {}
+    for atom in atoms:
+        sources_by_section.setdefault(atom["section"], set()).add(atom["source"])
+
+    split = sorted(s for s, srcs in sources_by_section.items() if len(srcs) > 1)
+    assert not split, f"sections transcribed under more than one source: {split}"
+
+    assert len(sources_by_section) == CORPUS_SECTION_COUNT, (
+        f"the corpus carries {len(sources_by_section)} sections and this gate expects "
+        f"{CORPUS_SECTION_COUNT}; a section appearing or vanishing is a document-level change"
+    )
+
+    census = Counter(atom["section"] for atom in atoms)
+    empty = sorted(s for s in sources_by_section if not census[s])
+    assert not empty, f"declared sections carrying no mandate: {empty}"
+
+
+def test_the_declared_section_kinds_name_sections_the_corpus_actually_carries() -> None:
+    """`section_kinds` overrides a disposition wholesale -- STAKEHOLDER and DOMAIN each
+    make the engine skip measurement entirely. A kind naming a section that does not exist
+    would be a silent no-op, and a kind the engine does not implement would be worse: it
+    would read as a decision while changing nothing."""
+    corpus = _corpus()
+    sections = {atom["section"] for atom in corpus["atoms"]}
+    declared = corpus.get("section_kinds", {})
+
+    unknown = sorted(set(declared) - sections)
+    assert not unknown, f"section kinds declared for sections the corpus does not carry: {unknown}"
+
+    implemented = {"STAKEHOLDER", "DOMAIN"}
+    inert = sorted(k for k, v in declared.items() if v not in implemented)
+    assert not inert, (
+        f"section kinds the disposition engine does not implement: {inert}; "
+        "a declared kind that changes no disposition is a decision that was never taken"
+    )
