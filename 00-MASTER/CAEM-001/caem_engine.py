@@ -414,6 +414,7 @@ def measure(workers: int = 12) -> dict:
     corpus = json.loads(CORPUS.read_text(encoding="utf-8"))
     anchors, by_word = build_anchor_index()
 
+    section_kinds = corpus.get("section_kinds", {})
     by_label: dict[str, list[dict]] = defaultdict(list)
     for atom in corpus["atoms"]:
         by_label[norm(atom["label"])].append(atom)
@@ -441,6 +442,14 @@ def measure(workers: int = 12) -> dict:
                 "mandates": [a["atom_id"] for a in by_label[key]],
                 "hits": len(files),
                 "anchored": anc,
+                "section_kind": next(
+                    (
+                        section_kinds[a["section"]]
+                        for a in by_label[key]
+                        if a["section"] in section_kinds
+                    ),
+                    "CONSTRUCT",
+                ),
                 "kinds": kinds,
                 "owner_files": owners_of_concept(label, files),
                 "code_files": [f for f in files if authority_rank(f) == 3][:4],
@@ -477,6 +486,29 @@ def _dispose(concepts: dict, workers: int) -> None:
     would distort the owner's single responsibility."""
     for concept in concepts.values():
         status = concept["status"]
+        kind = concept.get("section_kind", "CONSTRUCT")
+        # A stakeholder is an audience and a target domain is a market. Neither is built,
+        # and asking "is it in the code" of either is a category error: `Developers`
+        # reading IMPLEMENTED because the word occurs in source says nothing at all, and
+        # `Agriculture` reading CREATE would instruct the repository to hard-code an
+        # industry that PROHIBITED_TOKENS exists to refuse.
+        if kind == "STAKEHOLDER":
+            concept["disposition"] = "AUDIENCE"
+            concept["determination"] = "PROVISIONAL"
+            concept["reason"] = (
+                "a stakeholder the substrate serves, not a construct it contains; "
+                "nothing is owed by the repository"
+            )
+            continue
+        if kind == "DOMAIN":
+            concept["disposition"] = "REGISTER"
+            concept["determination"] = "PROVISIONAL"
+            concept["reason"] = (
+                "a market the substrate is composed into, admitted as registered data "
+                "rather than built as code (MIP LAW P43-001); implementing it would be "
+                "the fixed industry LYR-NEG/LN-05 forbids"
+            )
+            continue
         if status == "IMPLEMENTED":
             concept["disposition"] = "IMPLEMENTED"
         elif status == "ASSERTION":
@@ -500,6 +532,9 @@ def _dispose(concepts: dict, workers: int) -> None:
     # THE CAEM-001 CORRECTION. Re-ask every provisional CREATE as a narrower question:
     # is the HEAD NOUN owned? "Analytics Graph" absent does not mean GRAPH is absent.
     provisional = [k for k, c in concepts.items() if c["disposition"] == "CREATE"]
+    leaked = [k for k in provisional if concepts[k].get("section_kind") != "CONSTRUCT"]
+    if leaked:
+        raise RuntimeError(f"a stakeholder or domain reached the CREATE re-ask: {leaked[:3]}")
     print(f"re-asking {len(provisional)} provisional CREATEs", file=sys.stderr)
 
     def head_owner(key: str) -> tuple[str, list[str], list[str]]:
@@ -559,6 +594,11 @@ def bind(data: dict) -> dict:
     candidates = [f for f in result.stdout.splitlines() if f]
     declared = {m for c in data["concepts"].values() for m in c["mandates"]}
 
+    # A test may bind one mandate by id, or a whole SECTION by reading the corpus for it --
+    # `_corpus_section("MI-017")` covers all 27 target domains by construction and names no
+    # individual identifier. Crediting only exact ids would leave those 27 reading unbound
+    # while a test proves them, which is the same repaid-debt-unclaimed error in miniature.
+    sections = {m.split("/")[0] for m in declared}
     named_in: dict[str, list[str]] = defaultdict(list)
     for rel in candidates:
         try:
@@ -568,6 +608,11 @@ def bind(data: dict) -> dict:
         for mandate in declared:
             if mandate in text:
                 named_in[mandate].append(rel)
+        for section in sections:
+            if f'"{section}"' in text:
+                for mandate in declared:
+                    if mandate.startswith(f"{section}/"):
+                        named_in[mandate].append(rel)
 
     bound_total = 0
     for concept in data["concepts"].values():
@@ -593,10 +638,23 @@ DISPOSITION_MEANING = {
     "ASSERT": "The claim is about an ABSENCE. It needs a conformance test, not a name.",
     "ADJUDICATE": "A generic word in 200+ files with no owner located. Search cannot "
     "decide it and this engine will not pretend otherwise.",
+    "REGISTER": "A market the substrate is composed into. Admitted as registered data, "
+    "never built as code -- MIP LAW P43-001, and `industry` is a token the kernel refuses "
+    "to seed. Proving admission IS the implementation.",
+    "AUDIENCE": "A stakeholder the substrate serves. Not a construct; nothing is owed.",
     "CREATE": "Nothing in the repository owns this under any spelling tried. A genuine "
     "gap, and the only disposition that is new construction.",
 }
-ORDER = ("IMPLEMENTED", "REFERENCE", "EXTEND", "ASSERT", "ADJUDICATE", "CREATE")
+ORDER = (
+    "IMPLEMENTED",
+    "REFERENCE",
+    "EXTEND",
+    "ASSERT",
+    "REGISTER",
+    "AUDIENCE",
+    "ADJUDICATE",
+    "CREATE",
+)
 
 
 def render(data: dict) -> str:

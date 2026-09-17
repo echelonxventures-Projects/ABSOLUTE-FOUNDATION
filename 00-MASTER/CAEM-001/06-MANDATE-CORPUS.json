@@ -8710,5 +8710,10 @@
    "section": "UAKP-PRIN",
    "label": "Zero architectural specialization"
   }
- ]
+ ],
+ "section_kinds": {
+  "MI-016": "STAKEHOLDER",
+  "MI-017": "DOMAIN"
+ },
+ "$section_kinds": "Most sections mandate CONSTRUCTS -- things to build, reference or extend. Two do not, and the documents say so in their own headings. '016 STAKEHOLDERS' lists who the substrate serves; '017 TARGET DOMAINS' lists the markets it can be composed into. Treating either as a construct inverts the architecture: a target domain implemented as code is a FIXED INDUSTRY, which PRD principle P-001, LYR-NEG/LN-05 and MIP LAW P43-001 each forbid -- and 'industry' is a PROHIBITED_TOKEN the kernel refuses to seed. A register that dispositioned 'Agriculture' as CREATE would be instructing the repository to breach the mandate the same corpus states four sections earlier."
 }

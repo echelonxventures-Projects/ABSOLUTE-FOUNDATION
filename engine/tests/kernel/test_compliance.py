@@ -14,6 +14,7 @@ from engine.kernel.compliance import (
     kernel_source_fingerprint,
     quality_gates,
 )
+from engine.kernel.kernel import MetaKernel
 from engine.kernel.seed import FOUNDING_METATYPES
 
 
@@ -250,3 +251,81 @@ def test_the_binding_is_kernel_scoped_and_the_suite_says_so() -> None:
     """
     assert Path(compliance.__file__).resolve().parent.name == "kernel"
     assert compliance._KERNEL_DIR.name == "kernel"  # noqa: SLF001 - the scope under test
+
+
+# -------------------------------------------- the target domains, admitted rather than built
+#
+# The Master Index section 017 lists 27 TARGET DOMAINS -- Commerce, Healthcare, Defense,
+# Agriculture, Smart Cities, Multi Planet Operations. A requirements sweep reads them as
+# absent from the repository and concludes they must be built, which is precisely backwards:
+# a target domain implemented as code is a FIXED INDUSTRY, and `industry` is one of the
+# eighteen tokens this kernel refuses to seed. PRD principle P-001, LYR-NEG/LN-05 and MIP
+# LAW P43-001 ("industries are data-driven ontologies, never hard-coded") all forbid it.
+#
+# So the implementation of a target domain is its ADMISSION. This proves all 27 enter a
+# live kernel as registered data with the kernel's own source unchanged -- which is the
+# mandate satisfied, not deferred.
+
+
+def _corpus_section(section: str) -> list[str]:
+    repo = Path(__file__).resolve().parents[3]
+    corpus = json.loads(
+        (repo / "00-MASTER" / "CAEM-001" / "06-MANDATE-CORPUS.json").read_text(encoding="utf-8")
+    )
+    declared = corpus.get("section_kinds", {})
+    assert section in declared, f"{section} carries no declared section kind"
+    return [a["label"] for a in corpus["atoms"] if a["section"] == section]
+
+
+def test_every_target_domain_is_admitted_by_registration_with_the_kernel_unchanged() -> None:
+    domains = _corpus_section("MI-017")
+    assert (
+        len(domains) >= 27
+    ), f"the Master Index lists 27 target domains, corpus has {len(domains)}"
+
+    kernel = MetaKernel()
+    before_source = kernel_source_fingerprint()
+    before_count = len(kernel.metatypes())
+
+    for label in domains:
+        key = "Domain-" + "".join(part.capitalize() for part in label.split())
+        kernel.register_metatype(key, name=label, description=f"target domain: {label}")
+
+    assert kernel_source_fingerprint() == before_source, (
+        "admitting the target domains changed the kernel's own source, so they were built "
+        "rather than registered -- the fixed-industry failure LYR-NEG/LN-05 forbids"
+    )
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    missing = [
+        label
+        for label in domains
+        if "Domain-" + "".join(p.capitalize() for p in label.split()) not in registered
+    ]
+    assert not missing, f"target domains the kernel would not admit: {missing}"
+    assert len(kernel.metatypes()) == before_count + len(domains)
+
+
+def test_no_target_domain_is_seeded_into_the_kernel() -> None:
+    """NON-VACUITY. Admission proves nothing if the domain was hard-coded all along."""
+    domains = {label.lower() for label in _corpus_section("MI-017")}
+    seeded = {key.lower() for key, _name, _description in FOUNDING_METATYPES}
+    leaked = sorted(domains & seeded)
+    assert not leaked, f"target domains seeded as founding meta-types: {leaked}"
+
+
+def test_the_stakeholder_section_is_declared_an_audience_not_a_construct() -> None:
+    """MI-016 lists who the substrate serves. Nothing there is owed an implementation.
+
+    Asserted because the corpus's own `section_kinds` is what stops a requirements sweep
+    reporting `Regulators` and `Universities` as unbuilt capabilities -- and a declaration
+    nothing checks is a declaration that will quietly go missing.
+    """
+    repo = Path(__file__).resolve().parents[3]
+    corpus = json.loads(
+        (repo / "00-MASTER" / "CAEM-001" / "06-MANDATE-CORPUS.json").read_text(encoding="utf-8")
+    )
+    kinds = corpus.get("section_kinds", {})
+    assert kinds.get("MI-016") == "STAKEHOLDER"
+    assert kinds.get("MI-017") == "DOMAIN"
+    stakeholders = [a["label"] for a in corpus["atoms"] if a["section"] == "MI-016"]
+    assert len(stakeholders) >= 25
