@@ -269,3 +269,96 @@ def test_the_meta_model_gaps_agree_with_the_interrogative_model() -> None:
 
     assert shared <= here, f"the UCMM suite no longer reports absent: {sorted(shared - here)}"
     assert shared <= there, f"QM-CONST no longer reports absent: {sorted(shared - there)}"
+
+
+# --- ARCH-VALID — the twenty-one validations ------------------------------------
+#
+# The Quality & Trust Fabric lists twenty-one validations and opens the section with an
+# instruction rather than a description: "Automatically discover every constitutionally
+# applicable activity." Thirteen have an instrument. Eight do not, and six of those eight
+# are the non-functional axes -- Privacy, Risk, Performance, Reliability, Scalability,
+# Interoperability. That is the shape of the gap and it is worth stating as one: the
+# repository validates what it IS thoroughly and validates how it BEHAVES not at all.
+
+#: Validation -> the instrument that performs it.
+VALIDATION_INSTRUMENT = {
+    "ARCH-VALID/VL-01": "scripts/ucos-env.sh",  # Static Analysis -- the ruff gate
+    "ARCH-VALID/VL-02": "verify.sh",  # Dynamic Analysis -- the suite under the floor
+    # Semantic Analysis
+    "ARCH-VALID/VL-03": "00-MASTER/UAKOS-CLOSURE-008/02-SEMANTIC-EQUIVALENCE-REGISTER.md",
+    "ARCH-VALID/VL-04": "00-MASTER/UAIE-000001/uaie.json",  # Architecture Validation
+    "ARCH-VALID/VL-05": "engine/uckp/validation.py",  # Constitutional Validation
+    # Requirement Validation
+    "ARCH-VALID/VL-06": "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
+    "ARCH-VALID/VL-07": "engine/validation/checks.py",  # Dependency Validation
+    "ARCH-VALID/VL-08": "engine/foundation/config",  # Configuration Validation
+    "ARCH-VALID/VL-09": "engine/validation/checks.py",  # Identity Validation
+    "ARCH-VALID/VL-10": "engine/graph/validation.py",  # Relationship Validation
+    "ARCH-VALID/VL-11": "engine/kernel/governance.py",  # Policy Validation
+    "ARCH-VALID/VL-12": "engine/kernel/compliance.py",  # Compliance Validation
+    "ARCH-VALID/VL-13": "engine/validation/checks.py",  # Security Validation
+    "ARCH-VALID/VL-15": "engine/constitution/legality.py",  # Legal Validation
+    "ARCH-VALID/VL-20": "platform/validation_intelligence/compatibility.py",  # Compatibility
+}
+
+#: Performed by nothing. Six of the seven are behavioural axes, which is the finding.
+VALIDATION_ABSENT = {
+    "ARCH-VALID/VL-14": "privacy",
+    "ARCH-VALID/VL-16": "risk",
+    "ARCH-VALID/VL-17": "performance",
+    "ARCH-VALID/VL-18": "reliability",
+    "ARCH-VALID/VL-19": "scalability",
+    "ARCH-VALID/VL-21": "interoperability",
+}
+
+
+def test_every_mandated_validation_is_performed_or_absent() -> None:
+    mandates = section("ARCH-VALID")
+    assert len(mandates) == 21, f"the fabric lists 21 validations, corpus has {len(mandates)}"
+    assert_partitions("ARCH-VALID", mandates, VALIDATION_INSTRUMENT, VALIDATION_ABSENT)
+
+
+def test_every_performing_instrument_is_tracked_and_executable_or_declared_data() -> None:
+    """A validation carried by a register is a record of one having been done; a validation
+    carried by code is one that can be done again. Both count, and the difference is
+    recorded rather than flattened."""
+    assert_homes_exist("ARCH-VALID", VALIDATION_INSTRUMENT)
+    executable = [home for home in VALIDATION_INSTRUMENT.values() if home.endswith((".py", ".sh"))]
+    assert len(executable) >= 10, (
+        f"only {len(executable)} of the located validations are executable; the rest are "
+        "records of a validation having happened once"
+    )
+
+
+def test_the_three_checks_module_validations_name_distinct_checks() -> None:
+    """NON-VACUITY for the one home claimed three times. Dependency, Identity and Security
+    all resolve to `engine/validation/checks.py`, which is only honest if that module
+    carries three different checks."""
+    from engine.validation.checks import default_checks
+
+    names = {type(check).__name__ for check in default_checks()}
+    for expected in ("DependencyClosureCheck", "IdentityCheck", "SignatureCheck"):
+        assert expected in names, (
+            f"{expected} is not among the default checks {sorted(names)}; one of the three "
+            "validations mapped to that module is not actually performed"
+        )
+
+
+def test_the_absent_validations_are_performed_by_nothing() -> None:
+    """NON-VACUITY. `engine/constitution/legality.py` is why this is searched rather than
+    assumed: Legal Validation reads as an obvious gap and the repository has one."""
+    assert_named_by_nothing("ARCH-VALID", VALIDATION_ABSENT)
+
+
+def test_the_gap_is_behavioural_rather_than_scattered() -> None:
+    """The finding, asserted so it cannot quietly stop being true.
+
+    Six of the seven absent validations are non-functional axes. If a performance or
+    scalability validator ever lands, this assertion fails and the characterisation above
+    has to be rewritten rather than left standing as stale narrative.
+    """
+    behavioural = {"performance", "reliability", "scalability", "interoperability", "risk"}
+    assert behavioural <= set(VALIDATION_ABSENT.values()), (
+        "a behavioural validator now exists; the claim that this repository validates what "
+        "it is and not how it behaves no longer holds"
+    )
