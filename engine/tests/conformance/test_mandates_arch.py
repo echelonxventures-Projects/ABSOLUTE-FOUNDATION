@@ -471,3 +471,125 @@ def test_a_missing_test_for_a_missing_capability_is_one_gap_and_not_two() -> Non
     assert "performance" in set(
         VALIDATION_ABSENT.values()
     ), "performance validation now exists, so ARCH-TEST/TS-07 is a missing test"
+
+
+# --- ARCH-GOVF — the eighteen steps of the Universal Governance Fabric -----------
+#
+# Eighteen steps from Approval to Go-Live Authorization. This is a PIPELINE, and this
+# repository already declares one: UCL-000001's forty-five lifecycle stages include eight of
+# these eighteen under their own names, word for word. So the join is made against the
+# lifecycle rather than against modules, and `_ucl_stage_names` is imported from the QM-FLOW
+# binding rather than rewritten -- one reader of `ucl.json`, not two.
+#
+# Nine more steps are performed by an instrument the lifecycle does not name as a stage. The
+# eighteenth is the interesting one: Go-Live Authorization exists as a DETERMINATION that a
+# go-live was accepted, which is a record after the fact and not an authorization gate in a
+# pipeline. Counting it as the step would report an authority the repository does not have.
+
+#: Governance step -> the UCL-000001 stage that performs it, by that stage's own name.
+GOVERNANCE_LIFECYCLE_STAGE = {
+    "ARCH-GOVF/GF-02": "Certify",  # Certification
+    "ARCH-GOVF/GF-03": "Register",  # Registration
+    # Universal Identity Assignment
+    "ARCH-GOVF/GF-04": "Assign Universal Constitutional Identifier",
+    # Dictionary Update
+    "ARCH-GOVF/GF-05": "Update Universal Constitutional Identifier Dictionary",
+    "ARCH-GOVF/GF-08": "Update Universal Registry",  # Registry Update
+    "ARCH-GOVF/GF-13": "Update Universal Bookkeeping",  # Bookkeeping Update
+    "ARCH-GOVF/GF-14": "Update Universal Lineage",  # Lineage Update
+    "ARCH-GOVF/GF-16": "Update Repository Truth",  # Repository Truth Update
+}
+
+#: Governance step -> the instrument that performs it outside the declared lifecycle.
+GOVERNANCE_INSTRUMENT = {
+    "ARCH-GOVF/GF-01": "00-BOOK/DATA/allocation-permits.json",  # Approval
+    "ARCH-GOVF/GF-06": "engine/context/ontology.py",  # Ontology Update
+    "ARCH-GOVF/GF-07": "engine/context/taxonomy.py",  # Taxonomy Update
+    "ARCH-GOVF/GF-09": "00-BOOK/DATA/relationships.json",  # Relationship Update
+    "ARCH-GOVF/GF-10": "00-BOOK/DATA/relationships.json",  # Dependency Update -- Depends-On edges
+    "ARCH-GOVF/GF-11": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",  # Capability Update
+    "ARCH-GOVF/GF-12": "00-BOOK/DATA/evidence-universe.json",  # Evidence Registration
+    # Provenance Update. `provenance.json` is the richer answer and is NOT tracked -- it is
+    # a generated input, re-derived by its producer and absent from a pristine clone. A step
+    # of the governance fabric has to be carried by something Repository Truth holds.
+    "ARCH-GOVF/GF-15": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md",
+    # Production Readiness
+    "ARCH-GOVF/GF-17": "00-MASTER/UAKOS-CLOSURE-009/06-REPOSITORY-READINESS-MATRIX.md",
+}
+
+#: Recorded after the fact rather than performed as a step.
+GOVERNANCE_DETERMINATION_ONLY = {
+    "ARCH-GOVF/GF-18": "02-MASTER/UCOS-GO-LIVE-001-GO-LIVE-ACCEPTANCE-DETERMINATION.md",
+}
+
+
+def test_every_governance_step_is_a_stage_an_instrument_or_a_determination() -> None:
+    mandates = section("ARCH-GOVF")
+    assert len(mandates) == 18, f"the fabric lists 18 steps, corpus has {len(mandates)}"
+    assert_partitions(
+        "ARCH-GOVF",
+        mandates,
+        GOVERNANCE_LIFECYCLE_STAGE,
+        GOVERNANCE_INSTRUMENT,
+        GOVERNANCE_DETERMINATION_ONLY,
+    )
+
+
+def test_every_stage_backed_step_names_a_stage_ucl_declares() -> None:
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = _ucl_stage_names()
+    for mandate, stage in GOVERNANCE_LIFECYCLE_STAGE.items():
+        assert (
+            stage in declared
+        ), f"{mandate}: UCL-000001 declares no stage named {stage!r}; this join is stale"
+    claimed = list(GOVERNANCE_LIFECYCLE_STAGE.values())
+    assert len(claimed) == len(set(claimed)), "one lifecycle stage claimed by two steps"
+
+
+def test_every_instrument_backed_step_is_tracked_and_is_not_a_declared_stage() -> None:
+    """The tier boundary. A step UCL declares belongs in the lifecycle tier."""
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    assert_homes_exist("ARCH-GOVF", GOVERNANCE_INSTRUMENT)
+    declared = {name.lower() for name in _ucl_stage_names()}
+    mandates = section("ARCH-GOVF")
+    for mandate in GOVERNANCE_INSTRUMENT:
+        assert (
+            mandates[mandate].lower() not in declared
+        ), f"{mandate}: {mandates[mandate]!r} IS a declared stage and is understated"
+
+
+def test_relationship_and_dependency_share_one_register_because_a_dependency_is_an_edge() -> None:
+    """NON-VACUITY for the only home claimed twice. Article 7 says it outright -- "every
+    dependency an edge" -- so one relationship register carrying both is the law's own
+    shape, not a shortcut. Any OTHER doubled home would be."""
+    from engine.uckp.law import ROOT_LAW
+
+    homes = list(GOVERNANCE_INSTRUMENT.values())
+    doubled = sorted({h for h in homes if homes.count(h) > 1})
+    assert doubled == ["00-BOOK/DATA/relationships.json"], f"unexpected doubled homes: {doubled}"
+    article = next(a for a in ROOT_LAW.articles if a.article_id == "UCKP-ART-07")
+    assert "every dependency an edge" in article.clause, (
+        "Article 7 no longer makes a dependency an edge, so one register carrying both is "
+        "no longer the law's shape"
+    )
+
+
+def test_go_live_is_a_determination_and_not_an_authorization_gate() -> None:
+    """NON-VACUITY for the last step, and the distinction it rests on.
+
+    A determination records that a go-live was accepted. An authorization step refuses one
+    that is not. If a gate ever appears, this row moves and the fabric gains its final step;
+    until then, counting the determination as the step would report an authority nothing has.
+    """
+    from engine.tests.conformance.mandate_corpus import tracked
+
+    assert_homes_exist("ARCH-GOVF", GOVERNANCE_DETERMINATION_ONLY)
+    gates = [
+        path
+        for path in tracked()
+        if path.endswith((".py", ".sh"))
+        and "golive" in path.lower().replace("-", "").replace("_", "")
+    ]
+    assert not gates, f"a go-live gate now exists: {gates}; ARCH-GOVF/GF-18 must be re-tiered"
