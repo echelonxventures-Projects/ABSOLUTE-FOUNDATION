@@ -144,9 +144,59 @@ def variants(label: str) -> set[str]:
 SELF = "00-MASTER/CAEM-001/"
 
 
-def git_grep(token: str) -> list[str]:
+_PCRE_CHECKED = False
+
+
+def _require_pcre() -> None:
+    """Fail closed if this git cannot do PCRE, rather than measuring everything as absent."""
+    global _PCRE_CHECKED  # noqa: PLW0603 - one-shot capability probe
+    if _PCRE_CHECKED:
+        return
+    probe = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "grep", "-P", "-l", "-e", r"\bgit\b", "--", "README.md"],  # noqa: S607
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+    )
+    if probe.returncode not in (0, 1):
+        raise RuntimeError(
+            "git grep -P is unavailable, so single-word mandates cannot be matched as "
+            "stems. Refusing to measure: without PCRE every one of them would read ABSENT. "
+            f"git said: {probe.stderr.strip()[:200]}"
+        )
+    _PCRE_CHECKED = True
+
+
+def git_grep(token: str, whole_word: bool = False) -> list[str]:
+    """Tracked files containing `token`, optionally only as a whole word.
+
+    WHY THE FLAG EXISTS. Substring matching is safe for a phrase and catastrophic for a
+    short word. Measured on this repository: `AR` matched 6,993 files and `AI` 5,069,
+    because both occur inside *are*, *architecture*, *available* and *chain*; `ERP`
+    matched 1,353 because Python is full of *interpreter*; `Board` matched 434 through
+    *dashboard*; `Architect` matched 2,564 through *architecture*. Whole-word counts are
+    226, 323, 31, 27 and 99 -- so between 94% and 98% of those hits were noise, and the
+    200-file "too generic to decide" threshold was being applied to that noise.
+
+    MORPHOLOGY IS KEPT. A bare whole-word match would swing the error the other way:
+    `Recognize` would stop matching *recognized* (166 files down to 23) and `License`
+    would stop matching *licensing* (49 down to 19). So a single word is matched as a
+    STEM with an optional inflection -- boundary, word, optional s/es/d/ed/ing, boundary.
+    Measured: ERP 1,353 -> 31, AR 6,993 -> 226, Board 434 -> 27, while License recovers
+    to 40 and Recognize to 143. Noise removed, inflections retained.
+
+    Phrases keep substring matching, which is already specific enough to be safe and
+    stays tolerant of plurals without a pattern.
+    """
+    if whole_word:
+        _require_pcre()
+        pattern = rf"\b{re.escape(token)}(s|es|d|ed|ing)?\b"
+        argv = ["git", "grep", "-P", "-i", "-l"]
+    else:
+        pattern = token
+        argv = ["git", "grep", "-F", "-i", "-l"]
     result = subprocess.run(  # noqa: S603 - fixed argv, no shell
-        ["git", "grep", "-F", "-i", "-l", "--", token],  # noqa: S607 - git from PATH
+        [*argv, "--", pattern],  # noqa: S607 - git from PATH by design
         cwd=REPO,
         capture_output=True,
         text=True,
@@ -267,9 +317,10 @@ def measure(workers: int = 12) -> dict:
 
     def sweep(key: str) -> tuple[str, list[str]]:
         label = by_label[key][0]["label"]
+        single = len(norm(label).split()) == 1
         found: set[str] = set()
         for token in variants(label):
-            found.update(git_grep(token))
+            found.update(git_grep(token, whole_word=single))
         return key, sorted(found, key=lambda f: (authority_rank(f), f))
 
     concepts: dict[str, dict] = {}
@@ -349,7 +400,7 @@ def _dispose(concepts: dict, workers: int) -> None:
         words = [w for w in norm(concepts[key]["label"]).split() if w not in STOP and len(w) > 2]
         if not words:
             return key, [], []
-        hits = git_grep(words[-1])
+        hits = git_grep(words[-1], whole_word=True)
         return (
             key,
             words,

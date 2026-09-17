@@ -8,19 +8,19 @@
  "atom_count": 1449,
  "concept_count": 1117,
  "status_totals": {
-  "ABSENT": 310,
-  "ANCHORED": 152,
+  "ABSENT": 311,
+  "ANCHORED": 150,
   "ASSERTION": 37,
   "IMPLEMENTED": 232,
-  "PARTIAL": 101,
-  "SPECIFIED": 250,
-  "UNDECIDABLE": 35
+  "PARTIAL": 104,
+  "SPECIFIED": 252,
+  "UNDECIDABLE": 31
  },
  "disposition_totals": {
-  "ADJUDICATE": 35,
+  "ADJUDICATE": 31,
   "ASSERT": 37,
-  "CREATE": 19,
-  "EXTEND": 458,
+  "CREATE": 21,
+  "EXTEND": 460,
   "IMPLEMENTED": 232,
   "REFERENCE": 336
  },
@@ -95,14 +95,14 @@
    "mandates": [
     "LYR-L11/ME-03"
    ],
-   "hits": 38,
+   "hits": 32,
    "anchored": false,
    "kinds": {
     "code": 2,
     "test": 1,
     "gate": 0,
-    "decl": 4,
-    "doc": 31
+    "decl": 1,
+    "doc": 28
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
@@ -121,14 +121,14 @@
    "mandates": [
     "ARCH-OPF/OF-03"
    ],
-   "hits": 149,
+   "hits": 125,
    "anchored": true,
    "kinds": {
-    "code": 14,
-    "test": 5,
+    "code": 13,
+    "test": 2,
     "gate": 2,
     "decl": 19,
-    "doc": 109
+    "doc": 89
    },
    "owner_files": [
     "00-MASTER/UIS-001/uis-declaration.json",
@@ -155,14 +155,14 @@
    "mandates": [
     "UAKP-CLS/CS-35"
    ],
-   "hits": 340,
+   "hits": 323,
    "anchored": true,
    "kinds": {
     "code": 80,
-    "test": 25,
+    "test": 24,
     "gate": 1,
-    "decl": 39,
-    "doc": 195
+    "decl": 38,
+    "doc": 180
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -221,14 +221,14 @@
    "mandates": [
     "PRD-FR/FR-01"
    ],
-   "hits": 888,
+   "hits": 859,
    "anchored": true,
    "kinds": {
-    "code": 148,
-    "test": 43,
+    "code": 141,
+    "test": 37,
     "gate": 8,
-    "decl": 82,
-    "doc": 607
+    "decl": 78,
+    "doc": 595
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -286,31 +286,28 @@
     "MI-017/TD-19",
     "QM-OUT/OU-28"
    ],
-   "hits": 5069,
+   "hits": 334,
    "anchored": false,
    "kinds": {
-    "code": 1325,
-    "test": 831,
-    "gate": 42,
-    "decl": 489,
-    "doc": 2382
+    "code": 30,
+    "test": 2,
+    "gate": 0,
+    "decl": 27,
+    "doc": 275
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "engine/uckp/law.py",
+    "00-BOOK/DATA/allocation-permits.json",
+    "00-BOOK/DATA/artifacts.json",
+    "00-BOOK/DATA/context-authority.json"
    ],
    "code_files": [
-    "engine/acceptance/__init__.py",
     "engine/acceptance/contracts.py",
-    "engine/acceptance/engine.py",
-    "engine/acceptance/errors.py"
+    "engine/certification/closure.py",
+    "engine/ceu/catalog.py",
+    "engine/kernel/__init__.py"
    ],
-   "gate_files": [
-    ".github/workflows/acee-gate.yml",
-    ".github/workflows/aee-gate.yml"
-   ],
+   "gate_files": [],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
    "named_by": [],
@@ -462,14 +459,14 @@
    "mandates": [
     "MI-006/DEC-03"
    ],
-   "hits": 763,
+   "hits": 746,
    "anchored": true,
    "kinds": {
-    "code": 67,
-    "test": 18,
-    "gate": 6,
-    "decl": 71,
-    "doc": 601
+    "code": 59,
+    "test": 15,
+    "gate": 5,
+    "decl": 69,
+    "doc": 598
    },
    "owner_files": [
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
@@ -580,7 +577,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -610,8 +607,8 @@
    "head_noun": "graph",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "reason": "head noun 'graph' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -651,15 +648,15 @@
   },
   "anomalies": {
    "label": "Anomalies",
-   "status": "IMPLEMENTED",
+   "status": "PARTIAL",
    "mandates": [
     "PRD-OBS/OBS-07"
    ],
-   "hits": 11,
+   "hits": 10,
    "anchored": false,
    "kinds": {
     "code": 2,
-    "test": 1,
+    "test": 0,
     "gate": 0,
     "decl": 1,
     "doc": 7
@@ -671,7 +668,7 @@
     "engine/registry/volumes.py"
    ],
    "gate_files": [],
-   "disposition": "IMPLEMENTED",
+   "disposition": "EXTEND",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -864,20 +861,20 @@
    "mandates": [
     "LYR-L14/IF-06"
    ],
-   "hits": 744,
+   "hits": 630,
    "anchored": true,
    "kinds": {
-    "code": 145,
-    "test": 87,
-    "gate": 1,
-    "decl": 30,
-    "doc": 481
+    "code": 106,
+    "test": 39,
+    "gate": 0,
+    "decl": 28,
+    "doc": 457
    },
    "owner_files": [
-    "00-MASTER/UIS-001/uis-declaration.json",
     "engine/uckp/law.py",
     "00-BOOK/DATA/artifacts.json",
-    "00-BOOK/DATA/id-ledger.json"
+    "00-BOOK/DATA/id-ledger.json",
+    "00-MASTER/ACEE-000001/acee.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
@@ -902,14 +899,14 @@
     "LYR-L7O/GO-02",
     "UAKP-ENV/EV2-17"
    ],
-   "hits": 174,
+   "hits": 173,
    "anchored": false,
    "kinds": {
     "code": 14,
     "test": 1,
     "gate": 0,
     "decl": 10,
-    "doc": 149
+    "doc": 148
    },
    "owner_files": [
     "engine/uckp/law.py",
@@ -938,20 +935,20 @@
     "QM-OUT/OU-18",
     "LYR-L7O/GO-03"
    ],
-   "hits": 157,
+   "hits": 141,
    "anchored": true,
    "kinds": {
-    "code": 31,
-    "test": 13,
+    "code": 26,
+    "test": 6,
     "gate": 0,
-    "decl": 18,
+    "decl": 14,
     "doc": 95
    },
    "owner_files": [
     "00-BOOK/DATA/id-ledger.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
-    "00-MASTER/UCON-000001/closure-inventory.json",
-    "00-MASTER/UCOS-OMEGA-001/omega-surface.json"
+    "00-MASTER/UCOS-OMEGA-001/omega-surface.json",
+    "00-MASTER/UCOS-RIB-001/rib.json"
    ],
    "code_files": [
     "engine/factory/factories/application.py",
@@ -973,14 +970,14 @@
     "MI-006/DEC-13",
     "ARCH-GOVF/GF-01"
    ],
-   "hits": 257,
+   "hits": 248,
    "anchored": true,
    "kinds": {
-    "code": 27,
-    "test": 8,
+    "code": 26,
+    "test": 6,
     "gate": 1,
-    "decl": 25,
-    "doc": 196
+    "decl": 22,
+    "doc": 193
    },
    "owner_files": [
     "00-MASTER/UEC-000001/uec-declaration.json",
@@ -1007,31 +1004,28 @@
    "mandates": [
     "LYR-L14/IF-04"
    ],
-   "hits": 6993,
+   "hits": 226,
    "anchored": false,
    "kinds": {
-    "code": 1374,
-    "test": 847,
-    "gate": 42,
-    "decl": 658,
-    "doc": 4072
+    "code": 82,
+    "test": 4,
+    "gate": 0,
+    "decl": 9,
+    "doc": 131
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+    "00-MASTER/UCOS-UICM-000001/02-CLOSURE-OBSERVATION-REGISTRY.json",
+    "00-MASTER/UCOS-UICM-000001/03-CLOSURE-MEASUREMENT-REPORT.json"
    ],
    "code_files": [
-    "engine/__init__.py",
-    "engine/acceptance/__init__.py",
     "engine/acceptance/contracts.py",
-    "engine/acceptance/engine.py"
+    "engine/certification/contracts.py",
+    "engine/compiler/cycles.py",
+    "engine/compiler/errors.py"
    ],
-   "gate_files": [
-    ".github/workflows/acee-gate.yml",
-    ".github/workflows/aee-gate.yml"
-   ],
+   "gate_files": [],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
    "named_by": [],
@@ -1040,36 +1034,33 @@
   },
   "architect": {
    "label": "Architect",
-   "status": "UNDECIDABLE",
+   "status": "IMPLEMENTED",
    "mandates": [
     "LYR-L15/EL-08"
    ],
-   "hits": 2564,
+   "hits": 149,
    "anchored": false,
    "kinds": {
-    "code": 343,
-    "test": 138,
-    "gate": 12,
-    "decl": 268,
-    "doc": 1803
+    "code": 8,
+    "test": 35,
+    "gate": 0,
+    "decl": 13,
+    "doc": 93
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/ACEE-000001/acee-invariant-manifest.json",
+    "00-MASTER/ACEE-000001/acee.json",
+    "00-MASTER/EXECUTION-BACKLOG.json",
+    "00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-INVENTORY.json"
    ],
    "code_files": [
-    "engine/__init__.py",
-    "engine/acceptance/__init__.py",
-    "engine/acceptance/contracts.py",
-    "engine/acceptance/errors.py"
+    "engine/constitution/stages.py",
+    "engine/nucleus/lifecycle.py",
+    "platform/foundation/identity.py",
+    "platform/generation/contracts.py"
    ],
-   "gate_files": [
-    ".github/workflows/acee-gate.yml",
-    ".github/workflows/mcos-gate.yml"
-   ],
-   "disposition": "ADJUDICATE",
+   "gate_files": [],
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -1084,26 +1075,26 @@
     "ARCH-ENGF/EF-03",
     "QM-OUT/OU-04"
    ],
-   "hits": 2262,
+   "hits": 2194,
    "anchored": true,
    "kinds": {
-    "code": 303,
-    "test": 93,
+    "code": 292,
+    "test": 63,
     "gate": 5,
-    "decl": 256,
-    "doc": 1605
+    "decl": 252,
+    "doc": 1582
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
    ],
    "code_files": [
     "engine/__init__.py",
     "engine/acceptance/__init__.py",
-    "engine/acceptance/contracts.py",
-    "engine/acceptance/errors.py"
+    "engine/acceptance/errors.py",
+    "engine/acceptance/gates.py"
    ],
    "gate_files": [
     ".github/workflows/uaue-gate.yml",
@@ -1232,14 +1223,14 @@
    "mandates": [
     "ARCH-EVOF/VF2-11"
    ],
-   "hits": 258,
+   "hits": 248,
    "anchored": false,
    "kinds": {
-    "code": 42,
-    "test": 34,
+    "code": 40,
+    "test": 33,
     "gate": 2,
-    "decl": 30,
-    "doc": 150
+    "decl": 25,
+    "doc": 148
    },
    "owner_files": [
     "00-MASTER/UCI-000001/uci-declaration.json",
@@ -1268,13 +1259,13 @@
    "mandates": [
     "UAKP-STATE/SS-18"
    ],
-   "hits": 176,
+   "hits": 170,
    "anchored": false,
    "kinds": {
-    "code": 32,
-    "test": 27,
+    "code": 29,
+    "test": 25,
     "gate": 1,
-    "decl": 18,
+    "decl": 17,
     "doc": 98
    },
    "owner_files": [
@@ -1302,14 +1293,14 @@
    "mandates": [
     "UAKP-CLS/CS-19"
    ],
-   "hits": 3047,
+   "hits": 2919,
    "anchored": true,
    "kinds": {
-    "code": 515,
-    "test": 260,
+    "code": 466,
+    "test": 200,
     "gate": 37,
-    "decl": 265,
-    "doc": 1970
+    "decl": 254,
+    "doc": 1962
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -1339,11 +1330,11 @@
    "mandates": [
     "UAKP-REG/RG-12"
    ],
-   "hits": 405,
+   "hits": 406,
    "anchored": true,
    "kinds": {
     "code": 30,
-    "test": 11,
+    "test": 12,
     "gate": 3,
     "decl": 49,
     "doc": 312
@@ -1375,10 +1366,10 @@
    "mandates": [
     "MI-012/CM-03"
    ],
-   "hits": 226,
+   "hits": 224,
    "anchored": false,
    "kinds": {
-    "code": 15,
+    "code": 13,
     "test": 2,
     "gate": 0,
     "decl": 8,
@@ -1391,7 +1382,6 @@
     "00-MASTER/UCOS-RIB-001/rib-blueprint.json"
    ],
    "code_files": [
-    "platform/coverage/health.py",
     "platform/coverage/repository.py",
     "platform/security/contracts.py",
     "platform/workspace/__init__.py"
@@ -1409,14 +1399,14 @@
    "mandates": [
     "UAKP-STATE/SS-04"
    ],
-   "hits": 300,
+   "hits": 273,
    "anchored": true,
    "kinds": {
-    "code": 62,
-    "test": 22,
+    "code": 56,
+    "test": 16,
     "gate": 3,
-    "decl": 21,
-    "doc": 192
+    "decl": 18,
+    "doc": 180
    },
    "owner_files": [
     "00-BOOK/DATA/artifacts.json",
@@ -1446,14 +1436,14 @@
    "mandates": [
     "LYR-L6/AU-02"
    ],
-   "hits": 726,
+   "hits": 693,
    "anchored": true,
    "kinds": {
-    "code": 89,
-    "test": 43,
+    "code": 88,
+    "test": 38,
     "gate": 7,
-    "decl": 91,
-    "doc": 496
+    "decl": 83,
+    "doc": 477
    },
    "owner_files": [
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
@@ -1513,29 +1503,28 @@
     "MI-008/A-11",
     "LYR-L10/GV-06"
    ],
-   "hits": 1285,
+   "hits": 1041,
    "anchored": true,
    "kinds": {
-    "code": 294,
-    "test": 89,
-    "gate": 4,
-    "decl": 74,
-    "doc": 824
+    "code": 168,
+    "test": 60,
+    "gate": 3,
+    "decl": 65,
+    "doc": 745
    },
    "owner_files": [
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/engine.py",
-    "engine/acceptance/errors.py",
-    "engine/acceptance/evidence.py",
-    "engine/certification/errors.py"
+    "engine/certification_integrity/equivalence.py",
+    "engine/certification_integrity/surface.py",
+    "engine/ceu/context_binding.py",
+    "engine/ceu/existence.py"
    ],
    "gate_files": [
-    ".github/workflows/omega-gate.yml",
     ".github/workflows/ucon-gate.yml"
    ],
    "disposition": "REFERENCE",
@@ -1550,10 +1539,10 @@
    "mandates": [
     "PRD-NFR/NFR-11"
    ],
-   "hits": 67,
+   "hits": 66,
    "anchored": false,
    "kinds": {
-    "code": 4,
+    "code": 3,
     "test": 2,
     "gate": 0,
     "decl": 2,
@@ -1565,8 +1554,7 @@
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
    "code_files": [
-    "engine/foundation/contracts/contract.py",
-    "engine/uckp/validation.py"
+    "engine/foundation/contracts/contract.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -1583,11 +1571,11 @@
     "LYR-L0/K-09",
     "LYR-L10/GV-02"
    ],
-   "hits": 3632,
+   "hits": 3531,
    "anchored": true,
    "kinds": {
-    "code": 765,
-    "test": 354,
+    "code": 756,
+    "test": 262,
     "gate": 25,
     "decl": 328,
     "doc": 2160
@@ -1800,14 +1788,14 @@
    "mandates": [
     "PRD-NFR/NFR-02"
    ],
-   "hits": 167,
+   "hits": 147,
    "anchored": false,
    "kinds": {
-    "code": 12,
-    "test": 9,
+    "code": 11,
+    "test": 5,
     "gate": 0,
-    "decl": 33,
-    "doc": 113
+    "decl": 24,
+    "doc": 107
    },
    "owner_files": [
     "00-BOOK/DATA/artifacts.json",
@@ -1816,8 +1804,7 @@
     "00-MASTER/IMR-003A/cios-bindings.json"
    ],
    "code_files": [
-    "intelligence/kernel/__init__.py",
-    "platform/commercial_intelligence/product.py"
+    "intelligence/kernel/__init__.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -1863,14 +1850,14 @@
    "mandates": [
     "LYR-L12C/CF-02"
    ],
-   "hits": 1771,
+   "hits": 1752,
    "anchored": true,
    "kinds": {
-    "code": 99,
-    "test": 47,
+    "code": 95,
+    "test": 43,
     "gate": 8,
-    "decl": 88,
-    "doc": 1529
+    "decl": 83,
+    "doc": 1523
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -2081,14 +2068,14 @@
    "mandates": [
     "ARCH-CERTV/CV-07"
    ],
-   "hits": 736,
+   "hits": 680,
    "anchored": true,
    "kinds": {
     "code": 102,
-    "test": 30,
+    "test": 26,
     "gate": 0,
-    "decl": 39,
-    "doc": 565
+    "decl": 37,
+    "doc": 515
    },
    "owner_files": [
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
@@ -2111,33 +2098,32 @@
   },
   "board": {
    "label": "Board",
-   "status": "UNDECIDABLE",
+   "status": "IMPLEMENTED",
    "mandates": [
     "MI-016/SH-02"
    ],
-   "hits": 434,
+   "hits": 27,
    "anchored": false,
    "kinds": {
-    "code": 107,
-    "test": 40,
+    "code": 6,
+    "test": 2,
     "gate": 0,
-    "decl": 50,
-    "doc": 237
+    "decl": 3,
+    "doc": 16
    },
    "owner_files": [
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json",
-    "00-MASTER/UCOS-URR-001/urr-declaration.json",
-    "00-BOOK/DATA/artifacts.json"
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+    "00-MASTER/UCOS-MXR-001/roadmap.json"
    ],
    "code_files": [
-    "engine/certification_integrity/classify.py",
-    "engine/certification_integrity/coverage_data.py",
-    "engine/context/resolution.py",
-    "engine/graph/cli.py"
+    "engine/knowledge/integration/constitution.py",
+    "engine/knowledge/seed.py",
+    "engine/knowledge/ukip/certification.py",
+    "engine/knowledge/ukip/constitution.py"
    ],
    "gate_files": [],
-   "disposition": "ADJUDICATE",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -2180,26 +2166,26 @@
    "mandates": [
     "MI-007/E-08"
    ],
-   "hits": 2141,
+   "hits": 1349,
    "anchored": true,
    "kinds": {
-    "code": 751,
-    "test": 471,
+    "code": 367,
+    "test": 139,
     "gate": 13,
-    "decl": 79,
-    "doc": 827
+    "decl": 74,
+    "doc": 756
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/__init__.py",
-    "engine/acceptance/engine.py",
-    "engine/acceptance/evidence.py",
-    "engine/acceptance/readiness.py"
+    "engine/certification/closure.py",
+    "engine/certification_integrity/classify.py",
+    "engine/certification_integrity/contract.py",
+    "engine/certification_integrity/gate.py"
    ],
    "gate_files": [
     ".github/workflows/aee-gate.yml",
@@ -2319,8 +2305,8 @@
    "head_noun": "configure",
    "head_noun_owner": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json",
-    "00-BOOK/DATA/allocation-permits.json"
+    "00-BOOK/DATA/evidence-universe.json",
+    "00-BOOK/DATA/workspace-coordination.json"
    ],
    "reason": "head noun 'configure' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -2653,14 +2639,14 @@
     "MI-012/CM-04",
     "QM-CONST/CO-09"
    ],
-   "hits": 947,
+   "hits": 917,
    "anchored": true,
    "kinds": {
-    "code": 218,
-    "test": 90,
+    "code": 206,
+    "test": 80,
     "gate": 4,
-    "decl": 71,
-    "doc": 564
+    "decl": 70,
+    "doc": 557
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -2725,14 +2711,14 @@
     "UAKP-GRAPH/GP-05",
     "UAKP-CLS/CS-17"
    ],
-   "hits": 2364,
+   "hits": 2271,
    "anchored": true,
    "kinds": {
-    "code": 497,
-    "test": 235,
+    "code": 470,
+    "test": 188,
     "gate": 24,
-    "decl": 224,
-    "doc": 1384
+    "decl": 220,
+    "doc": 1369
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -3093,20 +3079,20 @@
     "UAKP-GRAPH/GP-13",
     "UAKP-CLS/CS-29"
    ],
-   "hits": 3381,
+   "hits": 3275,
    "anchored": true,
    "kinds": {
-    "code": 682,
-    "test": 305,
+    "code": 648,
+    "test": 269,
     "gate": 14,
-    "decl": 391,
-    "doc": 1989
+    "decl": 379,
+    "doc": 1965
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCI-000001/uci-declaration.json",
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
@@ -3222,14 +3208,14 @@
    "mandates": [
     "UAKP-STATE/SS-14"
    ],
-   "hits": 2818,
+   "hits": 2773,
    "anchored": true,
    "kinds": {
-    "code": 713,
-    "test": 331,
+    "code": 707,
+    "test": 299,
     "gate": 20,
-    "decl": 352,
-    "doc": 1402
+    "decl": 349,
+    "doc": 1398
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -3319,14 +3305,14 @@
     "LYR-L15/EL-11",
     "UAKP-PO/PO-20"
    ],
-   "hits": 1034,
+   "hits": 868,
    "anchored": true,
    "kinds": {
-    "code": 230,
-    "test": 172,
+    "code": 173,
+    "test": 87,
     "gate": 7,
-    "decl": 52,
-    "doc": 573
+    "decl": 43,
+    "doc": 558
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -3335,10 +3321,10 @@
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
    ],
    "code_files": [
-    "engine/certification/__init__.py",
     "engine/certification/contracts.py",
     "engine/certification/criteria.py",
-    "engine/certification/engine.py"
+    "engine/certification/engine.py",
+    "engine/certification_integrity/gate.py"
    ],
    "gate_files": [
     ".github/workflows/mcos-gate.yml",
@@ -3356,14 +3342,14 @@
    "mandates": [
     "LYR-L15/EL-06"
    ],
-   "hits": 67,
+   "hits": 62,
    "anchored": false,
    "kinds": {
-    "code": 9,
-    "test": 2,
+    "code": 8,
+    "test": 1,
     "gate": 0,
     "decl": 14,
-    "doc": 42
+    "doc": 39
    },
    "owner_files": [
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
@@ -3374,8 +3360,8 @@
    "code_files": [
     "engine/constitution/stages.py",
     "engine/context/constitution.py",
-    "engine/context/resolution.py",
-    "engine/nucleus/lifecycle.py"
+    "engine/nucleus/lifecycle.py",
+    "engine/omega_governance/authority.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -3452,14 +3438,14 @@
    "mandates": [
     "UAKP-CLS/CS-04"
    ],
-   "hits": 1498,
+   "hits": 1463,
    "anchored": true,
    "kinds": {
-    "code": 272,
-    "test": 180,
-    "gate": 19,
-    "decl": 93,
-    "doc": 934
+    "code": 265,
+    "test": 171,
+    "gate": 18,
+    "decl": 89,
+    "doc": 920
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -3475,7 +3461,7 @@
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
-    ".github/workflows/baseline-gate.yml"
+    ".github/workflows/ec1-ci.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -3522,14 +3508,14 @@
     "QM-FLOW/FL-05",
     "LYR-L6/AU-03"
    ],
-   "hits": 1655,
+   "hits": 1610,
    "anchored": true,
    "kinds": {
-    "code": 256,
-    "test": 97,
-    "gate": 5,
-    "decl": 107,
-    "doc": 1190
+    "code": 243,
+    "test": 86,
+    "gate": 4,
+    "decl": 103,
+    "doc": 1174
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -3559,20 +3545,20 @@
    "mandates": [
     "UAKP-STATE/SS-06"
    ],
-   "hits": 1348,
+   "hits": 1025,
    "anchored": false,
    "kinds": {
-    "code": 268,
-    "test": 111,
-    "gate": 7,
-    "decl": 176,
-    "doc": 786
+    "code": 238,
+    "test": 70,
+    "gate": 5,
+    "decl": 164,
+    "doc": 548
    },
    "owner_files": [
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/classify.py",
@@ -3582,7 +3568,7 @@
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
-    ".github/workflows/assimilation-gate.yml"
+    ".github/workflows/uaie-gate.yml"
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
@@ -3596,14 +3582,14 @@
    "mandates": [
     "ARCH-DISCF/DF-05"
    ],
-   "hits": 480,
+   "hits": 393,
    "anchored": true,
    "kinds": {
-    "code": 100,
-    "test": 50,
+    "code": 85,
+    "test": 42,
     "gate": 4,
-    "decl": 35,
-    "doc": 291
+    "decl": 32,
+    "doc": 230
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -3633,30 +3619,29 @@
    "mandates": [
     "LYR-L14/IF-07"
    ],
-   "hits": 1980,
+   "hits": 516,
    "anchored": true,
    "kinds": {
-    "code": 455,
-    "test": 280,
-    "gate": 8,
-    "decl": 274,
-    "doc": 963
+    "code": 156,
+    "test": 95,
+    "gate": 4,
+    "decl": 38,
+    "doc": 223
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-BOOK/DATA/allocation-permits.json",
+    "00-BOOK/DATA/generated-artifact-registry.json"
    ],
    "code_files": [
     "engine/certification_integrity/model.py",
     "engine/certification_integrity/surface.py",
-    "engine/ceu/catalog.py",
-    "engine/ceu/errors.py"
+    "engine/constitution/cli.py",
+    "engine/constitution/legality.py"
    ],
    "gate_files": [
-    ".github/workflows/ec1-ci.yml",
-    ".github/workflows/roadmap-gate.yml"
+    ".github/workflows/ec1-ci.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -3712,11 +3697,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "environment",
    "head_noun_owner": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCPA-000001/ucpa-declaration.json"
    ],
-   "reason": "head noun 'environment' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'environment' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -3894,7 +3879,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -3924,8 +3909,8 @@
    "head_noun": "graph",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "reason": "head noun 'graph' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -4085,14 +4070,14 @@
    "mandates": [
     "ARCH-VERIF/VF-08"
    ],
-   "hits": 1268,
+   "hits": 1195,
    "anchored": true,
    "kinds": {
-    "code": 133,
-    "test": 63,
-    "gate": 6,
-    "decl": 222,
-    "doc": 844
+    "code": 124,
+    "test": 28,
+    "gate": 4,
+    "decl": 219,
+    "doc": 820
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -4103,12 +4088,12 @@
    "code_files": [
     "engine/certification/integrity.py",
     "engine/ceu/possessions.py",
-    "engine/constitution/acceptance.py",
-    "engine/construct/contract.py"
+    "engine/context/catalog.py",
+    "engine/context/ontology.py"
    ],
    "gate_files": [
-    ".github/workflows/omega-gate.yml",
-    ".github/workflows/uctx-gate.yml"
+    ".github/workflows/uctx-gate.yml",
+    ".github/workflows/ufi-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -4124,14 +4109,14 @@
     "MI-009/GV-13",
     "LYR-L10/GV-05"
    ],
-   "hits": 1167,
+   "hits": 1135,
    "anchored": true,
    "kinds": {
-    "code": 211,
-    "test": 136,
+    "code": 202,
+    "test": 126,
     "gate": 8,
-    "decl": 149,
-    "doc": 663
+    "decl": 142,
+    "doc": 657
    },
    "owner_files": [
     "00-MASTER/UCOS-URR-001/urr-declaration.json",
@@ -4276,14 +4261,14 @@
    "mandates": [
     "UAKP-CLS/CS-20"
    ],
-   "hits": 626,
+   "hits": 585,
    "anchored": false,
    "kinds": {
-    "code": 96,
-    "test": 80,
+    "code": 90,
+    "test": 58,
     "gate": 3,
-    "decl": 44,
-    "doc": 403
+    "decl": 42,
+    "doc": 392
    },
    "owner_files": [
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
@@ -4348,14 +4333,14 @@
     "QM-FLOW/FL-13",
     "LYR-L6/AU-07"
    ],
-   "hits": 1266,
+   "hits": 1206,
    "anchored": true,
    "kinds": {
-    "code": 365,
-    "test": 154,
+    "code": 359,
+    "test": 141,
     "gate": 3,
-    "decl": 150,
-    "doc": 594
+    "decl": 148,
+    "doc": 555
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -4564,14 +4549,14 @@
    "mandates": [
     "UAKP-CLS/CS-07"
    ],
-   "hits": 175,
+   "hits": 171,
    "anchored": true,
    "kinds": {
-    "code": 20,
+    "code": 19,
     "test": 6,
     "gate": 0,
-    "decl": 23,
-    "doc": 126
+    "decl": 22,
+    "doc": 124
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -4658,14 +4643,14 @@
     "ARCH-ENGF/EF-07",
     "QM-FLOW/FL-14"
    ],
-   "hits": 441,
+   "hits": 415,
    "anchored": true,
    "kinds": {
-    "code": 100,
-    "test": 41,
+    "code": 95,
+    "test": 40,
     "gate": 3,
-    "decl": 42,
-    "doc": 255
+    "decl": 39,
+    "doc": 238
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -4837,20 +4822,20 @@
     "ARCH-VERIF/VF-09",
     "LYR-L12V/VF-05"
    ],
-   "hits": 496,
+   "hits": 451,
    "anchored": true,
    "kinds": {
-    "code": 52,
-    "test": 16,
+    "code": 49,
+    "test": 11,
     "gate": 2,
-    "decl": 42,
-    "doc": 384
+    "decl": 38,
+    "doc": 351
    },
    "owner_files": [
-    "00-MASTER/URKE-000001/urke-declaration.json",
     "00-BOOK/DATA/artifacts.json",
     "00-BOOK/DATA/generated-artifact-registry.json",
-    "00-BOOK/DATA/id-ledger.json"
+    "00-BOOK/DATA/id-ledger.json",
+    "00-MASTER/ACEE-000001/acee.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
@@ -4876,30 +4861,30 @@
     "LYR-L5/US-02",
     "LYR-L7I/GI-01"
    ],
-   "hits": 3142,
+   "hits": 1585,
    "anchored": true,
    "kinds": {
-    "code": 549,
-    "test": 182,
-    "gate": 24,
-    "decl": 304,
-    "doc": 2083
+    "code": 190,
+    "test": 66,
+    "gate": 7,
+    "decl": 104,
+    "doc": 1218
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
-    "engine/acceptance/contracts.py",
     "engine/acceptance/gates.py",
-    "engine/acceptance/readiness.py"
+    "engine/ceu/existence.py",
+    "engine/ceu/possessions.py"
    ],
    "gate_files": [
-    ".github/workflows/acee-gate.yml",
-    ".github/workflows/aee-gate.yml"
+    ".github/workflows/uaue-gate.yml",
+    ".github/workflows/ucef-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -4988,7 +4973,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -5235,14 +5220,14 @@
     "LYR-L0/K-10",
     "UAKP-CLS/CS-13"
    ],
-   "hits": 1046,
+   "hits": 1015,
    "anchored": true,
    "kinds": {
-    "code": 199,
-    "test": 58,
+    "code": 197,
+    "test": 41,
     "gate": 0,
-    "decl": 164,
-    "doc": 625
+    "decl": 158,
+    "doc": 619
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -5287,7 +5272,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -5386,20 +5371,20 @@
     "QM-CONST/CO-06",
     "LYR-L7I/GI-05"
    ],
-   "hits": 699,
+   "hits": 676,
    "anchored": false,
    "kinds": {
     "code": 157,
-    "test": 45,
+    "test": 32,
     "gate": 0,
-    "decl": 146,
-    "doc": 351
+    "decl": 141,
+    "doc": 346
    },
    "owner_files": [
     "00-MASTER/UCPA-000001/ucpa-declaration.json",
     "engine/constitution/law.py",
-    "00-BOOK/DATA/artifacts.json",
-    "00-BOOK/DATA/id-ledger.json"
+    "00-MASTER/MCOS-000001/mcos-civilization.json",
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
    ],
    "code_files": [
     "engine/ceu/catalog.py",
@@ -5529,11 +5514,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "erp",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "engine/nucleus/law.py",
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "reason": "head noun 'erp' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'erp' is named by engine/nucleus/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -5562,7 +5547,7 @@
    "head_noun_owner": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/IMR-0000/imr-0000-platform-bindings.json"
+    "00-MASTER/MCOS-000001/mcos-civilization.json"
    ],
    "reason": "head noun 'systems' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -5825,14 +5810,14 @@
     "LYR-L7I/GI-06",
     "UAKP-CLS/CS-15"
    ],
-   "hits": 1373,
+   "hits": 1279,
    "anchored": true,
    "kinds": {
-    "code": 358,
-    "test": 198,
+    "code": 330,
+    "test": 164,
     "gate": 5,
-    "decl": 102,
-    "doc": 710
+    "decl": 101,
+    "doc": 679
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -6179,14 +6164,14 @@
    "mandates": [
     "LYR-L5/US-09"
    ],
-   "hits": 1611,
+   "hits": 1599,
    "anchored": true,
    "kinds": {
-    "code": 726,
-    "test": 363,
+    "code": 725,
+    "test": 359,
     "gate": 2,
-    "decl": 135,
-    "doc": 385
+    "decl": 129,
+    "doc": 384
    },
    "owner_files": [
     "00-MASTER/UIS-001/uis-declaration.json",
@@ -6248,14 +6233,14 @@
     "MI-012/CM-10",
     "LYR-L11/ME-04"
    ],
-   "hits": 380,
+   "hits": 359,
    "anchored": true,
    "kinds": {
-    "code": 74,
-    "test": 42,
+    "code": 69,
+    "test": 41,
     "gate": 6,
-    "decl": 40,
-    "doc": 218
+    "decl": 36,
+    "doc": 207
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -6285,14 +6270,14 @@
    "mandates": [
     "ARCH-VERIF/VF-10"
    ],
-   "hits": 1845,
+   "hits": 1781,
    "anchored": true,
    "kinds": {
-    "code": 275,
-    "test": 189,
+    "code": 255,
+    "test": 157,
     "gate": 27,
-    "decl": 269,
-    "doc": 1085
+    "decl": 262,
+    "doc": 1080
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -6322,14 +6307,14 @@
    "mandates": [
     "ARCH-CERTV/CV-04"
    ],
-   "hits": 2188,
+   "hits": 2146,
    "anchored": false,
    "kinds": {
-    "code": 417,
-    "test": 280,
+    "code": 407,
+    "test": 259,
     "gate": 21,
-    "decl": 93,
-    "doc": 1377
+    "decl": 91,
+    "doc": 1368
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -6359,14 +6344,14 @@
    "mandates": [
     "MI-017/TD-03"
    ],
-   "hits": 28,
+   "hits": 27,
    "anchored": false,
    "kinds": {
     "code": 2,
     "test": 2,
     "gate": 0,
     "decl": 5,
-    "doc": 19
+    "doc": 18
    },
    "owner_files": [
     "engine/nucleus/law.py",
@@ -6467,29 +6452,25 @@
   },
   "customers": {
    "label": "Customers",
-   "status": "IMPLEMENTED",
+   "status": "SPECIFIED",
    "mandates": [
     "MI-016/SH-21"
    ],
-   "hits": 8,
+   "hits": 1,
    "anchored": false,
    "kinds": {
-    "code": 2,
-    "test": 1,
+    "code": 0,
+    "test": 0,
     "gate": 0,
-    "decl": 5,
+    "decl": 1,
     "doc": 0
    },
    "owner_files": [
-    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
-    "00-MASTER/UCON-000001/closure-inventory.json"
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "code_files": [
-    "platform/commercial_intelligence/__init__.py",
-    "platform/commercial_intelligence/customer.py"
-   ],
+   "code_files": [],
    "gate_files": [],
-   "disposition": "IMPLEMENTED",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -6503,14 +6484,14 @@
     "MI-015/PJ-18",
     "QM-OUT/OU-22"
    ],
-   "hits": 59,
+   "hits": 45,
    "anchored": false,
    "kinds": {
-    "code": 14,
-    "test": 8,
+    "code": 8,
+    "test": 4,
     "gate": 0,
-    "decl": 6,
-    "doc": 31
+    "decl": 3,
+    "doc": 30
    },
    "owner_files": [
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
@@ -6519,9 +6500,9 @@
    ],
    "code_files": [
     "engine/context/resolution.py",
-    "platform/execution_dashboard/__init__.py",
-    "platform/execution_dashboard/bootstrap.py",
-    "platform/execution_dashboard/errors.py"
+    "platform/generation/contracts.py",
+    "platform/repository_intelligence/discovery.py",
+    "platform/repository_intelligence/runtime.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -6536,14 +6517,14 @@
    "mandates": [
     "QM-OUT/OU-11"
    ],
-   "hits": 3649,
+   "hits": 2870,
    "anchored": true,
    "kinds": {
-    "code": 1060,
-    "test": 469,
+    "code": 626,
+    "test": 284,
     "gate": 31,
-    "decl": 366,
-    "doc": 1723
+    "decl": 358,
+    "doc": 1571
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -6552,10 +6533,10 @@
     "00-MASTER/UCI-000001/uci-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/contracts.py",
-    "engine/acceptance/engine.py",
-    "engine/acceptance/evidence.py",
-    "engine/acceptance/readiness.py"
+    "engine/certification_integrity/__init__.py",
+    "engine/certification_integrity/contract.py",
+    "engine/certification_integrity/coverage_data.py",
+    "engine/certification_integrity/equivalence.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -6585,15 +6566,11 @@
    "owner_files": [],
    "code_files": [],
    "gate_files": [],
-   "disposition": "EXTEND",
+   "disposition": "CREATE",
    "determination": "PROVISIONAL",
    "head_noun": "lake",
-   "head_noun_owner": [
-    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
-    "engine/object_birth/contract.py",
-    "engine/object_birth/gate.py"
-   ],
-   "reason": "head noun 'lake' is named by 00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "head_noun_owner": [],
+   "reason": "no owner located for 'lake' either, so nothing in the repository holds this under any spelling tried",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -6604,14 +6581,14 @@
    "mandates": [
     "UAKP-ENV/EV2-14"
    ],
-   "hits": 222,
+   "hits": 219,
    "anchored": true,
    "kinds": {
     "code": 39,
-    "test": 4,
+    "test": 5,
     "gate": 0,
-    "decl": 21,
-    "doc": 158
+    "decl": 20,
+    "doc": 155
    },
    "owner_files": [
     "00-MASTER/UCL-000001/ucl-declaration.json",
@@ -6668,14 +6645,14 @@
     "UAKP-PROC/PR-14",
     "UAKP-CLS/CS-10"
    ],
-   "hits": 1932,
+   "hits": 1871,
    "anchored": true,
    "kinds": {
-    "code": 440,
-    "test": 252,
+    "code": 417,
+    "test": 235,
     "gate": 8,
-    "decl": 102,
-    "doc": 1130
+    "decl": 99,
+    "doc": 1112
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -6877,14 +6854,14 @@
     "UAKP-GRAPH/GP-06",
     "UAKP-CLS/CS-22"
    ],
-   "hits": 1975,
+   "hits": 1857,
    "anchored": true,
    "kinds": {
-    "code": 344,
-    "test": 171,
+    "code": 311,
+    "test": 109,
     "gate": 10,
-    "decl": 137,
-    "doc": 1313
+    "decl": 125,
+    "doc": 1302
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -6893,10 +6870,10 @@
     "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/__init__.py",
     "engine/acceptance/contracts.py",
     "engine/acceptance/gates.py",
-    "engine/certification_integrity/coverage_data.py"
+    "engine/certification_integrity/coverage_data.py",
+    "engine/certification_integrity/immutable.py"
    ],
    "gate_files": [
     ".github/workflows/roadmap-gate.yml",
@@ -7142,14 +7119,14 @@
     "MI-018/ES-11",
     "QM-FLOW/FL-21"
    ],
-   "hits": 504,
+   "hits": 495,
    "anchored": true,
    "kinds": {
-    "code": 99,
-    "test": 25,
+    "code": 98,
+    "test": 22,
     "gate": 0,
-    "decl": 43,
-    "doc": 337
+    "decl": 41,
+    "doc": 334
    },
    "owner_files": [
     "00-BOOK/DATA/artifacts.json",
@@ -7204,13 +7181,13 @@
    "mandates": [
     "ARCH-CERTV/CV-06"
    ],
-   "hits": 220,
+   "hits": 217,
    "anchored": false,
    "kinds": {
     "code": 36,
     "test": 11,
     "gate": 0,
-    "decl": 15,
+    "decl": 12,
     "doc": 158
    },
    "owner_files": [
@@ -7238,14 +7215,14 @@
    "mandates": [
     "MI-006/DEC-05"
    ],
-   "hits": 816,
+   "hits": 794,
    "anchored": true,
    "kinds": {
-    "code": 178,
-    "test": 60,
+    "code": 175,
+    "test": 52,
     "gate": 7,
-    "decl": 141,
-    "doc": 430
+    "decl": 137,
+    "doc": 423
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -7277,20 +7254,20 @@
     "ARCH-ENGF/EF-04",
     "MI-018/ES-05"
    ],
-   "hits": 1206,
+   "hits": 953,
    "anchored": true,
    "kinds": {
-    "code": 143,
-    "test": 45,
-    "gate": 4,
-    "decl": 66,
-    "doc": 948
+    "code": 127,
+    "test": 41,
+    "gate": 2,
+    "decl": 47,
+    "doc": 736
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UEG-000001/ueg-declaration.json",
+    "00-MASTER/UIS-001/uis-declaration.json",
+    "00-MASTER/UISD-000001/uisd-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/contracts.py",
@@ -7299,8 +7276,7 @@
     "engine/ceu/possessions.py"
    ],
    "gate_files": [
-    ".github/workflows/sub-gate.yml",
-    ".github/workflows/ucl-gate.yml"
+    ".github/workflows/sub-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -7314,14 +7290,14 @@
    "mandates": [
     "ARCH-VERIF/VF-01"
    ],
-   "hits": 1477,
+   "hits": 1404,
    "anchored": true,
    "kinds": {
-    "code": 288,
-    "test": 175,
+    "code": 280,
+    "test": 165,
     "gate": 35,
-    "decl": 137,
-    "doc": 842
+    "decl": 86,
+    "doc": 838
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -7500,14 +7476,14 @@
    "mandates": [
     "MI-009/GV-04"
    ],
-   "hits": 184,
+   "hits": 176,
    "anchored": true,
    "kinds": {
-    "code": 17,
+    "code": 14,
     "test": 8,
     "gate": 5,
-    "decl": 35,
-    "doc": 119
+    "decl": 31,
+    "doc": 118
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -7631,14 +7607,14 @@
     "ARCH-DISCF/DF-02",
     "LYR-L15/EL-01"
    ],
-   "hits": 1592,
+   "hits": 911,
    "anchored": false,
    "kinds": {
-    "code": 377,
-    "test": 162,
-    "gate": 15,
-    "decl": 115,
-    "doc": 923
+    "code": 240,
+    "test": 95,
+    "gate": 10,
+    "decl": 75,
+    "doc": 491
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -7647,10 +7623,10 @@
     "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/__init__.py",
     "engine/acceptance/contracts.py",
-    "engine/acceptance/errors.py",
-    "engine/acceptance/gates.py"
+    "engine/acceptance/gates.py",
+    "engine/ceu/existence.py",
+    "engine/civilization/compliance.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -7686,7 +7662,7 @@
    "head_noun_owner": [
     "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
+    "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'ownership' is named by 00-MASTER/UCOS-CEU-001/ceu-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -7868,7 +7844,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'knowledge' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -7961,7 +7937,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'structure' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -7990,11 +7966,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "environment",
    "head_noun_owner": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCPA-000001/ucpa-declaration.json"
    ],
-   "reason": "head noun 'environment' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'environment' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -8036,14 +8012,14 @@
    "mandates": [
     "UAKP-STATE/SS-02"
    ],
-   "hits": 705,
+   "hits": 660,
    "anchored": true,
    "kinds": {
-    "code": 145,
-    "test": 55,
+    "code": 136,
+    "test": 42,
     "gate": 8,
-    "decl": 69,
-    "doc": 428
+    "decl": 68,
+    "doc": 406
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -8076,14 +8052,14 @@
     "QM-FLOW/FL-03",
     "LYR-L6/AU-01"
    ],
-   "hits": 1211,
+   "hits": 1161,
    "anchored": true,
    "kinds": {
-    "code": 276,
-    "test": 109,
+    "code": 263,
+    "test": 90,
     "gate": 11,
-    "decl": 96,
-    "doc": 719
+    "decl": 92,
+    "doc": 705
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -8191,11 +8167,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "environment",
    "head_noun_owner": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCPA-000001/ucpa-declaration.json"
    ],
-   "reason": "head noun 'environment' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'environment' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -8206,13 +8182,13 @@
    "mandates": [
     "LYR-L13/CM-10"
    ],
-   "hits": 283,
+   "hits": 279,
    "anchored": false,
    "kinds": {
-    "code": 54,
-    "test": 11,
+    "code": 53,
+    "test": 9,
     "gate": 1,
-    "decl": 50,
+    "decl": 49,
     "doc": 167
    },
    "owner_files": [
@@ -8243,14 +8219,14 @@
     "LYR-L6/AU-10",
     "LYR-L7O/GO-04"
    ],
-   "hits": 385,
+   "hits": 368,
    "anchored": true,
    "kinds": {
-    "code": 52,
-    "test": 19,
+    "code": 45,
+    "test": 14,
     "gate": 4,
-    "decl": 41,
-    "doc": 269
+    "decl": 40,
+    "doc": 265
    },
    "owner_files": [
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
@@ -8261,8 +8237,8 @@
    "code_files": [
     "engine/constitution/errors.py",
     "engine/enforcement_closure/discovery.py",
-    "engine/knowledge/__init__.py",
-    "engine/knowledge/capability.py"
+    "engine/knowledge/cko.py",
+    "engine/knowledge/docs.py"
    ],
    "gate_files": [
     ".github/workflows/ucl-gate.yml",
@@ -8307,14 +8283,14 @@
    "mandates": [
     "LYR-L5N/UN-02"
    ],
-   "hits": 1275,
+   "hits": 1259,
    "anchored": true,
    "kinds": {
-    "code": 163,
-    "test": 55,
+    "code": 159,
+    "test": 51,
     "gate": 8,
-    "decl": 68,
-    "doc": 981
+    "decl": 66,
+    "doc": 975
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -8344,14 +8320,14 @@
    "mandates": [
     "ARCH-EVOF/VF2-08"
    ],
-   "hits": 44,
+   "hits": 39,
    "anchored": false,
    "kinds": {
     "code": 5,
-    "test": 2,
+    "test": 1,
     "gate": 0,
-    "decl": 8,
-    "doc": 29
+    "decl": 5,
+    "doc": 28
    },
    "owner_files": [
     "00-MASTER/EXECUTION-BACKLOG.json",
@@ -8814,8 +8790,8 @@
    "head_noun": "replay",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
    ],
    "reason": "head noun 'replay' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -8889,14 +8865,14 @@
    "mandates": [
     "PRD-GOV/GOV-07"
    ],
-   "hits": 873,
+   "hits": 823,
    "anchored": true,
    "kinds": {
-    "code": 145,
-    "test": 58,
+    "code": 137,
+    "test": 32,
     "gate": 14,
-    "decl": 70,
-    "doc": 586
+    "decl": 64,
+    "doc": 576
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -8908,7 +8884,7 @@
     "engine/certification/integrity.py",
     "engine/certification_integrity/__init__.py",
     "engine/certification_integrity/contract.py",
-    "engine/certification_integrity/immutable.py"
+    "engine/certification_integrity/inventory.py"
    ],
    "gate_files": [
     ".github/workflows/ec1-ci.yml",
@@ -8926,13 +8902,13 @@
    "mandates": [
     "ARCH-ENGF/EF-05"
    ],
-   "hits": 1310,
+   "hits": 1292,
    "anchored": true,
    "kinds": {
-    "code": 210,
-    "test": 96,
+    "code": 201,
+    "test": 88,
     "gate": 4,
-    "decl": 226,
+    "decl": 225,
     "doc": 774
    },
    "owner_files": [
@@ -9132,30 +9108,30 @@
    "mandates": [
     "LYR-L1/EX-08"
    ],
-   "hits": 2833,
+   "hits": 740,
    "anchored": true,
    "kinds": {
-    "code": 794,
-    "test": 411,
-    "gate": 18,
-    "decl": 274,
-    "doc": 1336
+    "code": 147,
+    "test": 69,
+    "gate": 3,
+    "decl": 123,
+    "doc": 398
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/contracts.py",
-    "engine/acceptance/evidence.py",
-    "engine/certification/evidence.py",
-    "engine/certification_integrity/coverage_data.py"
+    "engine/ceu/catalog.py",
+    "engine/ceu/context_binding.py",
+    "engine/ceu/errors.py",
+    "engine/ceu/existence.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
-    ".github/workflows/baseline-gate.yml"
+    ".github/workflows/ucl-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -9170,26 +9146,26 @@
     "LYR-L1/EX-06",
     "UAKP-CLS/CS-34"
    ],
-   "hits": 677,
+   "hits": 604,
    "anchored": true,
    "kinds": {
-    "code": 133,
-    "test": 46,
+    "code": 123,
+    "test": 39,
     "gate": 12,
-    "decl": 85,
-    "doc": 401
+    "decl": 73,
+    "doc": 357
    },
    "owner_files": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-SUB-001/sub-declaration.json"
+    "00-MASTER/UCPA-000001/ucpa-declaration.json",
+    "00-MASTER/UEG-000001/ueg-declaration.json"
    ],
    "code_files": [
-    "engine/certification_integrity/classify.py",
     "engine/certification_integrity/equivalence.py",
     "engine/certification_integrity/immutable.py",
-    "engine/certification_integrity/model.py"
+    "engine/certification_integrity/pytest_shuffle.py",
+    "engine/constitution/replay.py"
    ],
    "gate_files": [
     ".github/workflows/aee-gate.yml",
@@ -9285,36 +9261,30 @@
   },
   "erp": {
    "label": "ERP",
-   "status": "UNDECIDABLE",
+   "status": "IMPLEMENTED",
    "mandates": [
     "MI-017/TD-02"
    ],
-   "hits": 1353,
+   "hits": 31,
    "anchored": false,
    "kinds": {
-    "code": 404,
-    "test": 279,
-    "gate": 14,
-    "decl": 78,
-    "doc": 578
+    "code": 4,
+    "test": 2,
+    "gate": 0,
+    "decl": 5,
+    "doc": 20
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "engine/nucleus/law.py",
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+    "00-MASTER/UCDA-000001/ucda-decisions.json"
    ],
    "code_files": [
-    "engine/certification_integrity/immutable.py",
-    "engine/certification_integrity/model.py",
-    "engine/ceu/catalog.py",
-    "engine/ceu/existence.py"
+    "engine/nucleus/catalog.py"
    ],
-   "gate_files": [
-    ".github/workflows/aee-gate.yml",
-    ".github/workflows/ec1-ci.yml"
-   ],
-   "disposition": "ADJUDICATE",
+   "gate_files": [],
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -9326,14 +9296,14 @@
    "mandates": [
     "MI-006/DEC-04"
    ],
-   "hits": 414,
+   "hits": 384,
    "anchored": true,
    "kinds": {
-    "code": 117,
-    "test": 30,
+    "code": 107,
+    "test": 16,
     "gate": 0,
-    "decl": 37,
-    "doc": 230
+    "decl": 33,
+    "doc": 228
    },
    "owner_files": [
     "00-MASTER/UCOS-URR-001/urr-declaration.json",
@@ -9344,8 +9314,8 @@
    "code_files": [
     "engine/construct/disposition.py",
     "engine/knowledge/cko.py",
-    "engine/knowledge/integration/constitution.py",
-    "engine/knowledge/seed.py"
+    "engine/omega_governance/state.py",
+    "engine/uaue/controller.py"
    ],
    "gate_files": [],
    "disposition": "REFERENCE",
@@ -9360,30 +9330,30 @@
    "mandates": [
     "LYR-L1/EX-10"
    ],
-   "hits": 1559,
+   "hits": 1040,
    "anchored": true,
    "kinds": {
-    "code": 335,
-    "test": 182,
-    "gate": 10,
-    "decl": 108,
-    "doc": 924
+    "code": 219,
+    "test": 115,
+    "gate": 4,
+    "decl": 71,
+    "doc": 631
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
     "00-MASTER/UCI-000001/uci-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UIS-001/uis-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/__init__.py",
-    "engine/certification_integrity/contract.py",
     "engine/certification_integrity/immutable.py",
-    "engine/ceu/catalog.py"
+    "engine/ceu/catalog.py",
+    "engine/ceu/context_binding.py"
    ],
    "gate_files": [
-    ".github/workflows/acee-gate.yml",
-    ".github/workflows/aee-gate.yml"
+    ".github/workflows/aee-gate.yml",
+    ".github/workflows/ec1-ci.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -9489,30 +9459,28 @@
     "QM-CONST/CO-12",
     "LYR-L9/KG-04"
    ],
-   "hits": 687,
+   "hits": 529,
    "anchored": true,
    "kinds": {
-    "code": 138,
-    "test": 85,
-    "gate": 1,
-    "decl": 36,
-    "doc": 427
+    "code": 115,
+    "test": 74,
+    "gate": 0,
+    "decl": 30,
+    "doc": 310
    },
    "owner_files": [
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-URAT-001/urat-declaration.json"
+    "00-MASTER/UIS-001/uis-declaration.json",
+    "00-MASTER/URKE-000001/urke-declaration.json",
+    "00-BOOK/DATA/canonical-observation-audit.json"
    ],
    "code_files": [
     "engine/ceu/context_binding.py",
-    "engine/constitution/assimilation.py",
     "engine/context/ontology.py",
-    "engine/knowledge/integration/pipeline.py"
+    "engine/lineage/model.py",
+    "engine/lineage/projection.py"
    ],
-   "gate_files": [
-    ".github/workflows/closure009-gate.yml"
-   ],
+   "gate_files": [],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
    "named_by": [],
@@ -9525,11 +9493,11 @@
    "mandates": [
     "QM-OUT/OU-01"
    ],
-   "hits": 650,
+   "hits": 633,
    "anchored": false,
    "kinds": {
     "code": 238,
-    "test": 85,
+    "test": 68,
     "gate": 6,
     "decl": 34,
     "doc": 287
@@ -9663,7 +9631,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCPA-000001/ucpa-declaration.json"
+    "00-MASTER/UIS-001/uis-declaration.json"
    ],
    "reason": "head noun 'extensible' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -9746,14 +9714,14 @@
     "UAKP-GRAPH/GP-02",
     "UAKP-CLS/CS-05"
    ],
-   "hits": 4144,
+   "hits": 3672,
    "anchored": true,
    "kinds": {
-    "code": 771,
-    "test": 372,
+    "code": 753,
+    "test": 331,
     "gate": 25,
-    "decl": 434,
-    "doc": 2542
+    "decl": 382,
+    "doc": 2181
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -10072,14 +10040,14 @@
     "UAKP-GRAPH/GP-15",
     "UAKP-CLS/CS-33"
    ],
-   "hits": 1229,
+   "hits": 1180,
    "anchored": true,
    "kinds": {
-    "code": 128,
-    "test": 48,
+    "code": 114,
+    "test": 42,
     "gate": 13,
-    "decl": 103,
-    "doc": 937
+    "decl": 98,
+    "doc": 913
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -10569,10 +10537,10 @@
    "mandates": [
     "PRD-NFR/NFR-07"
    ],
-   "hits": 20,
+   "hits": 19,
    "anchored": false,
    "kinds": {
-    "code": 3,
+    "code": 2,
     "test": 1,
     "gate": 0,
     "decl": 2,
@@ -10583,9 +10551,7 @@
     "00-MASTER/P0-FINAL-CLOSURE-002/UCOS-GOVERNANCE-EVOLUTION.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "code_files": [
-    "engine/uckp/validation.py"
-   ],
+   "code_files": [],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
@@ -10601,14 +10567,14 @@
     "ARCH-OPF/OF-04",
     "UAKP-CLS/CS-25"
    ],
-   "hits": 2529,
+   "hits": 2449,
    "anchored": true,
    "kinds": {
-    "code": 482,
-    "test": 210,
-    "gate": 14,
-    "decl": 274,
-    "doc": 1549
+    "code": 458,
+    "test": 189,
+    "gate": 12,
+    "decl": 263,
+    "doc": 1527
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -10806,40 +10772,38 @@
    "determination": "PROVISIONAL",
    "head_noun": "generation",
    "head_noun_owner": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
    ],
-   "reason": "head noun 'generation' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'generation' is named by 00-MASTER/UCOS-AEE-001/aee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
   },
   "executives": {
    "label": "Executives",
-   "status": "SPECIFIED",
+   "status": "ABSENT",
    "mandates": [
     "MI-016/SH-03"
    ],
-   "hits": 21,
+   "hits": 0,
    "anchored": false,
    "kinds": {
     "code": 0,
     "test": 0,
     "gate": 0,
-    "decl": 12,
-    "doc": 9
+    "decl": 0,
+    "doc": 0
    },
-   "owner_files": [
-    "00-BOOK/DATA/artifacts.json",
-    "00-BOOK/DATA/change-ledger.json",
-    "00-BOOK/DATA/id-ledger.json",
-    "00-BOOK/DATA/relationships.json"
-   ],
+   "owner_files": [],
    "code_files": [],
    "gate_files": [],
-   "disposition": "REFERENCE",
+   "disposition": "CREATE",
    "determination": "PROVISIONAL",
+   "head_noun": "executives",
+   "head_noun_owner": [],
+   "reason": "no owner located for 'executives' either, so nothing in the repository holds this under any spelling tried",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -10852,14 +10816,14 @@
     "LYR-L0/K-03",
     "LYR-L1/EX-01"
    ],
-   "hits": 640,
+   "hits": 617,
    "anchored": true,
    "kinds": {
-    "code": 69,
-    "test": 26,
+    "code": 67,
+    "test": 25,
     "gate": 2,
-    "decl": 60,
-    "doc": 483
+    "decl": 57,
+    "doc": 466
    },
    "owner_files": [
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
@@ -10904,11 +10868,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "project",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
-   "reason": "head noun 'project' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'project' is named by 00-MASTER/BASELINE-001/baseline-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -10919,14 +10883,14 @@
    "mandates": [
     "ARCH-CERTV/CV-03"
    ],
-   "hits": 965,
+   "hits": 948,
    "anchored": true,
    "kinds": {
-    "code": 229,
-    "test": 63,
+    "code": 222,
+    "test": 57,
     "gate": 2,
     "decl": 69,
-    "doc": 602
+    "doc": 598
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -10953,14 +10917,14 @@
    "mandates": [
     "PRD-NFR/NFR-08"
    ],
-   "hits": 222,
+   "hits": 208,
    "anchored": true,
    "kinds": {
-    "code": 15,
-    "test": 10,
+    "code": 13,
+    "test": 9,
     "gate": 3,
-    "decl": 26,
-    "doc": 168
+    "decl": 22,
+    "doc": 161
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -10989,14 +10953,14 @@
    "mandates": [
     "MI-006/DEC-07"
    ],
-   "hits": 747,
+   "hits": 700,
    "anchored": true,
    "kinds": {
-    "code": 109,
-    "test": 38,
-    "gate": 6,
-    "decl": 58,
-    "doc": 536
+    "code": 107,
+    "test": 32,
+    "gate": 5,
+    "decl": 50,
+    "doc": 506
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -11026,20 +10990,20 @@
    "mandates": [
     "UAKP-CLS/CS-08"
    ],
-   "hits": 3509,
+   "hits": 849,
    "anchored": false,
    "kinds": {
-    "code": 780,
-    "test": 369,
-    "gate": 38,
-    "decl": 273,
-    "doc": 2049
+    "code": 261,
+    "test": 121,
+    "gate": 7,
+    "decl": 49,
+    "doc": 411
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-UFEP-001/ufep-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
@@ -11048,8 +11012,8 @@
     "engine/acceptance/errors.py"
    ],
    "gate_files": [
-    ".github/workflows/acee-gate.yml",
-    ".github/workflows/aee-gate.yml"
+    ".github/workflows/ec1-ci.yml",
+    ".github/workflows/mutation-gate.yml"
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
@@ -11237,30 +11201,30 @@
    "mandates": [
     "PRD-ECON/ECON-13"
    ],
-   "hits": 1797,
+   "hits": 538,
    "anchored": false,
    "kinds": {
-    "code": 201,
-    "test": 95,
-    "gate": 8,
-    "decl": 118,
-    "doc": 1375
+    "code": 110,
+    "test": 32,
+    "gate": 3,
+    "decl": 29,
+    "doc": 364
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
+    "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+    "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+    "00-MASTER/UCOS-UTCE-001/utce-declaration.json"
    ],
    "code_files": [
-    "engine/__init__.py",
-    "engine/acceptance/__init__.py",
-    "engine/acceptance/contracts.py",
-    "engine/acceptance/errors.py"
+    "engine/certification/integrity.py",
+    "engine/compiler/cycles.py",
+    "engine/constitution/metadata.py",
+    "engine/construct/model.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
-    ".github/workflows/baseline-gate.yml"
+    ".github/workflows/ucl-gate.yml"
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
@@ -11514,11 +11478,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "environment",
    "head_noun_owner": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCPA-000001/ucpa-declaration.json"
    ],
-   "reason": "head noun 'environment' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'environment' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -11598,20 +11562,20 @@
    "mandates": [
     "LYR-L15/EL-09"
    ],
-   "hits": 1828,
+   "hits": 1375,
    "anchored": true,
    "kinds": {
-    "code": 250,
-    "test": 91,
+    "code": 213,
+    "test": 67,
     "gate": 22,
-    "decl": 204,
-    "doc": 1261
+    "decl": 174,
+    "doc": 899
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/classify.py",
@@ -11714,8 +11678,8 @@
    "head_noun": "packages",
    "head_noun_owner": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-URR-001/urr-declaration.json",
-    "00-MASTER/UEC-000001/uec-declaration.json"
+    "00-MASTER/UEC-000001/uec-declaration.json",
+    "00-MASTER/UEG-000001/ueg-declaration.json"
    ],
    "reason": "head noun 'packages' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -11777,7 +11741,7 @@
    "head_noun_owner": [
     "00-BOOK/DATA/id-ledger.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
-    "00-MASTER/UCON-000001/closure-inventory.json"
+    "00-MASTER/UCOS-OMEGA-001/omega-surface.json"
    ],
    "reason": "head noun 'applications' is named by 00-BOOK/DATA/id-ledger.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -11795,20 +11759,20 @@
     "QM-FLOW/FL-15",
     "LYR-L6/AU-06"
    ],
-   "hits": 1220,
+   "hits": 766,
    "anchored": true,
    "kinds": {
-    "code": 202,
-    "test": 105,
-    "gate": 5,
-    "decl": 90,
-    "doc": 818
+    "code": 167,
+    "test": 79,
+    "gate": 3,
+    "decl": 66,
+    "doc": 451
    },
    "owner_files": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
+    "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+    "00-MASTER/UCOS-URR-001/urr-declaration.json"
    ],
    "code_files": [
     "engine/certification/evidence.py",
@@ -11817,8 +11781,7 @@
     "engine/civilization/__init__.py"
    ],
    "gate_files": [
-    ".github/workflows/mcos-gate.yml",
-    ".github/workflows/research-publication-gate.yml"
+    ".github/workflows/mcos-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -11832,14 +11795,14 @@
    "mandates": [
     "LYR-L5/US-07"
    ],
-   "hits": 419,
+   "hits": 363,
    "anchored": true,
    "kinds": {
-    "code": 71,
-    "test": 32,
+    "code": 64,
+    "test": 17,
     "gate": 5,
-    "decl": 61,
-    "doc": 250
+    "decl": 48,
+    "doc": 229
    },
    "owner_files": [
     "00-MASTER/UCL-000001/ucl-declaration.json",
@@ -11851,7 +11814,7 @@
     "engine/certification_integrity/classify.py",
     "engine/certification_integrity/pytest_shuffle.py",
     "engine/ceu/catalog.py",
-    "engine/civilization/__init__.py"
+    "engine/civilization/compliance.py"
    ],
    "gate_files": [
     ".github/workflows/ec1-ci.yml",
@@ -11900,14 +11863,14 @@
    "mandates": [
     "UAKP-CLS/CS-12"
    ],
-   "hits": 266,
+   "hits": 246,
    "anchored": false,
    "kinds": {
-    "code": 25,
+    "code": 23,
     "test": 12,
-    "gate": 4,
-    "decl": 35,
-    "doc": 190
+    "gate": 3,
+    "decl": 31,
+    "doc": 177
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -12000,14 +11963,14 @@
     "LYR-L7O/GO-06",
     "UAKP-CLS/CS-30"
    ],
-   "hits": 2610,
+   "hits": 2543,
    "anchored": true,
    "kinds": {
-    "code": 386,
-    "test": 159,
+    "code": 375,
+    "test": 129,
     "gate": 19,
-    "decl": 189,
-    "doc": 1857
+    "decl": 183,
+    "doc": 1837
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -12244,15 +12207,15 @@
   },
   "governance model": {
    "label": "Governance Model",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "MI-003/M-17"
    ],
-   "hits": 212,
+   "hits": 213,
    "anchored": true,
    "kinds": {
     "code": 7,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 36,
     "doc": 169
@@ -12270,7 +12233,7 @@
     "engine/kernel/compliance.py"
    ],
    "gate_files": [],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -12342,14 +12305,14 @@
    "mandates": [
     "UAKP-STATE/SS-08"
    ],
-   "hits": 1624,
+   "hits": 1528,
    "anchored": true,
    "kinds": {
-    "code": 326,
-    "test": 126,
+    "code": 304,
+    "test": 98,
     "gate": 15,
-    "decl": 114,
-    "doc": 1043
+    "decl": 102,
+    "doc": 1009
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -12466,20 +12429,20 @@
    "mandates": [
     "UAKP-CLS/CS-23"
    ],
-   "hits": 2050,
+   "hits": 1905,
    "anchored": true,
    "kinds": {
-    "code": 446,
-    "test": 163,
+    "code": 420,
+    "test": 129,
     "gate": 13,
-    "decl": 161,
-    "doc": 1267
+    "decl": 150,
+    "doc": 1193
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
    ],
    "code_files": [
     "engine/ceu/catalog.py",
@@ -12561,20 +12524,20 @@
    "mandates": [
     "LYR-L11/ME-09"
    ],
-   "hits": 528,
+   "hits": 438,
    "anchored": true,
    "kinds": {
-    "code": 140,
-    "test": 97,
+    "code": 119,
+    "test": 74,
     "gate": 4,
-    "decl": 44,
-    "doc": 243
+    "decl": 36,
+    "doc": 205
    },
    "owner_files": [
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UEG-000001/ueg-declaration.json",
     "00-MASTER/UISD-000001/uisd-declaration.json",
-    "00-BOOK/DATA/constitutional-authority-alignment.json"
+    "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "00-BOOK/DATA/generated-artifact-registry.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
@@ -12629,14 +12592,14 @@
    "mandates": [
     "UAKP-STATE/SS-17"
    ],
-   "hits": 373,
+   "hits": 352,
    "anchored": false,
    "kinds": {
-    "code": 43,
-    "test": 18,
+    "code": 35,
+    "test": 17,
     "gate": 4,
     "decl": 28,
-    "doc": 280
+    "doc": 268
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -12692,14 +12655,14 @@
    "mandates": [
     "LYR-L9/KG-06"
    ],
-   "hits": 774,
+   "hits": 757,
    "anchored": true,
    "kinds": {
-    "code": 147,
-    "test": 58,
+    "code": 141,
+    "test": 53,
     "gate": 5,
-    "decl": 57,
-    "doc": 507
+    "decl": 56,
+    "doc": 502
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -12838,11 +12801,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "configured",
    "head_noun_owner": [
-    "00-MASTER/UISD-000001/uisd-declaration.json",
-    "00-BOOK/DATA/allocation-permits.json",
-    "00-BOOK/DATA/evidence-universe.json"
+    "00-BOOK/DATA/evidence-universe.json",
+    "00-BOOK/DATA/workspace-coordination.json",
+    "00-MASTER/MCOS-000001/mcos-civilization.json"
    ],
-   "reason": "head noun 'configured' is named by 00-MASTER/UISD-000001/uisd-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'configured' is named by 00-BOOK/DATA/evidence-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -12962,11 +12925,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "generated",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
-   "reason": "head noun 'generated' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'generated' is named by 00-MASTER/BASELINE-001/baseline-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -13115,11 +13078,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "related",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCPA-000001/ucpa-declaration.json"
+    "00-MASTER/UCPA-000001/ucpa-declaration.json",
+    "00-MASTER/URKE-000001/urke-declaration.json",
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
    ],
-   "reason": "head noun 'related' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'related' is named by 00-MASTER/UCPA-000001/ucpa-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -13281,11 +13244,11 @@
    "mandates": [
     "ARCH-DISCF/DF-04"
    ],
-   "hits": 126,
+   "hits": 125,
    "anchored": false,
    "kinds": {
     "code": 19,
-    "test": 8,
+    "test": 7,
     "gate": 1,
     "decl": 9,
     "doc": 89
@@ -13319,14 +13282,14 @@
     "LYR-L5/US-01",
     "UAKP-CLS/CS-16"
    ],
-   "hits": 2622,
+   "hits": 2556,
    "anchored": true,
    "kinds": {
-    "code": 744,
-    "test": 373,
+    "code": 732,
+    "test": 330,
     "gate": 18,
-    "decl": 226,
-    "doc": 1261
+    "decl": 223,
+    "doc": 1253
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -13681,14 +13644,14 @@
    "mandates": [
     "LYR-L11/ME-08"
    ],
-   "hits": 617,
+   "hits": 591,
    "anchored": true,
    "kinds": {
-    "code": 74,
-    "test": 29,
+    "code": 66,
+    "test": 24,
     "gate": 4,
     "decl": 50,
-    "doc": 460
+    "doc": 447
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -13722,14 +13685,14 @@
     "QM-FLOW/FL-16",
     "LYR-L6/AU-08"
    ],
-   "hits": 2572,
+   "hits": 2370,
    "anchored": true,
    "kinds": {
-    "code": 367,
-    "test": 105,
+    "code": 291,
+    "test": 84,
     "gate": 9,
-    "decl": 217,
-    "doc": 1874
+    "decl": 120,
+    "doc": 1866
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -13782,36 +13745,33 @@
   },
   "improve": {
    "label": "Improve",
-   "status": "UNDECIDABLE",
+   "status": "IMPLEMENTED",
    "mandates": [
     "LYR-L15/EL-07"
    ],
-   "hits": 211,
+   "hits": 107,
    "anchored": false,
    "kinds": {
-    "code": 22,
-    "test": 16,
-    "gate": 3,
-    "decl": 45,
-    "doc": 125
+    "code": 12,
+    "test": 8,
+    "gate": 1,
+    "decl": 21,
+    "doc": 65
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCOS-URAT-001/urat-declaration.json",
+    "00-MASTER/ACEE-000001/acee.json"
    ],
    "code_files": [
     "engine/certification_integrity/contract.py",
     "engine/constitution/stages.py",
-    "engine/enforcement_closure/contract.py",
-    "engine/ledger_authority/__init__.py"
+    "engine/nucleus/lifecycle.py",
+    "engine/omega_infinite/classification.py"
    ],
-   "gate_files": [
-    ".github/workflows/uctx-gate.yml",
-    ".github/workflows/uei-gate.yml"
-   ],
-   "disposition": "ADJUDICATE",
+   "gate_files": [],
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -13850,13 +13810,13 @@
     "MI-014/EV-07",
     "ARCH-EVOF/VF2-04"
    ],
-   "hits": 145,
+   "hits": 142,
    "anchored": true,
    "kinds": {
     "code": 14,
     "test": 10,
     "gate": 3,
-    "decl": 37,
+    "decl": 34,
     "doc": 81
    },
    "owner_files": [
@@ -13931,8 +13891,8 @@
    "head_noun": "cycle",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
    ],
    "reason": "head noun 'cycle' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -14036,14 +13996,14 @@
     "QM-CONST/CO-16",
     "UAKP-CLS/CS-02"
    ],
-   "hits": 160,
+   "hits": 106,
    "anchored": false,
    "kinds": {
-    "code": 21,
-    "test": 7,
+    "code": 16,
+    "test": 3,
     "gate": 1,
-    "decl": 11,
-    "doc": 120
+    "decl": 4,
+    "doc": 82
    },
    "owner_files": [
     "engine/uckp/law.py",
@@ -14054,8 +14014,8 @@
    "code_files": [
     "engine/certification_integrity/coverage_data.py",
     "engine/ceu/catalog.py",
-    "engine/graph/validation.py",
-    "engine/knowledge/portal.py"
+    "engine/knowledge/ukip/relationships.py",
+    "engine/omega_governance/authority.py"
    ],
    "gate_files": [
     ".github/workflows/sub-gate.yml"
@@ -14100,14 +14060,14 @@
     "MI-015/PJ-12",
     "QM-OUT/OU-20"
    ],
-   "hits": 1173,
+   "hits": 1170,
    "anchored": true,
    "kinds": {
-    "code": 118,
-    "test": 59,
+    "code": 117,
+    "test": 60,
     "gate": 4,
     "decl": 169,
-    "doc": 823
+    "doc": 820
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -14137,13 +14097,13 @@
    "mandates": [
     "MI-013/OB-10"
    ],
-   "hits": 39,
+   "hits": 38,
    "anchored": true,
    "kinds": {
     "code": 5,
     "test": 3,
     "gate": 0,
-    "decl": 16,
+    "decl": 15,
     "doc": 15
    },
    "owner_files": [
@@ -14235,11 +14195,11 @@
    "mandates": [
     "LYR-L15/EL-12"
    ],
-   "hits": 242,
+   "hits": 241,
    "anchored": false,
    "kinds": {
     "code": 41,
-    "test": 5,
+    "test": 4,
     "gate": 0,
     "decl": 28,
     "doc": 168
@@ -14270,14 +14230,14 @@
     "ARCH-ENGF/EF-10",
     "UAKP-CLS/CS-36"
    ],
-   "hits": 1314,
+   "hits": 1265,
    "anchored": true,
    "kinds": {
-    "code": 148,
-    "test": 93,
+    "code": 140,
+    "test": 84,
     "gate": 4,
-    "decl": 120,
-    "doc": 949
+    "decl": 111,
+    "doc": 926
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -14455,26 +14415,26 @@
     "ARCH-VERIF/VF-03",
     "LYR-L12V/VF-06"
    ],
-   "hits": 1757,
+   "hits": 1630,
    "anchored": true,
    "kinds": {
-    "code": 395,
-    "test": 171,
+    "code": 353,
+    "test": 117,
     "gate": 25,
-    "decl": 260,
-    "doc": 906
+    "decl": 253,
+    "doc": 882
    },
    "owner_files": [
     "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCOS-URR-001/urr-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/__init__.py",
     "engine/acceptance/contracts.py",
     "engine/acceptance/errors.py",
-    "engine/certification/__init__.py"
+    "engine/certification/__init__.py",
+    "engine/certification/contracts.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -14493,14 +14453,14 @@
     "MI-013/OB-09",
     "QM-CONST/CO-17"
    ],
-   "hits": 1428,
+   "hits": 1343,
    "anchored": true,
    "kinds": {
-    "code": 239,
-    "test": 81,
-    "gate": 14,
-    "decl": 118,
-    "doc": 976
+    "code": 215,
+    "test": 62,
+    "gate": 12,
+    "decl": 114,
+    "doc": 940
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -14510,13 +14470,13 @@
    ],
    "code_files": [
     "engine/certification_integrity/__init__.py",
-    "engine/certification_integrity/equivalence.py",
-    "engine/certification_integrity/immutable.py",
-    "engine/ceu/catalog.py"
+    "engine/ceu/catalog.py",
+    "engine/construct/__init__.py",
+    "engine/construct/audit.py"
    ],
    "gate_files": [
     ".github/workflows/determinism.yml",
-    ".github/workflows/ec1-ci.yml"
+    ".github/workflows/omega-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -14593,31 +14553,28 @@
    "mandates": [
     "UAKP-CLS/CS-11"
    ],
-   "hits": 403,
+   "hits": 242,
    "anchored": false,
    "kinds": {
-    "code": 65,
-    "test": 23,
-    "gate": 3,
-    "decl": 29,
-    "doc": 283
+    "code": 36,
+    "test": 15,
+    "gate": 0,
+    "decl": 22,
+    "doc": 169
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/UCPA-000001/ucpa-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+    "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "00-MASTER/ACEE-000001/acee-goal-manifest.json"
    ],
    "code_files": [
     "engine/certification_integrity/__init__.py",
-    "engine/certification_integrity/inventory.py",
-    "engine/certification_integrity/model.py",
-    "engine/certification_integrity/surface.py"
+    "engine/certification_integrity/surface.py",
+    "engine/ceu/catalog.py",
+    "engine/ceu/possessions.py"
    ],
-   "gate_files": [
-    ".github/workflows/ucon-gate.yml",
-    ".github/workflows/uisd-gate.yml"
-   ],
+   "gate_files": [],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
    "named_by": [],
@@ -14688,14 +14645,14 @@
    "mandates": [
     "LYR-L5/US-11"
    ],
-   "hits": 158,
+   "hits": 150,
    "anchored": true,
    "kinds": {
-    "code": 7,
-    "test": 5,
+    "code": 6,
+    "test": 4,
     "gate": 0,
-    "decl": 17,
-    "doc": 129
+    "decl": 13,
+    "doc": 127
    },
    "owner_files": [
     "engine/uckp/law.py",
@@ -14781,14 +14738,14 @@
    "mandates": [
     "MI-017/TD-17"
    ],
-   "hits": 7,
+   "hits": 5,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 1,
+    "test": 0,
     "gate": 0,
     "decl": 2,
-    "doc": 4
+    "doc": 3
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
@@ -14846,26 +14803,26 @@
     "UAKP-GRAPH/GP-01",
     "UAKP-CLS/CS-01"
    ],
-   "hits": 3707,
+   "hits": 3584,
    "anchored": true,
    "kinds": {
-    "code": 305,
-    "test": 136,
-    "gate": 25,
-    "decl": 129,
-    "doc": 3112
+    "code": 276,
+    "test": 107,
+    "gate": 23,
+    "decl": 122,
+    "doc": 3056
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "code_files": [
-    "engine/certification_integrity/__init__.py",
-    "engine/certification_integrity/surface.py",
     "engine/ceu/catalog.py",
-    "engine/ceu/context_binding.py"
+    "engine/ceu/context_binding.py",
+    "engine/ceu/sufficiency.py",
+    "engine/civilization/composition.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -15817,8 +15774,8 @@
    "head_noun": "verification",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "reason": "head noun 'verification' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -15831,14 +15788,14 @@
    "mandates": [
     "PRD-GOV/GOV-03"
    ],
-   "hits": 1863,
+   "hits": 1753,
    "anchored": true,
    "kinds": {
-    "code": 412,
-    "test": 124,
-    "gate": 13,
-    "decl": 143,
-    "doc": 1171
+    "code": 389,
+    "test": 106,
+    "gate": 12,
+    "decl": 126,
+    "doc": 1120
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -15868,14 +15825,14 @@
    "mandates": [
     "QM-CONST/CO-08"
    ],
-   "hits": 628,
+   "hits": 617,
    "anchored": true,
    "kinds": {
-    "code": 145,
-    "test": 35,
+    "code": 142,
+    "test": 31,
     "gate": 9,
     "decl": 54,
-    "doc": 385
+    "doc": 381
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -15906,14 +15863,14 @@
     "LYR-L15/EL-04",
     "UAKP-PO/PO-22"
    ],
-   "hits": 313,
+   "hits": 306,
    "anchored": false,
    "kinds": {
-    "code": 32,
-    "test": 15,
+    "code": 29,
+    "test": 14,
     "gate": 6,
     "decl": 45,
-    "doc": 215
+    "doc": 212
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -15980,14 +15937,14 @@
     "UAKP-GRAPH/GP-14",
     "UAKP-CLS/CS-32"
    ],
-   "hits": 221,
+   "hits": 210,
    "anchored": false,
    "kinds": {
-    "code": 18,
-    "test": 4,
+    "code": 15,
+    "test": 2,
     "gate": 4,
-    "decl": 37,
-    "doc": 158
+    "decl": 33,
+    "doc": 156
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -16048,27 +16005,17 @@
    "mandates": [
     "PRD-ECON/ECON-17"
    ],
-   "hits": 63,
+   "hits": 2,
    "anchored": false,
    "kinds": {
-    "code": 14,
-    "test": 6,
+    "code": 1,
+    "test": 1,
     "gate": 0,
-    "decl": 9,
-    "doc": 34
+    "decl": 0,
+    "doc": 0
    },
-   "owner_files": [
-    "00-BOOK/DATA/workspace-coordination.json",
-    "00-MASTER/UAIE-000001/uaie-architecture.json",
-    "00-MASTER/UAIE-000001/uaie.json",
-    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
-   ],
-   "code_files": [
-    "engine/context/cli.py",
-    "engine/context/errors.py",
-    "engine/context/evidence.py",
-    "engine/context/runtime.py"
-   ],
+   "owner_files": [],
+   "code_files": [],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
@@ -16201,13 +16148,13 @@
    "mandates": [
     "LYR-L13/CM-05"
    ],
-   "hits": 49,
+   "hits": 40,
    "anchored": false,
    "kinds": {
-    "code": 7,
-    "test": 9,
+    "code": 4,
+    "test": 6,
     "gate": 0,
-    "decl": 9,
+    "decl": 6,
     "doc": 24
    },
    "owner_files": [
@@ -16219,8 +16166,8 @@
    "code_files": [
     "engine/construct/audit.py",
     "engine/enforcement_closure/contract.py",
-    "platform/commercial_intelligence/__init__.py",
-    "platform/commercial_intelligence/customer.py"
+    "platform/commercial_intelligence/licensing.py",
+    "platform/commercial_intelligence/packages.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -16264,13 +16211,13 @@
     "MI-012/CM-06",
     "ARCH-OPF/OF-17"
    ],
-   "hits": 45,
+   "hits": 41,
    "anchored": true,
    "kinds": {
-    "code": 8,
-    "test": 3,
+    "code": 7,
+    "test": 1,
     "gate": 0,
-    "decl": 20,
+    "decl": 19,
     "doc": 14
    },
    "owner_files": [
@@ -16282,8 +16229,8 @@
    "code_files": [
     "platform/commercial_intelligence/__init__.py",
     "platform/commercial_intelligence/cli.py",
-    "platform/commercial_intelligence/contracts.py",
-    "platform/commercial_intelligence/customer.py"
+    "platform/commercial_intelligence/customer.py",
+    "platform/commercial_intelligence/errors.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -16329,26 +16276,26 @@
    "mandates": [
     "LYR-L0/K-13"
    ],
-   "hits": 2065,
+   "hits": 1979,
    "anchored": true,
    "kinds": {
-    "code": 490,
-    "test": 195,
+    "code": 463,
+    "test": 154,
     "gate": 11,
-    "decl": 247,
-    "doc": 1122
+    "decl": 244,
+    "doc": 1107
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCOS-CEU-001/ceu-declaration.json"
    ],
    "code_files": [
-    "engine/compiler/__init__.py",
     "engine/compiler/validation.py",
     "engine/constitution/__init__.py",
-    "engine/constitution/cli.py"
+    "engine/constitution/cli.py",
+    "engine/constitution/evolution.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -16458,14 +16405,14 @@
     "ARCH-VERIF/VF-05",
     "LYR-L9/KG-07"
    ],
-   "hits": 1145,
+   "hits": 1099,
    "anchored": true,
    "kinds": {
-    "code": 264,
-    "test": 87,
+    "code": 259,
+    "test": 56,
     "gate": 1,
-    "decl": 83,
-    "doc": 710
+    "decl": 78,
+    "doc": 705
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -16639,26 +16586,26 @@
    "mandates": [
     "LYR-L1/EX-07"
    ],
-   "hits": 871,
+   "hits": 605,
    "anchored": true,
    "kinds": {
-    "code": 139,
-    "test": 56,
+    "code": 121,
+    "test": 35,
     "gate": 5,
-    "decl": 76,
-    "doc": 595
+    "decl": 50,
+    "doc": 394
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-CEU-001/ceu-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/surface.py",
-    "engine/compiler/partition.py",
     "engine/construct/__init__.py",
-    "engine/construct/declaration.py"
+    "engine/construct/declaration.py",
+    "engine/construct/extension.py"
    ],
    "gate_files": [
     ".github/workflows/rfp-gate.yml",
@@ -16677,20 +16624,20 @@
     "MI-013/OB-01",
     "ARCH-OPF/OF-09"
    ],
-   "hits": 171,
+   "hits": 162,
    "anchored": true,
    "kinds": {
     "code": 95,
     "test": 1,
     "gate": 0,
-    "decl": 16,
-    "doc": 59
+    "decl": 14,
+    "doc": 52
    },
    "owner_files": [
     "00-BOOK/DATA/id-ledger.json",
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
-    "00-MASTER/UCOS-MXR-001/roadmap.json"
+    "00-MASTER/UCOS-OMEGA-001/omega-surface.json"
    ],
    "code_files": [
     "engine/acceptance/engine.py",
@@ -16761,24 +16708,24 @@
   },
   "logs": {
    "label": "Logs",
-   "status": "ANCHORED",
+   "status": "IMPLEMENTED",
    "mandates": [
     "PRD-OBS/OBS-03"
    ],
-   "hits": 370,
+   "hits": 155,
    "anchored": true,
    "kinds": {
-    "code": 35,
-    "test": 13,
-    "gate": 1,
-    "decl": 31,
-    "doc": 290
+    "code": 19,
+    "test": 2,
+    "gate": 0,
+    "decl": 15,
+    "doc": 119
    },
    "owner_files": [
-    "00-MASTER/UCOS-URR-001/urr-declaration.json",
-    "00-BOOK/DATA/allocation-permits.json",
-    "00-BOOK/DATA/artifacts.json",
-    "00-BOOK/DATA/evidence-universe.json"
+    "00-BOOK/DATA/exclusion-register.json",
+    "00-BOOK/DATA/id-ledger.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+    "00-MASTER/UCOS-OMEGA-001/omega-surface.json"
    ],
    "code_files": [
     "engine/discovery/engine.py",
@@ -16787,7 +16734,7 @@
     "engine/foundation/obs/telemetry.py"
    ],
    "gate_files": [],
-   "disposition": "REFERENCE",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -16841,11 +16788,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "consistency",
    "head_noun_owner": [
-    "00-MASTER/URKE-000001/urke-declaration.json",
     "00-BOOK/DATA/artifacts.json",
-    "00-BOOK/DATA/generated-artifact-registry.json"
+    "00-BOOK/DATA/generated-artifact-registry.json",
+    "00-BOOK/DATA/id-ledger.json"
    ],
-   "reason": "head noun 'consistency' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'consistency' is named by 00-BOOK/DATA/artifacts.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -16921,11 +16868,11 @@
     "MI-012/CM-05",
     "LYR-L13/CM-07"
    ],
-   "hits": 68,
+   "hits": 66,
    "anchored": true,
    "kinds": {
-    "code": 11,
-    "test": 6,
+    "code": 10,
+    "test": 5,
     "gate": 0,
     "decl": 22,
     "doc": 29
@@ -16940,7 +16887,7 @@
     "engine/nucleus/catalog.py",
     "platform/commercial_intelligence/__init__.py",
     "platform/commercial_intelligence/cli.py",
-    "platform/commercial_intelligence/contracts.py"
+    "platform/commercial_intelligence/errors.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -16956,20 +16903,20 @@
     "ARCH-STACK/ST-06",
     "QM-CONST/CO-02"
    ],
-   "hits": 567,
+   "hits": 482,
    "anchored": true,
    "kinds": {
-    "code": 110,
-    "test": 44,
-    "gate": 10,
-    "decl": 39,
-    "doc": 364
+    "code": 82,
+    "test": 29,
+    "gate": 4,
+    "decl": 36,
+    "doc": 331
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json",
-    "00-MASTER/UCOS-UTCE-001/utce-declaration.json"
+    "00-MASTER/UCOS-UTCE-001/utce-declaration.json",
+    "00-MASTER/UCPA-000001/ucpa-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/classify.py",
@@ -16978,8 +16925,8 @@
     "engine/constitution/acceptance.py"
    ],
    "gate_files": [
-    ".github/workflows/aee-gate.yml",
-    ".github/workflows/ec1-ci.yml"
+    ".github/workflows/uaue-gate.yml",
+    ".github/workflows/uci-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -16993,14 +16940,14 @@
    "mandates": [
     "LYR-L15/EL-03"
    ],
-   "hits": 1887,
+   "hits": 1614,
    "anchored": true,
    "kinds": {
-    "code": 401,
-    "test": 213,
-    "gate": 32,
-    "decl": 164,
-    "doc": 1077
+    "code": 342,
+    "test": 157,
+    "gate": 30,
+    "decl": 132,
+    "doc": 953
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -17033,14 +16980,14 @@
     "LYR-L0/K-15",
     "LYR-L5/US-16"
    ],
-   "hits": 1310,
+   "hits": 1292,
    "anchored": true,
    "kinds": {
-    "code": 264,
-    "test": 140,
+    "code": 261,
+    "test": 131,
     "gate": 21,
-    "decl": 140,
-    "doc": 745
+    "decl": 137,
+    "doc": 742
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -17070,13 +17017,13 @@
    "mandates": [
     "QM-CONST/CO-13"
    ],
-   "hits": 319,
+   "hits": 310,
    "anchored": false,
    "kinds": {
-    "code": 72,
-    "test": 37,
+    "code": 68,
+    "test": 33,
     "gate": 9,
-    "decl": 33,
+    "decl": 32,
     "doc": 168
    },
    "owner_files": [
@@ -17107,14 +17054,14 @@
    "mandates": [
     "UAKP-CLS/CS-31"
    ],
-   "hits": 860,
+   "hits": 823,
    "anchored": true,
    "kinds": {
-    "code": 129,
-    "test": 65,
+    "code": 120,
+    "test": 46,
     "gate": 12,
-    "decl": 68,
-    "doc": 586
+    "decl": 63,
+    "doc": 582
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -17124,9 +17071,9 @@
    ],
    "code_files": [
     "engine/certification/ledger.py",
-    "engine/certification_integrity/classify.py",
     "engine/ceu/existence.py",
-    "engine/compiler/ir.py"
+    "engine/compiler/ir.py",
+    "engine/construct/__init__.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -17258,13 +17205,13 @@
     "PRD-OBS/OBS-01",
     "MI-013/OB-05"
    ],
-   "hits": 355,
+   "hits": 333,
    "anchored": true,
    "kinds": {
-    "code": 86,
-    "test": 49,
+    "code": 77,
+    "test": 39,
     "gate": 2,
-    "decl": 35,
+    "decl": 32,
     "doc": 183
    },
    "owner_files": [
@@ -17294,14 +17241,14 @@
    "mandates": [
     "ARCH-EVOF/VF2-09"
    ],
-   "hits": 421,
+   "hits": 416,
    "anchored": false,
    "kinds": {
-    "code": 26,
+    "code": 25,
     "test": 8,
     "gate": 2,
-    "decl": 29,
-    "doc": 356
+    "decl": 26,
+    "doc": 355
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -17328,30 +17275,30 @@
    "mandates": [
     "MI-000/K-03"
    ],
-   "hits": 2038,
+   "hits": 1108,
    "anchored": true,
    "kinds": {
-    "code": 340,
-    "test": 154,
-    "gate": 39,
-    "decl": 101,
-    "doc": 1404
+    "code": 98,
+    "test": 24,
+    "gate": 3,
+    "decl": 48,
+    "doc": 935
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UISD-000001/uisd-declaration.json",
+    "00-MASTER/URKE-000001/urke-declaration.json",
+    "00-BOOK/DATA/artifacts.json"
    ],
    "code_files": [
     "engine/acceptance/gates.py",
     "engine/certification/closure.py",
-    "engine/certification_integrity/inventory.py",
-    "engine/certification_integrity/surface.py"
+    "engine/certification_integrity/surface.py",
+    "engine/governance/__init__.py"
    ],
    "gate_files": [
-    ".github/workflows/acee-gate.yml",
-    ".github/workflows/aee-gate.yml"
+    ".github/workflows/uaie-gate.yml",
+    ".github/workflows/uaue-gate.yml"
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
@@ -17423,14 +17370,14 @@
    "mandates": [
     "MI-007/E-03"
    ],
-   "hits": 28,
+   "hits": 25,
    "anchored": false,
    "kinds": {
-    "code": 2,
+    "code": 1,
     "test": 0,
     "gate": 0,
     "decl": 2,
-    "doc": 24
+    "doc": 22
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
@@ -17450,20 +17397,20 @@
    "mandates": [
     "QM-OUT/OU-05"
    ],
-   "hits": 529,
+   "hits": 517,
    "anchored": true,
    "kinds": {
-    "code": 95,
-    "test": 25,
+    "code": 87,
+    "test": 26,
     "gate": 2,
-    "decl": 39,
-    "doc": 368
+    "decl": 36,
+    "doc": 366
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCOS-UFEP-001/ufep-declaration.json",
-    "00-MASTER/UCOS-UTCE-001/utce-declaration.json"
+    "00-MASTER/UCOS-UTCE-001/utce-declaration.json",
+    "00-MASTER/UISD-000001/uisd-declaration.json"
    ],
    "code_files": [
     "engine/ceu/catalog.py",
@@ -17486,13 +17433,13 @@
    "mandates": [
     "LYR-L5N/UN-04"
    ],
-   "hits": 1488,
+   "hits": 1458,
    "anchored": true,
    "kinds": {
-    "code": 595,
-    "test": 215,
+    "code": 582,
+    "test": 200,
     "gate": 12,
-    "decl": 128,
+    "decl": 126,
     "doc": 538
    },
    "owner_files": [
@@ -17555,14 +17502,14 @@
     "QM-FLOW/FL-23",
     "LYR-L5/US-15"
    ],
-   "hits": 172,
+   "hits": 170,
    "anchored": true,
    "kinds": {
-    "code": 29,
+    "code": 28,
     "test": 3,
     "gate": 0,
     "decl": 25,
-    "doc": 115
+    "doc": 114
    },
    "owner_files": [
     "00-BOOK/DATA/artifacts.json",
@@ -17607,7 +17554,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -17637,8 +17584,8 @@
    "head_noun": "graph",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "reason": "head noun 'graph' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -17864,11 +17811,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "edge",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
-   "reason": "head noun 'edge' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'edge' is named by 00-MASTER/BASELINE-001/baseline-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -18067,7 +18014,7 @@
    "head_noun_owner": [
     "00-MASTER/UCOS-URR-001/urr-declaration.json",
     "00-BOOK/DATA/artifacts.json",
-    "00-BOOK/DATA/evidence-universe.json"
+    "00-BOOK/DATA/id-ledger.json"
    ],
    "reason": "head noun 'operations' is named by 00-MASTER/UCOS-URR-001/urr-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -18184,11 +18131,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "tax",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-BOOK/DATA/artifacts.json",
+    "00-BOOK/DATA/id-ledger.json",
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
    ],
-   "reason": "head noun 'tax' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'tax' is named by 00-BOOK/DATA/artifacts.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -18403,11 +18350,11 @@
    "mandates": [
     "PRD-SC/SC-02"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18625,11 +18572,11 @@
    "mandates": [
     "UAKP-IND/ID-09"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18681,11 +18628,11 @@
    "mandates": [
     "LYR-NEG/LN-07"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18709,11 +18656,11 @@
    "mandates": [
     "LYR-NEG/LN-01"
    ],
-   "hits": 1,
+   "hits": 2,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 1
@@ -18737,11 +18684,11 @@
    "mandates": [
     "LYR-NEG/LN-02"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18765,11 +18712,11 @@
    "mandates": [
     "LYR-NEG/LN-05"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18821,11 +18768,11 @@
    "mandates": [
     "LYR-NEG/LN-04"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18849,11 +18796,11 @@
    "mandates": [
     "LYR-NEG/LN-08"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18961,11 +18908,11 @@
    "mandates": [
     "UAKP-PRIN/PN-22"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18989,11 +18936,11 @@
    "mandates": [
     "UAKP-PRIN/PN-20"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -19045,11 +18992,11 @@
    "mandates": [
     "UAKP-IND/ID-08"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -19157,11 +19104,11 @@
    "mandates": [
     "UAKP-IND/ID-07"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -19185,11 +19132,11 @@
    "mandates": [
     "UAKP-IND/ID-03"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -19213,11 +19160,11 @@
    "mandates": [
     "PRD-P/P-003"
    ],
-   "hits": 1,
+   "hits": 2,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 1
@@ -19241,11 +19188,11 @@
    "mandates": [
     "PRD-P/P-001"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -19269,11 +19216,11 @@
    "mandates": [
     "PRD-P/P-002"
    ],
-   "hits": 1,
+   "hits": 2,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 1,
+    "test": 2,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -19333,14 +19280,14 @@
    "mandates": [
     "LYR-L5N/UN-01"
    ],
-   "hits": 345,
+   "hits": 341,
    "anchored": true,
    "kinds": {
-    "code": 49,
+    "code": 48,
     "test": 32,
     "gate": 3,
     "decl": 48,
-    "doc": 213
+    "doc": 210
    },
    "owner_files": [
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
@@ -19370,20 +19317,20 @@
    "mandates": [
     "LYR-L1/EX-09"
    ],
-   "hits": 2405,
+   "hits": 1958,
    "anchored": true,
    "kinds": {
-    "code": 678,
-    "test": 282,
+    "code": 597,
+    "test": 232,
     "gate": 11,
-    "decl": 322,
-    "doc": 1112
+    "decl": 206,
+    "doc": 912
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/__init__.py",
@@ -19470,14 +19417,14 @@
    "mandates": [
     "LYR-L9/KG-02"
    ],
-   "hits": 861,
+   "hits": 838,
    "anchored": true,
    "kinds": {
-    "code": 204,
-    "test": 70,
+    "code": 197,
+    "test": 61,
     "gate": 4,
-    "decl": 58,
-    "doc": 525
+    "decl": 57,
+    "doc": 519
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -19538,13 +19485,13 @@
    "mandates": [
     "PRD-NFR/NFR-09"
    ],
-   "hits": 419,
+   "hits": 413,
    "anchored": true,
    "kinds": {
-    "code": 114,
-    "test": 67,
+    "code": 112,
+    "test": 64,
     "gate": 2,
-    "decl": 31,
+    "decl": 30,
     "doc": 205
    },
    "owner_files": [
@@ -19557,7 +19504,7 @@
     "engine/foundation/__init__.py",
     "engine/foundation/obs/__init__.py",
     "engine/foundation/obs/context.py",
-    "engine/foundation/obs/errors.py"
+    "engine/foundation/obs/telemetry.py"
    ],
    "gate_files": [
     ".github/workflows/uei-gate.yml"
@@ -19582,14 +19529,14 @@
     "UAKP-GRAPH/GP-10",
     "UAKP-CLS/CS-03"
    ],
-   "hits": 834,
+   "hits": 794,
    "anchored": true,
    "kinds": {
-    "code": 124,
-    "test": 52,
+    "code": 121,
+    "test": 46,
     "gate": 10,
-    "decl": 81,
-    "doc": 567
+    "decl": 76,
+    "doc": 541
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -19712,14 +19659,14 @@
    "mandates": [
     "ARCH-DISCF/DF-01"
    ],
-   "hits": 836,
+   "hits": 732,
    "anchored": false,
    "kinds": {
-    "code": 170,
-    "test": 79,
+    "code": 150,
+    "test": 66,
     "gate": 13,
-    "decl": 68,
-    "doc": 506
+    "decl": 57,
+    "doc": 446
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -19749,20 +19696,20 @@
    "mandates": [
     "UAKP-STATE/SS-03"
    ],
-   "hits": 462,
+   "hits": 427,
    "anchored": true,
    "kinds": {
-    "code": 92,
-    "test": 57,
+    "code": 85,
+    "test": 45,
     "gate": 2,
-    "decl": 40,
-    "doc": 271
+    "decl": 34,
+    "doc": 261
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json",
-    "00-MASTER/URKE-000001/urke-declaration.json"
+    "00-MASTER/URKE-000001/urke-declaration.json",
+    "00-BOOK/DATA/allocation-permits.json"
    ],
    "code_files": [
     "engine/ceu/catalog.py",
@@ -19816,14 +19763,14 @@
     "MI-009/GV-05",
     "LYR-L5/US-03"
    ],
-   "hits": 842,
+   "hits": 806,
    "anchored": true,
    "kinds": {
-    "code": 146,
-    "test": 35,
+    "code": 139,
+    "test": 22,
     "gate": 4,
-    "decl": 61,
-    "doc": 596
+    "decl": 59,
+    "doc": 582
    },
    "owner_files": [
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
@@ -19835,7 +19782,7 @@
     "engine/ceu/context_binding.py",
     "engine/compiler/data_compiler.py",
     "engine/compiler/ir.py",
-    "engine/compiler/serialization.py"
+    "engine/construct/__init__.py"
    ],
    "gate_files": [
     ".github/workflows/ucef-gate.yml",
@@ -19938,13 +19885,13 @@
    "mandates": [
     "UAKP-MEM/MM-02"
    ],
-   "hits": 449,
-   "anchored": false,
+   "hits": 450,
+   "anchored": true,
    "kinds": {
     "code": 37,
     "test": 6,
     "gate": 6,
-    "decl": 51,
+    "decl": 52,
     "doc": 349
    },
    "owner_files": [
@@ -20038,20 +19985,20 @@
     "ARCH-EVOF/VF2-05",
     "LYR-L6/AU-13"
    ],
-   "hits": 120,
+   "hits": 118,
    "anchored": true,
    "kinds": {
     "code": 7,
-    "test": 4,
+    "test": 3,
     "gate": 2,
-    "decl": 26,
+    "decl": 25,
     "doc": 81
    },
    "owner_files": [
     "00-BOOK/DATA/generated-artifact-registry.json",
     "00-BOOK/DATA/id-ledger.json",
-    "00-MASTER/ACEE-000001/acee.json",
-    "00-MASTER/EXECUTION-BACKLOG.json"
+    "00-MASTER/EXECUTION-BACKLOG.json",
+    "00-MASTER/UAEP-000001/uaep-platform.json"
    ],
    "code_files": [
     "engine/compiler/__init__.py",
@@ -20136,14 +20083,14 @@
    "mandates": [
     "MI-010/X-04"
    ],
-   "hits": 459,
+   "hits": 449,
    "anchored": true,
    "kinds": {
-    "code": 91,
-    "test": 19,
+    "code": 87,
+    "test": 18,
     "gate": 0,
-    "decl": 72,
-    "doc": 277
+    "decl": 68,
+    "doc": 276
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -20152,10 +20099,10 @@
     "00-BOOK/DATA/id-ledger.json"
    ],
    "code_files": [
-    "engine/factory/__init__.py",
     "engine/factory/errors.py",
-    "engine/factory/orchestrator.py",
-    "engine/omega_infinite/artifact.py"
+    "engine/omega_infinite/artifact.py",
+    "engine/runtime/__init__.py",
+    "engine/runtime/context.py"
    ],
    "gate_files": [],
    "disposition": "REFERENCE",
@@ -20215,7 +20162,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'knowledge' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -20258,14 +20205,14 @@
    "mandates": [
     "PRD-ECON/ECON-15"
    ],
-   "hits": 1154,
+   "hits": 1068,
    "anchored": true,
    "kinds": {
-    "code": 179,
-    "test": 58,
-    "gate": 15,
-    "decl": 117,
-    "doc": 785
+    "code": 166,
+    "test": 39,
+    "gate": 14,
+    "decl": 109,
+    "doc": 740
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -20298,20 +20245,20 @@
     "LYR-L0/K-08",
     "LYR-L10/GV-01"
    ],
-   "hits": 1187,
+   "hits": 1137,
    "anchored": true,
    "kinds": {
-    "code": 180,
-    "test": 76,
+    "code": 168,
+    "test": 56,
     "gate": 4,
-    "decl": 97,
-    "doc": 830
+    "decl": 88,
+    "doc": 821
    },
    "owner_files": [
     "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json",
-    "00-MASTER/UCOS-URAT-001/urat-declaration.json"
+    "00-MASTER/UCOS-URAT-001/urat-declaration.json",
+    "00-MASTER/UCPA-000001/ucpa-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
@@ -20370,13 +20317,13 @@
     "MI-007/E-09",
     "ARCH-ENGF/EF-11"
    ],
-   "hits": 73,
+   "hits": 71,
    "anchored": true,
    "kinds": {
     "code": 12,
-    "test": 6,
+    "test": 5,
     "gate": 0,
-    "decl": 18,
+    "decl": 17,
     "doc": 37
    },
    "owner_files": [
@@ -20404,30 +20351,28 @@
    "mandates": [
     "PRD-ECON/ECON-14"
    ],
-   "hits": 44,
+   "hits": 28,
    "anchored": false,
    "kinds": {
-    "code": 11,
-    "test": 9,
-    "gate": 2,
-    "decl": 12,
-    "doc": 10
+    "code": 8,
+    "test": 6,
+    "gate": 0,
+    "decl": 7,
+    "doc": 7
    },
    "owner_files": [
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-SUB-001/sub-declaration.json",
-    "00-MASTER/UEC-000001/uec-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+    "00-MASTER/UVI-000001/uvi-declaration.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+    "00-MASTER/UCOS-RFP-001/rfp.json"
    ],
    "code_files": [
-    "engine/certification_integrity/contract.py",
     "engine/enforcement_closure/contract.py",
-    "engine/infinite_scope/contract.py",
-    "engine/ledger_authority/__init__.py"
+    "engine/ledger_authority/__init__.py",
+    "engine/omega_infinite/compat.py",
+    "engine/omega_infinite/git_provider.py"
    ],
-   "gate_files": [
-    ".github/workflows/sub-gate.yml"
-   ],
+   "gate_files": [],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
@@ -20440,14 +20385,14 @@
    "mandates": [
     "MI-016/SH-20"
    ],
-   "hits": 10,
+   "hits": 6,
    "anchored": false,
    "kinds": {
     "code": 0,
     "test": 0,
     "gate": 0,
     "decl": 1,
-    "doc": 9
+    "doc": 5
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
@@ -20466,20 +20411,20 @@
    "mandates": [
     "ARCH-CERTV/CV-01"
    ],
-   "hits": 3107,
+   "hits": 2838,
    "anchored": true,
    "kinds": {
-    "code": 590,
-    "test": 467,
+    "code": 500,
+    "test": 380,
     "gate": 36,
-    "decl": 445,
-    "doc": 1569
+    "decl": 435,
+    "doc": 1487
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCI-000001/uci-declaration.json",
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/contracts.py",
@@ -20581,30 +20526,27 @@
   },
   "performance": {
    "label": "Performance",
-   "status": "IMPLEMENTED",
+   "status": "PARTIAL",
    "mandates": [
     "LYR-L11/ME-01"
    ],
-   "hits": 149,
+   "hits": 115,
    "anchored": true,
    "kinds": {
-    "code": 5,
-    "test": 1,
+    "code": 2,
+    "test": 0,
     "gate": 0,
-    "decl": 13,
-    "doc": 130
+    "decl": 3,
+    "doc": 110
    },
    "owner_files": [
     "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-BOOK/DATA/control-tower.json",
-    "00-MASTER/MIP-W1-P001/wave1-baseline.json",
-    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "code_files": [
-    "intelligence/portal.py"
-   ],
+   "code_files": [],
    "gate_files": [],
-   "disposition": "IMPLEMENTED",
+   "disposition": "EXTEND",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -20709,14 +20651,14 @@
    "mandates": [
     "LYR-L10/GV-03"
    ],
-   "hits": 137,
+   "hits": 121,
    "anchored": true,
    "kinds": {
-    "code": 33,
-    "test": 16,
+    "code": 26,
+    "test": 12,
     "gate": 37,
-    "decl": 16,
-    "doc": 35
+    "decl": 14,
+    "doc": 32
    },
    "owner_files": [
     "00-BOOK/DATA/id-ledger.json",
@@ -20803,26 +20745,26 @@
    "mandates": [
     "LYR-L1/EX-05"
    ],
-   "hits": 119,
+   "hits": 52,
    "anchored": false,
    "kinds": {
-    "code": 14,
-    "test": 16,
+    "code": 11,
+    "test": 5,
     "gate": 0,
-    "decl": 18,
-    "doc": 71
+    "decl": 10,
+    "doc": 26
    },
    "owner_files": [
-    "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/URKE-000001/urke-declaration.json",
-    "engine/uckp/law.py"
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
    "code_files": [
-    "engine/ceu/catalog.py",
     "engine/context/catalog.py",
     "engine/context/location.py",
-    "engine/kernel/__init__.py"
+    "engine/kernel/__init__.py",
+    "engine/omega_governance/temporal/calendars.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -20865,14 +20807,14 @@
    "mandates": [
     "UAKP-STATE/SS-10"
    ],
-   "hits": 254,
+   "hits": 241,
    "anchored": false,
    "kinds": {
     "code": 46,
-    "test": 15,
+    "test": 10,
     "gate": 0,
     "decl": 29,
-    "doc": 164
+    "doc": 156
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -20905,14 +20847,14 @@
     "UAKP-PROC/PR-15",
     "UAKP-GRAPH/GP-07"
    ],
-   "hits": 352,
+   "hits": 343,
    "anchored": true,
    "kinds": {
     "code": 44,
-    "test": 19,
+    "test": 14,
     "gate": 4,
-    "decl": 46,
-    "doc": 239
+    "decl": 45,
+    "doc": 236
    },
    "owner_files": [
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
@@ -21052,13 +20994,13 @@
     "MI-015/PJ-11",
     "QM-OUT/OU-19"
    ],
-   "hits": 99,
+   "hits": 89,
    "anchored": false,
    "kinds": {
-    "code": 13,
-    "test": 6,
+    "code": 9,
+    "test": 3,
     "gate": 0,
-    "decl": 12,
+    "decl": 9,
     "doc": 68
    },
    "owner_files": [
@@ -21088,11 +21030,11 @@
     "QM-OUT/OU-06",
     "LYR-L10/GV-04"
    ],
-   "hits": 215,
+   "hits": 211,
    "anchored": true,
    "kinds": {
-    "code": 43,
-    "test": 14,
+    "code": 40,
+    "test": 13,
     "gate": 1,
     "decl": 33,
     "doc": 124
@@ -21125,14 +21067,14 @@
     "LYR-L0/K-12",
     "UAKP-CLS/CS-14"
    ],
-   "hits": 1055,
+   "hits": 1010,
    "anchored": true,
    "kinds": {
-    "code": 267,
-    "test": 120,
+    "code": 260,
+    "test": 93,
     "gate": 3,
-    "decl": 135,
-    "doc": 530
+    "decl": 133,
+    "doc": 521
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -21302,28 +21244,25 @@
   },
   "portability": {
    "label": "Portability",
-   "status": "IMPLEMENTED",
+   "status": "SPECIFIED",
    "mandates": [
     "PRD-NFR/NFR-05"
    ],
-   "hits": 12,
+   "hits": 2,
    "anchored": false,
    "kinds": {
-    "code": 2,
-    "test": 2,
+    "code": 0,
+    "test": 0,
     "gate": 0,
-    "decl": 4,
-    "doc": 4
+    "decl": 1,
+    "doc": 1
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "code_files": [
-    "engine/execution_environment/discovery.py",
-    "engine/execution_environment/model.py"
-   ],
+   "code_files": [],
    "gate_files": [],
-   "disposition": "IMPLEMENTED",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -21335,14 +21274,14 @@
    "mandates": [
     "ARCH-STACK/ST-02"
    ],
-   "hits": 63,
+   "hits": 41,
    "anchored": false,
    "kinds": {
     "code": 4,
-    "test": 3,
+    "test": 2,
     "gate": 0,
     "decl": 3,
-    "doc": 53
+    "doc": 32
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
@@ -21399,14 +21338,14 @@
     "ARCH-STACK/ST-01",
     "QM-FLOW/FL-01"
    ],
-   "hits": 59,
+   "hits": 54,
    "anchored": false,
    "kinds": {
-    "code": 5,
+    "code": 4,
     "test": 0,
     "gate": 0,
     "decl": 2,
-    "doc": 52
+    "doc": 48
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
@@ -21416,7 +21355,7 @@
     "engine/ceu/catalog.py",
     "engine/context/ontology.py",
     "engine/uaue/controller.py",
-    "engine/uaue/objects.py"
+    "engine/uaue/simulation.py"
    ],
    "gate_files": [],
    "disposition": "EXTEND",
@@ -21547,11 +21486,11 @@
     "PRD-ECON/ECON-05",
     "MI-012/CM-11"
    ],
-   "hits": 69,
+   "hits": 66,
    "anchored": true,
    "kinds": {
-    "code": 12,
-    "test": 5,
+    "code": 10,
+    "test": 4,
     "gate": 0,
     "decl": 21,
     "doc": 31
@@ -21687,7 +21626,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -21731,26 +21670,26 @@
    "mandates": [
     "LYR-L13/CM-01"
    ],
-   "hits": 799,
+   "hits": 318,
    "anchored": true,
    "kinds": {
-    "code": 124,
-    "test": 48,
-    "gate": 16,
-    "decl": 63,
-    "doc": 548
+    "code": 55,
+    "test": 15,
+    "gate": 14,
+    "decl": 32,
+    "doc": 202
    },
    "owner_files": [
-    "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCPA-000001/ucpa-declaration.json",
-    "00-MASTER/URKE-000001/urke-declaration.json"
+    "00-MASTER/URKE-000001/urke-declaration.json",
+    "engine/nucleus/law.py",
+    "00-BOOK/DATA/context-authority.json"
    ],
    "code_files": [
     "engine/certification_integrity/inventory.py",
-    "engine/compiler/signing.py",
-    "engine/compiler/validation.py",
-    "engine/construct/contract.py"
+    "engine/construct/contract.py",
+    "engine/kernel/compliance.py",
+    "engine/nucleus/__init__.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -21855,13 +21794,13 @@
    "mandates": [
     "MI-012/CM-01"
    ],
-   "hits": 103,
+   "hits": 101,
    "anchored": false,
    "kinds": {
-    "code": 10,
+    "code": 9,
     "test": 3,
     "gate": 2,
-    "decl": 11,
+    "decl": 10,
     "doc": 77
    },
    "owner_files": [
@@ -21871,10 +21810,10 @@
     "00-MASTER/UCDA-000001/ucda-decisions.json"
    ],
    "code_files": [
-    "platform/commercial_intelligence/__init__.py",
     "platform/commercial_intelligence/errors.py",
     "platform/commercial_intelligence/portfolio.py",
-    "platform/commercial_intelligence/product.py"
+    "platform/commercial_intelligence/product.py",
+    "platform/commercial_intelligence/validation.py"
    ],
    "gate_files": [
     ".github/workflows/uctx-gate.yml",
@@ -21892,14 +21831,14 @@
    "mandates": [
     "QM-CONST/CO-25"
    ],
-   "hits": 1590,
+   "hits": 1484,
    "anchored": true,
    "kinds": {
-    "code": 417,
-    "test": 197,
-    "gate": 7,
-    "decl": 117,
-    "doc": 852
+    "code": 412,
+    "test": 124,
+    "gate": 6,
+    "decl": 109,
+    "doc": 833
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -21947,7 +21886,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -21977,8 +21916,8 @@
    "head_noun": "graph",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "reason": "head noun 'graph' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -22019,14 +21958,14 @@
     "MI-009/GV-07",
     "ARCH-VERIF/VF-06"
    ],
-   "hits": 995,
+   "hits": 835,
    "anchored": true,
    "kinds": {
-    "code": 237,
-    "test": 160,
+    "code": 178,
+    "test": 89,
     "gate": 4,
-    "decl": 62,
-    "doc": 532
+    "decl": 55,
+    "doc": 509
    },
    "owner_files": [
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
@@ -22113,14 +22052,14 @@
    "mandates": [
     "ARCH-OPF/OF-02"
    ],
-   "hits": 124,
+   "hits": 113,
    "anchored": false,
    "kinds": {
-    "code": 22,
+    "code": 16,
     "test": 4,
     "gate": 0,
-    "decl": 34,
-    "doc": 64
+    "decl": 31,
+    "doc": 62
    },
    "owner_files": [
     "00-BOOK/DATA/artifacts.json",
@@ -22144,14 +22083,14 @@
     "PRD-ADM/ADM-09",
     "ARCH-ENGF/EF-12"
    ],
-   "hits": 208,
+   "hits": 203,
    "anchored": true,
    "kinds": {
-    "code": 31,
-    "test": 14,
+    "code": 30,
+    "test": 12,
     "gate": 4,
-    "decl": 34,
-    "doc": 125
+    "decl": 33,
+    "doc": 124
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -22182,14 +22121,14 @@
     "MI-000/K-01",
     "QM-CONST/CO-03"
    ],
-   "hits": 901,
+   "hits": 893,
    "anchored": false,
    "kinds": {
     "code": 79,
-    "test": 35,
+    "test": 34,
     "gate": 2,
     "decl": 39,
-    "doc": 746
+    "doc": 739
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -22245,26 +22184,26 @@
    "mandates": [
     "LYR-L11/ME-02"
    ],
-   "hits": 652,
+   "hits": 527,
    "anchored": true,
    "kinds": {
-    "code": 80,
-    "test": 40,
+    "code": 54,
+    "test": 18,
     "gate": 4,
-    "decl": 73,
-    "doc": 455
+    "decl": 63,
+    "doc": 388
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json",
-    "00-MASTER/UEG-000001/ueg-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+    "00-MASTER/UISD-000001/uisd-declaration.json",
+    "00-BOOK/DATA/artifacts.json",
+    "00-BOOK/DATA/id-ledger.json"
    ],
    "code_files": [
-    "engine/certification_integrity/contract.py",
     "engine/certification_integrity/coverage_data.py",
-    "engine/certification_integrity/equivalence.py",
-    "engine/certification_integrity/immutable.py"
+    "engine/civilization/__init__.py",
+    "engine/civilization/cli.py",
+    "engine/civilization/compliance.py"
    ],
    "gate_files": [
     ".github/workflows/rib-gate.yml",
@@ -22283,14 +22222,14 @@
     "ARCH-STACK/ST-04",
     "LYR-L1/EX-02"
    ],
-   "hits": 567,
+   "hits": 561,
    "anchored": true,
    "kinds": {
-    "code": 60,
-    "test": 21,
+    "code": 59,
+    "test": 19,
     "gate": 5,
-    "decl": 57,
-    "doc": 424
+    "decl": 56,
+    "doc": 422
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -22322,14 +22261,14 @@
     "UAKP-GRAPH/GP-09",
     "UAKP-CLS/CS-26"
    ],
-   "hits": 1333,
+   "hits": 1313,
    "anchored": true,
    "kinds": {
     "code": 212,
-    "test": 72,
+    "test": 60,
     "gate": 4,
-    "decl": 149,
-    "doc": 896
+    "decl": 145,
+    "doc": 892
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -22375,11 +22314,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "generation",
    "head_noun_owner": [
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCOS-AEE-001/aee-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
    ],
-   "reason": "head noun 'generation' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'generation' is named by 00-MASTER/UCOS-AEE-001/aee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -22447,26 +22386,26 @@
    "mandates": [
     "UAKP-STATE/SS-11"
    ],
-   "hits": 910,
+   "hits": 825,
    "anchored": false,
    "kinds": {
-    "code": 292,
-    "test": 42,
+    "code": 286,
+    "test": 15,
     "gate": 3,
-    "decl": 46,
-    "doc": 527
+    "decl": 33,
+    "doc": 488
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UIS-001/uis-declaration.json"
+    "00-MASTER/ACEE-000001/acee.json"
    ],
    "code_files": [
     "engine/civilization/dimensions.py",
     "engine/constitution/stages.py",
     "engine/construct/contract.py",
-    "engine/discovery/__init__.py"
+    "engine/discovery/dimensions.py"
    ],
    "gate_files": [
     ".github/workflows/uar-gate.yml",
@@ -22484,17 +22423,16 @@
    "mandates": [
     "LYR-L5N/UN-05"
    ],
-   "hits": 16,
+   "hits": 15,
    "anchored": false,
    "kinds": {
     "code": 1,
     "test": 1,
     "gate": 0,
-    "decl": 3,
+    "decl": 2,
     "doc": 11
    },
    "owner_files": [
-    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
    "code_files": [],
@@ -22511,14 +22449,14 @@
    "mandates": [
     "LYR-L15/EL-05"
    ],
-   "hits": 1170,
+   "hits": 1153,
    "anchored": true,
    "kinds": {
-    "code": 283,
-    "test": 159,
+    "code": 274,
+    "test": 153,
     "gate": 17,
-    "decl": 91,
-    "doc": 620
+    "decl": 92,
+    "doc": 617
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -22548,14 +22486,14 @@
    "mandates": [
     "UAKP-STATE/SS-09"
    ],
-   "hits": 76,
+   "hits": 70,
    "anchored": false,
    "kinds": {
-    "code": 8,
-    "test": 6,
+    "code": 7,
+    "test": 5,
     "gate": 0,
-    "decl": 11,
-    "doc": 51
+    "decl": 8,
+    "doc": 50
    },
    "owner_files": [
     "00-MASTER/UEC-000001/uec-declaration.json",
@@ -22564,10 +22502,10 @@
     "00-MASTER/UAIE-000001/uaie.json"
    ],
    "code_files": [
-    "engine/enforcement_closure/contract.py",
     "engine/omega_governance/reference/encoding.py",
     "engine/universal_discovery/discovery.py",
-    "engine/universal_discovery/graph.py"
+    "engine/universal_discovery/graph.py",
+    "engine/universal_discovery/surface.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -22586,14 +22524,14 @@
     "LYR-L6/AU-04",
     "UAKP-PROC/PR-13"
    ],
-   "hits": 287,
+   "hits": 283,
    "anchored": false,
    "kinds": {
     "code": 22,
     "test": 5,
     "gate": 5,
-    "decl": 32,
-    "doc": 223
+    "decl": 30,
+    "doc": 221
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -22650,13 +22588,13 @@
    "mandates": [
     "QM-FLOW/FL-04"
    ],
-   "hits": 140,
+   "hits": 137,
    "anchored": false,
    "kinds": {
     "code": 8,
     "test": 3,
     "gate": 0,
-    "decl": 9,
+    "decl": 6,
     "doc": 120
    },
    "owner_files": [
@@ -22684,26 +22622,26 @@
    "mandates": [
     "ARCH-DISCF/DF-03"
    ],
-   "hits": 166,
+   "hits": 143,
    "anchored": false,
    "kinds": {
-    "code": 16,
-    "test": 4,
+    "code": 9,
+    "test": 0,
     "gate": 1,
-    "decl": 10,
-    "doc": 135
+    "decl": 9,
+    "doc": 124
    },
    "owner_files": [
-    "00-MASTER/UEG-000001/ueg-declaration.json",
     "00-BOOK/DATA/constitutional-authority-alignment.json",
     "00-MASTER/P0-FINAL-CLOSURE-002/UCOS-FINALITY-ANALYSIS.json",
-    "00-MASTER/UAIE-000001/uaie-architecture.json"
+    "00-MASTER/UAIE-000001/uaie-architecture.json",
+    "00-MASTER/UAIE-000001/uaie.json"
    ],
    "code_files": [
-    "engine/execution_environment/contract.py",
     "engine/uckp/uga_projection.py",
-    "engine/verification_intelligence/execution.py",
-    "platform/artifact_explorer/service.py"
+    "platform/artifact_explorer/service.py",
+    "platform/foundation/trust.py",
+    "platform/runtime_platform/lifecycle.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -22718,13 +22656,13 @@
    "mandates": [
     "MI-010/X-10"
    ],
-   "hits": 685,
+   "hits": 678,
    "anchored": true,
    "kinds": {
-    "code": 31,
+    "code": 27,
     "test": 5,
     "gate": 2,
-    "decl": 56,
+    "decl": 53,
     "doc": 591
    },
    "owner_files": [
@@ -22843,14 +22781,14 @@
     "ARCH-GOVF/GF-03",
     "QM-FLOW/FL-20"
    ],
-   "hits": 1659,
+   "hits": 1597,
    "anchored": true,
    "kinds": {
-    "code": 302,
-    "test": 132,
+    "code": 287,
+    "test": 98,
     "gate": 13,
-    "decl": 105,
-    "doc": 1107
+    "decl": 102,
+    "doc": 1097
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -22881,13 +22819,13 @@
     "MI-015/PJ-15",
     "QM-OUT/OU-07"
    ],
-   "hits": 1022,
+   "hits": 1012,
    "anchored": true,
    "kinds": {
-    "code": 96,
-    "test": 38,
+    "code": 92,
+    "test": 34,
     "gate": 2,
-    "decl": 59,
+    "decl": 57,
     "doc": 827
    },
    "owner_files": [
@@ -22918,14 +22856,14 @@
     "MI-009/GV-03",
     "LYR-L5/US-06"
    ],
-   "hits": 2807,
+   "hits": 2707,
    "anchored": true,
    "kinds": {
-    "code": 602,
-    "test": 346,
+    "code": 563,
+    "test": 308,
     "gate": 30,
-    "decl": 141,
-    "doc": 1688
+    "decl": 135,
+    "doc": 1671
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -23133,14 +23071,14 @@
     "LYR-L1/EX-11",
     "UAKP-CLS/CS-21"
    ],
-   "hits": 1788,
+   "hits": 1730,
    "anchored": true,
    "kinds": {
-    "code": 391,
-    "test": 180,
+    "code": 379,
+    "test": 147,
     "gate": 3,
-    "decl": 285,
-    "doc": 929
+    "decl": 278,
+    "doc": 923
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -23187,7 +23125,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'constitution' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -23412,14 +23350,14 @@
     "LYR-L7I/GI-07",
     "LYR-L9/KG-03"
    ],
-   "hits": 1298,
+   "hits": 1260,
    "anchored": true,
    "kinds": {
-    "code": 312,
-    "test": 140,
+    "code": 310,
+    "test": 111,
     "gate": 1,
-    "decl": 246,
-    "doc": 599
+    "decl": 245,
+    "doc": 593
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -23477,13 +23415,13 @@
    "mandates": [
     "LYR-L12C/CF-03"
    ],
-   "hits": 271,
+   "hits": 266,
    "anchored": true,
    "kinds": {
     "code": 31,
-    "test": 14,
+    "test": 11,
     "gate": 4,
-    "decl": 49,
+    "decl": 47,
     "doc": 173
    },
    "owner_files": [
@@ -23605,26 +23543,26 @@
    "mandates": [
     "LYR-L15/EL-15"
    ],
-   "hits": 297,
+   "hits": 202,
    "anchored": false,
    "kinds": {
-    "code": 55,
-    "test": 39,
-    "gate": 1,
-    "decl": 16,
-    "doc": 186
+    "code": 39,
+    "test": 19,
+    "gate": 0,
+    "decl": 10,
+    "doc": 134
    },
    "owner_files": [
     "00-MASTER/UCPA-000001/ucpa-declaration.json",
-    "00-MASTER/UVI-000001/uvi-declaration.json",
     "00-BOOK/DATA/allocation-permits.json",
-    "00-BOOK/DATA/constitutional-authority-alignment.json"
+    "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
    "code_files": [
-    "engine/conformance/measure.py",
     "engine/constitution/catalog.py",
-    "engine/constitution/replay.py",
-    "engine/construct/audit.py"
+    "engine/enforcement_closure/model.py",
+    "engine/execution_environment/discovery.py",
+    "engine/graph/engine.py"
    ],
    "gate_files": [],
    "disposition": "ADJUDICATE",
@@ -23686,11 +23624,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "coupling",
    "head_noun_owner": [
-    "00-BOOK/DATA/context-authority.json",
     "00-MASTER/P0-FINAL-CLOSURE-002/UCOS-COVERAGE-CLOSURE.json",
-    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+    "00-MASTER/UCDA-000001/ucda-decisions.json"
    ],
-   "reason": "head noun 'coupling' is named by 00-BOOK/DATA/context-authority.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'coupling' is named by 00-MASTER/P0-FINAL-CLOSURE-002/UCOS-COVERAGE-CLOSURE.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -23706,20 +23644,20 @@
     "LYR-L12V/VF-04",
     "LYR-L15/EL-13"
    ],
-   "hits": 716,
+   "hits": 645,
    "anchored": true,
    "kinds": {
-    "code": 152,
-    "test": 76,
+    "code": 135,
+    "test": 63,
     "gate": 21,
-    "decl": 72,
-    "doc": 395
+    "decl": 65,
+    "doc": 361
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+    "00-MASTER/UCOS-URR-001/urr-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/pytest_shuffle.py",
@@ -23744,14 +23682,14 @@
     "MI-015/PJ-19",
     "QM-OUT/OU-23"
    ],
-   "hits": 1060,
+   "hits": 917,
    "anchored": true,
    "kinds": {
-    "code": 202,
-    "test": 215,
+    "code": 195,
+    "test": 82,
     "gate": 12,
-    "decl": 74,
-    "doc": 557
+    "decl": 73,
+    "doc": 555
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -23999,14 +23937,14 @@
    "mandates": [
     "PRD-FR/FR-02"
    ],
-   "hits": 367,
+   "hits": 357,
    "anchored": false,
    "kinds": {
-    "code": 62,
-    "test": 10,
+    "code": 60,
+    "test": 8,
     "gate": 0,
     "decl": 25,
-    "doc": 270
+    "doc": 264
    },
    "owner_files": [
     "00-MASTER/UCL-000001/ucl-declaration.json",
@@ -24065,14 +24003,14 @@
     "UAKP-GRAPH/GP-04",
     "UAKP-CLS/CS-18"
    ],
-   "hits": 1089,
+   "hits": 1057,
    "anchored": true,
    "kinds": {
-    "code": 179,
-    "test": 80,
+    "code": 170,
+    "test": 73,
     "gate": 5,
-    "decl": 155,
-    "doc": 670
+    "decl": 147,
+    "doc": 662
    },
    "owner_files": [
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
@@ -24191,13 +24129,13 @@
    "mandates": [
     "ARCH-ENGF/EF-02"
    ],
-   "hits": 461,
+   "hits": 444,
    "anchored": true,
    "kinds": {
-    "code": 48,
-    "test": 22,
+    "code": 40,
+    "test": 15,
     "gate": 2,
-    "decl": 33,
+    "decl": 31,
     "doc": 356
    },
    "owner_files": [
@@ -24325,7 +24263,7 @@
    "head_noun_owner": [
     "00-MASTER/UCPA-000001/ucpa-declaration.json",
     "engine/constitution/law.py",
-    "00-BOOK/DATA/artifacts.json"
+    "00-MASTER/MCOS-000001/mcos-civilization.json"
    ],
    "reason": "head noun 'constraints' is named by 00-MASTER/UCPA-000001/ucpa-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -24487,20 +24425,20 @@
    "mandates": [
     "ARCH-EVOF/VF2-12"
    ],
-   "hits": 308,
+   "hits": 290,
    "anchored": false,
    "kinds": {
-    "code": 30,
-    "test": 35,
+    "code": 26,
+    "test": 29,
     "gate": 4,
-    "decl": 22,
-    "doc": 217
+    "decl": 16,
+    "doc": 215
    },
    "owner_files": [
-    "00-MASTER/URKE-000001/urke-declaration.json",
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
-    "00-MASTER/UAKOS-CLOSURE-009/requirements.json"
+    "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
+    "00-MASTER/UAUE-000001/uaue-evolution.json"
    ],
    "code_files": [
     "engine/context/runtime.py",
@@ -24524,11 +24462,11 @@
    "mandates": [
     "PRD-FR/FR-13"
    ],
-   "hits": 136,
+   "hits": 134,
    "anchored": false,
    "kinds": {
     "code": 7,
-    "test": 7,
+    "test": 5,
     "gate": 0,
     "decl": 8,
     "doc": 114
@@ -24559,14 +24497,14 @@
     "MI-006/DEC-06",
     "ARCH-CERTV/CV-02"
    ],
-   "hits": 2306,
+   "hits": 2192,
    "anchored": true,
    "kinds": {
-    "code": 624,
-    "test": 239,
+    "code": 618,
+    "test": 177,
     "gate": 13,
-    "decl": 344,
-    "doc": 1086
+    "decl": 303,
+    "doc": 1081
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -24857,14 +24795,14 @@
     "PRD-GOV/GOV-02",
     "LYR-L0/K-11"
    ],
-   "hits": 2174,
+   "hits": 2092,
    "anchored": true,
    "kinds": {
-    "code": 505,
-    "test": 172,
+    "code": 481,
+    "test": 142,
     "gate": 19,
-    "decl": 115,
-    "doc": 1363
+    "decl": 106,
+    "doc": 1344
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -24948,14 +24886,14 @@
     "QM-CONST/CO-07",
     "LYR-L7I/GI-04"
    ],
-   "hits": 1136,
+   "hits": 1031,
    "anchored": true,
    "kinds": {
-    "code": 263,
-    "test": 97,
+    "code": 232,
+    "test": 72,
     "gate": 8,
-    "decl": 77,
-    "doc": 691
+    "decl": 67,
+    "doc": 652
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -24992,14 +24930,14 @@
     "LYR-L5/US-08",
     "LYR-L7O/GO-01"
    ],
-   "hits": 2369,
+   "hits": 2237,
    "anchored": true,
    "kinds": {
-    "code": 625,
-    "test": 289,
+    "code": 583,
+    "test": 210,
     "gate": 7,
-    "decl": 289,
-    "doc": 1159
+    "decl": 286,
+    "doc": 1151
    },
    "owner_files": [
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
@@ -25577,11 +25515,11 @@
     "MI-015/PJ-14",
     "QM-OUT/OU-10"
    ],
-   "hits": 287,
+   "hits": 283,
    "anchored": true,
    "kinds": {
-    "code": 22,
-    "test": 8,
+    "code": 20,
+    "test": 6,
     "gate": 2,
     "decl": 25,
     "doc": 230
@@ -25631,7 +25569,7 @@
    "head_noun_owner": [
     "00-MASTER/UCOS-UFEP-001/ufep-declaration.json",
     "00-BOOK/DATA/allocation-permits.json",
-    "00-BOOK/DATA/context-authority.json"
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
    "reason": "head noun 'computing' is named by 00-MASTER/UCOS-UFEP-001/ufep-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -25662,7 +25600,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'knowledge' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -25813,14 +25751,14 @@
     "PRD-NFR/NFR-04",
     "QM-CONST/CO-19"
    ],
-   "hits": 1038,
+   "hits": 1003,
    "anchored": true,
    "kinds": {
-    "code": 151,
-    "test": 54,
+    "code": 143,
+    "test": 47,
     "gate": 0,
-    "decl": 137,
-    "doc": 696
+    "decl": 130,
+    "doc": 683
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -25830,9 +25768,9 @@
    ],
    "code_files": [
     "engine/certification_integrity/pytest_shuffle.py",
-    "engine/compiler/publishing.py",
     "engine/context/__init__.py",
-    "engine/context/catalog.py"
+    "engine/context/catalog.py",
+    "engine/context/graph.py"
    ],
    "gate_files": [],
    "disposition": "REFERENCE",
@@ -26009,8 +25947,8 @@
    "head_noun": "graph",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "reason": "head noun 'graph' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -26913,14 +26851,14 @@
    "mandates": [
     "LYR-L13/CM-02"
    ],
-   "hits": 1783,
+   "hits": 1746,
    "anchored": true,
    "kinds": {
-    "code": 380,
-    "test": 222,
+    "code": 358,
+    "test": 209,
     "gate": 2,
     "decl": 220,
-    "doc": 959
+    "doc": 957
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -26931,8 +26869,8 @@
    "code_files": [
     "engine/ceu/catalog.py",
     "engine/compiler/ir.py",
-    "engine/factory/__init__.py",
-    "engine/factory/factories/__init__.py"
+    "engine/factory/factories/__init__.py",
+    "engine/factory/factories/service.py"
    ],
    "gate_files": [
     ".github/workflows/omega-gate.yml",
@@ -26952,14 +26890,14 @@
     "MI-015/PJ-09",
     "QM-OUT/OU-17"
    ],
-   "hits": 368,
+   "hits": 319,
    "anchored": true,
    "kinds": {
-    "code": 101,
-    "test": 54,
+    "code": 68,
+    "test": 42,
     "gate": 1,
-    "decl": 21,
-    "doc": 191
+    "decl": 20,
+    "doc": 188
    },
    "owner_files": [
     "00-BOOK/DATA/artifacts.json",
@@ -26988,14 +26926,14 @@
    "mandates": [
     "PRD-ECON/ECON-04"
    ],
-   "hits": 36,
+   "hits": 31,
    "anchored": false,
    "kinds": {
-    "code": 5,
+    "code": 4,
     "test": 1,
     "gate": 1,
-    "decl": 9,
-    "doc": 20
+    "decl": 6,
+    "doc": 19
    },
    "owner_files": [
     "00-MASTER/URKE-000001/urke-declaration.json",
@@ -27004,7 +26942,6 @@
     "00-MASTER/UCDA-000001/ucda-decisions.json"
    ],
    "code_files": [
-    "engine/uaue/__init__.py",
     "engine/uaue/controller.py",
     "engine/uaue/gate.py",
     "engine/uaue/registers.py"
@@ -27024,14 +26961,14 @@
    "mandates": [
     "PRD-ECON/ECON-16"
    ],
-   "hits": 630,
+   "hits": 607,
    "anchored": true,
    "kinds": {
-    "code": 178,
-    "test": 112,
+    "code": 177,
+    "test": 92,
     "gate": 3,
     "decl": 27,
-    "doc": 310
+    "doc": 308
    },
    "owner_files": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
@@ -27061,13 +26998,13 @@
    "mandates": [
     "PRD-OBS/OBS-05"
    ],
-   "hits": 367,
+   "hits": 359,
    "anchored": true,
    "kinds": {
-    "code": 50,
-    "test": 7,
+    "code": 48,
+    "test": 6,
     "gate": 0,
-    "decl": 35,
+    "decl": 30,
     "doc": 275
    },
    "owner_files": [
@@ -27077,10 +27014,10 @@
     "00-BOOK/DATA/id-ledger.json"
    ],
    "code_files": [
-    "engine/graph/__init__.py",
     "engine/graph/adapter.py",
     "engine/graph/engine.py",
-    "engine/graph/projections.py"
+    "engine/graph/projections.py",
+    "engine/knowledge/integration/repository.py"
    ],
    "gate_files": [],
    "disposition": "REFERENCE",
@@ -27300,11 +27237,11 @@
    "mandates": [
     "MI-006/DEC-11"
    ],
-   "hits": 104,
+   "hits": 102,
    "anchored": true,
    "kinds": {
-    "code": 17,
-    "test": 7,
+    "code": 16,
+    "test": 6,
     "gate": 0,
     "decl": 21,
     "doc": 59
@@ -27334,10 +27271,10 @@
    "mandates": [
     "PRD-PUB/PUB-03"
    ],
-   "hits": 65,
+   "hits": 64,
    "anchored": false,
    "kinds": {
-    "code": 10,
+    "code": 9,
     "test": 0,
     "gate": 0,
     "decl": 6,
@@ -27364,33 +27301,26 @@
   },
   "sre": {
    "label": "SRE",
-   "status": "IMPLEMENTED",
+   "status": "SPECIFIED",
    "mandates": [
     "MI-016/SH-10"
    ],
-   "hits": 153,
+   "hits": 5,
    "anchored": false,
    "kinds": {
-    "code": 42,
-    "test": 25,
-    "gate": 1,
-    "decl": 10,
-    "doc": 75
+    "code": 0,
+    "test": 0,
+    "gate": 0,
+    "decl": 2,
+    "doc": 3
    },
    "owner_files": [
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UEG-000001/ueg-declaration.json",
-    "00-BOOK/DATA/constitutional-authority-alignment.json",
-    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "code_files": [
-    "engine/ceu/existence.py",
-    "engine/conformance/__init__.py",
-    "engine/conformance/measure.py",
-    "engine/graph/architecture/__init__.py"
-   ],
+   "code_files": [],
    "gate_files": [],
-   "disposition": "IMPLEMENTED",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -27540,7 +27470,7 @@
    "head_noun_owner": [
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
     "engine/civilization/compliance.py",
-    "engine/kernel/identity.py"
+    "engine/provider/compliance.py"
    ],
    "reason": "head noun 'alpha' is named by 00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -27600,8 +27530,8 @@
    "head_noun": "ready",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCOS-UFEP-001/ufep-declaration.json"
    ],
    "reason": "head noun 'ready' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -27801,20 +27731,20 @@
    "mandates": [
     "LYR-L1/EX-12"
    ],
-   "hits": 3601,
+   "hits": 3178,
    "anchored": true,
    "kinds": {
-    "code": 907,
-    "test": 411,
-    "gate": 26,
-    "decl": 377,
-    "doc": 1880
+    "code": 818,
+    "test": 323,
+    "gate": 25,
+    "decl": 365,
+    "doc": 1647
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/__init__.py",
@@ -27872,20 +27802,20 @@
     "QM-CONST/CO-11",
     "LYR-L9/KG-05"
    ],
-   "hits": 1127,
+   "hits": 1002,
    "anchored": true,
    "kinds": {
-    "code": 249,
-    "test": 102,
-    "gate": 16,
-    "decl": 86,
-    "doc": 674
+    "code": 209,
+    "test": 73,
+    "gate": 14,
+    "decl": 74,
+    "doc": 632
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/contract.py",
@@ -28000,14 +27930,14 @@
     "MI-012/CM-12",
     "LYR-L13/CM-06"
    ],
-   "hits": 32,
+   "hits": 31,
    "anchored": false,
    "kinds": {
     "code": 1,
     "test": 1,
     "gate": 0,
     "decl": 4,
-    "doc": 26
+    "doc": 25
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
@@ -28031,14 +27961,14 @@
    "mandates": [
     "ARCH-CERTV/CV-05"
    ],
-   "hits": 970,
+   "hits": 957,
    "anchored": false,
    "kinds": {
-    "code": 136,
-    "test": 62,
+    "code": 131,
+    "test": 56,
     "gate": 7,
     "decl": 72,
-    "doc": 693
+    "doc": 691
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -28161,14 +28091,14 @@
    "mandates": [
     "PRD-ECON/ECON-08"
    ],
-   "hits": 22,
+   "hits": 20,
    "anchored": false,
    "kinds": {
     "code": 3,
     "test": 1,
     "gate": 1,
     "decl": 7,
-    "doc": 10
+    "doc": 8
    },
    "owner_files": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
@@ -28227,14 +28157,14 @@
     "MI-009/GV-06",
     "LYR-L5/US-04"
    ],
-   "hits": 835,
+   "hits": 823,
    "anchored": true,
    "kinds": {
-    "code": 161,
-    "test": 32,
+    "code": 160,
+    "test": 29,
     "gate": 2,
-    "decl": 52,
-    "doc": 588
+    "decl": 50,
+    "doc": 582
    },
    "owner_files": [
     "00-MASTER/UCL-000001/ucl-declaration.json",
@@ -28326,20 +28256,20 @@
     "MI-013/OB-03",
     "ARCH-OPF/OF-08"
    ],
-   "hits": 247,
+   "hits": 207,
    "anchored": true,
    "kinds": {
-    "code": 91,
+    "code": 88,
     "test": 12,
-    "gate": 2,
-    "decl": 27,
-    "doc": 115
+    "gate": 1,
+    "decl": 19,
+    "doc": 87
    },
    "owner_files": [
     "00-BOOK/DATA/evidence-universe.json",
     "00-BOOK/DATA/exclusion-register.json",
     "00-BOOK/DATA/id-ledger.json",
-    "00-MASTER/ACEE-000001/acee.json"
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
    ],
    "code_files": [
     "engine/acceptance/engine.py",
@@ -28397,14 +28327,14 @@
     "LYR-L6/AU-09",
     "LYR-L12V/VF-03"
    ],
-   "hits": 281,
+   "hits": 227,
    "anchored": true,
    "kinds": {
-    "code": 21,
-    "test": 19,
+    "code": 13,
+    "test": 14,
     "gate": 0,
-    "decl": 33,
-    "doc": 208
+    "decl": 24,
+    "doc": 176
    },
    "owner_files": [
     "00-MASTER/UEG-000001/ueg-declaration.json",
@@ -28433,14 +28363,14 @@
     "QM-OUT/OU-13",
     "LYR-L7O/GO-05"
    ],
-   "hits": 1736,
+   "hits": 1673,
    "anchored": true,
    "kinds": {
-    "code": 122,
+    "code": 104,
     "test": 801,
     "gate": 23,
-    "decl": 85,
-    "doc": 705
+    "decl": 82,
+    "doc": 663
    },
    "owner_files": [
     "00-MASTER/UCI-000001/uci-declaration.json",
@@ -28449,10 +28379,10 @@
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
    ],
    "code_files": [
-    "engine/acceptance/contracts.py",
-    "engine/certification/closure.py",
-    "engine/certification/contracts.py",
-    "engine/certification/integrity.py"
+    "engine/certification_integrity/__init__.py",
+    "engine/certification_integrity/classify.py",
+    "engine/certification_integrity/equivalence.py",
+    "engine/certification_integrity/inventory.py"
    ],
    "gate_files": [
     ".github/workflows/corpus-currency-gate.yml",
@@ -28497,14 +28427,14 @@
     "MI-009/GV-11",
     "ARCH-VERIF/VF-04"
    ],
-   "hits": 2068,
+   "hits": 1996,
    "anchored": true,
    "kinds": {
-    "code": 362,
-    "test": 194,
+    "code": 356,
+    "test": 150,
     "gate": 3,
-    "decl": 375,
-    "doc": 1134
+    "decl": 372,
+    "doc": 1115
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -28568,14 +28498,14 @@
    "mandates": [
     "PRD-OBS/OBS-04"
    ],
-   "hits": 307,
+   "hits": 296,
    "anchored": true,
    "kinds": {
-    "code": 48,
-    "test": 14,
+    "code": 44,
+    "test": 10,
     "gate": 2,
-    "decl": 32,
-    "doc": 211
+    "decl": 30,
+    "doc": 210
    },
    "owner_files": [
     "00-MASTER/UCOS-UTCE-001/utce-declaration.json",
@@ -28587,7 +28517,7 @@
     "engine/certification/integrity.py",
     "engine/constitution/legality.py",
     "engine/foundation/obs/telemetry.py",
-    "engine/graph/architecture/reachability.py"
+    "engine/graph/engine.py"
    ],
    "gate_files": [
     ".github/workflows/rib-gate.yml"
@@ -28600,15 +28530,15 @@
   },
   "tracing": {
    "label": "Tracing",
-   "status": "IMPLEMENTED",
+   "status": "PARTIAL",
    "mandates": [
     "ARCH-OPF/OF-10"
    ],
-   "hits": 54,
+   "hits": 52,
    "anchored": false,
    "kinds": {
-    "code": 3,
-    "test": 1,
+    "code": 2,
+    "test": 0,
     "gate": 0,
     "decl": 4,
     "doc": 46
@@ -28620,11 +28550,10 @@
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
    "code_files": [
-    "intelligence/realization/generation.py",
-    "platform/security/observability.py"
+    "intelligence/realization/generation.py"
    ],
    "gate_files": [],
-   "disposition": "IMPLEMENTED",
+   "disposition": "EXTEND",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -28666,14 +28595,14 @@
    "mandates": [
     "ARCH-EVOF/VF2-10"
    ],
-   "hits": 158,
+   "hits": 154,
    "anchored": true,
    "kinds": {
     "code": 12,
     "test": 5,
     "gate": 1,
-    "decl": 21,
-    "doc": 119
+    "decl": 20,
+    "doc": 116
    },
    "owner_files": [
     "00-MASTER/UCCFA-000001/uccfa-declaration.json",
@@ -28730,14 +28659,14 @@
     "UAKP-GRAPH/GP-03",
     "UAKP-CLS/CS-06"
    ],
-   "hits": 2074,
+   "hits": 2032,
    "anchored": true,
    "kinds": {
-    "code": 363,
-    "test": 90,
+    "code": 352,
+    "test": 74,
     "gate": 22,
     "decl": 170,
-    "doc": 1429
+    "doc": 1414
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -28983,26 +28912,26 @@
    "mandates": [
     "LYR-L15/EL-02"
    ],
-   "hits": 119,
+   "hits": 107,
    "anchored": false,
    "kinds": {
-    "code": 24,
-    "test": 7,
+    "code": 21,
+    "test": 5,
     "gate": 0,
     "decl": 27,
-    "doc": 61
+    "doc": 54
    },
    "owner_files": [
     "00-MASTER/UCOS-UGA-001/uga-declaration.json",
     "00-MASTER/URKE-000001/urke-declaration.json",
-    "engine/uckp/law.py",
-    "00-BOOK/DATA/generated-artifact-registry.json"
+    "00-BOOK/DATA/generated-artifact-registry.json",
+    "00-BOOK/DATA/id-ledger.json"
    ],
    "code_files": [
     "engine/constitution/stages.py",
     "engine/nucleus/lifecycle.py",
     "engine/omega_governance/temporal/ordering.py",
-    "engine/recursive_knowledge/contract.py"
+    "engine/recursive_knowledge/states.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -29017,14 +28946,14 @@
    "mandates": [
     "MI-018/ES-03"
    ],
-   "hits": 69,
+   "hits": 65,
    "anchored": true,
    "kinds": {
-    "code": 11,
+    "code": 10,
     "test": 4,
     "gate": 0,
     "decl": 21,
-    "doc": 33
+    "doc": 30
    },
    "owner_files": [
     "00-MASTER/URKE-000001/urke-declaration.json",
@@ -29034,9 +28963,9 @@
    ],
    "code_files": [
     "engine/constitution/stages.py",
-    "engine/recursive_knowledge/contract.py",
     "engine/recursive_knowledge/states.py",
-    "engine/uaue/certification.py"
+    "engine/uaue/certification.py",
+    "engine/uaue/controller.py"
    ],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
@@ -29618,8 +29547,8 @@
    "head_noun": "graph",
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
    "reason": "head noun 'graph' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -31029,11 +30958,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "logic",
    "head_noun_owner": [
-    "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/URKE-000001/urke-declaration.json",
+    "engine/nucleus/law.py"
    ],
-   "reason": "head noun 'logic' is named by 00-MASTER/UCL-000001/ucl-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'logic' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -32389,14 +32318,14 @@
     "LYR-L1/EX-03",
     "LYR-L5N/UN-03"
    ],
-   "hits": 1098,
+   "hits": 1055,
    "anchored": true,
    "kinds": {
-    "code": 189,
-    "test": 86,
+    "code": 173,
+    "test": 75,
     "gate": 4,
-    "decl": 78,
-    "doc": 741
+    "decl": 76,
+    "doc": 727
    },
    "owner_files": [
     "00-MASTER/UCL-000001/ucl-declaration.json",
@@ -32408,7 +32337,7 @@
     "engine/ceu/catalog.py",
     "engine/civilization/compliance.py",
     "engine/civilization/generation.py",
-    "engine/compiler/partition.py"
+    "engine/construct/declaration.py"
    ],
    "gate_files": [
     ".github/workflows/rfp-gate.yml",
@@ -32484,20 +32413,20 @@
    "mandates": [
     "UAKP-STATE/SS-01"
    ],
-   "hits": 1179,
+   "hits": 1022,
    "anchored": true,
    "kinds": {
-    "code": 327,
-    "test": 251,
+    "code": 307,
+    "test": 131,
     "gate": 11,
-    "decl": 70,
-    "doc": 520
+    "decl": 67,
+    "doc": 506
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/__init__.py",
@@ -32627,11 +32556,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "forms",
    "head_noun_owner": [
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+    "00-MASTER/UCOS-SUB-001/sub-declaration.json"
    ],
-   "reason": "head noun 'forms' is named by 00-MASTER/BASELINE-001/baseline-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'forms' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -32660,7 +32589,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json"
    ],
    "reason": "head noun 'knowledge' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -32673,14 +32602,14 @@
    "mandates": [
     "ARCH-EVOF/VF2-07"
    ],
-   "hits": 60,
+   "hits": 57,
    "anchored": false,
    "kinds": {
     "code": 5,
     "test": 1,
     "gate": 3,
-    "decl": 8,
-    "doc": 43
+    "decl": 7,
+    "doc": 41
    },
    "owner_files": [
     "00-MASTER/UCOS-URAT-001/urat-declaration.json",
@@ -32708,14 +32637,14 @@
    "mandates": [
     "LYR-L11/ME-05"
    ],
-   "hits": 86,
+   "hits": 80,
    "anchored": false,
    "kinds": {
     "code": 26,
-    "test": 3,
+    "test": 1,
     "gate": 0,
-    "decl": 9,
-    "doc": 48
+    "decl": 6,
+    "doc": 47
    },
    "owner_files": [
     "00-MASTER/UEG-000001/ueg-declaration.json",
@@ -32742,14 +32671,14 @@
    "mandates": [
     "UAKP-PO/PO-18"
    ],
-   "hits": 1968,
+   "hits": 1672,
    "anchored": true,
    "kinds": {
-    "code": 532,
-    "test": 314,
+    "code": 479,
+    "test": 156,
     "gate": 9,
-    "decl": 86,
-    "doc": 1027
+    "decl": 73,
+    "doc": 955
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -32779,20 +32708,20 @@
    "mandates": [
     "UAKP-STATE/SS-12"
    ],
-   "hits": 852,
+   "hits": 770,
    "anchored": true,
    "kinds": {
-    "code": 204,
-    "test": 73,
+    "code": 194,
+    "test": 44,
     "gate": 2,
-    "decl": 48,
-    "doc": 525
+    "decl": 43,
+    "doc": 487
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-MASTER/UCON-000001/ucon-declaration.json",
-    "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+    "00-MASTER/UCOS-SUB-001/sub-declaration.json"
    ],
    "code_files": [
     "engine/acceptance/contracts.py",
@@ -32826,14 +32755,14 @@
     "UAKP-GRAPH/GP-11",
     "UAKP-CLS/CS-27"
    ],
-   "hits": 3193,
+   "hits": 2996,
    "anchored": true,
    "kinds": {
-    "code": 611,
-    "test": 447,
-    "gate": 18,
-    "decl": 356,
-    "doc": 1761
+    "code": 568,
+    "test": 348,
+    "gate": 17,
+    "decl": 347,
+    "doc": 1716
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -32959,26 +32888,26 @@
     "UAKP-GRAPH/GP-12",
     "UAKP-CLS/CS-28"
    ],
-   "hits": 1333,
+   "hits": 1290,
    "anchored": true,
    "kinds": {
-    "code": 155,
-    "test": 59,
-    "gate": 14,
-    "decl": 105,
-    "doc": 1000
+    "code": 139,
+    "test": 54,
+    "gate": 13,
+    "decl": 100,
+    "doc": 984
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json",
     "00-MASTER/UCL-000001/ucl-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "00-MASTER/UCOS-AEE-001/aee-declaration.json"
    ],
    "code_files": [
     "engine/certification_integrity/__init__.py",
-    "engine/certification_integrity/equivalence.py",
-    "engine/certification_integrity/immutable.py",
-    "engine/ceu/possessions.py"
+    "engine/compiler/publishing.py",
+    "engine/constitution/gateway.py",
+    "engine/constitution/stages.py"
    ],
    "gate_files": [
     ".github/workflows/aee-gate.yml",
@@ -33081,14 +33010,14 @@
    "mandates": [
     "UAKP-STATE/SS-13"
    ],
-   "hits": 1125,
+   "hits": 1078,
    "anchored": true,
    "kinds": {
-    "code": 116,
-    "test": 33,
+    "code": 106,
+    "test": 22,
     "gate": 8,
-    "decl": 72,
-    "doc": 896
+    "decl": 64,
+    "doc": 878
    },
    "owner_files": [
     "00-MASTER/BASELINE-001/baseline-declaration.json",
@@ -33119,14 +33048,14 @@
     "LYR-L15/EL-10",
     "UAKP-PO/PO-19"
    ],
-   "hits": 1584,
+   "hits": 1420,
    "anchored": true,
    "kinds": {
-    "code": 335,
-    "test": 228,
+    "code": 278,
+    "test": 168,
     "gate": 34,
-    "decl": 95,
-    "doc": 892
+    "decl": 93,
+    "doc": 847
    },
    "owner_files": [
     "00-MASTER/UCI-000001/uci-declaration.json",
@@ -33136,9 +33065,9 @@
    ],
    "code_files": [
     "engine/acceptance/contracts.py",
-    "engine/certification/__init__.py",
     "engine/certification/closure.py",
-    "engine/certification/contracts.py"
+    "engine/certification/contracts.py",
+    "engine/certification/integrity.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -33187,13 +33116,13 @@
    "mandates": [
     "ARCH-EVOF/VF2-06"
    ],
-   "hits": 198,
+   "hits": 194,
    "anchored": true,
    "kinds": {
     "code": 18,
-    "test": 6,
+    "test": 3,
     "gate": 0,
-    "decl": 22,
+    "decl": 21,
     "doc": 152
    },
    "owner_files": [
@@ -33217,36 +33146,33 @@
   },
   "vision": {
    "label": "Vision",
-   "status": "ANCHORED",
+   "status": "IMPLEMENTED",
    "mandates": [
     "MI-000/K-02"
    ],
-   "hits": 1535,
+   "hits": 166,
    "anchored": true,
    "kinds": {
-    "code": 246,
-    "test": 120,
-    "gate": 13,
-    "decl": 270,
-    "doc": 886
+    "code": 20,
+    "test": 10,
+    "gate": 1,
+    "decl": 21,
+    "doc": 114
    },
    "owner_files": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCOS-UFEP-001/ufep-declaration.json",
-    "00-MASTER/UCOS-URAT-001/urat-declaration.json"
+    "00-MASTER/UCOS-URR-001/urr-declaration.json",
+    "00-BOOK/DATA/allocation-permits.json",
+    "00-BOOK/DATA/artifacts.json",
+    "00-BOOK/DATA/id-ledger.json"
    ],
    "code_files": [
-    "engine/acceptance/__init__.py",
-    "engine/acceptance/contracts.py",
-    "engine/acceptance/readiness.py",
-    "engine/certification/__init__.py"
+    "platform/universal_control_plane/__init__.py",
+    "platform/universal_control_plane/discovery.py",
+    "platform/universal_control_plane/intelligence.py",
+    "platform/universal_control_plane/manifest.py"
    ],
-   "gate_files": [
-    ".github/workflows/aee-gate.yml",
-    ".github/workflows/baseline-gate.yml"
-   ],
-   "disposition": "REFERENCE",
+   "gate_files": [],
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -33258,14 +33184,14 @@
    "mandates": [
     "LYR-L14/IF-03"
    ],
-   "hits": 43,
+   "hits": 13,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 6,
+    "test": 0,
     "gate": 0,
     "decl": 4,
-    "doc": 33
+    "doc": 9
    },
    "owner_files": [
     "00-MASTER/UAIE-000001/uaie-architecture.json",
@@ -33287,26 +33213,21 @@
    "mandates": [
     "LYR-L14/IF-05"
    ],
-   "hits": 110,
+   "hits": 51,
    "anchored": false,
    "kinds": {
-    "code": 10,
-    "test": 6,
+    "code": 3,
+    "test": 1,
     "gate": 0,
-    "decl": 16,
-    "doc": 78
+    "decl": 3,
+    "doc": 44
    },
    "owner_files": [
-    "00-MASTER/UCOS-URR-001/urr-declaration.json",
-    "00-BOOK/DATA/constitutional-authority-alignment.json",
-    "00-BOOK/DATA/id-ledger.json",
-    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+    "00-MASTER/UAKOS-CLOSURE-008/validation-record.json"
    ],
-   "code_files": [
-    "engine/ceu/catalog.py",
-    "platform/coverage/engine.py",
-    "platform/validation/contracts.py"
-   ],
+   "code_files": [],
    "gate_files": [],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
@@ -33316,21 +33237,20 @@
   },
   "web": {
    "label": "Web",
-   "status": "IMPLEMENTED",
+   "status": "PARTIAL",
    "mandates": [
     "LYR-L14/IF-01"
    ],
-   "hits": 64,
+   "hits": 19,
    "anchored": false,
    "kinds": {
-    "code": 10,
-    "test": 4,
+    "code": 3,
+    "test": 0,
     "gate": 0,
-    "decl": 4,
-    "doc": 46
+    "decl": 3,
+    "doc": 13
    },
    "owner_files": [
-    "00-MASTER/UCOS-URR-001/urr-declaration.json",
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
     "00-MASTER/UCOS-MXR-001/roadmap.json"
@@ -33340,7 +33260,7 @@
     "platform/portal/service.py"
    ],
    "gate_files": [],
-   "disposition": "IMPLEMENTED",
+   "disposition": "EXTEND",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -33551,7 +33471,7 @@
    "head_noun_owner": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCCFA-000001/uccfa-declaration.json"
+    "00-MASTER/UCI-000001/uci-declaration.json"
    ],
    "reason": "head noun 'exists' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -33735,11 +33655,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "expire",
    "head_noun_owner": [
-    "00-BOOK/DATA/allocation-permits.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
-    "engine/ceu/catalog.py"
+    "engine/ceu/catalog.py",
+    "engine/ledger_authority/__init__.py"
    ],
-   "reason": "head noun 'expire' is named by 00-BOOK/DATA/allocation-permits.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'expire' is named by 00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -33799,7 +33719,7 @@
    "head_noun_owner": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
+    "00-MASTER/URKE-000001/urke-declaration.json"
    ],
    "reason": "head noun 'observed' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -33859,11 +33779,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "valid",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCI-000001/uci-declaration.json",
+    "00-MASTER/UCOS-UFEP-001/ufep-declaration.json",
+    "00-MASTER/UCOS-URR-001/urr-declaration.json"
    ],
-   "reason": "head noun 'valid' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'valid' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -33978,11 +33898,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "project",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCON-000001/ucon-declaration.json"
    ],
-   "reason": "head noun 'project' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'project' is named by 00-MASTER/BASELINE-001/baseline-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -34162,7 +34082,7 @@
    "head_noun_owner": [
     "00-MASTER/UCON-000001/ucon-declaration.json",
     "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
+    "00-MASTER/URKE-000001/urke-declaration.json"
    ],
    "reason": "head noun 'observed' is named by 00-MASTER/UCON-000001/ucon-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -34222,11 +34142,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "valid",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCI-000001/uci-declaration.json"
+    "00-MASTER/UCI-000001/uci-declaration.json",
+    "00-MASTER/UCOS-UFEP-001/ufep-declaration.json",
+    "00-MASTER/UCOS-URR-001/urr-declaration.json"
    ],
-   "reason": "head noun 'valid' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'valid' is named by 00-MASTER/UCI-000001/uci-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -34493,11 +34413,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "variant",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
-    "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-BOOK/DATA/context-template-manifest.json",
+    "00-BOOK/DATA/generated-artifact-registry.json",
+    "00-MASTER/UAKOS-CLOSURE-008/assimilation.json"
    ],
-   "reason": "head noun 'variant' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'variant' is named by 00-BOOK/DATA/context-template-manifest.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -34669,11 +34589,11 @@
    "determination": "PROVISIONAL",
    "head_noun": "created",
    "head_noun_owner": [
-    "00-MASTER/ACEE-000001/acee-declaration.json",
     "00-MASTER/BASELINE-001/baseline-declaration.json",
-    "00-MASTER/UCL-000001/ucl-declaration.json"
+    "00-MASTER/UCL-000001/ucl-declaration.json",
+    "00-MASTER/UCOS-CEU-001/ceu-declaration.json"
    ],
-   "reason": "head noun 'created' is named by 00-MASTER/ACEE-000001/acee-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
+   "reason": "head noun 'created' is named by 00-MASTER/BASELINE-001/baseline-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
    "proved_by": [],
    "bound": false
@@ -34989,18 +34909,16 @@
    "mandates": [
     "UAKP-ENV/EV2-08"
    ],
-   "hits": 2,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 1,
     "test": 0,
     "gate": 0,
-    "decl": 1,
+    "decl": 0,
     "doc": 0
    },
-   "owner_files": [
-    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
-   ],
+   "owner_files": [],
    "code_files": [
     "engine/knowledge/seed.py"
    ],
@@ -35017,14 +34935,14 @@
    "mandates": [
     "UAKP-CLS/CS-24"
    ],
-   "hits": 2651,
+   "hits": 1553,
    "anchored": true,
    "kinds": {
-    "code": 519,
-    "test": 214,
-    "gate": 38,
-    "decl": 208,
-    "doc": 1672
+    "code": 186,
+    "test": 81,
+    "gate": 20,
+    "decl": 100,
+    "doc": 1166
    },
    "owner_files": [
     "00-MASTER/ACEE-000001/acee-declaration.json",
@@ -35034,9 +34952,9 @@
    ],
    "code_files": [
     "engine/acceptance/contracts.py",
-    "engine/acceptance/gates.py",
-    "engine/certification/__init__.py",
-    "engine/certification/closure.py"
+    "engine/certification_integrity/classify.py",
+    "engine/certification_integrity/coverage_data.py",
+    "engine/certification_integrity/immutable.py"
    ],
    "gate_files": [
     ".github/workflows/acee-gate.yml",
@@ -35116,11 +35034,11 @@
    "mandates": [
     "UAKP-PRIN/PN-32"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0

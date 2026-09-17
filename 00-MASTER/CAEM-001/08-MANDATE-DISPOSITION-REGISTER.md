@@ -10,10 +10,10 @@
 |---|---:|---:|---|
 | **IMPLEMENTED** | 232 | 284 | Located in code and named by a test or a gate. Nothing owed. |
 | **REFERENCE** | 336 | 574 | An owner already carries this. Cite it and build nothing — building anyway is a second authoring, void under UCKP-ART-03. |
-| **EXTEND** | 458 | 485 | An owner exists but does not yet carry this facet. Widen the owner. |
+| **EXTEND** | 460 | 487 | An owner exists but does not yet carry this facet. Widen the owner. |
 | **ASSERT** | 37 | 37 | The claim is about an ABSENCE. It needs a conformance test, not a name. |
-| **ADJUDICATE** | 35 | 50 | A generic word in 200+ files with no owner located. Search cannot decide it and this engine will not pretend otherwise. |
-| **CREATE** | 19 | 19 | Nothing in the repository owns this under any spelling tried. A genuine gap, and the only disposition that is new construction. |
+| **ADJUDICATE** | 31 | 46 | A generic word in 200+ files with no owner located. Search cannot decide it and this engine will not pretend otherwise. |
+| **CREATE** | 21 | 21 | Nothing in the repository owns this under any spelling tried. A genuine gap, and the only disposition that is new construction. |
 
 **Discharged so far: 37 of 1117 concepts** are named by a test or a gate outside this programme. A disposition records what is OWED; this records what has been PAID, and they are separate measurements on purpose -- a register that cannot tell a discharged obligation from an outstanding one leaves repaid debt unclaimed.
 
@@ -21,18 +21,20 @@
 
 ## §2 — THE CORRECTION THIS REGISTER IS SHAPED AROUND
 
-The first pass used *zero grep hits* as the test for a genuine gap and returned **376**. CAEM-001's founding measurement refutes that directly: the token `Fabric` occurs in **zero** of 4,981 tracked files, yet six of the eight Fabrics have canonical homes under other names. A zero-hit **label** is not evidence of a missing **concept**.
+The first pass used *zero grep hits* as the test for a genuine gap and returned **377**. CAEM-001's founding measurement refutes that directly: the token `Fabric` occurs in **zero** of 4,981 tracked files, yet six of the eight Fabrics have canonical homes under other names. A zero-hit **label** is not evidence of a missing **concept**.
 
-Re-asking each zero-hit label against its **head noun's** owner — *is `graph` owned, even though `Analytics Graph` is not?* — moved **357** concepts from CREATE to EXTEND and left **19**. Acting on the first number would have authored hundreds of rival authorities, which is the exact failure this instrument exists to prevent.
+Re-asking each zero-hit label against its **head noun's** owner — *is `graph` owned, even though `Analytics Graph` is not?* — moved **356** concepts from CREATE to EXTEND and left **21**. Acting on the first number would have authored hundreds of rival authorities, which is the exact failure this instrument exists to prevent.
 
 ## §3 — CREATE · nothing owns these under any spelling
 
 | Mandated concept | Mandated by | Head noun searched |
 |---|---|---|
 | Auctioned | `PRD-ECON/ECON-19` | `auctioned` |
+| Data Lake | `UAKP-ENV/EV2-16` | `lake` |
 | Diagrams | `MI-015/PJ-03` | `diagrams` |
 | Enterprise Architects | `MI-016/SH-04` | `architects` |
 | Evolution before stagnation | `UAKP-PRIN/PN-15` | `stagnation` |
+| Executives | `MI-016/SH-03` | `executives` |
 | Fractionalized | `PRD-ECON/ECON-21` | `fractionalized` |
 | Licensed | `PRD-ECON/ECON-18` | `licensed` |
 | Platform Engineers | `MI-016/SH-08` | `engineers` |
@@ -53,41 +55,37 @@ Re-asking each zero-hit label against its **head noun's** owner — *is `graph` 
 
 | Concept | Tracked files matching | Mandated by |
 |---|---:|---|
-| AI | 5069 | `MI-017/TD-19` |
-| AR | 6993 | `LYR-L14/IF-04` |
-| Architect | 2564 | `LYR-L15/EL-08` |
-| Archive | 258 | `ARCH-EVOF/VF2-11` |
-| Assets | 226 | `MI-012/CM-03` |
-| Board | 434 | `MI-016/SH-02` |
-| CREATE | 2188 | `ARCH-CERTV/CV-04` |
-| Classified | 1348 | `UAKP-STATE/SS-06` |
-| Component | 626 | `UAKP-CLS/CS-20` |
-| Constraints | 699 | `QM-CONST/CO-06` |
-| DEPRECATE | 220 | `ARCH-CERTV/CV-06` |
-| Discover | 1592 | `ARCH-DISCF/DF-02` |
-| Distribution | 283 | `LYR-L13/CM-10` |
-| ERP | 1353 | `MI-017/TD-02` |
-| Everything | 650 | `QM-OUT/OU-01` |
-| Fact | 3509 | `UAKP-CLS/CS-08` |
-| Free | 1797 | `PRD-ECON/ECON-13` |
-| Goal | 266 | `UAKP-CLS/CS-12` |
-| Historical | 373 | `UAKP-STATE/SS-17` |
-| Improve | 211 | `LYR-L15/EL-07` |
-| Integrate | 242 | `LYR-L15/EL-12` |
-| Intent | 403 | `UAKP-CLS/CS-11` |
-| Learn | 313 | `LYR-L15/EL-04` |
-| Learning | 221 | `MI-014/EV-03` |
-| Measurements | 319 | `QM-CONST/CO-13` |
-| Migration | 421 | `ARCH-EVOF/VF2-09` |
-| Observe | 836 | `ARCH-DISCF/DF-01` |
-| Planned | 254 | `UAKP-STATE/SS-10` |
-| Purpose | 901 | `MI-000/K-01` |
-| Realized | 910 | `UAKP-STATE/SS-11` |
-| Reasoning | 287 | `MI-014/EV-04` |
-| Repeat | 297 | `LYR-L15/EL-15` |
-| Representation | 367 | `PRD-FR/FR-02` |
-| Restore | 308 | `ARCH-EVOF/VF2-12` |
-| SUPERSEDE | 970 | `ARCH-CERTV/CV-05` |
+| AI | 334 | `MI-017/TD-19` |
+| AR | 226 | `LYR-L14/IF-04` |
+| Archive | 248 | `ARCH-EVOF/VF2-11` |
+| Assets | 224 | `MI-012/CM-03` |
+| CREATE | 2146 | `ARCH-CERTV/CV-04` |
+| Classified | 1025 | `UAKP-STATE/SS-06` |
+| Component | 585 | `UAKP-CLS/CS-20` |
+| Constraints | 676 | `QM-CONST/CO-06` |
+| DEPRECATE | 217 | `ARCH-CERTV/CV-06` |
+| Discover | 911 | `ARCH-DISCF/DF-02` |
+| Distribution | 279 | `LYR-L13/CM-10` |
+| Everything | 633 | `QM-OUT/OU-01` |
+| Fact | 849 | `UAKP-CLS/CS-08` |
+| Free | 538 | `PRD-ECON/ECON-13` |
+| Goal | 246 | `UAKP-CLS/CS-12` |
+| Historical | 352 | `UAKP-STATE/SS-17` |
+| Integrate | 241 | `LYR-L15/EL-12` |
+| Intent | 242 | `UAKP-CLS/CS-11` |
+| Learn | 306 | `LYR-L15/EL-04` |
+| Learning | 210 | `MI-014/EV-03` |
+| Measurements | 310 | `QM-CONST/CO-13` |
+| Migration | 416 | `ARCH-EVOF/VF2-09` |
+| Observe | 732 | `ARCH-DISCF/DF-01` |
+| Planned | 241 | `UAKP-STATE/SS-10` |
+| Purpose | 893 | `MI-000/K-01` |
+| Realized | 825 | `UAKP-STATE/SS-11` |
+| Reasoning | 283 | `MI-014/EV-04` |
+| Repeat | 202 | `LYR-L15/EL-15` |
+| Representation | 357 | `PRD-FR/FR-02` |
+| Restore | 290 | `ARCH-EVOF/VF2-12` |
+| SUPERSEDE | 957 | `ARCH-CERTV/CV-05` |
 
 Several are the instrument failing honestly rather than the repository failing: a two-letter token like `AI` or `AR` matches inside longer words, and a two-letter token is not a searchable requirement.
 
@@ -103,7 +101,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Adapter Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Admission | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Agriculture | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| AI | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
+| AI | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `engine/uckp/law.py` | 2 |
 | AI Agents | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 2 |
 | AI Intelligence | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | AI Memory | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
@@ -115,19 +113,19 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Analytics Constitution | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Analytics Graph | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Analytics Testing | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
-| Anomalies | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
+| Anomalies | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Anomaly Discovery | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Any Application | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Any Capability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Any Domain | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 1 |
 | Any Environment | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 1 |
 | Any Infrastructure | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| API | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 1 |
+| API | ANCHORED | REFERENCE | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | APIs | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/uckp/law.py` | 5 |
 | Applications | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 3 |
 | Approval | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UEC-000001/uec-declaration.json` | 2 |
-| AR | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Architect | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| AR | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
+| Architect | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/ACEE-000001/acee-invariant-manifest.json` | 1 |
 | Architecture | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 4 |
 | Architecture Assurance | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEC-000001/uec-declaration.json` | 1 |
 | Architecture Documents | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
@@ -141,7 +139,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Assimilated | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 1 |
 | Assimilation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCCFA-000001/uccfa-declaration.json` | 1 |
 | Auctioned | ABSENT | CREATE | PROVISIONAL | `` | 1 |
-| Audit | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 4 |
+| Audit | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 4 |
 | Auditability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Authority | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 3 |
 | Authority attribute | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -160,7 +158,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Billing Capability | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Billing Testing | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | BLOCKED | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
-| Board | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 1 |
+| Board | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Bookkeeping Update | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
 | Build | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Can certify | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
@@ -205,11 +203,11 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Claim | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Claim to Evidence | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Classification | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 3 |
-| Classified | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
+| Classified | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCCFA-000001/uccfa-declaration.json` | 1 |
 | Classify | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
-| CLI | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| CLI | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | CLIs | PARTIAL | EXTEND | PROVISIONAL | `engine/certification_integrity/surface.py` | 1 |
-| Cloud Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
+| Cloud Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Collective Intelligence | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Commerce | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/nucleus/law.py` | 3 |
 | Commerce Capability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
@@ -246,7 +244,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Configuration Constitution | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Configuration Validation | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Conflict Discovery | PARTIAL | EXTEND | PROVISIONAL | `platform/repository_intelligence/__init__.py` | 1 |
-| Consistency | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
+| Consistency | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 2 |
 | Constitution | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 4 |
 | Constitution before implementation | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Constitutional Assurance | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEC-000001/uec-declaration.json` | 1 |
@@ -267,7 +265,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Construct Discovery | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Consumer Banking | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Consumer Enterprise Platforms | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
-| Consumer ERP | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Consumer ERP | ABSENT | EXTEND | PROVISIONAL | `engine/nucleus/law.py` | 1 |
 | Consumer Future Systems | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Consumer Government | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Consumer Healthcare | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
@@ -297,10 +295,10 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Cryptographic Trust | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Cultural Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Customer Capability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| Customers | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
+| Customers | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Dashboards | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 3 |
 | Data | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Data Lake | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
+| Data Lake | ABSENT | CREATE | PROVISIONAL | `` | 1 |
 | Database | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Databases | PARTIAL | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Decision | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
@@ -322,7 +320,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Deployments | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | DEPRECATE | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
 | Derivation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Design | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 3 |
+| Design | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 3 |
 | Determinism | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Deterministic Fixed Point | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
 | Developers | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
@@ -344,13 +342,13 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Discover opportunities | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAUE-000001/UAUE-EVOLUTION-HISTORY.json` | 1 |
 | Discover relationships | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Discover structure | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Discover the environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
+| Discover the environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Discover truth | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Discovered | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Discovery | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 4 |
 | Discovery Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Discovery before configuration | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
-| Distributed Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
+| Distributed Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Distribution | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Documentation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 4 |
 | Documentation System | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
@@ -382,17 +380,17 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Enterprise Systems | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Enterprises | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Entity | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Environment | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 2 |
+| Environment | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 2 |
 | Environment Registry | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Environment Universe | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Environmental Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
-| ERP | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| ERP | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/nucleus/law.py` | 1 |
 | Evaluation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Event | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Event Driven Composition | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Event Model | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Event Streams | PARTIAL | EXTEND | PROVISIONAL | `engine/factory/factories/event.py` | 1 |
-| Events | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 4 |
+| Events | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 4 |
 | Everything | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Everything composable | PARTIAL | EXTEND | PROVISIONAL | `engine/knowledge/ukip/__init__.py` | 1 |
 | Everything discoverable | PARTIAL | EXTEND | PROVISIONAL | `engine/knowledge/ukip/__init__.py` | 1 |
@@ -433,10 +431,10 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Execution Orchestration | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Execution Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Execution Specification | SPECIFIED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/generated-artifact-registry.json` | 1 |
-| Execution Specification Generation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
-| Executives | SPECIFIED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 1 |
+| Execution Specification Generation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
+| Executives | ABSENT | CREATE | PROVISIONAL | `` | 1 |
 | Existence | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCCFA-000001/uccfa-declaration.json` | 3 |
-| Existing Project | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Existing Project | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | EXTEND | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Extensibility | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Extension | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -447,7 +445,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Founders | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Fractionalized | ABSENT | CREATE | PROVISIONAL | `` | 1 |
 | Fraud Monitoring | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 1 |
-| Free | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Free | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Future Capability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Future Civilizations | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Future Context Types | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/__init__.py` | 1 |
@@ -456,16 +454,16 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Future Name | PARTIAL | EXTEND | PROVISIONAL | `engine/object_birth/model.py` | 1 |
 | Future Systems | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Future Unknown Domains | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| Future Unknown Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
+| Future Unknown Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Galaxy | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Gap Discovery | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 2 |
-| Generate | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Generate | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Generate execution specifications | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/IMR-0000/imr-0000-platform-bindings.json` | 1 |
 | Generate planning | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
 | Generate realization packages | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Generate requirements | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Generated Reality Applications | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
-| Generation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 6 |
+| Generation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 6 |
 | Generator | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Go-Live Authorization | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Goal | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -479,7 +477,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Governance Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Governance Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCPA-000001/ucpa-declaration.json` | 1 |
 | Governance Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| Governance Model | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Governance Model | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Governance Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Governance Universe | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Governed | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -497,16 +495,16 @@ Several are the instrument failing honestly rather than the repository failing: 
 | History attribute | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | How is it certified | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | How is it composed | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| How is it configured | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
+| How is it configured | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/evidence-universe.json` | 1 |
 | How is it deployed | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/signals.json` | 1 |
 | How is it discovered | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | How is it evolved | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
-| How is it generated | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| How is it generated | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | How is it implemented | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | How is it improved | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
 | How is it monitored | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | How is it operated | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
-| How is it related | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| How is it related | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCPA-000001/ucpa-declaration.json` | 1 |
 | How is it understood | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | How is it validated | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | How is it verified | SPECIFIED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/context-authority.json` | 1 |
@@ -528,7 +526,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Impact | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Implementation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 5 |
 | Implementation Registry | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| Improve | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Improve | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
 | Improve itself | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Improvement | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
 | Infinite Composition | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
@@ -598,7 +596,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Learned | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Learning | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 7 |
 | Learning Memory | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
-| Leased | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/workspace-coordination.json` | 1 |
+| Leased | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `` | 1 |
 | Least Privilege | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Legacy Repository | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Legal Validation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -621,9 +619,9 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Logging | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 2 |
 | Logistics | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Logistics Capability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| Logs | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
+| Logs | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/exclusion-register.json` | 1 |
 | Machine Intelligence | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
-| Maintain consistency | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Maintain consistency | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 1 |
 | Manufacturing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Manufacturing Capability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Marketplace | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/nucleus/law.py` | 3 |
@@ -638,7 +636,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Metering | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 2 |
 | Metrics | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 2 |
 | Migration | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
-| Mission | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Mission | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Mobile | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Mobility Capability | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Modeling | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
@@ -655,7 +653,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Multi-Culture | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Multi-Currency | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
 | Multi-Dimension | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
-| Multi-Edge | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Multi-Edge | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Multi Enterprise | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 1 |
 | Multi-Existence | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Multi-Jurisdiction | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
@@ -666,7 +664,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Multi-Reality | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
 | Multi Region | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Multi Runtime | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCCFA-000001/uccfa-declaration.json` | 1 |
-| Multi-Tax | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
+| Multi-Tax | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 2 |
 | Multi Temporal | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Multi-Tenant | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 2 |
 | Multi-Timeline | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
@@ -745,14 +743,14 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Patent Applications | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Pattern Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 2 |
 | Payment Capability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| Performance | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Performance | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Performance Assessment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Performance Testing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/control-tower.json` | 1 |
 | Performance Validation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Permissions | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Philosophy | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Physical Context | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
-| Planet | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
+| Planet | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Planetary Infrastructure | PARTIAL | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Planned | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Planning | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 7 |
@@ -768,7 +766,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Policy Driven Composition | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Policy Validation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Polyrepo | SPECIFIED | CREATE | PROVISIONAL | `` | 1 |
-| Portability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
+| Portability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Possibility | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Post Quantum Readiness | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Potential | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 2 |
@@ -782,7 +780,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Privacy | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Privacy Constitution | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Privacy Validation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Product | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
+| Product | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Product Capability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Product Teams | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Production Readiness | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
@@ -801,17 +799,17 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Quality | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Reality | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 2 |
 | Realization | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 3 |
-| Realization Package Generation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
+| Realization Package Generation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
 | Realization Registry | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Realization Universe | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Realized | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Realm | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
+| Realm | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Reason | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Reasoned | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UEC-000001/uec-declaration.json` | 1 |
 | Reasoning | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 5 |
 | Reasoning Universe | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Recognition | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 1 |
-| Recognize | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
+| Recognize | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 1 |
 | Recovery | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Recovery Testing | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | Recursive Composition | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
@@ -842,7 +840,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Renewal | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Repeat | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCPA-000001/ucpa-declaration.json` | 1 |
 | Repeat continuously | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
-| Replaceability before coupling | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/context-authority.json` | 1 |
+| Replaceability before coupling | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/P0-FINAL-CLOSURE-002/UCOS-COVERAGE-CLOSURE.json` | 1 |
 | Replay | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 6 |
 | Reports | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
 | Repository Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -868,7 +866,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Resolve Relationships | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Resolve Rules | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Resource Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| Restore | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Restore | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Retirement | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Reuse | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
 | Reuse before duplication | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -962,7 +960,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Spatial Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Specialization | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 1 |
 | Specifications | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/IMR-0000/imr-0000-platform-bindings.json` | 1 |
-| SRE | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 1 |
+| SRE | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | Stage 0 Research | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Stage 1 Concept | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Stage 10 Constitutionally Stable Platform | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -978,7 +976,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Startups | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | State | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | State Model | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
-| States | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 2 |
+| States | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 2 |
 | Static Analysis | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UTCE-001/utce-declaration.json` | 2 |
 | Static Composition | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Storage Adapter | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -1000,7 +998,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Traceability | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 2 |
 | Traceability Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/artifacts.json` | 1 |
 | Traces | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-UTCE-001/utce-declaration.json` | 1 |
-| Tracing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
+| Tracing | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Training Materials | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Transformation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCCFA-000001/uccfa-declaration.json` | 1 |
 | Transportation | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
@@ -1078,7 +1076,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Universal Knowledge Universe | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 2 |
 | Universal Learning Engine | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Universal Lifecycle | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 1 |
-| Universal Logic | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 2 |
+| Universal Logic | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 2 |
 | Universal Logic Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Universal Mathematics | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 2 |
 | Universal Mathematics Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
@@ -1126,11 +1124,11 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Universe | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 2 |
 | Universes before engines | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Universities | ABSENT | CREATE | PROVISIONAL | `` | 1 |
-| Unknown | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Unknown | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
 | Unknown constructs admitted by governance not code | ASSERTION | ASSERT | PROVISIONAL | `` | 1 |
 | Unknown Future Construct | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Unknown Future Projections | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
-| Unknown Intelligence Forms | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
+| Unknown Intelligence Forms | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Update canonical knowledge | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Upgrade | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-URAT-001/urat-declaration.json` | 1 |
 | Usage | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
@@ -1148,10 +1146,10 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Verify | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 2 |
 | Version attribute | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Versioning | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
-| Vision | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Vision | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Voice | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAIE-000001/uaie-architecture.json` | 1 |
-| VR | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
-| Web | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
+| VR | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
+| Web | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 1 |
 | What can exist | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCDA-000001/ucda-decisions.json` | 1 |
 | What cannot exist | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | What exists | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-CEU-001/ceu-declaration.json` | 1 |
@@ -1164,15 +1162,15 @@ Several are the instrument failing honestly rather than the repository failing: 
 | When does it change | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | When does it evolve | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | When does it execute | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| When does it expire | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/allocation-permits.json` | 1 |
+| When does it expire | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | When is it certified | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | When is it observed | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | When is it replayed | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
-| When is it valid | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| When is it valid | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
 | When is the next evolution | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | When was it created | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/lineage/query.py` | 1 |
 | Where can it evolve | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Where can it project | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Where can it project | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Where can it replicate | ABSENT | CREATE | PROVISIONAL | `` | 1 |
 | Where does it exist | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Where is it deployed | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/signals.json` | 1 |
@@ -1180,7 +1178,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Where is it governed | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Where is it observed | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Where is it stored | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
-| Where is it valid | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Where is it valid | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
 | Which capability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Which configuration | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Which constraint | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
@@ -1189,13 +1187,13 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Which evolution | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCEF-000001/ucef-framework.json` | 1 |
 | Which policy | PARTIAL | EXTEND | PROVISIONAL | `platform/universal_assurance/planning.py` | 1 |
 | Which rule | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
-| Which variant | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Which variant | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/context-template-manifest.json` | 1 |
 | Which version | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-UGA-001/uga-declaration.json` | 1 |
 | Whitepapers | ABSENT | CREATE | PROVISIONAL | `` | 1 |
 | Who benefits | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Who certifies | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Who consumes | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Who created | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
+| Who created | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Who decides | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Who evolves | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-UTCE-001/utce-declaration.json` | 1 |
 | Who executes | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
@@ -1206,7 +1204,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Why should it continue | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Why should it evolve | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Why should it exist | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
-| Wiki | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
+| Wiki | PARTIAL | EXTEND | PROVISIONAL | `engine/knowledge/seed.py` | 1 |
 | Work | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Work Discovery | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Working Memory | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
