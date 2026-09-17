@@ -488,3 +488,142 @@ def test_the_foundation_gaps_agree_with_the_meta_model() -> None:
     there = set(META_MODEL_ABSENT.values())
     assert shared <= here, f"no longer ungrounded here: {sorted(shared - here)}"
     assert shared <= there, f"the UCMM no longer reports absent: {sorted(shared - there)}"
+
+
+# --- MI-004 — the twenty-one graphs ---------------------------------------------
+#
+# Section 004 lists twenty-one graphs. `engine/graph` already builds a core knowledge graph
+# and ten named projections over it, so the question is a join between two lists that were
+# written independently -- and they overlap less than either would suggest.
+#
+# Four mandated graphs are built projections. Five more are carried by an instrument that is
+# graph-shaped without being a projection. Eleven are carried by nothing. And six of the ten
+# projections the repository builds are not mandated here at all, which is the finding that
+# only appears if both directions are measured: the section is not a description of what
+# `engine/graph` does, and reading it as one would report far more coverage than exists.
+
+#: Mandated graph -> the projection name that builds it.
+GRAPH_PROJECTION = {
+    "MI-004/G-06": "dependency",  # Dependency Graph
+    "MI-004/G-07": "capability",  # Capability Graph
+    "MI-004/G-12": "evidence",  # Evidence Graph
+    "MI-004/G-13": "traceability",  # Traceability Graph
+}
+
+#: Mandated graph -> a graph-shaped instrument that is not a projection.
+GRAPH_INSTRUMENT = {
+    "MI-004/G-01": "engine/graph/model.py",  # Knowledge Graph -- the core the rest project from
+    "MI-004/G-03": "engine/uckp/graph.py",  # Concept Graph
+    "MI-004/G-05": "00-MASTER/UCOS-UGA-001/04-RELATIONSHIP-GRAPH.json",  # Relationship Graph
+    "MI-004/G-09": "00-MASTER/UCOS-UGA-001/00-EXISTENCE-INVENTORY.json",  # Repository Graph
+    "MI-004/G-15": "00-BOOK/DATA/change-ledger.json",  # Evolution Graph
+}
+
+#: Built by nothing. Identity and Lineage are the two worth pausing on: the repository has
+#: an id ledger and a lineage registry, and neither is a graph -- a ledger records what was
+#: allocated, a graph answers what reaches what, and only the second is mandated here.
+GRAPH_ABSENT = {
+    "MI-004/G-02": "semantic",
+    "MI-004/G-04": "identity",
+    "MI-004/G-08": "runtime",
+    "MI-004/G-10": "governance",
+    "MI-004/G-11": "intelligence",
+    "MI-004/G-14": "lineage",
+    "MI-004/G-16": "security",
+    "MI-004/G-17": "commercial",
+    "MI-004/G-18": "economic",
+    "MI-004/G-19": "monitoring",
+    "MI-004/G-20": "analytics",
+    "MI-004/G-21": "projection",
+}
+
+
+def _built_projections() -> set[str]:
+    """The projection names `engine/graph` actually builds.
+
+    Read from the `match` arms of `build_projection`, which is the one place that decides
+    whether a name resolves -- a list restated here would be a second authoring of the
+    registry and could disagree with it silently.
+    """
+    import re
+
+    source = (repo_root() / "engine" / "graph" / "projections.py").read_text(encoding="utf-8")
+    body = source[source.index("def build_projection(") :]
+    return set(re.findall(r'^\s+case "([a-z_]+)":', body, flags=re.MULTILINE))
+
+
+def test_every_mandated_graph_is_a_projection_an_instrument_or_absent() -> None:
+    mandates = section("MI-004")
+    assert len(mandates) == 21, f"section 004 lists 21 graphs, corpus has {len(mandates)}"
+    assert_partitions("MI-004", mandates, GRAPH_PROJECTION, GRAPH_INSTRUMENT, GRAPH_ABSENT)
+
+
+def test_every_projection_backed_graph_names_a_projection_the_engine_builds() -> None:
+    from engine.graph.projections import build_projection  # noqa: F401 - must import
+
+    built = _built_projections()
+    for mandate, name in GRAPH_PROJECTION.items():
+        assert name in built, (
+            f"{mandate}: engine/graph builds no projection named {name!r}, so the mandated "
+            "graph is not built"
+        )
+    claimed = list(GRAPH_PROJECTION.values())
+    duplicated = sorted({n for n in claimed if claimed.count(n) > 1})
+    assert not duplicated, f"one projection claimed by two mandated graphs: {duplicated}"
+
+
+def test_every_instrument_backed_graph_is_tracked_and_is_not_a_projection() -> None:
+    known = set(tracked())
+    built = _built_projections()
+    mandates = section("MI-004")
+    for mandate, home in GRAPH_INSTRUMENT.items():
+        assert home in known, f"{mandate}: {home} is not a tracked path"
+        name = mandates[mandate].removesuffix(" Graph").lower()
+        assert name not in built, (
+            f"{mandate}: {name!r} IS a built projection and is understated as a loose " "instrument"
+        )
+
+
+def test_the_absent_graphs_are_built_by_no_projection_and_no_module() -> None:
+    """NON-VACUITY in both directions. Checking only the projection set would report
+    Relationship absent while UGA builds one; checking only paths would report Dependency
+    absent because no file is named for it."""
+    built = _built_projections()
+    for mandate, name in GRAPH_ABSENT.items():
+        assert name not in built, f"{mandate}: {name!r} is a built projection after all"
+    # A DOCUMENT about a graph is not a graph. The first draft searched every tracked path
+    # and offered `PHASE-0.7-DEPENDENCY-GRAPH-GOVERNANCE-BINDING-DETERMINATION.md` as
+    # evidence that a Governance Graph exists, which is the occurrence-is-ownership error
+    # in its documentary form. Only code and data can build one.
+    graphish = [
+        path
+        for path in tracked()
+        if "graph" in path.rsplit("/", 1)[-1].lower()
+        and path.endswith((".py", ".json"))
+        and "/tests/" not in path
+    ]
+    assert graphish, "no code or data file is named for a graph, so this search is vacuous"
+    for mandate, name in GRAPH_ABSENT.items():
+        found = [p for p in graphish if name in p.rsplit("/", 1)[-1].lower()]
+        assert not found, f"{mandate}: {name!r} is declared absent but {found} is named for it"
+
+
+def test_the_repository_builds_projections_this_section_never_mandates() -> None:
+    """The reverse direction, which is where the real finding is.
+
+    Six of the ten projections `engine/graph` builds -- ontology, requirement,
+    implementation, validation, certification, impact -- appear nowhere in section 004.
+    The section is therefore not a description of the graph engine, and any reading that
+    treats it as one reports coverage that was never claimed.
+    """
+    built = _built_projections()
+    mandated = {label.removesuffix(" Graph").lower() for label in section("MI-004").values()}
+    unmandated = sorted(
+        name
+        for name in ("ontology", "requirement", "implementation", "validation", "certification")
+        if name in built and name not in mandated
+    )
+    assert len(unmandated) >= 5, (
+        f"expected the graph engine to build projections section 004 does not mandate; "
+        f"found only {unmandated}"
+    )
