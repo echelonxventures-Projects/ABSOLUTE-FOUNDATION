@@ -483,3 +483,100 @@ def test_the_existence_set_is_open() -> None:
     kernel.register_metatype(unlisted, name="unlisted", description="admitted by registration")
     assert unlisted in {obj.natural_key for obj in kernel.metatypes()}
     assert kernel_source_fingerprint() == before
+
+
+# --- LYR-L15 — the fifteen-step evolution lifecycle -----------------------------
+#
+# Layer 15 calls itself "the most important layer" and lists fifteen steps. UCL-000001
+# declares this repository's lifecycle in forty-five stages, and TWELVE of the fifteen are
+# the same word: Understand, Measure, Learn, Reason, Challenge, Improve, Architect, Verify,
+# Certify, Integrate, Replay, Elevate.
+#
+# That is the highest verbatim agreement anywhere in the corpus, and it is asserted as a
+# count rather than described, so drift between the two documents fails instead of passing.
+# The three that differ differ for stated reasons: two are performed by instruments the
+# lifecycle does not name as stages, and `Repeat` is the loop itself, which UCL spells
+# "Begin Next Elevated Engineering Cycle".
+
+EVOLUTION_LIFECYCLE_VERBATIM = {
+    "LYR-L15/EL-02": "Understand",
+    "LYR-L15/EL-03": "Measure",
+    "LYR-L15/EL-04": "Learn",
+    "LYR-L15/EL-05": "Reason",
+    "LYR-L15/EL-06": "Challenge",
+    "LYR-L15/EL-07": "Improve",
+    "LYR-L15/EL-08": "Architect",
+    "LYR-L15/EL-10": "Verify",
+    "LYR-L15/EL-11": "Certify",
+    "LYR-L15/EL-12": "Integrate",
+    "LYR-L15/EL-13": "Replay",
+    "LYR-L15/EL-14": "Elevate",
+}
+
+#: The loop. Not a step but the instruction to run the fourteen again, which UCL names.
+EVOLUTION_LIFECYCLE_LOOP = {"LYR-L15/EL-15": "Begin Next Elevated Engineering Cycle"}
+
+#: Performed by an instrument the lifecycle does not name as a stage.
+EVOLUTION_LIFECYCLE_INSTRUMENT = {
+    "LYR-L15/EL-01": "engine/universal_discovery",  # Discover
+    "LYR-L15/EL-09": "intelligence/realization/generators",  # Generate
+}
+
+
+def test_every_evolution_step_is_verbatim_the_loop_or_an_instrument() -> None:
+    mandates = section("LYR-L15")
+    assert len(mandates) == 15, f"layer 15 lists 15 steps, corpus has {len(mandates)}"
+    assert_partitions(
+        "LYR-L15",
+        mandates,
+        EVOLUTION_LIFECYCLE_VERBATIM,
+        EVOLUTION_LIFECYCLE_LOOP,
+        EVOLUTION_LIFECYCLE_INSTRUMENT,
+    )
+
+
+def test_twelve_steps_are_the_lifecycle_stage_name_exactly() -> None:
+    """The finding, asserted as an exact set. Two documents written apart, twelve identical
+    single words -- and the mandate label must BE the stage name, not merely resolve to it."""
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = _ucl_stage_names()
+    mandates = section("LYR-L15")
+    for mandate, stage in EVOLUTION_LIFECYCLE_VERBATIM.items():
+        assert stage in declared, f"{mandate}: UCL declares no stage named {stage!r}"
+        assert mandates[mandate] == stage, (
+            f"{mandate}: the mandate reads {mandates[mandate]!r} and the stage {stage!r}; "
+            "this tier is for verbatim agreement only"
+        )
+    assert len(EVOLUTION_LIFECYCLE_VERBATIM) == 12, (
+        "the verbatim count changed; the two documents have drifted and the tiers need "
+        "re-reading rather than re-baselining"
+    )
+
+
+def test_the_loop_step_names_the_stage_that_closes_the_cycle() -> None:
+    """NON-VACUITY for the loop. `Repeat` is not a step and mapping it to one would report a
+    fifteenth activity where there are fourteen and an instruction to run them again."""
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = _ucl_stage_names()
+    mandates = section("LYR-L15")
+    for mandate, stage in EVOLUTION_LIFECYCLE_LOOP.items():
+        assert stage in declared, f"{mandate}: UCL declares no stage named {stage!r}"
+        assert mandates[mandate] == "Repeat"
+        assert (
+            mandates[mandate] != stage
+        ), "the loop is a verbatim match after all and belongs in the verbatim tier"
+
+
+def test_the_two_instrument_steps_are_not_lifecycle_stages() -> None:
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    assert_homes_exist("LYR-L15", EVOLUTION_LIFECYCLE_INSTRUMENT)
+    declared = _ucl_stage_names()
+    mandates = section("LYR-L15")
+    for mandate in EVOLUTION_LIFECYCLE_INSTRUMENT:
+        assert mandates[mandate] not in declared, (
+            f"{mandate}: {mandates[mandate]!r} IS a declared stage and belongs in the "
+            "verbatim tier"
+        )
