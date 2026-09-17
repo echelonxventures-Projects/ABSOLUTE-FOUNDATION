@@ -13,6 +13,7 @@ from engine.tests.conformance.mandate_corpus import (
     assert_partitions,
     section,
 )
+from engine.uckp.facets import REQUIRED_FACETS, Facet
 
 # --- ARCH-CERTV — the eight certification verdicts ------------------------------
 #
@@ -126,3 +127,145 @@ def test_the_naming_rule_this_suite_relies_on_can_find_something() -> None:
 
 def test_absence_search_does_not_silently_match_nothing() -> None:
     assert_named_by_nothing("ARCH-CERTV", {"ARCH-CERTV/CV-08": "not applicable verdict"})
+
+
+# --- ARCH-UCMM — the thirty concepts of the Universal Constitutional Meta Model --
+#
+# The diagram places the UCMM directly beneath the Absolute Constitutional Kernel and lists
+# thirty universals in three columns. A meta-model is not a component inventory: it is the
+# set of things every object in the system must be describable IN. Article 6 answers exactly
+# that question with thirty-three facets -- "a question every constitutional object must be
+# able to answer about itself" -- so the facets are the natural respondent, and the concepts
+# they do not cover are the honest measure of the gap between diagram and law.
+#
+# Three tiers, and the boundary between the first two carries the weight. A FACET is
+# carried by every object; a MODULE is a capability the substrate has. "Universal Trust"
+# answered by `platform/foundation/trust.py` is a real answer and a weaker one than
+# "Universal Identity" answered by a facet every UCKO must fill, and flattening them would
+# report a meta-model that is complete when it is not.
+
+#: Meta-model concept -> the universal facet that carries it on every object.
+META_MODEL_FACET = {
+    "ARCH-UCMM/UM-01": Facet.IDENTITY,  # Universal Identity
+    "ARCH-UCMM/UM-02": Facet.RELATIONSHIPS,  # Universal Relationships
+    "ARCH-UCMM/UM-03": Facet.CONTEXT,  # Universal Context
+    "ARCH-UCMM/UM-04": Facet.SEMANTIC_IDENTITY,  # Universal Meaning
+    "ARCH-UCMM/UM-05": Facet.CONSTRAINTS,  # Universal Constraints
+    "ARCH-UCMM/UM-06": Facet.POLICIES,  # Universal Rules
+    "ARCH-UCMM/UM-07": Facet.KNOWLEDGE_CONTEXT,  # Universal Knowledge
+    "ARCH-UCMM/UM-16": Facet.TEMPORAL_HISTORY,  # Universal Event
+    "ARCH-UCMM/UM-17": Facet.LIFECYCLE,  # Universal Lifecycle
+    "ARCH-UCMM/UM-18": Facet.EVOLUTION_HISTORY,  # Universal Evolution
+    "ARCH-UCMM/UM-19": Facet.GOVERNANCE_CONTEXT,  # Universal Governance
+    "ARCH-UCMM/UM-20": Facet.AUTHORITY,  # Universal Authority
+    "ARCH-UCMM/UM-21": Facet.OWNERSHIP,  # Universal Ownership
+    "ARCH-UCMM/UM-22": Facet.SECURITY_CONTEXT,  # Universal Security
+    "ARCH-UCMM/UM-27": Facet.RUNTIME_BINDINGS,  # Universal Runtime
+    "ARCH-UCMM/UM-30": Facet.PROJECTION_BINDINGS,  # Universal Projection
+}
+
+#: Carried by a module the substrate has, not by a question every object answers.
+META_MODEL_MODULE = {
+    "ARCH-UCMM/UM-09": "engine/uckp/vocabulary.py",  # Universal Semantics
+    "ARCH-UCMM/UM-12": "platform/universal_measurement",  # Universal Measurement
+    "ARCH-UCMM/UM-13": "engine/uckp/capabilities.py",  # Universal Capability
+    "ARCH-UCMM/UM-15": "engine/uckp/state.py",  # Universal State
+    "ARCH-UCMM/UM-24": "platform/foundation/trust.py",  # Universal Trust
+    "ARCH-UCMM/UM-26": "platform/commercial_intelligence",  # Universal Commerce
+    "ARCH-UCMM/UM-28": "engine/uckp/intelligence.py",  # Universal Intelligence
+}
+
+#: Named by neither. Seven of thirty, and the set is worth reading whole: the meta-model
+#: mandates Logic and Mathematics as first-class universals and the substrate has neither,
+#: which means nothing in it can state a rule formally or measure a quantity dimensionally.
+#: Information, Behaviour, Privacy and Economics repeat the gaps QM-CONST records under
+#: other names -- the same holes seen from a second document.
+META_MODEL_ABSENT = {
+    "ARCH-UCMM/UM-08": "information",  # Universal Information
+    "ARCH-UCMM/UM-10": "logic",  # Universal Logic
+    "ARCH-UCMM/UM-11": "mathematics",  # Universal Mathematics
+    "ARCH-UCMM/UM-14": "behaviour",  # Universal Behaviour
+    "ARCH-UCMM/UM-23": "privacy",  # Universal Privacy
+    "ARCH-UCMM/UM-25": "economics",  # Universal Economics
+    "ARCH-UCMM/UM-29": "automation",  # Universal Automation
+}
+
+
+def test_every_meta_model_concept_is_a_facet_a_module_or_absent() -> None:
+    mandates = section("ARCH-UCMM")
+    assert len(mandates) == 30, f"the UCMM lists 30 universals, corpus has {len(mandates)}"
+    assert_partitions(
+        "ARCH-UCMM",
+        mandates,
+        META_MODEL_FACET,
+        META_MODEL_MODULE,
+        META_MODEL_ABSENT,
+    )
+
+
+def test_each_facet_backed_universal_is_required_and_carried_by_the_object() -> None:
+    import dataclasses
+
+    from engine.uckp.ucko import UniversalConstitutionalKnowledgeObject as UCKO
+
+    fields = {f.name for f in dataclasses.fields(UCKO)}
+    for mandate, facet in META_MODEL_FACET.items():
+        assert facet in REQUIRED_FACETS, f"{mandate}: {facet} is not a required facet"
+        assert facet.attribute in fields, (
+            f"{mandate}: facet {facet.value!r} is declared but no UCKO field carries it, so "
+            "the meta-model concept is not in fact universal over objects"
+        )
+
+
+def test_the_facet_mapping_is_injective() -> None:
+    """NON-VACUITY. Meaning and Semantics are listed as separate universals; answering both
+    with SEMANTIC_IDENTITY would report two concepts covered by one answer."""
+    facets = list(META_MODEL_FACET.values())
+    duplicated = sorted({f.value for f in facets if facets.count(f) > 1})
+    assert not duplicated, f"facets claimed by more than one universal: {duplicated}"
+
+
+def test_every_module_backed_universal_is_tracked_and_is_not_a_facet() -> None:
+    """The tier boundary, asserted. A concept in the module tier that a facet also answers
+    would be understated, and one in the facet tier without a field would be overstated."""
+    assert_homes_exist("ARCH-UCMM", META_MODEL_MODULE)
+    mandates = section("ARCH-UCMM")
+    facet_names = {facet.value.replace("-", " ") for facet in Facet}
+    for mandate in META_MODEL_MODULE:
+        concept = mandates[mandate].removeprefix("Universal ").lower()
+        assert concept not in facet_names, (
+            f"{mandate}: {concept!r} is answered by a facet after all and is understated "
+            "as a module"
+        )
+
+
+def test_the_absent_universals_are_named_by_no_module_and_no_facet() -> None:
+    """NON-VACUITY in both directions. Either check alone would let a real answer read as
+    missing -- a facet with no module, or a module with no facet."""
+    facet_names = {facet.value.replace("-", "") for facet in Facet}
+    for mandate, concept in META_MODEL_ABSENT.items():
+        assert (
+            concept not in facet_names
+        ), f"{mandate}: {concept!r} is declared absent but a facet is named for it"
+    assert_named_by_nothing("ARCH-UCMM", META_MODEL_ABSENT)
+
+
+def test_the_meta_model_gaps_agree_with_the_interrogative_model() -> None:
+    """Two documents, one repository.
+
+    The UCMM and the interrogative model each mandate Information, Behaviour, Privacy and
+    Economics, and each suite located them independently. If the two ever disagree, one has
+    mis-located something -- which is a finding about the suites, not about the repository,
+    and worth catching before it is read as a change in coverage. Behaviour is compared on
+    its stem because the documents spell it differently.
+    """
+    from engine.tests.conformance.test_mandates_model import CONSTITUTION_ABSENT
+
+    def stems(values):
+        return {v.replace("behaviour", "behavio").replace("behavior", "behavio") for v in values}
+
+    shared = {"information", "behavio", "privacy", "economics"}
+    here, there = stems(META_MODEL_ABSENT.values()), stems(CONSTITUTION_ABSENT.values())
+
+    assert shared <= here, f"the UCMM suite no longer reports absent: {sorted(shared - here)}"
+    assert shared <= there, f"QM-CONST no longer reports absent: {sorted(shared - there)}"
