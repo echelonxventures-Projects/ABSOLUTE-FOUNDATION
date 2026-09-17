@@ -15,6 +15,10 @@
 | **ADJUDICATE** | 35 | 50 | A generic word in 200+ files with no owner located. Search cannot decide it and this engine will not pretend otherwise. |
 | **CREATE** | 19 | 19 | Nothing in the repository owns this under any spelling tried. A genuine gap, and the only disposition that is new construction. |
 
+**Discharged so far: 37 of 1117 concepts** are named by a test or a gate outside this programme. A disposition records what is OWED; this records what has been PAID, and they are separate measurements on purpose -- a register that cannot tell a discharged obligation from an outstanding one leaves repaid debt unclaimed.
+
+- **ASSERT** — 37 of 37 bound
+
 ## §2 — THE CORRECTION THIS REGISTER IS SHAPED AROUND
 
 The first pass used *zero grep hits* as the test for a genuine gap and returned **376**. CAEM-001's founding measurement refutes that directly: the token `Fabric` occurs in **zero** of 4,981 tracked files, yet six of the eight Fabrics have canonical homes under other names. A zero-hit **label** is not evidence of a missing **concept**.

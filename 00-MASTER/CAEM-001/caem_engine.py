@@ -375,6 +375,62 @@ def _dispose(concepts: dict, workers: int) -> None:
                 )
 
 
+# --- binding ------------------------------------------------------------------------------
+def bind(data: dict) -> dict:
+    """Which mandates does something OUTSIDE this programme now name?
+
+    A disposition says what is owed. This says what has been PAID, and the two must be
+    separate measurements or the register cannot tell a discharged obligation from an
+    outstanding one -- repaid debt left unclaimed, which this repository refuses in both
+    directions.
+
+    One pass, not 1,449 greps: every identifier-shaped token in the tree is extracted at
+    once and intersected with the corpus. The programme's own home is excluded for the
+    same reason the sweep excludes it -- `06-MANDATE-CORPUS.json` names all 1,449, so
+    without the exclusion every mandate reads as bound by its own transcription.
+    """
+    result = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        [  # noqa: S607 - git from PATH by design
+            "git",
+            "grep",
+            "-l",
+            "-E",
+            "[A-Z][A-Z0-9]+(-[A-Z0-9]+)*/[A-Z]+[0-9]*-[0-9]+",
+            "--",
+            f":(exclude){SELF}",
+        ],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+    )
+    candidates = [f for f in result.stdout.splitlines() if f]
+    declared = {m for c in data["concepts"].values() for m in c["mandates"]}
+
+    named_in: dict[str, list[str]] = defaultdict(list)
+    for rel in candidates:
+        try:
+            text = (REPO / rel).read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        for mandate in declared:
+            if mandate in text:
+                named_in[mandate].append(rel)
+
+    bound_total = 0
+    for concept in data["concepts"].values():
+        files = sorted({f for m in concept["mandates"] for f in named_in.get(m, ())})
+        # Only a TEST or a GATE discharges anything. A mandate named in a document is
+        # cited, not answered, and counting citations would make the register congratulate
+        # itself for prose.
+        proving = [f for f in files if file_kind(f) in ("test", "gate")]
+        concept["named_by"] = files[:6]
+        concept["proved_by"] = proving[:6]
+        concept["bound"] = bool(proving)
+        bound_total += bool(proving)
+    data["bound_total"] = bound_total
+    return data
+
+
 # --- projection -------------------------------------------------------------------------
 DISPOSITION_MEANING = {
     "IMPLEMENTED": "Located in code and named by a test or a gate. Nothing owed.",
@@ -424,6 +480,23 @@ def render(data: dict) -> str:
         if count:
             add(f"| **{name}** | {count} | {atoms_by[name]} | {DISPOSITION_MEANING[name]} |")
     add("")
+
+    bound = sum(1 for c in concepts.values() if c.get("bound"))
+    if bound:
+        add(
+            f"**Discharged so far: {bound} of {len(concepts)} concepts** are named by a test "
+            "or a gate outside this programme. A disposition records what is OWED; this "
+            "records what has been PAID, and they are separate measurements on purpose -- "
+            "a register that cannot tell a discharged obligation from an outstanding one "
+            "leaves repaid debt unclaimed."
+        )
+        add("")
+        for name in ORDER:
+            total = sum(1 for c in concepts.values() if c["disposition"] == name)
+            done = sum(1 for c in concepts.values() if c["disposition"] == name and c.get("bound"))
+            if total and done:
+                add(f"- **{name}** — {done} of {total} bound")
+        add("")
 
     add("## §2 — THE CORRECTION THIS REGISTER IS SHAPED AROUND")
     add("")
@@ -560,13 +633,18 @@ def main() -> int:
         action="store_true",
         help="re-run the full sweep (~5k greps) and rewrite output 07",
     )
+    parser.add_argument(
+        "--bind",
+        action="store_true",
+        help="cheap: re-measure which mandates a test or gate now names, and rewrite 07",
+    )
     parser.add_argument("--render", action="store_true", help="render output 08 from 07")
     parser.add_argument("--gate", action="store_true", help="fail-closed invariant checks")
     parser.add_argument("--workers", type=int, default=12)
     args = parser.parse_args()
 
     if args.measure:
-        data = measure(args.workers)
+        data = bind(measure(args.workers))
         DISPOSITION.write_text(
             json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8"
         )
@@ -579,7 +657,17 @@ def main() -> int:
         return 2
     data = json.loads(DISPOSITION.read_text(encoding="utf-8"))
 
-    if args.render or args.measure:
+    if args.bind:
+        data = bind(data)
+        DISPOSITION.write_text(
+            json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        print(
+            f"bound: {data['bound_total']} of {len(data['concepts'])} concepts "
+            "are named by a test or a gate"
+        )
+
+    if args.render or args.measure or args.bind:
         REGISTER.write_text(render(data), encoding="utf-8")
         print(f"wrote {REGISTER.relative_to(REPO)}")
 
