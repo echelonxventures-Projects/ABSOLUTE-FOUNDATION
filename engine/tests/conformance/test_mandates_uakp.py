@@ -766,3 +766,164 @@ def test_discover_opportunities_is_mandated_by_no_engine_at_all() -> None:
     ), "an opportunity engine is now mandated; UAKP-PO/PO-12 must point at it"
     steps = section("UAKP-PO")
     assert steps["UAKP-PO/PO-12"] == "Discover opportunities"
+
+
+# ================================================================================
+# UAKP-PRIN — the thirty-two architectural principles
+# ================================================================================
+#
+# Thirty-two principles, mostly of the form "X before Y" or "Everything X". Seven of them
+# assert an ABSENCE and are bound in `engine/tests/kernel/test_compliance.py`, against the
+# kernel that can decide a negative; the twenty-five below are the rest.
+#
+# THE TIERS ARE THE POINT, AND THEY COME FROM THIS REPOSITORY'S OWN DIAGNOSIS. adr/0021
+# stated a principle and disclosed in its own Consequences that nothing enforced it, and
+# adr/0041 named the shape: "a rule that is right, with a measurement that does not reach
+# where it applies." A principle enforced by a GATE is refused when violated. A principle
+# STATED by an article is law with no measurement. Reporting both as satisfied reproduces
+# exactly the defect the repository has already caught itself in twice.
+
+#: Principle -> a quality gate that refuses its violation.
+PRINCIPLE_GATE = {
+    "UAKP-PRIN/PN-24": "no-closed-registries",  # Everything discoverable
+    "UAKP-PRIN/PN-27": "unknown-future-compatibility",  # Everything extensible
+    "UAKP-PRIN/PN-31": "no-finite-enumeration",  # Infinite extensibility
+    "UAKP-PRIN/PN-02": "no-domain-provider-technology-earth-civilization-coupling",  # Concepts
+    "UAKP-PRIN/PN-06": "no-implementation-leakage",  # Truth before implementation
+}
+
+#: Principle -> the article of the root law that states it. Law without a gate.
+PRINCIPLE_ARTICLE = {
+    "UAKP-PRIN/PN-01": "UCKP-ART-02",  # Constitution before implementation
+    "UAKP-PRIN/PN-04": "UCKP-ART-11",  # Objects before documents
+    "UAKP-PRIN/PN-05": "UCKP-ART-07",  # Graphs before hierarchies
+    "UAKP-PRIN/PN-13": "UCKP-ART-18",  # Reuse before duplication
+    "UAKP-PRIN/PN-14": "UCKP-ART-09",  # Replaceability before coupling
+    "UAKP-PRIN/PN-15": "UCKP-ART-14",  # Evolution before stagnation
+    "UAKP-PRIN/PN-17": "UCKP-ART-03",  # Knowledge once reuse everywhere
+    "UAKP-PRIN/PN-25": "UCKP-ART-16",  # Everything governable
+    "UAKP-PRIN/PN-28": "UCKP-ART-04",  # Everything replaceable
+    "UAKP-PRIN/PN-29": "UCKP-ART-14",  # Everything evolvable
+}
+
+#: Principle -> an instrument that performs it without stating it as law.
+PRINCIPLE_INSTRUMENT = {
+    "UAKP-PRIN/PN-07": "00-BOOK/DATA/evidence-universe.json",  # Evidence before truth
+    "UAKP-PRIN/PN-08": "engine/constitution/gateway.py",  # Governance before automation
+    "UAKP-PRIN/PN-09": "engine/universal_discovery",  # Discovery before configuration
+    "UAKP-PRIN/PN-16": "engine/constitution/gateway.py",  # Autonomy under governance
+    "UAKP-PRIN/PN-26": "engine/knowledge/integration/composition.py",  # Everything composable
+    "UAKP-PRIN/PN-30": "engine/infinite_scope",  # Infinite scalability
+}
+
+#: Stated by no article, refused by no gate, performed by no instrument. Four orderings the
+#: repository asserts nowhere: the priority of universes over engines, of capabilities over
+#: projects, of composition over specialization, and of configuration over customization --
+#: which is one of the seventeen concepts dispositioned CREATE and stays one.
+PRINCIPLE_UNENFORCED = {
+    "UAKP-PRIN/PN-03": "universes before engines",
+    "UAKP-PRIN/PN-10": "composition before specialization",
+    "UAKP-PRIN/PN-11": "configuration before customization",
+    "UAKP-PRIN/PN-12": "capabilities before projects",
+}
+
+
+def test_every_architectural_principle_is_gated_stated_performed_or_unenforced() -> None:
+    mandates = section("UAKP-PRIN")
+    assert len(mandates) == 32, f"the document lists 32 principles, corpus has {len(mandates)}"
+
+    negative = {
+        "UAKP-PRIN/PN-18",
+        "UAKP-PRIN/PN-19",
+        "UAKP-PRIN/PN-20",
+        "UAKP-PRIN/PN-21",
+        "UAKP-PRIN/PN-22",
+        "UAKP-PRIN/PN-23",
+        "UAKP-PRIN/PN-32",
+    }
+    assert negative <= set(mandates)
+    positive = {k: v for k, v in mandates.items() if k not in negative}
+    assert len(positive) == 25
+
+    assert_partitions(
+        "UAKP-PRIN",
+        positive,
+        PRINCIPLE_GATE,
+        PRINCIPLE_ARTICLE,
+        PRINCIPLE_INSTRUMENT,
+        PRINCIPLE_UNENFORCED,
+    )
+
+
+def test_the_negative_principles_are_bound_elsewhere_and_not_restated_here() -> None:
+    """Seven principles assert an absence. Corpus search cannot decide a negative and this
+    suite does not try; the kernel suite binds them to a token it refuses to seed or a gate
+    that passes. Asserted so the claim cannot go missing by being nobody's."""
+    from engine.tests.kernel.test_compliance import (
+        BOUND_TO_GATE,
+        BOUND_TO_PROHIBITED_TOKEN,
+        UNCOVERED,
+    )
+
+    accounted = set(BOUND_TO_PROHIBITED_TOKEN) | set(BOUND_TO_GATE) | set(UNCOVERED)
+    for mandate in ("UAKP-PRIN/PN-20", "UAKP-PRIN/PN-22", "UAKP-PRIN/PN-32"):
+        assert mandate in accounted, f"{mandate} is no longer accounted for by the kernel suite"
+
+
+def test_every_gated_principle_names_a_gate_that_exists_and_passes() -> None:
+    from engine.kernel.compliance import quality_gates
+
+    gates = {gate["id"]: gate for gate in quality_gates()["gates"]}
+    for mandate, gate_id in PRINCIPLE_GATE.items():
+        assert gate_id in gates, f"{mandate}: no gate named {gate_id!r}"
+        assert gates[gate_id]["passed"] is True, f"{mandate}: gate {gate_id!r} fails"
+
+
+def test_every_stated_principle_names_an_article_that_exists() -> None:
+    from engine.uckp.law import ROOT_LAW
+
+    articles = {article.article_id for article in ROOT_LAW.articles}
+    for mandate, article_id in PRINCIPLE_ARTICLE.items():
+        assert article_id in articles, f"{mandate}: {article_id} is not an article of the root law"
+
+
+def test_a_stated_principle_is_never_also_a_gated_one() -> None:
+    """The tier boundary, and the whole diagnosis. A principle with a gate is enforced; one
+    with only an article is the adr/0021 shape -- right, and unmeasured. Listing a principle
+    in both tiers would hide which of the two it actually is."""
+    assert not (set(PRINCIPLE_GATE) & set(PRINCIPLE_ARTICLE))
+    assert not (set(PRINCIPLE_GATE) & set(PRINCIPLE_INSTRUMENT))
+    assert len(PRINCIPLE_ARTICLE) > len(PRINCIPLE_GATE), (
+        "more principles are gated than merely stated, which would be a better repository "
+        "than this measurement found; re-check the tiers before believing it"
+    )
+
+
+def test_every_performing_instrument_is_tracked() -> None:
+    assert_homes_exist("UAKP-PRIN", PRINCIPLE_INSTRUMENT)
+
+
+def test_the_unenforced_principles_are_named_by_no_gate_and_no_article() -> None:
+    """NON-VACUITY. Each unenforced principle is searched against both populations by its
+    distinctive noun, so a gate or article that does cover one cannot be missed."""
+    from engine.kernel.compliance import quality_gates
+    from engine.uckp.law import ROOT_LAW
+
+    gate_ids = " ".join(gate["id"] for gate in quality_gates()["gates"]).lower()
+    law_text = " ".join(f"{a.title} {a.clause}" for a in ROOT_LAW.articles).lower()
+    for mandate, principle in PRINCIPLE_UNENFORCED.items():
+        noun = principle.split()[0]
+        assert noun not in gate_ids, f"{mandate}: a gate now names {noun!r}"
+        pair = principle.replace(" before ", " ")
+        assert pair not in law_text, f"{mandate}: the law now states {principle!r}"
+
+
+def test_configuration_before_customization_stays_a_genuine_gap() -> None:
+    """One of the seventeen CREATE concepts. Unlike Monorepo and Polyrepo, nothing in the
+    mandate forbids building it -- the repository simply has no notion of customization to
+    order configuration against, which is why it is unenforced rather than admitted."""
+    assert "UAKP-PRIN/PN-11" in PRINCIPLE_UNENFORCED
+    assert not [p for p in tracked() if "customization" in p.lower()], (
+        "a customization instrument now exists; PN-11 can be ordered against it and is no "
+        "longer a gap"
+    )
