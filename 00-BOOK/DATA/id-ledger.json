@@ -12155,10 +12155,10 @@
     "STAGE0": 1,
     "DET": 6,
     "CONFIG": 40,
-    "DATAOBJ": 147,
-    "EXDOC": 3150,
+    "DATAOBJ": 149,
+    "EXDOC": 3151,
     "TOOLING": 57,
-    "ENGINE": 1390,
+    "ENGINE": 1391,
     "TESTOBJ": 901,
     "OBS": 7,
     "ASSESS": 2,
@@ -67385,6 +67385,30 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:696b18c47365"
+    },
+    "00-MASTER/CAEM-001/06-MANDATE-CORPUS.json": {
+      "universal_id": "UCOS-DATAOBJ-000148",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:7bf65aa35788"
+    },
+    "00-MASTER/CAEM-001/07-MANDATE-DISPOSITION.json": {
+      "universal_id": "UCOS-DATAOBJ-000149",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:7bf65aa35788"
+    },
+    "00-MASTER/CAEM-001/08-MANDATE-DISPOSITION-REGISTER.md": {
+      "universal_id": "UCOS-EXDOC-003151",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:7bf65aa35788"
+    },
+    "00-MASTER/CAEM-001/caem_engine.py": {
+      "universal_id": "UCOS-ENGINE-001391",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:7bf65aa35788"
     }
   },
   "by_observation": {

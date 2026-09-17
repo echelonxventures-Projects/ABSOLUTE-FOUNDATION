@@ -14428,6 +14428,86 @@
       "validation_owner": "UCOS-RIE-001",
       "regeneration_command": "python -m intelligence.rie build",
       "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "CAEM-001.07-MANDATE-DISPOSITION.json",
+      "canonical_path": "00-MASTER/CAEM-001/07-MANDATE-DISPOSITION.json",
+      "title": "Every mandate the six governing documents state, dispositioned against a located owner.",
+      "producer": "00-MASTER/CAEM-001/caem_engine.py",
+      "owner": "CAEM-001",
+      "capability": "constitutional-anti-duplication-mapping",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/CAEM-001/caem_engine.py",
+        "00-MASTER/CAEM-001/06-MANDATE-CORPUS.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json"
+      ],
+      "input_classification": {
+        "00-MASTER/CAEM-001/caem_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/CAEM-001/06-MANDATE-CORPUS.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json": "GENERATED_DETERMINISTIC"
+      },
+      "$input_closure": "The engine also enumerates the tracked tree through `git grep`, which is not itemised here for the same reason UCOS-UGA-001's existence inventory does not itemise `git ls-files`: the tracked population is the boundary being measured, not a declarable file list.",
+      "deterministic": true,
+      "canonical_identity_role": "CANONICAL",
+      "regeneration_command": "python3 00-MASTER/CAEM-001/caem_engine.py --measure",
+      "registration_status": "OPERATIONAL_MEMORY_NOT_CORPUS",
+      "consumers": [],
+      "environmental_dependencies": []
+    },
+    {
+      "artifact_id": "CAEM-001.08-MANDATE-DISPOSITION-REGISTER.md",
+      "canonical_path": "00-MASTER/CAEM-001/08-MANDATE-DISPOSITION-REGISTER.md",
+      "title": "The disposition register as a readable projection.",
+      "producer": "00-MASTER/CAEM-001/caem_engine.py",
+      "owner": "CAEM-001",
+      "capability": "constitutional-anti-duplication-mapping",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/CAEM-001/caem_engine.py",
+        "00-MASTER/CAEM-001/06-MANDATE-CORPUS.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json"
+      ],
+      "input_classification": {
+        "00-MASTER/CAEM-001/caem_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/CAEM-001/06-MANDATE-CORPUS.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json": "GENERATED_DETERMINISTIC"
+      },
+      "$input_closure": "The engine also enumerates the tracked tree through `git grep`, which is not itemised here for the same reason UCOS-UGA-001's existence inventory does not itemise `git ls-files`: the tracked population is the boundary being measured, not a declarable file list.",
+      "deterministic": true,
+      "canonical_identity_role": "CANONICAL",
+      "regeneration_command": "python3 00-MASTER/CAEM-001/caem_engine.py --measure",
+      "registration_status": "OPERATIONAL_MEMORY_NOT_CORPUS",
+      "consumers": [],
+      "environmental_dependencies": []
     }
   ],
   "generated_inputs": [
@@ -14579,10 +14659,19 @@
       "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
       "producer": "intelligence/rie/engine.py",
       "bootstrap_command": "python -m intelligence.rie build",
-      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh (STAGE-RIE in the RFP pipeline)",
+      "bootstrap_stage": "STAGE-RIE in the UCOS-RFP-001 pipeline (argv: $PY -m intelligence.rie build). NOT scripts/generate-prerequisites.sh, which does not invoke this producer.",
       "tracked": true,
       "deterministic": true,
       "note": "The repository capability catalogue. Declared here because UAEP-000001 names it in its input closure as GENERATED_DETERMINISTIC, and that classification is admissible into canonical identity ONLY when this section names a producer and a bootstrap path — otherwise it is an input a pristine clone cannot obtain. Tracked, unlike closure.json, so a clone has it before the bootstrap runs; the bootstrap re-derives it rather than creating it."
+    },
+    {
+      "path": "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
+      "producer": "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
+      "bootstrap_command": "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --render",
+      "bootstrap_stage": "STAGE-CLOSURE-009 in the UCOS-RFP-001 pipeline (writes 00-MASTER/UAKOS-CLOSURE-009/). NOT scripts/generate-prerequisites.sh, which does not invoke this producer.",
+      "tracked": true,
+      "deterministic": true,
+      "note": "The Repository Requirement Register, 550 requirements. Declared because CAEM-001's disposition engine reads it as one of eight anchor sources: it supplies 1,387 name-shaped strings no other register carries, and 13 concepts' ANCHORED verdict turns on it -- measured, not assumed, before declaring it. Tracked, so a pristine clone holds the bytes before any producer runs; the stage re-derives rather than creates them."
     }
   ],
   "bootstrap_gaps": [],
@@ -14934,6 +15023,22 @@
       "home": "00-MASTER/UAKOS-PHASE-006",
       "producer": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py",
       "authored_inputs": []
+    },
+    {
+      "owner": "CAEM-001",
+      "home": "00-MASTER/CAEM-001",
+      "producer": "00-MASTER/CAEM-001/caem_engine.py",
+      "authored_inputs": [
+        "00-ASSIMILATION-RECORD.md",
+        "01-MANDATE-TO-CANONICAL-HOME-MAP.md",
+        "02-GENUINE-GAP-REGISTER.md",
+        "03-HARD-CODED-ASSUMPTION-REGISTER.md",
+        "04-VERIFICATION-EVIDENCE.md",
+        "05-GOVERNED-EXECUTION-PATH.md",
+        "06-MANDATE-CORPUS.json",
+        "README.md"
+      ],
+      "$authored_inputs": "Outputs 00 through 05 and the README are the ORIGINAL hand-performed mapping act -- thirteen concepts, mapped by a person, which outputs 07 and 08 extend rather than replace. They are authored and must never be regenerated."
     }
   ],
   "bootstrap_gaps_note": "EMPTY — every GENERATED_DETERMINISTIC input now names a producer AND a bootstrap path that scripts/generate-prerequisites.sh actually invokes. Two entries were discharged: 00-MASTER/UAKOS-PHASE-001B/provenance.json, whose producer was already invoked (the prior gap text was STALE and named it incorrectly), and realization/, whose producer was added to the bootstrap only after it was made deterministic. The gap was closed by completing the capability, never by relaxing the invariant. UGA-INV-06 measures this by READING the bootstrap script rather than by trusting this field."

@@ -6,7 +6,7 @@
   "phase": "1 — Forensic Inventory of mutable observations in canonical identity",
   "authority_binding": "UCOS-OBSERVATION-UNIVERSE-001",
   "swept": "every CANONICAL .json entry in the generated-artifact registry, against the wider OBSERVATION_SIGNATURES detection set — not only the keys an enforced rule already names, so an unidentified leak is a measurement and never a surprise.",
-  "total_sites": 14,
+  "total_sites": 15,
   "open_violations": 0,
   "entries": [
     {
@@ -25,7 +25,7 @@
       "artifact": "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
       "producer": "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
       "observation_type": "ENVIRONMENT_STATE",
-      "current_location": "$.requirements[548].coverage",
+      "current_location": "$.requirements[549].coverage",
       "classification": "CANDIDATE — signature present, not yet under an enforced rule",
       "enforced_by_rule": false,
       "remediation": "replace the reading with the UAKOS-CLOSURE-009 observation identity and write the value to that programme's evidence surface",
@@ -142,6 +142,28 @@
     },
     {
       "object_id": "COA-000011",
+      "artifact": "00-MASTER/UCOS-UGA-001/03-AUDIT-UNIVERSE.json",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "observation_type": "ENVIRONMENT_STATE",
+      "current_location": "$.events[5684].timestamp",
+      "classification": "CANDIDATE — signature present, not yet under an enforced rule",
+      "enforced_by_rule": false,
+      "remediation": "replace the reading with the UCOS-UGA-001 observation identity and write the value to that programme's evidence surface",
+      "observation_identities_available": []
+    },
+    {
+      "object_id": "COA-000012",
+      "artifact": "00-MASTER/UCOS-URAT-001/urat.json",
+      "producer": "00-MASTER/UCOS-URAT-001/urat_engine.py",
+      "observation_type": "ENVIRONMENT_STATE",
+      "current_location": "$.coverage",
+      "classification": "CANDIDATE — signature present, not yet under an enforced rule",
+      "enforced_by_rule": false,
+      "remediation": "replace the reading with the UCOS-URAT-001 observation identity and write the value to that programme's evidence surface",
+      "observation_identities_available": []
+    },
+    {
+      "object_id": "COA-000013",
       "artifact": "intelligence/UCOS-IMP-BASELINE-001.evidence.json",
       "producer": "intelligence/rie/engine.py",
       "observation_type": "ENVIRONMENT_STATE",
@@ -152,7 +174,7 @@
       "observation_identities_available": []
     },
     {
-      "object_id": "COA-000012",
+      "object_id": "COA-000014",
       "artifact": "intelligence/UCOS-IMP-BASELINE-001.evidence.json",
       "producer": "intelligence/rie/engine.py",
       "observation_type": "ENVIRONMENT_STATE",
@@ -163,25 +185,14 @@
       "observation_identities_available": []
     },
     {
-      "object_id": "COA-000013",
-      "artifact": "00-MASTER/UCOS-UGA-001/03-AUDIT-UNIVERSE.json",
-      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "object_id": "COA-000015",
+      "artifact": "00-MASTER/CAEM-001/07-MANDATE-DISPOSITION.json",
+      "producer": "00-MASTER/CAEM-001/caem_engine.py",
       "observation_type": "ENVIRONMENT_STATE",
-      "current_location": "$.events[5683].timestamp",
+      "current_location": "$.concepts.coverage",
       "classification": "CANDIDATE — signature present, not yet under an enforced rule",
       "enforced_by_rule": false,
-      "remediation": "replace the reading with the UCOS-UGA-001 observation identity and write the value to that programme's evidence surface",
-      "observation_identities_available": []
-    },
-    {
-      "object_id": "COA-000014",
-      "artifact": "00-MASTER/UCOS-URAT-001/urat.json",
-      "producer": "00-MASTER/UCOS-URAT-001/urat_engine.py",
-      "observation_type": "ENVIRONMENT_STATE",
-      "current_location": "$.coverage",
-      "classification": "CANDIDATE — signature present, not yet under an enforced rule",
-      "enforced_by_rule": false,
-      "remediation": "replace the reading with the UCOS-URAT-001 observation identity and write the value to that programme's evidence surface",
+      "remediation": "replace the reading with the CAEM-001 observation identity and write the value to that programme's evidence surface",
       "observation_identities_available": []
     }
   ]

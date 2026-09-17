@@ -1,0 +1,592 @@
+#!/usr/bin/env python3
+"""CAEM-001 — mandate disposition engine.
+
+MISSION
+    Take every mandate the six governing documents state, locate what already OWNS it,
+    and disposition it. Five outcomes; only one of them is new construction.
+
+AUTHORITY
+    NONE — DERIVED TRUTH. This engine ratifies nothing, certifies nothing, occupies no
+    tier and writes ONLY inside 00-MASTER/CAEM-001/.
+
+WHY IT EXISTS
+    CAEM-001 §1 performed this act for THIRTEEN concepts, by hand, and said why it had
+    to be by hand: `21-CONCEPT-NORMALIZATION-REGISTER.md` and `23-SEMANTIC-EQUIVALENCE-
+    MATRIX.md` state that no semantic matching is performed "because doing so would
+    fabricate equivalence; equivalence is decided only by canonical-ID identity."
+
+    Six documents mandate 1,449. Thirteen by hand does not scale to 1,449, and semantic
+    matching is forbidden. This engine takes the only remaining road: it measures what
+    can be measured — does a name occur, in what kind of file, and does anything NAME
+    this concept — and then refuses to convert that measurement into an equivalence
+    claim. Every disposition it derives is marked PROVISIONAL. Promotion to CONFIRMED
+    is a human act recorded in the disposition file, never something this engine does.
+
+    THE ERROR THIS ENGINE IS SHAPED AROUND. The first disposition pass used "zero grep
+    hits" as the test for a genuine gap and returned 376 of them. CAEM-001's founding
+    measurement is the refutation: the token `Fabric` occurs in ZERO of 4,981 tracked
+    files, yet six of the eight Fabrics have canonical homes under other names. Acting
+    on 376 would have authored hundreds of rival authorities — void under UCKP-ART-03,
+    and the precise failure this instrument exists to prevent. Re-asking each zero-hit
+    label against its HEAD NOUN's owner collapsed 376 to 19.
+
+USAGE
+    python3 00-MASTER/CAEM-001/caem_engine.py --measure   # slow: ~5k greps, writes 07
+    python3 00-MASTER/CAEM-001/caem_engine.py --render    # fast: 07 -> 08
+    python3 00-MASTER/CAEM-001/caem_engine.py --gate      # fail-closed checks
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parent.parent
+PROGRAM = "CAEM-001"
+AUTHORITY = "NONE (DERIVED TRUTH)"
+
+CORPUS = HERE / "06-MANDATE-CORPUS.json"
+DISPOSITION = HERE / "07-MANDATE-DISPOSITION.json"
+REGISTER = HERE / "08-MANDATE-DISPOSITION-REGISTER.md"
+
+# Registers whose NAME-SHAPED strings say what this repository owns. A concept named
+# here has an owner; the same word inside a report is a mention, and the difference is
+# the whole point of the exercise.
+ANCHOR_SOURCES = (
+    "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "00-BOOK/DATA/context-authority.json",
+    "00-BOOK/DATA/id-ledger.json",
+    "00-BOOK/DATA/evidence-universe.json",
+    "00-BOOK/DATA/observation-universe.json",
+    "00-BOOK/DATA/mutation-governance-boundary.json",
+    "00-BOOK/DATA/generated-artifact-registry.json",
+    "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
+)
+
+WS = re.compile(r"[\s\-_./]+")
+
+
+def norm(s: str) -> str:
+    return WS.sub(" ", s.strip().lower()).strip()
+
+
+# --- the classification rule ------------------------------------------------------------
+# Negative-form claims assert an ABSENCE. Finding the token proves nothing and NOT finding
+# it proves nothing either, so corpus search is the wrong instrument and saying so beats
+# reporting ABSENT. The exceptions are disclosed rather than silent: a rule with hidden
+# exceptions is a rule nobody can re-derive.
+NEG = (" no ", " zero ", " without ", " never ", " not ", " nothing ", " independent of ")
+NEG_EXCEPT = {
+    "zero trust": "names a security architecture, not the absence of one",
+    "not applicable": "a certification verdict value in the ARCH certification set",
+    "what no longer exists": "a question about retirement, answerable by a retirement instrument",
+}
+GENERIC_HITS = 200
+
+
+def is_assertion(label: str) -> bool:
+    n = norm(label)
+    if n in NEG_EXCEPT:
+        return False
+    return any(m in f" {n} " for m in NEG)
+
+
+def classify(label: str, hits: int, kinds: dict, anchored: bool) -> str:
+    """Seven outcomes, each a different KIND of knowledge or ignorance.
+
+    ANCHORED is the one that carries the weight. A bare word like `Governance` occurs in
+    2,616 files, hundreds of them code and tests, so a code-and-test rule fires on word
+    frequency alone and says nothing about whether the REQUIREMENT is met. What can be
+    established is whether the repository NAMES an owner for the concept — true, checkable,
+    and honestly weaker than "implemented", so it gets its own status instead of being
+    folded into one.
+    """
+    if is_assertion(label):
+        return "ASSERTION"
+    if hits == 0:
+        return "ABSENT"
+    if len(norm(label).split()) == 1 and hits > GENERIC_HITS:
+        return "ANCHORED" if anchored else "UNDECIDABLE"
+    if kinds["code"] and (kinds["test"] or kinds["gate"]):
+        return "IMPLEMENTED"
+    if kinds["code"]:
+        return "PARTIAL"
+    return "SPECIFIED"
+
+
+# --- measurement ------------------------------------------------------------------------
+CODE_EXT = (".py", ".sh", ".ts", ".tsx", ".js", ".mjs", ".go", ".rs", ".sql")
+GATE_FILES = ("Makefile", "verify.sh", "repo-ops.sh", "bootstrap.sh")
+
+
+def variants(label: str) -> set[str]:
+    words = norm(label).split()
+    out = {label.strip(), " ".join(words), "-".join(words), "_".join(words), "".join(words)}
+    if len(words) > 1:
+        out.add(words[0] + "".join(w.capitalize() for w in words[1:]))
+    return {v for v in out if v}
+
+
+#: This programme's own home, excluded from every sweep it performs.
+#:
+#: WITHOUT THIS THE REGISTER IS SELF-FULFILLING. `06-MANDATE-CORPUS.json` transcribes all
+#: 1,449 labels verbatim, so the moment it is committed every mandate matches at least one
+#: tracked file -- its own corpus -- and every ABSENT silently becomes SPECIFIED on the
+#: strength of the measurement's own input. The same class of defect was found and fixed
+#: one programme over: a derived register counted as evidence of the concept it mentions.
+SELF = "00-MASTER/CAEM-001/"
+
+
+def git_grep(token: str) -> list[str]:
+    result = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "grep", "-F", "-i", "-l", "--", token],  # noqa: S607 - git from PATH
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode not in (0, 1):
+        return []
+    return [f for f in result.stdout.splitlines() if f and not f.startswith(SELF)]
+
+
+def file_kind(path: str) -> str:
+    low = path.lower()
+    base = low.rsplit("/", 1)[-1]
+    if "/tests/" in f"/{low}" or low.startswith("tests/") or base.startswith("test_"):
+        return "test"
+    if path.startswith(".github/workflows/") or path in GATE_FILES:
+        return "gate"
+    if low.endswith(CODE_EXT):
+        return "code"
+    if low.endswith((".json", ".yml", ".yaml", ".toml")):
+        return "decl"
+    return "doc"
+
+
+def authority_rank(path: str) -> int:
+    """How much AUTHORITY a hit carries. Lower binds harder."""
+    if path.endswith("-declaration.json") or path.endswith("/law.py"):
+        return 0
+    if path.startswith("00-BOOK/DATA/") and path.endswith(".json"):
+        return 1
+    if path.startswith("00-MASTER/") and path.endswith(".json"):
+        return 2
+    if path.startswith(("engine/", "platform/", "intelligence/")) and path.endswith(".py"):
+        return 6 if "/tests/" in path else 3
+    if path.startswith(".github/workflows/"):
+        return 4
+    return 7
+
+
+def build_anchor_index() -> tuple[set, dict]:
+    raw: list[str] = []
+
+    def walk(node) -> None:
+        if isinstance(node, dict):
+            for key, value in node.items():
+                raw.append(key)
+                walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+        elif isinstance(node, str):
+            raw.append(node)
+
+    for rel in ANCHOR_SOURCES:
+        path = REPO / rel
+        if path.is_file():
+            walk(json.loads(path.read_text(encoding="utf-8")))
+    tracked = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "ls-files"],  # noqa: S607 - git from PATH by design
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+    ).stdout.split()
+    for rel in tracked:
+        if rel.startswith(SELF):
+            continue
+        raw.append(rel)
+        raw.extend(rel.replace(".", "/").split("/"))
+
+    anchors: set[str] = set()
+    by_word: dict[str, set[str]] = defaultdict(set)
+    for value in raw:
+        text = norm(value)
+        words = text.split()
+        # NAME-SHAPED only: a forty-word sentence containing "identity" is a mention,
+        # and a mention is exactly what is being refused here.
+        if not (1 <= len(words) <= 6) or len(text) > 60:
+            continue
+        anchors.add(text)
+        by_word[words[0]].add(text)
+        by_word[words[-1]].add(text)
+    return anchors, by_word
+
+
+def anchored(label: str, anchors: set, by_word: dict) -> bool:
+    text = norm(label)
+    words = text.split()
+    if text in anchors:
+        return True
+    for candidate in by_word.get(words[0], set()) | by_word.get(words[-1], set()):
+        if len(candidate.split()) > 4:
+            continue
+        if (
+            candidate.startswith(f"{text} ")
+            or candidate.endswith(f" {text}")
+            or f" {text} " in candidate
+        ):
+            return True
+    return False
+
+
+# --- disposition ------------------------------------------------------------------------
+# Words carrying no ownership question of their own.
+STOP = frozenset(
+    "universal the a an of to for and or is it any every new future unknown before under "
+    "once can what who where when how which why shall must may".split()
+)
+
+
+def measure(workers: int = 12) -> dict:
+    corpus = json.loads(CORPUS.read_text(encoding="utf-8"))
+    anchors, by_word = build_anchor_index()
+
+    by_label: dict[str, list[dict]] = defaultdict(list)
+    for atom in corpus["atoms"]:
+        by_label[norm(atom["label"])].append(atom)
+    keys = sorted(by_label)
+    print(f"measuring {len(corpus['atoms'])} atoms over {len(keys)} concepts", file=sys.stderr)
+
+    def sweep(key: str) -> tuple[str, list[str]]:
+        label = by_label[key][0]["label"]
+        found: set[str] = set()
+        for token in variants(label):
+            found.update(git_grep(token))
+        return key, sorted(found, key=lambda f: (authority_rank(f), f))
+
+    concepts: dict[str, dict] = {}
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for done, (key, files) in enumerate(pool.map(sweep, keys), start=1):
+            label = by_label[key][0]["label"]
+            kinds = Counter(file_kind(f) for f in files)
+            kinds = {k: kinds.get(k, 0) for k in ("code", "test", "gate", "decl", "doc")}
+            anc = anchored(label, anchors, by_word)
+            concepts[key] = {
+                "label": label,
+                "status": classify(label, len(files), kinds, anc),
+                "mandates": [a["atom_id"] for a in by_label[key]],
+                "hits": len(files),
+                "anchored": anc,
+                "kinds": kinds,
+                "owner_files": [f for f in files if authority_rank(f) <= 2][:4],
+                "code_files": [f for f in files if authority_rank(f) == 3][:4],
+                "gate_files": [f for f in files if authority_rank(f) == 4][:2],
+            }
+            if done % 200 == 0:
+                print(f"  ... {done}/{len(keys)}", file=sys.stderr, flush=True)
+
+    _dispose(concepts, workers)
+    totals = Counter(c["status"] for c in concepts.values())
+    dispositions = Counter(c.get("disposition", "") for c in concepts.values())
+    return {
+        "artifact_id": "CAEM-001-07",
+        "title": "CAEM-001 · OUTPUT 07 — MANDATE DISPOSITION",
+        "authority": AUTHORITY,
+        "constitutional_superior": "UCKP-LAW-0001 via CAEM-001",
+        "$every_disposition_here_is_provisional": "Derived by measurement, not by the "
+        "manual mapping act CAEM-001 §1 performed. "
+        "Semantic equivalence is forbidden to this engine, so no row below is an "
+        "equivalence claim; each names a CANDIDATE owner a person must confirm or "
+        "reject. Promotion to CONFIRMED is recorded per-row and is never automatic.",
+        "corpus": "00-MASTER/CAEM-001/06-MANDATE-CORPUS.json",
+        "atom_count": len(corpus["atoms"]),
+        "concept_count": len(concepts),
+        "status_totals": dict(sorted(totals.items())),
+        "disposition_totals": dict(sorted(dispositions.items())),
+        "concepts": dict(sorted(concepts.items())),
+    }
+
+
+def _dispose(concepts: dict, workers: int) -> None:
+    """CAEM-001's rule: a gap exists only where NO owner exists AND extend/reference
+    would distort the owner's single responsibility."""
+    for concept in concepts.values():
+        status = concept["status"]
+        if status == "IMPLEMENTED":
+            concept["disposition"] = "IMPLEMENTED"
+        elif status == "ASSERTION":
+            concept["disposition"] = "ASSERT"
+        elif concept["hits"] == 0:
+            concept["disposition"] = "CREATE"
+        elif status == "UNDECIDABLE":
+            concept["disposition"] = "ADJUDICATE"
+        elif status == "PARTIAL":
+            # Code nothing asserts is an owner missing a facet -- the test or the gate --
+            # which is EXTEND by definition, never a gap.
+            concept["disposition"] = "EXTEND"
+        elif concept["owner_files"]:
+            concept["disposition"] = "REFERENCE"
+        elif concept["code_files"] or concept["gate_files"]:
+            concept["disposition"] = "EXTEND"
+        else:
+            concept["disposition"] = "CREATE"
+        concept["determination"] = "PROVISIONAL"
+
+    # THE CAEM-001 CORRECTION. Re-ask every provisional CREATE as a narrower question:
+    # is the HEAD NOUN owned? "Analytics Graph" absent does not mean GRAPH is absent.
+    provisional = [k for k, c in concepts.items() if c["disposition"] == "CREATE"]
+    print(f"re-asking {len(provisional)} provisional CREATEs", file=sys.stderr)
+
+    def head_owner(key: str) -> tuple[str, list[str], list[str]]:
+        words = [w for w in norm(concepts[key]["label"]).split() if w not in STOP and len(w) > 2]
+        if not words:
+            return key, [], []
+        hits = git_grep(words[-1])
+        return (
+            key,
+            words,
+            sorted((f for f in hits if authority_rank(f) <= 3), key=authority_rank)[:3],
+        )
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for key, words, owners in pool.map(head_owner, provisional):
+            concept = concepts[key]
+            concept["head_noun"] = words[-1] if words else ""
+            concept["head_noun_owner"] = owners
+            if owners:
+                concept["disposition"] = "EXTEND"
+                concept["reason"] = (
+                    f"head noun {concept['head_noun']!r} is named by {owners[0]}; the "
+                    "concept has an owner, this variant of it does not. CANDIDATE — a "
+                    "person must confirm the owner genuinely holds it."
+                )
+            else:
+                concept["reason"] = (
+                    f"no owner located for {concept['head_noun'] or key!r} either, so "
+                    "nothing in the repository holds this under any spelling tried"
+                )
+
+
+# --- projection -------------------------------------------------------------------------
+DISPOSITION_MEANING = {
+    "IMPLEMENTED": "Located in code and named by a test or a gate. Nothing owed.",
+    "REFERENCE": "An owner already carries this. Cite it and build nothing — building "
+    "anyway is a second authoring, void under UCKP-ART-03.",
+    "EXTEND": "An owner exists but does not yet carry this facet. Widen the owner.",
+    "ASSERT": "The claim is about an ABSENCE. It needs a conformance test, not a name.",
+    "ADJUDICATE": "A generic word in 200+ files with no owner located. Search cannot "
+    "decide it and this engine will not pretend otherwise.",
+    "CREATE": "Nothing in the repository owns this under any spelling tried. A genuine "
+    "gap, and the only disposition that is new construction.",
+}
+ORDER = ("IMPLEMENTED", "REFERENCE", "EXTEND", "ASSERT", "ADJUDICATE", "CREATE")
+
+
+def render(data: dict) -> str:
+    concepts = data["concepts"]
+    lines: list[str] = []
+    add = lines.append
+
+    add("# CAEM-001 · OUTPUT 08 — MANDATE DISPOSITION REGISTER")
+    add("")
+    add(
+        f"> **AUTHORITY = NONE — DERIVED TRUTH.** Generated by `caem_engine.py` from "
+        f"`06-MANDATE-CORPUS.json`. {data['atom_count']} mandates over "
+        f"{data['concept_count']} distinct concepts."
+    )
+    add("")
+    add(
+        "**Every disposition below is PROVISIONAL.** This engine may not decide semantic "
+        "equivalence — `21-CONCEPT-NORMALIZATION-REGISTER.md` forbids it, because doing so "
+        '*"would fabricate equivalence; equivalence is decided only by canonical-ID '
+        'identity."* So each row names a **candidate** owner that a person confirms or '
+        "rejects. §1 of this instrument shows what a CONFIRMED row looks like: thirteen "
+        "concepts, mapped by hand, each with a located home and a stated treatment."
+    )
+    add("")
+    add("## §1 — DISPOSITION TOTALS")
+    add("")
+    add("| Disposition | Concepts | Mandates | Meaning |")
+    add("|---|---:|---:|---|")
+    atoms_by = Counter()
+    for concept in concepts.values():
+        atoms_by[concept["disposition"]] += len(concept["mandates"])
+    for name in ORDER:
+        count = sum(1 for c in concepts.values() if c["disposition"] == name)
+        if count:
+            add(f"| **{name}** | {count} | {atoms_by[name]} | {DISPOSITION_MEANING[name]} |")
+    add("")
+
+    add("## §2 — THE CORRECTION THIS REGISTER IS SHAPED AROUND")
+    add("")
+    # Derived from THIS run, never narrated from a previous one: a register quoting a
+    # number it did not itself measure is exactly the drift it exists to refuse.
+    reasked = [c for c in concepts.values() if "head_noun" in c]
+    rescued = [c for c in reasked if c.get("head_noun_owner")]
+    add(
+        f"The first pass used *zero grep hits* as the test for a genuine gap and returned "
+        f"**{len(reasked)}**. CAEM-001's founding measurement refutes that directly: the "
+        "token `Fabric` occurs in **zero** of 4,981 tracked files, yet six of the eight "
+        "Fabrics have canonical homes under other names. A zero-hit **label** is not "
+        "evidence of a missing **concept**."
+    )
+    add("")
+    add(
+        f"Re-asking each zero-hit label against its **head noun's** owner — *is `graph` "
+        f"owned, even though `Analytics Graph` is not?* — moved **{len(rescued)}** concepts "
+        f"from CREATE to EXTEND and left **{len(reasked) - len(rescued)}**. Acting on the "
+        "first number would have authored hundreds of rival authorities, which is the exact "
+        "failure this instrument exists to prevent."
+    )
+    add("")
+
+    create = sorted(
+        (c for c in concepts.values() if c["disposition"] == "CREATE"), key=lambda c: c["label"]
+    )
+    add("## §3 — CREATE · nothing owns these under any spelling")
+    add("")
+    add("| Mandated concept | Mandated by | Head noun searched |")
+    add("|---|---|---|")
+    for concept in create:
+        add(
+            f"| {concept['label']} | `{concept['mandates'][0]}` | "
+            f"`{concept.get('head_noun', '')}` |"
+        )
+    add("")
+
+    adjudicate = sorted(
+        (c for c in concepts.values() if c["disposition"] == "ADJUDICATE"), key=lambda c: c["label"]
+    )
+    add("## §4 — ADJUDICATE · search cannot decide these")
+    add("")
+    add("| Concept | Tracked files matching | Mandated by |")
+    add("|---|---:|---|")
+    for concept in adjudicate:
+        add(f"| {concept['label']} | {concept['hits']} | `{concept['mandates'][0]}` |")
+    add("")
+    add(
+        "Several are the instrument failing honestly rather than the repository failing: "
+        "a two-letter token like `AI` or `AR` matches inside longer words, and a two-letter "
+        "token is not a searchable requirement."
+    )
+    add("")
+
+    add("## §5 — EVERY CONCEPT")
+    add("")
+    add("| Concept | Status | Disposition | Determination | Candidate owner | Mandates |")
+    add("|---|---|---|---|---|---:|")
+    for key in sorted(concepts):
+        concept = concepts[key]
+        owner = (
+            concept["owner_files"]
+            or concept["code_files"]
+            or concept.get("head_noun_owner")
+            or [""]
+        )[0]
+        add(
+            f"| {concept['label']} | {concept['status']} | {concept['disposition']} | "
+            f"{concept['determination']} | `{owner}` | {len(concept['mandates'])} |"
+        )
+    add("")
+    return "\n".join(lines) + "\n"
+
+
+def gate(data: dict) -> int:
+    """Fail closed. Each check refuses a way this register could quietly become false."""
+    corpus = json.loads(CORPUS.read_text(encoding="utf-8"))
+    concepts = data["concepts"]
+    failures: list[str] = []
+
+    declared = {a["atom_id"] for a in corpus["atoms"]}
+    carried = {m for c in concepts.values() for m in c["mandates"]}
+    missing = declared - carried
+    if missing:
+        failures.append(
+            f"CAEM-INV-01 EVERY_MANDATE_DISPOSITIONED: {len(missing)} "
+            f"undispositioned, e.g. {sorted(missing)[:3]}"
+        )
+
+    orphan = carried - declared
+    if orphan:
+        failures.append(
+            f"CAEM-INV-02 NO_MANDATE_INVENTED: {len(orphan)} dispositioned "
+            f"mandates are not in the corpus, e.g. {sorted(orphan)[:3]}"
+        )
+
+    undecided = [k for k, c in concepts.items() if c["disposition"] not in ORDER]
+    if undecided:
+        failures.append(
+            f"CAEM-INV-03 EVERY_DISPOSITION_DECLARED: {len(undecided)} carry "
+            f"an undeclared disposition"
+        )
+
+    # A CONFIRMED row must name a file that exists: a confirmed determination pointing at
+    # a path nobody kept is worse than a provisional one, because it reads as settled.
+    for key, concept in concepts.items():
+        if concept["determination"] != "CONFIRMED":
+            continue
+        owner = (concept["owner_files"] or concept["code_files"] or [""])[0]
+        if not owner or not (REPO / owner).exists():
+            failures.append(
+                f"CAEM-INV-04 CONFIRMED_OWNER_EXISTS: {key!r} is CONFIRMED but "
+                f"its owner {owner!r} is not a file"
+            )
+
+    for line in failures:
+        print(f"  [FAIL] {line}")
+    if failures:
+        print(f"GATE FAILED — {len(failures)} blocking finding(s).")
+        return 1
+    print(f"  [PASS] CAEM-INV-01 EVERY_MANDATE_DISPOSITIONED  (measured={len(declared)})")
+    print(f"  [PASS] CAEM-INV-02 NO_MANDATE_INVENTED          (measured={len(carried)})")
+    print(f"  [PASS] CAEM-INV-03 EVERY_DISPOSITION_DECLARED   (measured={len(concepts)})")
+    print("  [PASS] CAEM-INV-04 CONFIRMED_OWNER_EXISTS")
+    print("GATE PASSED — every mandate carries a disposition.")
+    return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=f"{PROGRAM} mandate disposition engine")
+    parser.add_argument(
+        "--measure",
+        action="store_true",
+        help="re-run the full sweep (~5k greps) and rewrite output 07",
+    )
+    parser.add_argument("--render", action="store_true", help="render output 08 from 07")
+    parser.add_argument("--gate", action="store_true", help="fail-closed invariant checks")
+    parser.add_argument("--workers", type=int, default=12)
+    args = parser.parse_args()
+
+    if args.measure:
+        data = measure(args.workers)
+        DISPOSITION.write_text(
+            json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        print(f"wrote {DISPOSITION.relative_to(REPO)}")
+        for name, count in sorted(data["disposition_totals"].items()):
+            print(f"  {name:12} {count}")
+
+    if not DISPOSITION.is_file():
+        print(f"{DISPOSITION.relative_to(REPO)} absent — run --measure first", file=sys.stderr)
+        return 2
+    data = json.loads(DISPOSITION.read_text(encoding="utf-8"))
+
+    if args.render or args.measure:
+        REGISTER.write_text(render(data), encoding="utf-8")
+        print(f"wrote {REGISTER.relative_to(REPO)}")
+
+    if args.gate:
+        return gate(data)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

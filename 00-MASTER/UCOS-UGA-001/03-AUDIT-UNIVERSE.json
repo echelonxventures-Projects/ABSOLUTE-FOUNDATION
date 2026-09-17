@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "3 — Audit Universe",
   "evidence_class": "AUDIT",
-  "count": 5685,
+  "count": 5689,
   "events": [
     {
       "event_id": "UGA-AUD-618cd5b83d62",
@@ -24435,6 +24435,45 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-48a413d4dbfd",
+      "timestamp": "commit:7bf65aa35788",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-DATAOBJ-000148",
+      "object_path": "00-MASTER/CAEM-001/06-MANDATE-CORPUS.json",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-DATAOBJ-000148",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-f55f5d4eefdc",
+      "timestamp": "commit:7bf65aa35788",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-DATAOBJ-000149",
+      "object_path": "00-MASTER/CAEM-001/07-MANDATE-DISPOSITION.json",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-DATAOBJ-000149",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-358f524f2d08",
+      "timestamp": "commit:7bf65aa35788",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-003151",
+      "object_path": "00-MASTER/CAEM-001/08-MANDATE-DISPOSITION-REGISTER.md",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-003151",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-cd8388f89ca3",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -24443,6 +24482,19 @@
       "object_path": "00-MASTER/CAEM-001/README.md",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-EXDOC-001292",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-8c2c40550005",
+      "timestamp": "commit:7bf65aa35788",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001391",
+      "object_path": "00-MASTER/CAEM-001/caem_engine.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001391",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"

@@ -244,7 +244,7 @@
       "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39805,
+  "count": 39893,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -12479,7 +12479,7 @@
     {
       "from": "UCOS-DATAOBJ-000039",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAEP-000001/uaep_engine.py"
     },
     {
       "from": "UCOS-DATAOBJ-000039",
@@ -14527,6 +14527,46 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-DATAOBJ-000148",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000148",
+      "kind": "owned_by",
+      "to": "CAEM-001"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000148",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000148",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000149",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000149",
+      "kind": "owned_by",
+      "to": "CAEM-001"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000149",
+      "kind": "produced_by",
+      "to": "00-MASTER/CAEM-001/caem_engine.py"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000149",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-DEPEND-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -15744,6 +15784,16 @@
     {
       "from": "UCOS-ENGINE-000008",
       "kind": "depends_on",
+      "to": "engine/certification_integrity/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000008",
+      "kind": "depends_on",
+      "to": "engine/certification_integrity/immutable.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000008",
+      "kind": "depends_on",
       "to": "engine/constitution/__init__.py"
     },
     {
@@ -15865,6 +15915,31 @@
       "from": "UCOS-ENGINE-000009",
       "kind": "produced_by",
       "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-000009",
+      "kind": "produces",
+      "to": "00-MASTER/UAEP-000001/00-UAEP-DASHBOARD.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000009",
+      "kind": "produces",
+      "to": "00-MASTER/UAEP-000001/01-CAPABILITY-BINDING-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000009",
+      "kind": "produces",
+      "to": "00-MASTER/UAEP-000001/02-VALIDATION-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000009",
+      "kind": "produces",
+      "to": "00-MASTER/UAEP-000001/03-CERTIFICATION-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000009",
+      "kind": "produces",
+      "to": "00-MASTER/UAEP-000001/uaep.json"
     },
     {
       "from": "UCOS-ENGINE-000009",
@@ -16218,6 +16293,11 @@
     },
     {
       "from": "UCOS-ENGINE-000017",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-CLOSURE-009/requirements.json"
+    },
+    {
+      "from": "UCOS-ENGINE-000017",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -16318,6 +16398,71 @@
     },
     {
       "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/02-PAGE-PROVENANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/03-SECTION-PROVENANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/04-KNOWLEDGE-PROVENANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/05-CHATGPT-PROVENANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/06-RECOMMENDATION-PROVENANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/07-ARCHITECTURAL-DECISION-PROVENANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/08-IDENTIFIER-FAMILY-RECONSTRUCTION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/09-PROVENANCE-GAP-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/10-EVIDENCE-COMPLETENESS-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/11-MANUAL-AUDIT-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/12-REPOSITORY-PROVENANCE-READINESS-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-001B/13-PHASE-001B-COMPLETION-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000019",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -16363,6 +16508,56 @@
     },
     {
       "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/01-REPOSITORY-CAPABILITY-INVENTORY.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/02-REPOSITORY-IMPLEMENTATION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/03-KNOWLEDGE-OBJECT-RECONCILIATION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/04-IMPLEMENTATION-STATUS-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/05-IMPLEMENTATION-COVERAGE-MATRIX.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/06-DUPLICATE-IMPLEMENTATION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/07-CONFLICT-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/08-REPOSITORY-READINESS-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/09-REPOSITORY-INTEGRITY-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-002/10-PHASE-002-COMPLETION-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000021",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -16380,6 +16575,66 @@
       "from": "UCOS-ENGINE-000022",
       "kind": "produced_by",
       "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/01-IMPLEMENTATION-GAP-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/02-GAP-CLASSIFICATION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/03-GAP-EVIDENCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/04-DEPENDENCY-CLOSURE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/05-IMPLEMENTATION-READINESS-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/06-CRITICALITY-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/07-BLOCKER-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/08-CAPABILITY-GAP-MATRIX.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/09-REPOSITORY-GAP-MATRIX.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/10-IMPLEMENTATION-COMPLETENESS-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/11-CONSTITUTIONAL-GAP-BASELINE-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000022",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-003/12-PHASE-003-COMPLETION-REPORT.md"
     },
     {
       "from": "UCOS-ENGINE-000022",
@@ -16468,6 +16723,66 @@
     },
     {
       "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/01-IMPLEMENTATION-UNIT-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/02-EXECUTION-SEQUENCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/03-DEPENDENCY-RESOLUTION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/04-EXECUTION-WAVE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/05-VALIDATION-PLANNING-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/06-CERTIFICATION-PLANNING-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/07-EXECUTION-RISK-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/08-IMPLEMENTATION-READINESS-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/09-CRITICAL-PATH-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/11-MASTER-CONSTITUTIONAL-IMPLEMENTATION-BLUEPRINT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-004/12-PHASE-004-COMPLETION-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000024",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -16488,6 +16803,46 @@
     },
     {
       "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/01-EXECUTION-AUTHORIZATION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/02-EXECUTION-PACKAGE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/03-VALIDATION-GOVERNANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/04-CERTIFICATION-GOVERNANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/05-ROLLBACK-GOVERNANCE-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/06-EXECUTION-RISK-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/07-GOVERNANCE-READINESS-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-005/08-PHASE-005-COMPLETION-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000025",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -16505,6 +16860,36 @@
       "from": "UCOS-ENGINE-000026",
       "kind": "produced_by",
       "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-000026",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-006/01-EXECUTION-READINESS-CERTIFICATE.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000026",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-006/02-EXECUTION-AUTHORIZATION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000026",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-006/03-FREEZE-INTEGRITY-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000026",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-006/04-GOVERNANCE-COMPLIANCE-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000026",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-006/05-RELEASE-AUTHORIZATION-REPORT.md"
+    },
+    {
+      "from": "UCOS-ENGINE-000026",
+      "kind": "produces",
+      "to": "00-MASTER/UAKOS-PHASE-006/06-PHASE-006-COMPLETION-REPORT.md"
     },
     {
       "from": "UCOS-ENGINE-000026",
@@ -44850,6 +45235,11 @@
       "from": "UCOS-ENGINE-000652",
       "kind": "produces",
       "to": "intelligence/UCOS-RIE-AEOS-READINESS.json"
+    },
+    {
+      "from": "UCOS-ENGINE-000652",
+      "kind": "produces",
+      "to": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json"
     },
     {
       "from": "UCOS-ENGINE-000652",
@@ -76617,6 +77007,36 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-ENGINE-001391",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001391",
+      "kind": "owned_by",
+      "to": "CAEM-001"
+    },
+    {
+      "from": "UCOS-ENGINE-001391",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001391",
+      "kind": "produces",
+      "to": "00-MASTER/CAEM-001/07-MANDATE-DISPOSITION.json"
+    },
+    {
+      "from": "UCOS-ENGINE-001391",
+      "kind": "produces",
+      "to": "00-MASTER/CAEM-001/08-MANDATE-DISPOSITION-REGISTER.md"
+    },
+    {
+      "from": "UCOS-ENGINE-001391",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-ENVIRONMENTS-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -107189,7 +107609,7 @@
     {
       "from": "UCOS-EXDOC-001501",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAEP-000001/uaep_engine.py"
     },
     {
       "from": "UCOS-EXDOC-001501",
@@ -107209,7 +107629,7 @@
     {
       "from": "UCOS-EXDOC-001502",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAEP-000001/uaep_engine.py"
     },
     {
       "from": "UCOS-EXDOC-001502",
@@ -107229,7 +107649,7 @@
     {
       "from": "UCOS-EXDOC-001503",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAEP-000001/uaep_engine.py"
     },
     {
       "from": "UCOS-EXDOC-001503",
@@ -107249,7 +107669,7 @@
     {
       "from": "UCOS-EXDOC-001504",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAEP-000001/uaep_engine.py"
     },
     {
       "from": "UCOS-EXDOC-001504",
@@ -109909,7 +110329,7 @@
     {
       "from": "UCOS-EXDOC-001637",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001637",
@@ -109929,7 +110349,7 @@
     {
       "from": "UCOS-EXDOC-001638",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001638",
@@ -109949,7 +110369,7 @@
     {
       "from": "UCOS-EXDOC-001639",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001639",
@@ -109969,7 +110389,7 @@
     {
       "from": "UCOS-EXDOC-001640",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001640",
@@ -109989,7 +110409,7 @@
     {
       "from": "UCOS-EXDOC-001641",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001641",
@@ -110009,7 +110429,7 @@
     {
       "from": "UCOS-EXDOC-001642",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001642",
@@ -110029,7 +110449,7 @@
     {
       "from": "UCOS-EXDOC-001643",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001643",
@@ -110049,7 +110469,7 @@
     {
       "from": "UCOS-EXDOC-001644",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001644",
@@ -110069,7 +110489,7 @@
     {
       "from": "UCOS-EXDOC-001645",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001645",
@@ -110089,7 +110509,7 @@
     {
       "from": "UCOS-EXDOC-001646",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001646",
@@ -110109,7 +110529,7 @@
     {
       "from": "UCOS-EXDOC-001647",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001647",
@@ -110129,7 +110549,7 @@
     {
       "from": "UCOS-EXDOC-001648",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001648",
@@ -110149,7 +110569,7 @@
     {
       "from": "UCOS-EXDOC-001649",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py"
     },
     {
       "from": "UCOS-EXDOC-001649",
@@ -110169,7 +110589,7 @@
     {
       "from": "UCOS-EXDOC-001650",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001650",
@@ -110189,7 +110609,7 @@
     {
       "from": "UCOS-EXDOC-001651",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001651",
@@ -110209,7 +110629,7 @@
     {
       "from": "UCOS-EXDOC-001652",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001652",
@@ -110229,7 +110649,7 @@
     {
       "from": "UCOS-EXDOC-001653",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001653",
@@ -110249,7 +110669,7 @@
     {
       "from": "UCOS-EXDOC-001654",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001654",
@@ -110269,7 +110689,7 @@
     {
       "from": "UCOS-EXDOC-001655",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001655",
@@ -110289,7 +110709,7 @@
     {
       "from": "UCOS-EXDOC-001656",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001656",
@@ -110309,7 +110729,7 @@
     {
       "from": "UCOS-EXDOC-001657",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001657",
@@ -110329,7 +110749,7 @@
     {
       "from": "UCOS-EXDOC-001658",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001658",
@@ -110349,7 +110769,7 @@
     {
       "from": "UCOS-EXDOC-001659",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
     },
     {
       "from": "UCOS-EXDOC-001659",
@@ -110369,7 +110789,7 @@
     {
       "from": "UCOS-EXDOC-001660",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001660",
@@ -110389,7 +110809,7 @@
     {
       "from": "UCOS-EXDOC-001661",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001661",
@@ -110409,7 +110829,7 @@
     {
       "from": "UCOS-EXDOC-001662",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001662",
@@ -110429,7 +110849,7 @@
     {
       "from": "UCOS-EXDOC-001663",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001663",
@@ -110449,7 +110869,7 @@
     {
       "from": "UCOS-EXDOC-001664",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001664",
@@ -110469,7 +110889,7 @@
     {
       "from": "UCOS-EXDOC-001665",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001665",
@@ -110489,7 +110909,7 @@
     {
       "from": "UCOS-EXDOC-001666",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001666",
@@ -110509,7 +110929,7 @@
     {
       "from": "UCOS-EXDOC-001667",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001667",
@@ -110529,7 +110949,7 @@
     {
       "from": "UCOS-EXDOC-001668",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001668",
@@ -110549,7 +110969,7 @@
     {
       "from": "UCOS-EXDOC-001669",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001669",
@@ -110569,7 +110989,7 @@
     {
       "from": "UCOS-EXDOC-001670",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001670",
@@ -110589,7 +111009,7 @@
     {
       "from": "UCOS-EXDOC-001671",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
     },
     {
       "from": "UCOS-EXDOC-001671",
@@ -110969,7 +111389,7 @@
     {
       "from": "UCOS-EXDOC-001690",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001690",
@@ -110989,7 +111409,7 @@
     {
       "from": "UCOS-EXDOC-001691",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001691",
@@ -111009,7 +111429,7 @@
     {
       "from": "UCOS-EXDOC-001692",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001692",
@@ -111029,7 +111449,7 @@
     {
       "from": "UCOS-EXDOC-001693",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001693",
@@ -111049,7 +111469,7 @@
     {
       "from": "UCOS-EXDOC-001694",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001694",
@@ -111069,7 +111489,7 @@
     {
       "from": "UCOS-EXDOC-001695",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001695",
@@ -111089,7 +111509,7 @@
     {
       "from": "UCOS-EXDOC-001696",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001696",
@@ -111109,7 +111529,7 @@
     {
       "from": "UCOS-EXDOC-001697",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001697",
@@ -111129,7 +111549,7 @@
     {
       "from": "UCOS-EXDOC-001698",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001698",
@@ -111149,7 +111569,7 @@
     {
       "from": "UCOS-EXDOC-001699",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001699",
@@ -111169,7 +111589,7 @@
     {
       "from": "UCOS-EXDOC-001700",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001700",
@@ -111189,7 +111609,7 @@
     {
       "from": "UCOS-EXDOC-001701",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
     },
     {
       "from": "UCOS-EXDOC-001701",
@@ -111209,7 +111629,7 @@
     {
       "from": "UCOS-EXDOC-001702",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001702",
@@ -111229,7 +111649,7 @@
     {
       "from": "UCOS-EXDOC-001703",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001703",
@@ -111249,7 +111669,7 @@
     {
       "from": "UCOS-EXDOC-001704",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001704",
@@ -111269,7 +111689,7 @@
     {
       "from": "UCOS-EXDOC-001705",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001705",
@@ -111289,7 +111709,7 @@
     {
       "from": "UCOS-EXDOC-001706",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001706",
@@ -111309,7 +111729,7 @@
     {
       "from": "UCOS-EXDOC-001707",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001707",
@@ -111329,7 +111749,7 @@
     {
       "from": "UCOS-EXDOC-001708",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001708",
@@ -111349,7 +111769,7 @@
     {
       "from": "UCOS-EXDOC-001709",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
     },
     {
       "from": "UCOS-EXDOC-001709",
@@ -111369,7 +111789,7 @@
     {
       "from": "UCOS-EXDOC-001710",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py"
     },
     {
       "from": "UCOS-EXDOC-001710",
@@ -111389,7 +111809,7 @@
     {
       "from": "UCOS-EXDOC-001711",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py"
     },
     {
       "from": "UCOS-EXDOC-001711",
@@ -111409,7 +111829,7 @@
     {
       "from": "UCOS-EXDOC-001712",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py"
     },
     {
       "from": "UCOS-EXDOC-001712",
@@ -111429,7 +111849,7 @@
     {
       "from": "UCOS-EXDOC-001713",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py"
     },
     {
       "from": "UCOS-EXDOC-001713",
@@ -111449,7 +111869,7 @@
     {
       "from": "UCOS-EXDOC-001714",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py"
     },
     {
       "from": "UCOS-EXDOC-001714",
@@ -111469,7 +111889,7 @@
     {
       "from": "UCOS-EXDOC-001715",
       "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
+      "to": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py"
     },
     {
       "from": "UCOS-EXDOC-001715",
@@ -136013,6 +136433,26 @@
     },
     {
       "from": "UCOS-EXDOC-003150",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003151",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003151",
+      "kind": "owned_by",
+      "to": "CAEM-001"
+    },
+    {
+      "from": "UCOS-EXDOC-003151",
+      "kind": "produced_by",
+      "to": "00-MASTER/CAEM-001/caem_engine.py"
+    },
+    {
+      "from": "UCOS-EXDOC-003151",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
