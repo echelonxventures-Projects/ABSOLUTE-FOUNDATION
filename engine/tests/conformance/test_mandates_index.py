@@ -1027,3 +1027,96 @@ def test_the_discovery_gap_is_the_same_one_the_prd_reports() -> None:
     shared = {"risk", "opportunity", "pattern"}
     assert shared <= set(DISCOVERY_ABSENT.values())
     assert shared <= set(CONSTRUCT_DISCOVERY_ABSENT.values())
+
+
+# --- MI-009 — the fourteen governance surfaces ----------------------------------
+#
+# Section 009 lists fourteen things governance is made of. All fourteen are located, which
+# makes this the only fully-answered section in the Master Index -- and that is worth
+# recording as a fact rather than assumed, because "all located" is exactly the claim a
+# sweep would produce by accident.
+#
+# Two of the fourteen carry a top-level `authority` key AND are bound in UCOS-CAA-001 as
+# subordinate instruments of the root law. That is a strictly stronger standing than a
+# module existing, and CAA-INV-02 refuses an authority-carrying register that is not bound,
+# so the pair is checked against the binding rather than against the file.
+
+GOVERNANCE_SURFACE = {
+    "MI-009/GV-01": "00-MASTER/UCOS-RFP-001/REPOSITORY-FIXED-POINT-CONSTITUTION.md",
+    "MI-009/GV-02": "00-BOOK/DATA/id-ledger.json",  # Identity
+    "MI-009/GV-03": "00-BOOK/DATA/generated-artifact-registry.json",  # Registry
+    # Dictionary
+    "MI-009/GV-04": "00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json",
+    "MI-009/GV-05": "engine/context/ontology.py",  # Ontology
+    "MI-009/GV-06": "engine/context/taxonomy.py",  # Taxonomy
+    # Provenance
+    "MI-009/GV-07": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md",
+    "MI-009/GV-08": "00-BOOK/REGISTRIES/CHANGE-VERSION-LINEAGE-REGISTRY.md",  # Lineage
+    "MI-009/GV-09": "engine/nucleus/ownership.py",  # Ownership
+    "MI-009/GV-10": "00-BOOK/DATA/constitutional-authority-alignment.json",  # Authority
+    # Traceability
+    "MI-009/GV-11": "00-MASTER/UAKOS-CLOSURE-009/07-CONSTITUTIONAL-TRACEABILITY-MATRIX.md",
+    "MI-009/GV-12": "engine/kernel/governance.py",  # Policy
+    "MI-009/GV-13": "engine/kernel/compliance.py",  # Compliance
+    "MI-009/GV-14": "engine/uckp/law.py",  # Constitutional Governance
+}
+
+#: The two surfaces that are subordinate instruments of the root law, by their CAA id.
+GOVERNANCE_SUBORDINATE_INSTRUMENT = {
+    "MI-009/GV-03": "UCOS-GENERATED-ARTIFACT-REGISTRY-001",
+    "MI-009/GV-10": "UCOS-CAA-001",
+}
+
+
+def test_every_governance_surface_is_located() -> None:
+    mandates = section("MI-009")
+    assert len(mandates) == 14, f"section 009 lists 14 surfaces, corpus has {len(mandates)}"
+    assert_partitions("MI-009", mandates, GOVERNANCE_SURFACE)
+    assert_homes_exist("MI-009", GOVERNANCE_SURFACE)
+
+
+def test_the_fourteen_surfaces_are_fourteen_distinct_instruments() -> None:
+    """NON-VACUITY for a fully-answered section. Fourteen mandates resolving to fewer than
+    fourteen instruments would mean some are unlocated and the completeness is an artefact
+    of the mapping rather than of the repository."""
+    homes = list(GOVERNANCE_SURFACE.values())
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one instrument claimed for several surfaces: {duplicated}"
+    assert len(set(homes)) == 14
+
+
+def test_the_two_authority_carrying_surfaces_are_bound_under_the_root_law() -> None:
+    """CAA-INV-02 refuses a register that carries a top-level `authority` and is not bound
+    as a subordinate instrument. So for these two, 'located' understates it: they are
+    governing instruments with a declared standing, and the binding is what proves it."""
+    import json
+
+    alignment = json.loads(
+        (repo_root() / "00-BOOK" / "DATA" / "constitutional-authority-alignment.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    bound = {entry["id"]: entry for entry in alignment["subordinate_instruments"]}
+    for mandate, instrument_id in GOVERNANCE_SUBORDINATE_INSTRUMENT.items():
+        assert (
+            instrument_id in bound
+        ), f"{mandate}: {instrument_id} is no longer a bound subordinate instrument"
+        home = GOVERNANCE_SURFACE[mandate]
+        assert bound[instrument_id]["instrument"] == home, (
+            f"{mandate}: CAA binds {instrument_id} to "
+            f"{bound[instrument_id]['instrument']!r}, this row names {home!r}"
+        )
+        declared = json.loads((repo_root() / home).read_text(encoding="utf-8"))
+        assert declared.get("authority"), f"{mandate}: {home} carries no top-level authority"
+
+
+def test_constitutional_governance_resolves_to_the_root_law_itself() -> None:
+    """GV-14 is the section's own closing row and the only one that can only have one
+    answer: the supreme authority, whose home CLAUDE.md names."""
+    from engine.uckp.law import ROOT_LAW
+
+    assert GOVERNANCE_SURFACE["MI-009/GV-14"] == "engine/uckp/law.py"
+    assert (
+        ROOT_LAW.law_id == "UCKP-LAW-0001"
+    ), f"the root law is now {ROOT_LAW.law_id}; GV-14 names a different supreme authority"
+    assert len(ROOT_LAW.articles) == 20 and len(ROOT_LAW.invariants) == 17
