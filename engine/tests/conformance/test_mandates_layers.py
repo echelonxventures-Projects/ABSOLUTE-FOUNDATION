@@ -14,6 +14,7 @@ from engine.tests.conformance.mandate_corpus import (
     repo_root,
     section,
 )
+from engine.uckp.facets import Facet
 
 # --- LYR-L12V / LYR-L12C — Layer 12, verification and certification --------------
 #
@@ -215,3 +216,167 @@ def test_the_taxonomy_declares_itself_open_and_offers_the_extension_path() -> No
         "the declaration names ContextTaxonomy.extend as the extension mechanism and the "
         "taxonomy does not have it"
     )
+
+
+# --- LYR-L4C — the thirteen commerce capabilities -------------------------------
+#
+# Layer 4 opens "Everything is a capability. No fixed application modules." and then gives
+# Commerce as a WORKED EXAMPLE of composition -- thirteen capabilities that compose into a
+# marketplace. The example is the mandate: not that the substrate ship a Cart, but that
+# thirteen capabilities of this shape compose without the substrate knowing what commerce is.
+#
+# Three of the thirteen settle it. `product`, `tax` and `customer` are among the eighteen
+# tokens the kernel REFUSES to seed as concrete categories. A Product Capability built into
+# the substrate is the fixed-industry breach P-001 and LYR-NEG/LN-05 forbid -- and all three
+# compose as registered capabilities anyway, which is the distinction the layer is making.
+
+COMMERCE_CAPABILITY_PREFIX = "Capability-"
+
+
+def _capability_key(label: str) -> str:
+    words = label.removesuffix(" Capability").split()
+    return COMMERCE_CAPABILITY_PREFIX + "".join(word.capitalize() for word in words)
+
+
+def test_the_commerce_example_is_thirteen_capabilities() -> None:
+    mandates = section("LYR-L4C")
+    assert len(mandates) == 13, f"the example lists 13 capabilities, corpus has {len(mandates)}"
+    assert all(
+        label.endswith(" Capability") for label in mandates.values()
+    ), f"a row is not a capability: {sorted(mandates.values())}"
+
+
+def test_every_commerce_capability_composes_with_the_kernel_unchanged() -> None:
+    """The mandate as written. Composition, not construction: the kernel's source
+    fingerprint is required to be identical after all thirteen are registered."""
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.provider.framework import ProviderFramework
+
+    labels = list(section("LYR-L4C").values())
+    framework = ProviderFramework()
+    before = kernel_source_fingerprint()
+
+    for label in labels:
+        framework.register_category(
+            _capability_key(label), name=label, description=f"composed capability: {label}"
+        )
+
+    assert kernel_source_fingerprint() == before, (
+        "composing the commerce capabilities changed the kernel's source, so they were built "
+        "as application modules -- which is what 'No fixed application modules' forbids"
+    )
+    registered = set(framework.category_keys())
+    refused = sorted(label for label in labels if _capability_key(label) not in registered)
+    assert not refused, f"capabilities the framework would not admit: {refused}"
+
+
+def test_three_of_them_name_tokens_the_kernel_refuses_to_seed() -> None:
+    """The sharp end, and the reason the example is Commerce rather than something neutral.
+
+    Product, Tax and Customer are exactly the concrete categories a commerce platform would
+    hard-code. The kernel refuses all three by name and composes all three as capabilities,
+    which is the whole difference between a substrate and an eCommerce platform.
+    """
+    from engine.kernel.compliance import PROHIBITED_TOKENS
+    from engine.kernel.seed import FOUNDING_METATYPES
+
+    labels = {label.removesuffix(" Capability").lower() for label in section("LYR-L4C").values()}
+    refused = sorted(labels & set(PROHIBITED_TOKENS))
+    assert refused == ["customer", "product", "tax"], (
+        f"the prohibited overlap changed: {refused}; the example no longer demonstrates what "
+        "it was chosen to demonstrate"
+    )
+    # The intersection with the founding meta-types is NAMED rather than forbidden, for the
+    # same reason it is named for the object classes: `Evolution` is a universal engineering
+    # abstraction that happens to appear in a commerce list, and seeding it is not a
+    # commerce assumption. What would be a breach is the kernel seeding a capability it
+    # could only have got from this example -- Cart, Listing, Checkout.
+    founding = {key.lower() for key, _n, _d in FOUNDING_METATYPES}
+    shared = sorted(labels & founding)
+    assert shared == ["evolution"], (
+        f"the kernel now seeds commerce capabilities beyond the universal abstraction "
+        f"Evolution: {shared}"
+    )
+    assert labels - founding, "every commerce capability is seeded, so nothing is composed"
+
+
+def test_composition_is_open_beyond_the_thirteen_that_were_listed() -> None:
+    """An example that admits only its own members is not an example of composition."""
+    from engine.provider.framework import ProviderFramework
+
+    framework = ProviderFramework()
+    for label in section("LYR-L4C").values():
+        framework.register_category(_capability_key(label), name=label, description="composed")
+    unlisted = "Capability-NoDocumentHasNamedThisOne"
+    framework.register_category(unlisted, name="unlisted", description="admitted")
+    assert unlisted in framework.category_keys()
+
+
+# --- LYR-L8 — the Universal Runtime ---------------------------------------------
+#
+# Five claims about WHAT the runtime carries -- any application, domain, capability,
+# environment, infrastructure -- and seven about what it UNDERSTANDS: identity, context,
+# relationships, policies, events, state, evolution. The two halves are different kinds of
+# claim and are kept apart: the first is openness, the second is a facet the runtime can
+# read.
+#
+# All seven understandings are Article 6 facets, which is the strongest possible answer --
+# the runtime does not need to be taught them, because every object carries them.
+
+RUNTIME_OPENNESS = {
+    "LYR-L8/RT-01": "Any Application",
+    "LYR-L8/RT-02": "Any Domain",
+    "LYR-L8/RT-03": "Any Capability",
+    "LYR-L8/RT-04": "Any Environment",
+    "LYR-L8/RT-05": "Any Infrastructure",
+}
+
+RUNTIME_UNDERSTANDING = {
+    "LYR-L8/RT-06": Facet.IDENTITY,
+    "LYR-L8/RT-07": Facet.CONTEXT,
+    "LYR-L8/RT-08": Facet.RELATIONSHIPS,
+    "LYR-L8/RT-09": Facet.POLICIES,
+    "LYR-L8/RT-10": Facet.TEMPORAL_HISTORY,
+    "LYR-L8/RT-11": Facet.LIFECYCLE,
+    "LYR-L8/RT-12": Facet.EVOLUTION_HISTORY,
+}
+
+
+def test_the_runtime_layer_is_five_opennesses_and_seven_understandings() -> None:
+    mandates = section("LYR-L8")
+    assert len(mandates) == 12, f"layer 8 states 12 claims, corpus has {len(mandates)}"
+    assert_partitions("LYR-L8", mandates, RUNTIME_OPENNESS, RUNTIME_UNDERSTANDING)
+
+
+def test_every_runtime_understanding_is_a_facet_the_object_carries() -> None:
+    """The runtime does not need teaching: every object carries these by Article 6."""
+    import dataclasses
+
+    from engine.uckp.facets import REQUIRED_FACETS
+    from engine.uckp.ucko import UniversalConstitutionalKnowledgeObject as UCKO
+
+    fields = {f.name for f in dataclasses.fields(UCKO)}
+    for mandate, facet in RUNTIME_UNDERSTANDING.items():
+        assert facet in REQUIRED_FACETS, f"{mandate}: {facet} is not required"
+        assert (
+            facet.attribute in fields
+        ), f"{mandate}: no UCKO field carries {facet.value!r}, so the runtime cannot read it"
+    facets = list(RUNTIME_UNDERSTANDING.values())
+    assert len(facets) == len(set(facets)), "one facet claimed by two runtime understandings"
+
+
+def test_the_runtime_openness_is_the_admission_property_already_proven() -> None:
+    """The five `Any X` claims are the same openness the kernel proof establishes, so they
+    are bound to it rather than re-proven -- a second proof of one property would be a second
+    authoring of it."""
+    from engine.kernel.compliance import architectural_proof
+
+    proof = architectural_proof()
+    assert proof["kernel_unchanged"] is True
+    proven = {record["category"] for record in proof["records"] if record["ok"]}
+    assert {
+        "CapabilityDomain",
+        "ProviderCategory",
+        "ExecutionModelUnknown",
+    } <= proven, "the categories the runtime's openness rests on are no longer represented"
+    assert len(RUNTIME_OPENNESS) == 5
