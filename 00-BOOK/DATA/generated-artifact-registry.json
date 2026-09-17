@@ -5397,38 +5397,6 @@
       "certification_role": "PROGRAMME_DELIVERABLE"
     },
     {
-      "artifact_id": "UAKOS-PHASE-004.10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json",
-      "canonical_path": "00-MASTER/UAKOS-PHASE-004/10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json",
-      "title": "",
-      "producer": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py",
-      "owner": "UAKOS-PHASE-004",
-      "capability": "implementation-planning",
-      "lifecycle": "REGENERATED",
-      "input_closure": [
-        "00-MASTER/UAKOS-PHASE-004/phase4_plan.py",
-        "00-BOOK/DATA/relationships.json",
-        "00-MASTER/UAKOS-CLOSURE-002/closure.json",
-        "00-MASTER/UAKOS-PHASE-001B/provenance.json",
-        "00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py"
-      ],
-      "input_classification": {
-        "00-MASTER/UAKOS-PHASE-004/phase4_plan.py": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/relationships.json": "TRACKED_DETERMINISTIC",
-        "00-MASTER/UAKOS-CLOSURE-002/closure.json": "GENERATED_DETERMINISTIC",
-        "00-MASTER/UAKOS-PHASE-001B/provenance.json": "GENERATED_DETERMINISTIC",
-        "00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py": "TRACKED_DETERMINISTIC"
-      },
-      "build_mode_inputs": [],
-      "deterministic": true,
-      "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
-      "consumers": [],
-      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
-      "validation_owner": "UAKOS-PHASE-004",
-      "regeneration_command": "python3 00-MASTER/UAKOS-PHASE-004/phase4_plan.py",
-      "certification_role": "PROGRAMME_DELIVERABLE"
-    },
-    {
       "artifact_id": "UAKOS-PHASE-004.10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.md",
       "canonical_path": "00-MASTER/UAKOS-PHASE-004/10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.md",
       "title": "",
@@ -14606,6 +14574,15 @@
       "tracked": false,
       "deterministic": true,
       "note": "UCOS-UCTX-001 generated context projection — the GitHub Copilot surface. Model B: the authored declaration at 00-BOOK/DATA/context-authority.json is the canonical authority and this is its product. Untracked by design and classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json. Listing it HERE is what makes the bootstrap obligation machine-checked: UGA-INV-06 refuses a generated input with no bootstrap path, so a clone that cannot obtain its own agent context is a gate failure rather than a quiet absence."
+    },
+    {
+      "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
+      "producer": "intelligence/rie",
+      "bootstrap_command": "python3 -m intelligence.rie build",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh (STAGE-RIE in the RFP pipeline)",
+      "tracked": true,
+      "deterministic": true,
+      "note": "The repository capability catalogue. Declared here because UAEP-000001 names it in its input closure as GENERATED_DETERMINISTIC, and that classification is admissible into canonical identity ONLY when this section names a producer and a bootstrap path — otherwise it is an input a pristine clone cannot obtain. Tracked, unlike closure.json, so a clone has it before the bootstrap runs; the bootstrap re-derives it rather than creating it."
     }
   ],
   "bootstrap_gaps": [],
