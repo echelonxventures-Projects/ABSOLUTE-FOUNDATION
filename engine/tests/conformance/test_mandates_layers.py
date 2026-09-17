@@ -380,3 +380,106 @@ def test_the_runtime_openness_is_the_admission_property_already_proven() -> None
         "ExecutionModelUnknown",
     } <= proven, "the categories the runtime's openness rests on are no longer represented"
     assert len(RUNTIME_OPENNESS) == 5
+
+
+# --- LYR-L1 — the thirteen kinds of existence -----------------------------------
+#
+# "Represent anything that exists. Not only Earth. Not only humans. Not only physical
+# reality." Thirteen kinds follow, and the layer's worked example is Earth beside Mars under
+# the caption "Same architecture. Different configuration."
+#
+# That caption is the mandate and the kernel already enforces it: `earth` is one of the
+# eighteen tokens the kernel refuses to seed, while `planet` is not. A Planet KIND is
+# representable; the planet Earth is not a category the substrate may hold. Ten of the
+# thirteen have a located home, two are representable and deliberately unbuilt, and the
+# thirteenth is the openness claim.
+
+EXISTENCE_HOME = {
+    "LYR-L1/EX-01": "engine/uckp/facets.py",  # Existence -- the existence-context facet
+    "LYR-L1/EX-02": "engine/construct/reality.py",  # Reality
+    "LYR-L1/EX-03": "engine/uckp/universe.py",  # Universe
+    "LYR-L1/EX-06": "engine/execution_environment",  # Environment
+    "LYR-L1/EX-07": "engine/context/location.py",  # Location
+    "LYR-L1/EX-08": "engine/zero_class/entity_derivation.py",  # Entity
+    "LYR-L1/EX-09": "engine/uckp/ucko.py",  # Object
+    "LYR-L1/EX-10": "engine/uckp/values.py",  # Event -- TemporalEvent
+    "LYR-L1/EX-11": "engine/graph/model.py",  # Relationship
+    "LYR-L1/EX-12": "engine/uckp/state.py",  # State
+}
+
+#: Representable and deliberately unbuilt. A Galaxy class and a Planet class would be the
+#: fixed-cosmology equivalent of a fixed industry, and the layer says so in its own caption.
+EXISTENCE_REPRESENTABLE = {
+    "LYR-L1/EX-04": "Galaxy",
+    "LYR-L1/EX-05": "Planet",
+}
+
+EXISTENCE_OPENNESS = {"LYR-L1/EX-13": "Unknown Future Construct"}
+
+
+def test_every_kind_of_existence_is_homed_representable_or_the_openness_claim() -> None:
+    mandates = section("LYR-L1")
+    assert len(mandates) == 13, f"layer 1 lists 13 kinds, corpus has {len(mandates)}"
+    assert_partitions(
+        "LYR-L1",
+        mandates,
+        EXISTENCE_HOME,
+        EXISTENCE_REPRESENTABLE,
+        EXISTENCE_OPENNESS,
+    )
+
+
+def test_every_homed_kind_is_tracked_and_distinct() -> None:
+    assert_homes_exist("LYR-L1", EXISTENCE_HOME)
+    homes = list(EXISTENCE_HOME.values())
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one module claimed for several kinds of existence: {duplicated}"
+
+
+def test_planet_is_representable_and_earth_is_refused() -> None:
+    """The layer's own example, executed.
+
+    "Not only Earth" is enforced by the kernel refusing `earth` as a seedable category,
+    while `planet` is not refused -- so a Planet KIND registers and the planet Earth cannot
+    become one. If `planet` is ever prohibited the kind becomes unrepresentable, and if
+    `earth` is ever permitted the caption stops being true; both directions are asserted.
+    """
+    from engine.kernel.compliance import PROHIBITED_TOKENS, kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    assert (
+        "earth" in PROHIBITED_TOKENS
+    ), "`earth` is no longer refused; 'Not only Earth' is no longer enforced by anything"
+    for kind in EXISTENCE_REPRESENTABLE.values():
+        assert (
+            kind.lower() not in PROHIBITED_TOKENS
+        ), f"{kind!r} is now refused, so this kind of existence cannot be represented at all"
+
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    for kind in EXISTENCE_REPRESENTABLE.values():
+        kernel.register_metatype(f"Existence-{kind}", name=kind, description=f"existence: {kind}")
+    assert kernel_source_fingerprint() == before
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    assert {"Existence-Galaxy", "Existence-Planet"} <= registered
+
+
+def test_the_representable_kinds_are_not_built_as_classes() -> None:
+    """NON-VACUITY. Representable-and-unbuilt is only a finding if nothing builds them."""
+    assert_named_by_nothing(
+        "LYR-L1",
+        {m: kind.lower() for m, kind in EXISTENCE_REPRESENTABLE.items()},
+    )
+
+
+def test_the_existence_set_is_open() -> None:
+    """EX-13 is not a kind; it is the claim the list can grow."""
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    unlisted = "Existence-KindNoDocumentHasNamedYet"
+    kernel.register_metatype(unlisted, name="unlisted", description="admitted by registration")
+    assert unlisted in {obj.natural_key for obj in kernel.metatypes()}
+    assert kernel_source_fingerprint() == before
