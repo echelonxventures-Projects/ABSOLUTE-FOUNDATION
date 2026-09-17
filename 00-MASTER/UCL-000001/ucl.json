@@ -421,14 +421,7 @@
   ],
   "blocking_failures": [],
   "bound_hits": [],
-  "bounds_slack": [
-    {
-      "bound": 4,
-      "id": "UCL-V-24",
-      "measure": "stage_obligation_failures",
-      "value": 1
-    }
-  ],
+  "bounds_slack": [],
   "capabilities": [
     {
       "action": "EXTEND",
@@ -598,7 +591,7 @@
     "adapters_unresolved": 0,
     "admission_paths_unresolved": 0,
     "authority_claims": 0,
-    "bounds_slack": 1,
+    "bounds_slack": 0,
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "capability_artifacts_unresolved": 0,
@@ -1124,12 +1117,12 @@
       "blocking": false,
       "bound_measure": "stage_obligation_failures",
       "class": "MEASURED-OBLIGATION-COVERAGE",
-      "detail": "Eleven obligations are evaluated against forty-five discovered stages. Applicability is determined first, so the inapplicable cases are reported rather than counted: registration is not applicable where the Universal Registry does not admit the zone the owner lives in — operational memory is deliberately barred from consuming a permanent corpus identity, so its absence from the registry is the exclusion authority working correctly — and replay and fixed-point proof are not applicable to a stage the repository declares constitutionally but does not execute. After applicability, exactly four obligations remain genuinely unbound. THREE belong to gap discovery: its owner lies in a zone that constitutional checks do cover, and the repository does execute it as a pipeline member, but no declared gate certifies, validates or verifies that artifact — so the obligation is in scope and unmet. ONE belongs to certification: it is a pipeline member, so replay is in scope, but the pipeline declares that stage non-reentrant as deliberate defence in depth against a recursion that would stop the repository converging. The bound equals the measured total exactly, so it carries no slack and any regression closes the gate.",
+      "detail": "Eleven obligations are evaluated against forty-five discovered stages. Applicability is determined first, so the inapplicable cases are reported rather than counted: registration is not applicable where the Universal Registry does not admit the zone the owner lives in — operational memory is deliberately barred from consuming a permanent corpus identity, so its absence from the registry is the exclusion authority working correctly — and replay and fixed-point proof are not applicable to a stage the repository declares constitutionally but does not execute. After applicability, exactly ONE obligation remains unbound, down from four. The THREE that belonged to gap discovery are bound: that stage's manifest node now declares a governance-gate binding to G-06 alongside its executable-stage binding, so certification is met directly and validation and verification follow transitively through the same edge — gap discovery measures 11/11. The ONE that remains belongs to certification: it is a pipeline member, so replay is in scope, but the pipeline declares STAGE-UCCEP non-reentrant as deliberate defence in depth against a recursion that would stop the repository converging. The bound equals the measured total exactly, so it carries no slack and any regression closes the gate.",
       "disposition": "REGISTERED",
       "id": "UCL-F-002",
       "referred_to": "00-MASTER/UCCEP-000000/uccep-bindings.json",
-      "title": "Four applicable obligations are unbound, each traced to a named cause in Repository Truth",
-      "why_not_repaired": "An obligation is bound by the located instrument that owns the stage, not by the measurement that reads it. Declaring a gate for gap discovery, or flipping the reentrancy of the certification stage, would amend another owner's record to improve this programme's own report — and in the second case would re-arm the exact recursion the pipeline documents itself as defending against. Each unbound obligation is reported against its stage and its owner in the obligation matrix, so the referral is specific rather than aggregate."
+      "title": "One applicable obligation is unbound, and it is unbound by a decision rather than an omission",
+      "why_not_repaired": "THE REMAINING ONE IS NOT REPAIRED BECAUSE REPAIRING IT WOULD COST MORE THAN IT BUYS. Flipping STAGE-UCCEP's reentrancy binds this obligation and re-arms the exact recursion the pipeline documents itself as defending against; rfp-declaration.json records that trade at the stage and states that UCL will report obligations=1unbound for this reason, permanently and by choice. A deficiency that names its cause is worth more than a counter driven to zero.\n\nTHE THREE THAT WERE REPAIRED WERE REPAIRED OVER THIS FINDING'S OWN OBJECTION, BY AN OWNER DECISION, AND THAT IS RECORDED HERE RATHER THAN QUIETLY DROPPED. This finding previously held that 'declaring a gate for gap discovery ... would amend another owner's record to improve this programme's own report'. The objection has force and is not withdrawn: G-06 is declared in uccep-bindings.json as the Repository Truth Gate owned by 00-BOOK/tools/ukb.py, and nothing in UCCEP's own record says that gate certifies gap discovery — the binding is asserted by this programme's manifest, and UCCEP has not been asked to agree. What weighed against it: gap discovery's three siblings in the same root zone each already declare exactly such a binding (G-04, G-05, G-08), so the absence read as an omission rather than a principle, and the stage's own authority line names Repository Truth as what a gap is measured against. The owner decided on that basis. If UCCEP later declines the binding, this is the paragraph to reopen."
     },
     {
       "blocking": false,
@@ -15692,7 +15685,7 @@
       ]
     }
   ],
-  "seal_sha256": "668b6f5cf51e1f8c0baf185b77b3969afd68234585d595a9f69ddc99e654e029",
+  "seal_sha256": "24f907b96732686269b586100c62282d6da7f59cb5db524b9d40b73e7d90102a",
   "self_evolution": [
     {
       "anchor": "",
@@ -19848,7 +19841,7 @@
       "bound_finding": "UCL-F-002",
       "comparator": "<=",
       "dimension": "every applicable obligation is bound on every discovered stage",
-      "expect": 4,
+      "expect": 1,
       "id": "UCL-V-24",
       "measure": "stage_obligation_failures",
       "satisfied": true,
