@@ -7,6 +7,7 @@ rather than examples: determinism, purity, totality, and refusal.
 from __future__ import annotations
 
 import dataclasses
+import json
 import uuid
 
 import pytest
@@ -357,3 +358,134 @@ def test_the_canonical_payload_refuses_a_value_it_would_have_to_guess_about() ->
         canonical_payload(object())
     with pytest.raises(TypeError, match="without guessing"):
         canonical_payload({"declared": object()})
+
+
+# --- the mandated object attributes, bound to the facet law ---------------------
+#
+# The Universal Autonomous Knowledge Platform foundation states that EVERY constitutional
+# object shall possess thirteen attributes. Article 6 already answers that question with
+# thirty-three facets, so the mandate is not new construction -- it is a claim about this
+# law's completeness, and the honest way to settle it is to map all thirteen and let the
+# two that do not map say so out loud.
+#
+# SCOPE. A binding below proves the facet EXISTS and is carried by the UCKO dataclass. It
+# does not prove any particular object has attested it: Article 6 permits a facet to be
+# unattested, and `test_attestation_defaults_to_unattested_and_never_to_attested` is the
+# instrument for that distinction.
+
+#: Mandated attribute -> the universal facet that answers it, one to one.
+OBJECT_ATTRIBUTE_FACET = {
+    "UAKP-OBJ/OJ-01": Facet.IDENTITY,  # Universal Identity attribute
+    "UAKP-OBJ/OJ-02": Facet.ONTOLOGY,  # Type attribute -- "What kind of being is it?"
+    "UAKP-OBJ/OJ-03": Facet.METADATA,  # Metadata attribute
+    "UAKP-OBJ/OJ-04": Facet.LIFECYCLE,  # Lifecycle State attribute
+    "UAKP-OBJ/OJ-05": Facet.RELATIONSHIPS,  # Relationships attribute
+    "UAKP-OBJ/OJ-06": Facet.AUTHORITY,  # Authority attribute
+    "UAKP-OBJ/OJ-07": Facet.PROVENANCE,  # Provenance attribute
+    "UAKP-OBJ/OJ-08": Facet.EVIDENCE,  # Evidence attribute
+    "UAKP-OBJ/OJ-10": Facet.GOVERNANCE_CONTEXT,  # Governance attribute
+    "UAKP-OBJ/OJ-12": Facet.TEMPORAL_HISTORY,  # History attribute
+    "UAKP-OBJ/OJ-13": Facet.EVOLUTION_HISTORY,  # Evolution History attribute
+}
+
+#: Answered by a deliberate REFUSAL rather than by a facet. A mutable version field would
+#: contradict Article 5 (an identity, once minted, never changes) and Article 12 (every
+#: transition creates a NEW state referencing its parent). The law answers "which version?"
+#: with the state chain, so the absence of a `version` facet is the answer, not a gap.
+OBJECT_ATTRIBUTE_BY_REFUSAL = {
+    "UAKP-OBJ/OJ-11": (Facet.EVOLUTION_HISTORY, Facet.TEMPORAL_HISTORY),  # Version attribute
+}
+
+#: Present in the repository, but NOT at the scope the mandate states. "Every object shall
+#: possess Confidence"; this repository binds confidence to a registered KNOWLEDGE record
+#: (`engine.knowledge.ukip.confidence`), which is a strictly smaller population than every
+#: UCKO. Recorded here rather than counted as satisfied, because a scope difference that
+#: only a reader notices is a scope difference nothing enforces.
+OBJECT_ATTRIBUTE_SCOPED_ELSEWHERE = {
+    "UAKP-OBJ/OJ-09": "engine.knowledge.ukip.confidence binds confidence to a knowledge "
+    "record, never to a UCKO; the mandate says every object",
+}
+
+
+def _object_model_mandates() -> dict[str, str]:
+    from pathlib import Path
+
+    repo = Path(__file__).resolve().parents[3]
+    corpus = json.loads(
+        (repo / "00-MASTER" / "CAEM-001" / "06-MANDATE-CORPUS.json").read_text(encoding="utf-8")
+    )
+    return {a["atom_id"]: a["label"] for a in corpus["atoms"] if a["section"] == "UAKP-OBJ"}
+
+
+def test_every_mandated_object_attribute_is_answered_or_declared_out_of_scope() -> None:
+    """TOTALITY. No mandated attribute may be silently missing from this mapping."""
+    mandates = _object_model_mandates()
+    assert (
+        len(mandates) == 13
+    ), f"the UAKP object model states 13 attributes, corpus has {sorted(mandates)}"
+
+    accounted = (
+        set(OBJECT_ATTRIBUTE_FACET)
+        | set(OBJECT_ATTRIBUTE_BY_REFUSAL)
+        | set(OBJECT_ATTRIBUTE_SCOPED_ELSEWHERE)
+    )
+    assert set(mandates) == accounted, (
+        f"attributes neither mapped nor declared: {sorted(set(mandates) - accounted)}; "
+        f"identifiers mapped that are not object-model mandates: "
+        f"{sorted(accounted - set(mandates))}"
+    )
+    overlap = set(OBJECT_ATTRIBUTE_FACET) & (
+        set(OBJECT_ATTRIBUTE_BY_REFUSAL) | set(OBJECT_ATTRIBUTE_SCOPED_ELSEWHERE)
+    )
+    assert not overlap, f"an attribute cannot be both answered and unanswered: {sorted(overlap)}"
+
+
+def test_each_mapped_attribute_names_a_required_facet_the_object_actually_carries() -> None:
+    from engine.uckp.ucko import UniversalConstitutionalKnowledgeObject as UCKO
+
+    fields = {f.name for f in dataclasses.fields(UCKO)}
+    for mandate, facet in OBJECT_ATTRIBUTE_FACET.items():
+        assert facet in REQUIRED_FACETS, f"{mandate}: {facet} is not a required facet"
+        assert facet.attribute in fields, (
+            f"{mandate}: facet {facet.value!r} is declared but the UCKO carries no "
+            f"{facet.attribute!r} field, so the object cannot answer the question"
+        )
+
+
+def test_the_attribute_mapping_is_injective() -> None:
+    """NON-VACUITY. Two attributes answered by one facet would mean one of them is
+    unanswered and the mapping is hiding it."""
+    facets = list(OBJECT_ATTRIBUTE_FACET.values())
+    duplicated = sorted({f.value for f in facets if facets.count(f) > 1})
+    assert not duplicated, f"facets claimed by more than one mandated attribute: {duplicated}"
+
+
+def test_version_is_answered_by_refusal_and_the_refusal_is_real() -> None:
+    """The claim is that no version FIELD exists because the law forbids one. If a version
+    facet or field ever appears, this mapping became a rationalisation and must be redone."""
+    from engine.uckp.ucko import UniversalConstitutionalKnowledgeObject as UCKO
+
+    assert "version" not in {facet.value for facet in Facet}
+    fields = {f.name for f in dataclasses.fields(UCKO)}
+    assert "version" not in fields, (
+        "UAKP-OBJ/OJ-11 is mapped to the state chain on the grounds that no version field "
+        "exists; one now does, so the mapping is false"
+    )
+    for facet in OBJECT_ATTRIBUTE_BY_REFUSAL["UAKP-OBJ/OJ-11"]:
+        assert facet.attribute in fields
+
+
+def test_confidence_is_scoped_to_knowledge_and_the_scope_limit_is_real() -> None:
+    """NON-VACUITY for the one attribute declared out of scope. Without this, the scoped
+    list is a place to put anything inconvenient."""
+    from engine.knowledge.ukip.confidence import CONFIDENCE_DIMENSION
+    from engine.uckp.ucko import UniversalConstitutionalKnowledgeObject as UCKO
+
+    assert CONFIDENCE_DIMENSION == "confidence"
+    assert "confidence" not in {f.name for f in dataclasses.fields(UCKO)}, (
+        "UAKP-OBJ/OJ-09 is declared out of scope because no UCKO carries confidence; "
+        "one now does, so it is in scope and must be bound rather than excused"
+    )
+    assert "confidence" not in {facet.value for facet in Facet}
+    for mandate, reason in OBJECT_ATTRIBUTE_SCOPED_ELSEWHERE.items():
+        assert len(reason) > 40, f"{mandate}: declared out of scope without a stated reason"
