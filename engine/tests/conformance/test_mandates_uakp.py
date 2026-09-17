@@ -1472,3 +1472,139 @@ def test_ucos_is_a_consumer_of_this_platform_and_not_its_owner() -> None:
     labels = [mandates[m].removeprefix("Consumer ") for m in INTEGRATION_CONSUMERS]
     assert "UCOS" in labels
     assert labels.index("UCOS") == 0, "UCOS is listed first, as one consumer among eleven"
+
+
+# ================================================================================
+# UAKP-MAT — the eleven maturity stages
+# ================================================================================
+#
+# Stage 0 Research through Stage 10 Constitutionally Stable Platform. This repository
+# declares its own maturity lattice -- UAKOS-CLOSURE-009's M0..M7 -- and the two do not line
+# up, which is the finding rather than an inconvenience.
+#
+# The M-lattice measures what a REQUIREMENT has evidenced: rejected, deferred, specified,
+# implemented, tested, checked, certified, runtime-proven. UAKP's stages measure what a
+# PLATFORM has become: research, concept, prototype, alpha, beta, production. Only the top
+# four of eleven have a counterpart, one stage has no level of its own, and the six product
+# stages have no representation at all -- the repository has no notion of being in beta.
+
+#: Stage -> the maturity level that corresponds to it.
+MATURITY_LEVEL = {
+    "UAKP-MAT/MT-06": "M5",  # Validated Baseline
+    "UAKP-MAT/MT-08": "M6",  # Certified Baseline
+    "UAKP-MAT/MT-09": "M7",  # Production Ecosystem
+}
+
+#: Stage 7 Verified Baseline has no level of its own: M5 is `VALIDATED-OR-VERIFIED`, one
+#: level for two stages UAKP keeps apart. Recorded rather than mapped, because giving it M5
+#: too would report two stages reached where the lattice can only tell you one was.
+MATURITY_COLLAPSED = {"UAKP-MAT/MT-07": "M5"}
+
+#: Product stages the repository has no notion of. M2 SPECIFIED and M3 IMPLEMENTED are
+#: engineering states of a requirement, not stages of a platform, and reading them as
+#: Prototype or Alpha would be a category error.
+MATURITY_ABSENT = {
+    "UAKP-MAT/MT-00": "Stage 0 Research",
+    "UAKP-MAT/MT-01": "Stage 1 Concept",
+    "UAKP-MAT/MT-02": "Stage 2 Prototype",
+    "UAKP-MAT/MT-03": "Stage 3 Alpha",
+    "UAKP-MAT/MT-04": "Stage 4 Beta",
+    "UAKP-MAT/MT-05": "Stage 5 Production Ready",
+    "UAKP-MAT/MT-10": "Stage 10 Constitutionally Stable Platform",
+}
+
+
+_REQUIREMENT_REGISTER = (
+    "00-MASTER",
+    "UAKOS-CLOSURE-009",
+    "02-REPOSITORY-REQUIREMENT-REGISTER.md",
+)
+
+
+def _maturity_lattice() -> dict[str, str]:
+    """The levels the lattice DECLARES, `M0` -> `REJECTED`, read from its own table.
+
+    The histogram is the wrong source and reading it was a real error: a level no
+    requirement has reached is simply absent from the counts, so M7 read as undeclared when
+    it is declared and empty. Declared and reached are different questions.
+    """
+    import re
+
+    text = (repo_root().joinpath(*_REQUIREMENT_REGISTER)).read_text(encoding="utf-8")
+    return dict(re.findall(r"^\| (M\d) \| ([A-Z-]+) \|", text, flags=re.MULTILINE))
+
+
+def _maturity_histogram() -> dict[str, int]:
+    """How many requirements have REACHED each level. Absent means zero."""
+    return json.loads(
+        (repo_root() / "00-MASTER" / "UAKOS-CLOSURE-009" / "requirements.json").read_text(
+            encoding="utf-8"
+        )
+    )["histograms"]["maturity_level"]
+
+
+def test_every_maturity_stage_is_a_level_collapsed_or_absent() -> None:
+    mandates = section("UAKP-MAT")
+    assert len(mandates) == 11, f"the maturity model lists 11 stages, corpus has {len(mandates)}"
+    assert_partitions(
+        "UAKP-MAT",
+        mandates,
+        MATURITY_LEVEL,
+        MATURITY_COLLAPSED,
+        MATURITY_ABSENT,
+    )
+
+
+def test_every_mapped_stage_names_a_level_the_lattice_declares() -> None:
+    lattice = _maturity_lattice()
+    assert len(lattice) == 8, f"the lattice declares {len(lattice)} levels, expected M0..M7"
+    for mandate, level in MATURITY_LEVEL.items():
+        assert (
+            level in lattice
+        ), f"{mandate}: the requirement lattice declares no {level}; this mapping is stale"
+    claimed = list(MATURITY_LEVEL.values())
+    assert len(claimed) == len(set(claimed)), "one level claimed by two stages"
+
+
+def test_verified_baseline_has_no_level_of_its_own() -> None:
+    """NON-VACUITY for the collapsed tier, and the claim it rests on: M5 is a single level
+    named for two stages. If the lattice ever separates them, MT-07 gets a level and this
+    tier is wrong."""
+    assert _maturity_lattice().get("M5") == "VALIDATED-OR-VERIFIED", (
+        "M5 is no longer a single level for validated AND verified; UAKP-MAT/MT-07 may have "
+        "a level of its own now"
+    )
+    assert (
+        MATURITY_COLLAPSED["UAKP-MAT/MT-07"] == MATURITY_LEVEL["UAKP-MAT/MT-06"]
+    ), "the collapsed stage must share the level of the stage it is collapsed into"
+
+
+def test_the_platform_has_not_reached_the_stage_its_top_level_corresponds_to() -> None:
+    """The measurement, stated as a fact about where the platform actually is.
+
+    Stage 9 corresponds to M7 RUNTIME-PROVEN, and no requirement has reached it. The highest
+    any has reached is M6 CERTIFIED-PROVISIONAL. So the platform sits below the stage its own
+    lattice tops out at, and Stage 10 has no representation at all.
+    """
+    histogram = _maturity_histogram()
+    assert histogram.get("M7", 0) == 0, (
+        "a requirement has reached M7 RUNTIME-PROVEN; the platform has entered Stage 9 and "
+        "this measurement must be rewritten rather than left standing"
+    )
+    assert histogram.get("M6", 0) > 0, "no requirement is certified; even Stage 8 is unreached"
+
+
+def test_the_absent_stages_are_product_stages_the_lattice_does_not_model() -> None:
+    """NON-VACUITY, against the level NAMES the lattice declares.
+
+    Each absent stage contributes its distinctive word -- research, concept, prototype,
+    alpha, beta, ready, platform -- and no declared level may carry one. If a level ever
+    adopts one, that stage is modelled and belongs a tier up. The lattice's eight levels are
+    engineering states of a requirement; none of these seven words appears among them.
+    """
+    declared = {name.replace("-", " ").lower() for name in _maturity_lattice().values()}
+    words = {stage.split()[-1].lower() for stage in MATURITY_ABSENT.values()}
+    assert len(words) == 7, f"expected seven distinct stage words, got {sorted(words)}"
+    for word in sorted(words):
+        carrying = sorted(name for name in declared if word in name.split())
+        assert not carrying, f"the lattice now declares a level named for {word!r}: {carrying}"

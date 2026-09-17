@@ -493,3 +493,120 @@ def test_the_platform_discovers_what_is_and_not_what_might_be() -> None:
         "an outward-looking discovery now exists; the claim that this platform discovers "
         "what is and not what might be no longer holds"
     )
+
+
+# --- PRD-PUB — the Universal Publication Framework ------------------------------
+#
+# "Automatically generate" eleven kinds of document. `intelligence/publication` declares
+# twenty-three built-in FORMATS across eleven genres, each with its required sections and a
+# renderer, so ten of the eleven are answered by a declared genre.
+#
+# TWO OF THESE ARE ON THE CREATE LIST AND SHOULD NOT BE. CAEM-001 dispositions `Whitepapers`
+# and `Research Papers` as genuine greenfield gaps -- the only disposition that authorises
+# new construction -- because it searched the document's spelling. The repository writes
+# them `White Paper` and `Research Paper`, two words each, and declares both as built-in
+# formats with academic section sets. Building either would be a second authoring of a
+# format that already exists, void under UCKP-ART-03.
+
+#: Publication kind -> the genre that produces it.
+PUBLICATION_GENRE = {
+    "PRD-PUB/PUB-01": "technical-article",  # Technical Documents
+    "PRD-PUB/PUB-03": "standards",  # Specifications
+    "PRD-PUB/PUB-04": "standards",  # Standards -- the same genre; see the test below
+    "PRD-PUB/PUB-05": "white-paper",  # Whitepapers
+    "PRD-PUB/PUB-06": "paper",  # Research Papers
+    "PRD-PUB/PUB-07": "journal",  # Journal Publications
+    "PRD-PUB/PUB-08": "patent",  # Patent Applications
+    "PRD-PUB/PUB-11": "technical-article",  # Training Materials -- the Tutorial format
+}
+
+#: Produced outside the publication engine.
+PUBLICATION_ELSEWHERE = {
+    "PRD-PUB/PUB-02": "intelligence/realization/generators/architecture.py",  # Architecture Docs
+    # Knowledge Artifacts
+    "PRD-PUB/PUB-10": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+}
+
+#: No genre and no producer. A regulatory submission has a recipient and a filing format,
+#: and the engine models neither.
+PUBLICATION_ABSENT = {"PRD-PUB/PUB-09": "regulatory"}
+
+
+def test_every_publication_kind_is_a_genre_produced_elsewhere_or_absent() -> None:
+    mandates = section("PRD-PUB")
+    assert len(mandates) == 11, f"section 14 lists 11 publication kinds, corpus has {len(mandates)}"
+    assert_partitions(
+        "PRD-PUB",
+        mandates,
+        PUBLICATION_GENRE,
+        PUBLICATION_ELSEWHERE,
+        PUBLICATION_ABSENT,
+    )
+
+
+def test_every_named_genre_is_declared_with_a_renderer_and_required_sections() -> None:
+    """A genre with no renderer generates nothing, and a format with no required sections
+    would accept an empty document."""
+    from intelligence.publication.formats import BUILT_IN_FORMATS
+
+    by_genre: dict[str, list[dict]] = {}
+    for fmt in BUILT_IN_FORMATS:
+        by_genre.setdefault(fmt["genre"], []).append(fmt)
+
+    for mandate, genre in PUBLICATION_GENRE.items():
+        assert genre in by_genre, f"{mandate}: no built-in format declares genre {genre!r}"
+        for fmt in by_genre[genre]:
+            assert fmt.get("renderer"), f"{mandate}: format {fmt['label']!r} has no renderer"
+            assert fmt.get("required"), f"{mandate}: format {fmt['label']!r} requires no sections"
+
+
+def test_whitepapers_and_research_papers_are_declared_formats_not_gaps() -> None:
+    """The correction this binding exists to make.
+
+    Both are dispositioned CREATE by CAEM-001 -- new construction -- because the search used
+    the document's one-word spelling. The repository writes them as two words and declares
+    each as a built-in format. This test names the exact labels, so if either is ever
+    removed the CREATE disposition becomes true again and this assertion fails.
+    """
+    from intelligence.publication.formats import BUILT_IN_FORMATS
+
+    labels = {fmt["label"] for fmt in BUILT_IN_FORMATS}
+    assert (
+        "White Paper" in labels
+    ), "no White Paper format is declared; PRD-PUB/PUB-05 is a genuine gap after all"
+    assert (
+        "Research Paper" in labels
+    ), "no Research Paper format is declared; PRD-PUB/PUB-06 is a genuine gap after all"
+    mandates = section("PRD-PUB")
+    assert mandates["PRD-PUB/PUB-05"] == "Whitepapers"
+    assert mandates["PRD-PUB/PUB-06"] == "Research Papers"
+
+
+def test_specifications_and_standards_share_a_genre_and_that_is_stated() -> None:
+    """NON-VACUITY for the one genre claimed twice. The standards genre carries two formats
+    -- a Standards Proposal and an RFC-style Memo -- so two mandates resolving to it is two
+    documents, not one answer counted twice."""
+    from intelligence.publication.formats import BUILT_IN_FORMATS
+
+    claimed = list(PUBLICATION_GENRE.values())
+    doubled = sorted({g for g in claimed if claimed.count(g) > 1})
+    assert doubled == ["standards", "technical-article"], f"unexpected doubling: {doubled}"
+    for genre in doubled:
+        formats = [f for f in BUILT_IN_FORMATS if f["genre"] == genre]
+        assert (
+            len(formats) >= 2
+        ), f"genre {genre!r} answers two mandates and declares only {len(formats)} format"
+
+
+def test_the_absent_publication_kind_has_no_genre_and_no_producer() -> None:
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+    from intelligence.publication.formats import BUILT_IN_FORMATS
+
+    genres = {fmt["genre"] for fmt in BUILT_IN_FORMATS}
+    for mandate, kind in PUBLICATION_ABSENT.items():
+        assert not any(kind in genre for genre in genres), f"{mandate}: a {kind!r} genre now exists"
+    assert_named_by_nothing("PRD-PUB", PUBLICATION_ABSENT)
+
+
+def test_every_elsewhere_producer_is_tracked() -> None:
+    assert_homes_exist("PRD-PUB", PUBLICATION_ELSEWHERE)
