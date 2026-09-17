@@ -362,3 +362,112 @@ def test_the_gap_is_behavioural_rather_than_scattered() -> None:
         "a behavioural validator now exists; the claim that this repository validates what "
         "it is and not how it behaves no longer holds"
     )
+
+
+# --- ARCH-TEST — the fourteen kinds of testing ----------------------------------
+#
+# Fourteen testing kinds under Universal Testing. Five have a suite named for them, two are
+# not suites at all but MODES of the repository-standard command, and seven have nothing.
+#
+# The seven divide in a way that matters. Component and End-to-End are testing this
+# repository could do and does not. Performance, Chaos, Billing and Analytics are testing it
+# could not do if it wanted to: there is no billing to test, no analytics to test, and
+# ARCH-VALID already records that nothing validates performance either. A missing test for
+# a missing capability is one gap, not two, and this suite asserts the pairing so it is read
+# as one.
+
+#: Testing kind -> the suite named for it.
+TESTING_SUITE = {
+    "ARCH-TEST/TS-01": "engine/tests/unit",  # Unit Testing
+    "ARCH-TEST/TS-03": "engine/tests/integration",  # Integration Testing
+    "ARCH-TEST/TS-08": "application/tests/test_security.py",  # Security Testing
+    "ARCH-TEST/TS-10": "engine/tests/unit/test_execution_recovery.py",  # Recovery Testing
+    "ARCH-TEST/TS-14": "engine/tests/integration/test_runtime.py",  # Runtime Testing
+}
+
+#: Testing kind -> the verify.sh mode that performs it. Not a suite: a claim about WHICH
+#: tests run and under what floor, which is what distinguishes system and regression testing
+#: from the suites they are made of.
+TESTING_MODE = {
+    "ARCH-TEST/TS-04": "--integration",  # System Testing -- whole suite under the floor
+    "ARCH-TEST/TS-06": "--full",  # Regression Testing -- release certification, what CI runs
+}
+
+#: Testing this repository could do and does not.
+TESTING_ABSENT_CAPABLE = {
+    "ARCH-TEST/TS-02": "component",
+    "ARCH-TEST/TS-05": "end to end",
+}
+
+#: Testing with nothing to test. Each names the capability whose absence makes it moot.
+TESTING_ABSENT_NO_SUBJECT = {
+    "ARCH-TEST/TS-07": "performance",  # ARCH-VALID/VL-17 -- nothing validates it either
+    "ARCH-TEST/TS-09": "chaos",  # no fault-injection surface exists
+    "ARCH-TEST/TS-11": "billing",  # PRD-ECON/ECON-03 -- there is no billing
+    "ARCH-TEST/TS-12": "licensing",  # licensing exists; no test names it
+    "ARCH-TEST/TS-13": "analytics",  # MI-002/C-25 -- analytics is unconstituted
+}
+
+
+def test_every_testing_kind_has_a_suite_a_mode_or_neither() -> None:
+    mandates = section("ARCH-TEST")
+    assert len(mandates) == 14, f"the fabric lists 14 testing kinds, corpus has {len(mandates)}"
+    assert_partitions(
+        "ARCH-TEST",
+        mandates,
+        TESTING_SUITE,
+        TESTING_MODE,
+        TESTING_ABSENT_CAPABLE,
+        TESTING_ABSENT_NO_SUBJECT,
+    )
+
+
+def test_every_named_suite_is_a_tracked_test_path() -> None:
+    from engine.tests.conformance.mandate_corpus import tracked
+
+    known = set(tracked())
+    for mandate, home in TESTING_SUITE.items():
+        present = home in known or any(p.startswith(home.rstrip("/") + "/") for p in known)
+        assert present, f"{mandate}: {home} is not a tracked path"
+        assert "test" in home, f"{mandate}: {home} is not a test path"
+
+
+def test_every_named_mode_is_a_mode_verify_sh_accepts() -> None:
+    """A mode the entry point does not accept is a claim nobody can run."""
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    verify = (repo_root() / "verify.sh").read_text(encoding="utf-8")
+    for mandate, mode in TESTING_MODE.items():
+        assert f"{mode})" in verify, (
+            f"{mandate}: verify.sh accepts no {mode} argument, so this testing kind names a "
+            "command that cannot be run"
+        )
+
+
+def test_the_absent_kinds_have_no_suite_named_for_them() -> None:
+    """NON-VACUITY over the TEST paths specifically. Searching the whole tree would match
+    `platform/commercial_intelligence/licensing.py` and report licensing testing that does
+    not exist -- the capability is there and the test for it is not."""
+    from engine.tests.conformance.mandate_corpus import _path_tokens, tracked
+
+    test_paths = [p for p in tracked() if "/tests/" in p or "/test_" in p]
+    assert test_paths, "no test paths are tracked, so this search is vacuous"
+    for mandate, kind in {**TESTING_ABSENT_CAPABLE, **TESTING_ABSENT_NO_SUBJECT}.items():
+        words = {w.rstrip("s") for w in kind.split()}
+        found = [p for p in test_paths if words <= _path_tokens(p)]
+        assert not found, f"{mandate}: {kind!r} is declared untested but {found} tests it"
+
+
+def test_a_missing_test_for_a_missing_capability_is_one_gap_and_not_two() -> None:
+    """The pairing, asserted across suites. Billing testing is absent because billing is
+    absent, and performance testing because nothing validates performance either. If either
+    capability lands, its test moves to the tier of things this repository could do and does
+    not -- which is a different obligation."""
+    from engine.tests.conformance.test_mandates_prd import ECONOMIC_FACULTY_ABSENT
+
+    assert "billing" in set(
+        ECONOMIC_FACULTY_ABSENT.values()
+    ), "billing now exists, so ARCH-TEST/TS-11 is a missing test rather than a moot one"
+    assert "performance" in set(
+        VALIDATION_ABSENT.values()
+    ), "performance validation now exists, so ARCH-TEST/TS-07 is a missing test"
