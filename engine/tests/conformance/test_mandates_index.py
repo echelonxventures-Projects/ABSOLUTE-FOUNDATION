@@ -834,3 +834,97 @@ def test_the_formal_gap_is_the_same_one_two_other_sections_report() -> None:
     assert shared <= set(KERNEL_FORMALISM_ABSENT.values())
     assert shared <= set(META_MODEL_ABSENT.values())
     assert shared <= set(FOUNDATION_UNGROUNDED.values())
+
+
+# --- MI-011 — the seventeen operation dimensions --------------------------------
+#
+# Section 011 is the Master Index's account of the same axes PRD section 19 states, plus
+# three it adds and minus three it omits. The mechanism is identical and is explained under
+# PRD-MD: an axis stays open by the kernel REFUSING to seed a concrete value for it, or by
+# an unknown category the architectural proof represents. That explanation is not repeated
+# here; what is checked here is this section's own seventeen, and the agreement between the
+# two documents where they overlap.
+
+DIMENSION_REFUSED_TOKEN_MI = {
+    "MI-011/O-01": "human",  # Multi User
+    "MI-011/O-03": "company",  # Multi Organization
+    "MI-011/O-04": "company",  # Multi Enterprise -- the same axis under a second name
+    "MI-011/O-06": "country",  # Multi Country
+    "MI-011/O-07": "language",  # Multi Language
+    "MI-011/O-08": "currency",  # Multi Currency
+    "MI-011/O-09": "tax",  # Multi Tax
+    "MI-011/O-10": "calendar",  # Multi Calendar
+    "MI-011/O-11": "timezone",  # Multi Temporal
+    "MI-011/O-13": "cloud",  # Multi Cloud
+    "MI-011/O-14": "earth",  # Multi Planet
+}
+
+DIMENSION_UNKNOWN_CATEGORY_MI = {
+    "MI-011/O-12": "ExecutionModelUnknown",  # Multi Runtime
+    "MI-011/O-16": "CapabilityDomain",  # Multi Reality
+}
+
+#: Infinite Scalability is not a dimension; it is the claim the dimensions have no ceiling.
+DIMENSION_SCOPE_MODULE = {"MI-011/O-17": "engine/infinite_scope"}
+
+DIMENSION_UNHELD_MI = {
+    "MI-011/O-02": "Multi Tenant",
+    "MI-011/O-05": "Multi Region",
+    "MI-011/O-15": "Multi Universe",
+}
+
+
+def test_every_operation_dimension_is_refused_represented_scoped_or_unheld() -> None:
+    mandates = section("MI-011")
+    assert len(mandates) == 17, f"section 011 states 17 dimensions, corpus has {len(mandates)}"
+    assert_partitions(
+        "MI-011",
+        mandates,
+        DIMENSION_REFUSED_TOKEN_MI,
+        DIMENSION_UNKNOWN_CATEGORY_MI,
+        DIMENSION_SCOPE_MODULE,
+        DIMENSION_UNHELD_MI,
+    )
+
+
+def test_every_token_and_category_this_section_names_is_real() -> None:
+    from engine.kernel.compliance import PROHIBITED_TOKENS, architectural_proof
+
+    for mandate, token in DIMENSION_REFUSED_TOKEN_MI.items():
+        assert token in PROHIBITED_TOKENS, f"{mandate}: {token!r} is not a prohibited token"
+    proven = {r["category"] for r in architectural_proof()["records"] if r["ok"]}
+    for mandate, category in DIMENSION_UNKNOWN_CATEGORY_MI.items():
+        assert category in proven, f"{mandate}: {category!r} is not represented"
+    assert_homes_exist("MI-011", DIMENSION_SCOPE_MODULE)
+
+
+def test_organization_and_enterprise_share_one_token_because_they_are_one_axis() -> None:
+    """NON-VACUITY for the only token claimed twice. Two dimensions on one refusal is honest
+    only when they are the same axis named twice, and unnoticed otherwise -- so it is stated
+    rather than allowed to pass as an oversight."""
+    claimed = list(DIMENSION_REFUSED_TOKEN_MI.values())
+    shared = sorted({t for t in claimed if claimed.count(t) > 1})
+    assert shared == ["company"], f"tokens claimed by two dimensions: {shared}"
+    mandates = section("MI-011")
+    assert mandates["MI-011/O-03"] == "Multi Organization"
+    assert mandates["MI-011/O-04"] == "Multi Enterprise"
+
+
+def test_the_two_documents_agree_on_which_dimensions_are_unheld() -> None:
+    """Tenant and Universe are unheld in both sections. Two documents, one repository, and
+    the overlap measured independently -- a disagreement would mean one suite mis-mapped an
+    axis rather than that the repository changed."""
+    from engine.tests.conformance.test_mandates_prd import (
+        DIMENSION_REFUSED_TOKEN,
+        DIMENSION_UNHELD,
+    )
+
+    def axes(values):
+        return {v.replace("Multi-", "").replace("Multi ", "").lower() for v in values}
+
+    here, there = axes(DIMENSION_UNHELD_MI.values()), axes(DIMENSION_UNHELD.values())
+    assert (
+        {"tenant", "universe"} <= here & there
+    ), f"the two sections no longer agree on the unheld axes: {sorted(here ^ there)}"
+    shared_tokens = set(DIMENSION_REFUSED_TOKEN.values()) & set(DIMENSION_REFUSED_TOKEN_MI.values())
+    assert {"company", "language", "currency", "tax", "cloud"} <= shared_tokens

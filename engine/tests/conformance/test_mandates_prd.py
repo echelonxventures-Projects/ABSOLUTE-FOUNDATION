@@ -224,3 +224,115 @@ def test_royalty_stays_a_genuine_gap_because_it_is_a_faculty_not_a_tenure() -> N
     thing is held under. Admitting the word would prove nothing about the faculty."""
     assert "PRD-ECON/ECON-07" in ECONOMIC_FACULTY_ABSENT
     assert "royalty" not in {t.lower() for t in ECONOMIC_TENURE.values()}
+
+
+# --- PRD-MD — Universal Multi-Dimensional Support -------------------------------
+#
+# Fourteen dimensions "without limits". None of them is a feature, and treating them as
+# features is the breach: shipping Multi-Currency means the substrate knows what a currency
+# IS, and `currency` is one of the eighteen tokens the kernel refuses to seed. The mandate
+# is satisfied by NOT knowing -- by refusing the fixed category and representing the axis by
+# registration instead.
+#
+# So each dimension is answered one of two ways, and both are already instruments in this
+# repository: a PROHIBITED TOKEN the kernel will not seed as a concrete category, or an
+# UNKNOWN CATEGORY the architectural proof represents with the kernel unchanged. Five are
+# answered by neither, and those five are the finding.
+
+#: Dimension -> the token the kernel refuses to seed, which is how the axis stays open.
+DIMENSION_REFUSED_TOKEN = {
+    "PRD-MD/MD-02": "company",  # Multi-Organization
+    "PRD-MD/MD-03": "language",  # Multi-Language
+    "PRD-MD/MD-05": "currency",  # Multi-Currency
+    "PRD-MD/MD-06": "tax",  # Multi-Tax
+    "PRD-MD/MD-08": "cloud",  # Multi-Cloud
+}
+
+#: Dimension -> the unknown category the architectural proof represents.
+DIMENSION_UNKNOWN_CATEGORY = {
+    "PRD-MD/MD-04": "Civilization",  # Multi-Culture
+    "PRD-MD/MD-07": "GovernanceModel",  # Multi-Jurisdiction
+    "PRD-MD/MD-10": "CapabilityDomain",  # Multi-Reality
+    "PRD-MD/MD-12": "TemporalModel",  # Multi-Timeline
+}
+
+#: Neither refused nor represented. The substrate has no axis for these at all, which means
+#: nothing stops one of them being hard-coded tomorrow -- the gap is the absence of a
+#: refusal, not the absence of a feature.
+DIMENSION_UNHELD = {
+    "PRD-MD/MD-01": "Multi-Tenant",
+    "PRD-MD/MD-09": "Multi-Edge",
+    "PRD-MD/MD-11": "Multi-Existence",
+    "PRD-MD/MD-13": "Multi-Universe",
+    "PRD-MD/MD-14": "Multi-Dimension",
+}
+
+
+def test_every_dimension_is_refused_represented_or_unheld() -> None:
+    mandates = section("PRD-MD")
+    assert len(mandates) == 14, f"section 19 states 14 dimensions, corpus has {len(mandates)}"
+    assert_partitions(
+        "PRD-MD",
+        mandates,
+        DIMENSION_REFUSED_TOKEN,
+        DIMENSION_UNKNOWN_CATEGORY,
+        DIMENSION_UNHELD,
+    )
+
+
+def test_every_token_backed_dimension_names_a_token_the_kernel_refuses_to_seed() -> None:
+    from engine.kernel.compliance import PROHIBITED_TOKENS
+    from engine.kernel.seed import FOUNDING_METATYPES
+
+    founding = {key.lower() for key, _n, _d in FOUNDING_METATYPES}
+    for mandate, token in DIMENSION_REFUSED_TOKEN.items():
+        assert token in PROHIBITED_TOKENS, (
+            f"{mandate}: {token!r} is not a prohibited token, so nothing stops this "
+            "dimension being fixed to one value"
+        )
+        assert token not in founding, f"{mandate}: {token!r} is seeded as a founding meta-type"
+
+
+def test_every_category_backed_dimension_is_proven_with_the_kernel_unchanged() -> None:
+    from engine.kernel.compliance import architectural_proof
+
+    proof = architectural_proof()
+    proven = {record["category"] for record in proof["records"] if record["ok"]}
+    for mandate, category in DIMENSION_UNKNOWN_CATEGORY.items():
+        assert (
+            category in proven
+        ), f"{mandate}: {category!r} is not among the represented categories {sorted(proven)}"
+    assert proof["kernel_unchanged"] is True, (
+        "the categories are represented but the kernel source changed, so 'without limits' "
+        "is false for every dimension bound above"
+    )
+
+
+def test_the_two_mechanisms_are_not_the_same_claim_twice() -> None:
+    """NON-VACUITY. A refused token keeps an axis open by forbidding a value; a represented
+    category keeps it open by admitting one. A dimension answered by both would be
+    double-counted, and one answered by neither would hide in the overlap."""
+    assert not (set(DIMENSION_REFUSED_TOKEN) & set(DIMENSION_UNKNOWN_CATEGORY))
+    tokens = set(DIMENSION_REFUSED_TOKEN.values())
+    categories = {c.lower() for c in DIMENSION_UNKNOWN_CATEGORY.values()}
+    assert not (tokens & categories)
+
+
+def test_the_unheld_dimensions_are_refused_by_nothing_and_represented_by_nothing() -> None:
+    """NON-VACUITY for the tier that matters most here.
+
+    These five have no refusal, which is a different and quieter failure than a missing
+    feature: nothing in the kernel would object if `tenant` or `edge` were seeded as a
+    concrete category tomorrow, and the mandate would be silently broken.
+    """
+    from engine.kernel.compliance import PROHIBITED_TOKENS, UNKNOWN_CATEGORIES
+
+    categories = {key.lower() for key, _i, _a in UNKNOWN_CATEGORIES}
+    for mandate, dimension in DIMENSION_UNHELD.items():
+        axis = dimension.removeprefix("Multi-").lower()
+        assert (
+            axis not in PROHIBITED_TOKENS
+        ), f"{mandate}: {axis!r} is now a prohibited token and this dimension is held"
+        assert not any(
+            axis in category for category in categories
+        ), f"{mandate}: {axis!r} is now represented by an unknown category"
