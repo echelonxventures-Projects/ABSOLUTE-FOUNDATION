@@ -511,3 +511,131 @@ def test_the_absent_registry_is_named_by_no_tracked_register_at_all() -> None:
 
 def test_the_naming_rules_these_bindings_rely_on_can_find_something() -> None:
     assert_absence_rule_can_find_something("knowledge ukip classification")
+
+
+# ================================================================================
+# UAKP-ENV — the twenty-six governed knowledge environments
+# ================================================================================
+#
+# "ANY GOVERNED KNOWLEDGE ENVIRONMENT" heads a list of twenty-six -- Monorepo, Polyrepo,
+# Wiki, Data Lake, Digital Twin, Future Unknown Environment -- and the document states the
+# rule that governs them two paragraphs later: "The platform SHALL never directly depend
+# upon a specific repository or storage. Every environment SHALL expose constitutional
+# adapters."
+#
+# So an environment is not a construct. Building a `Monorepo` class would be precisely the
+# repository-specific assumption UAKP-IND/ID-04 forbids, and building `Database` or `Cloud
+# Environment` would seed a category the kernel refuses by name -- `database` and `cloud` are
+# both PROHIBITED_TOKENS. A requirements sweep reads all twenty-six as missing and concludes
+# they must be built, which is backwards for the same reason it was backwards for the target
+# domains: the implementation of an environment is its ADMISSION.
+#
+# This matters beyond the section. `Monorepo` and `Polyrepo` are two of the seventeen
+# concepts CAEM-001 disposition CREATE -- the only disposition that authorises new
+# construction. They are not gaps. They are admissions, and building them would breach the
+# document that mandates them.
+
+ENVIRONMENT_PREFIX = "Env-"
+
+
+def _environment_key(label: str) -> str:
+    words = label.replace("-", " ").split()
+    return ENVIRONMENT_PREFIX + "".join(word.capitalize() for word in words)
+
+
+def test_every_governed_environment_is_admissible_with_the_kernel_unchanged() -> None:
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    labels = list(section("UAKP-ENV").values())
+    assert len(labels) == 26, f"the document lists 26 environments, corpus has {len(labels)}"
+
+    before_source = kernel_source_fingerprint()
+    kernel = MetaKernel()
+    before_count = len(kernel.metatypes())
+
+    for label in labels:
+        kernel.register_metatype(
+            _environment_key(label), name=label, description=f"governed environment: {label}"
+        )
+
+    assert kernel_source_fingerprint() == before_source, (
+        "admitting the environments changed the kernel's own source, so the platform now "
+        "depends on specific repositories and storage -- what the adapter rule forbids"
+    )
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    refused = sorted(
+        _environment_key(label) for label in labels if _environment_key(label) not in registered
+    )
+    assert not refused, f"environments the kernel would not admit: {refused}"
+    assert len(kernel.metatypes()) == before_count + len(labels)
+
+
+def test_no_environment_is_seeded_into_the_kernel() -> None:
+    """NON-VACUITY. Admission proves nothing if the environment was hard-coded all along."""
+    from engine.kernel.seed import FOUNDING_METATYPES
+
+    labels = {label.lower() for label in section("UAKP-ENV").values()}
+    founding = {key.lower() for key, _name, _description in FOUNDING_METATYPES}
+    leaked = sorted(labels & founding)
+    assert not leaked, f"environments seeded as founding meta-types: {leaked}"
+
+
+def test_the_storage_shaped_environments_are_names_the_kernel_refuses_to_seed() -> None:
+    """The sharper half. Two environments name categories PROHIBITED_TOKENS exists to keep
+    out of the kernel, and they are still admissible as registered data. That pair is the
+    whole distinction between admitting an environment and assuming one."""
+    from engine.kernel.compliance import PROHIBITED_TOKENS
+
+    labels = {label.lower() for label in section("UAKP-ENV").values()}
+    assert "database" in labels and "cloud environment" in labels
+    assert "database" in PROHIBITED_TOKENS, (
+        "`database` is no longer a prohibited token, so nothing stops a storage assumption "
+        "being seeded and UAKP-IND/ID-07 is unbound"
+    )
+    assert (
+        "cloud" in PROHIBITED_TOKENS
+    ), "`cloud` is no longer a prohibited token, so UAKP-IND/ID-08 is unbound"
+
+
+def test_the_two_environments_dispositioned_create_are_admissions_not_gaps() -> None:
+    """Monorepo and Polyrepo are dispositioned CREATE by CAEM-001 -- new construction. The
+    document that mandates them forbids exactly that, so the disposition is answered by
+    admission and this test records which two it answers."""
+    labels = {label.lower() for label in section("UAKP-ENV").values()}
+    assert {"monorepo", "polyrepo"} <= labels
+
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    for label in ("Monorepo", "Polyrepo"):
+        kernel.register_metatype(_environment_key(label), name=label, description="admitted")
+    assert kernel_source_fingerprint() == before
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    assert {_environment_key("Monorepo"), _environment_key("Polyrepo")} <= registered
+
+
+def test_admission_is_open_beyond_the_twenty_six_that_were_listed() -> None:
+    """EV2-26 is `Future Unknown Environment`, which is not an environment but the claim
+    that the list can grow. Proven the way the object classes prove it: by admitting one the
+    document never named."""
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    labels = list(section("UAKP-ENV").values())
+    assert "Future Unknown Environment" in labels
+
+    kernel = MetaKernel()
+    for label in labels:
+        kernel.register_metatype(_environment_key(label), name=label, description="admitted")
+
+    before = kernel_source_fingerprint()
+    unlisted = "Env-SubstrateNoDocumentHasNamedYet"
+    kernel.register_metatype(unlisted, name="unlisted", description="admitted by registration")
+    assert unlisted in {obj.natural_key for obj in kernel.metatypes()}, (
+        "the kernel admits the twenty-six the document lists and refuses one it does not; "
+        "that is a closed environment set, which the adapter rule forbids"
+    )
+    assert kernel_source_fingerprint() == before
