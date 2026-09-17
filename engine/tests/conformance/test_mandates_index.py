@@ -7,7 +7,12 @@ domain is ADMITTED rather than built. Nothing here restates them.
 
 from __future__ import annotations
 
-from engine.tests.conformance.mandate_corpus import assert_partitions, repo_root, section
+from engine.tests.conformance.mandate_corpus import (
+    assert_partitions,
+    repo_root,
+    section,
+    tracked,
+)
 from intelligence.realization.contracts import ArtifactFamily
 from intelligence.realization.generators import GENERATORS
 
@@ -211,3 +216,137 @@ def test_the_producer_set_is_open_which_is_what_the_last_projection_claims() -> 
         {generator.family for generator in GENERATORS}
     ), "two generators claim one family, so the registry cannot be extended safely"
     assert len(ArtifactFamily) >= len(GENERATORS)
+
+
+# --- MI-002 — the twenty-seven constitutions ------------------------------------
+#
+# Section 002 lists twenty-seven constitutions, one per governed domain. CMG-000001 is the
+# instrument that decides what counts as one, and this repository has a naming convention
+# that follows it: a constitution is a document whose name ends `CONSTITUTION.md`. That is
+# the test used below, in both directions -- a domain has a constitution when such a file
+# carries its name, and lacks one when none does.
+#
+# The distinction the tiers keep is between a CONSTITUTION and an OWNER. Eleven domains have
+# a constitution. Five more have no constitution and do have a declared owner -- the root law
+# or an instrument the authority alignment register subordinates to it -- which is governance
+# without a constitution, not the absence of governance. Eleven have neither.
+#
+# `UCRD-001-CONSTITUTIONAL-RELATIONSHIP-DETERMINATION.md` is why the rule is the SUFFIX and
+# not the word: it carries both "constitutional" and "relationship" and is a determination.
+# Matching it would have reported a Relationship Constitution that does not exist.
+
+CONSTITUTION_SUFFIX = "CONSTITUTION.md"
+
+#: Domain -> the document that constitutes it.
+DOMAIN_CONSTITUTION = {
+    "MI-002/C-01": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+    "MI-002/C-09": "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md",
+    "MI-002/C-13": "00-MASTER/UAKOS-CLOSURE-006/CONST-09-REPOSITORY-LIFECYCLE-CONSTITUTION.md",
+    "MI-002/C-14": "08-RUNTIME/RUNTIME-001-UNIVERSAL-RUNTIME-CONSTITUTION.md",
+    "MI-002/C-15": "00-MASTER/UCOS-RFP-001/REPOSITORY-FIXED-POINT-CONSTITUTION.md",
+    "MI-002/C-16": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+    "MI-002/C-17": "00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md",
+    "MI-002/C-18": "00-MASTER/UCOS-CVR-001/05-VERIFICATION-CONSTITUTION.md",
+    "MI-002/C-19": "00-CEP/CEP-005-CONSTITUTIONAL-CERTIFICATION-CONSTITUTION.md",
+    "MI-002/C-20": "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md",
+    "MI-002/C-26": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+}
+
+#: Domain -> a declared owner that is not a constitution. Governance without a constitution
+#: is a real standing and a weaker one, so it is recorded rather than counted as either.
+DOMAIN_OWNED_NOT_CONSTITUTED = {
+    "MI-002/C-02": "engine/uckp/law.py",  # Identity -- UCKP-ART-05
+    "MI-002/C-04": "00-MASTER/UCXI-000001/ucxi-declaration.json",  # Context
+    "MI-002/C-07": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",  # Knowledge
+    # Capability
+    "MI-002/C-10": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+    "MI-002/C-27": "00-BOOK/DATA/generated-artifact-registry.json",  # Projection
+}
+
+#: Neither constituted nor owned. Eleven of twenty-seven, and four of them -- Privacy,
+#: Commercial, Economic and Analytics -- are the same domains ARCH-UCMM and QM-CONST report
+#: unanswered. A third document naming the same holes is corroboration, not new information.
+DOMAIN_UNCONSTITUTED = {
+    "MI-002/C-03": "relationship",
+    "MI-002/C-05": "constraint",
+    "MI-002/C-06": "rule",
+    "MI-002/C-08": "information",
+    "MI-002/C-11": "configuration",
+    "MI-002/C-12": "composition",
+    "MI-002/C-21": "privacy",
+    "MI-002/C-22": "commercial",
+    "MI-002/C-23": "economic",
+    "MI-002/C-24": "monitoring",
+    "MI-002/C-25": "analytics",
+}
+
+
+def test_every_mandated_constitution_is_constituted_owned_or_neither() -> None:
+    mandates = section("MI-002")
+    assert len(mandates) == 27, f"section 002 lists 27 constitutions, corpus has {len(mandates)}"
+    assert_partitions(
+        "MI-002",
+        mandates,
+        DOMAIN_CONSTITUTION,
+        DOMAIN_OWNED_NOT_CONSTITUTED,
+        DOMAIN_UNCONSTITUTED,
+    )
+
+
+def test_every_named_constitution_is_a_constitution_by_the_repository_convention() -> None:
+    """A home that does not end CONSTITUTION.md is a determination, a register or a report,
+    and calling it a constitution is the category error this tier exists to avoid."""
+    known = set(tracked())
+    for mandate, home in DOMAIN_CONSTITUTION.items():
+        assert home in known, f"{mandate}: {home} is not a tracked path"
+        assert home.endswith(CONSTITUTION_SUFFIX), (
+            f"{mandate}: {home} does not end {CONSTITUTION_SUFFIX}, so by this repository's "
+            "own convention it is not a constitution"
+        )
+
+
+def test_every_owned_domain_has_a_tracked_owner_that_is_not_a_constitution() -> None:
+    """The tier boundary. An owner that IS a constitution belongs a tier up."""
+    known = set(tracked())
+    for mandate, home in DOMAIN_OWNED_NOT_CONSTITUTED.items():
+        assert home in known, f"{mandate}: {home} is not a tracked path"
+        assert not home.endswith(
+            CONSTITUTION_SUFFIX
+        ), f"{mandate}: {home} is a constitution and is understated as a bare owner"
+
+
+def test_the_unconstituted_domains_are_named_by_no_constitution() -> None:
+    """NON-VACUITY, by the suffix rule rather than by the word.
+
+    Searching for the word would match `UCRD-001-CONSTITUTIONAL-RELATIONSHIP-DETERMINATION`
+    and report a Relationship Constitution that does not exist -- a determination is not a
+    constitution, and the repository's own naming says which is which.
+    """
+    constitutions = [p for p in tracked() if p.endswith(CONSTITUTION_SUFFIX)]
+    assert constitutions, "no file ends CONSTITUTION.md, so the suffix rule is vacuous"
+    for mandate, domain in DOMAIN_UNCONSTITUTED.items():
+        found = [p for p in constitutions if domain in p.rsplit("/", 1)[-1].lower()]
+        assert (
+            not found
+        ), f"{mandate}: {domain!r} is declared unconstituted but {found} carries its name"
+
+
+def test_the_suffix_rule_that_proves_absence_can_return_a_positive() -> None:
+    """Run the rule against a domain that IS constituted and require a hit."""
+    constitutions = [p for p in tracked() if p.endswith(CONSTITUTION_SUFFIX)]
+    hits = [p for p in constitutions if "security" in p.rsplit("/", 1)[-1].lower()]
+    assert hits, "the suffix rule finds no Security Constitution, which exists; it is vacuous"
+
+
+def test_the_unconstituted_domains_agree_with_the_other_two_documents() -> None:
+    """Privacy, Commercial/Commerce, Economic(s) and Analytics are reported unanswered by
+    the UCMM and the interrogative model too. A disagreement would mean one suite has
+    mis-located something rather than that the repository changed."""
+    from engine.tests.conformance.test_mandates_arch import META_MODEL_ABSENT
+    from engine.tests.conformance.test_mandates_model import CONSTITUTION_ABSENT
+
+    here = set(DOMAIN_UNCONSTITUTED.values())
+    elsewhere = set(META_MODEL_ABSENT.values()) | set(CONSTITUTION_ABSENT.values())
+    for domain in ("privacy", "information"):
+        assert domain in here, f"{domain} is no longer reported unconstituted here"
+        assert domain in elsewhere, f"{domain} is no longer reported absent elsewhere"
