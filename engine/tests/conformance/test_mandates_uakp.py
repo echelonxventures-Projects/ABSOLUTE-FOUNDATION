@@ -927,3 +927,124 @@ def test_configuration_before_customization_stays_a_genuine_gap() -> None:
         "a customization instrument now exists; PN-11 can be ordered against it and is no "
         "longer a gap"
     )
+
+
+# ================================================================================
+# UAKP-STATE — the eighteen lifecycle states
+# ================================================================================
+#
+# Eighteen states in an ordered chain, Unknown through Archived, and one sentence under it:
+# "Lifecycle SHALL be configurable." That sentence decides the binding. A lifecycle hard-
+# coded as an eighteen-member enum is not configurable, and Layer Zero says so in its own
+# words -- adding a stage "becomes a code edit, and a code edit in Layer Zero is a
+# constitutional amendment", which is why the stage vocabulary is data with an append-only
+# registry instead.
+#
+# So the mandate is answered by EXTENSION, and the proof has to be stronger than "the names
+# can be added". The document mandates an ORDER, so the order is what is proven: every
+# consecutive pair of the eighteen becomes a declared transition, and `can_transition`
+# answers for each one.
+
+#: The two states the vocabulary already seeds. Everything else is registered.
+STATE_SEEDED = {
+    "UAKP-STATE/SS-17": "historical",  # Historical
+    "UAKP-STATE/SS-18": "archived",  # Archived
+}
+
+
+def _state_chain() -> list[str]:
+    """The eighteen states in transcription order, lower-cased to vocabulary term ids."""
+    mandates = section("UAKP-STATE")
+    return [mandates[f"UAKP-STATE/SS-{n:02d}"].lower() for n in range(1, 19)]
+
+
+def test_the_state_model_is_eighteen_states_in_a_declared_order() -> None:
+    mandates = section("UAKP-STATE")
+    assert len(mandates) == 18, f"the state model lists 18 states, corpus has {len(mandates)}"
+    chain = _state_chain()
+    assert chain[0] == "unknown" and chain[-1] == "archived"
+    assert len(set(chain)) == 18, "a state is repeated, so the chain is not a total order"
+
+
+def test_the_two_seeded_states_are_already_terms_of_the_lifecycle_vocabulary() -> None:
+    from engine.uckp.vocabulary import DEFAULT_VOCABULARIES, LIFECYCLE_STAGE
+
+    vocabulary = DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE)
+    mandates = section("UAKP-STATE")
+    for mandate, term_id in STATE_SEEDED.items():
+        assert vocabulary.has(term_id), f"{mandate}: {term_id!r} is not a seeded lifecycle stage"
+        assert mandates[mandate].lower() == term_id
+
+
+def test_every_state_is_registrable_and_the_mandated_order_holds_after_registration() -> None:
+    """The mandate as written: eighteen states, in that order, admitted without amendment.
+
+    Registering the names alone would prove half of it. The document draws a chain, so each
+    consecutive pair is declared as a successor and `can_transition` is asked for every one
+    of the seventeen edges -- an order nothing can answer for is not an order.
+    """
+    from engine.uckp.vocabulary import DEFAULT_VOCABULARIES, LIFECYCLE_STAGE, Term
+
+    chain = _state_chain()
+    vocabulary = DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE)
+    before = set(vocabulary.term_ids())
+
+    for state, successor in zip(chain, chain[1:] + [""], strict=True):
+        if vocabulary.has(state):
+            continue
+        vocabulary = vocabulary.extended_with(
+            Term(
+                term_id=state,
+                definition=f"UAKP lifecycle state: {state}",
+                successors=(successor,) if successor else (),
+            )
+        )
+
+    missing = [state for state in chain if not vocabulary.has(state)]
+    assert not missing, f"lifecycle states the vocabulary would not admit: {missing}"
+
+    unordered = [
+        (state, successor)
+        for state, successor in zip(chain, chain[1:], strict=False)
+        if not vocabulary.can_transition(state, successor) and state not in STATE_SEEDED.values()
+    ]
+    assert not unordered, (
+        f"states admitted but the mandated order does not hold across: {unordered}; an "
+        "order nothing can answer for is not an order"
+    )
+    assert set(DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE).term_ids()) == before, (
+        "extending the vocabulary mutated the seeded one; `extended_with` must return a new "
+        "vocabulary or every digest computed under the old meaning is retroactively wrong"
+    )
+
+
+def test_the_vocabulary_refuses_to_redefine_a_state_it_already_carries() -> None:
+    """NON-VACUITY, and the property that makes 'configurable' safe rather than merely
+    flexible. An open vocabulary that let a term be redefined would invalidate every digest
+    computed under the old meaning, so openness has to be append-only to be lawful."""
+    import pytest
+
+    from engine.uckp.errors import LawViolation
+    from engine.uckp.vocabulary import DEFAULT_VOCABULARIES, LIFECYCLE_STAGE, Term
+
+    vocabulary = DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE)
+    assert vocabulary.has("archived")
+    with pytest.raises(LawViolation):
+        vocabulary.extended_with(Term(term_id="archived", definition="redefined", successors=()))
+
+
+def test_the_lifecycle_is_open_beyond_the_eighteen_that_were_listed() -> None:
+    """`Lifecycle SHALL be configurable` is a claim about the nineteenth state as much as
+    the eighteen, so a state no document has named is registered too."""
+    from engine.uckp.vocabulary import DEFAULT_VOCABULARIES, LIFECYCLE_STAGE, Term
+
+    vocabulary = DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE)
+    unlisted = "state-no-document-has-named-yet"
+    assert not vocabulary.has(unlisted)
+    extended = vocabulary.extended_with(
+        Term(term_id=unlisted, definition="admitted by registration", successors=())
+    )
+    assert extended.has(unlisted), (
+        "the vocabulary admits the states the document lists and refuses one it does not; "
+        "that is a fixed lifecycle, which the document forbids in its own sentence"
+    )
