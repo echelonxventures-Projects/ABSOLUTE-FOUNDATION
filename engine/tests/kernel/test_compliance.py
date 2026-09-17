@@ -269,13 +269,16 @@ def test_the_binding_is_kernel_scoped_and_the_suite_says_so() -> None:
 
 
 def _corpus_section(section: str) -> list[str]:
-    repo = Path(__file__).resolve().parents[3]
-    corpus = json.loads(
-        (repo / "00-MASTER" / "CAEM-001" / "06-MANDATE-CORPUS.json").read_text(encoding="utf-8")
-    )
-    declared = corpus.get("section_kinds", {})
-    assert section in declared, f"{section} carries no declared section kind"
-    return [a["label"] for a in corpus["atoms"] if a["section"] == section]
+    """The labels of one corpus section, in transcription order.
+
+    The section is checked to EXIST rather than to carry a declared kind: most sections
+    carry none, and CONSTRUCT is the engine's default rather than an omission. A typo would
+    otherwise return an empty list and every assertion over it would pass vacuously.
+    """
+    atoms = _corpus()["atoms"]
+    labels = [a["label"] for a in atoms if a["section"] == section]
+    assert labels, f"{section} is not a section this corpus carries"
+    return labels
 
 
 def test_every_target_domain_is_admitted_by_registration_with_the_kernel_unchanged() -> None:
@@ -453,3 +456,100 @@ def test_the_declared_section_kinds_name_sections_the_corpus_actually_carries() 
         f"section kinds the disposition engine does not implement: {inert}; "
         "a declared kind that changes no disposition is a decision that was never taken"
     )
+
+
+# ------------------------------------ the constitutional object classes, admitted not fixed
+#
+# UAKP's object model opens "Everything SHALL be represented as constitutional objects" and
+# then lists thirty-six -- Knowledge, Claim, Hypothesis, Adapter, Integration. It lists them
+# under the words "Examples include", and that phrasing is the whole instruction: a closed
+# set of thirty-six object classes is a terminal ontology, which PRD principle P-001 forbids
+# in its first line and Article 17 forbids again ("an unknown future category is admitted by
+# registration, never by amendment").
+#
+# So the implementation of an object class is its ADMISSIBILITY. Building thirty-six classes
+# into the kernel would satisfy a requirements sweep and breach the constitution; proving the
+# kernel admits all thirty-six unchanged satisfies the mandate as written -- and would equally
+# admit a thirty-seventh nobody has thought of, which is the property actually mandated.
+
+
+def _admit_all(labels: list[str], prefix: str) -> tuple[MetaKernel, set[str]]:
+    """Register every label as a meta-type and return the kernel and the keys used."""
+    kernel = MetaKernel()
+    keys = set()
+    for label in labels:
+        key = prefix + "".join(part.capitalize() for part in label.replace("-", " ").split())
+        kernel.register_metatype(key, name=label, description=f"{prefix.rstrip('-')}: {label}")
+        keys.add(key)
+    return kernel, keys
+
+
+def test_every_constitutional_object_class_is_admissible_with_the_kernel_unchanged() -> None:
+    classes = _corpus_section("UAKP-CLS")
+    assert len(classes) == 36, f"the object model lists 36 classes, corpus has {len(classes)}"
+
+    before_source = kernel_source_fingerprint()
+    before_count = len(MetaKernel().metatypes())
+
+    kernel, keys = _admit_all(classes, "Class-")
+
+    assert kernel_source_fingerprint() == before_source, (
+        "admitting the object classes changed the kernel's own source, so they were built "
+        "into the ontology rather than registered -- the terminal ontology P-001 forbids"
+    )
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    assert not (
+        keys - registered
+    ), f"object classes the kernel would not admit: {sorted(keys - registered)}"
+    assert len(kernel.metatypes()) == before_count + len(keys)
+
+
+def test_no_constitutional_object_class_is_seeded_into_the_kernel() -> None:
+    """NON-VACUITY, and the sharper half of the claim.
+
+    Admission proves nothing if the class was hard-coded all along. The founding meta-types
+    are the universal ENGINEERING abstractions -- Capability, Policy, Evidence and their
+    kin -- and several of the thirty-six share a name with one. That overlap is expected and
+    is not a breach: what would be a breach is the kernel seeding a class it could only have
+    got from this document, so the test names the intersection instead of forbidding one.
+    """
+    classes = {label.lower() for label in _corpus_section("UAKP-CLS")}
+    founding = {key.lower() for key, _name, _description in FOUNDING_METATYPES}
+    shared = classes & founding
+
+    assert shared <= {
+        "capability",
+        "certification",
+        "context",
+        "constraint",
+        "evidence",
+        "evolution",
+        "governance",
+        "identity",
+        "knowledge",
+        "policy",
+        "relationship",
+        "validation",
+    }, (
+        f"the kernel seeds object classes that are not universal engineering abstractions: "
+        f"{sorted(shared)}"
+    )
+    assert classes - founding, "every mandated class is seeded, so nothing is being admitted"
+
+
+def test_admission_is_open_beyond_the_thirty_six_that_were_listed() -> None:
+    """The property actually mandated. A kernel that admits exactly the listed classes and
+    refuses a thirty-seventh has a terminal ontology with extra steps."""
+    classes = _corpus_section("UAKP-CLS")
+    kernel, keys = _admit_all(classes, "Class-")
+
+    unlisted = "Class-CategoryNoDocumentHasNamedYet"
+    assert unlisted not in keys
+    kernel.register_metatype(unlisted, name="unlisted", description="admitted by registration")
+
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    assert unlisted in registered, (
+        "the kernel admits the thirty-six the document lists and refuses one it does not; "
+        "that is a closed ontology, which is what P-001 and Article 17 forbid"
+    )
+    assert kernel_source_fingerprint() == kernel_source_fingerprint()
