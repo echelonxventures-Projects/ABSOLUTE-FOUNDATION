@@ -442,3 +442,125 @@ def test_a_taxon_whose_chain_ends_somewhere_other_than_the_root_is_refused() -> 
     with pytest.raises(TaxonomyError, match="does not reach the root") as excinfo:
         taxonomy._assert_reaches("CTX-A", ROOT_TAXON)  # noqa: SLF001
     assert excinfo.value.context["taxon"] == "CTX-A"
+
+
+# ------------------------------------------------- the Layer-2 mandate, bound to the code
+#
+# The Substrate Layer Architecture mandates fourteen Context Dimensions at Layer 2. Until
+# now nothing tied that mandate to UCXI-000001, so a requirements sweep could locate the
+# CODE (engine/context/taxonomy.py) and the WORDS (prose determinations under 00-MASTER/)
+# without either one answering for the other. These three tests are that binding, and they
+# are deliberately written to fail if the mandate and the implementation drift apart.
+#
+# Measured when written: twelve of the fourteen resolve to a universal kind, one names the
+# extension mechanism rather than a kind, and exactly one — Physical Context — has no
+# universal kind at all. That last one is not papered over below; it is the case that
+# proves the open-taxonomy property on a real mandate instead of on a fixture.
+
+MANDATED_CONTEXT_DIMENSIONS = (
+    "Spatial Context",
+    "Temporal Context",
+    "Physical Context",
+    "Environmental Context",
+    "Cultural Context",
+    "Linguistic Context",
+    "Economic Context",
+    "Governance Context",
+    "Regulatory Context",
+    "Identity Context",
+    "Security Context",
+    "Knowledge Context",
+    "Computational Context",
+    "Future Context Types",
+)
+
+#: The mandate's label, and the ContextKind it resolves to. "Future Context Types" and
+#: "Physical Context" are absent by measurement, and each has its own test below.
+MANDATE_TO_KIND = {
+    "Spatial Context": ContextKind.SPATIAL,
+    "Temporal Context": ContextKind.TEMPORAL,
+    "Environmental Context": ContextKind.ENVIRONMENTAL,
+    "Cultural Context": ContextKind.CULTURAL,
+    "Linguistic Context": ContextKind.LINGUISTIC,
+    "Economic Context": ContextKind.ECONOMIC,
+    "Governance Context": ContextKind.GOVERNANCE,
+    "Regulatory Context": ContextKind.REGULATORY,
+    "Identity Context": ContextKind.IDENTITY,
+    "Security Context": ContextKind.SECURITY,
+    "Knowledge Context": ContextKind.KNOWLEDGE,
+    "Computational Context": ContextKind.COMPUTATIONAL,
+}
+
+
+def test_every_mandated_context_dimension_resolves_to_a_declared_kind() -> None:
+    """Twelve of the fourteen are universal taxa, reachable by the mandate's own name."""
+    assert len(MANDATED_CONTEXT_DIMENSIONS) == 14, "the Layer-2 mandate lists fourteen"
+
+    for label, kind in MANDATE_TO_KIND.items():
+        taxon = UNIVERSAL_TAXONOMY.taxon_for_kind(kind)
+        assert UNIVERSAL_TAXONOMY.is_universal(kind.value), (
+            f"the mandated dimension {label!r} resolves to kind {kind.value!r}, which the "
+            "taxonomy does not carry as universal"
+        )
+        assert taxon.title, f"{label!r} resolves to a taxon with no title"
+
+    # Non-vacuity: the map must not have quietly lost a dimension. Two are accounted for
+    # by the two tests below, and every remaining mandate must appear here.
+    accounted = set(MANDATE_TO_KIND) | {"Physical Context", "Future Context Types"}
+    assert accounted == set(MANDATED_CONTEXT_DIMENSIONS), (
+        "a mandated Layer-2 dimension is neither mapped to a kind nor separately "
+        f"accounted for: {sorted(set(MANDATED_CONTEXT_DIMENSIONS) - accounted)}"
+    )
+
+
+def test_future_context_types_names_the_extension_mechanism_not_a_kind() -> None:
+    """The fourteenth mandate is a PROPERTY of the taxonomy, so it must not be a taxon.
+
+    Declaring `future` as a universal kind would be the error the mandate warns against:
+    a terminal taxonomy that has merely reserved a slot labelled "future".
+    """
+    assert "future" not in {kind.value for kind in ContextKind}
+    assert UNIVERSAL_TAXONOMY.future_kinds() == (), (
+        "the universal taxonomy ships with a future kind already in it, so 'future types' "
+        "has been seeded rather than left open"
+    )
+    assert hasattr(UNIVERSAL_TAXONOMY, "extend"), "no admission mechanism for a future type"
+
+
+def test_the_one_mandated_dimension_the_universal_set_lacks_is_admitted_as_data() -> None:
+    """Physical Context — the P-002 'No Terminal Taxonomy' claim, on a real mandate.
+
+    Layer 2 mandates it; the sixteen universal kinds do not carry it. The claim under test
+    is NOT that the taxonomy already knows every dimension — it is that a dimension it does
+    not know is admitted **without editing this layer**. So the gap is the experiment.
+
+    If a later change makes `physical` universal, the first assertion fails and this test
+    must be rewritten to pick another absent dimension. That is intended: the property
+    needs a genuinely unknown kind to be proved against, and a fixture kind like `quantum`
+    proves less than a kind the mandate actually asks for.
+    """
+    assert "physical" not in {kind.value for kind in ContextKind}, (
+        "physical is now a universal kind — this test's premise is gone and it must be "
+        "re-pointed at a dimension the universal set genuinely lacks"
+    )
+
+    extended = UNIVERSAL_TAXONOMY.extend(
+        ContextTaxon(
+            taxon_id="CTX-PHYSICAL",
+            kind="physical",
+            title="Physical Context",
+            parent=ROOT_TAXON,
+            description="Layer-2 mandated dimension, admitted as data (CXL-02).",
+        )
+    )
+
+    assert extended.taxon_for_kind("physical").title == "Physical Context"
+    assert extended.future_kinds() == ("physical",)
+    assert extended.is_universal("physical") is False, (
+        "extension granted universality, which would let a later mandate rewrite the "
+        "constitutionally-present set from outside"
+    )
+    assert len(extended) == len(UNIVERSAL_TAXONOMY) + 1
+    # Non-mutating, so admitting a dimension cannot change what every other caller sees.
+    assert len(UNIVERSAL_TAXONOMY) == 17
+    assert UNIVERSAL_TAXONOMY.future_kinds() == ()
