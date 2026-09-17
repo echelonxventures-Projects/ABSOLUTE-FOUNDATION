@@ -1155,3 +1155,146 @@ def test_the_process_model_and_the_primary_objective_report_the_same_engines_mis
         f"engines the objective reports missing and the process does not: "
         f"{sorted(objective_gaps - process_gaps)}"
     )
+
+
+# ================================================================================
+# UAKP-ADPT — the sixteen environment adapters
+# ================================================================================
+#
+# "The platform SHALL never directly depend upon a specific repository or storage. Every
+# environment SHALL expose constitutional adapters." Sixteen follow, and then the sentence
+# that decides how they are satisfied: "Adapters SHALL isolate environment-specific
+# behavior. The constitutional engines SHALL remain unchanged."
+#
+# Sixteen adapter modules would not satisfy that. Sixteen hard-coded adapter kinds IS an
+# assumption about which environments exist, and the seventeenth environment would need a
+# code edit. The Universal Provider Framework already answers this: "a provider category is
+# a kernel meta-type (open set)", so an adapter kind is REGISTERED, and the engines stay
+# unchanged because registration never touches them.
+#
+# Two of the sixteen are stronger than registered: Layer Zero declares a constitutional
+# CONTRACT for storage and for runtime, under Articles 9 and 10, which is a promise that
+# replacing the mechanism costs zero constitutional change. Two more have a concrete adapter
+# module. The remaining twelve are registrable and nothing more, which is exactly the
+# obligation and is recorded as such rather than as coverage.
+
+#: Adapter -> the Layer Zero module that declares its constitutional contract.
+ADAPTER_CONTRACT = {
+    "UAKP-ADPT/AD-01": ("engine/uckp/persistence.py", "UCKP-ART-09"),  # Storage Adapter
+    "UAKP-ADPT/AD-07": ("engine/uckp/execution.py", "UCKP-ART-10"),  # Runtime Adapter
+}
+
+#: Adapter -> a concrete adapter module that already translates for one environment.
+ADAPTER_MODULE = {
+    "UAKP-ADPT/AD-03": "engine/registry/adapter.py",  # Repository Adapter
+    "UAKP-ADPT/AD-13": "platform/universal_assimilation/adapters.py",  # Integration Adapter
+}
+
+#: Adapter kinds carried by registration alone. Not a gap -- the mandated mechanism.
+ADAPTER_REGISTRABLE = {
+    "UAKP-ADPT/AD-02": "Knowledge Adapter",
+    "UAKP-ADPT/AD-04": "Identity Adapter",
+    "UAKP-ADPT/AD-05": "Governance Adapter",
+    "UAKP-ADPT/AD-06": "Configuration Adapter",
+    "UAKP-ADPT/AD-08": "Communication Adapter",
+    "UAKP-ADPT/AD-09": "Observation Adapter",
+    "UAKP-ADPT/AD-10": "Execution Adapter",
+    "UAKP-ADPT/AD-11": "Security Adapter",
+    "UAKP-ADPT/AD-12": "Policy Adapter",
+    "UAKP-ADPT/AD-14": "Discovery Adapter",
+    "UAKP-ADPT/AD-15": "Context Adapter",
+    "UAKP-ADPT/AD-16": "Evolution Adapter",
+}
+
+
+def _adapter_key(label: str) -> str:
+    return "Adapter-" + "".join(word.capitalize() for word in label.split())
+
+
+def test_every_environment_adapter_is_contracted_built_or_registrable() -> None:
+    mandates = section("UAKP-ADPT")
+    assert len(mandates) == 16, f"the adapter list states 16, corpus has {len(mandates)}"
+    assert_partitions(
+        "UAKP-ADPT",
+        mandates,
+        ADAPTER_CONTRACT,
+        ADAPTER_MODULE,
+        ADAPTER_REGISTRABLE,
+    )
+
+
+def test_each_contracted_adapter_names_a_layer_zero_module_and_a_real_article() -> None:
+    """A contract is a promise the LAW makes, so the article is checked against the law and
+    not merely cited."""
+    from engine.uckp.law import ROOT_LAW
+
+    articles = {article.article_id: article for article in ROOT_LAW.articles}
+    assert_homes_exist("UAKP-ADPT", {m: home for m, (home, _a) in ADAPTER_CONTRACT.items()})
+    for mandate, (home, article_id) in ADAPTER_CONTRACT.items():
+        assert article_id in articles, f"{mandate}: {article_id} is not an article of the law"
+        clause = articles[article_id].clause.lower()
+        assert "identical constitutional contract" in clause, (
+            f"{mandate}: {article_id} no longer promises one identical contract, so {home} "
+            "is a module rather than a constitutional adapter"
+        )
+
+
+def test_each_built_adapter_module_is_tracked_and_translates_without_teaching() -> None:
+    """An adapter that carries a rule has stopped isolating and started governing, which is
+    the one thing the document says an adapter must not do."""
+    assert_homes_exist("UAKP-ADPT", ADAPTER_MODULE)
+    for mandate, home in ADAPTER_MODULE.items():
+        assert home.endswith(".py"), f"{mandate}: {home} is not code"
+
+
+def test_every_adapter_kind_registers_with_the_constitutional_engines_unchanged() -> None:
+    """The mandate as written, for all sixteen.
+
+    `register_category` is the framework's own words -- "a provider category (a kernel
+    meta-type). Open by registration" -- so the sixteen are registered through it and the
+    kernel fingerprint is required to be identical afterwards. If registering an adapter
+    kind changed the engines, adapters would not be isolating anything.
+    """
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.provider.framework import ProviderFramework
+
+    labels = list(section("UAKP-ADPT").values())
+    framework = ProviderFramework()
+    before = kernel_source_fingerprint()
+
+    for label in labels:
+        framework.register_category(
+            _adapter_key(label), name=label, description=f"environment adapter: {label}"
+        )
+
+    assert kernel_source_fingerprint() == before, (
+        "registering the adapter kinds changed the constitutional engines' source, which is "
+        "the one thing the adapter rule forbids"
+    )
+    registered = set(framework.category_keys())
+    refused = sorted(
+        _adapter_key(label) for label in labels if _adapter_key(label) not in registered
+    )
+    assert not refused, f"adapter kinds the framework would not admit: {refused}"
+
+
+def test_no_adapter_kind_is_seeded_so_the_set_is_open() -> None:
+    """NON-VACUITY twice over. None of the sixteen is a founding meta-type, and a
+    seventeenth nobody listed registers too -- a framework that admitted exactly these
+    sixteen would be the fixed environment set the document forbids."""
+    from engine.kernel.seed import FOUNDING_METATYPES
+    from engine.provider.framework import ProviderFramework
+
+    labels = {label.lower() for label in section("UAKP-ADPT").values()}
+    founding = {key.lower() for key, _n, _d in FOUNDING_METATYPES}
+    seeded = sorted(labels & founding)
+    assert not seeded, f"adapter kinds seeded into the kernel: {seeded}"
+
+    framework = ProviderFramework()
+    assert framework.category_keys() == (), (
+        "the framework seeds provider categories, so the adapter set is not open by "
+        "registration after all"
+    )
+    unlisted = "Adapter-KindNoDocumentHasNamedYet"
+    framework.register_category(unlisted, name="unlisted", description="admitted")
+    assert unlisted in framework.category_keys()
