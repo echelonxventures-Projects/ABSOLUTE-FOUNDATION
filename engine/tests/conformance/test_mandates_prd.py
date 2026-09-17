@@ -89,3 +89,138 @@ def test_no_manual_platform_redesign_is_bound_elsewhere_and_not_restated_here() 
 
 def test_the_naming_rule_this_suite_relies_on_can_find_something() -> None:
     assert_absence_rule_can_find_something("knowledge ukip classification")
+
+
+# --- PRD-ECON — the Universal Economic Framework --------------------------------
+#
+# Section 13 has two halves and they mandate different things. Twelve FACULTIES -- "Every
+# construct may support: Cost, Revenue, Billing, Settlement..." -- and nine TENURES,
+# "Everything may be: Free, Paid, Owned, Shared, Leased, Licensed, Auctioned, Tokenized,
+# Fractionalized." A faculty is machinery the substrate must have. A tenure is a state a
+# thing may be held under, which is a vocabulary question and not a module question.
+#
+# Keeping them apart is what stops the section reading as twenty-one missing modules. It
+# also isolates the real finding: of the twelve faculties, four are built and eight are
+# not, and the eight are the ones money actually moves through -- Revenue, Billing,
+# Settlement, Taxation. The substrate can price a thing and license it, and cannot charge
+# for it.
+
+#: Faculty -> the module that provides it.
+ECONOMIC_FACULTY = {
+    "PRD-ECON/ECON-01": "engine/verification_intelligence/cost_model.py",  # Cost
+    "PRD-ECON/ECON-05": "platform/commercial_intelligence/pricing.py",  # Pricing
+    "PRD-ECON/ECON-09": "engine/nucleus/ownership.py",  # Ownership
+    "PRD-ECON/ECON-10": "platform/commercial_intelligence/licensing.py",  # Licensing
+    "PRD-ECON/ECON-11": "platform/commercial_intelligence/marketplace.py",  # Marketplace
+}
+
+#: Faculty -> nothing. Seven of the twelve, and the settlement chain is all of it.
+ECONOMIC_FACULTY_ABSENT = {
+    "PRD-ECON/ECON-02": "revenue",
+    "PRD-ECON/ECON-03": "billing",
+    "PRD-ECON/ECON-04": "settlement",
+    "PRD-ECON/ECON-06": "subscription",
+    "PRD-ECON/ECON-07": "royalty",
+    "PRD-ECON/ECON-08": "taxation",
+    "PRD-ECON/ECON-12": "commerce",
+}
+
+#: The nine tenures. Not modules: a tenure is a state a thing is held under, and the
+#: substrate's answer to "may everything be held this way" is its open vocabulary, the same
+#: mechanism that answers the lifecycle. None of the nine is seeded, which is correct --
+#: seeding `Auctioned` would fix a commercial model, and PRD principle P-001 forbids exactly
+#: that. They are registrable, and that is the whole obligation.
+ECONOMIC_TENURE = {
+    "PRD-ECON/ECON-13": "Free",
+    "PRD-ECON/ECON-14": "Paid",
+    "PRD-ECON/ECON-15": "Owned",
+    "PRD-ECON/ECON-16": "Shared",
+    "PRD-ECON/ECON-17": "Leased",
+    "PRD-ECON/ECON-18": "Licensed",
+    "PRD-ECON/ECON-19": "Auctioned",
+    "PRD-ECON/ECON-20": "Tokenized",
+    "PRD-ECON/ECON-21": "Fractionalized",
+}
+
+
+def test_every_economic_mandate_is_a_faculty_or_a_tenure() -> None:
+    mandates = section("PRD-ECON")
+    assert (
+        len(mandates) == 21
+    ), f"section 13 states 21 economic mandates, corpus has {len(mandates)}"
+    assert_partitions(
+        "PRD-ECON",
+        mandates,
+        ECONOMIC_FACULTY,
+        ECONOMIC_FACULTY_ABSENT,
+        ECONOMIC_TENURE,
+    )
+    assert len(ECONOMIC_FACULTY) + len(ECONOMIC_FACULTY_ABSENT) == 12
+    assert len(ECONOMIC_TENURE) == 9
+
+
+def test_every_built_faculty_has_a_tracked_module() -> None:
+    assert_homes_exist("PRD-ECON", ECONOMIC_FACULTY)
+
+
+def test_the_absent_faculties_are_named_by_no_module() -> None:
+    """NON-VACUITY. Cost and Ownership are why this is searched rather than assumed: both
+    read as obvious gaps in a repository with no billing, and both exist."""
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-ECON", ECONOMIC_FACULTY_ABSENT)
+
+
+def test_the_settlement_chain_is_the_gap_rather_than_scattered_holes() -> None:
+    """The finding, asserted so it cannot quietly stop being true. Revenue, Billing,
+    Settlement and Taxation are the faculties money moves through, and none exists."""
+    chain = {"revenue", "billing", "settlement", "taxation"}
+    assert chain <= set(ECONOMIC_FACULTY_ABSENT.values()), (
+        "part of the settlement chain now exists; the claim that this substrate can price "
+        "a thing and cannot charge for it no longer holds"
+    )
+
+
+def test_no_tenure_is_seeded_as_a_commercial_model() -> None:
+    """The tenures are answered by refusing to fix them.
+
+    Seeding `Auctioned` or `Tokenized` as a built-in would be a fixed business model, which
+    PRD principle P-001 forbids in its first line and LYR-NEG/LN-07 forbids again. So the
+    obligation is that none is hard-coded and every one is registrable -- proven the same
+    way the object classes and the lifecycle states are proven.
+    """
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+    from engine.kernel.seed import FOUNDING_METATYPES
+
+    tenures = list(ECONOMIC_TENURE.values())
+    founding = {key.lower() for key, _name, _description in FOUNDING_METATYPES}
+    leaked = sorted(t for t in tenures if t.lower() in founding)
+    assert not leaked, f"tenures seeded as founding meta-types, fixing a business model: {leaked}"
+
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    for tenure in tenures:
+        kernel.register_metatype(f"Tenure-{tenure}", name=tenure, description=f"tenure: {tenure}")
+    assert kernel_source_fingerprint() == before, (
+        "admitting the tenures changed the kernel's source, so they were built as business "
+        "models rather than registered"
+    )
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    refused = sorted(t for t in tenures if f"Tenure-{t}" not in registered)
+    assert not refused, f"tenures the kernel would not admit: {refused}"
+
+
+def test_the_three_tenures_dispositioned_create_are_admissions_not_gaps() -> None:
+    """Auctioned, Tokenized and Fractionalized are three of the seventeen CREATE concepts.
+    Building them is what LN-07 forbids, so the disposition is answered by admission -- the
+    same correction Monorepo and Polyrepo needed."""
+    assert {"Auctioned", "Tokenized", "Fractionalized"} <= set(ECONOMIC_TENURE.values())
+
+
+def test_royalty_stays_a_genuine_gap_because_it_is_a_faculty_not_a_tenure() -> None:
+    """The fourth CREATE concept in this section does NOT get the same answer, and the
+    difference is the point: a royalty is machinery that computes and pays, not a state a
+    thing is held under. Admitting the word would prove nothing about the faculty."""
+    assert "PRD-ECON/ECON-07" in ECONOMIC_FACULTY_ABSENT
+    assert "royalty" not in {t.lower() for t in ECONOMIC_TENURE.values()}
