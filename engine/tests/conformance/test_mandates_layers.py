@@ -116,3 +116,102 @@ def test_the_naming_rule_this_suite_relies_on_can_find_something() -> None:
     from engine.tests.conformance.mandate_corpus import assert_absence_rule_can_find_something
 
     assert_absence_rule_can_find_something("certification integrity")
+
+
+# --- LYR-L2 — the fourteen context dimensions -----------------------------------
+#
+# Layer 2 lists fourteen context dimensions and closes the list with "Future Context Types",
+# which is the instruction rather than a fourteenth dimension. UCXI-000001 owns exactly this
+# question and answers it the same way: the context taxonomy is "the open classification
+# tree over context kinds", and its declaration says of the kinds it recognises today that
+# they "are not a closed list, and no consumer branches on a particular kind."
+#
+# Twelve of the thirteen real dimensions are already `ContextKind` members, by name. One is
+# not, and is admissible by the declared extension mechanism -- which is the same answer,
+# arrived at by the mechanism instead of by the seed.
+
+#: Dimension -> the ContextKind value that is it.
+CONTEXT_KIND_SEEDED = {
+    "LYR-L2/CX-01": "spatial",
+    "LYR-L2/CX-02": "temporal",
+    "LYR-L2/CX-04": "environmental",
+    "LYR-L2/CX-05": "cultural",
+    "LYR-L2/CX-06": "linguistic",
+    "LYR-L2/CX-07": "economic",
+    "LYR-L2/CX-08": "governance",
+    "LYR-L2/CX-09": "regulatory",
+    "LYR-L2/CX-10": "identity",
+    "LYR-L2/CX-11": "security",
+    "LYR-L2/CX-12": "knowledge",
+    "LYR-L2/CX-13": "computational",
+}
+
+#: Recognised by no seeded kind, and admissible as data. Not a gap: the declaration's own
+#: extension path, exercised.
+CONTEXT_KIND_BY_EXTENSION = {"LYR-L2/CX-03": "physical"}
+
+#: The openness claim itself, which is not a dimension.
+CONTEXT_OPENNESS = {"LYR-L2/CX-14": "Future Context Types"}
+
+
+def test_every_context_dimension_is_a_kind_extensible_or_the_openness_claim() -> None:
+    mandates = section("LYR-L2")
+    assert len(mandates) == 14, f"layer 2 lists 14 dimensions, corpus has {len(mandates)}"
+    assert_partitions(
+        "LYR-L2",
+        mandates,
+        CONTEXT_KIND_SEEDED,
+        CONTEXT_KIND_BY_EXTENSION,
+        CONTEXT_OPENNESS,
+    )
+
+
+def test_every_seeded_dimension_is_a_context_kind_under_its_own_name() -> None:
+    from engine.context.taxonomy import ContextKind
+
+    kinds = {kind.value for kind in ContextKind}
+    mandates = section("LYR-L2")
+    for mandate, value in CONTEXT_KIND_SEEDED.items():
+        assert value in kinds, f"{mandate}: {value!r} is not a recognised context kind"
+        assert (
+            mandates[mandate].lower().startswith(value)
+        ), f"{mandate}: {mandates[mandate]!r} was mapped to {value!r}, which is not its own name"
+    claimed = list(CONTEXT_KIND_SEEDED.values())
+    assert len(claimed) == len(set(claimed)), "one context kind claimed by two dimensions"
+
+
+def test_the_extensible_dimension_is_genuinely_not_a_seeded_kind() -> None:
+    """NON-VACUITY. If `physical` is ever seeded, this row belongs a tier up and the claim
+    that the taxonomy had to be extended for it is false."""
+    from engine.context.taxonomy import ContextKind
+
+    kinds = {kind.value for kind in ContextKind}
+    for mandate, value in CONTEXT_KIND_BY_EXTENSION.items():
+        assert value not in kinds, (
+            f"{mandate}: {value!r} is now a seeded context kind and is understated as an "
+            "extension"
+        )
+
+
+def test_the_taxonomy_declares_itself_open_and_offers_the_extension_path() -> None:
+    """CX-14 is the whole point of the section, so it is checked against the declaration
+    that owns the question rather than against a module that happens to allow it."""
+    import json
+
+    from engine.context.taxonomy import UNIVERSAL_TAXONOMY
+
+    declaration = json.loads(
+        (repo_root() / "00-MASTER" / "UCXI-000001" / "ucxi-declaration.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    openness = declaration["openness"]
+    assert (
+        openness["closed_set"] is False
+    ), "UCXI now declares the context kinds a closed set; LYR-L2/CX-14 is unsatisfied"
+    assert openness["upper_limit"] is None
+    assert "extend" in openness["extension_mechanism"]
+    assert hasattr(UNIVERSAL_TAXONOMY, "extend"), (
+        "the declaration names ContextTaxonomy.extend as the extension mechanism and the "
+        "taxonomy does not have it"
+    )

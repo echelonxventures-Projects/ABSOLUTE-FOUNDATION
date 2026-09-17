@@ -1298,3 +1298,79 @@ def test_no_adapter_kind_is_seeded_so_the_set_is_open() -> None:
     unlisted = "Adapter-KindNoDocumentHasNamedYet"
     framework.register_category(unlisted, name="unlisted", description="admitted")
     assert unlisted in framework.category_keys()
+
+
+# ================================================================================
+# UAKP-MEM — the twelve memory universes
+# ================================================================================
+#
+# "Memory SHALL be first-class. Memory SHALL NOT be inferred from repositories." Twelve
+# memories follow, and the second sentence is what makes them checkable: a memory has to be
+# a RECORD something keeps, not a state a reader reconstructs by looking around.
+#
+# Nine are kept. Three are not, and they are the three that would record what the platform
+# has LEARNED -- working, learning and optimization memory. The repository remembers what it
+# did and what was decided; it keeps nothing about what it got better at, which is the same
+# gap the specified-and-unbuilt learning engine records from the other side.
+
+MEMORY_RECORD = {
+    "UAKP-MEM/MM-02": "00-BOOK/tools/config.py",  # Operational Memory -- 00-MASTER, declared
+    "UAKP-MEM/MM-03": "00-MASTER/EXECUTION-BACKLOG.json",  # Execution Memory
+    # Decision Memory
+    "UAKP-MEM/MM-04": "00-MASTER/UCDA-000001/01-CONSTITUTIONAL-DECISION-REGISTER.md",
+    # Institutional Memory
+    "UAKP-MEM/MM-05": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+    "UAKP-MEM/MM-06": "00-BOOK/REGISTRIES/KNOWLEDGE-GRAPH-REGISTRY.md",  # Knowledge Memory
+    "UAKP-MEM/MM-07": "00-BOOK/DATA/evidence-universe.json",  # Evidence Memory
+    "UAKP-MEM/MM-09": "00-MASTER/W1-FAILURE-LEDGER.md",  # Failure Memory
+    "UAKP-MEM/MM-11": "00-BOOK/DATA/change-ledger.json",  # Evolution Memory
+    # Historical Memory
+    "UAKP-MEM/MM-12": "00-BOOK/REGISTRIES/CHANGE-VERSION-LINEAGE-REGISTRY.md",
+}
+
+MEMORY_ABSENT = {
+    "UAKP-MEM/MM-01": "working memory",
+    "UAKP-MEM/MM-08": "learning memory",
+    "UAKP-MEM/MM-10": "optimization memory",
+}
+
+
+def test_every_memory_is_a_kept_record_or_absent() -> None:
+    mandates = section("UAKP-MEM")
+    assert len(mandates) == 12, f"the memory model lists 12 memories, corpus has {len(mandates)}"
+    assert_partitions("UAKP-MEM", mandates, MEMORY_RECORD, MEMORY_ABSENT)
+
+
+def test_every_kept_memory_is_a_tracked_record_and_not_an_engine() -> None:
+    """ "Memory SHALL NOT be inferred from repositories" -- so a memory carried by code that
+    recomputes it on demand is not a memory. Each home is a register, a ledger or a book."""
+    assert_homes_exist("UAKP-MEM", MEMORY_RECORD)
+    for mandate, home in MEMORY_RECORD.items():
+        if mandate == "UAKP-MEM/MM-02":
+            continue  # operational memory is a DECLARATION about a zone; checked below
+        assert home.endswith(
+            (".json", ".md")
+        ), f"{mandate}: {home} is executable, so this memory is recomputed rather than kept"
+
+
+def test_operational_memory_is_a_declared_zone_rather_than_a_file() -> None:
+    """NON-VACUITY for the one row that is not a record. 00-MASTER/ is declared Operational
+    Memory by UCOS-RECON-C1 and excluded from corpus registration for that reason -- it is
+    execution state, not repository truth. The declaration is where that lives."""
+    config = (repo_root() / "00-BOOK" / "tools" / "config.py").read_text(encoding="utf-8")
+    assert "Operational Memory" in config, (
+        "config.py no longer declares 00-MASTER/ as Operational Memory; UAKP-MEM/MM-02 rests "
+        "on that declaration"
+    )
+    assert '"00-MASTER/"' in config
+
+
+def test_the_absent_memories_are_all_about_what_was_learned() -> None:
+    """NON-VACUITY, and the finding. The repository remembers what it did and what was
+    decided, and keeps nothing about what it got better at."""
+    assert_named_by_nothing("UAKP-MEM", MEMORY_ABSENT, suffix=".md")
+    assert_named_by_nothing("UAKP-MEM", MEMORY_ABSENT)
+    assert "UAKP-ENG/EN-28" in ENGINE_SPECIFIED_ONLY, (
+        "the learning engine is now built, so learning memory is a missing record rather "
+        "than a memory with nothing to remember"
+    )
