@@ -45,6 +45,7 @@ import subprocess
 import sys
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -235,6 +236,99 @@ def authority_rank(path: str) -> int:
     return 7
 
 
+# Words carrying no ownership question of their own.
+STOP = frozenset(
+    "universal the a an of to for and or is it any every new future unknown before under "
+    "once can what who where when how which why shall must may".split()
+)
+
+#: Keys whose VALUES name a thing rather than describe it.
+NAMING_KEYS = (
+    '"artifact_id"',
+    '"title"',
+    '"authority"',
+    '"capability"',
+    '"name"',
+    '"id"',
+    '"domain"',
+    '"question"',
+    '"subject"',
+    '"owner"',
+    '"program"',
+    '"mission"',
+)
+
+
+#: Above this, a file is scored on its PATH alone. The big DATA registers mention every
+#: concept in the repository, so reading them decides nothing and costs everything.
+_MAX_SCORED_BYTES = 4_000_000
+
+
+@lru_cache(maxsize=64)
+def _file_text(path: str) -> str | None:
+    """Lower-cased contents, cached. Scoring probes the same declarations repeatedly."""
+    full = REPO / path
+    try:
+        if full.stat().st_size > _MAX_SCORED_BYTES:
+            return None
+        return full.read_text(encoding="utf-8", errors="ignore").lower()
+    except OSError:
+        return None
+
+
+def owner_score(path: str, label: str) -> int:
+    """How strongly does `path` OWN `label`, as opposed to merely mentioning it?
+
+    WHY THIS REPLACED RANK-ORDER. The first attribution sorted hits by file KIND and broke
+    ties on path order, so the owner of a concept was in practice whichever declaration
+    sorted earliest and happened to contain the word. Measured on the result: 356 of 460
+    EXTEND rows took their owner from the head-noun route, and ONE file --
+    ACEE-000001/acee-declaration.json -- was named owner of "Monitoring Constitution",
+    "Resolve Rules", "When does it change" and "Canonical Authority Discovery" alike.
+    `id-ledger.json` owned "Context Model" for the same reason: it mentions everything, so
+    it wins any contest decided by mentioning.
+
+    Ownership is a different question from occurrence. A file whose own PATH carries the
+    concept is where the concept lives; a file naming it in an identity field is declaring
+    it; everything else is prose, and prose scores zero.
+    """
+    slug = norm(path.replace("/", " ").replace(".", " "))
+    words = [w for w in norm(label).split() if w not in STOP and len(w) > 2]
+    if not words:
+        return 0
+
+    score = 0
+    if all(f" {w} " in f" {slug} " for w in words):
+        score += 4
+    elif f" {words[-1]} " in f" {slug} ":
+        score += 3
+
+    lowered = _file_text(path)
+    if lowered is None:
+        return score
+    target = norm(label)
+
+    if path.endswith(".json"):
+        if f'"{target}"' in lowered:
+            score += 2
+        else:
+            for key in NAMING_KEYS:
+                start = lowered.find(key)
+                while start != -1:
+                    if target in lowered[start : start + 200]:
+                        return score + 2
+                    start = lowered.find(key, start + 1)
+    else:
+        for line in lowered.splitlines():
+            stripped = line.strip().lower()
+            if stripped.startswith(("#", "def ", "class ", '"""', "- **", "| **")) and (
+                target in stripped
+            ):
+                score += 1
+                break
+    return score
+
+
 def build_anchor_index() -> tuple[set, dict]:
     raw: list[str] = []
 
@@ -298,11 +392,22 @@ def anchored(label: str, anchors: set, by_word: dict) -> bool:
 
 
 # --- disposition ------------------------------------------------------------------------
-# Words carrying no ownership question of their own.
-STOP = frozenset(
-    "universal the a an of to for and or is it any every new future unknown before under "
-    "once can what who where when how which why shall must may".split()
-)
+
+
+def owners_of_concept(label: str, files: list[str], probe: int = 30) -> list[str]:
+    """The hit files that NAME the concept, best first -- never merely mention it.
+
+    Only the top `probe` candidates by authority rank are scored, because scoring reads the
+    file and a generic concept can hit thousands. Owners live among the declarations and
+    modules, which is exactly what authority rank brings to the front, so the cap costs
+    nothing an owner would have occupied.
+
+    Returns [] when nothing NAMES the concept. That empty result is a finding, not a
+    failure: it says the concept occurs in this repository without anything claiming it.
+    """
+    ranked = sorted(files, key=lambda f: (authority_rank(f), f))[:probe]
+    scored = [(owner_score(f, label), -authority_rank(f), f) for f in ranked]
+    return [f for score, _rank, f in sorted(scored, reverse=True) if score > 0][:4]
 
 
 def measure(workers: int = 12) -> dict:
@@ -337,9 +442,10 @@ def measure(workers: int = 12) -> dict:
                 "hits": len(files),
                 "anchored": anc,
                 "kinds": kinds,
-                "owner_files": [f for f in files if authority_rank(f) <= 2][:4],
+                "owner_files": owners_of_concept(label, files),
                 "code_files": [f for f in files if authority_rank(f) == 3][:4],
                 "gate_files": [f for f in files if authority_rank(f) == 4][:2],
+                "mention_only": [f for f in files if authority_rank(f) <= 2][:3],
             }
             if done % 200 == 0:
                 print(f"  ... {done}/{len(keys)}", file=sys.stderr, flush=True)
@@ -401,11 +507,7 @@ def _dispose(concepts: dict, workers: int) -> None:
         if not words:
             return key, [], []
         hits = git_grep(words[-1], whole_word=True)
-        return (
-            key,
-            words,
-            sorted((f for f in hits if authority_rank(f) <= 3), key=authority_rank)[:3],
-        )
+        return key, words, owners_of_concept(words[-1], hits)
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
         for key, words, owners in pool.map(head_owner, provisional):
