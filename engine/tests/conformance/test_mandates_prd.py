@@ -430,3 +430,66 @@ def test_self_optimizing_stays_a_genuine_gap() -> None:
     """One of the ten remaining CREATE concepts, and it stays one: unlike the tenures and
     the environments, nothing in any document forbids a platform optimising itself."""
     assert "PRD-SELF/SELF-11" in SELF_NEAR_MISS
+
+
+# --- PRD-DISC — the Universal Discovery Framework -------------------------------
+#
+# Section 10: "The platform shall automatically discover" twelve things. Six have an
+# instrument. Six do not, and five of those six are the outward-looking ones -- risk,
+# opportunity, pattern, anomaly and emergent behaviour. MI-005 mandates three of the same
+# five from the Master Index, so the gap is measured twice and the two suites are asserted
+# to agree.
+
+CONSTRUCT_DISCOVERY_INSTRUMENT = {
+    "PRD-DISC/DISC-01": "engine/universal_discovery",  # Construct Discovery
+    "PRD-DISC/DISC-02": "engine/uckp/resolution.py",  # Relationship Discovery
+    "PRD-DISC/DISC-03": "engine/uckp/capabilities.py",  # Capability Discovery
+    "PRD-DISC/DISC-04": "engine/context/resolution.py",  # Context Discovery
+    "PRD-DISC/DISC-05": "engine/knowledge/integration/dependency.py",  # Dependency Discovery
+    "PRD-DISC/DISC-06": "engine/knowledge/ukip/discovery.py",  # Knowledge Discovery
+    "PRD-DISC/DISC-07": "engine/kernel/governance.py",  # Policy Discovery
+}
+
+CONSTRUCT_DISCOVERY_ABSENT = {
+    "PRD-DISC/DISC-08": "risk",
+    "PRD-DISC/DISC-09": "opportunity",
+    "PRD-DISC/DISC-10": "pattern",
+    "PRD-DISC/DISC-11": "anomaly",
+    "PRD-DISC/DISC-12": "emergent",
+}
+
+
+def test_every_mandated_discovery_is_instrumented_or_absent() -> None:
+    mandates = section("PRD-DISC")
+    assert len(mandates) == 12, f"section 10 lists 12 discoveries, corpus has {len(mandates)}"
+    assert_partitions(
+        "PRD-DISC",
+        mandates,
+        CONSTRUCT_DISCOVERY_INSTRUMENT,
+        CONSTRUCT_DISCOVERY_ABSENT,
+    )
+
+
+def test_every_discovery_instrument_is_tracked_and_distinct() -> None:
+    assert_homes_exist("PRD-DISC", CONSTRUCT_DISCOVERY_INSTRUMENT)
+    homes = list(CONSTRUCT_DISCOVERY_INSTRUMENT.values())
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one instrument claimed for several discoveries: {duplicated}"
+
+
+def test_the_absent_discoveries_are_performed_by_nothing() -> None:
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-DISC", CONSTRUCT_DISCOVERY_ABSENT)
+
+
+def test_the_platform_discovers_what_is_and_not_what_might_be() -> None:
+    """The finding, asserted so it cannot quietly stop being true. Every discovery the
+    platform performs is of something already present in the corpus; every one it does not
+    perform is a judgement about what is not there -- a risk, an opportunity, an
+    alternative, a pattern, an anomaly, an emergent behaviour."""
+    outward = {"risk", "opportunity", "pattern", "anomaly", "emergent"}
+    assert outward <= set(CONSTRUCT_DISCOVERY_ABSENT.values()), (
+        "an outward-looking discovery now exists; the claim that this platform discovers "
+        "what is and not what might be no longer holds"
+    )

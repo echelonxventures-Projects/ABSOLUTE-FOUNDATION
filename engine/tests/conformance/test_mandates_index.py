@@ -928,3 +928,102 @@ def test_the_two_documents_agree_on_which_dimensions_are_unheld() -> None:
     ), f"the two sections no longer agree on the unheld axes: {sorted(here ^ there)}"
     shared_tokens = set(DIMENSION_REFUSED_TOKEN.values()) & set(DIMENSION_REFUSED_TOKEN_MI.values())
     assert {"company", "language", "currency", "tax", "cloud"} <= shared_tokens
+
+
+# --- MI-005 — the nineteen discoveries ------------------------------------------
+#
+# Section 005 lists nineteen kinds of discovery. Eleven of them are UCL-000001 lifecycle
+# stages, and six of those eleven match the stage name EXACTLY -- Knowledge Discovery,
+# Capability Discovery, Dependency Discovery, Constraint Discovery, Gap Discovery, Context
+# Assimilation. Two documents written apart, six identical phrases.
+#
+# Four more are performed by an instrument the lifecycle does not name. Four are performed
+# by nothing, and PRD section 10 mandates three of the same four -- so the gap is measured
+# twice, independently, and the two suites are asserted to agree.
+
+DISCOVERY_LIFECYCLE_STAGE = {
+    "MI-005/D-01": "Observe",  # Observation
+    "MI-005/D-02": "Repository Truth Discovery",  # Discovery
+    "MI-005/D-03": "Knowledge Discovery",  # Knowledge Discovery
+    "MI-005/D-05": "Capability Discovery",  # Capability Discovery
+    "MI-005/D-06": "Dependency Discovery",  # Dependency Discovery
+    "MI-005/D-10": "Canonical Owner Discovery",  # Ownership Discovery
+    "MI-005/D-11": "Constraint Discovery",  # Constraint Discovery
+    "MI-005/D-12": "Gap Discovery",  # Gap Discovery
+    "MI-005/D-15": "Reuse Before Create",  # Reuse Discovery
+    "MI-005/D-18": "Context Assimilation",  # Context Assimilation
+    "MI-005/D-19": "Understand",  # Constitutional Understanding
+}
+
+DISCOVERY_INSTRUMENT = {
+    # Requirement Discovery
+    "MI-005/D-04": "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
+    "MI-005/D-07": "engine/context/resolution.py",  # Context Discovery
+    "MI-005/D-08": "00-BOOK/DATA/id-ledger.json",  # Identity Discovery
+    "MI-005/D-09": "engine/uckp/resolution.py",  # Relationship Discovery
+}
+
+#: Performed by nothing. All four look outward rather than inward: what might go wrong, what
+#: could be gained, what else would work, what keeps recurring. The repository discovers what
+#: IS and does not discover what MIGHT BE.
+DISCOVERY_ABSENT = {
+    "MI-005/D-13": "risk",
+    "MI-005/D-14": "opportunity",
+    "MI-005/D-16": "alternative",
+    "MI-005/D-17": "pattern",
+}
+
+
+def test_every_discovery_is_a_stage_an_instrument_or_absent() -> None:
+    mandates = section("MI-005")
+    assert len(mandates) == 19, f"section 005 lists 19 discoveries, corpus has {len(mandates)}"
+    assert_partitions(
+        "MI-005",
+        mandates,
+        DISCOVERY_LIFECYCLE_STAGE,
+        DISCOVERY_INSTRUMENT,
+        DISCOVERY_ABSENT,
+    )
+
+
+def test_every_stage_backed_discovery_names_a_stage_ucl_declares() -> None:
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = _ucl_stage_names()
+    for mandate, stage in DISCOVERY_LIFECYCLE_STAGE.items():
+        assert stage in declared, f"{mandate}: UCL declares no stage named {stage!r}"
+    claimed = list(DISCOVERY_LIFECYCLE_STAGE.values())
+    assert len(claimed) == len(set(claimed)), "one stage claimed by two discoveries"
+
+
+def test_six_discoveries_carry_the_lifecycle_stage_name_verbatim() -> None:
+    """NON-VACUITY for the join, and the evidence that it is a join rather than a mapping:
+    six of the eleven are the same phrase on both sides."""
+    mandates = section("MI-005")
+    verbatim = [
+        mandate
+        for mandate, stage in DISCOVERY_LIFECYCLE_STAGE.items()
+        if mandates[mandate] == stage
+    ]
+    assert len(verbatim) >= 6, (
+        f"only {len(verbatim)} discoveries still match their stage name verbatim; the two "
+        "documents have drifted and this join needs re-reading"
+    )
+
+
+def test_every_instrument_backed_discovery_is_tracked() -> None:
+    assert_homes_exist("MI-005", DISCOVERY_INSTRUMENT)
+
+
+def test_the_absent_discoveries_are_performed_by_nothing() -> None:
+    assert_named_by_nothing("MI-005", DISCOVERY_ABSENT)
+
+
+def test_the_discovery_gap_is_the_same_one_the_prd_reports() -> None:
+    """Risk, Opportunity and Pattern discovery are mandated by both documents and performed
+    by neither. Measured in two suites over two sections, asserted to agree."""
+    from engine.tests.conformance.test_mandates_prd import CONSTRUCT_DISCOVERY_ABSENT
+
+    shared = {"risk", "opportunity", "pattern"}
+    assert shared <= set(DISCOVERY_ABSENT.values())
+    assert shared <= set(CONSTRUCT_DISCOVERY_ABSENT.values())
