@@ -279,6 +279,16 @@
       "closing_invariant": "Closed by an authority outside this repository and not derivable inside it, exactly as ISD-CE-13 is. It names the standard library's process-starting entry points — subprocess.run, Popen, check_output, call, check_call and getoutput — which are the interpreter's published surface rather than this repository's vocabulary. Nothing in this tree can enumerate 'the functions that start a process' by inspection; the property is documented, not introspectable.",
       "admission": "Append the name when the runtime gains a new way to start a process. The set exists so the direct-caller ratchet can distinguish a module that SPAWNS the tool from one that merely NAMES it — a distinction two modules were miscounted on before this predicate required it — so a name absent here is invisible to that guard and adding one widens what it can see.",
       "intentional": true
+    },
+    {
+      "id": "ISD-CE-15",
+      "enumeration": "_ANCHOR_KEYS",
+      "declared_at": "00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py",
+      "population": 3,
+      "closing_invariant": "RFP-4 — a tracked register may record WHAT it read but never a value that moves on its own. The set is closed because it is not a taxonomy of anything: it names the exact fields a generated input uses to carry the commit it was built at. closure.json spells that anchor flat as baseline_commit and branch; provenance.json copies the same anchor nested under closure_baseline. Three names, because three names is what the two shapes between them use.",
+      "admission": "Append the field name here and in phase2_recon.py's identical set, when a generated input introduces a new way of carrying its commit anchor. No amendment and no gate change: this is data about how two files are shaped, and a fourth shape is one line. The cost of getting it wrong is visible rather than silent — an unstripped anchor makes the recorded digest move on every commit, which is the defect this set was introduced to close.",
+      "intentional": true,
+      "$what_it_is": "the fields a generated input carries that move on their own"
     }
   ],
   "$disclosure_completeness": "This list is itself open: it enumerates the closed enumerations located at baseline bb9c27d2 and is extended by appending an entry. ISD-L-01 measures that each entry names a closing invariant and an admission path, not that the list is exhaustive — a claim of exhaustiveness would be the very finite assumption the principle prohibits.",
