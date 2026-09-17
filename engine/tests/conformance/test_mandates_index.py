@@ -8,6 +8,7 @@ domain is ADMITTED rather than built. Nothing here restates them.
 from __future__ import annotations
 
 from engine.tests.conformance.mandate_corpus import (
+    assert_named_by_nothing,
     assert_partitions,
     repo_root,
     section,
@@ -350,3 +351,140 @@ def test_the_unconstituted_domains_agree_with_the_other_two_documents() -> None:
     for domain in ("privacy", "information"):
         assert domain in here, f"{domain} is no longer reported unconstituted here"
         assert domain in elsewhere, f"{domain} is no longer reported absent elsewhere"
+
+
+# --- MI-001 — the twenty-five foundations ---------------------------------------
+#
+# Section 001 lists twenty-five foundations. A foundation is not a capability; it is the
+# ground a capability stands on, and in this repository the ground is the root law. Each of
+# its twenty articles declares the tokens it BINDS, so "is there a Universal Identity
+# Foundation" has a mechanical answer: does an article bind `identity`.
+#
+# Eleven foundations are grounded in an article. Eight more are not, and are carried by a
+# located instrument -- real ground, lower down, and the difference is worth keeping because
+# an instrument can be replaced and an article cannot. Six are neither, and two of those are
+# the same Logic and Mathematics the meta-model reports missing: a foundation the law does
+# not ground and no module carries is a foundation in name only.
+
+#: Foundation -> the article of the root law that grounds it.
+FOUNDATION_ARTICLE = {
+    "MI-001/F-01": "UCKP-ART-01",  # Universal Constitutional Foundation
+    "MI-001/F-02": "UCKP-ART-02",  # Universal Existence Foundation
+    "MI-001/F-07": "UCKP-ART-06",  # Universal Knowledge Foundation
+    "MI-001/F-09": "UCKP-ART-05",  # Universal Identity Foundation
+    "MI-001/F-10": "UCKP-ART-07",  # Universal Relationship Foundation
+    "MI-001/F-16": "UCKP-ART-13",  # Universal Measurement Foundation
+    "MI-001/F-18": "UCKP-ART-15",  # Universal Intelligence Foundation
+    "MI-001/F-19": "UCKP-ART-16",  # Universal Governance Foundation
+    "MI-001/F-20": "UCKP-ART-14",  # Universal Evolution Foundation
+    "MI-001/F-22": "UCKP-ART-10",  # Universal Runtime Foundation
+    "MI-001/F-25": "UCKP-ART-11",  # Universal Projection Foundation
+}
+
+#: Foundation -> a located instrument, where no article grounds it.
+FOUNDATION_INSTRUMENT = {
+    "MI-001/F-03": "engine/construct/reality.py",  # Universal Reality Foundation
+    "MI-001/F-05": "platform/universal_truth",  # Universal Truth Foundation
+    "MI-001/F-06": "engine/uckp/values.py",  # Universal Meaning Foundation
+    "MI-001/F-11": "00-MASTER/UCXI-000001/ucxi-declaration.json",  # Universal Context Foundation
+    "MI-001/F-12": "engine/uckp/facets.py",  # Universal Constraint Foundation
+    "MI-001/F-13": "engine/kernel/governance.py",  # Universal Rule Foundation
+    "MI-001/F-21": "platform/universal_assurance",  # Universal Assurance Foundation
+    "MI-001/F-24": "platform/commercial_intelligence",  # Universal Commercial Foundation
+}
+
+#: Grounded by neither the law nor a module.
+FOUNDATION_UNGROUNDED = {
+    "MI-001/F-04": "possibility",
+    "MI-001/F-08": "information",
+    "MI-001/F-14": "logic",
+    "MI-001/F-15": "mathematics",
+    "MI-001/F-17": "computation",
+    "MI-001/F-23": "economic",
+}
+
+
+def _foundation_word(label: str) -> str:
+    """`Universal Identity Foundation` -> `identity`, which is what an article binds."""
+    return label.removeprefix("Universal ").removesuffix(" Foundation").lower()
+
+
+def test_every_foundation_is_grounded_in_an_article_an_instrument_or_neither() -> None:
+    mandates = section("MI-001")
+    assert len(mandates) == 25, f"section 001 lists 25 foundations, corpus has {len(mandates)}"
+    assert_partitions(
+        "MI-001",
+        mandates,
+        FOUNDATION_ARTICLE,
+        FOUNDATION_INSTRUMENT,
+        FOUNDATION_UNGROUNDED,
+    )
+
+
+def test_each_article_grounded_foundation_names_an_article_that_binds_it() -> None:
+    """The article must exist AND carry the foundation's word -- in what it binds or in its
+    own title. Naming an article that says nothing about the foundation would be a citation,
+    not a grounding."""
+    from engine.uckp.law import ROOT_LAW
+
+    articles = {article.article_id: article for article in ROOT_LAW.articles}
+    mandates = section("MI-001")
+    for mandate, article_id in FOUNDATION_ARTICLE.items():
+        assert article_id in articles, f"{mandate}: {article_id} is not an article of the root law"
+        article = articles[article_id]
+        word = _foundation_word(mandates[mandate])
+        grounded = word in article.title.lower() or any(
+            word.startswith(token) or token.startswith(word) for token in article.binds
+        )
+        assert grounded, (
+            f"{mandate}: {article_id} ({article.title}) binds {article.binds} and says "
+            f"nothing about {word!r}; that is a citation, not a grounding"
+        )
+
+
+def test_no_article_is_claimed_by_two_foundations() -> None:
+    """NON-VACUITY. Twenty articles and twenty-five foundations, so overlap is possible --
+    and two foundations resting on one article means one of them is not separately grounded."""
+    claimed = list(FOUNDATION_ARTICLE.values())
+    duplicated = sorted({a for a in claimed if claimed.count(a) > 1})
+    assert not duplicated, f"articles claimed by more than one foundation: {duplicated}"
+
+
+def test_every_instrument_grounded_foundation_has_no_article_and_a_tracked_home() -> None:
+    """The tier boundary. If an article binds the word, the foundation belongs a tier up."""
+    from engine.uckp.law import ROOT_LAW
+
+    known = set(tracked())
+    mandates = section("MI-001")
+    for mandate, home in FOUNDATION_INSTRUMENT.items():
+        present = home in known or any(p.startswith(home.rstrip("/") + "/") for p in known)
+        assert present, f"{mandate}: {home} is not a tracked path"
+        word = _foundation_word(mandates[mandate])
+        grounding = [a.article_id for a in ROOT_LAW.articles if word in a.binds]
+        assert not grounding, (
+            f"{mandate}: {word!r} is bound by {grounding} after all, so this foundation is "
+            "understated as an instrument"
+        )
+
+
+def test_the_ungrounded_foundations_are_bound_by_no_article_and_named_by_no_module() -> None:
+    """NON-VACUITY in both directions -- the law and the tree. `engine/construct/reality.py`
+    is why the module half is checked: Reality reads as ungrounded against the law alone and
+    is carried by a module, so the law-only answer would have been wrong."""
+    from engine.uckp.law import ROOT_LAW
+
+    for mandate, word in FOUNDATION_UNGROUNDED.items():
+        grounding = [a.article_id for a in ROOT_LAW.articles if word in a.binds]
+        assert not grounding, f"{mandate}: {word!r} is bound by {grounding}"
+    assert_named_by_nothing("MI-001", FOUNDATION_UNGROUNDED)
+
+
+def test_the_foundation_gaps_agree_with_the_meta_model() -> None:
+    """Logic, Mathematics and Information are ungrounded here and absent in the UCMM."""
+    from engine.tests.conformance.test_mandates_arch import META_MODEL_ABSENT
+
+    shared = {"logic", "mathematics", "information"}
+    here = set(FOUNDATION_UNGROUNDED.values())
+    there = set(META_MODEL_ABSENT.values())
+    assert shared <= here, f"no longer ungrounded here: {sorted(shared - here)}"
+    assert shared <= there, f"the UCMM no longer reports absent: {sorted(shared - there)}"
