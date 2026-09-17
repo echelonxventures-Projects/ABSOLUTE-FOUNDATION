@@ -519,3 +519,176 @@ def test_every_alignment_object_renders_the_declaration_behind_it() -> None:
         "article": rule.article,
         "also": list(rule.also),
     }
+
+
+# --- the thirty-one mandated engines, located against Repository Truth ----------
+#
+# UAKP's engine model lists thirty-one engines and states the rule that makes locating them
+# an alignment question rather than an inventory: "Engines are replaceable implementations"
+# and "No engine SHALL contain project-specific logic." A replaceable implementation still
+# has to EXIST somewhere, and the question of which instrument holds a mandated capability
+# is the same question UCOS-CAA-001 answers for authorities.
+#
+# THE TEST OF OWNERSHIP IS NAMING, NOT OCCURRENCE. A module that mentions "reasoning" is not
+# the Universal Reasoning Engine. So a row below is admitted only when a module or package is
+# named for the engine's function, and the five that nothing names are listed as absent
+# rather than matched to the nearest file that happens to contain the word.
+
+#: Engine -> the module or package that carries it. One path may carry two engines when the
+#: instrument itself names both, which UCL-000001 does for extraction and elevation.
+ENGINE_HOME = {
+    "UAKP-ENG/EN-02": "engine/knowledge/ukip/assimilation.py",  # Knowledge Assimilation
+    "UAKP-ENG/EN-04": "engine/knowledge/ukip/classification.py",  # Knowledge Classification
+    "UAKP-ENG/EN-05": "engine/context/resolution.py",  # Context Resolution
+    "UAKP-ENG/EN-06": "engine/universal_discovery",  # Repository Discovery
+    "UAKP-ENG/EN-07": "engine/execution_environment/discovery.py",  # Environment Discovery
+    "UAKP-ENG/EN-08": "engine/knowledge/ukip/evidence.py",  # Evidence Discovery
+    "UAKP-ENG/EN-09": "platform/universal_truth",  # Truth Discovery
+    "UAKP-ENG/EN-10": "engine/constitution/authority.py",  # Canonical Authority
+    "UAKP-ENG/EN-12": "engine/omega_infinite/contradiction.py",  # Conflict Detection
+    "UAKP-ENG/EN-13": "engine/uicm/gap.py",  # Gap Discovery
+    "UAKP-ENG/EN-14": "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",  # Requirement Discovery
+    "UAKP-ENG/EN-15": "engine/knowledge/integration/dependency.py",  # Dependency Discovery
+    "UAKP-ENG/EN-17": "00-MASTER/UAKOS-CLOSURE-008/decision_engine.py",  # Decision
+    "UAKP-ENG/EN-18": "intelligence/realization/planning.py",  # Planning
+    "UAKP-ENG/EN-21": "engine/runtime/orchestration.py",  # Orchestration
+    "UAKP-ENG/EN-22": "intelligence/realization",  # Realization
+    "UAKP-ENG/EN-23": "engine/uicm/observation.py",  # Observation
+    "UAKP-ENG/EN-24": "engine/validation",  # Validation
+    "UAKP-ENG/EN-25": "engine/uaue/verification.py",  # Verification
+    "UAKP-ENG/EN-26": "engine/certification",  # Certification
+    "UAKP-ENG/EN-27": "00-MASTER/UCL-000001/ucl_engine.py",  # Knowledge Extraction
+    "UAKP-ENG/EN-29": "00-MASTER/UCL-000001/ucl_engine.py",  # Capability Elevation
+    "UAKP-ENG/EN-30": "engine/constitution/evolution.py",  # Evolution
+    "UAKP-ENG/EN-31": "00-MASTER/UCOS-AEE-001/aee_engine.py",  # Self-Evolution
+}
+
+#: Realized, but at a scope narrower than the word "Universal" in the mandate. Recorded as
+#: its own tier because folding it into ENGINE_HOME would let four question-scoped engines
+#: read as one universal one, and folding it into ABSENT would discard working capability.
+ENGINE_NARROWER = {
+    "UAKP-ENG/EN-16": (
+        "00-BOOK/tools/config.py",
+        "INTEL_QUESTIONS declares four question-scoped reasoning engines -- change, "
+        "impact, dependency and certification -- and no engine that reasons in general",
+    ),
+}
+
+#: Specified and not built. The specification is real and the implementation is not, which
+#: is a different finding from absence: the design decision has been taken and recorded.
+ENGINE_SPECIFIED_ONLY = {
+    "UAKP-ENG/EN-28": (
+        "00-MASTER/UEI-000001/03-UNIVERSAL-LEARNING-SPECIFICATION.md",
+        "uei_engine.py implements none of it",
+    ),
+}
+
+#: Nothing in the repository is named for these. Listed so the engine model's completeness
+#: claim fails loudly rather than by silence.
+ENGINE_ABSENT = {
+    "UAKP-ENG/EN-01": "Knowledge Acquisition",
+    "UAKP-ENG/EN-03": "Knowledge Refinement",
+    "UAKP-ENG/EN-11": "Duplicate Detection",
+    "UAKP-ENG/EN-19": "Execution Specification",
+    "UAKP-ENG/EN-20": "Realization Package",
+}
+
+
+def _engine_mandates() -> dict[str, str]:
+    repo = Path(__file__).resolve().parents[3]
+    corpus = json.loads(
+        (repo / "00-MASTER" / "CAEM-001" / "06-MANDATE-CORPUS.json").read_text(encoding="utf-8")
+    )
+    return {a["atom_id"]: a["label"] for a in corpus["atoms"] if a["section"] == "UAKP-ENG"}
+
+
+def test_every_mandated_engine_is_located_narrowed_specified_or_absent() -> None:
+    """TOTALITY. Thirty-one, partitioned four ways, each engine in exactly one tier."""
+    mandates = _engine_mandates()
+    assert len(mandates) == 31, f"the engine model lists 31 engines, corpus has {len(mandates)}"
+
+    tiers = (ENGINE_HOME, ENGINE_NARROWER, ENGINE_SPECIFIED_ONLY, ENGINE_ABSENT)
+    accounted = set().union(*(set(t) for t in tiers))
+    assert set(mandates) == accounted, (
+        f"engines in no tier: {sorted(set(mandates) - accounted)}; "
+        f"tiered identifiers that are not engine mandates: {sorted(accounted - set(mandates))}"
+    )
+    assert (
+        sum(len(t) for t in tiers) == len(accounted) == 31
+    ), "an engine appears in more than one tier, so it is being claimed both present and absent"
+
+
+def test_every_located_engine_has_a_home_that_exists_and_carries_code() -> None:
+    """A located engine whose home is a document is a specification, not an engine."""
+    repo = Path(__file__).resolve().parents[3]
+    for mandate, home in ENGINE_HOME.items():
+        path = repo / home
+        assert path.exists(), f"{mandate}: declared home {home} does not exist"
+        if path.is_dir():
+            assert any(path.rglob("*.py")), f"{mandate}: {home} is a directory carrying no code"
+        else:
+            assert (
+                path.suffix == ".py"
+            ), f"{mandate}: {home} is not code, so it specifies an engine rather than being one"
+
+
+def test_the_narrowed_and_specified_engines_name_a_real_instrument() -> None:
+    repo = Path(__file__).resolve().parents[3]
+    for mandate, (home, reason) in {**ENGINE_NARROWER, **ENGINE_SPECIFIED_ONLY}.items():
+        assert (repo / home).exists(), f"{mandate}: {home} does not exist"
+        assert len(reason) > 30, f"{mandate}: tiered below 'located' without a stated reason"
+
+
+def test_the_narrowed_reasoning_engine_is_really_narrower() -> None:
+    """NON-VACUITY. The claim is that reasoning is bound to specific questions. If a general
+    reasoning engine ever appears, this row is wrong and must move up a tier."""
+    repo = Path(__file__).resolve().parents[3]
+    config = (repo / "00-BOOK" / "tools" / "config.py").read_text(encoding="utf-8")
+    assert "INTEL_QUESTIONS" in config
+    assert "Reasoning Engine" in config
+    assert (
+        "Universal Reasoning Engine" not in config
+    ), "a Universal Reasoning Engine is now declared; UAKP-ENG/EN-16 is no longer narrower"
+
+
+def test_the_absent_engines_are_absent_under_their_own_name() -> None:
+    """NON-VACUITY for the tier anything inconvenient would drift into.
+
+    The check is the same one used to admit a located engine: is a module or package NAMED
+    for this function? Naming means the PATH carries every word of the function, not just
+    the last one -- `platform/commercial_intelligence/packages.py` is named for commercial
+    packages and matching it to "Realization Package" on the word `package` alone would be
+    the occurrence-is-ownership error this whole tiering exists to avoid. Searching file
+    CONTENT instead would match every document that discusses an engine and make absence
+    unprovable in the other direction.
+    """
+    repo = Path(__file__).resolve().parents[3]
+    roots = [repo / "engine", repo / "platform", repo / "intelligence", repo / "service"]
+    for mandate, function in ENGINE_ABSENT.items():
+        words = [w.lower() for w in function.split()]
+        found = [
+            str(p.relative_to(repo))
+            for root in roots
+            if root.exists()
+            for p in root.rglob("*.py")
+            if "test" not in p.parts
+            and "tests" not in p.parts
+            and all(w in str(p.relative_to(repo)).lower() for w in words)
+        ]
+        assert (
+            not found
+        ), f"{mandate}: {function} is declared absent but a module is named for it: {found}"
+
+
+def test_the_naming_rule_that_proves_absence_can_find_something() -> None:
+    """The absence rule is only evidence if it is capable of a positive. Run it against a
+    located engine and require a hit, so a rule that silently matches nothing cannot pass
+    every absence claim by construction."""
+    repo = Path(__file__).resolve().parents[3]
+    hits = [
+        str(p.relative_to(repo))
+        for p in (repo / "engine").rglob("*.py")
+        if "tests" not in p.parts
+        and all(w in str(p.relative_to(repo)).lower() for w in ("knowledge", "classification"))
+    ]
+    assert hits, "the path-naming rule matches nothing at all, so every absence claim is vacuous"
