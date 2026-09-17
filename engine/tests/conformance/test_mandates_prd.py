@@ -336,3 +336,97 @@ def test_the_unheld_dimensions_are_refused_by_nothing_and_represented_by_nothing
         assert not any(
             axis in category for category in categories
         ), f"{mandate}: {axis!r} is now represented by an unknown category"
+
+
+# --- PRD-SELF — the fourteen self-* requirements --------------------------------
+#
+# "Platform must be: Self Discovering, Self Registering..." The prefix is the whole mandate.
+# A repository that validates OTHER things is not self-validating, and an optimiser that
+# improves the code it compiles is not self-optimising. So a row is admitted only when the
+# instrument's SUBJECT is this repository, and the two that fail that test fail it for
+# reasons worth naming rather than for want of a module.
+
+#: Requirement -> the instrument whose subject is this repository.
+SELF_INSTRUMENT = {
+    "PRD-SELF/SELF-01": "engine/universal_discovery",  # Self Discovering
+    "PRD-SELF/SELF-02": "00-BOOK/tools/register.sh",  # Self Registering
+    "PRD-SELF/SELF-03": "00-BOOK/tools/config.py",  # Self Classifying -- CLASSIFY_RULES
+    "PRD-SELF/SELF-04": "00-BOOK/tools/ukb.py",  # Self Documenting -- it writes its own book
+    "PRD-SELF/SELF-05": "engine/constitution/gateway.py",  # Self Governing
+    "PRD-SELF/SELF-06": "engine/validation",  # Self Validating
+    "PRD-SELF/SELF-07": "verify.sh",  # Self Verifying
+    # Self Certifying
+    "PRD-SELF/SELF-08": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py",
+    "PRD-SELF/SELF-09": "00-MASTER/UCOS-UGA-001/06-SELF-OBSERVATION.json",  # Self Monitoring
+    "PRD-SELF/SELF-12": "00-MASTER/UCOS-AEE-001/aee_engine.py",  # Self Evolving
+    "PRD-SELF/SELF-13": "intelligence/publication",  # Self Publishing
+    "PRD-SELF/SELF-14": "00-BOOK/DATA/canonical-observation-audit.json",  # Self Auditing
+}
+
+#: Requirement -> (the nearest instrument, why it is NOT the self-* capability). Both of
+#: these would pass a keyword sweep and neither does what the prefix demands.
+SELF_NEAR_MISS = {
+    "PRD-SELF/SELF-10": (
+        "engine/runtime/execution/health.py",
+        "health is DETECTED and nothing acts on the detection; detecting is not healing",
+    ),
+    "PRD-SELF/SELF-11": (
+        "engine/compiler/optimization.py",
+        "the compiler optimises the output it emits, not the platform that emits it",
+    ),
+}
+
+
+def test_every_self_requirement_is_instrumented_or_a_near_miss() -> None:
+    mandates = section("PRD-SELF")
+    assert (
+        len(mandates) == 14
+    ), f"section 20 states 14 self-* requirements, corpus has {len(mandates)}"
+    assert_partitions("PRD-SELF", mandates, SELF_INSTRUMENT, SELF_NEAR_MISS)
+
+
+def test_every_self_instrument_is_tracked_and_distinct() -> None:
+    """Twelve capabilities pointing at one instrument would mean eleven are unlocated."""
+    assert_homes_exist("PRD-SELF", SELF_INSTRUMENT)
+    homes = list(SELF_INSTRUMENT.values())
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one instrument claimed for several self-* requirements: {duplicated}"
+
+
+def test_the_self_classifying_and_self_documenting_claims_name_what_does_the_work() -> None:
+    """NON-VACUITY for the two rows that rest on a file rather than a package. Both are
+    large modules and the claim is about a specific thing inside each."""
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    config = (repo_root() / "00-BOOK" / "tools" / "config.py").read_text(encoding="utf-8")
+    assert (
+        "CLASSIFY_RULES" in config
+    ), "PRD-SELF/SELF-03 rests on config.py carrying CLASSIFY_RULES; it does not"
+    book = (repo_root() / "00-BOOK" / "tools" / "ukb.py").read_text(encoding="utf-8")
+    assert (
+        "UNIVERSAL-ARTIFACT-REGISTRY.md" in book
+    ), "PRD-SELF/SELF-04 rests on ukb.py writing the repository's own registry; it does not"
+
+
+def test_the_near_misses_are_near_and_are_misses() -> None:
+    """NON-VACUITY in both directions, which is the point of the tier.
+
+    The named instrument must exist -- otherwise the row is plain absence and the
+    explanation is decoration. And nothing may be named for the self-* capability itself,
+    or the near miss is a hit that was overlooked.
+    """
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_homes_exist("PRD-SELF", {m: home for m, (home, _why) in SELF_NEAR_MISS.items()})
+    for mandate, (_home, why) in SELF_NEAR_MISS.items():
+        assert len(why) > 40, f"{mandate}: tiered a near miss without a stated reason"
+    assert_named_by_nothing(
+        "PRD-SELF",
+        {"PRD-SELF/SELF-10": "self healing", "PRD-SELF/SELF-11": "self optimizing"},
+    )
+
+
+def test_self_optimizing_stays_a_genuine_gap() -> None:
+    """One of the ten remaining CREATE concepts, and it stays one: unlike the tenures and
+    the environments, nothing in any document forbids a platform optimising itself."""
+    assert "PRD-SELF/SELF-11" in SELF_NEAR_MISS
