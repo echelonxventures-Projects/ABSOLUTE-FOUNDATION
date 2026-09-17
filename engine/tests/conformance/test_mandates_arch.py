@@ -593,3 +593,151 @@ def test_go_live_is_a_determination_and_not_an_authorization_gate() -> None:
         and "golive" in path.lower().replace("-", "").replace("_", "")
     ]
     assert not gates, f"a go-live gate now exists: {gates}; ARCH-GOVF/GF-18 must be re-tiered"
+
+
+# --- ARCH-EVOF — the seventeen steps of the Universal Evolution Fabric -----------
+#
+# Nine of the seventeen are UCL lifecycle stages, two are carried by Layer Zero, and six are
+# absent. The six do not divide by accident.
+#
+# TWO ARE REFUSED BY LAW, not missing. Article 14 says evolution "appends; it never
+# rewrites", and the lifecycle vocabulary implements that as a successor graph with no
+# backward edge: `archived` reaches only `historical`, and `historical` reaches nothing. So
+# Downgrade and Restore are not gaps -- they are operations this constitution forbids, and
+# building them would breach the article that mandates the fabric they appear in.
+#
+# FOUR ARE GENUINELY ABSENT: Optimization, Upgrade, Migration and Transformation.
+
+EVOLUTION_LIFECYCLE_STAGE = {
+    "ARCH-EVOF/VF2-01": "Extract Engineering Knowledge",  # Knowledge Extraction
+    "ARCH-EVOF/VF2-02": "Learn",  # Learning
+    "ARCH-EVOF/VF2-03": "Reason",  # Reasoning
+    "ARCH-EVOF/VF2-04": "Improve",  # Improvement
+    "ARCH-EVOF/VF2-13": "Replay",  # Replay
+    "ARCH-EVOF/VF2-14": "Deterministic Fixed Point",  # Deterministic Fixed Point
+    "ARCH-EVOF/VF2-15": "Elevate",  # Capability Elevation
+    "ARCH-EVOF/VF2-16": "Register Engineering Knowledge",  # Engineering Knowledge Registration
+    "ARCH-EVOF/VF2-17": "Observe",  # Repository Observation
+}
+
+EVOLUTION_INSTRUMENT = {
+    "ARCH-EVOF/VF2-06": "engine/uckp/evolution.py",  # Versioning -- the state chain
+    "ARCH-EVOF/VF2-11": "engine/uckp/vocabulary.py",  # Archive -- the `archived` stage
+}
+
+#: Refused by Article 14, not missing. Each names the transition the lifecycle will not make.
+EVOLUTION_REFUSED_BY_LAW = {
+    "ARCH-EVOF/VF2-08": ("archived", "ratified"),  # Downgrade
+    "ARCH-EVOF/VF2-12": ("archived", "operational"),  # Restore
+}
+
+#: A module carries the word and does something else with it. Both would pass a keyword
+#: sweep and neither is an evolution step.
+EVOLUTION_NEAR_MISS = {
+    "ARCH-EVOF/VF2-05": (
+        "engine/compiler/optimization.py",
+        "the compiler optimises the output it emits, not the substrate that emits it -- the "
+        "same near miss PRD-SELF/SELF-11 records for Self Optimizing",
+    ),
+    "ARCH-EVOF/VF2-10": (
+        "engine/omega_governance/reference/transformation.py",
+        "a reference transformation maps one representation to another; it does not evolve "
+        "the thing represented",
+    ),
+}
+
+EVOLUTION_ABSENT = {
+    "ARCH-EVOF/VF2-07": "upgrade",
+    "ARCH-EVOF/VF2-09": "migration",
+}
+
+
+def test_every_evolution_step_is_a_stage_an_instrument_refused_or_absent() -> None:
+    mandates = section("ARCH-EVOF")
+    assert len(mandates) == 17, f"the fabric lists 17 steps, corpus has {len(mandates)}"
+    assert_partitions(
+        "ARCH-EVOF",
+        mandates,
+        EVOLUTION_LIFECYCLE_STAGE,
+        EVOLUTION_INSTRUMENT,
+        EVOLUTION_REFUSED_BY_LAW,
+        EVOLUTION_NEAR_MISS,
+        EVOLUTION_ABSENT,
+    )
+
+
+def test_every_evolution_stage_names_a_stage_ucl_declares() -> None:
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = _ucl_stage_names()
+    for mandate, stage in EVOLUTION_LIFECYCLE_STAGE.items():
+        assert stage in declared, f"{mandate}: UCL declares no stage named {stage!r}"
+    claimed = list(EVOLUTION_LIFECYCLE_STAGE.values())
+    assert len(claimed) == len(set(claimed)), "one stage claimed by two evolution steps"
+
+
+def test_the_refused_steps_name_a_transition_the_lifecycle_will_not_make() -> None:
+    """The claim is that these two are forbidden, not missing -- so the refusal is executed.
+
+    Each row names a transition; the vocabulary must refuse it. If a backward edge is ever
+    added, Downgrade and Restore become buildable and this tier is wrong.
+    """
+    from engine.uckp.vocabulary import DEFAULT_VOCABULARIES, LIFECYCLE_STAGE
+
+    vocabulary = DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE)
+    for mandate, (source, target) in EVOLUTION_REFUSED_BY_LAW.items():
+        assert vocabulary.has(source) and vocabulary.has(target)
+        assert not vocabulary.can_transition(source, target), (
+            f"{mandate}: the lifecycle now admits {source!r} -> {target!r}, so this step is "
+            "buildable and is no longer refused by law"
+        )
+
+
+def test_article_fourteen_still_forbids_rewriting() -> None:
+    """NON-VACUITY for the refused tier. The transitions above are the mechanism; this is
+    the law they implement, read rather than cited."""
+    from engine.uckp.law import ROOT_LAW
+
+    article = next(a for a in ROOT_LAW.articles if a.article_id == "UCKP-ART-14")
+    assert "it never rewrites" in article.clause, (
+        "Article 14 no longer forbids rewriting; Downgrade and Restore may be buildable and "
+        "must be re-tiered rather than left declared refused"
+    )
+    # Each refusal must be a BACKWARD edge, or it is not evidence of append-only: a
+    # forward transition the lifecycle happens not to declare would refuse for a different
+    # reason entirely.
+    from engine.uckp.vocabulary import DEFAULT_VOCABULARIES, LIFECYCLE_STAGE
+
+    vocabulary = DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE)
+    for mandate, (source, target) in EVOLUTION_REFUSED_BY_LAW.items():
+        assert vocabulary.can_transition(target, "deprecated") or target == "ratified", (
+            f"{mandate}: {target!r} is not an earlier lifecycle state than {source!r}, so "
+            "refusing the transition is not evidence that evolution never rewrites"
+        )
+
+
+def test_the_near_misses_are_near_and_are_misses() -> None:
+    """Both directions. The named module must exist, or the explanation is decoration; and
+    the reason has to be stated, because "a module carries the word" is the finding this
+    tier exists to refuse.
+
+    Optimization is the same near miss PRD-SELF records for Self Optimizing, so the two are
+    asserted to agree -- one module, two mandates, one reason.
+    """
+    from engine.tests.conformance.test_mandates_prd import SELF_NEAR_MISS
+
+    assert_homes_exist("ARCH-EVOF", {m: home for m, (home, _w) in EVOLUTION_NEAR_MISS.items()})
+    for mandate, (_home, why) in EVOLUTION_NEAR_MISS.items():
+        assert len(why) > 40, f"{mandate}: tiered a near miss without a stated reason"
+
+    optimiser = EVOLUTION_NEAR_MISS["ARCH-EVOF/VF2-05"][0]
+    assert SELF_NEAR_MISS["PRD-SELF/SELF-11"][0] == optimiser, (
+        "the two sections no longer name the same module for Optimization; one of the two "
+        "near misses has been re-located and the pair must be re-read"
+    )
+
+
+def test_the_absent_steps_are_performed_by_nothing() -> None:
+    """NON-VACUITY over the two with no module at all. Upgrade and Migration are the only
+    evolution steps nothing in the tree is even named for."""
+    assert_named_by_nothing("ARCH-EVOF", EVOLUTION_ABSENT)

@@ -1374,3 +1374,101 @@ def test_the_absent_memories_are_all_about_what_was_learned() -> None:
         "the learning engine is now built, so learning memory is a missing record rather "
         "than a memory with nothing to remember"
     )
+
+
+# ================================================================================
+# UAKP-INTG — the integration model and its eleven consumers
+# ================================================================================
+#
+# Four steps and eleven consumers. The consumers are the section's own words -- "Consumers
+# MAY include: UCOS, Linux, ERP, Banking, Healthcare, Government, Research, Manufacturing,
+# Open Source, Enterprise Platforms, Future Systems" -- and they are the same category as
+# the Master Index's target domains: a market the substrate is composed into, never a
+# construct it contains. "Consumers SHALL NOT own constitutional capabilities. Consumers
+# SHALL compose them," which is the document forbidding exactly the build a requirements
+# sweep would schedule.
+#
+# So the four steps are located, and the eleven consumers are ADMITTED -- proven the way
+# MI-017 proves its domains, with the kernel's own source unchanged.
+
+INTEGRATION_STEP = {
+    "UAKP-INTG/IG-01": "00-MASTER/RELEASE-001",  # Certified Release
+    # Compatibility Validation
+    "UAKP-INTG/IG-02": "platform/validation_intelligence/compatibility.py",
+    "UAKP-INTG/IG-03": "00-MASTER/UCOS-RIB-001/rib_engine.py",  # Integration Certification
+    "UAKP-INTG/IG-04": "engine/knowledge/integration",  # Consumer Integration
+}
+
+INTEGRATION_CONSUMERS = tuple(f"UAKP-INTG/IG-{n:02d}" for n in range(5, 16))
+
+
+def test_the_integration_model_is_four_steps_and_eleven_consumers() -> None:
+    mandates = section("UAKP-INTG")
+    assert len(mandates) == 15, f"the integration model lists 15, corpus has {len(mandates)}"
+    consumers = {m: mandates[m] for m in INTEGRATION_CONSUMERS}
+    assert_partitions("UAKP-INTG", mandates, INTEGRATION_STEP, consumers)
+    assert all(
+        label.startswith("Consumer ") for label in consumers.values()
+    ), f"a row tiered as a consumer is not one: {sorted(consumers.values())}"
+
+
+def test_every_integration_step_is_tracked() -> None:
+    assert_homes_exist("UAKP-INTG", INTEGRATION_STEP)
+
+
+def test_every_consumer_is_admitted_by_registration_with_the_kernel_unchanged() -> None:
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    mandates = section("UAKP-INTG")
+    labels = [mandates[m].removeprefix("Consumer ") for m in INTEGRATION_CONSUMERS]
+    assert len(labels) == 11
+
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    for label in labels:
+        key = "Consumer-" + "".join(word.capitalize() for word in label.split())
+        kernel.register_metatype(key, name=label, description=f"consumer: {label}")
+
+    assert kernel_source_fingerprint() == before, (
+        "admitting the consumers changed the kernel's own source, so they were built rather "
+        "than registered -- and a consumer built into the substrate is a consumer that owns "
+        "a constitutional capability, which the document forbids in its own words"
+    )
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    refused = sorted(
+        label
+        for label in labels
+        if "Consumer-" + "".join(w.capitalize() for w in label.split()) not in registered
+    )
+    assert not refused, f"consumers the kernel would not admit: {refused}"
+
+
+def test_no_consumer_is_seeded_and_none_is_a_prohibited_market_hard_coded() -> None:
+    """NON-VACUITY twice. None of the eleven is a founding meta-type, and the markets among
+    them -- Banking, Healthcare, Government, Manufacturing -- are the same shape as MI-017's
+    target domains, so seeding one would be the fixed-industry breach LN-05 forbids."""
+    from engine.kernel.seed import FOUNDING_METATYPES
+
+    mandates = section("UAKP-INTG")
+    labels = {mandates[m].removeprefix("Consumer ").lower() for m in INTEGRATION_CONSUMERS}
+    founding = {key.lower() for key, _n, _d in FOUNDING_METATYPES}
+    leaked = sorted(labels & founding)
+    assert not leaked, f"consumers seeded as founding meta-types: {leaked}"
+
+    domains = {label.lower() for label in section("MI-017").values()}
+    shared = sorted(labels & domains)
+    assert (
+        len(shared) >= 4
+    ), f"expected the consumer list to overlap the target domains; found {shared}"
+
+
+def test_ucos_is_a_consumer_of_this_platform_and_not_its_owner() -> None:
+    """The document's own claim, and the one that makes the section more than a list: "This
+    platform SHALL NOT be developed as part of UCOS. UCOS SHALL become one consumer." So
+    UCOS appears in the consumer list alongside Linux and Banking, and is admitted the same
+    way -- not privileged, not seeded."""
+    mandates = section("UAKP-INTG")
+    labels = [mandates[m].removeprefix("Consumer ") for m in INTEGRATION_CONSUMERS]
+    assert "UCOS" in labels
+    assert labels.index("UCOS") == 0, "UCOS is listed first, as one consumer among eleven"
