@@ -8,48 +8,41 @@
 
 | Disposition | Concepts | Mandates | Meaning |
 |---|---:|---:|---|
-| **IMPLEMENTED** | 229 | 289 | Located in code and named by a test or a gate. Nothing owed. |
-| **REFERENCE** | 272 | 506 | An owner already carries this. Cite it and build nothing — building anyway is a second authoring, void under UCKP-ART-03. |
-| **EXTEND** | 480 | 497 | An owner exists but does not yet carry this facet. Widen the owner. |
+| **IMPLEMENTED** | 254 | 317 | Located in code and named by a test or a gate. Nothing owed. |
+| **REFERENCE** | 280 | 514 | An owner already carries this. Cite it and build nothing — building anyway is a second authoring, void under UCKP-ART-03. |
+| **EXTEND** | 454 | 468 | An owner exists but does not yet carry this facet. Widen the owner. |
 | **ASSERT** | 37 | 37 | The claim is about an ABSENCE. It needs a conformance test, not a name. |
 | **REGISTER** | 27 | 33 | A market the substrate is composed into. Admitted as registered data, never built as code -- MIP LAW P43-001, and `industry` is a token the kernel refuses to seed. Proving admission IS the implementation. |
 | **AUDIENCE** | 25 | 26 | A stakeholder the substrate serves. Not a construct; nothing is owed. |
 | **ADJUDICATE** | 30 | 44 | A generic word in 200+ files with no owner located. Search cannot decide it and this engine will not pretend otherwise. |
-| **CREATE** | 17 | 17 | Nothing in the repository owns this under any spelling tried. A genuine gap, and the only disposition that is new construction. |
+| **CREATE** | 10 | 10 | Nothing in the repository owns this under any spelling tried. A genuine gap, and the only disposition that is new construction. |
 
-**Discharged so far: 218 of 1117 concepts** are named by a test or a gate outside this programme. A disposition records what is OWED; this records what has been PAID, and they are separate measurements on purpose -- a register that cannot tell a discharged obligation from an outstanding one leaves repaid debt unclaimed.
+**Discharged so far: 519 of 1117 concepts** are named by a test or a gate outside this programme. A disposition records what is OWED; this records what has been PAID, and they are separate measurements on purpose -- a register that cannot tell a discharged obligation from an outstanding one leaves repaid debt unclaimed.
 
-- **IMPLEMENTED** — 24 of 229 bound
-- **REFERENCE** — 57 of 272 bound
-- **EXTEND** — 43 of 480 bound
+- **IMPLEMENTED** — 112 of 254 bound
+- **REFERENCE** — 149 of 280 bound
+- **EXTEND** — 152 of 454 bound
 - **ASSERT** — 37 of 37 bound
 - **REGISTER** — 27 of 27 bound
 - **AUDIENCE** — 25 of 25 bound
-- **ADJUDICATE** — 5 of 30 bound
+- **ADJUDICATE** — 17 of 30 bound
 
 ## §2 — THE CORRECTION THIS REGISTER IS SHAPED AROUND
 
-The first pass used *zero grep hits* as the test for a genuine gap and returned **403**. CAEM-001's founding measurement refutes that directly: the token `Fabric` occurs in **zero** of 4,981 tracked files, yet six of the eight Fabrics have canonical homes under other names. A zero-hit **label** is not evidence of a missing **concept**.
+The first pass used *zero grep hits* as the test for a genuine gap and returned **395**. CAEM-001's founding measurement refutes that directly: the token `Fabric` occurs in **zero** of 4,981 tracked files, yet six of the eight Fabrics have canonical homes under other names. A zero-hit **label** is not evidence of a missing **concept**.
 
-Re-asking each zero-hit label against its **head noun's** owner — *is `graph` owned, even though `Analytics Graph` is not?* — moved **386** concepts from CREATE to EXTEND and left **17**. Acting on the first number would have authored hundreds of rival authorities, which is the exact failure this instrument exists to prevent.
+Re-asking each zero-hit label against its **head noun's** owner — *is `graph` owned, even though `Analytics Graph` is not?* — moved **385** concepts from CREATE to EXTEND and left **10**. Acting on the first number would have authored hundreds of rival authorities, which is the exact failure this instrument exists to prevent.
 
 ## §3 — CREATE · nothing owns these under any spelling
 
 | Mandated concept | Mandated by | Head noun searched |
 |---|---|---|
-| Auctioned | `PRD-ECON/ECON-19` | `auctioned` |
-| Configuration before customization | `UAKP-PRIN/PN-11` | `customization` |
-| Fractionalized | `PRD-ECON/ECON-21` | `fractionalized` |
 | Mobile | `LYR-L14/IF-02` | `mobile` |
 | Monetization | `PRD-FR/FR-10` | `monetization` |
-| Monorepo | `UAKP-ENV/EV2-05` | `monorepo` |
-| Polyrepo | `UAKP-ENV/EV2-06` | `polyrepo` |
 | Portability | `PRD-NFR/NFR-05` | `portability` |
 | Research Papers | `PRD-PUB/PUB-06` | `papers` |
 | Robots | `QM-OUT/OU-26` | `robots` |
-| Royalty | `PRD-ECON/ECON-07` | `royalty` |
 | Self Optimizing | `PRD-SELF/SELF-11` | `optimizing` |
-| Tokenized | `PRD-ECON/ECON-20` | `tokenized` |
 | Universal Monetization | `PRD-P/P-009` | `monetization` |
 | Universal Postulates | `MI-000/K-10` | `postulates` |
 | What is unknown | `QM-WHAT/WT-09` | `` |
@@ -60,35 +53,35 @@ Re-asking each zero-hit label against its **head noun's** owner — *is `graph` 
 | Concept | Tracked files matching | Mandated by |
 |---|---:|---|
 | AR | 226 | `LYR-L14/IF-04` |
-| Archive | 248 | `ARCH-EVOF/VF2-11` |
+| Archive | 249 | `ARCH-EVOF/VF2-11` |
 | Assets | 224 | `MI-012/CM-03` |
-| CREATE | 2147 | `ARCH-CERTV/CV-04` |
+| CREATE | 2149 | `ARCH-CERTV/CV-04` |
 | Classified | 1025 | `UAKP-STATE/SS-06` |
-| Component | 585 | `UAKP-CLS/CS-20` |
-| Constraints | 676 | `QM-CONST/CO-06` |
-| DEPRECATE | 217 | `ARCH-CERTV/CV-06` |
-| Discover | 911 | `ARCH-DISCF/DF-02` |
+| Component | 586 | `UAKP-CLS/CS-20` |
+| Constraints | 678 | `QM-CONST/CO-06` |
+| DEPRECATE | 218 | `ARCH-CERTV/CV-06` |
+| Discover | 913 | `ARCH-DISCF/DF-02` |
 | Distribution | 279 | `LYR-L13/CM-10` |
-| Everything | 634 | `QM-OUT/OU-01` |
-| Fact | 849 | `UAKP-CLS/CS-08` |
-| Free | 538 | `PRD-ECON/ECON-13` |
+| Everything | 638 | `QM-OUT/OU-01` |
+| Fact | 850 | `UAKP-CLS/CS-08` |
+| Free | 539 | `PRD-ECON/ECON-13` |
 | Goal | 246 | `UAKP-CLS/CS-12` |
-| Historical | 352 | `UAKP-STATE/SS-17` |
+| Historical | 353 | `UAKP-STATE/SS-17` |
 | Integrate | 241 | `LYR-L15/EL-12` |
 | Intent | 243 | `UAKP-CLS/CS-11` |
 | Learn | 307 | `LYR-L15/EL-04` |
 | Learning | 211 | `MI-014/EV-03` |
-| Measurements | 310 | `QM-CONST/CO-13` |
+| Measurements | 311 | `QM-CONST/CO-13` |
 | Migration | 416 | `ARCH-EVOF/VF2-09` |
 | Observe | 732 | `ARCH-DISCF/DF-01` |
 | Planned | 241 | `UAKP-STATE/SS-10` |
-| Purpose | 893 | `MI-000/K-01` |
+| Purpose | 894 | `MI-000/K-01` |
 | Realized | 826 | `UAKP-STATE/SS-11` |
-| Reasoning | 285 | `MI-014/EV-04` |
-| Repeat | 202 | `LYR-L15/EL-15` |
+| Reasoning | 284 | `MI-014/EV-04` |
+| Repeat | 204 | `LYR-L15/EL-15` |
 | Representation | 357 | `PRD-FR/FR-02` |
 | Restore | 290 | `ARCH-EVOF/VF2-12` |
-| SUPERSEDE | 957 | `ARCH-CERTV/CV-05` |
+| SUPERSEDE | 958 | `ARCH-CERTV/CV-05` |
 
 Several are the instrument failing honestly rather than the repository failing: a two-letter token like `AI` or `AR` matches inside longer words, and a two-letter token is not a searchable requirement.
 
@@ -96,16 +89,16 @@ Several are the instrument failing honestly rather than the repository failing: 
 
 | Concept | Status | Disposition | Determination | Candidate owner | Mandates |
 |---|---|---|---|---|---:|
-| Absolute Constitutional Kernel | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 1 |
+| Absolute Constitutional Kernel | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_arch.py` | 1 |
 | Accountability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
 | Accuracy | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `UCOS-OMEGA-INFINITY-BASELINE-INTEGRITY-RECONCILIATION-REPORT.md` | 1 |
 | Activation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 1 |
 | Adapter | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
-| Adapter Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/uckp/test_alignment.py` | 1 |
+| Adapter Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Admission | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Agriculture | SPECIFIED | REGISTER | PROVISIONAL | `engine/tests/kernel/test_compliance.py` | 1 |
 | AI | UNDECIDABLE | REGISTER | PROVISIONAL | `engine/acceptance/contracts.py` | 2 |
-| AI Agents | PARTIAL | AUDIENCE | PROVISIONAL | `engine/knowledge/seed.py` | 2 |
+| AI Agents | IMPLEMENTED | AUDIENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_index.py` | 2 |
 | AI Intelligence | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | AI Memory | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Alerts | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/observability/service.py` | 1 |
@@ -141,7 +134,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Assets | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCOS-RIB-001/rib.json` | 1 |
 | Assimilated | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Assimilation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
-| Auctioned | ABSENT | CREATE | PROVISIONAL | `` | 1 |
+| Auctioned | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_prd.py` | 1 |
 | Audit | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/canonical-observation-audit.json` | 4 |
 | Auditability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Authority | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/baseline-authority.json` | 3 |
@@ -150,13 +143,13 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Autonomous Response | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Autonomous Systems | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
 | Autonomous Threat Detection | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
-| Autonomy under governance | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Autonomy under governance | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Availability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/signals.json` | 1 |
 | Banking | IMPLEMENTED | REGISTER | PROVISIONAL | `engine/tests/expansion/test_platform_composition_verification.py` | 1 |
 | Baseline | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
 | Behavior Model | SPECIFIED | REFERENCE | PROVISIONAL | `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md` | 1 |
 | Behavioral Twin | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
-| Behaviors | SPECIFIED | REFERENCE | PROVISIONAL | `12-APPLICATION/APPLICATION-003-UNIVERSAL-APPLICATION-ONTOLOGY.md` | 1 |
+| Behaviors | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_model.py` | 1 |
 | Billing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json` | 4 |
 | Billing Capability | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Billing Testing | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
@@ -180,7 +173,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Canonical Knowledge State | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `intelligence/realization/engine.py` | 1 |
 | Canonical Knowledge Update | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Capabilities | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
-| Capabilities before projects | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 1 |
+| Capabilities before projects | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 1 |
 | Capability | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 5 |
 | Capability Cluster | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Capability Constitution | PARTIAL | EXTEND | PROVISIONAL | `platform/universal_foundation/constitution.py` | 1 |
@@ -193,9 +186,9 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Cart Capability | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Catalog Capability | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Certification | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/certification.json` | 16 |
-| Certification Constitution | PARTIAL | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
+| Certification Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Certification Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/universal_assurance/registry.py` | 1 |
-| Certification Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Certification Universe | SPECIFIED | REFERENCE | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-UNIVERSE-CATALOG.md"` | 1 |
 | Certified | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Certified Release | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Certified State | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/universal_pipeline/state.py` | 1 |
@@ -209,8 +202,8 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Classified | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Classify | ANCHORED | REFERENCE | PROVISIONAL | `engine/certification_integrity/classify.py` | 1 |
 | CLI | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` | 1 |
-| CLIs | PARTIAL | EXTEND | PROVISIONAL | `engine/certification_integrity/surface.py` | 1 |
-| Cloud Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| CLIs | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/certification_integrity/surface.py` | 1 |
+| Cloud Environment | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Collective Intelligence | PARTIAL | EXTEND | PROVISIONAL | `02-MASTER/APP-002-UNIVERSAL-APPLICATION-REFERENCE-ARCHITECTURE.md` | 1 |
 | Commerce | IMPLEMENTED | REGISTER | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 3 |
 | Commerce Capability | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
@@ -218,7 +211,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Commercial Assurance | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Commercial Constitution | SPECIFIED | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
 | Commercial Graph | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Commercial Model | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCEF-000001/ucef-framework.json` | 1 |
+| Commercial Model | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCEF-000001/ucef-framework.json` | 1 |
 | Commercialization | SPECIFIED | REFERENCE | PROVISIONAL | `platform/universal_foundation/catalog/foundation-nucleus.json` | 2 |
 | Communication Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
 | Communication Capability | SPECIFIED | REFERENCE | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-CAPABILITY-CATALOG.md"` | 1 |
@@ -228,11 +221,11 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Compliance Assessment | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `INFINITE-EXPANSION-COMPLIANCE-ASSESSMENT.md` | 1 |
 | Compliance Monitoring | SPECIFIED | REFERENCE | PROVISIONAL | `INFINITE-EXPANSION-COMPLIANCE-DETERMINATION.md` | 1 |
 | Compliance Teams | ABSENT | AUDIENCE | PROVISIONAL | `` | 1 |
-| Compliance Validation | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-PHASE-005/03-VALIDATION-GOVERNANCE-REGISTER.md` | 1 |
+| Compliance Validation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAKOS-PHASE-005/03-VALIDATION-GOVERNANCE-REGISTER.md` | 1 |
 | Component | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Component Testing | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | Composition | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 6 |
-| Composition before specialization | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
+| Composition before specialization | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
 | Composition Constitution | SPECIFIED | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
 | Computational Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/taxonomy.py` | 1 |
 | Concept Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `UCOS-ACC-001-ABSOLUTE-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md` | 1 |
@@ -243,7 +236,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Confidence attribute | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Configuration | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 4 |
 | Configuration Adapter | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
-| Configuration before customization | ABSENT | CREATE | PROVISIONAL | `` | 1 |
+| Configuration before customization | SPECIFIED | EXTEND | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Configuration Constitution | SPECIFIED | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
 | Configuration Validation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Conflict Discovery | PARTIAL | EXTEND | PROVISIONAL | `platform/repository_intelligence/discovery.py` | 1 |
@@ -254,11 +247,11 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Constitutional Constitution | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-AB-001/06-ARCHITECTURE-GOVERNANCE-REGISTER.md` | 1 |
 | Constitutional Decision | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Constitutional Evolution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UEI-000001/uei-evolution.json` | 1 |
-| Constitutional Foundation Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Constitutional Foundation Universe | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 1 |
 | Constitutional Governance | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 2 |
 | Constitutional Laws | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Constitutional Understanding | ABSENT | EXTEND | PROVISIONAL | `engine/uaue/understanding.py` | 1 |
-| Constitutional Validation | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
+| Constitutional Validation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Constraint | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 2 |
 | Constraint Constitution | ABSENT | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
 | Constraint Discovery | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCL-000001/ucl.json` | 1 |
@@ -286,7 +279,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Context Model | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/CMG-000012/CMG-000012-UNIVERSAL-CONTEXT-MODEL.md` | 1 |
 | Context Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/registry.py` | 1 |
 | Context Resolution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/resolution.py` | 2 |
-| Context Universe | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Context Universe | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/ontology.py` | 1 |
 | Contextualized | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `application/EC3-B12-U11-COMPLETION-REPORT.md` | 1 |
 | Continuous Verification | SPECIFIED | REFERENCE | PROVISIONAL | `PHASE-POST-FREEZE-EVOLUTION-READINESS-DETERMINATION.md` | 1 |
 | Contracts | ANCHORED | REFERENCE | PROVISIONAL | `engine/acceptance/contracts.py` | 1 |
@@ -301,13 +294,13 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Customers | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
 | Dashboards | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/repository_operations/contracts.py` | 3 |
 | Data | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 1 |
-| Data Lake | ABSENT | EXTEND | PROVISIONAL | `10-DATA/DATA-GOV-000-UNIVERSAL-DATA-PROGRAM-ESTABLISHMENT-DETERMINATION.md` | 1 |
+| Data Lake | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Database | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
-| Databases | PARTIAL | EXTEND | PROVISIONAL | `08-RUNTIME/RUNTIME-001-UNIVERSAL-RUNTIME-CONSTITUTION.md` | 1 |
+| Databases | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `08-RUNTIME/RUNTIME-001-UNIVERSAL-RUNTIME-CONSTITUTION.md` | 1 |
 | Decision | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
 | Decision Memory | SPECIFIED | REFERENCE | PROVISIONAL | `PHASE-4-RESUMPTION-STATE-REPORT.md` | 1 |
 | Decision Registry | SPECIFIED | REFERENCE | PROVISIONAL | `OMEGA-E06-STAGE-1-UNIVERSAL-CONSTITUTIONAL-REPOSITORY-DETERMINATION.md` | 1 |
-| Decision Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Decision Universe | SPECIFIED | REFERENCE | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-UNIVERSE-CATALOG.md"` | 1 |
 | Defense | IMPLEMENTED | REGISTER | PROVISIONAL | `platform/security/registries.py` | 1 |
 | Defense In Depth | PARTIAL | EXTEND | PROVISIONAL | `14-SECURITY/SECURITY-002-UNIVERSAL-SECURITY-THEORY.md` | 1 |
 | Define universal rules | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEC-000001/uec-declaration.json` | 1 |
@@ -316,7 +309,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Dependency Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Dependency Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/universal_control_plane/registry.py` | 1 |
 | Dependency Scheduling | ABSENT | EXTEND | PROVISIONAL | `platform/runtime_platform/scheduling.py` | 1 |
-| Dependency Universe | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Dependency Universe | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-UNIVERSE-CATALOG.md"` | 1 |
 | Dependency Update | SPECIFIED | REFERENCE | PROVISIONAL | `UCOS-OMEGA-INFINITY-CLOSURE-DEPENDENCY-GRAPH-DETERMINATION.md` | 1 |
 | Dependency Validation | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | Deployment | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 4 |
@@ -329,28 +322,28 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Developers | PARTIAL | AUDIENCE | PROVISIONAL | `engine/knowledge/bootstrap.py` | 1 |
 | DevOps | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
 | Diagrams | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-007/06-DISCOVERY-COVERAGE-MATRIX.md` | 1 |
-| Dictionaries | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
+| Dictionaries | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Dictionary | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json` | 1 |
 | Dictionary Update | PARTIAL | EXTEND | PROVISIONAL | `engine/infinite_scope/contract.py` | 1 |
 | Digital Twin | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
-| Digital Twins | SPECIFIED | REGISTER | PROVISIONAL | `` | 3 |
+| Digital Twins | SPECIFIED | REGISTER | PROVISIONAL | `engine/tests/conformance/test_mandates_index.py` | 3 |
 | Discover | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
-| Discover canonical ownership | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-OWNERSHIP.json` | 1 |
+| Discover canonical ownership | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-OWNERSHIP.json` | 1 |
 | Discover conflicts | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/repository_intelligence/__init__.py` | 1 |
 | Discover dependencies | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/discovery/__init__.py` | 1 |
 | Discover evidence | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/discovery/__init__.py` | 1 |
 | Discover gaps | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/repository_intelligence/__init__.py` | 1 |
-| Discover governance | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Discover knowledge | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Discover opportunities | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEI-000001/uei-evolution.json` | 1 |
-| Discover relationships | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/relationships.json` | 1 |
-| Discover structure | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
-| Discover the environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Discover truth | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Discover governance | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Discover knowledge | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
+| Discover opportunities | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UEI-000001/uei-evolution.json` | 1 |
+| Discover relationships | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/relationships.json` | 1 |
+| Discover structure | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
+| Discover the environment | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Discover truth | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Discovered | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Discovery | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 4 |
 | Discovery Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
-| Discovery before configuration | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
+| Discovery before configuration | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | Distributed Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Distribution | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | Documentation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 4 |
@@ -364,7 +357,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Economic Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/taxonomy.py` | 1 |
 | Economic Graph | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Economic Model | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
-| Economics | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Economics | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Ecosystem | PARTIAL | EXTEND | PROVISIONAL | `"06-IMPLEMENTATION/UCOS-\316\251\342\210\236-ECOSYSTEM-PLATFORM.md"` | 1 |
 | Education | SPECIFIED | REGISTER | PROVISIONAL | `engine/tests/expansion/test_platform_composition_verification.py` | 1 |
 | Elevate | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/BASELINE-001/baseline-declaration.json` | 1 |
@@ -385,7 +378,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Entity | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Environment | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
 | Environment Registry | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Environment Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Environment Universe | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 1 |
 | Environmental Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/taxonomy.py` | 1 |
 | ERP | IMPLEMENTED | REGISTER | PROVISIONAL | `00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json` | 1 |
 | Evaluation | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/mutation-governance-boundary.json` | 1 |
@@ -395,15 +388,15 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Event Streams | PARTIAL | EXTEND | PROVISIONAL | `11-SERVICE/SERVICE-GOV-000-UNIVERSAL-SERVICE-PROGRAM-ESTABLISHMENT-DETERMINATION.md` | 1 |
 | Events | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 4 |
 | Everything | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Everything composable | PARTIAL | EXTEND | PROVISIONAL | `engine/knowledge/ukip/__init__.py` | 1 |
-| Everything discoverable | PARTIAL | EXTEND | PROVISIONAL | `engine/knowledge/ukip/__init__.py` | 1 |
+| Everything composable | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/knowledge/ukip/__init__.py` | 1 |
+| Everything discoverable | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/knowledge/ukip/__init__.py` | 1 |
 | Everything evolvable | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Everything extensible | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UMK-000001/umk-kernel.json` | 1 |
-| Everything governable | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Everything replaceable | ABSENT | EXTEND | PROVISIONAL | `engine/omega_infinite/filesystem_provider.py` | 1 |
+| Everything extensible | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UMK-000001/umk-kernel.json` | 1 |
+| Everything governable | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Everything replaceable | SPECIFIED | EXTEND | PROVISIONAL | `engine/omega_infinite/filesystem_provider.py` | 1 |
 | Evidence | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/evidence-universe.json` | 9 |
 | Evidence attribute | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/CMG-FOUNDATION-PERMANENT-FREEZE-CERTIFICATION-AUDIT.md` | 1 |
-| Evidence before truth | PARTIAL | EXTEND | PROVISIONAL | `engine/coordinate_framework/contract.py` | 1 |
+| Evidence before truth | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/coordinate_framework/contract.py` | 1 |
 | Evidence Collection | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UTCE-001/utce-declaration.json` | 1 |
 | Evidence Discovery | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Evidence Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/graph/projections.py` | 1 |
@@ -413,9 +406,9 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Evidence Universe | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/evidence-universe.json` | 1 |
 | Evolution | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 11 |
 | Evolution Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
-| Evolution Approval | ABSENT | EXTEND | PROVISIONAL | `platform/commercial_intelligence/approval.py` | 1 |
+| Evolution Approval | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_layers.py` | 1 |
 | Evolution Assurance | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Evolution before stagnation | ABSENT | EXTEND | PROVISIONAL | `engine/tests/universal_discovery/test_ratchet.py` | 1 |
+| Evolution before stagnation | SPECIFIED | EXTEND | PROVISIONAL | `engine/tests/universal_discovery/test_ratchet.py` | 1 |
 | Evolution Capability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAUE-000001/01-AUTONOMOUS-EVOLUTION-CAPABILITY-MATRIX.md` | 1 |
 | Evolution Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Evolution Graph | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-MXR-001/roadmap.json` | 1 |
@@ -446,7 +439,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Finance | SPECIFIED | REGISTER | PROVISIONAL | `00-MASTER/UCMI-000001/commercial-surface.json` | 1 |
 | Finance Capability | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Founders | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
-| Fractionalized | ABSENT | CREATE | PROVISIONAL | `` | 1 |
+| Fractionalized | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_prd.py` | 1 |
 | Fraud Monitoring | ABSENT | EXTEND | PROVISIONAL | `engine/runtime/execution/monitoring.py` | 1 |
 | Free | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Future Capability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCDA-000001/ucda.json` | 1 |
@@ -457,14 +450,14 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Future Name | PARTIAL | EXTEND | PROVISIONAL | `engine/object_birth/model.py` | 1 |
 | Future Systems | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Future Unknown Domains | SPECIFIED | REGISTER | PROVISIONAL | `` | 1 |
-| Future Unknown Environment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Future Unknown Environment | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Galaxy | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Gap Discovery | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/repository_intelligence/discovery.py` | 2 |
 | Generate | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Generate execution specifications | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URRC-000001/urrc.json` | 1 |
-| Generate planning | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Generate realization packages | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URRC-000001/urrc.json` | 1 |
-| Generate requirements | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-009/requirements.json` | 1 |
+| Generate execution specifications | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URRC-000001/urrc.json` | 1 |
+| Generate planning | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Generate realization packages | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URRC-000001/urrc.json` | 1 |
+| Generate requirements | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-009/requirements.json` | 1 |
 | Generated Reality Applications | ABSENT | EXTEND | PROVISIONAL | `platform/universal_portal/applications.py` | 1 |
 | Generation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 6 |
 | Generator | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-UTCE-001/utce-declaration.json` | 1 |
@@ -475,20 +468,20 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Governance | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 6 |
 | Governance Adapter | PARTIAL | EXTEND | PROVISIONAL | `platform/universal_project_state/state_governance.py` | 1 |
 | Governance attribute | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Governance before automation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
+| Governance before automation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Governance Capability | PARTIAL | EXTEND | PROVISIONAL | `IAC-001D/03-CAPABILITY-COVERAGE-MATRIX.md` | 1 |
 | Governance Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/constitution/law.py` | 1 |
 | Governance Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/ceu/context_binding.py` | 1 |
 | Governance Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `SELF-COVERAGE-GRAPH.md` | 1 |
 | Governance Model | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Governance Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
-| Governance Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Governance Universe | SPECIFIED | REFERENCE | PROVISIONAL | `00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md` | 1 |
 | Governed | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Government | IMPLEMENTED | REGISTER | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
 | Government Platforms | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
 | Governments | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
 | Graph | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Graphs before hierarchies | ABSENT | EXTEND | PROVISIONAL | `UNIVERSAL-REQUIREMENT-EVOLUTION-CLOSURE-DETERMINATION.md` | 1 |
+| Graphs before hierarchies | SPECIFIED | EXTEND | PROVISIONAL | `UNIVERSAL-REQUIREMENT-EVOLUTION-CLOSURE-DETERMINATION.md` | 1 |
 | Guiding Principles | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Health | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Healthcare | IMPLEMENTED | REGISTER | PROVISIONAL | `00-MASTER/UCDA-000001/ucda.json` | 1 |
@@ -535,7 +528,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Infinite Composition | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Infinite Evolution Cycle | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Infinite extensibility | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-MXR-001/roadmap.json` | 1 |
-| Infinite Future Projections | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
+| Infinite Future Projections | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Infinite Scalability | SPECIFIED | REFERENCE | PROVISIONAL | `UNIVERSAL-IDENTITY-UNIVERSE-DETERMINATION.md` | 2 |
 | Information | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/exclusion-register.json` | 2 |
 | Information Constitution | SPECIFIED | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
@@ -549,21 +542,21 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Integration Certification | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `infrastructure/tests/test_integration_certification.py` | 1 |
 | Integration Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `infrastructure/_evidence/EC3-B13-U10/integration-registry.json` | 1 |
 | Integration Testing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `intelligence/portal.py` | 1 |
-| Integration Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Integration Universe | SPECIFIED | REFERENCE | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-UNIVERSE-CATALOG.md"` | 1 |
 | Integrity | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
 | Intelligence | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
-| Intelligence Constitution | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UEI-000001/uei-evolution.json` | 1 |
+| Intelligence Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UEI-000001/uei-evolution.json` | 1 |
 | Intelligence Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | 1 |
 | Intent | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Intent Driven Composition | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Intent Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Intent Universe | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 1 |
 | Interfaces | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UICM-000001/uicm.json` | 1 |
 | Interoperability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 1 |
 | Interoperability Validation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | IoT | SPECIFIED | REGISTER | PROVISIONAL | `` | 1 |
 | Journal Publications | ABSENT | EXTEND | PROVISIONAL | `intelligence/publication/registry.py` | 1 |
 | Knowledge | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 8 |
-| Knowledge Acquisition | SPECIFIED | EXTEND | PROVISIONAL | `verify.sh` | 1 |
+| Knowledge Acquisition | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Knowledge Adapter | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Knowledge Artifacts | SPECIFIED | REFERENCE | PROVISIONAL | `UNIVERSAL-KNOWLEDGE-ASSIMILATION-CAPABILITY-DETERMINATION.md` | 1 |
 | Knowledge Assimilation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/knowledge/ukip/assimilation.py` | 4 |
@@ -584,7 +577,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Knowledge Ingestion | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-006/CONST-07-SUCCESSOR-GOVERNANCE-CONSTITUTION.md` | 1 |
 | Knowledge Memory | SPECIFIED | REFERENCE | PROVISIONAL | `engine/lineage/memory-layers.json` | 1 |
 | Knowledge Objects | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
-| Knowledge once reuse everywhere | ABSENT | EXTEND | PROVISIONAL | `platform/universal_pipeline/orchestrator.py` | 1 |
+| Knowledge once reuse everywhere | SPECIFIED | EXTEND | PROVISIONAL | `platform/universal_pipeline/orchestrator.py` | 1 |
 | Knowledge Refinement | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-MXR-001/roadmap.json` | 1 |
 | Knowledge Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/knowledge/ukip/registry.py` | 1 |
 | Knowledge Relationships | PARTIAL | EXTEND | PROVISIONAL | `engine/knowledge/ukip/relationships.py` | 1 |
@@ -599,13 +592,13 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Learned | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Learning | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json` | 7 |
 | Learning Memory | SPECIFIED | REFERENCE | PROVISIONAL | `PHASE-4-CAPABILITY-GAP-MATRIX.md` | 1 |
-| Leased | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `` | 1 |
+| Leased | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/conformance/test_mandates_prd.py` | 1 |
 | Least Privilege | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/security/contracts.py` | 1 |
 | Legacy Repository | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Legal Validation | SPECIFIED | REFERENCE | PROVISIONAL | `00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md` | 1 |
 | Libraries | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `application/state.py` | 1 |
 | License | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCON-000001/closure-inventory.json` | 1 |
-| Licensed | SPECIFIED | REFERENCE | PROVISIONAL | `UMN-001-UNIVERSAL-MICRO-NUCLEUS-CONSTITUTIONAL-DETERMINATION.md` | 1 |
+| Licensed | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_prd.py` | 1 |
 | Licensing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/commercial_intelligence/licensing.py` | 3 |
 | Licensing Testing | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | Lifecycle | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
@@ -634,7 +627,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Measurements | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
 | Memory | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Memory Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/factory/registry.py` | 1 |
-| Memory Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Memory Universe | SPECIFIED | REFERENCE | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-UNIVERSE-CATALOG.md"` | 1 |
 | Metadata attribute | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UPF-000001/upf-provider.json` | 1 |
 | Metering | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-MXR-001/roadmap.json` | 2 |
 | Metrics | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
@@ -649,7 +642,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Monitoring | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/runtime/execution/monitoring.py` | 6 |
 | Monitoring Constitution | ABSENT | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
 | Monitoring Graph | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Monorepo | SPECIFIED | CREATE | PROVISIONAL | `` | 1 |
+| Monorepo | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Multi Calendar | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Multi-Cloud | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 2 |
 | Multi Country | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/MCOS-000001/mcos-civilization.json` | 1 |
@@ -713,7 +706,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Object Model | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/object_birth/model.py` | 1 |
 | Object Store | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/uckp/persistence.py` | 1 |
 | Objects | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
-| Objects before documents | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
+| Objects before documents | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Observability | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Observation | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 9 |
 | Observation Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
@@ -724,16 +717,16 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Ontologies | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/URRC-000001/urrc.json` | 1 |
 | Ontology | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
 | Ontology Registry | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-USIS-001/09-USIS-REGISTRY-INTEGRATION-MANIFEST.md` | 1 |
-| Ontology Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Ontology Universe | SPECIFIED | REFERENCE | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-UNIVERSE-CATALOG.md"` | 1 |
 | Ontology Update | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Operational Memory | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-URAT-001/urat-declaration.json` | 1 |
 | Operational Twin | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Opportunity Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-invariant-manifest.json` | 2 |
 | Optimization | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/compiler/optimization.py` | 5 |
 | Optimization Memory | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
-| Orchestrate realization | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-REALIZATION.json` | 1 |
+| Orchestrate realization | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-REALIZATION.json` | 1 |
 | Orchestration | ANCHORED | REFERENCE | PROVISIONAL | `engine/runtime/orchestration.py` | 1 |
-| Orchestration Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Orchestration Universe | SPECIFIED | REFERENCE | PROVISIONAL | `02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md` | 1 |
 | Organizational Knowledge | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Organizations | PARTIAL | EXTEND | PROVISIONAL | `02-MASTER/T02-UED-001-UNIVERSAL-EXISTENCE-FOUNDATION-DISCOVERY-INTELLIGENCE.md` | 1 |
 | Owned | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
@@ -746,7 +739,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Patent Applications | SPECIFIED | EXTEND | PROVISIONAL | `platform/universal_portal/applications.py` | 1 |
 | Pattern Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `PHASE-UCF-012-PROVIDER-CATEGORY-OWNERSHIP-RESOLUTION-INTEGRATION-DETERMINATION.md` | 2 |
 | Payment Capability | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-MXR-001/roadmap.json` | 1 |
-| Performance | PARTIAL | EXTEND | PROVISIONAL | `` | 1 |
+| Performance | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/conformance/test_mandates_arch.py` | 1 |
 | Performance Assessment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Performance Testing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/MIP-W1-P001/01-EXECUTIVE-SUMMARY.md` | 1 |
 | Performance Validation | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-CVR-001/05-VERIFICATION-CONSTITUTION.md` | 1 |
@@ -758,7 +751,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Planned | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
 | Planning | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 7 |
 | Planning Registry | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Planning Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Planning Universe | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 1 |
 | Platform Engineers | ABSENT | AUDIENCE | PROVISIONAL | `` | 1 |
 | Platform independent of UCOS | ASSERTION | ASSERT | PROVISIONAL | `` | 1 |
 | Platforms | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 2 |
@@ -768,7 +761,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Policy Discovery | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Policy Driven Composition | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Policy Validation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `service/tests/test_policy_validation.py` | 1 |
-| Polyrepo | SPECIFIED | CREATE | PROVISIONAL | `` | 1 |
+| Polyrepo | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Portability | SPECIFIED | CREATE | PROVISIONAL | `` | 1 |
 | Possibility | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/universal_discovery/classification.py` | 1 |
 | Post Quantum Readiness | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
@@ -780,7 +773,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Pricing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/commercial_intelligence/pricing.py` | 2 |
 | Pricing Capability | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Primitive Model | SPECIFIED | REFERENCE | PROVISIONAL | `08-RUNTIME/RUNTIME-005-UNIVERSAL-RUNTIME-META-MODEL.md` | 1 |
-| Privacy | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `OMEGA-E06-STAGE-1-UNIVERSAL-CONSTITUTIONAL-REPOSITORY-DETERMINATION.md` | 1 |
+| Privacy | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/conformance/test_mandates_model.py` | 1 |
 | Privacy Constitution | ABSENT | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
 | Privacy Validation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Product | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCON-000001/ucon-declaration.json` | 1 |
@@ -804,13 +797,13 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Realization | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-REALIZATION.json` | 3 |
 | Realization Package Generation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Realization Registry | SPECIFIED | REFERENCE | PROVISIONAL | `00-CEP/STAGE-02-S2-09-REALIZATION-BINDING-ARCHITECTURE.md` | 1 |
-| Realization Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Realization Universe | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 1 |
 | Realized | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-declaration.json` | 1 |
 | Realm | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/catalog/reference-frames.json` | 1 |
 | Reason | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Reasoned | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee.json` | 1 |
 | Reasoning | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 5 |
-| Reasoning Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Reasoning Universe | SPECIFIED | REFERENCE | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-UNIVERSE-CATALOG.md"` | 1 |
 | Recognition | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
 | Recognize | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf-authority.json` | 1 |
 | Recovery | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
@@ -827,7 +820,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Regulatory Knowledge | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json` | 1 |
 | Regulatory Submissions | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/IMR-003A/cios-bindings.json` | 1 |
 | Relationship | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 4 |
-| Relationship Constitution | ABSENT | EXTEND | PROVISIONAL | `engine/constitution/law.py` | 1 |
+| Relationship Constitution | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_index.py` | 1 |
 | Relationship Discovery | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UCOS-UMA-001/07-DISCOVERY-FRAMEWORK.md` | 2 |
 | Relationship Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UGA-001/04-RELATIONSHIP-GRAPH.json` | 1 |
 | Relationship Model | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-IMPLEMENTATION-MODEL-CONSTITUTION.md"` | 1 |
@@ -838,12 +831,12 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Relationships | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/relationships.json` | 3 |
 | Relationships attribute | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Release | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Reliability | PARTIAL | EXTEND | PROVISIONAL | `UCOS-OMEGA-INFINITY-UGA-REALITY-SYNCHRONIZATION-DETERMINATION.md` | 2 |
+| Reliability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/conformance/test_mandates_arch.py` | 2 |
 | Reliability Validation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Renewal | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCMI-000001/commercial-surface.json` | 1 |
 | Repeat | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 1 |
-| Repeat continuously | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
-| Replaceability before coupling | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UPF-000001/upf-provider.json` | 1 |
+| Repeat continuously | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
+| Replaceability before coupling | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UPF-000001/upf-provider.json` | 1 |
 | Replay | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-REPLAY.json` | 6 |
 | Reports | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
 | Repository Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
@@ -856,7 +849,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Representation | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Representation Twin | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-URR-001/urr-declaration.json` | 1 |
 | Requirement | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
-| Requirement Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `UNIVERSAL-REQUIREMENT-EVOLUTION-CLOSURE-DETERMINATION.md` | 2 |
+| Requirement Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 2 |
 | Requirement Registry | SPECIFIED | REFERENCE | PROVISIONAL | `PHASE-1A-EXECUTION-COMPLETION-REPORT.md` | 1 |
 | Requirement Validation | SPECIFIED | REFERENCE | PROVISIONAL | `100-PERCENT-CLAIM-VALIDATION-DETERMINATION.md` | 1 |
 | Requirements | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-009/requirements.json` | 1 |
@@ -872,15 +865,15 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Restore | UNDECIDABLE | ADJUDICATE | PROVISIONAL | `00-MASTER/UCOS-MXR-001/roadmap.json` | 1 |
 | Retirement | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 1 |
 | Reuse | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
-| Reuse before duplication | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
+| Reuse before duplication | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCOS-AEE-001/aee-declaration.json` | 1 |
 | Reuse Discovery | PARTIAL | EXTEND | PROVISIONAL | `platform/repository_intelligence/discovery.py` | 1 |
-| Revenue | PARTIAL | EXTEND | PROVISIONAL | `02-MASTER/T04-TEE-001-UNIVERSAL-TRANSACTION-AND-ENTERPRISE-EXISTENCE-DISCOVERY-DETERMINATION.md` | 3 |
+| Revenue | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/conformance/test_mandates_prd.py` | 3 |
 | Revocation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
 | Risk Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/ACEE-000001/acee-invariant-manifest.json` | 2 |
 | Risk Validation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Robotics | SPECIFIED | REGISTER | PROVISIONAL | `` | 2 |
 | Robots | ABSENT | CREATE | PROVISIONAL | `` | 1 |
-| Royalty | SPECIFIED | CREATE | PROVISIONAL | `` | 1 |
+| Royalty | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_prd.py` | 1 |
 | Rule | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
 | Rule Constitution | PARTIAL | EXTEND | PROVISIONAL | `engine/context/validation.py` | 1 |
 | Rule Model | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
@@ -889,7 +882,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Runtime Adapter | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
 | Runtime Assurance | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Runtime Composition | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/runtime/composition.py` | 1 |
-| Runtime Constitution | PARTIAL | EXTEND | PROVISIONAL | `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md` | 1 |
+| Runtime Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md` | 1 |
 | Runtime context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/runtime_operations/context.py` | 1 |
 | Runtime events | PARTIAL | EXTEND | PROVISIONAL | `application/state_validation.py` | 1 |
 | Runtime evolution | SPECIFIED | REFERENCE | PROVISIONAL | `CEP-MOD-002-UNIVERSAL-STRUCTURAL-VOCABULARY-MIGRATION-DETERMINATION.md` | 1 |
@@ -907,7 +900,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Schemas | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
 | Scientific Computing | ABSENT | REGISTER | PROVISIONAL | `` | 1 |
 | Scientific Knowledge | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Scientific Platforms | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
+| Scientific Platforms | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
 | Scientists | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
 | SCM | SPECIFIED | REGISTER | PROVISIONAL | `` | 1 |
 | SDKs | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-USIS-WAVE3-STRUCTURE/06-READINESS-DETERMINATION.md` | 2 |
@@ -931,7 +924,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Self Discovering | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UAUE-000001/uaue-evolution.json` | 1 |
 | Self Documenting | PARTIAL | EXTEND | PROVISIONAL | `` | 1 |
 | Self Evolution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAUE-000001/uaue-evolution.json` | 1 |
-| Self-Evolution Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Self-Evolution Universe | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 1 |
 | Self Evolving | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `` | 1 |
 | Self Governance | PARTIAL | EXTEND | PROVISIONAL | `` | 1 |
 | Self Governing | PARTIAL | EXTEND | PROVISIONAL | `engine/civilization/generation.py` | 1 |
@@ -947,7 +940,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Self Validation | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/MB18-MB25-VALIDATION-MATRIX.md` | 1 |
 | Self Verification | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `PHASE2-HEAD-VERIFICATION-REPORT.md` | 1 |
 | Self Verifying | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/acceptance/contracts.py` | 1 |
-| Semantic Analysis | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-CVER-001/03-REFERENCE-CORPUS-CERTIFICATION.md` | 1 |
+| Semantic Analysis | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_arch.py` | 1 |
 | Semantic Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UAIE-000001/04-OWNERSHIP-AND-DEPENDENCY-GRAPH.md` | 1 |
 | Service | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Services | ANCHORED | REFERENCE | PROVISIONAL | `platform/foundation/services.py` | 3 |
@@ -958,11 +951,11 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Smart Cities | SPECIFIED | REGISTER | PROVISIONAL | `engine/tests/kernel/test_compliance.py` | 1 |
 | Solution Architects | ABSENT | AUDIENCE | PROVISIONAL | `` | 1 |
 | Source Code | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/uckp/projection.py` | 2 |
-| Space Platforms | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
+| Space Platforms | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/volumes.json` | 1 |
 | Space Systems | SPECIFIED | REGISTER | PROVISIONAL | `` | 1 |
 | Spatial Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/context/taxonomy.py` | 1 |
 | Specialization | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
-| Specifications | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/URRC-000001/urrc.json` | 1 |
+| Specifications | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/URRC-000001/urrc.json` | 1 |
 | SRE | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
 | Stage 0 Research | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Stage 1 Concept | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
@@ -997,7 +990,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Temporal Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/context/conftest.py` | 1 |
 | Testing | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 3 |
 | Tests | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 3 |
-| Tokenized | SPECIFIED | CREATE | PROVISIONAL | `` | 1 |
+| Tokenized | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_prd.py` | 1 |
 | Traceability | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 2 |
 | Traceability Graph | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/graph/projections.py` | 1 |
 | Traces | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-UTCE-001/utce-declaration.json` | 1 |
@@ -1006,21 +999,21 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Transformation | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/omega_governance/reference/transformation.py` | 1 |
 | Transportation | SPECIFIED | REGISTER | PROVISIONAL | `02-MASTER/T04-TEE-001-UNIVERSAL-TRANSACTION-AND-ENTERPRISE-EXISTENCE-DISCOVERY-DETERMINATION.md` | 1 |
 | Truth | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 4 |
-| Truth before implementation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Truth before implementation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Truth Determination | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/UAKOS-CLOSURE-002/19-REPOSITORY-TRUTH-DETERMINATION.md` | 1 |
 | Truth Discovery | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl.json` | 1 |
 | Truth Registry | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Truth revisable on new evidence | ABSENT | EXTEND | PROVISIONAL | `00-BOOK/DATA/evidence-universe.json` | 1 |
-| Truth Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Truth Universe | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 1 |
 | Type attribute | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Understand | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UGA-001/uga-declaration.json` | 1 |
 | Understanding | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/uaue/understanding.py` | 1 |
 | Unit Testing | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/graph/projections.py` | 1 |
-| Universal Assurance Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Assurance Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Authority | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/omega_governance/test_authority.py` | 1 |
 | Universal Automation | SPECIFIED | REFERENCE | PROVISIONAL | `UCOS-CEA-000002-REGENERATED-ROADMAPS-AND-EXECUTION-SEQUENCE.md` | 1 |
 | Universal Axioms | SPECIFIED | EXTEND | PROVISIONAL | `14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md` | 1 |
-| Universal Behaviour | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
+| Universal Behaviour | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Universal Canonical Authority Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Capability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
 | Universal Capability Composer | ABSENT | EXTEND | PROVISIONAL | `intelligence/publication/composer.py` | 1 |
@@ -1028,17 +1021,17 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Universal Certifiability | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/RA-002/02-MISSING-CONCEPTS.md` | 1 |
 | Universal Certification Engine | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/universal_certification/errors.py` | 1 |
 | Universal Commerce | SPECIFIED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
-| Universal Commercial Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Commercial Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Computation Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Conflict Detection Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Constitutional Foundation | SPECIFIED | REFERENCE | PROVISIONAL | `04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md` | 1 |
 | Universal Constitutional Grammar | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 1 |
 | Universal Constitutional Graph | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Constitutional Kernel | SPECIFIED | REFERENCE | PROVISIONAL | `"00-MASTER/EVOLUTION-001/\316\251-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md"` | 1 |
-| Universal Constraint Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Constraint Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Constraints | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/kernel/test_governance.py` | 1 |
 | Universal Context | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/context-authority.json` | 1 |
-| Universal Context Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Context Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Context Resolution Engine | SPECIFIED | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Decision Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Definitions | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UAEP-000001/uaep-platform.json` | 1 |
@@ -1047,7 +1040,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Universal Economic Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Economics | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Universal Environment Discovery Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
-| Universal Event | PARTIAL | EXTEND | PROVISIONAL | `"05-GENERATION/UCOS-\316\251\342\210\236-UNIVERSAL-EVENT-GENERATION-FRAMEWORK.md"` | 1 |
+| Universal Event | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `"05-GENERATION/UCOS-\316\251\342\210\236-UNIVERSAL-EVENT-GENERATION-FRAMEWORK.md"` | 1 |
 | Universal Evidence Discovery Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Evolution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UEI-000001/uei-evolution.json` | 1 |
 | Universal Evolution Engine | PARTIAL | EXTEND | PROVISIONAL | `platform/universal_control_plane/evolution.py` | 2 |
@@ -1058,11 +1051,11 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Universal Existence Foundation | SPECIFIED | REFERENCE | PROVISIONAL | `02-MASTER/T02-UED-001-UNIVERSAL-EXISTENCE-FOUNDATION-DISCOVERY-INTELLIGENCE.md` | 1 |
 | Universal Gap Discovery Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Governance | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/universal_control_plane/governance.py` | 1 |
-| Universal Governance Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Governance Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Identity | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UIS-001/uis-declaration.json` | 1 |
 | Universal Identity Assignment | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Identity attribute | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Universal Identity Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Identity Foundation | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_index.py` | 1 |
 | Universal Information | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/exclusion-register.json` | 1 |
 | Universal Information Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Intelligence | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/uckp/intelligence.py` | 1 |
@@ -1078,15 +1071,15 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Universal Knowledge Refinement Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Knowledge Universe | SPECIFIED | REFERENCE | PROVISIONAL | `UCOS-CEA-000002-REGENERATED-ROADMAPS-AND-EXECUTION-SEQUENCE.md` | 2 |
 | Universal Learning Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
-| Universal Lifecycle | PARTIAL | EXTEND | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-INVENTORY.json` | 1 |
-| Universal Logic | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
+| Universal Lifecycle | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-INVENTORY.json` | 1 |
+| Universal Logic | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
 | Universal Logic Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Mathematics | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 2 |
 | Universal Mathematics Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Meaning | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Universal Meaning Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Meaning Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Measurement | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/measurement/service.py` | 1 |
-| Universal Measurement Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Measurement Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Meta Model | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Universal Monetization | ABSENT | CREATE | PROVISIONAL | `` | 1 |
 | Universal Observability | PARTIAL | EXTEND | PROVISIONAL | `"02-MASTER/UCOS-\316\251\342\210\236-UNIVERSAL-OBSERVABILITY-ARCHITECTURE-CONSTITUTION.md"` | 1 |
@@ -1097,54 +1090,54 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Universal Possibility Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Postulates | ABSENT | CREATE | PROVISIONAL | `` | 1 |
 | Universal Privacy | SPECIFIED | REFERENCE | PROVISIONAL | `OMEGA-E06-STAGE-1-UNIVERSAL-CONSTITUTIONAL-REPOSITORY-DETERMINATION.md` | 1 |
-| Universal Projection | PARTIAL | EXTEND | PROVISIONAL | `engine/uckp/projection.py` | 1 |
-| Universal Projection Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Projection | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/uckp/projection.py` | 1 |
+| Universal Projection Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Proof System | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Universal Reality Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Reality Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Realization Engine | SPECIFIED | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Realization Package Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
-| Universal Reasoning Engine | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_alignment.py` | 1 |
-| Universal Relationship Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Reasoning Engine | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
+| Universal Relationship Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Relationships | SPECIFIED | EXTEND | PROVISIONAL | `00-BOOK/DATA/relationships.json` | 1 |
 | Universal Repository Discovery Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Requirement Discovery Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
-| Universal Rule Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Rule Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Rules | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UEC-000001/uec-declaration.json` | 1 |
 | Universal Runtime | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/runtime_platform/execution.py` | 1 |
-| Universal Runtime Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Runtime Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Security | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/MASTER-BOOK/UMB-015-SECURITY-ARCHITECTURE.md` | 1 |
 | Universal Self-Evolution Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universal Semantics | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 2 |
-| Universal State | PARTIAL | EXTEND | PROVISIONAL | `platform/universal_pipeline/state.py` | 1 |
+| Universal State | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/universal_pipeline/state.py` | 1 |
 | Universal Symbols | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UOBC-000001/uobc-birth-contract.json` | 1 |
 | Universal Terminology | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCOS-UCAF-001/ucaf.json` | 1 |
 | Universal Traceability | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/MIP-W1-P001/13-UNIVERSAL-TRACEABILITY-MATRIX.md` | 1 |
 | Universal Trust | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/CMG-000010/CMG-000010-UNIVERSAL-TRUST-EVOLUTION-MODEL.md` | 1 |
 | Universal Truth Discovery Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
-| Universal Truth Foundation | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Universal Truth Foundation | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Universal Validation Engine | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `platform/universal_validation/engine.py` | 1 |
 | Universal Verification Engine | ABSENT | EXTEND | PROVISIONAL | `engine/uckp/law.py` | 1 |
 | Universe | ANCHORED | REFERENCE | PROVISIONAL | `00-BOOK/DATA/observation-universe.json` | 2 |
-| Universes before engines | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
+| Universes before engines | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCI-000001/uci-declaration.json` | 1 |
 | Universities | SPECIFIED | AUDIENCE | PROVISIONAL | `` | 1 |
 | Unknown | ANCHORED | EXTEND | PROVISIONAL | `engine/certification_integrity/__init__.py` | 1 |
 | Unknown constructs admitted by governance not code | ASSERTION | ASSERT | PROVISIONAL | `` | 1 |
 | Unknown Future Construct | SPECIFIED | REFERENCE | PROVISIONAL | `00-CEP/STAGE-04-FOUNDATION-IMPLEMENTATION-FACTORY-PLAN.md` | 1 |
 | Unknown Future Projections | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Unknown Intelligence Forms | SPECIFIED | REFERENCE | PROVISIONAL | `UCOS-OMEGA-INFINITY-UNIVERSAL-KNOWLEDGE-ASSIMILATION-COMPLETENESS-DETERMINATION.md` | 1 |
-| Update canonical knowledge | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
+| Update canonical knowledge | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Upgrade | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
 | Usage | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UEG-000001/ueg-declaration.json` | 1 |
 | Validate | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Validated | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Validation | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 12 |
-| Validation Constitution | PARTIAL | EXTEND | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
+| Validation Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/id-ledger.json` | 1 |
 | Validation Registry | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/IMR-0000/07-CANONICAL-REGISTRY-FRAMEWORK.md` | 1 |
-| Validation Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Validation Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Verification | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 11 |
-| Verification Constitution | PARTIAL | EXTEND | PROVISIONAL | `engine/verification_intelligence/constitution.py` | 1 |
+| Verification Constitution | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/verification_intelligence/constitution.py` | 1 |
 | Verification Registry | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Verification Universe | SPECIFIED | REFERENCE | PROVISIONAL | `engine/tests/uckp/test_universe_and_validation.py` | 1 |
+| Verification Universe | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-CVR-001/00-VERIFICATION-ARCHITECTURE-REPORT.md` | 1 |
 | Verified | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Verify | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 2 |
 | Version attribute | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
@@ -1200,14 +1193,14 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Who decides | PARTIAL | EXTEND | PROVISIONAL | `engine/uckp/vocabulary.py` | 1 |
 | Who evolves | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UEI-000001/uei-evolution.json` | 1 |
 | Who executes | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UCL-000001/ucl-declaration.json` | 1 |
-| Who governs | PARTIAL | EXTEND | PROVISIONAL | `engine/recursive_knowledge/declaration.py` | 1 |
+| Who governs | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/recursive_knowledge/declaration.py` | 1 |
 | Who observes | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/UCCFA-000001/uccfa-declaration.json` | 1 |
 | Who owns | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-BOOK/DATA/constitutional-authority-alignment.json` | 1 |
 | Why does anything exist | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Why should it continue | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UER-000001/uer.json` | 1 |
 | Why should it evolve | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
 | Why should it exist | ABSENT | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
-| Wiki | PARTIAL | EXTEND | PROVISIONAL | `engine/knowledge/seed.py` | 1 |
+| Wiki | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `engine/tests/conformance/test_mandates_uakp.py` | 1 |
 | Work | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
 | Work Discovery | SPECIFIED | REFERENCE | PROVISIONAL | `00-MASTER/W1-INTEGRATION-REPORT.md` | 1 |
 | Working Memory | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UISD-000001/uisd-declaration.json` | 1 |
