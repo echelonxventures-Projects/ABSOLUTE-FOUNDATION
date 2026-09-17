@@ -601,6 +601,22 @@
       "expires_at": null,
       "single_use": true,
       "$authorization": "OPERATOR-AUTHORIZED IN SESSION (\"Issue the permit and keep going in sequence\"), transcribed by the agent rather than composed by it. The three bindings above are a transcription of `uga_engine.py run --plan` at HEAD 7bf65aa3, which is what that command exists to produce. WHAT IT ALLOCATES. Exactly four by_object identities, for the four files that give CAEM-001 a producer and a governed disposition register: caem_engine.py (ENGINE, seq 1390->1391); 06-MANDATE-CORPUS.json and 07-MANDATE-DISPOSITION.json (DATAOBJ, seq 147->149); 08-MANDATE-DISPOSITION-REGISTER.md (EXDOC, seq 3150->3151). WHY IT IS NEEDED. Six governing documents state 1,449 mandates. CAEM-001 §1 mapped thirteen of them to canonical homes by hand and recorded why it had to be by hand. These four files carry that act to the whole corpus without repeating it: the corpus is transcribed once, the disposition is measured reproducibly, and every row stays PROVISIONAL because semantic equivalence is forbidden to an engine. UGA-INV-01 refuses a tracked file without a Universal ID, so the commit cannot land without this. WHAT IT DOES NOT COVER. No other identity, no knowledge minting, no corpus registration -- these are Operational Memory under 00-MASTER/, not corpus, and the plan's own report bounds it at four. IRREVERSIBILITY. Permanent (UCKP-ART-05); bound to this manifest, pre-image and HEAD 7bf65aa3, and single-use."
+    },
+    {
+      "permit_id": "P-UCOS-MANDATE-CONFORMANCE-001",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "3e9139bb0edea9ef1135e6840499ad3d1e3df35886089084227034438f5fc186",
+      "preimage_digest": "9301f0bae0a2fb36da09c02138e6e64a9b9062845999a19797c10fd6aec410f9",
+      "head": "fea8a8652008e6acca6ce7e787b9357ed661daf0",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 7
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION (the operator was asked how to proceed on new tracked files and answered \"Issue a permit\", then \"Implement all in sequence\"), transcribed by the agent rather than composed by it. The three bindings above are a transcription of `uga_engine.py run --plan` at HEAD fea8a865, which is what that command exists to produce. WHAT IT ALLOCATES. Exactly seven by_object identities (TESTOBJ, seq 901->908) for one shared reader and six mandate-conformance suites under engine/tests/conformance/: mandate_corpus.py and test_mandates_{prd,index,arch,uakp,model,layers}.py, one suite per governing document. WHY IT IS NEEDED. Six documents state 1,449 mandates, and discharging one means a test or a gate that names it and asserts the property against its located owner. The first six waves were appended to engine/tests/uckp/test_{layer_zero,universe_and_validation,alignment}.py, each of which declares a scope its new contents exceeded -- and a suite whose declared scope no longer describes what it asserts is the drift these bindings exist to catch. This permit buys the written waves a home that matches them and the remaining sections a place to land. UGA-INV-01 refuses a tracked file without a Universal ID, so the commit cannot land without it. WHAT IT DOES NOT COVER. No other identity, no knowledge minting, no corpus registration, and no file outside engine/tests/conformance/. The plan's own report bounds it at seven. IRREVERSIBILITY. Permanent (UCKP-ART-05); bound to this manifest, pre-image and HEAD fea8a865, and single-use."
     }
   ]
 }

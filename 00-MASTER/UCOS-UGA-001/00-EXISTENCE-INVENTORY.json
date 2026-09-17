@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7158,
+  "total_objects": 7165,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -46013,6 +46013,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "engine/tests/conformance/mandate_corpus.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000902",
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
       "path": "engine/tests/conformance/test_agnosticism_conformance.py",
       "object_class": "TEST_OBJECT",
       "lifecycle": "AUTHORED",
@@ -46020,6 +46029,60 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TESTOBJ-000897",
       "first_seen": "commit:3dd9256687e2"
+    },
+    {
+      "path": "engine/tests/conformance/test_mandates_arch.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000903",
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "path": "engine/tests/conformance/test_mandates_index.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000904",
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "path": "engine/tests/conformance/test_mandates_layers.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000905",
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "path": "engine/tests/conformance/test_mandates_model.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000906",
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "path": "engine/tests/conformance/test_mandates_prd.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000907",
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "path": "engine/tests/conformance/test_mandates_uakp.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000908",
+      "first_seen": "commit:fea8a8652008"
     },
     {
       "path": "engine/tests/conftest.py",

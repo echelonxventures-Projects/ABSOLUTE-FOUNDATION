@@ -12159,7 +12159,7 @@
     "EXDOC": 3151,
     "TOOLING": 57,
     "ENGINE": 1391,
-    "TESTOBJ": 901,
+    "TESTOBJ": 908,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -67409,6 +67409,48 @@
       "object_class": "EXECUTABLE_OBJECT",
       "category": "ENGINE",
       "first_seen": "commit:7bf65aa35788"
+    },
+    "engine/tests/conformance/mandate_corpus.py": {
+      "universal_id": "UCOS-TESTOBJ-000902",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:fea8a8652008"
+    },
+    "engine/tests/conformance/test_mandates_arch.py": {
+      "universal_id": "UCOS-TESTOBJ-000903",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:fea8a8652008"
+    },
+    "engine/tests/conformance/test_mandates_index.py": {
+      "universal_id": "UCOS-TESTOBJ-000904",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:fea8a8652008"
+    },
+    "engine/tests/conformance/test_mandates_layers.py": {
+      "universal_id": "UCOS-TESTOBJ-000905",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:fea8a8652008"
+    },
+    "engine/tests/conformance/test_mandates_model.py": {
+      "universal_id": "UCOS-TESTOBJ-000906",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:fea8a8652008"
+    },
+    "engine/tests/conformance/test_mandates_prd.py": {
+      "universal_id": "UCOS-TESTOBJ-000907",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:fea8a8652008"
+    },
+    "engine/tests/conformance/test_mandates_uakp.py": {
+      "universal_id": "UCOS-TESTOBJ-000908",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:fea8a8652008"
     }
   },
   "by_observation": {

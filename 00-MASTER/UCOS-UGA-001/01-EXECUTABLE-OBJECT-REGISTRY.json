@@ -4,7 +4,7 @@
   "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "1-2 — Identity + Executable Object Registry",
-  "count": 5469,
+  "count": 5476,
   "identity_authority": {
     "ledger": "00-BOOK/DATA/id-ledger.json",
     "rule": "There is exactly ONE identity authority. This programme mints from the SAME ledger and the SAME category_seq counter as the corpus. It creates no second authority and no second sequence.",
@@ -1098,7 +1098,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "606fca6d05397b6fa87f30f6b22430b393ed240f35056dbfd01a987a839894f5",
+      "content_hash": "7b26bb87363d917244e83909284f0ff8eeff75cb1ccd03796f73d181bca93693",
       "content_hash_withheld": null,
       "first_seen": "commit:77798202d2df"
     },
@@ -1368,7 +1368,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "ef1b08528ac80d8d0e92eeb71861001aadc71ef2882bc84e5eccea2ff9adb5b9",
+      "content_hash": "6dcc219c258d322c094c589c7ae6778fdb671c5cb35ce47a0555c4ddd25d787c",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -33899,7 +33899,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "1ffc3cb749b96b0fde2eb7f1de39b9121f4fe4776b44c7f28f39850b5b890b7d",
+      "content_hash": "632d7fdaf20cd467fee29b8abaab24d7fc55784f24a14686c8fe283e90c7cad5",
       "content_hash_withheld": null,
       "first_seen": "commit:7bf65aa35788"
     },
@@ -33917,7 +33917,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "e2abbae47ad39d7c9464621637394fe8b0fbfb6baae2071994cce7159caff64f",
+      "content_hash": "8dcc99ade30438e3aeaca3eb5579bec7efa1983b5c78f52d9db5171274fffa9c",
       "content_hash_withheld": null,
       "first_seen": "commit:7bf65aa35788"
     },
@@ -33935,7 +33935,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "5b219123f4648bb42596be7c46928aebf97f66f5ba7242d6b6a045f05e7a54b7",
+      "content_hash": "d06bb103c5e5302f4757ad55c0b91810f297fe265079edb8eb8f0db250b72bbd",
       "content_hash_withheld": null,
       "first_seen": "commit:7bf65aa35788"
     },
@@ -33974,7 +33974,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "ab99e7f93a5f7b23249a5305370d660d192fc9281cf69855f107a1f51bf6f423",
+      "content_hash": "a82c865f62b10d5b4c090e9586cb25fbfc8ca19c35f0c79ffbb4448965a46714",
       "content_hash_withheld": null,
       "first_seen": "commit:7bf65aa35788"
     },
@@ -74599,6 +74599,24 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "universal_id": "UCOS-TESTOBJ-000902",
+      "path": "engine/tests/conformance/mandate_corpus.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "97e800490f01e7c6ca1d1413d21b225a8c41c4ca0a7740e33f3c063950c68415",
+      "content_hash_withheld": null,
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
       "universal_id": "UCOS-TESTOBJ-000897",
       "path": "engine/tests/conformance/test_agnosticism_conformance.py",
       "object_class": "TEST_OBJECT",
@@ -74620,6 +74638,134 @@
       "content_hash": "b7794ca04a05c4f537e38e46895e0863ed138aa2f9867c85688bf4af612737ca",
       "content_hash_withheld": null,
       "first_seen": "commit:3dd9256687e2"
+    },
+    {
+      "universal_id": "UCOS-TESTOBJ-000903",
+      "path": "engine/tests/conformance/test_mandates_arch.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/constitution/assimilation.py",
+        "engine/tests/conformance/mandate_corpus.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "408ad924c817e65fa6bb72a8516019123313945f8a6da601beaf3d8549c55aeb",
+      "content_hash_withheld": null,
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "universal_id": "UCOS-TESTOBJ-000904",
+      "path": "engine/tests/conformance/test_mandates_index.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/tests/conformance/mandate_corpus.py",
+        "intelligence/realization/contracts.py",
+        "intelligence/realization/generators/__init__.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "ea25139b7933085d37021676319b054cdc64a669f69e5a8464bacdcf61188754",
+      "content_hash_withheld": null,
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "universal_id": "UCOS-TESTOBJ-000905",
+      "path": "engine/tests/conformance/test_mandates_layers.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/tests/conformance/mandate_corpus.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "c6d857e4263f8b789f5ef6a90dc6814339ec56344b4669b12f27785ae722d840",
+      "content_hash_withheld": null,
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "universal_id": "UCOS-TESTOBJ-000906",
+      "path": "engine/tests/conformance/test_mandates_model.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/tests/conformance/mandate_corpus.py",
+        "engine/uckp/facets.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "94442093bfc3b04885978446fdf82d6cd5b3e099cc947b7e1a597efe26ba54f2",
+      "content_hash_withheld": null,
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "universal_id": "UCOS-TESTOBJ-000907",
+      "path": "engine/tests/conformance/test_mandates_prd.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/kernel/compliance.py",
+        "engine/tests/conformance/mandate_corpus.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "0aa42607c0dd79e91cc5e69f2dc03ed152e5edc1495a5f9c354ecd3e9d88bf0c",
+      "content_hash_withheld": null,
+      "first_seen": "commit:fea8a8652008"
+    },
+    {
+      "universal_id": "UCOS-TESTOBJ-000908",
+      "path": "engine/tests/conformance/test_mandates_uakp.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/knowledge/ukip/confidence.py",
+        "engine/tests/conformance/mandate_corpus.py",
+        "engine/uckp/facets.py",
+        "engine/uckp/ucko.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "7573c7faa1d1093bce23e6bd6f6f6c821278af8e225ba857b224c27e96c05c56",
+      "content_hash_withheld": null,
+      "first_seen": "commit:fea8a8652008"
     },
     {
       "universal_id": "UCOS-TESTOBJ-000125",
@@ -76566,14 +76712,17 @@
       "identity_authority": "UCOS-UGA-001",
       "lifecycle": "AUTHORED",
       "dependencies": [
-        "engine/kernel/compliance.py"
+        "engine/kernel/__init__.py",
+        "engine/kernel/compliance.py",
+        "engine/kernel/kernel.py",
+        "engine/kernel/seed.py"
       ],
       "produces": [],
       "evidence_class": "VALIDATION",
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "4078e7f763003bf84e0b0425acc44f87e5321b54375be9171598b546e29aaca3",
+      "content_hash": "d3823b1a8281ed7a79ec447470141bdea6f58d9ec8b5e10a5ee341d46150b609",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
