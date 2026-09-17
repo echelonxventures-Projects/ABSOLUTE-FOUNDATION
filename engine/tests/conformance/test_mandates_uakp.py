@@ -1048,3 +1048,110 @@ def test_the_lifecycle_is_open_beyond_the_eighteen_that_were_listed() -> None:
         "the vocabulary admits the states the document lists and refuses one it does not; "
         "that is a fixed lifecycle, which the document forbids in its own sentence"
     )
+
+
+# ================================================================================
+# UAKP-PROC — the twenty-seven stages of the Universal Process Model
+# ================================================================================
+#
+# "The platform SHALL operate as a constitutional graph. NOT a linear pipeline." Twenty-seven
+# stages follow, and they are the engine model's outputs under process names -- Knowledge
+# Assimilation is what the Knowledge Assimilation Engine does. So this is the second join on
+# `ENGINE_HOME`, written the same way and for the same reason: re-locating those instruments
+# here would author one finding twice and let the two drift.
+#
+# Twenty stages join a located engine. One joins the narrowed reasoning engine. One is
+# performed by an instrument the engine model never names. Five are undelivered, and every
+# one of the five points at an engine this suite already reports missing.
+
+PROCESS_ENGINE = {
+    "UAKP-PROC/PR-02": "UAKP-ENG/EN-02",  # Knowledge Assimilation
+    "UAKP-PROC/PR-04": "UAKP-ENG/EN-04",  # Knowledge Classification
+    "UAKP-PROC/PR-05": "UAKP-ENG/EN-05",  # Context Resolution
+    "UAKP-PROC/PR-06": "UAKP-ENG/EN-08",  # Evidence Discovery
+    "UAKP-PROC/PR-07": "UAKP-ENG/EN-09",  # Truth Discovery
+    "UAKP-PROC/PR-08": "UAKP-ENG/EN-10",  # Canonical Authority Discovery
+    "UAKP-PROC/PR-09": "UAKP-ENG/EN-13",  # Gap Discovery
+    "UAKP-PROC/PR-10": "UAKP-ENG/EN-12",  # Conflict Discovery
+    "UAKP-PROC/PR-11": "UAKP-ENG/EN-14",  # Requirement Discovery
+    "UAKP-PROC/PR-12": "UAKP-ENG/EN-15",  # Dependency Discovery
+    "UAKP-PROC/PR-14": "UAKP-ENG/EN-17",  # Decision
+    "UAKP-PROC/PR-15": "UAKP-ENG/EN-18",  # Planning
+    "UAKP-PROC/PR-18": "UAKP-ENG/EN-21",  # Execution Orchestration
+    "UAKP-PROC/PR-19": "UAKP-ENG/EN-22",  # Realization
+    "UAKP-PROC/PR-20": "UAKP-ENG/EN-23",  # Observation
+    "UAKP-PROC/PR-21": "UAKP-ENG/EN-24",  # Validation
+    "UAKP-PROC/PR-22": "UAKP-ENG/EN-25",  # Verification
+    "UAKP-PROC/PR-23": "UAKP-ENG/EN-26",  # Certification
+    "UAKP-PROC/PR-26": "UAKP-ENG/EN-29",  # Capability Elevation
+    "UAKP-PROC/PR-27": "UAKP-ENG/EN-30",  # Evolution
+}
+
+#: Joins the engine that is realized at a narrower scope than the mandate states.
+PROCESS_NARROWED = {"UAKP-PROC/PR-13": "UAKP-ENG/EN-16"}  # Reasoning
+
+#: Performed by an instrument the engine model never names. Updating canonical knowledge is
+#: the Corpus Registration Transaction, which is a governed act rather than an engine.
+PROCESS_INSTRUMENT = {"UAKP-PROC/PR-24": "00-BOOK/tools/register.sh"}  # Canonical Knowledge Update
+
+PROCESS_UNDELIVERED = {
+    "UAKP-PROC/PR-01": "UAKP-ENG/EN-01",  # Knowledge Acquisition
+    "UAKP-PROC/PR-03": "UAKP-ENG/EN-03",  # Knowledge Refinement
+    "UAKP-PROC/PR-16": "UAKP-ENG/EN-19",  # Execution Specification Generation
+    "UAKP-PROC/PR-17": "UAKP-ENG/EN-20",  # Realization Package Generation
+    "UAKP-PROC/PR-25": "UAKP-ENG/EN-28",  # Learning
+}
+
+
+def test_every_process_stage_joins_an_engine_an_instrument_or_nothing() -> None:
+    mandates = section("UAKP-PROC")
+    assert len(mandates) == 27, f"the process model lists 27 stages, corpus has {len(mandates)}"
+    assert_partitions(
+        "UAKP-PROC",
+        mandates,
+        PROCESS_ENGINE,
+        PROCESS_NARROWED,
+        PROCESS_INSTRUMENT,
+        PROCESS_UNDELIVERED,
+    )
+
+
+def test_every_engine_backed_stage_resolves_to_an_engine_this_suite_located() -> None:
+    for mandate, engine in PROCESS_ENGINE.items():
+        assert engine in ENGINE_HOME, (
+            f"{mandate}: {engine} is not a located engine; a stage cannot run on machinery "
+            "this suite reports missing"
+        )
+    claimed = list(PROCESS_ENGINE.values())
+    duplicated = sorted({e for e in claimed if claimed.count(e) > 1})
+    assert not duplicated, f"engines claimed by two process stages: {duplicated}"
+
+
+def test_the_narrowed_stage_and_the_undelivered_stages_name_the_right_tiers() -> None:
+    """The join in both directions. A narrowed stage must point at the narrowed engine, and
+    an undelivered one at an engine reported absent or specified-only -- so a stage cannot be
+    written off while its engine works, nor counted while its engine is missing."""
+    for mandate, engine in PROCESS_NARROWED.items():
+        assert engine in ENGINE_NARROWER, f"{mandate}: {engine} is no longer the narrowed engine"
+    unbuilt = set(ENGINE_ABSENT) | set(ENGINE_SPECIFIED_ONLY)
+    for mandate, engine in PROCESS_UNDELIVERED.items():
+        assert (
+            engine in unbuilt
+        ), f"{mandate}: {engine} is no longer reported missing, so this stage is delivered"
+
+
+def test_the_instrument_backed_stage_is_tracked_and_is_not_an_engine() -> None:
+    assert_homes_exist("UAKP-PROC", PROCESS_INSTRUMENT)
+    assert not (set(PROCESS_INSTRUMENT.values()) & set(ENGINE_HOME.values()))
+
+
+def test_the_process_model_and_the_primary_objective_report_the_same_engines_missing() -> None:
+    """Two sections of one document describe the same machinery from different angles. They
+    must fail in the same places: an engine that is missing for the objective and present
+    for the process would mean one of the two joins is wrong."""
+    objective_gaps = {engine for engine in OBJECTIVE_UNDELIVERED.values() if engine}
+    process_gaps = set(PROCESS_UNDELIVERED.values())
+    assert objective_gaps <= process_gaps, (
+        f"engines the objective reports missing and the process does not: "
+        f"{sorted(objective_gaps - process_gaps)}"
+    )

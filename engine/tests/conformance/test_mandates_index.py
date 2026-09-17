@@ -8,6 +8,7 @@ domain is ADMITTED rather than built. Nothing here restates them.
 from __future__ import annotations
 
 from engine.tests.conformance.mandate_corpus import (
+    assert_homes_exist,
     assert_named_by_nothing,
     assert_partitions,
     repo_root,
@@ -627,3 +628,209 @@ def test_the_repository_builds_projections_this_section_never_mandates() -> None
         f"expected the graph engine to build projections section 004 does not mandate; "
         f"found only {unmandated}"
     )
+
+
+# --- MI-003 — the twenty universal models ---------------------------------------
+#
+# Section 003 lists twenty models. Layer Zero is the respondent for most of them, and five
+# arrive in one module: `engine/uckp/values.py` carries Relationship, ContextBinding,
+# Constraint, Policy and TemporalEvent as separate frozen dataclasses. One home claimed five
+# times is only honest if the module really carries five distinct models, so the class NAMES
+# are asserted rather than the path -- a file five mandates point at with one class in it
+# would be four mandates unanswered.
+
+#: Model -> the module that defines it, and the class within it when the module carries
+#: several. An empty class name means the module is the model.
+UNIVERSAL_MODEL = {
+    "MI-003/M-01": ("engine/uckp/canonical.py", ""),  # Primitive Model
+    "MI-003/M-02": ("engine/root_ontology/model.py", ""),  # Concept Model
+    "MI-003/M-03": ("engine/uckp/ucko.py", ""),  # Object Model
+    "MI-003/M-04": ("engine/uckp/identity.py", ""),  # Identity Model
+    "MI-003/M-05": ("engine/uckp/values.py", "Relationship"),  # Relationship Model
+    "MI-003/M-06": ("engine/uckp/values.py", "ContextBinding"),  # Context Model
+    "MI-003/M-07": ("engine/uckp/capabilities.py", ""),  # Capability Model
+    "MI-003/M-08": ("engine/uckp/values.py", "Constraint"),  # Constraint Model
+    "MI-003/M-09": ("engine/uckp/values.py", "Policy"),  # Rule Model
+    "MI-003/M-10": ("engine/uckp/values.py", "TemporalEvent"),  # Event Model
+    "MI-003/M-11": ("engine/uckp/state.py", ""),  # State Model
+    "MI-003/M-13": ("engine/uckp/vocabulary.py", ""),  # Lifecycle Model
+    "MI-003/M-14": ("engine/uckp/evolution.py", ""),  # Evolution Model
+    "MI-003/M-15": ("engine/uckp/execution.py", ""),  # Runtime Model
+    "MI-003/M-16": ("00-MASTER/UCOS-UGA-001/uga-declaration.json", ""),  # Repository Model
+    "MI-003/M-17": ("engine/uckp/governance.py", ""),  # Governance Model
+    "MI-003/M-19": ("platform/commercial_intelligence/contracts.py", ""),  # Commercial Model
+    "MI-003/M-20": ("engine/uckp/projection.py", ""),  # Projection Model
+}
+
+#: Modelled by nothing. Behaviour and Economics again -- the fourth and third document
+#: respectively to name them, which is why the cross-suite agreement below is worth having.
+UNIVERSAL_MODEL_ABSENT = {
+    "MI-003/M-12": "behavior",
+    "MI-003/M-18": "economic",
+}
+
+
+def test_every_universal_model_is_defined_or_absent() -> None:
+    mandates = section("MI-003")
+    assert len(mandates) == 20, f"section 003 lists 20 models, corpus has {len(mandates)}"
+    assert_partitions("MI-003", mandates, UNIVERSAL_MODEL, UNIVERSAL_MODEL_ABSENT)
+
+
+def test_every_defined_model_has_a_tracked_home() -> None:
+    assert_homes_exist("MI-003", {m: home for m, (home, _cls) in UNIVERSAL_MODEL.items()})
+
+
+def test_the_shared_module_really_carries_a_distinct_class_per_model() -> None:
+    """NON-VACUITY for the five models that share `values.py`.
+
+    Asserting the path would pass for a module with one class in it and four mandates
+    pointing hopefully at it. Asserting the class name is what makes five separate answers.
+    """
+    import ast
+
+    shared: dict[str, list[str]] = {}
+    for _mandate, (home, class_name) in UNIVERSAL_MODEL.items():
+        if class_name:
+            shared.setdefault(home, []).append(class_name)
+
+    for home, expected in shared.items():
+        assert len(expected) == len(
+            set(expected)
+        ), f"{home}: one class claimed by two models: {sorted(expected)}"
+        tree = ast.parse((repo_root() / home).read_text(encoding="utf-8"))
+        defined = {n.name for n in ast.walk(tree) if isinstance(n, ast.ClassDef)}
+        missing = sorted(set(expected) - defined)
+        assert not missing, f"{home} defines no {missing}; those models are unanswered"
+
+
+def test_no_two_models_share_a_home_without_naming_a_class() -> None:
+    """The other half. Two models on one module with no class named would be the same error
+    in the opposite direction -- indistinguishable answers presented as two."""
+    bare = [home for _m, (home, class_name) in UNIVERSAL_MODEL.items() if not class_name]
+    duplicated = sorted({h for h in bare if bare.count(h) > 1})
+    assert (
+        not duplicated
+    ), f"modules claimed by two models with no class distinguishing them: {duplicated}"
+
+
+def test_the_absent_models_are_defined_by_nothing() -> None:
+    assert_named_by_nothing("MI-003", UNIVERSAL_MODEL_ABSENT)
+
+
+def test_behaviour_and_economics_are_unanswered_in_every_document_that_names_them() -> None:
+    """Four documents mandate a behaviour model and none of them is answered. That is the
+    strongest form the finding takes, so it is asserted across all four suites at once."""
+    from engine.tests.conformance.test_mandates_arch import META_MODEL_ABSENT
+    from engine.tests.conformance.test_mandates_model import CONSTITUTION_ABSENT
+
+    def stems(values):
+        return {v.replace("behaviour", "behavio").replace("behavior", "behavio") for v in values}
+
+    here = stems(UNIVERSAL_MODEL_ABSENT.values())
+    assert "behavio" in here and "economic" in here
+    assert "behavio" in stems(META_MODEL_ABSENT.values())
+    assert "behavio" in stems(CONSTITUTION_ABSENT.values())
+    assert "economics" in set(META_MODEL_ABSENT.values()) | set(CONSTITUTION_ABSENT.values())
+
+
+# --- MI-000 — the Absolute Constitutional Kernel --------------------------------
+#
+# Section 000 lists nineteen things the kernel holds. Nine of them exist in the root law or
+# in Layer Zero. Ten do not, and the ten divide cleanly in a way worth naming: five are the
+# repository's INTENT -- Purpose, Vision, Mission, Philosophy, Core Values -- and five are
+# its FORMAL APPARATUS -- Postulates, Symbols, Mathematics, Logic, Grammar.
+#
+# Neither half is an oversight in the same sense. A substrate with no stated purpose still
+# runs; a substrate with no logic or grammar cannot state a rule formally, which is the same
+# gap ARCH-UCMM and MI-001 already report from two other directions.
+
+#: Kernel element -> the module or law attribute that holds it, and the class when the
+#: module carries several.
+KERNEL_ELEMENT = {
+    "MI-000/K-06": ("engine/uckp/law.py", "Article"),  # Guiding Principles
+    "MI-000/K-07": ("engine/uckp/law.py", "RootLaw"),  # Constitutional Laws
+    "MI-000/K-08": ("engine/uckp/law.py", "Invariant"),  # Universal Invariants
+    "MI-000/K-09": ("engine/uckp/law.py", ""),  # Universal Axioms -- a governed category
+    "MI-000/K-11": ("engine/uckp/vocabulary.py", "Term"),  # Universal Definitions
+    "MI-000/K-12": ("engine/uckp/vocabulary.py", "Vocabulary"),  # Universal Terminology
+    "MI-000/K-13": ("engine/uckp/values.py", "SemanticIdentity"),  # Universal Semantics
+    "MI-000/K-17": ("engine/determinism/reproduce.py", ""),  # Universal Proof System
+    "MI-000/K-18": ("engine/kernel/meta.py", ""),  # Universal Meta Model
+}
+
+#: The kernel's stated intent. Absent, and absent together.
+KERNEL_INTENT_ABSENT = {
+    "MI-000/K-01": "purpose",
+    "MI-000/K-02": "vision",
+    "MI-000/K-03": "mission",
+    "MI-000/K-04": "philosophy",
+    "MI-000/K-05": "core values",
+}
+
+#: The kernel's formal apparatus. Absent, and this is the half that costs something.
+KERNEL_FORMALISM_ABSENT = {
+    "MI-000/K-10": "postulates",
+    "MI-000/K-14": "symbols",
+    "MI-000/K-15": "mathematics",
+    "MI-000/K-16": "logic",
+    "MI-000/K-19": "grammar",
+}
+
+
+def test_every_kernel_element_is_held_or_absent() -> None:
+    mandates = section("MI-000")
+    assert len(mandates) == 19, f"section 000 lists 19 elements, corpus has {len(mandates)}"
+    assert_partitions(
+        "MI-000",
+        mandates,
+        KERNEL_ELEMENT,
+        KERNEL_INTENT_ABSENT,
+        KERNEL_FORMALISM_ABSENT,
+    )
+
+
+def test_every_held_element_has_a_tracked_home_and_its_named_class() -> None:
+    import ast
+
+    assert_homes_exist("MI-000", {m: home for m, (home, _c) in KERNEL_ELEMENT.items()})
+    for mandate, (home, class_name) in KERNEL_ELEMENT.items():
+        if not class_name:
+            continue
+        tree = ast.parse((repo_root() / home).read_text(encoding="utf-8"))
+        defined = {n.name for n in ast.walk(tree) if isinstance(n, ast.ClassDef)}
+        assert (
+            class_name in defined
+        ), f"{mandate}: {home} defines no {class_name!r}, so the element is unanswered"
+
+
+def test_the_law_really_carries_articles_invariants_and_an_axiom_category() -> None:
+    """NON-VACUITY for the four elements answered by `law.py`. A class that exists and is
+    never populated would satisfy the AST check and hold nothing."""
+    from engine.uckp.law import ROOT_LAW
+
+    assert len(ROOT_LAW.articles) == 20, f"the law carries {len(ROOT_LAW.articles)} articles"
+    assert len(ROOT_LAW.invariants) == 17, f"the law carries {len(ROOT_LAW.invariants)} invariants"
+    assert (
+        "axiom" in ROOT_LAW.governed_categories
+    ), "MI-000/K-09 rests on `axiom` being a governed category of the root law; it is not"
+
+
+def test_the_intent_and_the_formalism_are_absent_for_different_reasons() -> None:
+    """Both halves are searched, and the split is asserted rather than described: five
+    elements of stated intent and five of formal apparatus, none of them held."""
+    assert len(KERNEL_INTENT_ABSENT) == 5
+    assert len(KERNEL_FORMALISM_ABSENT) == 5
+    assert_named_by_nothing("MI-000", KERNEL_INTENT_ABSENT)
+    assert_named_by_nothing("MI-000", KERNEL_FORMALISM_ABSENT)
+
+
+def test_the_formal_gap_is_the_same_one_two_other_sections_report() -> None:
+    """Logic and Mathematics are missing from the kernel, from the meta-model and from the
+    foundations. Three sections, one hole, asserted together so it cannot be read as three
+    small omissions."""
+    from engine.tests.conformance.test_mandates_arch import META_MODEL_ABSENT
+
+    shared = {"logic", "mathematics"}
+    assert shared <= set(KERNEL_FORMALISM_ABSENT.values())
+    assert shared <= set(META_MODEL_ABSENT.values())
+    assert shared <= set(FOUNDATION_UNGROUNDED.values())

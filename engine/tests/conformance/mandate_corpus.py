@@ -93,23 +93,44 @@ def assert_homes_exist(name: str, homes: dict[str, str]) -> None:
         ), f"{name}/{mandate}: declared home {home!r} is not a tracked path"
 
 
+def _path_tokens(path: str) -> set[str]:
+    """The words a path is made of, singularised.
+
+    Raw substring matching is wrong here and was wrong in practice: `mission` occurs inside
+    `admission.py` and `permissions.py`, so a search for the kernel's Mission found two
+    modules that have nothing to do with it. A path is a sequence of WORDS and the question
+    is whether one of them is the concept, so the path is split into words and compared word
+    to word.
+    """
+    word = ""
+    words: set[str] = set()
+    for char in path.lower():
+        if char.isalnum():
+            word += char
+        elif word:
+            words.add(word.rstrip("s"))
+            word = ""
+    if word:
+        words.add(word.rstrip("s"))
+    return words
+
+
 def assert_named_by_nothing(name: str, absent: dict[str, str], *, suffix: str = ".py") -> None:
     """NON-VACUITY for an absent tier.
 
-    Naming means the PATH carries every word of the concept, not merely the last one:
-    matching `Realization Package` to `commercial_intelligence/packages.py` on the word
-    `package` is the occurrence-is-ownership error these suites exist to avoid. Searching
-    file CONTENT instead would match every document that merely discusses the concept and
-    make absence unprovable in the other direction.
+    Naming means the PATH carries every word of the concept as a WORD, not as a substring
+    and not merely its last word: matching `Realization Package` to
+    `commercial_intelligence/packages.py` on `package` alone is the occurrence-is-ownership
+    error these suites exist to avoid, and matching `Mission` to `admission.py` is the same
+    error one level down. Searching file CONTENT instead would match every document that
+    merely discusses the concept and make absence unprovable in the other direction.
     """
     for mandate, concept in absent.items():
-        words = [w.lower() for w in concept.replace("-", " ").split()]
+        words = {w.rstrip("s") for w in concept.replace("-", " ").lower().split()}
         found = [
             path
             for path in tracked()
-            if path.endswith(suffix)
-            and "/tests/" not in path
-            and all(word in path.lower() for word in words)
+            if path.endswith(suffix) and "/tests/" not in path and words <= _path_tokens(path)
         ]
         assert not found, (
             f"{name}/{mandate}: {concept!r} is declared absent but a path is named for it: "
@@ -120,12 +141,8 @@ def assert_named_by_nothing(name: str, absent: dict[str, str], *, suffix: str = 
 def assert_absence_rule_can_find_something(concept: str, *, suffix: str = ".py") -> None:
     """The absence rule must be capable of a positive verdict, or it passes every absence
     claim by construction. Each suite runs it against a concept it has located."""
-    words = [w.lower() for w in concept.replace("-", " ").split()]
-    hits = [
-        path
-        for path in tracked()
-        if path.endswith(suffix) and all(word in path.lower() for word in words)
-    ]
+    words = {w.rstrip("s") for w in concept.replace("-", " ").lower().split()}
+    hits = [path for path in tracked() if path.endswith(suffix) and words <= _path_tokens(path)]
     assert hits, (
         f"the path-naming rule finds nothing for {concept!r}, which is located; the rule "
         "matches nothing at all and every absence claim resting on it is vacuous"

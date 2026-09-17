@@ -18,6 +18,7 @@ from engine.tests.conformance.mandate_corpus import (
     assert_named_by_nothing,
     assert_partitions,
     section,
+    tracked,
 )
 from engine.uckp.facets import REQUIRED_FACETS, Facet
 
@@ -111,3 +112,134 @@ def test_the_absent_five_are_neither_a_facet_nor_a_module() -> None:
 
 def test_the_naming_rule_this_suite_relies_on_can_find_something() -> None:
     assert_absence_rule_can_find_something("uckp capabilities")
+
+
+# --- QM-FLOW — the twenty-eight stages of the constitutional flow ----------------
+#
+# The interrogative model ends in a FLOW: Potential through Evolution Registration and back
+# to Repository Truth, then infinity. UCL-000001 declares this repository's own lifecycle as
+# forty-five stages, so the question is whether the flow the document draws is the lifecycle
+# the repository runs.
+#
+# Seventeen stages the two agree on by name. Ten more are performed by an instrument the
+# lifecycle does not name as a stage -- which is a difference in where the boundary of
+# "lifecycle" falls, not a missing capability, and calling them absent would be wrong. One
+# is genuinely nothing: Potential, the state before anything exists, which a lifecycle of
+# governed objects has no stage for by construction.
+#
+# The stage names are read from `ucl.json` rather than restated here, so a lifecycle that
+# renamed a stage breaks this binding instead of silently passing.
+
+#: Flow stage -> the UCL-000001 lifecycle stage that performs it, by that stage's own name.
+FLOW_LIFECYCLE_STAGE = {
+    "QM-FLOW/FL-02": "Observe",  # Observation
+    "QM-FLOW/FL-03": "Knowledge Discovery",  # Discovery
+    "QM-FLOW/FL-04": "Perceive",  # Recognition
+    "QM-FLOW/FL-06": "Assign Universal Constitutional Identifier",  # Identity Resolution
+    "QM-FLOW/FL-07": "Context Assimilation",  # Context Resolution
+    "QM-FLOW/FL-09": "Constraint Discovery",  # Constraint Resolution
+    "QM-FLOW/FL-11": "Update Repository Truth",  # Repository Truth
+    "QM-FLOW/FL-17": "Validate",  # Validation
+    "QM-FLOW/FL-18": "Verify",  # Verification
+    "QM-FLOW/FL-19": "Certify",  # Certification
+    "QM-FLOW/FL-20": "Register",  # Registration
+    "QM-FLOW/FL-21": "Integrate",  # Deployment
+    "QM-FLOW/FL-24": "Measure",  # Measurement
+    "QM-FLOW/FL-25": "Learn",  # Learning
+    "QM-FLOW/FL-26": "Extract Engineering Knowledge",  # Knowledge Extraction
+    "QM-FLOW/FL-27": "Elevate",  # Capability Elevation
+    "QM-FLOW/FL-28": "Register Engineering Knowledge",  # Evolution Registration
+}
+
+#: Flow stage -> an instrument that performs it outside the declared lifecycle.
+FLOW_INSTRUMENT = {
+    "QM-FLOW/FL-05": "engine/knowledge/ukip/classification.py",  # Classification
+    "QM-FLOW/FL-08": "engine/uckp/resolution.py",  # Relationship Resolution
+    "QM-FLOW/FL-10": "engine/uckp/assimilation.py",  # Knowledge Assimilation
+    "QM-FLOW/FL-12": "intelligence/realization/planning.py",  # Planning
+    "QM-FLOW/FL-13": "engine/knowledge/integration/composition.py",  # Composition
+    "QM-FLOW/FL-14": "engine/foundation/config",  # Configuration
+    "QM-FLOW/FL-15": "intelligence/realization/generators",  # Generation
+    "QM-FLOW/FL-16": "intelligence/realization/implementation.py",  # Implementation
+    "QM-FLOW/FL-22": "engine/runtime",  # Runtime
+    "QM-FLOW/FL-23": "platform/observability",  # Monitoring
+}
+
+#: Performed by nothing, and correctly so.
+FLOW_ABSENT = {"QM-FLOW/FL-01": "Potential"}
+
+
+def _ucl_stage_names() -> set[str]:
+    """The stage names UCL-000001 declares, read from its own generated state."""
+    import json
+
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    ucl = json.loads(
+        (repo_root() / "00-MASTER" / "UCL-000001" / "ucl.json").read_text(encoding="utf-8")
+    )
+    return {str(stage.get("stage") or "") for stage in ucl["stages"]}
+
+
+def test_every_flow_stage_is_a_lifecycle_stage_an_instrument_or_absent() -> None:
+    mandates = section("QM-FLOW")
+    assert len(mandates) == 28, f"the flow draws 28 stages, corpus has {len(mandates)}"
+    assert_partitions(
+        "QM-FLOW",
+        mandates,
+        FLOW_LIFECYCLE_STAGE,
+        FLOW_INSTRUMENT,
+        FLOW_ABSENT,
+    )
+
+
+def test_every_lifecycle_backed_stage_names_a_stage_ucl_declares() -> None:
+    declared = _ucl_stage_names()
+    assert len(declared) >= 40, f"UCL declares only {len(declared)} stages; the join is suspect"
+    for mandate, stage in FLOW_LIFECYCLE_STAGE.items():
+        assert stage in declared, (
+            f"{mandate}: UCL-000001 declares no stage named {stage!r}; the lifecycle renamed "
+            "it or never had it, and either way this join is stale"
+        )
+    claimed = list(FLOW_LIFECYCLE_STAGE.values())
+    duplicated = sorted({s for s in claimed if claimed.count(s) > 1})
+    assert not duplicated, f"one lifecycle stage claimed by two flow stages: {duplicated}"
+
+
+def test_every_instrument_backed_stage_is_tracked_and_is_not_a_lifecycle_stage() -> None:
+    """The tier boundary. A stage UCL declares belongs in the lifecycle tier, and putting it
+    here would understate how strongly the repository holds it."""
+    assert_homes_exist("QM-FLOW", FLOW_INSTRUMENT)
+    declared = {name.lower() for name in _ucl_stage_names()}
+    mandates = section("QM-FLOW")
+    for mandate in FLOW_INSTRUMENT:
+        assert mandates[mandate].lower() not in declared, (
+            f"{mandate}: {mandates[mandate]!r} IS a declared lifecycle stage and is "
+            "understated as a loose instrument"
+        )
+
+
+def test_potential_is_absent_because_a_lifecycle_of_objects_cannot_have_a_stage_for_it() -> None:
+    """NON-VACUITY for the one absent stage, and the reason is structural rather than a gap.
+
+    `Potential` is the state before anything exists. UCL governs objects, and an object in
+    the potential state is one that has not been minted -- Article 2 says nothing exists
+    constitutionally until it has become a knowledge object. A stage for it would be a stage
+    with no subject.
+    """
+    declared = {name.lower() for name in _ucl_stage_names()}
+    assert "potential" not in declared
+    assert not [
+        path
+        for path in tracked()
+        if path.endswith(".py") and "potential" in path.rsplit("/", 1)[-1].lower()
+    ], "a potential module now exists; FL-01 is no longer absent by construction"
+
+
+def test_the_flow_and_the_lifecycle_agree_more_than_they_differ() -> None:
+    """The finding. Seventeen of twenty-eight stages match by name across two documents
+    written independently, which is what makes the ten differences legible as boundary
+    disagreements rather than as holes."""
+    assert len(FLOW_LIFECYCLE_STAGE) == 17
+    assert len(FLOW_INSTRUMENT) == 10
+    assert len(FLOW_LIFECYCLE_STAGE) > len(FLOW_INSTRUMENT) + len(FLOW_ABSENT)
