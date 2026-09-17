@@ -14577,8 +14577,8 @@
     },
     {
       "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
-      "producer": "intelligence/rie",
-      "bootstrap_command": "python3 -m intelligence.rie build",
+      "producer": "intelligence/rie/engine.py",
+      "bootstrap_command": "python -m intelligence.rie build",
       "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh (STAGE-RIE in the RFP pipeline)",
       "tracked": true,
       "deterministic": true,
@@ -14886,6 +14886,54 @@
       "authored_inputs": [
         "../DATA/context-authority.json"
       ]
+    },
+    {
+      "owner": "UAEP-000001",
+      "home": "00-MASTER/UAEP-000001",
+      "producer": "00-MASTER/UAEP-000001/uaep_engine.py",
+      "authored_inputs": [
+        "uaep-platform.json"
+      ],
+      "$authored_inputs": "The platform declaration the engine reads. Everything else in this home is emitted."
+    },
+    {
+      "owner": "UAKOS-PHASE-001B",
+      "home": "00-MASTER/UAKOS-PHASE-001B",
+      "producer": "00-MASTER/UAKOS-PHASE-001B/emit_registers.py",
+      "authored_inputs": [
+        "provenance_engine.py"
+      ],
+      "$authored_inputs": "A second engine shares this home: provenance_engine.py emits provenance.json, declared under generated_inputs. A home names one producer, so its sibling is declared here as authored — the same shape UAKOS-CLOSURE-008 already uses for its two sibling engines."
+    },
+    {
+      "owner": "UAKOS-PHASE-002",
+      "home": "00-MASTER/UAKOS-PHASE-002",
+      "producer": "00-MASTER/UAKOS-PHASE-002/phase2_recon.py",
+      "authored_inputs": []
+    },
+    {
+      "owner": "UAKOS-PHASE-003",
+      "home": "00-MASTER/UAKOS-PHASE-003",
+      "producer": "00-MASTER/UAKOS-PHASE-003/phase3_gap.py",
+      "authored_inputs": []
+    },
+    {
+      "owner": "UAKOS-PHASE-004",
+      "home": "00-MASTER/UAKOS-PHASE-004",
+      "producer": "00-MASTER/UAKOS-PHASE-004/phase4_plan.py",
+      "authored_inputs": []
+    },
+    {
+      "owner": "UAKOS-PHASE-005",
+      "home": "00-MASTER/UAKOS-PHASE-005",
+      "producer": "00-MASTER/UAKOS-PHASE-005/phase5_gov.py",
+      "authored_inputs": []
+    },
+    {
+      "owner": "UAKOS-PHASE-006",
+      "home": "00-MASTER/UAKOS-PHASE-006",
+      "producer": "00-MASTER/UAKOS-PHASE-006/phase6_certify.py",
+      "authored_inputs": []
     }
   ],
   "bootstrap_gaps_note": "EMPTY — every GENERATED_DETERMINISTIC input now names a producer AND a bootstrap path that scripts/generate-prerequisites.sh actually invokes. Two entries were discharged: 00-MASTER/UAKOS-PHASE-001B/provenance.json, whose producer was already invoked (the prior gap text was STALE and named it incorrectly), and realization/, whose producer was added to the bootstrap only after it was made deterministic. The gap was closed by completing the capability, never by relaxing the invariant. UGA-INV-06 measures this by READING the bootstrap script rather than by trusting this field."
