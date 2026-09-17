@@ -257,12 +257,12 @@
    "mandates": [
     "PRD-FR/FR-01"
    ],
-   "hits": 859,
+   "hits": 860,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 141,
-    "test": 37,
+    "test": 38,
     "gate": 8,
     "decl": 78,
     "doc": 595
@@ -300,17 +300,19 @@
    "mandates": [
     "MI-017/TD-14"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "DOMAIN",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [

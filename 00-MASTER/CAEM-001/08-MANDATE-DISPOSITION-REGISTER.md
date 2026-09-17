@@ -99,7 +99,7 @@ Several are the instrument failing honestly rather than the repository failing: 
 | Adapter | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/UCOS-SUB-001/sub-declaration.json` | 1 |
 | Adapter Registry | IMPLEMENTED | IMPLEMENTED | PROVISIONAL | `00-MASTER/UCOS-UMA-001/07-DISCOVERY-FRAMEWORK.md` | 1 |
 | Admission | ANCHORED | REFERENCE | PROVISIONAL | `00-MASTER/URKE-000001/urke-declaration.json` | 1 |
-| Agriculture | SPECIFIED | REGISTER | PROVISIONAL | `` | 1 |
+| Agriculture | SPECIFIED | REGISTER | PROVISIONAL | `engine/tests/kernel/test_compliance.py` | 1 |
 | AI | UNDECIDABLE | REGISTER | PROVISIONAL | `engine/acceptance/contracts.py` | 2 |
 | AI Agents | PARTIAL | AUDIENCE | PROVISIONAL | `engine/knowledge/seed.py` | 2 |
 | AI Intelligence | SPECIFIED | EXTEND | PROVISIONAL | `00-MASTER/UVI-000001/uvi-declaration.json` | 1 |
