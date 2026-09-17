@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import copy
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -692,3 +693,197 @@ def test_the_naming_rule_that_proves_absence_can_find_something() -> None:
         and all(w in str(p.relative_to(repo)).lower() for w in ("knowledge", "classification"))
     ]
     assert hits, "the path-naming rule matches nothing at all, so every absence claim is vacuous"
+
+
+# --- the twenty-five mandated registries, split by what governs them ------------
+#
+# UAKP lists twenty-five registries and attaches three obligations: every registry SHALL be
+# discoverable, versioned and GOVERNED. The third is the one that decides this binding,
+# because this repository holds two populations that both call themselves registers and only
+# one of them is governed.
+#
+#   * Repository Truth (`00-BOOK/`) and engine code carry GOVERNED registries: version
+#     controlled, corpus-registered, each answerable to a declared authority.
+#   * `00-MASTER/` is a registration-EXCLUDED zone (`config.py :: EXCLUDE_DIR_PREFIXES`)
+#     holding programme outputs that declare AUTHORITY = NONE. A register there is real,
+#     readable and derived — and it is not a governed registry.
+#
+# Counting the second population as the first is the measurement that would report this
+# mandate satisfied. So the tiers are kept apart, and the exclusion that separates them is
+# asserted rather than assumed.
+
+#: Registry -> a governed home: Repository Truth under 00-BOOK/, or a registry module.
+REGISTRY_GOVERNED = {
+    "UAKP-REG/RG-02": "engine/uckp/registry.py",  # Knowledge Registry
+    "UAKP-REG/RG-03": "00-BOOK/DATA/id-ledger.json",  # Identity Registry
+    "UAKP-REG/RG-04": "engine/context/registry.py",  # Context Registry
+    "UAKP-REG/RG-05": "00-BOOK/DATA/evidence-universe.json",  # Evidence Registry
+    "UAKP-REG/RG-11": "00-BOOK/DATA/relationships.json",  # Dependency Registry
+    "UAKP-REG/RG-12": "00-BOOK/DATA/generated-artifact-registry.json",  # Artifact Registry
+    "UAKP-REG/RG-13": "00-BOOK/DATA/relationships.json",  # Relationship Registry
+    # Execution Registry
+    "UAKP-REG/RG-16": "00-BOOK/CONTROL-TOWER/UCOS-MASTER-EXECUTION-STATUS-REGISTRY.md",
+    "UAKP-REG/RG-18": "engine/verification_intelligence/registry.py",  # Verification Registry
+    "UAKP-REG/RG-19": "00-BOOK/DATA/certification.json",  # Certification Registry
+    "UAKP-REG/RG-20": "00-BOOK/DATA/constitutional-authority-alignment.json",  # Governance
+    "UAKP-REG/RG-22": "00-BOOK/DATA/change-ledger.json",  # Evolution Registry
+}
+
+#: Registry -> a programme register under `00-MASTER/`. Real, derived, and NOT governed:
+#: the zone is registration-excluded and each of these declares AUTHORITY = NONE.
+REGISTRY_PROGRAMME_ONLY = {
+    "UAKP-REG/RG-06": "00-MASTER/UCCEP-000000/02-REPOSITORY-TRUTH-REGISTER.md",  # Truth
+    "UAKP-REG/RG-07": "00-MASTER/UAKOS-CLOSURE-009/02-REPOSITORY-REQUIREMENT-REGISTER.md",
+    "UAKP-REG/RG-08": "00-MASTER/UAKOS-CLOSURE-008/10-REPOSITORY-DECISION-REGISTER.md",
+    "UAKP-REG/RG-09": "00-MASTER/UAKOS-PHASE-004/05-VALIDATION-PLANNING-REGISTER.md",  # Planning
+    "UAKP-REG/RG-10": "00-MASTER/UAEP-000001/01-CAPABILITY-BINDING-REGISTER.md",  # Capability
+    "UAKP-REG/RG-14": "00-MASTER/UAKOS-PHASE-002/02-REPOSITORY-IMPLEMENTATION-REGISTER.md",
+    "UAKP-REG/RG-15": "00-MASTER/UAKOS-PHASE-003R/01-REALIZATION-TYPE-REGISTER.md",  # Realization
+    "UAKP-REG/RG-17": "00-MASTER/UAKOS-CLOSURE-003/05-VALIDATION-REGISTER.md",  # Validation
+    "UAKP-REG/RG-23": "00-MASTER/UEG-000001/ueg-declaration.json",  # Environment
+    # Adapter Registry
+    "UAKP-REG/RG-24": "00-MASTER/UCL-000001/06-METADATA-PROVIDER-AND-ADAPTER-REGISTER.md",
+}
+
+#: Ontology is carried by a module, not a register: `engine/context/ontology.py` holds the
+#: classification the mandate wants a registry FOR. Recorded separately because calling a
+#: module a registry would blur exactly the distinction the other two tiers keep.
+REGISTRY_AS_MODULE = {
+    "UAKP-REG/RG-01": "engine/context/ontology.py",  # Ontology Registry
+}
+
+#: Carried by a tracked registry whose own `authority` field is execution-scoped rather
+#: than constitutional. Neither governed nor absent, and both of those labels would be a
+#: false report: the register exists and it does not govern.
+REGISTRY_BAND_SCOPED = {
+    # Integration Registry
+    "UAKP-REG/RG-25": (
+        "infrastructure/_evidence/EC3-B13-U10/integration-registry.json",
+        "ENGINEERING-EXECUTION-ONLY",
+    ),
+}
+
+#: Nothing carries these under any of the four shapes above.
+REGISTRY_ABSENT = {
+    "UAKP-REG/RG-21": "Memory Registry",
+}
+
+_EXCLUDED_ZONE = "00-MASTER/"
+
+
+def _registry_mandates() -> dict[str, str]:
+    repo = Path(__file__).resolve().parents[3]
+    corpus = json.loads(
+        (repo / "00-MASTER" / "CAEM-001" / "06-MANDATE-CORPUS.json").read_text(encoding="utf-8")
+    )
+    return {a["atom_id"]: a["label"] for a in corpus["atoms"] if a["section"] == "UAKP-REG"}
+
+
+def test_every_mandated_registry_is_governed_programme_module_or_absent() -> None:
+    """TOTALITY. Twenty-five, partitioned four ways, each registry in exactly one tier."""
+    mandates = _registry_mandates()
+    assert len(mandates) == 25, f"the model lists 25 registries, corpus has {len(mandates)}"
+
+    tiers = (
+        REGISTRY_GOVERNED,
+        REGISTRY_PROGRAMME_ONLY,
+        REGISTRY_AS_MODULE,
+        REGISTRY_BAND_SCOPED,
+        REGISTRY_ABSENT,
+    )
+    accounted = set().union(*(set(t) for t in tiers))
+    assert set(mandates) == accounted, (
+        f"registries in no tier: {sorted(set(mandates) - accounted)}; "
+        f"tiered identifiers that are not registry mandates: {sorted(accounted - set(mandates))}"
+    )
+    assert sum(len(t) for t in tiers) == len(accounted) == 25
+
+
+def test_every_governed_registry_is_outside_the_registration_excluded_zone() -> None:
+    """The property that makes the governed tier mean anything."""
+    repo = Path(__file__).resolve().parents[3]
+    for mandate, home in {**REGISTRY_GOVERNED, **REGISTRY_AS_MODULE}.items():
+        assert not home.startswith(_EXCLUDED_ZONE), (
+            f"{mandate}: {home} sits in the registration-excluded zone and cannot be a "
+            "governed registry"
+        )
+        assert (repo / home).exists(), f"{mandate}: governed home {home} does not exist"
+
+
+def test_every_programme_register_is_inside_the_excluded_zone_and_exists() -> None:
+    repo = Path(__file__).resolve().parents[3]
+    for mandate, home in REGISTRY_PROGRAMME_ONLY.items():
+        assert home.startswith(_EXCLUDED_ZONE), (
+            f"{mandate}: {home} is outside {_EXCLUDED_ZONE} but is tiered as programme-only; "
+            "if it is governed it belongs a tier up"
+        )
+        assert (repo / home).exists(), f"{mandate}: programme register {home} does not exist"
+
+
+def test_the_excluded_zone_really_is_excluded_from_registration() -> None:
+    """NON-VACUITY. The whole split rests on `00-MASTER/` being registration-excluded. If
+    that exclusion is ever lifted, ten registries change tier and this binding is wrong."""
+    repo = Path(__file__).resolve().parents[3]
+    config = (repo / "00-BOOK" / "tools" / "config.py").read_text(encoding="utf-8")
+    assert "EXCLUDE_DIR_PREFIXES" in config
+    assert f'"{_EXCLUDED_ZONE}"' in config, (
+        f"{_EXCLUDED_ZONE} is no longer listed in EXCLUDE_DIR_PREFIXES; the governed / "
+        "programme split this binding makes is no longer the right one"
+    )
+
+
+def test_the_band_scoped_registry_declares_an_execution_only_authority() -> None:
+    """NON-VACUITY. The tier's whole claim is the `authority` field. If that file ever
+    declares a constitutional authority it is a governed registry and belongs a tier up."""
+    repo = Path(__file__).resolve().parents[3]
+    for mandate, (home, authority) in REGISTRY_BAND_SCOPED.items():
+        path = repo / home
+        assert path.exists(), f"{mandate}: {home} does not exist"
+        declared = json.loads(path.read_text(encoding="utf-8")).get("authority")
+        assert declared == authority, (
+            f"{mandate}: {home} declares authority {declared!r}, not {authority!r}; "
+            "its tier was decided by that field and must be re-decided"
+        )
+
+
+def test_the_absent_registry_is_named_by_no_tracked_register_at_all() -> None:
+    """NON-VACUITY for the absent tier, over BOTH populations so absence means absence
+    rather than 'absent from the governed half'.
+
+    The search is the TRACKED set, not the filesystem: an untracked worktree copy is not
+    Repository Truth, and the first draft of this test reported one as evidence of presence.
+    """
+    repo = Path(__file__).resolve().parents[3]
+    tracked = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "-C", str(repo), "ls-files"],  # noqa: S607 - git from PATH by design
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.splitlines()
+    for mandate, label in REGISTRY_ABSENT.items():
+        word = label.split()[0].lower()
+        found = [
+            path
+            for path in tracked
+            if "registr" in path.rsplit("/", 1)[-1].lower()
+            and word in path.rsplit("/", 1)[-1].lower()
+        ]
+        assert not found, f"{mandate}: {label} is declared absent but a register exists: {found}"
+
+
+def test_the_tracked_search_that_proves_absence_can_find_something() -> None:
+    """The absence rule must be capable of a positive, or it passes every claim vacuously."""
+    repo = Path(__file__).resolve().parents[3]
+    tracked = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "-C", str(repo), "ls-files"],  # noqa: S607 - git from PATH by design
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.splitlines()
+    hits = [
+        path
+        for path in tracked
+        if "registr" in path.rsplit("/", 1)[-1].lower()
+        and "certification" in path.rsplit("/", 1)[-1].lower()
+    ]
+    assert hits, "the tracked-register search matches nothing, so every absence claim is vacuous"
