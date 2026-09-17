@@ -8,12 +8,12 @@
  "atom_count": 1449,
  "concept_count": 1117,
  "status_totals": {
-  "ABSENT": 308,
+  "ABSENT": 294,
   "ANCHORED": 150,
   "ASSERTION": 37,
-  "IMPLEMENTED": 232,
-  "PARTIAL": 104,
-  "SPECIFIED": 255,
+  "IMPLEMENTED": 240,
+  "PARTIAL": 96,
+  "SPECIFIED": 269,
   "UNDECIDABLE": 31
  },
  "disposition_totals": {
@@ -21,9 +21,9 @@
   "ASSERT": 37,
   "AUDIENCE": 25,
   "CREATE": 17,
-  "EXTEND": 497,
-  "IMPLEMENTED": 221,
-  "REFERENCE": 263,
+  "EXTEND": 480,
+  "IMPLEMENTED": 229,
+  "REFERENCE": 272,
   "REGISTER": 27
  },
  "concepts": {
@@ -179,12 +179,12 @@
    "mandates": [
     "UAKP-CLS/CS-35"
    ],
-   "hits": 323,
+   "hits": 325,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 80,
-    "test": 24,
+    "test": 26,
     "gate": 1,
     "decl": 38,
     "doc": 180
@@ -209,9 +209,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "adapter registry": {
    "label": "Adapter Registry",
@@ -219,17 +223,18 @@
    "mandates": [
     "UAKP-REG/RG-24"
    ],
-   "hits": 18,
+   "hits": 19,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 4,
-    "test": 2,
+    "test": 3,
     "gate": 0,
     "decl": 7,
     "doc": 5
    },
    "owner_files": [
+    "engine/tests/uckp/test_alignment.py",
     "00-MASTER/UCOS-UMA-001/07-DISCOVERY-FRAMEWORK.md",
     "00-MASTER/UCOS-UMA-001/03-COMPONENT-ARCHITECTURE.md",
     "00-MASTER/UCOS-UMA-001/02-PLATFORM-ARCHITECTURE.md"
@@ -247,9 +252,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "admission": {
    "label": "Admission",
@@ -1524,12 +1533,12 @@
    "mandates": [
     "UAKP-CLS/CS-19"
    ],
-   "hits": 2919,
+   "hits": 2920,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 466,
-    "test": 200,
+    "test": 201,
     "gate": 37,
     "decl": 254,
     "doc": 1962
@@ -1557,9 +1566,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "artifact registry": {
    "label": "Artifact Registry",
@@ -1567,12 +1580,12 @@
    "mandates": [
     "UAKP-REG/RG-12"
    ],
-   "hits": 406,
+   "hits": 407,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 30,
-    "test": 12,
+    "test": 13,
     "gate": 3,
     "decl": 49,
     "doc": 312
@@ -1599,9 +1612,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "assets": {
    "label": "Assets",
@@ -1691,12 +1708,12 @@
    "mandates": [
     "LYR-L6/AU-02"
    ],
-   "hits": 693,
+   "hits": 694,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 88,
-    "test": 38,
+    "test": 39,
     "gate": 7,
     "decl": 83,
     "doc": 477
@@ -1847,12 +1864,12 @@
     "LYR-L0/K-09",
     "LYR-L10/GV-02"
    ],
-   "hits": 3531,
+   "hits": 3533,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 756,
-    "test": 262,
+    "test": 264,
     "gate": 25,
     "decl": 328,
     "doc": 2160
@@ -1890,12 +1907,12 @@
    "mandates": [
     "UAKP-OBJ/OJ-06"
    ],
-   "hits": 4,
+   "hits": 5,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 4
@@ -1914,9 +1931,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "autonomous composition": {
    "label": "Autonomous Composition",
@@ -2541,12 +2562,12 @@
    "mandates": [
     "MI-007/E-08"
    ],
-   "hits": 1349,
+   "hits": 1350,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 367,
-    "test": 139,
+    "test": 140,
     "gate": 13,
     "decl": 74,
     "doc": 756
@@ -3166,12 +3187,12 @@
     "UAKP-GRAPH/GP-05",
     "UAKP-CLS/CS-17"
    ],
-   "hits": 2271,
+   "hits": 2273,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 470,
-    "test": 188,
+    "test": 190,
     "gate": 24,
     "decl": 220,
     "doc": 1369
@@ -3199,9 +3220,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "capability cluster": {
    "label": "Capability Cluster",
@@ -3315,7 +3340,7 @@
   },
   "capability elevation": {
    "label": "Capability Elevation",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "MI-014/EV-06",
     "ARCH-EVOF/VF2-15",
@@ -3323,12 +3348,12 @@
     "QM-FLOW/FL-27",
     "UAKP-PROC/PR-26"
    ],
-   "hits": 35,
+   "hits": 36,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 3,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 13,
     "doc": 19
@@ -3346,7 +3371,7 @@
     "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-BOOK/DATA/generated-artifact-registry.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -3470,9 +3495,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "capability update": {
    "label": "Capability Update",
@@ -3600,12 +3629,12 @@
     "UAKP-GRAPH/GP-13",
     "UAKP-CLS/CS-29"
    ],
-   "hits": 3275,
+   "hits": 3277,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 648,
-    "test": 269,
+    "test": 271,
     "gate": 14,
     "decl": 379,
     "doc": 1965
@@ -3633,9 +3662,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "certification constitution": {
    "label": "Certification Constitution",
@@ -3678,12 +3711,12 @@
    "mandates": [
     "UAKP-REG/RG-19"
    ],
-   "hits": 229,
+   "hits": 230,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 16,
-    "test": 12,
+    "test": 13,
     "gate": 1,
     "decl": 22,
     "doc": 178
@@ -3710,9 +3743,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "certification universe": {
    "label": "Certification Universe",
@@ -3720,17 +3757,18 @@
    "mandates": [
     "UAKP-UNIV/UV-20"
    ],
-   "hits": 7,
+   "hits": 8,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 5
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\""
    ],
    "code_files": [],
@@ -3741,9 +3779,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "certified": {
    "label": "Certified",
@@ -4017,12 +4059,12 @@
    "mandates": [
     "UAKP-CLS/CS-04"
    ],
-   "hits": 1463,
+   "hits": 1465,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 265,
-    "test": 171,
+    "test": 173,
     "gate": 18,
     "decl": 89,
     "doc": 920
@@ -4050,9 +4092,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "claim to evidence": {
    "label": "Claim to Evidence",
@@ -4096,12 +4142,12 @@
     "QM-FLOW/FL-05",
     "LYR-L6/AU-03"
    ],
-   "hits": 1610,
+   "hits": 1611,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 243,
-    "test": 86,
+    "test": 87,
     "gate": 4,
     "decl": 103,
     "doc": 1174
@@ -4747,12 +4793,12 @@
    "mandates": [
     "ARCH-VERIF/VF-08"
    ],
-   "hits": 1195,
+   "hits": 1197,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 124,
-    "test": 28,
+    "test": 30,
     "gate": 4,
     "decl": 219,
     "doc": 820
@@ -5000,9 +5046,13 @@
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "component testing": {
    "label": "Component Testing",
@@ -5302,12 +5352,12 @@
    "mandates": [
     "UAKP-CLS/CS-07"
    ],
-   "hits": 171,
+   "hits": 172,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 19,
-    "test": 6,
+    "test": 7,
     "gate": 0,
     "decl": 22,
     "doc": 124
@@ -5332,9 +5382,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "confidence assessment": {
    "label": "Confidence Assessment",
@@ -5396,9 +5450,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "configuration": {
    "label": "Configuration",
@@ -5666,12 +5724,12 @@
     "LYR-L5/US-02",
     "LYR-L7I/GI-01"
    ],
-   "hits": 1585,
+   "hits": 1586,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 190,
-    "test": 66,
+    "test": 67,
     "gate": 7,
     "decl": 104,
     "doc": 1218
@@ -5886,37 +5944,35 @@
   },
   "constitutional foundation universe": {
    "label": "Constitutional Foundation Universe",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-UNIV/UV-01"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "constitutional governance": {
    "label": "Constitutional Governance",
@@ -6076,12 +6132,12 @@
     "LYR-L0/K-10",
     "UAKP-CLS/CS-13"
    ],
-   "hits": 1015,
+   "hits": 1016,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 197,
-    "test": 41,
+    "test": 42,
     "gate": 0,
     "decl": 158,
     "doc": 619
@@ -6106,9 +6162,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "constraint constitution": {
    "label": "Constraint Constitution",
@@ -6740,12 +6800,12 @@
     "LYR-L7I/GI-06",
     "UAKP-CLS/CS-15"
    ],
-   "hits": 1279,
+   "hits": 1282,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 330,
-    "test": 164,
+    "test": 167,
     "gate": 5,
     "decl": 101,
     "doc": 679
@@ -6773,9 +6833,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "context adapter": {
    "label": "Context Adapter",
@@ -6969,12 +7033,12 @@
    "mandates": [
     "UAKP-REG/RG-04"
    ],
-   "hits": 58,
+   "hits": 59,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 17,
-    "test": 10,
+    "test": 11,
     "gate": 0,
     "decl": 7,
     "doc": 24
@@ -6998,9 +7062,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "context resolution": {
    "label": "Context Resolution",
@@ -7009,12 +7077,12 @@
     "QM-FLOW/FL-07",
     "UAKP-PROC/PR-05"
    ],
-   "hits": 35,
+   "hits": 36,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 11,
-    "test": 3,
+    "test": 4,
     "gate": 0,
     "decl": 7,
     "doc": 14
@@ -7049,17 +7117,18 @@
    "mandates": [
     "UAKP-UNIV/UV-04"
    ],
-   "hits": 5,
+   "hits": 6,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 1,
-    "test": 1,
+    "test": 2,
     "gate": 0,
     "decl": 2,
     "doc": 1
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "engine/context/ontology.py",
     "engine/tests/unit/test_runtime_composition.py"
    ],
@@ -7073,9 +7142,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "contextualized": {
    "label": "Contextualized",
@@ -7315,12 +7388,12 @@
    "mandates": [
     "ARCH-CERTV/CV-04"
    ],
-   "hits": 2146,
+   "hits": 2147,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 407,
-    "test": 259,
+    "test": 260,
     "gate": 21,
     "decl": 91,
     "doc": 1368
@@ -7581,12 +7654,12 @@
    "mandates": [
     "QM-OUT/OU-11"
    ],
-   "hits": 2871,
+   "hits": 2872,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 626,
-    "test": 285,
+    "test": 286,
     "gate": 31,
     "decl": 358,
     "doc": 1571
@@ -7730,12 +7803,12 @@
     "UAKP-PROC/PR-14",
     "UAKP-CLS/CS-10"
    ],
-   "hits": 1871,
+   "hits": 1873,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 417,
-    "test": 235,
+    "test": 237,
     "gate": 8,
     "decl": 99,
     "doc": 1112
@@ -7763,9 +7836,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "decision memory": {
    "label": "Decision Memory",
@@ -7825,9 +7902,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "decision universe": {
    "label": "Decision Universe",
@@ -7835,21 +7916,21 @@
    "mandates": [
     "UAKP-UNIV/UV-12"
    ],
-   "hits": 11,
+   "hits": 12,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 3,
     "doc": 8
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\"",
     "00-MASTER/UCOS-MXR-001/roadmap.json",
-    "MASTER-EXECUTION-ADMISSION-MATRIX.md",
-    "CAPABILITY-REUSE-ANALYSIS-DETERMINATION.md"
+    "MASTER-EXECUTION-ADMISSION-MATRIX.md"
    ],
    "code_files": [],
    "gate_files": [],
@@ -7860,9 +7941,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "defense": {
    "label": "Defense",
@@ -7982,12 +8067,12 @@
     "UAKP-GRAPH/GP-06",
     "UAKP-CLS/CS-22"
    ],
-   "hits": 1857,
+   "hits": 1859,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 311,
-    "test": 109,
+    "test": 111,
     "gate": 10,
     "decl": 125,
     "doc": 1302
@@ -8015,24 +8100,28 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "dependency discovery": {
    "label": "Dependency Discovery",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "PRD-DISC/DISC-05",
     "MI-005/D-06",
     "UAKP-PROC/PR-12"
    ],
-   "hits": 35,
+   "hits": 36,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 4,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 14,
     "doc": 17
@@ -8055,7 +8144,7 @@
     "00-MASTER/ACEE-000001/acee-invariant-manifest.json",
     "00-MASTER/ACEE-000001/acee.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -8109,12 +8198,12 @@
    "mandates": [
     "UAKP-REG/RG-11"
    ],
-   "hits": 72,
+   "hits": 73,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 9,
-    "test": 2,
+    "test": 3,
     "gate": 0,
     "decl": 6,
     "doc": 55
@@ -8139,9 +8228,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "dependency scheduling": {
    "label": "Dependency Scheduling",
@@ -8179,21 +8272,22 @@
   },
   "dependency universe": {
    "label": "Dependency Universe",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "UAKP-UNIV/UV-14"
    ],
-   "hits": 5,
+   "hits": 6,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 1,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 2
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\""
    ],
    "code_files": [
@@ -8204,11 +8298,15 @@
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "dependency update": {
    "label": "Dependency Update",
@@ -8441,12 +8539,12 @@
     "ARCH-ENGF/EF-04",
     "MI-018/ES-05"
    ],
-   "hits": 953,
+   "hits": 954,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 127,
-    "test": 41,
+    "test": 42,
     "gate": 2,
     "decl": 47,
     "doc": 736
@@ -9343,12 +9441,12 @@
     "QM-FLOW/FL-03",
     "LYR-L6/AU-01"
    ],
-   "hits": 1161,
+   "hits": 1162,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 263,
-    "test": 90,
+    "test": 91,
     "gate": 11,
     "decl": 92,
     "doc": 705
@@ -10338,12 +10436,12 @@
    "mandates": [
     "ARCH-ENGF/EF-05"
    ],
-   "hits": 1292,
+   "hits": 1294,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 201,
-    "test": 88,
+    "test": 90,
     "gate": 4,
     "decl": 225,
     "doc": 774
@@ -10631,12 +10729,12 @@
     "LYR-L1/EX-06",
     "UAKP-CLS/CS-34"
    ],
-   "hits": 604,
+   "hits": 606,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 123,
-    "test": 39,
+    "test": 41,
     "gate": 12,
     "decl": 73,
     "doc": 357
@@ -10664,9 +10762,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "environment registry": {
    "label": "Environment Registry",
@@ -10701,9 +10803,13 @@
     "00-MASTER/UEC-000001/uec-declaration.json"
    ],
    "reason": "head noun 'registry' is named by 00-MASTER/UVI-000001/uvi-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "environment universe": {
    "label": "Environment Universe",
@@ -10711,36 +10817,34 @@
    "mandates": [
     "UAKP-UNIV/UV-23"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "environmental context": {
    "label": "Environmental Context",
@@ -11053,12 +11157,12 @@
    "mandates": [
     "QM-OUT/OU-01"
    ],
-   "hits": 633,
+   "hits": 634,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 238,
-    "test": 68,
+    "test": 69,
     "gate": 6,
     "decl": 34,
     "doc": 287
@@ -11274,8 +11378,8 @@
    "head_noun_owner": [
     "engine/omega_infinite/filesystem_provider.py",
     "engine/civilization/compliance.py",
-    "PHASE_OMEGA_B_CRITICAL_ASSUMPTION_CLOSURE_MATRIX.md",
-    "PHASE_OMEGA_A_EXPANSION_BARRIER_REGISTER.md"
+    "engine/tests/uckp/test_alignment.py",
+    "PHASE_OMEGA_B_CRITICAL_ASSUMPTION_CLOSURE_MATRIX.md"
    ],
    "reason": "head noun 'replaceable' is named by engine/omega_infinite/filesystem_provider.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
    "named_by": [],
@@ -11296,12 +11400,12 @@
     "UAKP-GRAPH/GP-02",
     "UAKP-CLS/CS-05"
    ],
-   "hits": 3672,
+   "hits": 3673,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 753,
-    "test": 331,
+    "test": 332,
     "gate": 25,
     "decl": 382,
     "doc": 2181
@@ -11329,9 +11433,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "evidence attribute": {
    "label": "Evidence attribute",
@@ -11339,12 +11447,12 @@
    "mandates": [
     "UAKP-OBJ/OJ-08"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 2
@@ -11357,9 +11465,13 @@
    "mention_only": [],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "evidence before truth": {
    "label": "Evidence before truth",
@@ -11434,16 +11546,16 @@
   },
   "evidence discovery": {
    "label": "Evidence Discovery",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-PROC/PR-06"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -11572,12 +11684,12 @@
    "mandates": [
     "UAKP-REG/RG-05"
    ],
-   "hits": 71,
+   "hits": 72,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 8,
-    "test": 1,
+    "test": 2,
     "gate": 1,
     "decl": 9,
     "doc": 52
@@ -11602,9 +11714,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "evidence universe": {
    "label": "Evidence Universe",
@@ -11612,12 +11728,12 @@
    "mandates": [
     "UAKP-UNIV/UV-06"
    ],
-   "hits": 86,
+   "hits": 88,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 6,
-    "test": 4,
+    "test": 6,
     "gate": 0,
     "decl": 22,
     "doc": 54
@@ -11640,9 +11756,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "evolution": {
    "label": "Evolution",
@@ -11660,12 +11780,12 @@
     "UAKP-GRAPH/GP-15",
     "UAKP-CLS/CS-33"
    ],
-   "hits": 1180,
+   "hits": 1183,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 114,
-    "test": 42,
+    "test": 45,
     "gate": 13,
     "decl": 98,
     "doc": 913
@@ -11693,9 +11813,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "evolution adapter": {
    "label": "Evolution Adapter",
@@ -11940,16 +12064,16 @@
   },
   "evolution history attribute": {
    "label": "Evolution History attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-13"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -11968,9 +12092,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "evolution memory": {
    "label": "Evolution Memory",
@@ -12081,12 +12209,12 @@
    "mandates": [
     "UAKP-REG/RG-22"
    ],
-   "hits": 52,
+   "hits": 53,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 2,
     "decl": 7,
     "doc": 43
@@ -12108,9 +12236,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "evolution rules": {
    "label": "Evolution Rules",
@@ -12189,21 +12321,21 @@
    "mandates": [
     "UAKP-UNIV/UV-21"
    ],
-   "hits": 19,
+   "hits": 20,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 8,
     "doc": 11
    },
    "owner_files": [
     "00-MASTER/UCOS-UGA-001/03-AUDIT-UNIVERSE.json",
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\"",
-    "00-MASTER/UCOS-USIS-WAVE1/01-WAVE1-CONTEXT-ASSIMILATION.md",
-    "00-MASTER/UCOS-USIS-001/12-USIS-IMPLEMENTATION-ROADMAP.md"
+    "00-MASTER/UCOS-USIS-WAVE1/01-WAVE1-CONTEXT-ASSIMILATION.md"
    ],
    "code_files": [],
    "gate_files": [],
@@ -12214,9 +12346,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "evolvability": {
    "label": "Evolvability",
@@ -12259,12 +12395,12 @@
     "ARCH-OPF/OF-04",
     "UAKP-CLS/CS-25"
    ],
-   "hits": 2449,
+   "hits": 2450,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 458,
-    "test": 189,
+    "test": 190,
     "gate": 12,
     "decl": 263,
     "doc": 1527
@@ -12292,9 +12428,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "execution adapter": {
    "label": "Execution Adapter",
@@ -12407,12 +12547,12 @@
    "mandates": [
     "UAKP-REG/RG-16"
    ],
-   "hits": 35,
+   "hits": 36,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 8,
-    "test": 3,
+    "test": 4,
     "gate": 0,
     "decl": 5,
     "doc": 19
@@ -12421,7 +12561,7 @@
     "platform/runtime_platform/registry.py",
     "platform/tests/test_runtime_platform_registry.py",
     "00-MASTER/UCOS-USIS-001/09-USIS-REGISTRY-INTEGRATION-MANIFEST.md",
-    "00-MASTER/UCOS-USIS-WAVE3-FOUNDATION/04-GAP-DETERMINATION.md"
+    "engine/tests/uckp/test_alignment.py"
    ],
    "code_files": [
     "platform/runtime_platform/__init__.py",
@@ -12436,9 +12576,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "execution specification": {
    "label": "Execution Specification",
@@ -12446,12 +12590,12 @@
    "mandates": [
     "UAKP-GRAPH/GP-08"
    ],
-   "hits": 13,
+   "hits": 14,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 10,
     "doc": 3
@@ -12546,12 +12690,12 @@
     "LYR-L0/K-03",
     "LYR-L1/EX-01"
    ],
-   "hits": 617,
+   "hits": 618,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 67,
-    "test": 25,
+    "test": 26,
     "gate": 2,
     "decl": 57,
     "doc": 466
@@ -12775,9 +12919,13 @@
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "failure memory": {
    "label": "Failure Memory",
@@ -13373,12 +13521,12 @@
     "MI-005/D-12",
     "UAKP-PROC/PR-09"
    ],
-   "hits": 34,
+   "hits": 35,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 4,
-    "test": 1,
+    "test": 2,
     "gate": 0,
     "decl": 11,
     "doc": 18
@@ -13413,12 +13561,12 @@
    "mandates": [
     "LYR-L15/EL-09"
    ],
-   "hits": 1375,
+   "hits": 1376,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 213,
-    "test": 67,
+    "test": 68,
     "gate": 22,
     "decl": 174,
     "doc": 899
@@ -13783,9 +13931,13 @@
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "govern evolution": {
    "label": "Govern evolution",
@@ -13864,12 +14016,12 @@
     "LYR-L7O/GO-06",
     "UAKP-CLS/CS-30"
    ],
-   "hits": 2543,
+   "hits": 2545,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 375,
-    "test": 129,
+    "test": 131,
     "gate": 19,
     "decl": 183,
     "doc": 1837
@@ -13897,9 +14049,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "governance adapter": {
    "label": "Governance Adapter",
@@ -13934,16 +14090,16 @@
   },
   "governance attribute": {
    "label": "Governance attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-10"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -13962,9 +14118,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "governance before automation": {
    "label": "Governance before automation",
@@ -14078,12 +14238,12 @@
    "mandates": [
     "LYR-L2/CX-08"
    ],
-   "hits": 39,
+   "hits": 40,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 5,
-    "test": 3,
+    "test": 4,
     "gate": 0,
     "decl": 11,
     "doc": 20
@@ -14223,9 +14383,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "governance universe": {
    "label": "Governance Universe",
@@ -14233,17 +14397,18 @@
    "mandates": [
     "UAKP-UNIV/UV-09"
    ],
-   "hits": 14,
+   "hits": 15,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 12
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\"",
     "00-CEP/STAGE-02-S2-01-CEP-UCOS-CONSTITUTIONAL-BINDING-CROSSWALK.md"
@@ -14256,9 +14421,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "governed": {
    "label": "Governed",
@@ -14266,12 +14435,12 @@
    "mandates": [
     "UAKP-STATE/SS-08"
    ],
-   "hits": 1528,
+   "hits": 1529,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 304,
-    "test": 98,
+    "test": 99,
     "gate": 15,
     "decl": 102,
     "doc": 1009
@@ -14457,9 +14626,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "graphs before hierarchies": {
    "label": "Graphs before hierarchies",
@@ -14702,12 +14875,12 @@
    "mandates": [
     "LYR-L9/KG-06"
    ],
-   "hits": 757,
+   "hits": 758,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 141,
-    "test": 53,
+    "test": 54,
     "gate": 5,
     "decl": 56,
     "doc": 502
@@ -14741,16 +14914,16 @@
   },
   "history attribute": {
    "label": "History attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-12"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -14769,9 +14942,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "how is it certified": {
    "label": "How is it certified",
@@ -15321,19 +15498,20 @@
    "mandates": [
     "UAKP-CLS/CS-09"
    ],
-   "hits": 41,
+   "hits": 42,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 5,
-    "test": 1,
+    "test": 2,
     "gate": 0,
     "decl": 4,
     "doc": 31
    },
    "owner_files": [
     "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UCON-000001/ucon-declaration.json"
+    "00-MASTER/UCON-000001/ucon-declaration.json",
+    "engine/tests/kernel/test_compliance.py"
    ],
    "code_files": [
     "engine/ceu/catalog.py",
@@ -15349,9 +15527,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "identify": {
    "label": "Identify",
@@ -15403,12 +15585,12 @@
     "LYR-L5/US-01",
     "UAKP-CLS/CS-16"
    ],
-   "hits": 2556,
+   "hits": 2557,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 732,
-    "test": 330,
+    "test": 331,
     "gate": 18,
     "decl": 223,
     "doc": 1253
@@ -15436,9 +15618,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "identity adapter": {
    "label": "Identity Adapter",
@@ -15679,12 +15865,12 @@
    "mandates": [
     "UAKP-REG/RG-03"
    ],
-   "hits": 54,
+   "hits": 55,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 6,
-    "test": 3,
+    "test": 4,
     "gate": 0,
     "decl": 9,
     "doc": 36
@@ -15709,9 +15895,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "identity resolution": {
    "label": "Identity Resolution",
@@ -15754,21 +15944,21 @@
    "mandates": [
     "UAKP-UNIV/UV-03"
    ],
-   "hits": 37,
+   "hits": 38,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 8,
     "doc": 29
    },
    "owner_files": [
     "00-MASTER/UCOS-UGA-001/03-AUDIT-UNIVERSE.json",
+    "engine/tests/uckp/test_universe_and_validation.py",
     "02-MASTER/EC-3-B13-P02-UNIVERSAL-UNIVERSE-ARCHITECTURE-FRAMEWORK.md",
-    "00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md",
-    "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\""
+    "00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md"
    ],
    "code_files": [],
    "gate_files": [],
@@ -15779,9 +15969,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "identity validation": {
    "label": "Identity Validation",
@@ -15822,12 +16016,12 @@
    "mandates": [
     "LYR-L11/ME-08"
    ],
-   "hits": 591,
+   "hits": 592,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 66,
-    "test": 24,
+    "test": 25,
     "gate": 4,
     "decl": 50,
     "doc": 447
@@ -15869,12 +16063,12 @@
     "QM-FLOW/FL-16",
     "LYR-L6/AU-08"
    ],
-   "hits": 2370,
+   "hits": 2371,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 291,
-    "test": 84,
+    "test": 85,
     "gate": 9,
     "decl": 120,
     "doc": 1866
@@ -15934,9 +16128,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "improve": {
    "label": "Improve",
@@ -16271,9 +16469,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "information constitution": {
    "label": "Information Constitution",
@@ -16319,12 +16521,12 @@
     "MI-015/PJ-12",
     "QM-OUT/OU-20"
    ],
-   "hits": 1170,
+   "hits": 1171,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 117,
-    "test": 60,
+    "test": 61,
     "gate": 4,
     "decl": 169,
     "doc": 820
@@ -16520,12 +16722,12 @@
     "ARCH-ENGF/EF-10",
     "UAKP-CLS/CS-36"
    ],
-   "hits": 1265,
+   "hits": 1268,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 140,
-    "test": 84,
+    "test": 87,
     "gate": 4,
     "decl": 111,
     "doc": 926
@@ -16553,9 +16755,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "integration adapter": {
    "label": "Integration Adapter",
@@ -16632,12 +16838,12 @@
    "mandates": [
     "UAKP-REG/RG-25"
    ],
-   "hits": 20,
+   "hits": 21,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 1,
-    "test": 1,
+    "test": 2,
     "gate": 0,
     "decl": 9,
     "doc": 9
@@ -16657,9 +16863,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "integration testing": {
    "label": "Integration Testing",
@@ -16699,17 +16909,18 @@
    "mandates": [
     "UAKP-UNIV/UV-22"
    ],
-   "hits": 6,
+   "hits": 7,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 4
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\""
    ],
    "code_files": [],
@@ -16720,9 +16931,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "integrity": {
    "label": "Integrity",
@@ -16775,12 +16990,12 @@
     "MI-013/OB-09",
     "QM-CONST/CO-17"
    ],
-   "hits": 1343,
+   "hits": 1344,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 215,
-    "test": 62,
+    "test": 63,
     "gate": 12,
     "decl": 114,
     "doc": 940
@@ -16893,12 +17108,12 @@
    "mandates": [
     "UAKP-CLS/CS-11"
    ],
-   "hits": 242,
+   "hits": 243,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 36,
-    "test": 15,
+    "test": 16,
     "gate": 0,
     "decl": 22,
     "doc": 169
@@ -16923,9 +17138,13 @@
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "intent driven composition": {
    "label": "Intent Driven Composition",
@@ -16967,36 +17186,34 @@
    "mandates": [
     "UAKP-UNIV/UV-10"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "interfaces": {
    "label": "Interfaces",
@@ -17187,12 +17404,12 @@
     "UAKP-GRAPH/GP-01",
     "UAKP-CLS/CS-01"
    ],
-   "hits": 3584,
+   "hits": 3586,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 276,
-    "test": 107,
+    "test": 109,
     "gate": 23,
     "decl": 122,
     "doc": 3056
@@ -17220,9 +17437,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "knowledge acquisition": {
    "label": "Knowledge Acquisition",
@@ -17230,12 +17451,12 @@
    "mandates": [
     "UAKP-PROC/PR-01"
    ],
-   "hits": 3,
+   "hits": 4,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 1
@@ -17332,12 +17553,12 @@
     "QM-FLOW/FL-10",
     "UAKP-PROC/PR-02"
    ],
-   "hits": 146,
+   "hits": 147,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 5,
-    "test": 1,
+    "test": 2,
     "gate": 2,
     "decl": 24,
     "doc": 114
@@ -17558,17 +17779,17 @@
   },
   "knowledge classification": {
    "label": "Knowledge Classification",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "PRD-KN/KN-04",
     "UAKP-PROC/PR-04"
    ],
-   "hits": 26,
+   "hits": 27,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 1,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 12,
     "doc": 13
@@ -17588,7 +17809,7 @@
     "00-BOOK/DATA/id-ledger.json",
     "00-MASTER/ACEE-000001/acee.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -17820,19 +18041,19 @@
   },
   "knowledge extraction": {
    "label": "Knowledge Extraction",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "MI-014/EV-05",
     "ARCH-EVOF/VF2-01",
     "MI-018/ES-15",
     "QM-FLOW/FL-26"
    ],
-   "hits": 44,
+   "hits": 45,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 3,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 14,
     "doc": 27
@@ -17850,7 +18071,7 @@
     "00-MASTER/UCL-000001/ucl-declaration.json",
     "00-BOOK/DATA/generated-artifact-registry.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -18040,16 +18261,16 @@
   },
   "knowledge refinement": {
    "label": "Knowledge Refinement",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-PROC/PR-03"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18078,12 +18299,12 @@
    "mandates": [
     "UAKP-REG/RG-02"
    ],
-   "hits": 108,
+   "hits": 109,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 21,
-    "test": 16,
+    "test": 17,
     "gate": 0,
     "decl": 16,
     "doc": 55
@@ -18108,9 +18329,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "knowledge relationships": {
    "label": "Knowledge Relationships",
@@ -18218,21 +18443,21 @@
    "mandates": [
     "UAKP-UNIV/UV-05"
    ],
-   "hits": 52,
+   "hits": 53,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 17,
-    "test": 2,
+    "test": 3,
     "gate": 0,
     "decl": 7,
     "doc": 26
    },
    "owner_files": [
     "engine/uckp/universe.py",
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\"",
-    "00-MASTER/UCOS-MXR-001/roadmap.json",
-    "engine/uckp/law.py"
+    "00-MASTER/UCOS-MXR-001/roadmap.json"
    ],
    "code_files": [
     "engine/runtime/bridge/__init__.py",
@@ -18248,9 +18473,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "knowledge validation": {
    "label": "Knowledge Validation",
@@ -18325,12 +18554,12 @@
    "mandates": [
     "PRD-GOV/GOV-03"
    ],
-   "hits": 1754,
+   "hits": 1755,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 389,
-    "test": 107,
+    "test": 108,
     "gate": 12,
     "decl": 126,
     "doc": 1120
@@ -18412,12 +18641,12 @@
     "LYR-L15/EL-04",
     "UAKP-PO/PO-22"
    ],
-   "hits": 306,
+   "hits": 307,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 29,
-    "test": 14,
+    "test": 15,
     "gate": 6,
     "decl": 45,
     "doc": 212
@@ -18498,12 +18727,12 @@
     "UAKP-GRAPH/GP-14",
     "UAKP-CLS/CS-32"
    ],
-   "hits": 210,
+   "hits": 211,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 15,
-    "test": 2,
+    "test": 3,
     "gate": 4,
     "decl": 33,
     "doc": 156
@@ -18531,9 +18760,13 @@
    ],
    "disposition": "ADJUDICATE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "learning memory": {
    "label": "Learning Memory",
@@ -18866,12 +19099,12 @@
    "mandates": [
     "LYR-L0/K-13"
    ],
-   "hits": 1979,
+   "hits": 1980,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 463,
-    "test": 154,
+    "test": 155,
     "gate": 11,
     "decl": 244,
     "doc": 1107
@@ -18969,16 +19202,16 @@
   },
   "lifecycle state attribute": {
    "label": "Lifecycle State attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-04"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -18997,9 +19230,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "lineage": {
    "label": "Lineage",
@@ -19702,12 +19939,12 @@
     "LYR-L0/K-15",
     "LYR-L5/US-16"
    ],
-   "hits": 1292,
+   "hits": 1294,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 261,
-    "test": 131,
+    "test": 133,
     "gate": 21,
     "decl": 137,
     "doc": 742
@@ -19788,12 +20025,12 @@
    "mandates": [
     "UAKP-CLS/CS-31"
    ],
-   "hits": 823,
+   "hits": 825,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 120,
-    "test": 46,
+    "test": 48,
     "gate": 12,
     "decl": 63,
     "doc": 582
@@ -19821,22 +20058,26 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "memory registry": {
    "label": "Memory Registry",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "UAKP-REG/RG-21"
    ],
-   "hits": 8,
+   "hits": 9,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 1,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 3,
     "doc": 4
@@ -19854,11 +20095,15 @@
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "memory universe": {
    "label": "Memory Universe",
@@ -19866,17 +20111,18 @@
    "mandates": [
     "UAKP-UNIV/UV-08"
    ],
-   "hits": 7,
+   "hits": 8,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 5
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\""
    ],
    "code_files": [],
@@ -19887,9 +20133,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "metadata attribute": {
    "label": "Metadata attribute",
@@ -19897,12 +20147,12 @@
    "mandates": [
     "UAKP-OBJ/OJ-03"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 1,
     "doc": 1
@@ -19917,9 +20167,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "metering": {
    "label": "Metering",
@@ -22342,12 +22596,12 @@
    "mandates": [
     "LYR-L1/EX-09"
    ],
-   "hits": 1958,
+   "hits": 1959,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 597,
-    "test": 232,
+    "test": 233,
     "gate": 11,
     "decl": 206,
     "doc": 912
@@ -22385,12 +22639,12 @@
    "mandates": [
     "MI-003/M-03"
    ],
-   "hits": 152,
+   "hits": 154,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 10,
-    "test": 3,
+    "test": 5,
     "gate": 0,
     "decl": 25,
     "doc": 114
@@ -22461,12 +22715,12 @@
    "mandates": [
     "LYR-L9/KG-02"
    ],
-   "hits": 838,
+   "hits": 839,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 197,
-    "test": 61,
+    "test": 62,
     "gate": 4,
     "decl": 57,
     "doc": 519
@@ -22588,12 +22842,12 @@
     "UAKP-GRAPH/GP-10",
     "UAKP-CLS/CS-03"
    ],
-   "hits": 794,
+   "hits": 796,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 121,
-    "test": 46,
+    "test": 48,
     "gate": 10,
     "decl": 76,
     "doc": 541
@@ -22621,9 +22875,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "observation adapter": {
    "label": "Observation Adapter",
@@ -22699,12 +22957,12 @@
    "mandates": [
     "UAKP-UNIV/UV-17"
    ],
-   "hits": 71,
+   "hits": 72,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 4,
-    "test": 4,
+    "test": 5,
     "gate": 0,
     "decl": 18,
     "doc": 45
@@ -22713,7 +22971,7 @@
     "00-BOOK/DATA/observation-universe.json",
     "platform/tests/test_observation_universe.py",
     "00-MASTER/UCOS-UGA-001/03-AUDIT-UNIVERSE.json",
-    "00-BOOK/DATA/generated-artifact-registry.json"
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
    "code_files": [
     "engine/ledger_authority/__init__.py"
@@ -22726,9 +22984,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "observe": {
    "label": "Observe",
@@ -22858,12 +23120,12 @@
     "MI-009/GV-05",
     "LYR-L5/US-03"
    ],
-   "hits": 806,
+   "hits": 809,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 139,
-    "test": 22,
+    "test": 25,
     "gate": 4,
     "decl": 59,
     "doc": 582
@@ -22901,12 +23163,12 @@
    "mandates": [
     "UAKP-REG/RG-01"
    ],
-   "hits": 20,
+   "hits": 21,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 18
@@ -22925,9 +23187,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "ontology universe": {
    "label": "Ontology Universe",
@@ -22935,17 +23201,18 @@
    "mandates": [
     "UAKP-UNIV/UV-02"
    ],
-   "hits": 7,
+   "hits": 8,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 5
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\""
    ],
    "code_files": [],
@@ -22956,9 +23223,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "ontology update": {
    "label": "Ontology Update",
@@ -23223,12 +23494,12 @@
    "mandates": [
     "MI-010/X-04"
    ],
-   "hits": 449,
+   "hits": 451,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 87,
-    "test": 18,
+    "test": 20,
     "gate": 0,
     "decl": 68,
     "doc": 276
@@ -23263,17 +23534,18 @@
    "mandates": [
     "UAKP-UNIV/UV-15"
    ],
-   "hits": 5,
+   "hits": 6,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 3
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md"
    ],
    "code_files": [],
@@ -23284,9 +23556,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "organizational knowledge": {
    "label": "Organizational Knowledge",
@@ -23409,12 +23685,12 @@
     "LYR-L0/K-08",
     "LYR-L10/GV-01"
    ],
-   "hits": 1137,
+   "hits": 1138,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 168,
-    "test": 56,
+    "test": 57,
     "gate": 4,
     "decl": 88,
     "doc": 821
@@ -23606,12 +23882,12 @@
    "mandates": [
     "ARCH-CERTV/CV-01"
    ],
-   "hits": 2838,
+   "hits": 2839,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 500,
-    "test": 380,
+    "test": 381,
     "gate": 36,
     "decl": 435,
     "doc": 1487
@@ -24103,12 +24379,12 @@
     "UAKP-PROC/PR-15",
     "UAKP-GRAPH/GP-07"
    ],
-   "hits": 343,
+   "hits": 345,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 44,
-    "test": 14,
+    "test": 16,
     "gate": 4,
     "decl": 45,
     "doc": 236
@@ -24173,9 +24449,13 @@
     "00-MASTER/UEC-000001/uec-declaration.json"
    ],
    "reason": "head noun 'registry' is named by 00-MASTER/UVI-000001/uvi-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "planning universe": {
    "label": "Planning Universe",
@@ -24183,36 +24463,34 @@
    "mandates": [
     "UAKP-UNIV/UV-13"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "platform engineers": {
    "label": "Platform Engineers",
@@ -24367,12 +24645,12 @@
     "LYR-L0/K-12",
     "UAKP-CLS/CS-14"
    ],
-   "hits": 1010,
+   "hits": 1011,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 260,
-    "test": 93,
+    "test": 94,
     "gate": 3,
     "decl": 133,
     "doc": 521
@@ -24399,9 +24677,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "policy adapter": {
    "label": "Policy Adapter",
@@ -25062,12 +25344,12 @@
    "mandates": [
     "LYR-L13/CM-01"
    ],
-   "hits": 318,
+   "hits": 319,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 55,
-    "test": 15,
+    "test": 16,
     "gate": 14,
     "decl": 32,
     "doc": 202
@@ -25389,12 +25671,12 @@
     "MI-009/GV-07",
     "ARCH-VERIF/VF-06"
    ],
-   "hits": 835,
+   "hits": 836,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 178,
-    "test": 89,
+    "test": 90,
     "gate": 4,
     "decl": 55,
     "doc": 509
@@ -25428,16 +25710,16 @@
   },
   "provenance attribute": {
    "label": "Provenance attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-07"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -25456,9 +25738,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "provenance update": {
    "label": "Provenance Update",
@@ -25745,12 +26031,12 @@
     "UAKP-GRAPH/GP-09",
     "UAKP-CLS/CS-26"
    ],
-   "hits": 1313,
+   "hits": 1315,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 212,
-    "test": 60,
+    "test": 62,
     "gate": 4,
     "decl": 145,
     "doc": 892
@@ -25778,9 +26064,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "realization package generation": {
    "label": "Realization Package Generation",
@@ -25840,9 +26130,13 @@
    "mention_only": [],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "realization universe": {
    "label": "Realization Universe",
@@ -25850,35 +26144,33 @@
    "mandates": [
     "UAKP-UNIV/UV-16"
    ],
-   "hits": 1,
+   "hits": 2,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 1,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "realized": {
    "label": "Realized",
@@ -25886,12 +26178,12 @@
    "mandates": [
     "UAKP-STATE/SS-11"
    ],
-   "hits": 825,
+   "hits": 826,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 286,
-    "test": 15,
+    "test": 16,
     "gate": 3,
     "decl": 33,
     "doc": 488
@@ -25961,12 +26253,12 @@
    "mandates": [
     "LYR-L15/EL-05"
    ],
-   "hits": 1153,
+   "hits": 1155,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 274,
-    "test": 153,
+    "test": 155,
     "gate": 17,
     "decl": 92,
     "doc": 617
@@ -26048,12 +26340,12 @@
     "LYR-L6/AU-04",
     "UAKP-PROC/PR-13"
    ],
-   "hits": 283,
+   "hits": 285,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 22,
-    "test": 5,
+    "test": 7,
     "gate": 5,
     "decl": 30,
     "doc": 221
@@ -26091,17 +26383,18 @@
    "mandates": [
     "UAKP-UNIV/UV-11"
    ],
-   "hits": 6,
+   "hits": 7,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 4
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "\"02-MASTER/UCOS-\\316\\251\\342\\210\\236-UNIVERSAL-UNIVERSE-CATALOG.md\""
    ],
    "code_files": [],
@@ -26112,9 +26405,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "recognition": {
    "label": "Recognition",
@@ -26348,12 +26645,12 @@
     "ARCH-GOVF/GF-03",
     "QM-FLOW/FL-20"
    ],
-   "hits": 1597,
+   "hits": 1598,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 287,
-    "test": 98,
+    "test": 99,
     "gate": 13,
     "decl": 102,
     "doc": 1097
@@ -26392,12 +26689,12 @@
     "MI-015/PJ-15",
     "QM-OUT/OU-07"
    ],
-   "hits": 1012,
+   "hits": 1013,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 92,
-    "test": 34,
+    "test": 35,
     "gate": 2,
     "decl": 57,
     "doc": 827
@@ -26435,12 +26732,12 @@
     "MI-009/GV-03",
     "LYR-L5/US-06"
    ],
-   "hits": 2707,
+   "hits": 2708,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 563,
-    "test": 308,
+    "test": 309,
     "gate": 30,
     "decl": 135,
     "doc": 1671
@@ -26674,12 +26971,12 @@
     "LYR-L1/EX-11",
     "UAKP-CLS/CS-21"
    ],
-   "hits": 1730,
+   "hits": 1731,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 379,
-    "test": 147,
+    "test": 148,
     "gate": 3,
     "decl": 278,
     "doc": 923
@@ -26706,9 +27003,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "relationship constitution": {
    "label": "Relationship Constitution",
@@ -26860,16 +27161,16 @@
   },
   "relationship registry": {
    "label": "Relationship Registry",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "UAKP-REG/RG-13"
    ],
-   "hits": 20,
+   "hits": 21,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 1,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 17
@@ -26888,11 +27189,15 @@
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "relationship resolution": {
    "label": "Relationship Resolution",
@@ -27002,12 +27307,12 @@
     "LYR-L7I/GI-07",
     "LYR-L9/KG-03"
    ],
-   "hits": 1260,
+   "hits": 1262,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 310,
-    "test": 111,
+    "test": 113,
     "gate": 1,
     "decl": 245,
     "doc": 593
@@ -27038,16 +27343,16 @@
   },
   "relationships attribute": {
    "label": "Relationships attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-05"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -27066,9 +27371,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "release": {
    "label": "Release",
@@ -27565,12 +27874,12 @@
     "QM-FLOW/FL-11",
     "LYR-L5/US-05"
    ],
-   "hits": 1048,
+   "hits": 1050,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 138,
-    "test": 38,
+    "test": 40,
     "gate": 10,
     "decl": 106,
     "doc": 756
@@ -27756,12 +28065,12 @@
     "UAKP-GRAPH/GP-04",
     "UAKP-CLS/CS-18"
    ],
-   "hits": 1058,
+   "hits": 1059,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 170,
-    "test": 74,
+    "test": 75,
     "gate": 5,
     "decl": 147,
     "doc": 662
@@ -27789,9 +28098,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "requirement discovery": {
    "label": "Requirement Discovery",
@@ -27800,12 +28113,12 @@
     "MI-005/D-04",
     "UAKP-PROC/PR-11"
    ],
-   "hits": 11,
+   "hits": 12,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 11
@@ -27849,9 +28162,13 @@
    "mention_only": [],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "requirement validation": {
    "label": "Requirement Validation",
@@ -28669,12 +28986,12 @@
     "PRD-GOV/GOV-02",
     "LYR-L0/K-11"
    ],
-   "hits": 2092,
+   "hits": 2093,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 481,
-    "test": 142,
+    "test": 143,
     "gate": 19,
     "decl": 106,
     "doc": 1344
@@ -28828,12 +29145,12 @@
     "LYR-L5/US-08",
     "LYR-L7O/GO-01"
    ],
-   "hits": 2237,
+   "hits": 2238,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 583,
-    "test": 210,
+    "test": 211,
     "gate": 7,
     "decl": 286,
     "doc": 1151
@@ -30377,19 +30694,18 @@
    "mandates": [
     "UAKP-SELFEV/SE-07"
    ],
-   "hits": 126,
+   "hits": 128,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 12,
-    "test": 2,
+    "test": 4,
     "gate": 0,
     "decl": 24,
     "doc": 88
    },
    "owner_files": [
-    "00-MASTER/UAUE-000001/uaue-evolution.json",
-    "engine/tests/unit/test_uaue_evolution_authority.py"
+    "00-MASTER/UAUE-000001/uaue-evolution.json"
    ],
    "code_files": [
     "engine/recursive_knowledge/declaration.py",
@@ -30415,49 +30731,47 @@
    "mandates": [
     "UAKP-UNIV/UV-24"
    ],
-   "hits": 6,
+   "hits": 7,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 4
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "self evolving": {
    "label": "Self Evolving",
-   "status": "PARTIAL",
+   "status": "IMPLEMENTED",
    "mandates": [
     "PRD-SELF/SELF-12"
    ],
-   "hits": 33,
+   "hits": 34,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 1,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 7,
     "doc": 25
@@ -30470,7 +30784,7 @@
     "00-BOOK/DATA/id-ledger.json",
     "00-BOOK/DATA/volumes.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
    "named_by": [],
    "proved_by": [],
@@ -31006,12 +31320,12 @@
    "mandates": [
     "LYR-L13/CM-02"
    ],
-   "hits": 1746,
+   "hits": 1747,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 358,
-    "test": 209,
+    "test": 210,
     "gate": 2,
     "decl": 220,
     "doc": 957
@@ -31134,12 +31448,12 @@
    "mandates": [
     "PRD-ECON/ECON-16"
    ],
-   "hits": 607,
+   "hits": 608,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 177,
-    "test": 92,
+    "test": 93,
     "gate": 3,
     "decl": 27,
     "doc": 308
@@ -32016,12 +32330,12 @@
    "mandates": [
     "LYR-L1/EX-12"
    ],
-   "hits": 3178,
+   "hits": 3180,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 818,
-    "test": 323,
+    "test": 325,
     "gate": 25,
     "decl": 365,
     "doc": 1647
@@ -32100,12 +32414,12 @@
     "QM-CONST/CO-11",
     "LYR-L9/KG-05"
    ],
-   "hits": 1002,
+   "hits": 1004,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 209,
-    "test": 73,
+    "test": 75,
     "gate": 14,
     "decl": 74,
     "doc": 632
@@ -33089,12 +33403,12 @@
     "UAKP-GRAPH/GP-03",
     "UAKP-CLS/CS-06"
    ],
-   "hits": 2032,
+   "hits": 2034,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 352,
-    "test": 74,
+    "test": 76,
     "gate": 22,
     "decl": 170,
     "doc": 1414
@@ -33122,9 +33436,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "truth before implementation": {
    "label": "Truth before implementation",
@@ -33203,12 +33521,12 @@
    "mandates": [
     "UAKP-PROC/PR-07"
    ],
-   "hits": 45,
+   "hits": 46,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 6,
-    "test": 2,
+    "test": 3,
     "gate": 0,
     "decl": 16,
     "doc": 21
@@ -33270,9 +33588,13 @@
     "00-MASTER/UEC-000001/uec-declaration.json"
    ],
    "reason": "head noun 'registry' is named by 00-MASTER/UVI-000001/uvi-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "truth revisable on new evidence": {
    "label": "Truth revisable on new evidence",
@@ -33310,50 +33632,48 @@
   },
   "truth universe": {
    "label": "Truth Universe",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-UNIV/UV-07"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "type attribute": {
    "label": "Type attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-02"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -33372,9 +33692,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "understand": {
    "label": "Understand",
@@ -33696,9 +34020,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal capability": {
    "label": "Universal Capability",
@@ -33802,9 +34130,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal certifiability": {
    "label": "Universal Certifiability",
@@ -33873,9 +34205,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal commerce": {
    "label": "Universal Commerce",
@@ -34010,9 +34346,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal constitutional foundation": {
    "label": "Universal Constitutional Foundation",
@@ -34322,9 +34662,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal decision engine": {
    "label": "Universal Decision Engine",
@@ -34356,9 +34700,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal definitions": {
    "label": "Universal Definitions",
@@ -34424,9 +34772,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal duplicate detection engine": {
    "label": "Universal Duplicate Detection Engine",
@@ -34458,9 +34810,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal economic foundation": {
    "label": "Universal Economic Foundation",
@@ -34561,9 +34917,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal event": {
    "label": "Universal Event",
@@ -34632,9 +34992,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal evolution": {
    "label": "Universal Evolution",
@@ -34709,9 +35073,13 @@
    ],
    "disposition": "EXTEND",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal evolution foundation": {
    "label": "Universal Evolution Foundation",
@@ -34810,9 +35178,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal existence and context engine": {
    "label": "Universal Existence and Context Engine",
@@ -34913,9 +35285,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal governance": {
    "label": "Universal Governance",
@@ -35069,16 +35445,16 @@
   },
   "universal identity attribute": {
    "label": "Universal Identity attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-01"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -35097,9 +35473,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "universal identity foundation": {
    "label": "Universal Identity Foundation",
@@ -35377,9 +35757,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal knowledge assimilation engine": {
    "label": "Universal Knowledge Assimilation Engine",
@@ -35411,9 +35795,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal knowledge classification engine": {
    "label": "Universal Knowledge Classification Engine",
@@ -35445,9 +35833,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal knowledge extraction engine": {
    "label": "Universal Knowledge Extraction Engine",
@@ -35479,9 +35871,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal knowledge foundation": {
    "label": "Universal Knowledge Foundation",
@@ -35584,9 +35980,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal knowledge universe": {
    "label": "Universal Knowledge Universe",
@@ -35651,9 +36051,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal lifecycle": {
    "label": "Universal Lifecycle",
@@ -36113,9 +36517,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal orchestration engine": {
    "label": "Universal Orchestration Engine",
@@ -36147,9 +36555,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal ownership": {
    "label": "Universal Ownership",
@@ -36221,9 +36633,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal possibility foundation": {
    "label": "Universal Possibility Foundation",
@@ -36487,9 +36903,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal realization package engine": {
    "label": "Universal Realization Package Engine",
@@ -36521,43 +36941,45 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal reasoning engine": {
    "label": "Universal Reasoning Engine",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-ENG/EN-16"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "engine",
-   "head_noun_owner": [
-    "engine/uckp/law.py",
-    "engine/nucleus/law.py",
-    "engine/constitution/law.py",
-    "00-MASTER/UVI-000001/uvi-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
    ],
-   "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal relationship foundation": {
    "label": "Universal Relationship Foundation",
@@ -36657,9 +37079,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal requirement discovery engine": {
    "label": "Universal Requirement Discovery Engine",
@@ -36691,9 +37117,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal rule foundation": {
    "label": "Universal Rule Foundation",
@@ -36905,9 +37335,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal semantics": {
    "label": "Universal Semantics",
@@ -37153,9 +37587,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal truth foundation": {
    "label": "Universal Truth Foundation",
@@ -37227,9 +37665,13 @@
    ],
    "disposition": "IMPLEMENTED",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universal verification engine": {
    "label": "Universal Verification Engine",
@@ -37261,9 +37703,13 @@
     "00-MASTER/UVI-000001/uvi-declaration.json"
    ],
    "reason": "head noun 'engine' is named by engine/uckp/law.py; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "universe": {
    "label": "Universe",
@@ -37272,12 +37718,12 @@
     "LYR-L1/EX-03",
     "LYR-L5N/UN-03"
    ],
-   "hits": 1055,
+   "hits": 1056,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 173,
-    "test": 75,
+    "test": 76,
     "gate": 4,
     "decl": 76,
     "doc": 727
@@ -37750,12 +38196,12 @@
     "UAKP-GRAPH/GP-11",
     "UAKP-CLS/CS-27"
    ],
-   "hits": 2996,
+   "hits": 2998,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 568,
-    "test": 348,
+    "test": 350,
     "gate": 17,
     "decl": 347,
     "doc": 1716
@@ -37783,9 +38229,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "validation constitution": {
    "label": "Validation Constitution",
@@ -37854,9 +38304,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "validation universe": {
    "label": "Validation Universe",
@@ -37864,36 +38318,34 @@
    "mandates": [
     "UAKP-UNIV/UV-18"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 0
    },
-   "owner_files": [],
+   "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
    "code_files": [],
    "gate_files": [],
    "mention_only": [
     "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
     "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json"
    ],
-   "disposition": "EXTEND",
+   "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "head_noun": "universe",
-   "head_noun_owner": [
-    "00-BOOK/DATA/observation-universe.json",
-    "00-BOOK/DATA/evidence-universe.json",
-    "00-MASTER/URKE-000001/urke-declaration.json",
-    "00-MASTER/UISD-000001/uisd-declaration.json"
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
    ],
-   "reason": "head noun 'universe' is named by 00-BOOK/DATA/observation-universe.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "verification": {
    "label": "Verification",
@@ -37911,12 +38363,12 @@
     "UAKP-GRAPH/GP-12",
     "UAKP-CLS/CS-28"
    ],
-   "hits": 1290,
+   "hits": 1292,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 139,
-    "test": 54,
+    "test": 56,
     "gate": 13,
     "decl": 100,
     "doc": 984
@@ -37944,9 +38396,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "verification constitution": {
    "label": "Verification Constitution",
@@ -37990,12 +38446,12 @@
    "mandates": [
     "UAKP-REG/RG-18"
    ],
-   "hits": 2,
+   "hits": 3,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 0
@@ -38017,9 +38473,13 @@
     "00-MASTER/UEC-000001/uec-declaration.json"
    ],
    "reason": "head noun 'registry' is named by 00-MASTER/UVI-000001/uvi-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_alignment.py"
+   ],
+   "bound": true
   },
   "verification universe": {
    "label": "Verification Universe",
@@ -38027,17 +38487,18 @@
    "mandates": [
     "UAKP-UNIV/UV-19"
    ],
-   "hits": 4,
+   "hits": 5,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 2,
     "doc": 2
    },
    "owner_files": [
+    "engine/tests/uckp/test_universe_and_validation.py",
     "00-MASTER/UCOS-CVR-001/00-VERIFICATION-ARCHITECTURE-REPORT.md"
    ],
    "code_files": [],
@@ -38048,9 +38509,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_universe_and_validation.py"
+   ],
+   "bound": true
   },
   "verified": {
    "label": "Verified",
@@ -38141,16 +38606,16 @@
   },
   "version attribute": {
    "label": "Version attribute",
-   "status": "ABSENT",
+   "status": "SPECIFIED",
    "mandates": [
     "UAKP-OBJ/OJ-11"
    ],
-   "hits": 0,
+   "hits": 1,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 0,
+    "test": 1,
     "gate": 0,
     "decl": 0,
     "doc": 0
@@ -38169,9 +38634,13 @@
     "00-MASTER/UCOS-URAT-001/urat-declaration.json"
    ],
    "reason": "head noun 'attribute' is named by 00-MASTER/URKE-000001/urke-declaration.json; the concept has an owner, this variant of it does not. CANDIDATE — a person must confirm the owner genuinely holds it.",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "proved_by": [
+    "engine/tests/uckp/test_layer_zero.py"
+   ],
+   "bound": true
   },
   "versioning": {
    "label": "Versioning",
@@ -39646,18 +40115,19 @@
    "mandates": [
     "QM-WHICH/WH-01"
    ],
-   "hits": 9,
+   "hits": 10,
    "anchored": false,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 0,
-    "test": 2,
+    "test": 3,
     "gate": 0,
     "decl": 2,
     "doc": 5
    },
    "owner_files": [
-    "00-MASTER/UCOS-UGA-001/uga-declaration.json"
+    "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+    "engine/tests/uckp/test_layer_zero.py"
    ],
    "code_files": [],
    "gate_files": [],
@@ -40195,12 +40665,12 @@
    "mandates": [
     "UAKP-CLS/CS-24"
    ],
-   "hits": 1553,
+   "hits": 1554,
    "anchored": true,
    "section_kind": "CONSTRUCT",
    "kinds": {
     "code": 186,
-    "test": 81,
+    "test": 82,
     "gate": 20,
     "decl": 100,
     "doc": 1166
@@ -40228,9 +40698,13 @@
    ],
    "disposition": "REFERENCE",
    "determination": "PROVISIONAL",
-   "named_by": [],
-   "proved_by": [],
-   "bound": false
+   "named_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "proved_by": [
+    "engine/tests/kernel/test_compliance.py"
+   ],
+   "bound": true
   },
   "work discovery": {
    "label": "Work Discovery",
@@ -40357,5 +40831,5 @@
    "bound": false
   }
  },
- "bound_total": 89
+ "bound_total": 218
 }
