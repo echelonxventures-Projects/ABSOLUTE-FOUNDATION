@@ -610,3 +610,109 @@ def test_the_absent_publication_kind_has_no_genre_and_no_producer() -> None:
 
 def test_every_elsewhere_producer_is_tracked() -> None:
     assert_homes_exist("PRD-PUB", PUBLICATION_ELSEWHERE)
+
+
+# --- PRD-NFR — the eleven non-functional requirements ---------------------------
+#
+# Each of the eleven carries a one-line claim in the document, and the claim is what makes
+# it checkable: Scalability is "no architectural upper limit", Reliability is "deterministic
+# operation", Portability is "technology agnostic". A module named for the quality proves
+# nothing; the instrument has to make the CLAIM.
+#
+# PORTABILITY IS ON THE CREATE LIST AND SHOULD NOT BE. It is dispositioned new construction
+# because nothing is named `portability`. The claim is "technology agnostic", and
+# `engine/conformance` is the agnosticism conformance harness -- UAC-000001, which measures
+# whether a contract discriminates between implementations and whose own docstring says
+# "Nothing below names a technology, a language, a database or an interpreter."
+
+#: Quality -> (the instrument, the claim it makes).
+NFR_INSTRUMENT = {
+    "PRD-NFR/NFR-01": ("engine/infinite_scope", "no architectural upper limit"),
+    "PRD-NFR/NFR-03": ("engine/determinism", "deterministic operation"),
+    "PRD-NFR/NFR-04": ("14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md", "zero trust"),
+    "PRD-NFR/NFR-05": ("engine/conformance", "technology agnostic"),
+    "PRD-NFR/NFR-09": ("platform/observability", "full-stack observability"),
+    "PRD-NFR/NFR-10": ("engine/governance", "full governance"),
+    "PRD-NFR/NFR-11": ("00-BOOK/DATA/canonical-observation-audit.json", "full audit trail"),
+}
+
+#: Quality -> the quality gate that refuses its violation. Stronger than an instrument: a
+#: gate fails the build rather than being available to call.
+NFR_GATE = {
+    "PRD-NFR/NFR-07": "unknown-future-compatibility",  # Evolvability -- no terminal architecture
+    "PRD-NFR/NFR-08": "no-finite-enumeration",  # Extensibility -- infinite extensibility
+}
+
+#: Availability's claim is "autonomous failover" and nothing fails over; `resilience` records
+#: that a unit survived, which is not the same as one taking over. Interoperability repeats
+#: the gap ARCH-VALID/VL-21 records -- nothing validates it either.
+NFR_ABSENT = {
+    "PRD-NFR/NFR-02": "failover",
+    "PRD-NFR/NFR-06": "interoperability",
+}
+
+
+def test_every_non_functional_requirement_is_instrumented_gated_or_absent() -> None:
+    mandates = section("PRD-NFR")
+    assert len(mandates) == 11, f"section 21 states 11 qualities, corpus has {len(mandates)}"
+    assert_partitions("PRD-NFR", mandates, NFR_INSTRUMENT, NFR_GATE, NFR_ABSENT)
+
+
+def test_every_instrumented_quality_has_a_tracked_home_and_a_stated_claim() -> None:
+    assert_homes_exist("PRD-NFR", {m: home for m, (home, _c) in NFR_INSTRUMENT.items()})
+    homes = [home for home, _c in NFR_INSTRUMENT.values()]
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one instrument claimed for several qualities: {duplicated}"
+    for mandate, (_home, claim) in NFR_INSTRUMENT.items():
+        assert len(claim) > 8, f"{mandate}: no claim stated, so nothing distinguishes the row"
+
+
+def test_portability_is_answered_by_the_agnosticism_harness_and_is_not_a_gap() -> None:
+    """The correction this binding makes.
+
+    Portability is dispositioned CREATE because nothing is named `portability`. Its claim is
+    "technology agnostic", and UAC-000001 measures exactly that: it reads a declared axis
+    register and asks whether each contract DISCRIMINATES between implementations, refusing
+    to name a technology anywhere in the process. Building a portability module would be a
+    second authoring of a harness that already exists.
+    """
+    from engine.conformance.measure import REGISTER_PATH, load_register
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    register = load_register(REGISTER_PATH)
+    assert register, "the agnosticism axis register is empty; the harness measures nothing"
+    home, claim = NFR_INSTRUMENT["PRD-NFR/NFR-05"]
+    assert home == "engine/conformance" and claim == "technology agnostic"
+    source = (repo_root() / "engine" / "conformance" / "measure.py").read_text(encoding="utf-8")
+    assert "names a technology" in source, (
+        "the harness no longer states that it names no technology; the portability claim it "
+        "answers rests on that property"
+    )
+
+
+def test_every_gated_quality_names_a_gate_that_passes() -> None:
+    """A gate is stronger than an instrument: it refuses rather than being available."""
+    from engine.kernel.compliance import quality_gates
+
+    gates = {gate["id"]: gate for gate in quality_gates()["gates"]}
+    for mandate, gate_id in NFR_GATE.items():
+        assert gate_id in gates, f"{mandate}: no gate named {gate_id!r}"
+        assert gates[gate_id]["passed"] is True, f"{mandate}: gate {gate_id!r} fails"
+    assert not (set(NFR_GATE) & set(NFR_INSTRUMENT)), "a quality is both gated and instrumented"
+
+
+def test_availability_and_interoperability_are_answered_by_nothing() -> None:
+    """NON-VACUITY, and the distinction Availability needs.
+
+    `infrastructure/resilience.py` exists and records that a unit survived. The claim is
+    "autonomous failover" -- one unit taking over from another -- and nothing does that. A
+    keyword sweep would have called this satisfied.
+    """
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-NFR", NFR_ABSENT)
+    from engine.tests.conformance.test_mandates_arch import VALIDATION_ABSENT
+
+    assert "interoperability" in set(
+        VALIDATION_ABSENT.values()
+    ), "interoperability validation now exists; PRD-NFR/NFR-06 may be answered"
