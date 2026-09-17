@@ -639,3 +639,130 @@ def test_admission_is_open_beyond_the_twenty_six_that_were_listed() -> None:
         "that is a closed environment set, which the adapter rule forbids"
     )
     assert kernel_source_fingerprint() == before
+
+
+# ================================================================================
+# UAKP-PO — the twenty-four steps of the Primary Objective
+# ================================================================================
+#
+# "Given ANY governed knowledge environment, the platform SHALL automatically:" and then
+# twenty-four verbs, ending "Repeat continuously". Nothing new is mandated here -- the
+# engine model two sections later names the machinery, and the objective names the OUTCOME
+# each piece of machinery is for.
+#
+# That makes this binding a join rather than a fresh inventory, and it is written as one:
+# every row resolves through `ENGINE_HOME`, `ENGINE_ABSENT` or `ENGINE_SPECIFIED_ONLY`
+# above, so a step cannot be reported delivered while the engine that would deliver it is
+# reported missing. Re-locating the same instruments here would be a second authoring of
+# one finding, void under UCKP-ART-03, and would let the two drift apart silently.
+
+#: Objective step -> the mandated engine that delivers it.
+OBJECTIVE_ENGINE = {
+    "UAKP-PO/PO-01": "UAKP-ENG/EN-07",  # Discover the environment
+    "UAKP-PO/PO-03": "UAKP-ENG/EN-06",  # Discover structure
+    "UAKP-PO/PO-06": "UAKP-ENG/EN-15",  # Discover dependencies
+    "UAKP-PO/PO-07": "UAKP-ENG/EN-10",  # Discover canonical ownership
+    "UAKP-PO/PO-08": "UAKP-ENG/EN-08",  # Discover evidence
+    "UAKP-PO/PO-09": "UAKP-ENG/EN-09",  # Discover truth
+    "UAKP-PO/PO-10": "UAKP-ENG/EN-13",  # Discover gaps
+    "UAKP-PO/PO-11": "UAKP-ENG/EN-12",  # Discover conflicts
+    "UAKP-PO/PO-13": "UAKP-ENG/EN-14",  # Generate requirements
+    "UAKP-PO/PO-14": "UAKP-ENG/EN-18",  # Generate planning
+    "UAKP-PO/PO-17": "UAKP-ENG/EN-21",  # Orchestrate realization
+    "UAKP-PO/PO-18": "UAKP-ENG/EN-24",  # Validate
+    "UAKP-PO/PO-19": "UAKP-ENG/EN-25",  # Verify
+    "UAKP-PO/PO-20": "UAKP-ENG/EN-26",  # Certify
+    "UAKP-PO/PO-21": "UAKP-ENG/EN-02",  # Update canonical knowledge
+    "UAKP-PO/PO-23": "UAKP-ENG/EN-31",  # Improve itself
+}
+
+#: Objective step -> an instrument that is not one of the mandated engines. Three steps the
+#: engine model does not name and the repository performs anyway.
+OBJECTIVE_INSTRUMENT = {
+    "UAKP-PO/PO-04": "engine/uckp/alignment.py",  # Discover governance
+    "UAKP-PO/PO-05": "engine/uckp/graph.py",  # Discover relationships
+    "UAKP-PO/PO-24": "00-MASTER/UCOS-RFP-001/rfp_engine.py",  # Repeat continuously
+}
+
+#: Steps nothing performs. Four of the five are the engine model's own gaps read back as
+#: outcomes, which is what makes those gaps legible: "Knowledge Acquisition Engine is
+#: absent" and "the platform cannot discover knowledge" are the same finding, and only the
+#: second states what is lost.
+OBJECTIVE_UNDELIVERED = {
+    "UAKP-PO/PO-02": "UAKP-ENG/EN-01",  # Discover knowledge
+    "UAKP-PO/PO-12": "",  # Discover opportunities -- no engine is even mandated for it
+    "UAKP-PO/PO-15": "UAKP-ENG/EN-20",  # Generate realization packages
+    "UAKP-PO/PO-16": "UAKP-ENG/EN-19",  # Generate execution specifications
+    "UAKP-PO/PO-22": "UAKP-ENG/EN-28",  # Learn
+}
+
+
+def test_every_objective_step_is_delivered_by_an_engine_an_instrument_or_nothing() -> None:
+    mandates = section("UAKP-PO")
+    assert len(mandates) == 24, f"the objective states 24 steps, corpus has {len(mandates)}"
+    assert_partitions(
+        "UAKP-PO",
+        mandates,
+        OBJECTIVE_ENGINE,
+        OBJECTIVE_INSTRUMENT,
+        OBJECTIVE_UNDELIVERED,
+    )
+
+
+def test_every_engine_backed_step_resolves_to_an_engine_this_suite_located() -> None:
+    """The join. A step delivered by an engine that is not in ENGINE_HOME would be a claim
+    this suite has already contradicted twenty lines above."""
+    for mandate, engine in OBJECTIVE_ENGINE.items():
+        assert engine in ENGINE_HOME, (
+            f"{mandate}: {engine} is not a located engine; the step cannot be delivered by "
+            "machinery this suite reports missing"
+        )
+
+
+def test_no_engine_delivers_two_objective_steps() -> None:
+    """NON-VACUITY. Twenty-four steps and thirty-one engines, so a one-to-one join is
+    available; two steps on one engine would mean one of them is unaccounted for."""
+    claimed = list(OBJECTIVE_ENGINE.values())
+    duplicated = sorted({e for e in claimed if claimed.count(e) > 1})
+    assert not duplicated, f"engines claimed by more than one objective step: {duplicated}"
+
+
+def test_every_instrument_backed_step_is_tracked_and_is_not_a_mandated_engine() -> None:
+    """The tier boundary. An instrument that IS a mandated engine belongs in the join."""
+    assert_homes_exist("UAKP-PO", OBJECTIVE_INSTRUMENT)
+    located = set(ENGINE_HOME.values())
+    for mandate, home in OBJECTIVE_INSTRUMENT.items():
+        assert home not in located, (
+            f"{mandate}: {home} is a located mandated engine and is understated as a "
+            "loose instrument"
+        )
+
+
+def test_every_undelivered_step_names_an_engine_this_suite_reports_missing() -> None:
+    """NON-VACUITY, and the half that makes the gaps legible.
+
+    Four of the five point at an engine, and each is required to be in the absent or
+    specified-only tier -- so a step cannot be written off while its engine is reported
+    working. The fifth points at nothing because the engine model mandates no engine for
+    `Discover opportunities` at all, which is a gap in the mandate rather than in the code.
+    """
+    unbuilt = set(ENGINE_ABSENT) | set(ENGINE_SPECIFIED_ONLY)
+    for mandate, engine in OBJECTIVE_UNDELIVERED.items():
+        if not engine:
+            continue
+        assert engine in unbuilt, (
+            f"{mandate}: {engine} is no longer reported missing, so this step is delivered "
+            "and must move out of the undelivered tier"
+        )
+    assert sum(1 for engine in OBJECTIVE_UNDELIVERED.values() if not engine) == 1
+
+
+def test_discover_opportunities_is_mandated_by_no_engine_at_all() -> None:
+    """NON-VACUITY for the one step with no engine behind it. If the engine model ever names
+    one, this row stops being a hole in the mandate and becomes a hole in the code."""
+    engines = {label.lower() for label in section("UAKP-ENG").values()}
+    assert not any(
+        "opportunit" in label for label in engines
+    ), "an opportunity engine is now mandated; UAKP-PO/PO-12 must point at it"
+    steps = section("UAKP-PO")
+    assert steps["UAKP-PO/PO-12"] == "Discover opportunities"
