@@ -1259,3 +1259,110 @@ def test_optimization_is_the_same_near_miss_all_four_restatements_reach() -> Non
     optimiser = EVOLUTION_CYCLE_NEAR_MISS["MI-014/EV-08"]
     assert EVOLUTION_NEAR_MISS["ARCH-EVOF/VF2-05"][0] == optimiser
     assert SELF_NEAR_MISS["PRD-SELF/SELF-11"][0] == optimiser
+
+
+# --- MI-007 / MI-008 / MI-010 / MI-012 / MI-013 / MI-018 — the remainder ---------
+#
+# The last six Master Index sections, bound together because what is left of each is small
+# and because the same gap runs through three of them: DESIGN. MI-007 lists it as an
+# engineering stage, ARCH-ENGF lists it as a fabric step, MI-018 lists it in the end state,
+# and nothing in the repository performs it. Three documents, one missing stage -- asserted
+# across the suites so it reads as one finding.
+
+MASTER_INDEX_REMAINDER = {
+    # MI-007 Engineering
+    "MI-007/E-03": "engine/uckp/ucko.py",  # Modeling
+    "MI-007/E-08": "engine/compiler/packaging.py",  # Build
+    "MI-007/E-09": "engine/compiler/packaging.py",  # Packaging
+    "MI-007/E-11": "engine/runtime",  # Runtime Preparation
+    # MI-008 Assurance
+    "MI-008/A-07": "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md",  # Security
+    "MI-008/A-09": "engine/kernel/compliance.py",  # Compliance Assessment
+    "MI-008/A-10": "engine/certification/evidence.py",  # Evidence Collection
+    # MI-010 Execution
+    "MI-010/X-01": "00-MASTER/EXECUTION-BACKLOG.json",  # Work Discovery
+    "MI-010/X-02": "platform/runtime_platform/scheduling.py",  # Dependency Scheduling
+    "MI-010/X-04": "engine/runtime/orchestration.py",  # Orchestration
+    "MI-010/X-10": "engine/runtime/execution/recovery.py",  # Recovery
+    # MI-012 Commercialization
+    "MI-012/CM-03": "00-MASTER/UCOS-RIB-001/rib.json",  # Assets
+    # MI-013 Observability
+    "MI-013/OB-08": "platform/observability/alerting.py",  # Alerts
+    "MI-013/OB-10": "engine/graph/architecture/insights.py",  # Insights
+    # MI-018 End State
+    "MI-018/ES-03": "00-MASTER/UCL-000001/ucl.json",  # Understanding -- the `Understand` stage
+}
+
+#: Market-shaped: `product` is a token the kernel refuses to seed.
+MASTER_INDEX_MARKET_SHAPED = {"MI-012/CM-01": "Products"}
+
+#: Absent. Design appears three times across three documents and nothing performs it.
+MASTER_INDEX_ABSENT = {
+    "MI-007/E-02": "design",  # Design
+    "MI-008/A-08": "performance assessment",
+    "MI-010/X-03": "resource discovery",
+    "MI-012/CM-13": "ecosystem",
+    "MI-018/ES-05": "design",  # Design, a second time
+}
+
+
+def test_the_master_index_remainder_is_located_market_shaped_or_absent() -> None:
+    mandates: dict[str, str] = {}
+    for name in ("MI-007", "MI-008", "MI-010", "MI-012", "MI-013", "MI-018"):
+        mandates.update(section(name))
+    covered = {
+        **MASTER_INDEX_REMAINDER,
+        **MASTER_INDEX_MARKET_SHAPED,
+        **MASTER_INDEX_ABSENT,
+    }
+    foreign = sorted(set(covered) - set(mandates))
+    assert not foreign, f"tiered identifiers that are not Master Index mandates: {foreign}"
+    assert_homes_exist("MI-remainder", MASTER_INDEX_REMAINDER)
+
+
+def test_build_and_packaging_share_a_module_because_the_compiler_does_both() -> None:
+    """NON-VACUITY for the only doubled home. Build and Packaging are separate stages and
+    one module answers both, which is honest only if it really performs two acts."""
+    import ast
+
+    home = MASTER_INDEX_REMAINDER["MI-007/E-08"]
+    assert home == MASTER_INDEX_REMAINDER["MI-007/E-09"]
+    tree = ast.parse((repo_root() / home).read_text(encoding="utf-8"))
+    functions = {n.name for n in ast.walk(tree) if isinstance(n, ast.FunctionDef)}
+    assert len(functions) >= 2, (
+        f"{home} answers two stages and defines {len(functions)} function(s); one of the "
+        "two stages is unlocated"
+    )
+    homes = list(MASTER_INDEX_REMAINDER.values())
+    doubled = sorted({h for h in homes if homes.count(h) > 1})
+    assert doubled == [home], f"unexpected doubled homes in the remainder: {doubled}"
+
+
+def test_products_is_admitted_not_built() -> None:
+    from engine.kernel.compliance import PROHIBITED_TOKENS, kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    assert "product" in PROHIBITED_TOKENS, (
+        "`product` is no longer refused, so MI-012/CM-01 could be seeded as a concrete "
+        "market and must be re-decided"
+    )
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    kernel.register_metatype("Output-Products", name="Products", description="market output")
+    assert kernel_source_fingerprint() == before
+    assert "Output-Products" in {obj.natural_key for obj in kernel.metatypes()}
+
+
+def test_design_is_mandated_by_three_documents_and_performed_by_nothing() -> None:
+    """The finding this grouping exists for.
+
+    MI-007 lists Design as an engineering stage, MI-018 lists it in the end state, and
+    ARCH-ENGF lists it as a fabric step. Nothing in the repository designs: there is an
+    architecture generator that emits a description of what was decided, and no stage where
+    the deciding happens. If a design instrument ever lands, all three rows move together.
+    """
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("MI-remainder", MASTER_INDEX_ABSENT)
+    design_rows = [m for m, concept in MASTER_INDEX_ABSENT.items() if concept == "design"]
+    assert len(design_rows) == 2, f"expected Design twice in this grouping, got {design_rows}"

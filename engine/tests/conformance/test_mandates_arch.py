@@ -1033,3 +1033,81 @@ def test_constitutional_assurance_is_the_root_law_and_nothing_smaller() -> None:
     assert ASSURANCE_OWNER["ARCH-ASSUR/AS-01"] == "engine/uckp/law.py"
     assert ROOT_LAW.law_id == "UCKP-LAW-0001"
     assert ROOT_LAW.supremacy, "the root law no longer declares supremacy"
+
+
+# --- ARCH-ENGF / ARCH-VERIF / ARCH-STACK / ARCH-KERNEL / ARCH-UCG — the remainder -
+#
+# What is left of the architecture diagram. The engineering fabric contributes the third
+# sighting of the Design gap; the verification fabric is fully answered; and three of the
+# diagram's own boxes -- the stack, the kernel and the graph -- are bound to the instruments
+# that are them.
+
+ARCH_REMAINDER = {
+    # ARCH-ENGF Engineering Fabric
+    "ARCH-ENGF/EF-02": "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",  # Requirements
+    "ARCH-ENGF/EF-05": "00-MASTER/UCL-000001/ucl.json",  # Engineering -- the `Engineer` stage
+    "ARCH-ENGF/EF-11": "engine/compiler/packaging.py",  # Packaging
+    # ARCH-VERIF Universal Verification
+    "ARCH-VERIF/VF-01": "engine/determinism",  # Determinism
+    "ARCH-VERIF/VF-08": "engine/certification_integrity",  # Completeness
+    "ARCH-VERIF/VF-10": "platform/coverage",  # Coverage
+    # the diagram's own boxes
+    "ARCH-KERNEL/AK-01": "engine/kernel",  # Absolute Constitutional Kernel
+    "ARCH-UCG/UG-01": "engine/graph",  # Universal Constitutional Graph
+}
+
+#: The third sighting of Design, and the one stack layer nothing represents.
+ARCH_REMAINDER_ABSENT = {
+    "ARCH-ENGF/EF-04": "design",  # Design
+    "ARCH-STACK/ST-02": "possibility",  # Possibility
+}
+
+
+def test_the_architecture_remainder_is_located_or_absent() -> None:
+    mandates: dict[str, str] = {}
+    for name in ("ARCH-ENGF", "ARCH-VERIF", "ARCH-STACK", "ARCH-KERNEL", "ARCH-UCG"):
+        mandates.update(section(name))
+    covered = {**ARCH_REMAINDER, **ARCH_REMAINDER_ABSENT}
+    foreign = sorted(set(covered) - set(mandates))
+    assert not foreign, f"tiered identifiers that are not architecture mandates: {foreign}"
+    assert_homes_exist("ARCH-remainder", ARCH_REMAINDER)
+    homes = list(ARCH_REMAINDER.values())
+    assert len(set(homes)) == len(homes), "one instrument claimed for two remainder rows"
+
+
+def test_the_kernel_box_and_the_graph_box_are_the_instruments_that_are_them() -> None:
+    """The diagram's two named boxes. Each is a package rather than a document, because a
+    box in an architecture diagram that resolves to prose is a box nothing implements."""
+    from engine.tests.conformance.mandate_corpus import tracked
+
+    known = set(tracked())
+    for mandate in ("ARCH-KERNEL/AK-01", "ARCH-UCG/UG-01"):
+        home = ARCH_REMAINDER[mandate]
+        assert any(
+            p.startswith(home + "/") and p.endswith(".py") for p in known
+        ), f"{mandate}: {home} is not a package carrying code"
+
+
+def test_design_is_absent_here_exactly_as_the_master_index_reports() -> None:
+    """The third sighting, joined. Three documents mandate a design stage and nothing
+    performs it; if one suite ever locates it, the others must too."""
+    from engine.tests.conformance.test_mandates_index import MASTER_INDEX_ABSENT
+
+    assert ARCH_REMAINDER_ABSENT["ARCH-ENGF/EF-04"] == "design"
+    assert "design" in set(MASTER_INDEX_ABSENT.values()), (
+        "the Master Index no longer reports Design absent; this suite disagrees with it and "
+        "one of the two is wrong"
+    )
+    assert_named_by_nothing("ARCH-remainder", ARCH_REMAINDER_ABSENT)
+
+
+def test_possibility_is_the_one_layer_of_the_stack_nothing_represents() -> None:
+    """NON-VACUITY. The diagram's stack runs Potential, Possibility, Existence, Reality,
+    Truth, Meaning. Possibility is the only one with no instrument, and MI-001 reports the
+    same foundation ungrounded -- so the two are asserted together."""
+    from engine.tests.conformance.test_mandates_index import FOUNDATION_UNGROUNDED
+
+    assert "possibility" in set(FOUNDATION_UNGROUNDED.values()), (
+        "MI-001 no longer reports the Possibility foundation ungrounded; the stack layer may "
+        "be represented after all"
+    )
