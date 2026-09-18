@@ -933,3 +933,208 @@ def test_the_undriven_modes_are_all_about_when_composition_happens() -> None:
     assert (
         not event_composers
     ), f"an event-driven composer now exists: {event_composers}; COMP-04 is driven"
+
+
+# --- PRD-INT — the Universal Intelligence Framework -----------------------------
+#
+# Seven intelligence forms under one rule: "No intelligence assumptions." This is the
+# least-answered section in the corpus, and the repository already knows it -- the kernel
+# suite declares three mandates UNCOVERED for exactly this reason, in its own words: "no
+# AI-model token and no AI-model category; nothing refuses one" and "UNKNOWN_CATEGORIES
+# carries no intelligence-model category".
+#
+# One form is refused: `human` is among the eighteen tokens the kernel will not seed, so
+# Human Intelligence cannot be hard-coded. The other six are neither refused nor
+# represented, which means the framework's rule is unenforced: nothing stops an
+# intelligence assumption being seeded tomorrow.
+
+#: Form -> the token the kernel refuses to seed.
+INTELLIGENCE_REFUSED = {"PRD-INT/INT-01": "human"}  # Human Intelligence
+
+#: Forms the kernel suite has already declared UNCOVERED, by the mandate that records it.
+INTELLIGENCE_DECLARED_UNCOVERED = {
+    "PRD-INT/INT-03": "UAKP-IND/ID-06",  # AI Intelligence
+    "PRD-INT/INT-06": "PRD-SC/SC-07",  # Future Intelligence Models
+}
+
+#: Neither refused, represented, nor formally recorded as uncovered.
+INTELLIGENCE_UNHELD = {
+    "PRD-INT/INT-02": "machine intelligence",
+    "PRD-INT/INT-04": "collective intelligence",
+    "PRD-INT/INT-05": "synthetic intelligence",
+    "PRD-INT/INT-07": "unknown intelligence",
+}
+
+
+def test_every_intelligence_form_is_refused_declared_uncovered_or_unheld() -> None:
+    mandates = section("PRD-INT")
+    assert len(mandates) == 7, f"section 12 states 7 forms, corpus has {len(mandates)}"
+    assert_partitions(
+        "PRD-INT",
+        mandates,
+        INTELLIGENCE_REFUSED,
+        INTELLIGENCE_DECLARED_UNCOVERED,
+        INTELLIGENCE_UNHELD,
+    )
+
+
+def test_human_intelligence_is_refused_as_a_seedable_category() -> None:
+    from engine.kernel.compliance import PROHIBITED_TOKENS
+    from engine.kernel.seed import FOUNDING_METATYPES
+
+    for mandate, token in INTELLIGENCE_REFUSED.items():
+        assert token in PROHIBITED_TOKENS, (
+            f"{mandate}: `{token}` is no longer refused, so a human-intelligence model could "
+            "be seeded and the framework's rule would be unenforced for it too"
+        )
+        assert token not in {k.lower() for k, _n, _d in FOUNDING_METATYPES}
+
+
+def test_the_uncovered_forms_are_the_ones_the_kernel_suite_already_records() -> None:
+    """The join. These two are not new findings -- they are the same holes the kernel suite
+    declares UNCOVERED, reached from a second document. If either is ever bound there, it
+    stops being uncovered here."""
+    from engine.tests.kernel.test_compliance import (
+        BOUND_TO_GATE,
+        BOUND_TO_PROHIBITED_TOKEN,
+        BOUND_TO_UNKNOWN_CATEGORY,
+        UNCOVERED,
+    )
+
+    bound = set(BOUND_TO_PROHIBITED_TOKEN) | set(BOUND_TO_UNKNOWN_CATEGORY) | set(BOUND_TO_GATE)
+    for mandate, recorded in INTELLIGENCE_DECLARED_UNCOVERED.items():
+        assert (
+            recorded in UNCOVERED
+        ), f"{mandate}: {recorded} is no longer declared uncovered by the kernel suite"
+        assert recorded not in bound, f"{mandate}: {recorded} is now bound and is covered"
+        assert "intelligence" in UNCOVERED[recorded] or "AI" in UNCOVERED[recorded]
+
+
+def test_no_intelligence_category_exists_so_the_rule_is_unenforced() -> None:
+    """The finding, and the sharpest form of it.
+
+    "No intelligence assumptions" is a negative mandate, and a negative mandate is enforced
+    by a refusal. UNKNOWN_CATEGORIES represents eleven unknowns and none of them is an
+    intelligence model; PROHIBITED_TOKENS refuses eighteen and none is an AI token. So
+    nothing in the kernel would object if an intelligence model were seeded tomorrow.
+    """
+    from engine.kernel.compliance import PROHIBITED_TOKENS, UNKNOWN_CATEGORIES
+
+    categories = {key.lower() for key, _i, _a in UNKNOWN_CATEGORIES}
+    assert not [c for c in categories if "intelligence" in c], (
+        "an intelligence-model category now exists; the framework's rule is enforced and "
+        "PRD-SC/SC-07 is no longer uncovered"
+    )
+    assert (
+        "ai" not in PROHIBITED_TOKENS
+    ), "an AI token is now refused; UAKP-IND/ID-06 is no longer uncovered"
+
+
+def test_the_unheld_forms_are_named_by_nothing() -> None:
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-INT", INTELLIGENCE_UNHELD)
+
+
+# --- PRD-GOV — the Universal Governance Framework -------------------------------
+#
+# Ten things governance includes, and one sentence under them that is easy to read past:
+# "Governance itself must be governable." All ten are located, which would be the whole
+# binding -- except that the closing sentence is the harder claim, and this repository
+# satisfies it in a specific, checkable way.
+#
+# UCOS-CAA-001 is the register of which instrument holds which standing. It carries a
+# top-level `authority` of its own, and therefore appears in its own claim scan; CAA-INV-02
+# is the invariant that refuses an authority-carrying register that is not bound. Its own
+# words: "An alignment register exempt from the rule it enforces is the first parallel
+# authority anyone would build, so it is measured by CAA-INV-02". That is governance
+# governing itself, and it is what the closing sentence asks for.
+
+GOVERNANCE_ELEMENT = {
+    "PRD-GOV/GOV-01": "engine/kernel/governance.py",  # Policy
+    "PRD-GOV/GOV-02": "engine/uckp/governance.py",  # Rule
+    "PRD-GOV/GOV-03": "engine/uckp/law.py",  # Law
+    "PRD-GOV/GOV-04": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",  # Constitution
+    "PRD-GOV/GOV-05": "engine/kernel/compliance.py",  # Compliance
+    "PRD-GOV/GOV-06": "engine/certification",  # Certification
+    "PRD-GOV/GOV-07": "engine/enforcement_closure",  # Enforcement
+    "PRD-GOV/GOV-08": "00-BOOK/DATA/canonical-observation-audit.json",  # Audit
+    "PRD-GOV/GOV-09": "00-BOOK/REGISTRIES/CHANGE-VERSION-LINEAGE-REGISTRY.md",  # Lineage
+    "PRD-GOV/GOV-10": "00-MASTER/UCOS-UCAF-001/ucaf.json",  # Accountability
+}
+
+
+def test_every_governance_element_is_located_and_distinct() -> None:
+    mandates = section("PRD-GOV")
+    assert len(mandates) == 10, f"section 9 lists 10 elements, corpus has {len(mandates)}"
+    assert_partitions("PRD-GOV", mandates, GOVERNANCE_ELEMENT)
+    assert_homes_exist("PRD-GOV", GOVERNANCE_ELEMENT)
+    homes = list(GOVERNANCE_ELEMENT.values())
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one instrument claimed for several elements: {duplicated}"
+
+
+def test_policy_and_rule_are_two_instruments_and_not_one() -> None:
+    """NON-VACUITY for the pair most likely to collapse. The document lists Policy and Rule
+    as separate elements; if one module carried both, one of them would be unlocated."""
+    import ast
+
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    policy_home = GOVERNANCE_ELEMENT["PRD-GOV/GOV-01"]
+    rule_home = GOVERNANCE_ELEMENT["PRD-GOV/GOV-02"]
+    assert policy_home != rule_home
+    for home in (policy_home, rule_home):
+        tree = ast.parse((repo_root() / home).read_text(encoding="utf-8"))
+        assert any(
+            isinstance(n, ast.ClassDef) for n in ast.walk(tree)
+        ), f"{home} defines no class, so it carries no governance element"
+
+
+def test_governance_governs_itself() -> None:
+    """The closing sentence, which is the section's real claim.
+
+    The alignment register carries a top-level `authority`, is bound as a subordinate
+    instrument of the root law, and binds ITSELF -- it appears in its own subordinate list
+    rather than sitting outside the rule it enforces. A register exempt from its own rule is
+    the first parallel authority anyone would build.
+    """
+    import json
+
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    path = "00-BOOK/DATA/constitutional-authority-alignment.json"
+    alignment = json.loads((repo_root() / path).read_text(encoding="utf-8"))
+
+    assert alignment.get("authority"), f"{path} carries no top-level authority"
+    bound = {entry["id"]: entry for entry in alignment["subordinate_instruments"]}
+    assert "UCOS-CAA-001" in bound, (
+        "the alignment register no longer binds itself; governance is no longer governable "
+        "by the mechanism this section rests on"
+    )
+    assert bound["UCOS-CAA-001"]["instrument"] == path
+    assert bound["UCOS-CAA-001"]["may_never_own"], (
+        "the self-binding no longer declares what it may never own, which is the half that "
+        "stops it becoming an authority of its own"
+    )
+
+
+def test_the_root_law_is_above_the_register_that_records_standings() -> None:
+    """NON-VACUITY for the self-binding. Self-governance is only lawful if something is
+    still above it: the register derives UNDER the root law and confers no authority."""
+    import json
+
+    from engine.tests.conformance.mandate_corpus import repo_root
+    from engine.uckp.law import ROOT_LAW
+
+    alignment = json.loads(
+        (repo_root() / "00-BOOK" / "DATA" / "constitutional-authority-alignment.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    supreme = alignment.get("supreme_authority")
+    assert supreme, "the alignment register names no supreme authority"
+    assert ROOT_LAW.law_id in json.dumps(supreme), (
+        f"the register's supreme authority is not {ROOT_LAW.law_id}; the self-binding would "
+        "make it answerable to nothing"
+    )
