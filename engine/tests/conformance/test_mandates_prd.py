@@ -1289,3 +1289,63 @@ def test_the_absent_knowledge_stages_are_named_by_nothing() -> None:
     from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
 
     assert_named_by_nothing("PRD-KN", KNOWLEDGE_ABSENT)
+
+
+# --- PRD-OBS — the Universal Observability Framework ----------------------------
+#
+# Seven things the framework must support. Five exist, two do not, and Traces needs a
+# distinction this suite has already drawn from the other side.
+#
+# ARCH-OPF/OF-10 records Tracing as UNBUILT because nothing correlates spans across a
+# request. `platform/observability/traces.py` is still a real answer HERE, because the two
+# sections ask different questions: the operation fabric asks whether the platform TRACES,
+# and the observability framework asks whether a trace is a thing it can observe. One
+# module, two verdicts, and both are correct.
+
+OBSERVABILITY_SIGNAL = {
+    "PRD-OBS/OBS-01": "platform/observability/metrics.py",  # Metrics
+    "PRD-OBS/OBS-02": "platform/foundation/events.py",  # Events
+    "PRD-OBS/OBS-03": "platform/observability/logs.py",  # Logs
+    "PRD-OBS/OBS-04": "platform/observability/traces.py",  # Traces
+    "PRD-OBS/OBS-05": "00-BOOK/DATA/signals.json",  # Signals
+}
+
+#: Absent, and both are inferences rather than records. Everything the framework observes is
+#: something that happened; nothing it observes is something inferred.
+OBSERVABILITY_ABSENT = {
+    "PRD-OBS/OBS-06": "predictions",
+    "PRD-OBS/OBS-07": "anomalies",
+}
+
+
+def test_every_observable_is_present_or_absent() -> None:
+    mandates = section("PRD-OBS")
+    assert len(mandates) == 7, f"section 16 states 7 observables, corpus has {len(mandates)}"
+    assert_partitions("PRD-OBS", mandates, OBSERVABILITY_SIGNAL, OBSERVABILITY_ABSENT)
+    assert_homes_exist("PRD-OBS", OBSERVABILITY_SIGNAL)
+    homes = list(OBSERVABILITY_SIGNAL.values())
+    assert len(set(homes)) == len(homes), "one module claimed for two observables"
+
+
+def test_traces_are_observable_here_and_unproduced_in_the_operation_fabric() -> None:
+    """One module, two verdicts, both correct -- and the reason is stated so neither reads
+    as a contradiction. The operation fabric asks whether the platform TRACES; this section
+    asks whether a trace is a thing it can observe."""
+    from engine.tests.conformance.test_mandates_arch import OPERATION_UNBUILT
+
+    assert (
+        "ARCH-OPF/OF-10" in OPERATION_UNBUILT
+    ), "tracing is now produced; the two verdicts have converged and this note is stale"
+    assert OBSERVABILITY_SIGNAL["PRD-OBS/OBS-04"] == "platform/observability/traces.py"
+
+
+def test_the_framework_observes_what_happened_and_not_what_is_inferred() -> None:
+    """The finding. Metrics, events, logs, traces and signals are all records of something
+    that occurred. Predictions and anomalies are inferences, and the framework makes
+    neither -- the same hole PRD-DISC records as Anomaly Discovery."""
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-OBS", OBSERVABILITY_ABSENT)
+    assert "anomaly" in set(
+        CONSTRUCT_DISCOVERY_ABSENT.values()
+    ), "anomaly discovery now exists; the observability framework may infer after all"

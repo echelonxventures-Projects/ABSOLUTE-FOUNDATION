@@ -766,3 +766,125 @@ def test_the_interface_set_is_not_open_by_registration_and_the_layer_claims_it_i
     )
     with pytest.raises(ValueError):
         ArtifactFamily("interface-no-document-has-named-yet")
+
+
+# --- LYR-L0R — the six kernel responsibilities ----------------------------------
+#
+# Layer 0 lists six things the kernel is responsible for. All six are discharged, which
+# makes this the third fully-answered section -- and, as with the other two, the six must
+# resolve to six DISTINCT instruments or the completeness is an artefact of the mapping.
+
+KERNEL_RESPONSIBILITY = {
+    "LYR-L0R/KR-01": "engine/uckp/law.py",  # Define universal rules
+    "LYR-L0R/KR-02": "engine/uckp/validation.py",  # Maintain consistency
+    "LYR-L0R/KR-03": "engine/omega_infinite/contradiction.py",  # Prevent contradictions
+    "LYR-L0R/KR-04": "engine/constitution/evolution.py",  # Govern evolution
+    "LYR-L0R/KR-05": "00-BOOK/REGISTRIES/CHANGE-VERSION-LINEAGE-REGISTRY.md",  # Preserve lineage
+    "LYR-L0R/KR-06": "engine/determinism",  # Enable replay
+}
+
+
+def test_every_kernel_responsibility_is_discharged_by_a_distinct_instrument() -> None:
+    mandates = section("LYR-L0R")
+    assert len(mandates) == 6, f"layer 0 lists 6 responsibilities, corpus has {len(mandates)}"
+    assert_partitions("LYR-L0R", mandates, KERNEL_RESPONSIBILITY)
+    assert_homes_exist("LYR-L0R", KERNEL_RESPONSIBILITY)
+    homes = list(KERNEL_RESPONSIBILITY.values())
+    assert len(set(homes)) == 6, f"six responsibilities, {len(set(homes))} instruments"
+
+
+def test_maintaining_consistency_and_preventing_contradictions_are_two_things() -> None:
+    """NON-VACUITY for the pair most likely to collapse.
+
+    Consistency is about ONE object satisfying the law; contradiction is about TWO claims
+    that cannot both be true. The repository separates them -- `require_coherent` refuses an
+    incoherent state, and the contradiction engine compares claims that already exist -- and
+    folding them together would report one responsibility discharged twice.
+    """
+    from engine.uckp.law import ROOT_LAW
+
+    assert hasattr(
+        ROOT_LAW, "require_coherent"
+    ), "the root law no longer offers a coherence check; KR-02 rests on it"
+    assert KERNEL_RESPONSIBILITY["LYR-L0R/KR-02"] != KERNEL_RESPONSIBILITY["LYR-L0R/KR-03"]
+    contradiction = (repo_root() / KERNEL_RESPONSIBILITY["LYR-L0R/KR-03"]).read_text(
+        encoding="utf-8"
+    )
+    assert "compares claims that already exist" in " ".join(contradiction.split()), (
+        "the contradiction engine no longer describes itself as comparing existing claims, "
+        "which is what distinguishes it from a coherence check"
+    )
+
+
+# --- LYR-L5N — the seven names for a structural container -----------------------
+#
+# "Even 'Nucleus' is not a hard-coded concept. The architecture supports configurable
+# structural containers." Seven possible names follow, ending in Future Name.
+#
+# The repository hard-codes the first one. `engine/nucleus` is a package, so the single name
+# the document offers as its example of what must NOT be fixed is the one that is. The other
+# five register as meta-types with the kernel unchanged, and the seventh is the openness
+# claim -- so the layer is satisfied for six of seven and contradicted by its own example.
+
+CONTAINER_NAME_FIXED = {"LYR-L5N/UN-01": "engine/nucleus"}  # Nucleus
+
+CONTAINER_NAME_REGISTRABLE = {
+    "LYR-L5N/UN-02": "Domain",
+    "LYR-L5N/UN-03": "Universe",
+    "LYR-L5N/UN-04": "Module",
+    "LYR-L5N/UN-05": "Realm",
+    "LYR-L5N/UN-06": "Capability Cluster",
+}
+
+CONTAINER_NAME_OPENNESS = {"LYR-L5N/UN-07": "Future Name"}
+
+
+def test_every_container_name_is_fixed_registrable_or_the_openness_claim() -> None:
+    mandates = section("LYR-L5N")
+    assert len(mandates) == 7, f"layer 5 lists 7 names, corpus has {len(mandates)}"
+    assert_partitions(
+        "LYR-L5N",
+        mandates,
+        CONTAINER_NAME_FIXED,
+        CONTAINER_NAME_REGISTRABLE,
+        CONTAINER_NAME_OPENNESS,
+    )
+
+
+def test_the_one_name_the_document_offers_as_an_example_is_the_one_fixed() -> None:
+    """The finding, and it is about this repository rather than about the document.
+
+    Layer 5 names Nucleus specifically to say it is not hard-coded. `engine/nucleus` is a
+    package, which fixes it in the one place a name cannot be configured away. If the
+    package is ever renamed or made configurable, this row moves to the registrable tier.
+    """
+    from engine.tests.conformance.mandate_corpus import tracked
+
+    known = set(tracked())
+    for mandate, home in CONTAINER_NAME_FIXED.items():
+        assert any(
+            path.startswith(home + "/") for path in known
+        ), f"{mandate}: {home} is no longer a package; the name may be configurable now"
+
+
+def test_the_other_five_names_register_with_the_kernel_unchanged() -> None:
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    for name in CONTAINER_NAME_REGISTRABLE.values():
+        key = "Container-" + "".join(word.capitalize() for word in name.split())
+        kernel.register_metatype(key, name=name, description=f"structural container: {name}")
+    assert kernel_source_fingerprint() == before
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    refused = sorted(
+        name
+        for name in CONTAINER_NAME_REGISTRABLE.values()
+        if "Container-" + "".join(w.capitalize() for w in name.split()) not in registered
+    )
+    assert not refused, f"container names the kernel would not admit: {refused}"
+
+    unlisted = "Container-NameNoDocumentHasOffered"
+    kernel.register_metatype(unlisted, name="unlisted", description="admitted")
+    assert unlisted in {obj.natural_key for obj in kernel.metatypes()}
