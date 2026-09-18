@@ -1120,3 +1120,142 @@ def test_constitutional_governance_resolves_to_the_root_law_itself() -> None:
         ROOT_LAW.law_id == "UCKP-LAW-0001"
     ), f"the root law is now {ROOT_LAW.law_id}; GV-14 names a different supreme authority"
     assert len(ROOT_LAW.articles) == 20 and len(ROOT_LAW.invariants) == 17
+
+
+# --- MI-006 — the thirteen decision stages --------------------------------------
+#
+# Section 006 lists thirteen stages of a constitutional decision. Two of them -- Reuse and
+# Extension -- are not two instruments here but one verdict and its payload:
+# `AssimilationVerdict.status` returns CREATE or REUSE, and `reuse_targets` carries "the
+# existing subjects the caller should extend instead". ARCH-CERTV records the same shape for
+# the certification verdict set, and this section is where the consequence lands.
+
+DECISION_STAGE = {
+    "MI-006/DEC-01": "00-MASTER/UCDA-000001/01-CONSTITUTIONAL-DECISION-REGISTER.md",
+    "MI-006/DEC-02": "intelligence/realization/planning.py",  # Planning
+    "MI-006/DEC-03": "intelligence/rie/analysis.py",  # Analysis
+    "MI-006/DEC-05": "platform/foundation/derivation.py",  # Derivation
+    "MI-006/DEC-06": "engine/constitution/assimilation.py",  # Reuse -- the REUSE verdict
+    "MI-006/DEC-08": "engine/knowledge/integration/composition.py",  # Composition
+    "MI-006/DEC-09": "engine/foundation/config",  # Configuration
+    "MI-006/DEC-10": "intelligence/realization/generators",  # Generation
+    "MI-006/DEC-11": "platform/universal_foundation/specialization.py",  # Specialization
+    "MI-006/DEC-13": "00-BOOK/DATA/allocation-permits.json",  # Approval
+}
+
+#: Extension is not a stage of its own: it rides on the reuse verdict's targets. Recorded
+#: here rather than given a second home, because inventing one would report two decisions
+#: where the gate makes one.
+DECISION_RIDES_ON_REUSE = {"MI-006/DEC-07": "reuse_targets"}  # Extension
+
+#: Optimization is the compiler near miss again; Evaluation has nothing at all.
+DECISION_ABSENT = {
+    "MI-006/DEC-04": "evaluation",
+    "MI-006/DEC-12": "decision optimization",
+}
+
+
+def test_every_decision_stage_is_located_rides_on_reuse_or_absent() -> None:
+    mandates = section("MI-006")
+    assert len(mandates) == 13, f"section 006 lists 13 stages, corpus has {len(mandates)}"
+    assert_partitions(
+        "MI-006",
+        mandates,
+        DECISION_STAGE,
+        DECISION_RIDES_ON_REUSE,
+        DECISION_ABSENT,
+    )
+    assert_homes_exist("MI-006", DECISION_STAGE)
+
+
+def test_extension_rides_on_the_reuse_verdict_exactly_as_arch_certv_records() -> None:
+    """The join, and the reason Extension gets no home of its own.
+
+    `AssimilationVerdict.status` returns CREATE or REUSE and nothing else; the instruction
+    to extend is carried by `reuse_targets`. ARCH-CERTV/CV-03 records the same shape for the
+    certification verdict set, so the two sections are asserted to agree -- if the gate ever
+    returns EXTEND, both rows change together.
+    """
+    from engine.tests.conformance.test_mandates_arch import VERDICT_EXPRESSED_DIFFERENTLY
+
+    _home, symbol, _why = VERDICT_EXPRESSED_DIFFERENTLY["ARCH-CERTV/CV-03"]
+    assert (
+        symbol == DECISION_RIDES_ON_REUSE["MI-006/DEC-07"]
+    ), "the two sections no longer name the same carrier for the extend instruction"
+    assert DECISION_STAGE["MI-006/DEC-06"] == "engine/constitution/assimilation.py"
+
+
+def test_the_absent_decision_stages_are_named_by_nothing() -> None:
+    assert_named_by_nothing("MI-006", DECISION_ABSENT)
+
+
+# --- MI-014 — the eleven evolution stages ---------------------------------------
+#
+# Section 014 restates the evolution cycle a fourth time -- after ARCH-EVOF, LYR-L15 and
+# UAKP-PROC -- and agrees with UCL-000001 on eight stage names. Nothing new is bound here;
+# what is asserted is that the four documents have not drifted apart.
+
+EVOLUTION_CYCLE_STAGE = {
+    "MI-014/EV-01": "Observe",  # Observation
+    "MI-014/EV-02": "Measure",  # Measurement
+    "MI-014/EV-03": "Learn",  # Learning
+    "MI-014/EV-04": "Reason",  # Reasoning
+    "MI-014/EV-05": "Extract Engineering Knowledge",  # Knowledge Extraction
+    "MI-014/EV-06": "Elevate",  # Capability Elevation
+    "MI-014/EV-07": "Improve",  # Improvement
+    "MI-014/EV-10": "Update Repository Truth",  # Repository Truth Update
+    "MI-014/EV-11": "Begin Next Elevated Engineering Cycle",  # Infinite Evolution Cycle
+}
+
+EVOLUTION_CYCLE_INSTRUMENT = {
+    "MI-014/EV-09": "engine/constitution/evolution.py",  # Constitutional Evolution
+}
+
+#: The compiler near miss, for the fourth time in this corpus.
+EVOLUTION_CYCLE_NEAR_MISS = {"MI-014/EV-08": "engine/compiler/optimization.py"}  # Optimization
+
+
+def test_every_evolution_cycle_stage_is_a_stage_an_instrument_or_a_near_miss() -> None:
+    mandates = section("MI-014")
+    assert len(mandates) == 11, f"section 014 lists 11 stages, corpus has {len(mandates)}"
+    assert_partitions(
+        "MI-014",
+        mandates,
+        EVOLUTION_CYCLE_STAGE,
+        EVOLUTION_CYCLE_INSTRUMENT,
+        EVOLUTION_CYCLE_NEAR_MISS,
+    )
+    assert_homes_exist("MI-014", EVOLUTION_CYCLE_INSTRUMENT)
+    assert_homes_exist("MI-014", EVOLUTION_CYCLE_NEAR_MISS)
+
+
+def test_the_four_documents_that_restate_the_evolution_cycle_still_agree() -> None:
+    """Four sections across three documents describe one cycle. A stage named by UCL here
+    and not there would mean one of the four joins has gone stale, which is a finding about
+    the suites rather than about the repository."""
+    from engine.tests.conformance.test_mandates_arch import EVOLUTION_LIFECYCLE_STAGE
+    from engine.tests.conformance.test_mandates_layers import EVOLUTION_LIFECYCLE_VERBATIM
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = _ucl_stage_names()
+    for mandate, stage in EVOLUTION_CYCLE_STAGE.items():
+        assert stage in declared, f"{mandate}: UCL declares no stage named {stage!r}"
+
+    shared = {"Learn", "Improve", "Elevate", "Observe"}
+    assert shared <= set(EVOLUTION_CYCLE_STAGE.values())
+    assert shared <= set(EVOLUTION_LIFECYCLE_VERBATIM.values()) | {"Observe"}
+    assert "Extract Engineering Knowledge" in set(
+        EVOLUTION_LIFECYCLE_STAGE.values()
+    ), "ARCH-EVOF no longer names the extraction stage; the four restatements have drifted"
+
+
+def test_optimization_is_the_same_near_miss_all_four_restatements_reach() -> None:
+    """Four documents mandate Optimization and one module carries the word. It optimises the
+    compiler's output, not the substrate -- so all four rows point at it and none counts it
+    as satisfied."""
+    from engine.tests.conformance.test_mandates_arch import EVOLUTION_NEAR_MISS
+    from engine.tests.conformance.test_mandates_prd import SELF_NEAR_MISS
+
+    optimiser = EVOLUTION_CYCLE_NEAR_MISS["MI-014/EV-08"]
+    assert EVOLUTION_NEAR_MISS["ARCH-EVOF/VF2-05"][0] == optimiser
+    assert SELF_NEAR_MISS["PRD-SELF/SELF-11"][0] == optimiser

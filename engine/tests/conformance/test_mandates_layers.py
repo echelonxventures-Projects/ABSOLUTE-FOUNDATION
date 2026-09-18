@@ -888,3 +888,74 @@ def test_the_other_five_names_register_with_the_kernel_unchanged() -> None:
     unlisted = "Container-NameNoDocumentHasOffered"
     kernel.register_metatype(unlisted, name="unlisted", description="admitted")
     assert unlisted in {obj.natural_key for obj in kernel.metatypes()}
+
+
+# --- LYR-L11 — the nine measurements --------------------------------------------
+#
+# "Everything measurable." Nine measures follow, and four exist. The five that do not are
+# Performance, Accuracy, Usage, Reliability -- and the shape is the same one ARCH-VALID
+# found from the validation side: this repository measures what it IS and does not measure
+# how it BEHAVES. Two sections, two vocabularies, one hole.
+
+MEASUREMENT_INSTRUMENT = {
+    "LYR-L11/ME-02": "engine/kernel/compliance.py",  # Quality -- the quality gates
+    "LYR-L11/ME-04": "engine/verification_intelligence/cost_model.py",  # Cost
+    "LYR-L11/ME-07": "00-MASTER/UEI-000001/uei.json",  # Evolution
+    "LYR-L11/ME-09": "engine/runtime/execution/health.py",  # Health
+}
+
+#: Impact is measured by a graph projection rather than a module.
+MEASUREMENT_PROJECTION = {"LYR-L11/ME-08": "impact"}  # Impact
+
+MEASUREMENT_ABSENT = {
+    "LYR-L11/ME-01": "performance",
+    "LYR-L11/ME-03": "accuracy",
+    "LYR-L11/ME-05": "usage",
+    "LYR-L11/ME-06": "reliability",
+}
+
+
+def test_every_measurement_is_instrumented_projected_or_absent() -> None:
+    mandates = section("LYR-L11")
+    assert len(mandates) == 9, f"layer 11 lists 9 measurements, corpus has {len(mandates)}"
+    assert_partitions(
+        "LYR-L11",
+        mandates,
+        MEASUREMENT_INSTRUMENT,
+        MEASUREMENT_PROJECTION,
+        MEASUREMENT_ABSENT,
+    )
+    assert_homes_exist("LYR-L11", MEASUREMENT_INSTRUMENT)
+
+
+def test_impact_is_measured_by_a_projection_the_graph_engine_builds() -> None:
+    """NON-VACUITY for the one row that is not a module. A projection name that
+    `build_projection` does not resolve would measure nothing."""
+    from engine.tests.conformance.test_mandates_index import _built_projections
+
+    built = _built_projections()
+    for mandate, projection in MEASUREMENT_PROJECTION.items():
+        assert projection in built, (
+            f"{mandate}: engine/graph builds no {projection!r} projection, so nothing "
+            "measures impact"
+        )
+
+
+def test_the_measurement_gap_is_the_behavioural_one_arch_valid_already_found() -> None:
+    """The finding, asserted across two sections that use different words for it.
+
+    ARCH-VALID records Performance, Reliability, Scalability and Interoperability as
+    unvalidated; this section records Performance, Accuracy, Usage and Reliability as
+    unmeasured. The overlap is not a coincidence -- you cannot validate what you do not
+    measure -- so the two are asserted together and neither reads as a lone gap.
+    """
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+    from engine.tests.conformance.test_mandates_arch import VALIDATION_ABSENT
+
+    assert_named_by_nothing("LYR-L11", MEASUREMENT_ABSENT)
+    unvalidated = set(VALIDATION_ABSENT.values())
+    unmeasured = set(MEASUREMENT_ABSENT.values())
+    assert {"performance", "reliability"} <= unvalidated & unmeasured, (
+        "performance or reliability is now measured or validated; the claim that this "
+        "repository measures what it is and not how it behaves must be re-read"
+    )
