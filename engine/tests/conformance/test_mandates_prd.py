@@ -716,3 +716,120 @@ def test_availability_and_interoperability_are_answered_by_nothing() -> None:
     assert "interoperability" in set(
         VALIDATION_ABSENT.values()
     ), "interoperability validation now exists; PRD-NFR/NFR-06 may be answered"
+
+
+# --- PRD-SEC — the Universal Security Framework ---------------------------------
+#
+# Eight principles the document calls MANDATORY. Three are stated by the Universal Security
+# Constitution in its own words, one is realized by a module, and four are stated nowhere and
+# realized by nothing.
+#
+# The four that are absent are not evenly absent. Continuous Verification and Post Quantum
+# Readiness have no instrument but the substrate is not incapable of them -- verify.sh runs
+# continuously and crypto agility exists. Autonomous Threat Detection and Autonomous Response
+# require a threat model, and the substrate has none, so those two are absent at a deeper
+# level: there is nothing for them to act on.
+
+#: Principle -> the constitution that states it, by the phrase it uses.
+SECURITY_CONSTITUTED = {
+    "PRD-SEC/SEC-01": "Zero Trust",
+    "PRD-SEC/SEC-02": "Least Privilege",
+    "PRD-SEC/SEC-04": "Defense in Depth",
+}
+
+#: Principle -> the module that realizes it.
+SECURITY_REALIZED = {
+    "PRD-SEC/SEC-05": "platform/foundation/crypto_agility.py",  # Cryptographic Trust
+}
+
+#: Stated nowhere, realized by nothing, and the substrate could do it.
+SECURITY_UNREALIZED = {
+    "PRD-SEC/SEC-03": "continuous verification",
+    "PRD-SEC/SEC-06": "post quantum readiness",
+}
+
+#: Absent at a deeper level: no threat model exists for these to act on.
+SECURITY_NO_THREAT_MODEL = {
+    "PRD-SEC/SEC-07": "threat detection",
+    "PRD-SEC/SEC-08": "autonomous response",
+}
+
+SECURITY_CONSTITUTION = "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md"
+
+
+def test_every_security_principle_is_constituted_realized_or_absent() -> None:
+    mandates = section("PRD-SEC")
+    assert len(mandates) == 8, f"section 17 states 8 principles, corpus has {len(mandates)}"
+    assert_partitions(
+        "PRD-SEC",
+        mandates,
+        SECURITY_CONSTITUTED,
+        SECURITY_REALIZED,
+        SECURITY_UNREALIZED,
+        SECURITY_NO_THREAT_MODEL,
+    )
+
+
+def test_every_constituted_principle_is_stated_in_the_constitution_verbatim() -> None:
+    """A principle the constitution does not name is not constituted by it. Each row carries
+    the exact phrase, so a rewording breaks the binding instead of passing."""
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    text = (repo_root() / SECURITY_CONSTITUTION).read_text(encoding="utf-8")
+    for mandate, phrase in SECURITY_CONSTITUTED.items():
+        assert phrase in text, (
+            f"{mandate}: the security constitution no longer states {phrase!r}; this "
+            "principle is constituted by nothing"
+        )
+
+
+def test_cryptographic_trust_is_realized_by_an_agility_module_not_an_algorithm() -> None:
+    """NON-VACUITY, and the reason this row is realized rather than constituted.
+
+    Naming an algorithm would be the technology assumption UAKP-IND/ID-03 forbids. Crypto
+    agility is the constitutional form of cryptographic trust: algorithm-tagged digests and
+    witnessed rollover, so identity survives an algorithm breaking.
+    """
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    home = SECURITY_REALIZED["PRD-SEC/SEC-05"]
+    # Whitespace-normalised: the claim is a sentence in a wrapped docstring, so matching the
+    # raw text would depend on where the line happens to break.
+    source = " ".join((repo_root() / home).read_text(encoding="utf-8").split())
+    assert "rollover" in source, f"{home} no longer provides algorithm rollover"
+    assert "identity is opaque and survives algorithm breakage" in source, (
+        f"{home} no longer claims identity survives algorithm breakage, which is what makes "
+        "it cryptographic TRUST rather than a cryptography module"
+    )
+
+
+def test_the_unrealized_principles_are_stated_by_nothing_and_built_by_nothing() -> None:
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing, repo_root
+
+    text = (repo_root() / SECURITY_CONSTITUTION).read_text(encoding="utf-8").lower()
+    for mandate, principle in {**SECURITY_UNREALIZED, **SECURITY_NO_THREAT_MODEL}.items():
+        assert principle not in text, (
+            f"{mandate}: the security constitution now states {principle!r} and this row "
+            "belongs in the constituted tier"
+        )
+    assert_named_by_nothing("PRD-SEC", SECURITY_UNREALIZED)
+    assert_named_by_nothing("PRD-SEC", SECURITY_NO_THREAT_MODEL)
+
+
+def test_the_autonomous_security_principles_have_no_threat_model_to_act_on() -> None:
+    """The distinction between the two absent tiers, asserted.
+
+    Detection and response are not two missing modules; they are two operations with no
+    subject. ARCH-OPF records Security Monitoring unbuilt and PRD-DISC records Risk
+    Discovery absent, so nothing produces the signal either would consume. If a risk or
+    threat surface ever lands, these become ordinary gaps.
+    """
+    from engine.tests.conformance.test_mandates_arch import OPERATION_UNBUILT
+
+    assert "ARCH-OPF/OF-12" in OPERATION_UNBUILT, (
+        "security monitoring now exists; the autonomous security principles have a signal "
+        "to act on and are ordinary gaps rather than subjectless ones"
+    )
+    assert "risk" in set(
+        CONSTRUCT_DISCOVERY_ABSENT.values()
+    ), "risk discovery now exists; the same re-tiering applies"
