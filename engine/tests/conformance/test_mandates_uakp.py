@@ -1608,3 +1608,113 @@ def test_the_absent_stages_are_product_stages_the_lattice_does_not_model() -> No
     for word in sorted(words):
         carrying = sorted(name for name in declared if word in name.split())
         assert not carrying, f"the lattice now declares a level named for {word!r}: {carrying}"
+
+
+# ================================================================================
+# UAKP-SELFEV — the nine-step self-evolution model
+# ================================================================================
+#
+# "The platform SHALL continuously improve itself", nine steps, and one constraint that
+# decides how they are bound: "Self-evolution SHALL NEVER violate constitutional
+# invariants." So a self-evolution step is not satisfied by a module that could run -- it is
+# satisfied by one that runs UNDER the invariants.
+#
+# Five of the nine are the same capabilities PRD section 20 states, and they resolve through
+# `SELF_INSTRUMENT` rather than being re-located: two sections of two documents naming one
+# capability is one finding, and locating it twice would let the two drift.
+
+#: Step -> the PRD self-* requirement that already located it.
+SELF_EVOLUTION_VIA_PRD = {
+    "UAKP-SELFEV/SE-01": "PRD-SELF/SELF-09",  # Self Observation <- Self Monitoring
+    "UAKP-SELFEV/SE-03": "PRD-SELF/SELF-06",  # Self Validation
+    "UAKP-SELFEV/SE-04": "PRD-SELF/SELF-07",  # Self Verification
+    "UAKP-SELFEV/SE-05": "PRD-SELF/SELF-08",  # Self Certification
+    "UAKP-SELFEV/SE-07": "PRD-SELF/SELF-12",  # Self Evolution
+    "UAKP-SELFEV/SE-09": "PRD-SELF/SELF-05",  # Self Governance
+}
+
+#: Step -> an instrument PRD section 20 does not state.
+SELF_EVOLUTION_INSTRUMENT = {
+    "UAKP-SELFEV/SE-02": "intelligence/rie/analysis.py",  # Self Analysis
+    "UAKP-SELFEV/SE-06": "00-MASTER/EXECUTION-BACKLOG.json",  # Self Planning
+}
+
+#: Self Learning. The learning engine is specified and unbuilt, and the learning memory that
+#: would hold what was learned is absent too -- so the step has neither a runner nor a place
+#: to put a result.
+SELF_EVOLUTION_ABSENT = {"UAKP-SELFEV/SE-08": "self learning"}
+
+
+def test_every_self_evolution_step_is_via_prd_instrumented_or_absent() -> None:
+    mandates = section("UAKP-SELFEV")
+    assert len(mandates) == 9, f"the model states 9 steps, corpus has {len(mandates)}"
+    assert_partitions(
+        "UAKP-SELFEV",
+        mandates,
+        SELF_EVOLUTION_VIA_PRD,
+        SELF_EVOLUTION_INSTRUMENT,
+        SELF_EVOLUTION_ABSENT,
+    )
+
+
+def test_every_prd_backed_step_resolves_to_a_self_capability_already_located() -> None:
+    """The join. A step resolving to a PRD row this repository reports as a near miss would
+    be claiming a capability the other suite denies."""
+    from engine.tests.conformance.test_mandates_prd import SELF_INSTRUMENT, SELF_NEAR_MISS
+
+    for mandate, prd in SELF_EVOLUTION_VIA_PRD.items():
+        assert prd in SELF_INSTRUMENT, (
+            f"{mandate}: {prd} is not a located self-* capability; PRD reports it "
+            f"{'a near miss' if prd in SELF_NEAR_MISS else 'unaccounted for'}"
+        )
+    claimed = list(SELF_EVOLUTION_VIA_PRD.values())
+    assert len(claimed) == len(set(claimed)), "one PRD capability claimed by two steps"
+
+
+def test_every_instrument_backed_step_is_tracked_and_is_not_a_prd_capability() -> None:
+    """The tier boundary. If PRD already states it, the step belongs in the join."""
+    from engine.tests.conformance.test_mandates_prd import SELF_INSTRUMENT
+
+    assert_homes_exist("UAKP-SELFEV", SELF_EVOLUTION_INSTRUMENT)
+    located = set(SELF_INSTRUMENT.values())
+    for mandate, home in SELF_EVOLUTION_INSTRUMENT.items():
+        assert home not in located, (
+            f"{mandate}: {home} is already a located PRD self-* capability and this step "
+            "should resolve through the join"
+        )
+
+
+def test_self_evolution_runs_under_the_invariants_it_may_never_violate() -> None:
+    """The constraint that makes the section more than a list of nine verbs.
+
+    "Self-evolution SHALL NEVER violate constitutional invariants." The root law declares
+    seventeen, every one blocking, and `require_coherent` is what refuses a state that
+    breaks them. A self-evolution model with no enforceable invariant set would satisfy the
+    nine steps and lose the sentence under them.
+    """
+    from engine.uckp.law import ROOT_LAW
+
+    assert len(ROOT_LAW.invariants) == 17
+    non_blocking = [i.invariant_id for i in ROOT_LAW.invariants if not i.blocking]
+    assert not non_blocking, (
+        f"these invariants no longer block: {non_blocking}; self-evolution could violate "
+        "one without being refused"
+    )
+    assert hasattr(ROOT_LAW, "require_coherent"), (
+        "the root law no longer offers a coherence check, so nothing refuses a state that "
+        "violates an invariant"
+    )
+
+
+def test_self_learning_has_neither_a_runner_nor_a_place_to_put_a_result() -> None:
+    """NON-VACUITY for the one absent step, and it fails twice over: the engine that would
+    learn is specified and unbuilt, and the memory that would hold what was learned is
+    absent. Either alone would be a gap; both together is why the step cannot be partially
+    credited."""
+    assert (
+        "UAKP-ENG/EN-28" in ENGINE_SPECIFIED_ONLY
+    ), "the learning engine is now built; Self Learning has a runner and must be re-tiered"
+    assert (
+        "UAKP-MEM/MM-08" in MEMORY_ABSENT
+    ), "learning memory now exists; Self Learning has somewhere to put a result"
+    assert_named_by_nothing("UAKP-SELFEV", SELF_EVOLUTION_ABSENT)

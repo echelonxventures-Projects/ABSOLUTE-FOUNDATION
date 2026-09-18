@@ -741,3 +741,112 @@ def test_the_absent_steps_are_performed_by_nothing() -> None:
     """NON-VACUITY over the two with no module at all. Upgrade and Migration are the only
     evolution steps nothing in the tree is even named for."""
     assert_named_by_nothing("ARCH-EVOF", EVOLUTION_ABSENT)
+
+
+# --- ARCH-OPF — the eighteen steps of the Universal Operation Fabric -------------
+#
+# Deployment through Commercialization. Twelve are located, and the six that are not divide
+# into two kinds worth keeping apart.
+#
+# THREE HAVE NOTHING TO OPERATE ON. Billing and Metering are moot in a substrate with no
+# settlement chain -- PRD-ECON records Revenue, Billing, Settlement and Taxation all absent
+# -- and Fraud Monitoring is moot without transactions to monitor. THREE ARE GENUINELY
+# UNBUILT: Provisioning, Security Monitoring and Tracing. `platform/observability/traces.py`
+# exists and stores traces; nothing traces.
+
+OPERATION_INSTRUMENT = {
+    "ARCH-OPF/OF-01": "intelligence/realization/generators/deployment.py",  # Deployment
+    "ARCH-OPF/OF-03": "00-MASTER/UIS-001/uis-declaration.json",  # Activation
+    "ARCH-OPF/OF-04": "engine/uckp/execution.py",  # Execution
+    "ARCH-OPF/OF-05": "engine/runtime",  # Runtime
+    "ARCH-OPF/OF-06": "engine/uicm/observation.py",  # Observation
+    "ARCH-OPF/OF-07": "platform/observability/metrics.py",  # Monitoring
+    "ARCH-OPF/OF-08": "engine/foundation/obs/telemetry.py",  # Telemetry
+    "ARCH-OPF/OF-09": "engine/foundation/obs/logging.py",  # Logging
+    "ARCH-OPF/OF-11": "intelligence/rie/analysis.py",  # Analytics
+    "ARCH-OPF/OF-14": "engine/kernel/compliance.py",  # Compliance Monitoring
+    "ARCH-OPF/OF-17": "platform/commercial_intelligence/licensing.py",  # Licensing
+    "ARCH-OPF/OF-18": "platform/commercial_intelligence",  # Commercialization
+}
+
+#: Nothing to operate on. Each names the capability whose absence makes the step moot.
+OPERATION_NO_SUBJECT = {
+    "ARCH-OPF/OF-13": "fraud",  # no transactions to monitor
+    "ARCH-OPF/OF-15": "billing",  # PRD-ECON/ECON-03 -- no billing exists
+    "ARCH-OPF/OF-16": "metering",  # nothing is metered because nothing is billed
+}
+
+#: Genuinely unbuilt, with something to operate on if they existed.
+OPERATION_UNBUILT = {
+    "ARCH-OPF/OF-02": "provisioning",
+    "ARCH-OPF/OF-10": "tracing",
+    "ARCH-OPF/OF-12": "security monitoring",
+}
+
+
+def test_every_operation_step_is_instrumented_moot_or_unbuilt() -> None:
+    mandates = section("ARCH-OPF")
+    assert len(mandates) == 18, f"the fabric lists 18 steps, corpus has {len(mandates)}"
+    assert_partitions(
+        "ARCH-OPF",
+        mandates,
+        OPERATION_INSTRUMENT,
+        OPERATION_NO_SUBJECT,
+        OPERATION_UNBUILT,
+    )
+
+
+def test_every_operating_instrument_is_tracked_and_distinct() -> None:
+    assert_homes_exist("ARCH-OPF", OPERATION_INSTRUMENT)
+    homes = list(OPERATION_INSTRUMENT.values())
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one instrument claimed for several operation steps: {duplicated}"
+
+
+def test_the_moot_steps_are_moot_because_their_subject_is_absent() -> None:
+    """The pairing, asserted across suites. Billing operation is absent because billing is
+    absent -- one gap, not two. If the settlement chain ever lands, these move to the
+    unbuilt tier, which is a different obligation."""
+    from engine.tests.conformance.test_mandates_prd import ECONOMIC_FACULTY_ABSENT
+
+    absent_faculties = set(ECONOMIC_FACULTY_ABSENT.values())
+    assert (
+        "billing" in absent_faculties
+    ), "billing now exists, so ARCH-OPF/OF-15 is an unbuilt step rather than a moot one"
+    assert {"revenue", "settlement"} <= absent_faculties, (
+        "the settlement chain has partially landed; the fraud and metering rows rest on its "
+        "absence and must be re-read"
+    )
+
+
+def test_tracing_is_unbuilt_even_though_traces_are_stored() -> None:
+    """NON-VACUITY, and the distinction that keeps Tracing out of the located tier.
+
+    `platform/observability/traces.py` exists and would satisfy a keyword sweep. Storing a
+    trace is not producing one: the telemetry module has the `trace` context manager that
+    emits spans, and it is bound to Telemetry, not to Tracing. Nothing correlates spans
+    across a request, which is what the fabric's Tracing step means.
+    """
+    from engine.tests.conformance.mandate_corpus import repo_root, tracked
+
+    assert "platform/observability/traces.py" in set(tracked())
+    telemetry = (repo_root() / "engine" / "foundation" / "obs" / "telemetry.py").read_text(
+        encoding="utf-8"
+    )
+    assert (
+        "def trace(" in telemetry
+    ), "the telemetry module no longer emits spans; the Telemetry row rests on it"
+    assert OPERATION_INSTRUMENT["ARCH-OPF/OF-08"].endswith("telemetry.py")
+    assert "ARCH-OPF/OF-10" in OPERATION_UNBUILT
+
+
+def test_the_unbuilt_steps_are_named_by_no_module() -> None:
+    """NON-VACUITY over the two with no near-miss. Provisioning and Security Monitoring have
+    nothing in the tree named for them at all."""
+    assert_named_by_nothing(
+        "ARCH-OPF",
+        {
+            "ARCH-OPF/OF-02": "provisioning",
+            "ARCH-OPF/OF-12": "security monitoring",
+        },
+    )
