@@ -1447,3 +1447,86 @@ def test_universal_monetization_is_the_settlement_chain_gap_stated_as_a_principl
         ECONOMIC_FACULTY_ABSENT.values()
     ), "the settlement chain has landed; P-009 may be answered and must be re-tiered"
     assert_named_by_nothing("PRD-P", PRINCIPLE_ABSENT)
+
+
+# --- PRD-FR / PRD-CERT — the last of the PRD -------------------------------------
+#
+# Section 6's thirteen fundamental requirements are the PRD's own summary of everything
+# below it, so eleven of them resolve through the sections that own them rather than being
+# re-located. Two do not: Representation is the object model, and Monetization is the one
+# fundamental requirement with no instrument -- the settlement chain again, stated at the
+# top of the document this time.
+
+FUNDAMENTAL_VIA_SECTION = {
+    "PRD-FR/FR-01": "PRD-ADM",  # Admission -- the nine admission steps
+    "PRD-FR/FR-13": "PRD-KN",  # Retirement -- knowledge retirement owns the lifecycle end
+}
+
+FUNDAMENTAL_INSTRUMENT = {
+    "PRD-FR/FR-02": "engine/uckp/ucko.py",  # Representation
+}
+
+FUNDAMENTAL_ABSENT = {"PRD-FR/FR-10": "monetization"}  # Monetization
+
+#: Certification renewal and revocation. A certification that cannot be withdrawn is a
+#: certification nothing can correct, and neither operation exists.
+CERTIFICATION_LIFECYCLE_ABSENT = {
+    "PRD-CERT/CERT-05": "renewal",
+    "PRD-CERT/CERT-06": "revocation",
+}
+
+
+def test_the_last_prd_mandates_are_joined_instrumented_or_absent() -> None:
+    mandates: dict[str, str] = {}
+    for name in ("PRD-FR", "PRD-CERT"):
+        mandates.update(section(name))
+    covered = {
+        **FUNDAMENTAL_VIA_SECTION,
+        **FUNDAMENTAL_INSTRUMENT,
+        **FUNDAMENTAL_ABSENT,
+        **CERTIFICATION_LIFECYCLE_ABSENT,
+    }
+    foreign = sorted(set(covered) - set(mandates))
+    assert not foreign, f"tiered identifiers that are not PRD mandates: {foreign}"
+    assert_homes_exist("PRD-last", FUNDAMENTAL_INSTRUMENT)
+
+
+def test_admission_and_retirement_resolve_through_the_sections_that_own_them() -> None:
+    """The join. Section 6 summarises the document; re-locating its rows here would author
+    each finding twice and let the summary drift from what it summarises."""
+    assert (
+        len(ADMISSION_STEP_HOME) == 9
+    ), "the admission framework no longer states nine steps; PRD-FR/FR-01 rests on it"
+    assert (
+        "PRD-KN/KN-09" in KNOWLEDGE_STAGE
+    ), "knowledge retirement is no longer located; PRD-FR/FR-13 rests on it"
+
+
+def test_monetization_is_the_one_fundamental_requirement_with_no_instrument() -> None:
+    """Stated at the top of the document and absent at the bottom of it. PRD-P/P-009 says
+    the same thing as a principle and PRD-ECON as a settlement chain -- three sightings of
+    one hole, asserted together."""
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert (
+        "PRD-P/P-009" in PRINCIPLE_ABSENT
+    ), "the monetization principle is no longer absent; this row must be re-read"
+    assert {"revenue", "billing", "settlement"} <= set(ECONOMIC_FACULTY_ABSENT.values())
+    assert_named_by_nothing("PRD-last", FUNDAMENTAL_ABSENT)
+
+
+def test_certification_can_be_granted_and_neither_renewed_nor_revoked() -> None:
+    """NON-VACUITY, and the finding. The certification framework's other five operations are
+    located; these two are the ones that would CORRECT a certification after the fact, and a
+    certification that cannot be withdrawn is one nothing can correct.
+    """
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-last", CERTIFICATION_LIFECYCLE_ABSENT)
+    from engine.registry.universal.records import AuditAct, RegistrationState
+
+    assert "RETIRE" in {act.name for act in AuditAct}, (
+        "the registry can no longer retire a registration, which is the nearest thing to a "
+        "revocation this repository has and is what makes its absence specific"
+    )
+    assert "RETIRED" in {state.name for state in RegistrationState}

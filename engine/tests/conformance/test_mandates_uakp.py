@@ -1813,3 +1813,36 @@ def test_truth_is_revisable_and_this_register_is_the_demonstration() -> None:
         "the register no longer declares its own provisionality, which is what makes the "
         "revisability claim checkable rather than assumed"
     )
+
+
+# ================================================================================
+# UAKP-GRAPH — the last mandate
+# ================================================================================
+#
+# The graph model's fifteen nodes are bound through the sections that own them. One is not:
+# `Execution Specification` is a node in the graph and an engine in the engine model, and the
+# engine model reports it absent. A node whose producer does not exist is a node nothing can
+# ever put anything in.
+
+GRAPH_NODE_UNDELIVERED = {"UAKP-GRAPH/GP-08": "UAKP-ENG/EN-19"}  # Execution Specification
+
+
+def test_the_execution_specification_node_has_no_producer() -> None:
+    """The join, and the last mandate in the corpus to be accounted for.
+
+    `Execution Specification` appears as a node in the graph model and as an engine in the
+    engine model. The engine is reported absent, so the node has no producer -- and the two
+    suites are asserted to agree, because a node the graph declares and nothing fills is a
+    different finding from a node nobody declared.
+    """
+    mandates = section("UAKP-GRAPH")
+    assert mandates["UAKP-GRAPH/GP-08"] == "Execution Specification"
+    for mandate, engine in GRAPH_NODE_UNDELIVERED.items():
+        assert engine in ENGINE_ABSENT, (
+            f"{mandate}: {engine} is no longer reported absent, so this graph node has a "
+            "producer and must be re-tiered"
+        )
+    assert "UAKP-PROC/PR-16" in PROCESS_UNDELIVERED, (
+        "the process model no longer reports Execution Specification Generation undelivered; "
+        "three sections disagree and one of them is wrong"
+    )

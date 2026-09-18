@@ -1061,3 +1061,100 @@ def test_the_nuclei_part_uses_the_one_container_name_layer_five_says_is_not_fixe
         "the nuclei part and the fixed container name no longer resolve to the same package; "
         "the cross-layer note has drifted and needs re-reading"
     )
+
+
+# --- LYR-L5 / L9 / L10 / L13 / L0 / L6 — the layer remainder ---------------------
+#
+# What is left of the layer document. Three of the four commercialization rows repeat the
+# shape this corpus has met at every turn: Product is a market token the kernel refuses,
+# Service and License are real modules, and Distribution is absent -- the same absence
+# PRD-ECON records as the settlement chain, one step further out.
+
+LAYER_REMAINDER = {
+    # L5 Universal Structure
+    "LYR-L5/US-07": "intelligence/realization/generators",  # Generator
+    "LYR-L5/US-09": "engine/acceptance/contracts.py",  # Contracts
+    # L9 Data & Knowledge Architecture
+    "LYR-L9/KG-01": "engine/graph/model.py",  # Universal Knowledge Graph
+    "LYR-L9/KG-02": "engine/uckp/ucko.py",  # Objects
+    "LYR-L9/KG-06": "engine/uckp/values.py",  # History -- TemporalEvent
+    # L10 Universal Governance System
+    "LYR-L10/GV-03": "platform/administration/permissions.py",  # Permissions
+    "LYR-L10/GV-08": "00-MASTER/UCOS-AB-001/07-CHANGE-CONTROL-CONSTITUTION.md",  # Change Control
+    # Evolution Rules
+    "LYR-L10/GV-09": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+    # L13 Commercialization
+    "LYR-L13/CM-02": "platform/commercial_intelligence/service.py",  # Service
+    "LYR-L13/CM-05": "platform/commercial_intelligence/licensing.py",  # License
+    # L0 core concepts
+    "LYR-L0/K-13": "engine/uckp/vocabulary.py",  # Lifecycle -- the stage vocabulary
+    # L6 Automation Engine
+    "LYR-L6/AU-02": "engine/uckp/assimilation.py",  # Assimilation
+}
+
+#: Interfaces resolve through LYR-L14 rather than being re-located.
+LAYER_REMAINDER_VIA_SECTION = {"LYR-L5/US-11": "LYR-L14"}  # Interfaces
+
+#: `product` is a token the kernel refuses to seed.
+LAYER_REMAINDER_MARKET_SHAPED = {"LYR-L13/CM-01": "Product"}
+
+#: Distribution is the settlement chain one step further out: there is nothing to distribute
+#: because nothing is sold.
+LAYER_REMAINDER_ABSENT = {"LYR-L13/CM-10": "distribution"}
+
+
+def test_the_layer_remainder_is_located_joined_market_shaped_or_absent() -> None:
+    mandates: dict[str, str] = {}
+    for name in ("LYR-L5", "LYR-L9", "LYR-L10", "LYR-L13", "LYR-L0", "LYR-L6"):
+        mandates.update(section(name))
+    covered = {
+        **LAYER_REMAINDER,
+        **LAYER_REMAINDER_VIA_SECTION,
+        **LAYER_REMAINDER_MARKET_SHAPED,
+        **LAYER_REMAINDER_ABSENT,
+    }
+    foreign = sorted(set(covered) - set(mandates))
+    assert not foreign, f"tiered identifiers that are not layer mandates: {foreign}"
+    assert_homes_exist("LYR-remainder", LAYER_REMAINDER)
+    homes = list(LAYER_REMAINDER.values())
+    assert len(set(homes)) == len(homes), "one instrument claimed for two remainder rows"
+
+
+def test_interfaces_resolve_through_the_interface_layer() -> None:
+    """The join. Layer 5 lists Interfaces as a part of the universal structure and Layer 14
+    is the section that owns them -- including the finding that the generator families are a
+    closed set. Re-locating them here would lose that."""
+    assert LAYER_REMAINDER_VIA_SECTION["LYR-L5/US-11"] == "LYR-L14"
+    assert (
+        len(INTERFACE_ABSENT) == 5
+    ), "the interface layer's absent set has changed size; the Layer 5 row rests on it"
+
+
+def test_product_is_refused_and_distribution_has_nothing_to_distribute() -> None:
+    """The commercialization layer, and it fails the same way PRD-ECON does one step out.
+
+    Product is a market token the kernel will not seed. Distribution is absent because
+    nothing is sold: PRD-ECON records Revenue, Billing and Settlement all missing, so there
+    is no transaction for a distribution to follow.
+    """
+    from engine.kernel.compliance import PROHIBITED_TOKENS
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+    from engine.tests.conformance.test_mandates_prd import ECONOMIC_FACULTY_ABSENT
+
+    assert "product" in PROHIBITED_TOKENS
+    assert {"revenue", "billing", "settlement"} <= set(ECONOMIC_FACULTY_ABSENT.values()), (
+        "the settlement chain has landed; Distribution has a transaction to follow and is a "
+        "missing module rather than a moot one"
+    )
+    assert_named_by_nothing("LYR-remainder", LAYER_REMAINDER_ABSENT)
+
+
+def test_the_lifecycle_core_concept_is_the_open_vocabulary_not_an_enum() -> None:
+    """Layer 0 lists Lifecycle among the kernel's core concepts, and the concept this
+    repository holds is the OPEN one: an append-only stage vocabulary, not a fixed enum.
+    UAKP-STATE proves the openness; this row names the same instrument."""
+    from engine.uckp.vocabulary import DEFAULT_VOCABULARIES, LIFECYCLE_STAGE
+
+    assert LAYER_REMAINDER["LYR-L0/K-13"] == "engine/uckp/vocabulary.py"
+    vocabulary = DEFAULT_VOCABULARIES.require(LIFECYCLE_STAGE)
+    assert len(vocabulary.term_ids()) >= 10, "the lifecycle vocabulary has lost its stages"
