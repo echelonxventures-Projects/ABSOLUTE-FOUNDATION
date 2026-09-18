@@ -541,3 +541,116 @@ def test_the_three_unanswered_questions_are_normative_future_or_improvement() ->
         "QM-WHAT/WT-07",
         "QM-HOW/HW-14",
     }
+
+
+# --- QM-OUT — the outputs, and the nine still unaccounted ------------------------
+#
+# The interrogative model closes with thirty OUTPUTS. Twenty-one are bound through the
+# sections that own them; the nine below are the rest, and they divide into four kinds.
+#
+# ROBOTS IS ON THE CREATE LIST AND SHOULD NOT BE. `Robotics` is one of the twenty-seven
+# target domains MI-017 lists, and MI-017 already settles what a market is owed: admission,
+# never construction. A robot built as an output of this substrate is the fixed industry
+# LYR-NEG/LN-05 forbids, and MI-015/PJ-25 already records Robotics as a projection with no
+# producer for the same reason.
+
+#: Output -> the instrument that produces it.
+OUTPUT_INSTRUMENT = {
+    "QM-OUT/OU-08": "engine/context/ontology.py",  # Ontologies
+    "QM-OUT/OU-09": "engine/context/taxonomy.py",  # Taxonomies
+    "QM-OUT/OU-11": "00-BOOK/DATA",  # Data
+}
+
+#: Output -> the section that owns the set. Models are the twenty MI-003 declares; counting
+#: them again here would be a second authoring of one inventory.
+OUTPUT_VIA_SECTION = {"QM-OUT/OU-05": "MI-003"}  # Models
+
+#: Market-shaped outputs. Admitted as registered data, never built -- the MI-017 rule.
+OUTPUT_MARKET_SHAPED = {
+    "QM-OUT/OU-24": "Organizations",
+    "QM-OUT/OU-26": "Robots",
+}
+
+#: Not outputs at all: the document's own words for the totality and the openness of the
+#: list. `Everything` heads the column, and the last two entries say the column can grow.
+OUTPUT_TOTALITY_AND_OPENNESS = {
+    "QM-OUT/OU-01": "Everything",
+    "QM-OUT/OU-29": "Future Systems",
+    "QM-OUT/OU-30": "Unknown Future Projections",
+}
+
+
+def test_the_nine_remaining_outputs_are_accounted_four_ways() -> None:
+    mandates = section("QM-OUT")
+    assert len(mandates) == 30, f"the model lists 30 outputs, corpus has {len(mandates)}"
+    covered = {
+        **OUTPUT_INSTRUMENT,
+        **OUTPUT_VIA_SECTION,
+        **OUTPUT_MARKET_SHAPED,
+        **OUTPUT_TOTALITY_AND_OPENNESS,
+    }
+    assert len(covered) == 9
+    foreign = sorted(set(covered) - set(mandates))
+    assert not foreign, f"tiered identifiers that are not QM-OUT mandates: {foreign}"
+    assert_homes_exist("QM-OUT", OUTPUT_INSTRUMENT)
+
+
+def test_models_are_the_twenty_the_master_index_declares() -> None:
+    """The join. Re-listing the models here would be a second authoring of one inventory."""
+    from engine.tests.conformance.test_mandates_index import (
+        UNIVERSAL_MODEL,
+        UNIVERSAL_MODEL_ABSENT,
+    )
+
+    assert OUTPUT_VIA_SECTION["QM-OUT/OU-05"] == "MI-003"
+    assert (
+        len(UNIVERSAL_MODEL) + len(UNIVERSAL_MODEL_ABSENT) == 20
+    ), "MI-003 no longer accounts for twenty models; the output row rests on that section"
+
+
+def test_robots_and_organizations_are_admitted_not_built() -> None:
+    """The correction this binding makes, and the reason it is not new construction.
+
+    `Robots` is dispositioned CREATE. `Robotics` is an MI-017 target domain, and
+    `organization` shares the axis `company` -- a prohibited token. Both admit as registered
+    metatypes with the kernel unchanged, which is what a market is owed.
+    """
+    from engine.kernel.compliance import PROHIBITED_TOKENS, kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    domains = {label.lower() for label in section("MI-017").values()}
+    assert (
+        "robotics" in domains
+    ), "Robotics is no longer a target domain; the Robots output may be construction after all"
+    assert "company" in PROHIBITED_TOKENS, (
+        "`company` is no longer refused, so Organizations could be seeded as a concrete "
+        "market and this row must be re-decided"
+    )
+
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    for label in OUTPUT_MARKET_SHAPED.values():
+        kernel.register_metatype(f"Output-{label}", name=label, description=f"output: {label}")
+    assert kernel_source_fingerprint() == before, (
+        "admitting the market-shaped outputs changed the kernel's source, so they were built "
+        "rather than registered -- the fixed-industry failure LN-05 forbids"
+    )
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    assert {"Output-Robots", "Output-Organizations"} <= registered
+
+
+def test_everything_and_the_future_entries_are_not_outputs() -> None:
+    """NON-VACUITY for the last tier. `Everything` heads the column and the last two entries
+    say the column can grow; treating any of the three as a deliverable would report three
+    products where the document states a totality and an openness."""
+    mandates = section("QM-OUT")
+    labels = list(mandates.values())
+    assert (
+        labels[0] == "Everything"
+    ), f"the outputs no longer open with the totality word: {labels[0]!r}"
+    assert (
+        labels[-1] == "Unknown Future Projections"
+    ), f"the outputs no longer close with the openness claim: {labels[-1]!r}"
+    for mandate in OUTPUT_TOTALITY_AND_OPENNESS:
+        assert mandate not in OUTPUT_INSTRUMENT
+        assert mandate not in OUTPUT_MARKET_SHAPED

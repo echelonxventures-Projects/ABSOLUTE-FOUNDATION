@@ -959,3 +959,105 @@ def test_the_measurement_gap_is_the_behavioural_one_arch_valid_already_found() -
         "performance or reliability is now measured or validated; the claim that this "
         "repository measures what it is and not how it behaves must be re-read"
     )
+
+
+# --- LYR-STACK — the six boxes of the architecture ------------------------------
+#
+# The layer document opens with a six-box stack, kernel at the bottom and generated
+# applications at the top. All six are located, which is what one would hope of a diagram of
+# the system's own spine -- and the six must be six DISTINCT instruments, or the stack has
+# fewer layers than it draws.
+
+ARCHITECTURE_BOX = {
+    "LYR-STACK/LS-01": "engine/kernel",  # Universal Constitutional Kernel
+    "LYR-STACK/LS-02": "engine/context",  # Universal Existence and Context Engine
+    "LYR-STACK/LS-03": "engine/uckp/universe.py",  # Universal Knowledge Universe
+    "LYR-STACK/LS-04": "engine/provider/framework.py",  # Universal Capability Composer
+    "LYR-STACK/LS-05": "00-MASTER/UCOS-AEE-001/aee_engine.py",  # Universal Evolution Engine
+    "LYR-STACK/LS-06": "intelligence/realization",  # Generated Reality Applications
+}
+
+
+def test_every_architecture_box_is_located_and_distinct() -> None:
+    mandates = section("LYR-STACK")
+    assert len(mandates) == 6, f"the stack draws 6 boxes, corpus has {len(mandates)}"
+    assert_partitions("LYR-STACK", mandates, ARCHITECTURE_BOX)
+    assert_homes_exist("LYR-STACK", ARCHITECTURE_BOX)
+    homes = list(ARCHITECTURE_BOX.values())
+    assert len(set(homes)) == 6, f"six boxes, {len(set(homes))} instruments"
+
+
+def test_the_capability_composer_is_the_thing_that_composes_without_building() -> None:
+    """NON-VACUITY for the box the whole architecture turns on. A composer that changed the
+    kernel would make every 'admitted, not built' finding in this suite false."""
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.provider.framework import ProviderFramework
+
+    framework = ProviderFramework()
+    before = kernel_source_fingerprint()
+    framework.register_category("Box-CompositionProof", name="proof", description="composed")
+    assert kernel_source_fingerprint() == before, (
+        "the capability composer changes the kernel when it composes; every admission proof "
+        "in this suite rests on it not doing that"
+    )
+    assert "Box-CompositionProof" in framework.category_keys()
+
+
+def test_the_top_box_is_generated_and_the_bottom_box_is_not() -> None:
+    """The stack's direction, asserted. Generated Reality Applications sit above the kernel
+    because they are PRODUCED from it; if the kernel were itself generated the stack would
+    have no ground."""
+    import json
+
+    registry = json.loads(
+        (repo_root() / "00-BOOK" / "DATA" / "generated-artifact-registry.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    generated = {entry["canonical_path"] for entry in registry["entries"]}
+    kernel = ARCHITECTURE_BOX["LYR-STACK/LS-01"]
+    assert not [p for p in generated if p.startswith(kernel + "/")], (
+        f"{kernel} now contains generated artifacts; the bottom of the stack is produced by "
+        "something and the diagram has no ground"
+    )
+
+
+# --- LYR-L3 — the six parts of the Knowledge Universe ---------------------------
+#
+# All six located. The third part is worth a note: `Dynamic Knowledge Nuclei` is the same
+# `nucleus` name LYR-L5N offers as its example of a container name that must not be fixed.
+# Here the knowledge layer uses it as a structural term, and `engine/nucleus` is what
+# answers -- so the two layers are consistent with each other and both are inconsistent
+# with L5N's own caption.
+
+KNOWLEDGE_UNIVERSE_PART = {
+    "LYR-L3/KU-01": "engine/uckp/universe.py",  # Universal Knowledge Universe
+    "LYR-L3/KU-02": "engine/knowledge/ukip/registry.py",  # Knowledge Domain Registry
+    "LYR-L3/KU-03": "engine/nucleus",  # Dynamic Knowledge Nuclei
+    "LYR-L3/KU-04": "engine/uckp/ucko.py",  # Knowledge Objects
+    "LYR-L3/KU-05": "engine/knowledge/ukip/relationships.py",  # Knowledge Relationships
+    "LYR-L3/KU-06": "engine/uckp/evolution.py",  # Knowledge Evolution
+}
+
+
+def test_every_knowledge_universe_part_is_located_and_distinct() -> None:
+    mandates = section("LYR-L3")
+    assert len(mandates) == 6, f"layer 3 lists 6 parts, corpus has {len(mandates)}"
+    assert_partitions("LYR-L3", mandates, KNOWLEDGE_UNIVERSE_PART)
+    assert_homes_exist("LYR-L3", KNOWLEDGE_UNIVERSE_PART)
+    homes = list(KNOWLEDGE_UNIVERSE_PART.values())
+    assert len(set(homes)) == 6, f"six parts, {len(set(homes))} instruments"
+
+
+def test_the_nuclei_part_uses_the_one_container_name_layer_five_says_is_not_fixed() -> None:
+    """The cross-layer note, asserted so it cannot drift.
+
+    Layer 5 names Nucleus as its example of a container name that must NOT be hard-coded.
+    Layer 3 uses `Dynamic Knowledge Nuclei` as a structural term and `engine/nucleus`
+    answers it. The two layers agree with each other and both sit against L5N's caption --
+    which is a finding about the documents as much as about the repository.
+    """
+    assert KNOWLEDGE_UNIVERSE_PART["LYR-L3/KU-03"] == CONTAINER_NAME_FIXED["LYR-L5N/UN-01"], (
+        "the nuclei part and the fixed container name no longer resolve to the same package; "
+        "the cross-layer note has drifted and needs re-reading"
+    )
