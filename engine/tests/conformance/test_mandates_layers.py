@@ -7,6 +7,8 @@ negative by refusing to seed a token. Nothing here restates them.
 
 from __future__ import annotations
 
+import pytest
+
 from engine.tests.conformance.mandate_corpus import (
     assert_homes_exist,
     assert_named_by_nothing,
@@ -659,3 +661,108 @@ def test_no_capability_domain_is_seeded_and_none_names_a_permitted_industry() ->
         "`industry` is no longer refused, so a capability domain could be seeded as a "
         "concrete market and LYR-NEG/LN-05 would be unenforced"
     )
+
+
+# --- LYR-L14 — the eight interfaces ---------------------------------------------
+#
+# "Interfaces are generated." Eight follow, ending in Future Interface. One of the eight is
+# generated; one exists and is hand-written; five are neither; and the eighth is an openness
+# claim that this repository does not currently satisfy.
+#
+# THE OPENNESS CLAIM IS THE FINDING. Everywhere else in this corpus an open set is open by
+# REGISTRATION -- metatypes, context kinds, lifecycle stages, provider categories all admit
+# a member no document named, with the kernel unchanged. The generator families are not:
+# `ArtifactFamily` is a closed Enum of seven, so adding a Web or Voice generator is a code
+# edit, which is exactly what "Future Interface" promises it will not be.
+
+INTERFACE_GENERATED = {"LYR-L14/IF-06": "api"}  # API -> ArtifactFamily.API
+
+#: Exists and is not generated. CLIs are written by hand throughout the repository, and
+#: `ArtifactFamily` has no cli member -- so the interface is present and the claim
+#: "interfaces are generated" is not true of it.
+INTERFACE_HAND_WRITTEN = {"LYR-L14/IF-07": "CLI"}
+
+#: Neither generated nor present. Each would need a new artifact family, which is a code
+#: edit rather than a registration.
+INTERFACE_ABSENT = {
+    "LYR-L14/IF-01": "web",
+    "LYR-L14/IF-02": "mobile",
+    "LYR-L14/IF-03": "voice",
+    "LYR-L14/IF-04": "ar",
+    "LYR-L14/IF-05": "vr",
+}
+
+INTERFACE_OPENNESS = {"LYR-L14/IF-08": "Future Interface"}
+
+
+def test_every_interface_is_generated_hand_written_absent_or_the_openness_claim() -> None:
+    mandates = section("LYR-L14")
+    assert len(mandates) == 8, f"layer 14 lists 8 interfaces, corpus has {len(mandates)}"
+    assert_partitions(
+        "LYR-L14",
+        mandates,
+        INTERFACE_GENERATED,
+        INTERFACE_HAND_WRITTEN,
+        INTERFACE_ABSENT,
+        INTERFACE_OPENNESS,
+    )
+
+
+def test_the_generated_interface_names_a_family_a_generator_claims() -> None:
+    from intelligence.realization.contracts import ArtifactFamily
+    from intelligence.realization.generators import GENERATORS
+
+    claimed = {generator.family.value for generator in GENERATORS}
+    for mandate, family in INTERFACE_GENERATED.items():
+        assert family in {f.value for f in ArtifactFamily}, f"{mandate}: no {family!r} family"
+        assert family in claimed, f"{mandate}: no generator claims {family!r}"
+
+
+def test_clis_exist_and_are_not_generated() -> None:
+    """NON-VACUITY for the hand-written tier, in both directions. CLIs are everywhere and no
+    artifact family emits them, so the interface is present and the layer's claim about it
+    is false."""
+    from engine.tests.conformance.mandate_corpus import tracked
+    from intelligence.realization.contracts import ArtifactFamily
+
+    clis = [path for path in tracked() if path.endswith("cli.py") and "/tests/" not in path]
+    assert len(clis) >= 5, f"only {len(clis)} CLI modules; the hand-written claim is thin"
+    assert "cli" not in {
+        f.value for f in ArtifactFamily
+    }, "a cli artifact family now exists; LYR-L14/IF-07 is generated and belongs a tier up"
+
+
+def test_the_absent_interfaces_have_no_family_and_no_module() -> None:
+    from intelligence.realization.contracts import ArtifactFamily
+
+    families = {f.value for f in ArtifactFamily}
+    for mandate, interface in INTERFACE_ABSENT.items():
+        assert interface not in families, f"{mandate}: a {interface!r} family now exists"
+    # `ar` and `vr` are two-letter tokens and a two-letter token is not a searchable
+    # requirement, so only the three that can be searched are searched.
+    assert_named_by_nothing(
+        "LYR-L14",
+        {m: i for m, i in INTERFACE_ABSENT.items() if len(i) > 2},
+    )
+
+
+def test_the_interface_set_is_not_open_by_registration_and_the_layer_claims_it_is() -> None:
+    """The finding, asserted so it cannot quietly stop being true.
+
+    Every other open set in this corpus admits a member no document named, with the kernel
+    unchanged: metatypes, context kinds, lifecycle stages, provider categories. The artifact
+    families do not -- `ArtifactFamily` is a closed Enum, so a Future Interface costs a code
+    edit. If the family set ever becomes registrable, this assertion fails and IF-08 is
+    satisfied.
+    """
+    import enum
+
+    from intelligence.realization.contracts import ArtifactFamily
+
+    assert issubclass(ArtifactFamily, enum.Enum)
+    assert len(ArtifactFamily) == 7, (
+        f"the family set has changed size to {len(ArtifactFamily)}; if it became open by "
+        "registration, LYR-L14/IF-08 is satisfied and this tier is wrong"
+    )
+    with pytest.raises(ValueError):
+        ArtifactFamily("interface-no-document-has-named-yet")
