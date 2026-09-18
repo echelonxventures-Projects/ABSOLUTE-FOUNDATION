@@ -1138,3 +1138,154 @@ def test_the_root_law_is_above_the_register_that_records_standings() -> None:
         f"the register's supreme authority is not {ROOT_LAW.law_id}; the self-binding would "
         "make it answerable to nothing"
     )
+
+
+# --- PRD-TWIN — the Universal Digital Twin Framework ----------------------------
+#
+# "Anything may possess" six kinds of twin, and "No restriction on twin types." One kind
+# exists, one is architecture without an instance, and four are absent -- so the closing
+# rule is true by vacuity rather than by design: nothing restricts twin types because
+# nothing produces more than one.
+#
+# The operational twin that does exist carries its own limit, and CAEM-001 recorded it
+# before this suite did: GAP-6, "twin subject set narrow, fixture-fed", carried by
+# WP-UCDA-012. Eight subjects and fifteen signals, sourced from a fixed timestamp. That is
+# recorded as part of the row rather than left for a reader to discover.
+
+#: Twin -> the instrument that produces it.
+TWIN_PRODUCED = {"PRD-TWIN/TWIN-02": "00-BOOK/DATA/twin.json"}  # Operational Twin
+
+#: Architecture without an instance. UMB-002 specifies the twin; nothing emits this kind.
+TWIN_SPECIFIED_ONLY = {
+    "PRD-TWIN/TWIN-01": "00-BOOK/MASTER-BOOK/UMB-002-DIGITAL-TWIN-ARCHITECTURE.md",
+}
+
+TWIN_ABSENT = {
+    "PRD-TWIN/TWIN-03": "behavioral twin",
+    "PRD-TWIN/TWIN-04": "predictive twin",
+    "PRD-TWIN/TWIN-05": "simulation twin",
+    "PRD-TWIN/TWIN-06": "evolution twin",
+}
+
+
+def test_every_twin_kind_is_produced_specified_or_absent() -> None:
+    mandates = section("PRD-TWIN")
+    assert len(mandates) == 6, f"section 18 states 6 twin kinds, corpus has {len(mandates)}"
+    assert_partitions("PRD-TWIN", mandates, TWIN_PRODUCED, TWIN_SPECIFIED_ONLY, TWIN_ABSENT)
+    assert_homes_exist("PRD-TWIN", TWIN_PRODUCED)
+    assert_homes_exist("PRD-TWIN", TWIN_SPECIFIED_ONLY)
+
+
+def test_the_operational_twin_carries_the_narrow_subject_set_caem_recorded() -> None:
+    """The row and its limit together. CAEM-001 GAP-6 records the twin subject set as narrow
+    and fixture-fed; this asserts the shape of that limit so the row cannot read as a fully
+    realized operational twin, and so the assertion fails if the twin ever grows.
+    """
+    import json
+
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    twin = json.loads((repo_root() / TWIN_PRODUCED["PRD-TWIN/TWIN-02"]).read_text(encoding="utf-8"))
+    assert twin["subject_count"] < 100, (
+        f"the twin now covers {twin['subject_count']} subjects; CAEM-001 GAP-6 recorded the "
+        "set as narrow and that limit no longer holds -- re-read the row"
+    )
+    assert twin["dimensions"], "the twin declares no dimensions, so it records no state"
+    assert "operational" in twin["dimensions"], (
+        "the twin no longer carries an operational dimension, which is what makes it the "
+        "OPERATIONAL twin rather than some other kind"
+    )
+
+
+def test_the_specified_twin_is_architecture_and_not_an_instance() -> None:
+    """NON-VACUITY for the specified tier. A document is a specification; if a producer ever
+    emits representation twins, this row moves up."""
+    home = TWIN_SPECIFIED_ONLY["PRD-TWIN/TWIN-01"]
+    assert home.endswith(".md"), f"{home} is not a document, so this row is not specification"
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-TWIN", {"PRD-TWIN/TWIN-01": "representation twin"})
+
+
+def test_no_restriction_on_twin_types_is_true_by_vacuity() -> None:
+    """The section's closing rule, read honestly.
+
+    "No restriction on twin types" is satisfied -- nothing restricts them. It is satisfied
+    because nothing produces more than one kind, which is not the same as being satisfied by
+    design. If a second producer ever lands, this assertion fails and the rule starts being
+    a real claim about an extensible twin set.
+    """
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert len(TWIN_PRODUCED) == 1, (
+        "more than one twin kind is now produced; 'no restriction on twin types' is a claim "
+        "about a real set and must be proven the way the other open sets are"
+    )
+    assert_named_by_nothing("PRD-TWIN", TWIN_ABSENT)
+
+
+# --- PRD-KN — the Universal Knowledge Framework ---------------------------------
+#
+# Nine stages of the knowledge lifecycle. Seven have an instrument in the knowledge plane;
+# two do not, and the pair is worth naming: Capture and Verification.
+#
+# Verification's absence is the same shape the maturity lattice shows. UAKP-MAT records M5
+# as `VALIDATED-OR-VERIFIED`, one level for two stages; here the knowledge plane has
+# `validation.py` and `certification.py` and no verification module at all. Two documents,
+# one missing distinction between checking a thing against its shape and checking it
+# against reality.
+
+KNOWLEDGE_STAGE = {
+    "PRD-KN/KN-02": "platform/universal_assimilation",  # Knowledge Ingestion
+    "PRD-KN/KN-03": "engine/knowledge/ukip/assimilation.py",  # Knowledge Assimilation
+    "PRD-KN/KN-04": "engine/knowledge/ukip/classification.py",  # Knowledge Classification
+    "PRD-KN/KN-05": "engine/knowledge/ukip/validation.py",  # Knowledge Validation
+    "PRD-KN/KN-07": "engine/knowledge/ukip/certification.py",  # Knowledge Certification
+    "PRD-KN/KN-08": "engine/uckp/evolution.py",  # Knowledge Evolution
+    "PRD-KN/KN-09": "engine/registry/universal/records.py",  # Knowledge Retirement
+}
+
+KNOWLEDGE_ABSENT = {
+    "PRD-KN/KN-01": "knowledge capture",
+    "PRD-KN/KN-06": "knowledge verification",
+}
+
+
+def test_every_knowledge_stage_is_instrumented_or_absent() -> None:
+    mandates = section("PRD-KN")
+    assert len(mandates) == 9, f"section 11 states 9 stages, corpus has {len(mandates)}"
+    assert_partitions("PRD-KN", mandates, KNOWLEDGE_STAGE, KNOWLEDGE_ABSENT)
+    assert_homes_exist("PRD-KN", KNOWLEDGE_STAGE)
+
+
+def test_the_knowledge_plane_validates_and_certifies_and_does_not_verify() -> None:
+    """NON-VACUITY, and the finding. The knowledge plane has a validation module and a
+    certification module beside each other and no verification module -- so the stage
+    between them has no instrument. If one ever appears, this row moves."""
+    from engine.tests.conformance.mandate_corpus import tracked
+
+    ukip = [p for p in tracked() if p.startswith("engine/knowledge/ukip/") and p.endswith(".py")]
+    assert "engine/knowledge/ukip/validation.py" in ukip
+    assert "engine/knowledge/ukip/certification.py" in ukip
+    assert "engine/knowledge/ukip/verification.py" not in ukip, (
+        "the knowledge plane now verifies; PRD-KN/KN-06 has an instrument and must be " "re-tiered"
+    )
+
+
+def test_the_missing_verification_is_the_same_distinction_the_lattice_collapses() -> None:
+    """Two documents, one missing distinction. The maturity lattice names M5
+    `VALIDATED-OR-VERIFIED` -- one level for two stages -- and the knowledge plane has no
+    verification module. Asserted together so the pair reads as one finding."""
+    from engine.tests.conformance.test_mandates_uakp import MATURITY_COLLAPSED
+
+    assert "UAKP-MAT/MT-07" in MATURITY_COLLAPSED, (
+        "the lattice now separates validated from verified; the knowledge plane's missing "
+        "verification is a lone gap rather than half of one finding"
+    )
+    assert "PRD-KN/KN-06" in KNOWLEDGE_ABSENT
+
+
+def test_the_absent_knowledge_stages_are_named_by_nothing() -> None:
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert_named_by_nothing("PRD-KN", KNOWLEDGE_ABSENT)
