@@ -1718,3 +1718,98 @@ def test_self_learning_has_neither_a_runner_nor_a_place_to_put_a_result() -> Non
         "UAKP-MEM/MM-08" in MEMORY_ABSENT
     ), "learning memory now exists; Self Learning has somewhere to put a result"
     assert_named_by_nothing("UAKP-SELFEV", SELF_EVOLUTION_ABSENT)
+
+
+# ================================================================================
+# UAKP-TRUTH — the seven-step truth model
+# ================================================================================
+#
+# "Knowledge SHALL NOT equal Truth. Truth SHALL be constitutionally derived." Seven steps
+# from observation to a canonical knowledge state, closing with "Truth SHALL remain revisable
+# when new evidence appears."
+#
+# Six steps have an instrument. The seventh is not an instrument at all -- it is a PROPERTY
+# of how truth is held here, and this repository demonstrates it rather than declaring it:
+# every disposition in CAEM-001's register is PROVISIONAL, re-measured from the tree, and
+# the register's own field says so. A truth model whose determinations were final would
+# satisfy the first six steps and lose the sentence that closes them.
+
+TRUTH_STEP = {
+    "UAKP-TRUTH/TR-01": "00-BOOK/DATA/observation-universe.json",  # Observation to Claim
+    "UAKP-TRUTH/TR-02": "00-BOOK/DATA/evidence-universe.json",  # Claim to Evidence
+    "UAKP-TRUTH/TR-03": "engine/knowledge/ukip/confidence.py",  # Confidence Assessment
+    "UAKP-TRUTH/TR-05": "platform/universal_truth",  # Truth Determination
+    "UAKP-TRUTH/TR-06": "00-MASTER/UCOS-RFP-001/rfp.json",  # Canonical Knowledge State
+}
+
+#: Reasoning is performed at a narrower scope than the model states -- the same narrowing
+#: UAKP-ENG/EN-16 records, reached from a second section.
+TRUTH_NARROWED = {"UAKP-TRUTH/TR-04": "UAKP-ENG/EN-16"}  # Reasoning
+
+#: Not a step: a property of the model, demonstrated by the register that measures it.
+TRUTH_PROPERTY = {"UAKP-TRUTH/TR-07": "Truth revisable on new evidence"}
+
+
+def test_every_truth_step_is_instrumented_narrowed_or_a_property() -> None:
+    mandates = section("UAKP-TRUTH")
+    assert len(mandates) == 7, f"the truth model states 7 steps, corpus has {len(mandates)}"
+    assert_partitions("UAKP-TRUTH", mandates, TRUTH_STEP, TRUTH_NARROWED, TRUTH_PROPERTY)
+    assert_homes_exist("UAKP-TRUTH", TRUTH_STEP)
+
+
+def test_observation_and_evidence_are_held_apart() -> None:
+    """The model's opening claim is that knowledge is not truth, and the repository's version
+    of that separation is sharper: an observation may never enter canonical identity. If the
+    two universes were one register, the chain from observation to truth would have no step
+    in it."""
+    import json
+
+    observation = json.loads(
+        (repo_root() / TRUTH_STEP["UAKP-TRUTH/TR-01"]).read_text(encoding="utf-8")
+    )
+    evidence = json.loads(
+        (repo_root() / TRUTH_STEP["UAKP-TRUTH/TR-02"]).read_text(encoding="utf-8")
+    )
+    assert observation.get("authority") != evidence.get("authority"), (
+        "observation and evidence now declare one authority; the model's first two steps "
+        "have collapsed into one"
+    )
+    assert "canonical identity" in json.dumps(observation), (
+        "the observation universe no longer states the rule that keeps an observation out "
+        "of canonical identity"
+    )
+
+
+def test_reasoning_is_narrowed_here_exactly_as_the_engine_model_records() -> None:
+    """The join. A second section reaching the same narrowing is corroboration; a
+    disagreement would mean one of the two rows is wrong."""
+    for mandate, engine in TRUTH_NARROWED.items():
+        assert (
+            engine in ENGINE_NARROWER
+        ), f"{mandate}: {engine} is no longer the narrowed reasoning engine"
+
+
+def test_truth_is_revisable_and_this_register_is_the_demonstration() -> None:
+    """The closing sentence, proven by the instrument that measures this very corpus.
+
+    Every concept in the disposition register carries `determination: PROVISIONAL`, and the
+    register declares in its own words that each row names a CANDIDATE a person confirms or
+    rejects. That is truth held revisably. A register that promoted rows to final
+    automatically would satisfy the six steps above and contradict the seventh.
+    """
+    import json
+
+    disposition = json.loads(
+        (repo_root() / "00-MASTER" / "CAEM-001" / "07-MANDATE-DISPOSITION.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    determinations = {c.get("determination") for c in disposition["concepts"].values()}
+    assert determinations == {"PROVISIONAL"}, (
+        f"determinations are no longer uniformly provisional: {sorted(determinations)}; "
+        "some row has been promoted without a person confirming it"
+    )
+    assert disposition.get("$every_disposition_here_is_provisional"), (
+        "the register no longer declares its own provisionality, which is what makes the "
+        "revisability claim checkable rather than assumed"
+    )

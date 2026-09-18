@@ -1349,3 +1349,101 @@ def test_the_framework_observes_what_happened_and_not_what_is_inferred() -> None
     assert "anomaly" in set(
         CONSTRUCT_DISCOVERY_ABSENT.values()
     ), "anomaly discovery now exists; the observability framework may infer after all"
+
+
+# --- PRD-P — the ten constitutional principles ----------------------------------
+#
+# Three of the ten are negative -- No Terminal Ontology, Taxonomy, Architecture -- and are
+# bound in the kernel suite to gates that refuse the violation. The seven below are the
+# positive ones, and four of them have the strongest answer available in this repository:
+# they are FACETS. "Everything must be observable / traceable / certifiable / evolvable" is
+# satisfied by every object carrying the facet, not by a module that could be called.
+#
+# One is absent, and it is the same absence PRD-ECON records: Universal Monetization has no
+# instrument because the settlement chain does not exist.
+
+#: Principle -> the facet that makes it true of every object.
+PRINCIPLE_FACET = {
+    "PRD-P/P-006": "observer-context",  # Universal Observability
+    "PRD-P/P-007": "traceability",  # Universal Traceability
+    "PRD-P/P-008": "certification",  # Universal Certifiability
+    "PRD-P/P-010": "evolution-history",  # Universal Evolvability
+}
+
+#: Principle -> the instrument that carries it.
+PRINCIPLE_INSTRUMENT = {
+    "PRD-P/P-004": "engine/infinite_scope",  # Infinite Composition
+    "PRD-P/P-005": "engine/constitution/gateway.py",  # Constitutional Governance
+}
+
+#: Bound in the kernel suite, to a gate that refuses the violation.
+PRINCIPLE_GATED_ELSEWHERE = {
+    "PRD-P/P-001": "no-closed-registries",
+    "PRD-P/P-002": "no-finite-enumeration",
+    "PRD-P/P-003": "unknown-future-compatibility",
+}
+
+PRINCIPLE_ABSENT = {"PRD-P/P-009": "monetization"}  # Universal Monetization
+
+
+def test_every_constitutional_principle_is_a_facet_instrumented_gated_or_absent() -> None:
+    mandates = section("PRD-P")
+    assert len(mandates) == 10, f"section 4 states 10 principles, corpus has {len(mandates)}"
+    assert_partitions(
+        "PRD-P",
+        mandates,
+        PRINCIPLE_FACET,
+        PRINCIPLE_INSTRUMENT,
+        PRINCIPLE_GATED_ELSEWHERE,
+        PRINCIPLE_ABSENT,
+    )
+
+
+def test_the_four_universal_principles_are_carried_by_every_object() -> None:
+    """The strongest answer available: not a module that could be called, but a question
+    every object must be able to answer about itself."""
+    import dataclasses
+
+    from engine.uckp.facets import REQUIRED_FACETS, Facet
+    from engine.uckp.ucko import UniversalConstitutionalKnowledgeObject as UCKO
+
+    fields = {f.name for f in dataclasses.fields(UCKO)}
+    for mandate, value in PRINCIPLE_FACET.items():
+        facet = Facet.coerce(value)
+        assert facet in REQUIRED_FACETS, f"{mandate}: {value!r} is not a required facet"
+        assert facet.attribute in fields, (
+            f"{mandate}: no UCKO field carries {value!r}, so the principle is not true of "
+            "every object"
+        )
+    values = list(PRINCIPLE_FACET.values())
+    assert len(values) == len(set(values)), "one facet claimed by two principles"
+
+
+def test_the_negative_principles_stay_bound_in_the_kernel_suite() -> None:
+    """Corpus search cannot decide a negative. These three are bound where they can be
+    decided -- to a gate that fails the build -- and this suite asserts the binding rather
+    than restating it."""
+    from engine.kernel.compliance import quality_gates
+    from engine.tests.kernel.test_compliance import BOUND_TO_GATE
+
+    gates = {gate["id"]: gate for gate in quality_gates()["gates"]}
+    for mandate, gate_id in PRINCIPLE_GATED_ELSEWHERE.items():
+        assert (
+            BOUND_TO_GATE.get(mandate) == gate_id
+        ), f"{mandate}: the kernel suite no longer binds this to {gate_id!r}"
+        assert gates[gate_id]["passed"] is True, f"{mandate}: gate {gate_id!r} fails"
+
+
+def test_universal_monetization_is_the_settlement_chain_gap_stated_as_a_principle() -> None:
+    """The one absent principle, and it is not a lone gap.
+
+    PRD-ECON records Revenue, Billing, Settlement and Taxation all absent. "Everything must
+    be monetizable" is that same hole stated as a principle, so the two are asserted
+    together -- and if the chain ever lands, this principle is answered by it.
+    """
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
+
+    assert {"revenue", "billing", "settlement", "taxation"} <= set(
+        ECONOMIC_FACULTY_ABSENT.values()
+    ), "the settlement chain has landed; P-009 may be answered and must be re-tiered"
+    assert_named_by_nothing("PRD-P", PRINCIPLE_ABSENT)
