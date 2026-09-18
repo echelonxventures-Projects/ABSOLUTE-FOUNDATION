@@ -580,3 +580,82 @@ def test_the_two_instrument_steps_are_not_lifecycle_stages() -> None:
             f"{mandate}: {mandates[mandate]!r} IS a declared stage and belongs in the "
             "verbatim tier"
         )
+
+
+# --- LYR-L4 — the nine capability domains ---------------------------------------
+#
+# Layer 4 opens "Everything is a capability. No fixed application modules." and lists nine
+# domains: Identity, Commerce, Mobility, Finance, Communication, Knowledge, Manufacturing,
+# Governance, Future Capability.
+#
+# Seven of the nine are MARKETS under capability names. Commerce, Finance and Manufacturing
+# are three of the twenty-seven target domains MI-017 lists, and MI-017 already settles what
+# a market is owed: admission, never construction. The ninth entry is not a domain at all --
+# `Future Capability` is the openness claim, exactly as MI-017 ends with Future Unknown
+# Domains and UAKP-ENV with Future Unknown Environment.
+
+CAPABILITY_DOMAIN_PREFIX = "Domain-"
+
+
+def test_the_capability_layer_is_eight_domains_and_an_openness_claim() -> None:
+    mandates = section("LYR-L4")
+    assert len(mandates) == 9, f"layer 4 lists 9 capabilities, corpus has {len(mandates)}"
+    labels = list(mandates.values())
+    assert (
+        labels[-1] == "Future Capability"
+    ), f"the list no longer ends with the openness claim: {labels[-1]!r}"
+
+
+def test_three_of_them_are_target_domains_the_master_index_already_settles() -> None:
+    """The overlap is the argument. If these were built as capability modules they would be
+    the fixed industries MI-017 refuses, so the overlap is asserted as a floor rather than
+    described."""
+    mandates = section("LYR-L4")
+    here = {label.removesuffix(" Capability").lower() for label in mandates.values()}
+    domains = {label.lower() for label in section("MI-017").values()}
+    shared = sorted(here & domains)
+    assert len(shared) >= 3, (
+        f"the capability layer no longer overlaps the target domains; found {shared}. The "
+        "argument that these are markets rather than modules rests on that overlap."
+    )
+
+
+def test_every_capability_domain_is_admissible_with_the_kernel_unchanged() -> None:
+    from engine.kernel.compliance import kernel_source_fingerprint
+    from engine.kernel.kernel import MetaKernel
+
+    labels = list(section("LYR-L4").values())
+    kernel = MetaKernel()
+    before = kernel_source_fingerprint()
+    for label in labels:
+        key = CAPABILITY_DOMAIN_PREFIX + "".join(w.capitalize() for w in label.split())
+        kernel.register_metatype(key, name=label, description=f"capability domain: {label}")
+
+    assert kernel_source_fingerprint() == before, (
+        "admitting the capability domains changed the kernel's source, so they were built as "
+        "application modules -- which is what 'No fixed application modules' forbids"
+    )
+    registered = {obj.natural_key for obj in kernel.metatypes()}
+    refused = sorted(
+        label
+        for label in labels
+        if CAPABILITY_DOMAIN_PREFIX + "".join(w.capitalize() for w in label.split())
+        not in registered
+    )
+    assert not refused, f"capability domains the kernel would not admit: {refused}"
+
+
+def test_no_capability_domain_is_seeded_and_none_names_a_permitted_industry() -> None:
+    """NON-VACUITY. None is a founding meta-type, and `industry` -- the token that would let
+    one be seeded as a concrete market -- is still refused."""
+    from engine.kernel.compliance import PROHIBITED_TOKENS
+    from engine.kernel.seed import FOUNDING_METATYPES
+
+    labels = {label.removesuffix(" Capability").lower() for label in section("LYR-L4").values()}
+    founding = {key.lower() for key, _n, _d in FOUNDING_METATYPES}
+    leaked = sorted(labels & founding - {"knowledge", "governance", "identity"})
+    assert not leaked, f"capability domains seeded beyond the universal abstractions: {leaked}"
+    assert "industry" in PROHIBITED_TOKENS, (
+        "`industry` is no longer refused, so a capability domain could be seeded as a "
+        "concrete market and LYR-NEG/LN-05 would be unenforced"
+    )

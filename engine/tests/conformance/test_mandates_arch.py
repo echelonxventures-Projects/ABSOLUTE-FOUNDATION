@@ -850,3 +850,101 @@ def test_the_unbuilt_steps_are_named_by_no_module() -> None:
             "ARCH-OPF/OF-12": "security monitoring",
         },
     )
+
+
+# --- ARCH-DISCF — the twelve steps of the Universal Discovery Fabric -------------
+#
+# Six of the twelve are UCL-000001 stages; six are not, and the six that are not are the
+# COGNITIVE ones -- Discover, Recognize, Identify, Classify, Resolve Relationships, Resolve
+# Rules. The lifecycle names the stages where something is looked up or written down, and
+# not the stages where something is judged.
+#
+# Five of those six are still performed, by instruments the lifecycle does not stage. The
+# sixth is not performed at all.
+
+DISCOVERY_FABRIC_STAGE = {
+    "ARCH-DISCF/DF-01": "Observe",  # Observe
+    "ARCH-DISCF/DF-03": "Perceive",  # Recognize
+    "ARCH-DISCF/DF-06": "Context Assimilation",  # Resolve Context
+    "ARCH-DISCF/DF-08": "Constraint Discovery",  # Resolve Constraints
+    "ARCH-DISCF/DF-10": "Dependency Discovery",  # Resolve Dependencies
+    "ARCH-DISCF/DF-12": "Update Repository Truth",  # Repository Truth
+}
+
+DISCOVERY_FABRIC_INSTRUMENT = {
+    "ARCH-DISCF/DF-02": "engine/universal_discovery",  # Discover
+    "ARCH-DISCF/DF-04": "engine/uckp/identity.py",  # Identify
+    "ARCH-DISCF/DF-05": "engine/knowledge/ukip/classification.py",  # Classify
+    "ARCH-DISCF/DF-07": "engine/uckp/resolution.py",  # Resolve Relationships
+    "ARCH-DISCF/DF-11": "engine/uckp/assimilation.py",  # Knowledge Assimilation
+}
+
+#: Rules are declared as policies and never RESOLVED: nothing takes a subject and returns
+#: the rules that apply to it. `engine/kernel/governance.py` holds Policy and Rule as
+#: objects, which is declaration, not resolution.
+DISCOVERY_FABRIC_ABSENT = {"ARCH-DISCF/DF-09": "rule resolution"}
+
+
+def test_every_discovery_fabric_step_is_a_stage_an_instrument_or_absent() -> None:
+    mandates = section("ARCH-DISCF")
+    assert len(mandates) == 12, f"the fabric lists 12 steps, corpus has {len(mandates)}"
+    assert_partitions(
+        "ARCH-DISCF",
+        mandates,
+        DISCOVERY_FABRIC_STAGE,
+        DISCOVERY_FABRIC_INSTRUMENT,
+        DISCOVERY_FABRIC_ABSENT,
+    )
+
+
+def test_every_fabric_stage_names_a_stage_ucl_declares() -> None:
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = _ucl_stage_names()
+    for mandate, stage in DISCOVERY_FABRIC_STAGE.items():
+        assert stage in declared, f"{mandate}: UCL declares no stage named {stage!r}"
+    claimed = list(DISCOVERY_FABRIC_STAGE.values())
+    assert len(claimed) == len(set(claimed)), "one stage claimed by two fabric steps"
+
+
+def test_the_instrument_steps_are_the_cognitive_ones_the_lifecycle_does_not_stage() -> None:
+    """The finding. The lifecycle stages what is looked up or written down; it does not stage
+    judgement. If UCL ever adds a Classify or Identify stage, that step moves up a tier and
+    this characterisation has to be rewritten rather than left standing."""
+    from engine.tests.conformance.mandate_corpus import repo_root, tracked
+    from engine.tests.conformance.test_mandates_model import _ucl_stage_names
+
+    declared = {name.lower() for name in _ucl_stage_names()}
+    mandates = section("ARCH-DISCF")
+    known = set(tracked())
+    for mandate, home in DISCOVERY_FABRIC_INSTRUMENT.items():
+        present = home in known or any(p.startswith(home.rstrip("/") + "/") for p in known)
+        assert present, f"{mandate}: {home} is not a tracked path"
+        assert (
+            mandates[mandate].lower() not in declared
+        ), f"{mandate}: {mandates[mandate]!r} IS a declared stage now and is understated"
+    assert (repo_root() / "engine" / "uckp" / "identity.py").exists()
+
+
+def test_rule_resolution_is_absent_although_rules_are_declared() -> None:
+    """NON-VACUITY, and the distinction that keeps it out of the located tier.
+
+    `engine/kernel/governance.py` carries Policy and Rule as objects and would satisfy a
+    keyword sweep. Declaring a rule is not resolving one: the fabric's step takes a subject
+    and returns the rules that apply to it, and nothing does that.
+    """
+    import ast
+
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    source = (repo_root() / "engine" / "kernel" / "governance.py").read_text(encoding="utf-8")
+    defined = {n.name for n in ast.walk(ast.parse(source)) if isinstance(n, ast.ClassDef)}
+    assert "Rule" in defined or "Policy" in defined, (
+        "governance.py no longer declares a Rule or Policy; the near-miss this row rests on "
+        "has changed"
+    )
+    functions = {n.name for n in ast.walk(ast.parse(source)) if isinstance(n, ast.FunctionDef)}
+    resolvers = sorted(f for f in functions if "resolve" in f and "rule" in f)
+    assert (
+        not resolvers
+    ), f"a rule resolver now exists: {resolvers}; ARCH-DISCF/DF-09 must be re-tiered"
