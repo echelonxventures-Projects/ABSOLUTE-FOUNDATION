@@ -833,3 +833,103 @@ def test_the_autonomous_security_principles_have_no_threat_model_to_act_on() -> 
     assert "risk" in set(
         CONSTRUCT_DISCOVERY_ABSENT.values()
     ), "risk discovery now exists; the same re-tiering applies"
+
+
+# --- PRD-COMP — the nine modes of composition -----------------------------------
+#
+# "Composition must support" nine modes. They are not nine composers: they are nine things
+# that can DRIVE one composition, and the repository's autonomous composer is driven by
+# several of them at once. So each row names the driver rather than a module, and the driver
+# has to be visible in the composer's own signature or in a module composition reaches.
+#
+# Six are driven. Three are not, and they share a shape: Static, Dynamic and Event Driven
+# are all about WHEN composition happens. The substrate composes when asked and has no
+# notion of composition bound to declaration time, to runtime change, or to an event.
+
+#: Mode -> (the module that drives it, the symbol that shows the driver).
+COMPOSITION_DRIVER = {
+    # Runtime Composition
+    "PRD-COMP/COMP-03": ("engine/runtime/orchestration.py", ""),
+    # Intent Driven -- the composer's entry point takes an ArtifactIntent
+    "PRD-COMP/COMP-05": ("engine/knowledge/integration/contracts.py", "ArtifactIntent"),
+    # Policy Driven
+    "PRD-COMP/COMP-06": ("engine/kernel/governance.py", "Policy"),
+    # Knowledge Driven -- the composer is constructed over a KnowledgeBase
+    "PRD-COMP/COMP-07": ("engine/knowledge/integration/composition.py", "AutonomousComposer"),
+    # Autonomous
+    "PRD-COMP/COMP-08": ("engine/knowledge/integration/composition.py", "AutonomousComposer"),
+    # Recursive
+    "PRD-COMP/COMP-09": ("engine/recursive_knowledge/composition.py", ""),
+}
+
+#: Undriven, and all three are about WHEN.
+COMPOSITION_UNDRIVEN = {
+    "PRD-COMP/COMP-01": "static composition",
+    "PRD-COMP/COMP-02": "dynamic composition",
+    "PRD-COMP/COMP-04": "event driven composition",
+}
+
+
+def test_every_composition_mode_is_driven_or_undriven() -> None:
+    mandates = section("PRD-COMP")
+    assert len(mandates) == 9, f"section 8 states 9 composition modes, corpus has {len(mandates)}"
+    assert_partitions("PRD-COMP", mandates, COMPOSITION_DRIVER, COMPOSITION_UNDRIVEN)
+
+
+def test_every_driven_mode_names_a_module_and_a_symbol_it_defines() -> None:
+    """A driver that is a path is a guess; a driver that is a named class in that path is a
+    driver. Where no symbol is named the module itself is the driver."""
+    import ast
+
+    from engine.tests.conformance.mandate_corpus import repo_root
+
+    assert_homes_exist("PRD-COMP", {m: home for m, (home, _s) in COMPOSITION_DRIVER.items()})
+    for mandate, (home, symbol) in COMPOSITION_DRIVER.items():
+        if not symbol:
+            continue
+        tree = ast.parse((repo_root() / home).read_text(encoding="utf-8"))
+        defined = {n.name for n in ast.walk(tree) if isinstance(n, ast.ClassDef)}
+        assert symbol in defined, f"{mandate}: {home} defines no {symbol!r}"
+
+
+def test_the_composer_is_driven_by_intent_and_knowledge_at_once() -> None:
+    """NON-VACUITY for the two rows that share a module. Intent Driven and Knowledge Driven
+    are not the same claim: the composer is CONSTRUCTED over a knowledge base and CALLED
+    with an intent, so both drivers are visible in its own signature."""
+    import inspect
+
+    from engine.knowledge.integration.composition import AutonomousComposer
+
+    init = inspect.signature(AutonomousComposer.__init__)
+    assert (
+        "base" in init.parameters
+    ), "the composer no longer takes a knowledge base; the Knowledge Driven row rests on it"
+    source = inspect.getsource(AutonomousComposer)
+    assert (
+        "ArtifactIntent" in source
+    ), "the composer no longer takes an ArtifactIntent; the Intent Driven row rests on it"
+
+
+def test_the_undriven_modes_are_all_about_when_composition_happens() -> None:
+    """The finding, asserted rather than described. Static, Dynamic and Event Driven all
+    answer WHEN; the substrate composes when asked. If a scheduler or an event-driven
+    composer ever lands, this characterisation has to be rewritten."""
+    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing, tracked
+
+    assert set(COMPOSITION_UNDRIVEN) == {
+        "PRD-COMP/COMP-01",
+        "PRD-COMP/COMP-02",
+        "PRD-COMP/COMP-04",
+    }
+    assert_named_by_nothing("PRD-COMP", COMPOSITION_UNDRIVEN)
+    event_composers = [
+        path
+        for path in tracked()
+        if path.endswith(".py")
+        and "/tests/" not in path
+        and "event" in path.lower()
+        and "compos" in path.lower()
+    ]
+    assert (
+        not event_composers
+    ), f"an event-driven composer now exists: {event_composers}; COMP-04 is driven"

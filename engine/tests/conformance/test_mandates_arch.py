@@ -948,3 +948,88 @@ def test_rule_resolution_is_absent_although_rules_are_declared() -> None:
     assert (
         not resolvers
     ), f"a rule resolver now exists: {resolvers}; ARCH-DISCF/DF-09 must be re-tiered"
+
+
+# --- ARCH-ASSUR — the eight assurance domains -----------------------------------
+#
+# Universal Assurance names eight domains. All eight are located, which makes this the
+# second fully-answered section in the corpus -- and as with MI-009, "all located" is the
+# claim a sweep produces by accident, so the eight must resolve to eight DISTINCT owners.
+#
+# Assurance is not validation: the Quality & Trust Fabric lists them as siblings. An
+# assurance domain answers "is this kind of thing sound", and a validation answers "does
+# this instance meet its declared shape". The two tiers below keep that apart by requiring
+# each assurance owner to be an authority or a programme, never a single check.
+
+ASSURANCE_OWNER = {
+    "ARCH-ASSUR/AS-01": "engine/uckp/law.py",  # Constitutional Assurance
+    "ARCH-ASSUR/AS-02": "engine/knowledge/ukip/validation.py",  # Knowledge Assurance
+    # Engineering Assurance
+    "ARCH-ASSUR/AS-04": "00-MASTER/UCOS-EG-001/01-ENGINEERING-GOVERNANCE-CONSTITUTION.md",
+    "ARCH-ASSUR/AS-05": "platform/runtime_operations",  # Runtime Assurance
+    # Security Assurance
+    "ARCH-ASSUR/AS-06": "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md",
+    "ARCH-ASSUR/AS-07": "platform/commercial_intelligence/validation.py",  # Commercial Assurance
+    "ARCH-ASSUR/AS-08": "00-MASTER/UEI-000001/uei.json",  # Evolution Assurance
+}
+
+
+#: Architecture is the one domain where assurance and validation resolve to the SAME
+#: instrument. `UAIE-000001` derives architectural intelligence and is what ARCH-VALID/VL-04
+#: names for Architecture Validation too. The fabric lists the two as siblings and this
+#: repository does not distinguish them, which is a finding about the repository rather than
+#: a mapping error -- recorded here instead of being papered over with a second owner chosen
+#: to satisfy a tier rule.
+ASSURANCE_SHARED_WITH_VALIDATION = {
+    "ARCH-ASSUR/AS-03": "00-MASTER/UAIE-000001/uaie.json",  # Architecture Assurance
+}
+
+
+def test_every_assurance_domain_is_owned() -> None:
+    mandates = section("ARCH-ASSUR")
+    assert len(mandates) == 8, f"the fabric lists 8 assurance domains, corpus has {len(mandates)}"
+    assert_partitions("ARCH-ASSUR", mandates, ASSURANCE_OWNER, ASSURANCE_SHARED_WITH_VALIDATION)
+    assert_homes_exist("ARCH-ASSUR", ASSURANCE_OWNER)
+    assert_homes_exist("ARCH-ASSUR", ASSURANCE_SHARED_WITH_VALIDATION)
+
+
+def test_the_eight_domains_are_eight_distinct_owners() -> None:
+    """NON-VACUITY for a fully-answered section, the same guard MI-009 needs. Eight mandates
+    resolving to fewer than eight owners would make the completeness an artefact of the
+    mapping rather than of the repository."""
+    homes = list(ASSURANCE_OWNER.values()) + list(ASSURANCE_SHARED_WITH_VALIDATION.values())
+    duplicated = sorted({h for h in homes if homes.count(h) > 1})
+    assert not duplicated, f"one owner claimed for several assurance domains: {duplicated}"
+    assert len(set(homes)) == 8
+
+
+def test_no_assurance_owner_is_one_of_the_validations() -> None:
+    """The distinction the fabric draws, asserted. Assurance and Validation are siblings in
+    the diagram: assurance asks whether a KIND of thing is sound, validation whether an
+    INSTANCE meets its shape. An assurance domain owned by a single validation instrument
+    would collapse the two."""
+    validations = set(VALIDATION_INSTRUMENT.values())
+    overlap = sorted(set(ASSURANCE_OWNER.values()) & validations)
+    assert not overlap, (
+        f"these assurance domains are owned by a validation instrument: {overlap}; the "
+        "fabric lists assurance and validation as siblings, not as one"
+    )
+
+    # The one domain that DOES share, named rather than hidden. The first draft put it in
+    # the tier above and this assertion refused it, which is the tier rule working.
+    shared = sorted(set(ASSURANCE_SHARED_WITH_VALIDATION.values()) & validations)
+    assert shared == ["00-MASTER/UAIE-000001/uaie.json"], (
+        f"the assurance/validation overlap changed: {shared}. Architecture was the only "
+        "domain this repository does not separate; a new overlap needs reading, not tiering."
+    )
+
+
+def test_constitutional_assurance_is_the_root_law_and_nothing_smaller() -> None:
+    """AS-01 is the assurance every other domain derives under, so it can only be owned by
+    the supreme authority -- an assurance of the constitution owned by a subordinate
+    instrument would be a subordinate checking its own superior."""
+    from engine.uckp.law import ROOT_LAW
+
+    assert ASSURANCE_OWNER["ARCH-ASSUR/AS-01"] == "engine/uckp/law.py"
+    assert ROOT_LAW.law_id == "UCKP-LAW-0001"
+    assert ROOT_LAW.supremacy, "the root law no longer declares supremacy"
