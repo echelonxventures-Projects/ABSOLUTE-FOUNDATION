@@ -289,6 +289,66 @@
       "admission": "Append the field name here and in phase2_recon.py's identical set, when a generated input introduces a new way of carrying its commit anchor. No amendment and no gate change: this is data about how two files are shaped, and a fourth shape is one line. The cost of getting it wrong is visible rather than silent — an unstripped anchor makes the recorded digest move on every commit, which is the defect this set was introduced to close.",
       "intentional": true,
       "$what_it_is": "the fields a generated input carries that move on their own"
+    },
+    {
+      "id": "ISD-CE-16",
+      "enumeration": "DEFAULT_CLASS",
+      "declared_at": "00-BOOK/tools/config.py",
+      "population": 3,
+      "closing_invariant": "UMB-IMP-001 / GOV-005 §5.2 — one fixed positional triple (program OTHER, category MISC, volume VOL-000) returned by ukb.py::classify when no curated CLASSIFY_RULES rule matches and no front-matter metadata declares a class. It is not a vocabulary that grows with the corpus: the deterministic path-derived catch-all (_derive_class_from_path) exists for the sole purpose of making this triple unreachable, and ukb.py:575 records it as the OTHER/MISC dead-end. An artifact that reaches it is a classification failure the classification gate reports, so membership is bounded by the fallback contract and not by the tree.",
+      "admission": "A new fallback shape is a change to the classifier contract rather than an appended member: edit the triple in 00-BOOK/tools/config.py and re-run ukb.py build. The module header declares it DATA ONLY, the triple is read positionally at ukb.py:2062 and ukb.py:2082, and every existing Universal ID is path-keyed so no identifier is renumbered.",
+      "intentional": true,
+      "$what_it_is": "the class an artifact takes when nothing classifies it"
+    },
+    {
+      "id": "ISD-CE-17",
+      "enumeration": "EXCLUDE_DIR_PREFIXES",
+      "declared_at": "00-BOOK/tools/config.py",
+      "population": 17,
+      "closing_invariant": "REG-AUTO-001 / UMB-IMP-001 — the corpus-internal prefix list ukb.py applies ON TOP of the version-control boundary (ukb.py:829) so the registry never lists its own machinery or its own generated outputs. Membership is bounded by what the generator emits, not by what the corpus contains: the entries are the generator's own tooling, its DATA/REGISTRIES/CONTROL-TOWER/VOLUMES/PORTAL outputs, operational memory (UCOS-RECON-C1) and the generated projections emitted outside 00-BOOK. Exclusion is append-only-safe — an identifier already allocated to a now-excluded path is RETAINED-BUT-RETIRED in the id-ledger, never renumbered and never reused (config.py:880).",
+      "admission": "Append the prefix when a new generated-output tree or operational-memory root appears, and re-run ukb.py build. Data alone: the list is read at registration time via startswith() (ukb.py:815) and no engine or schema change is involved. Three readers must stay aligned — this list, .gitignore and 00-BOOK/DATA/generated-artifact-registry.json — and platform/tests/test_generated_artifact_registry.py asserts the alignment.",
+      "intentional": true,
+      "$what_it_is": "the trees the generator must not register"
+    },
+    {
+      "id": "ISD-CE-18",
+      "enumeration": "INCLUDE_EXTENSIONS",
+      "declared_at": "00-BOOK/tools/config.py",
+      "population": 4,
+      "closing_invariant": "REG-AUTO-001 — the eligible-type boundary of REPOSITORY_ARTIFACT_DEFINITION: a version-controlled corpus file is an artifact iff its extension is in this tuple (ukb.py:799, ukb.py:817, ukb.py:847). Four members because four is what the corpus actually writes prose, plain text, Word and JSON in; widening it admits a new file CLASS into the id-ledger, so membership is a statement about what the corpus is rather than a list of conveniences.",
+      "admission": "Append the extension and re-run ukb.py build. Data alone: read at eligibility time via endswith(); no engine change, no schema change, and allocate() is path-keyed so existing identifiers are untouched. The twin declaration lives in engine/enforcement_closure/model.py, which restates the same tuple for the enforcement plane.",
+      "intentional": true,
+      "$what_it_is": "the file types the corpus registers"
+    },
+    {
+      "id": "ISD-CE-19",
+      "enumeration": "ENFORCEMENT_GATES",
+      "declared_at": "00-BOOK/tools/config.py",
+      "population": 4,
+      "closing_invariant": "REG-AUTO-001 §16 / UMB-IMP-001 — the ordered fail-fast chain that makes Artifact Creation = Artifact Registration: eligibility, validity, classification, registration. Order is significant and the four are the complete chain; a fifth gate is a new step in the enforcement contract rather than another entry in a list, and the classification gate is the same gate that reports an artifact falling to DEFAULT_CLASS (ukb.py:2085).",
+      "admission": "Append the gate in order and implement it in ukb.py::cmd_enforce, where the mechanism lives (config.py:1035). The chain is emitted into the enforcement audit record (ukb.py:2137), so a declared gate with no implementation is visible rather than silent.",
+      "intentional": true,
+      "$what_it_is": "the gates an artifact must pass to be committed"
+    },
+    {
+      "id": "ISD-CE-20",
+      "enumeration": "RELATIONSHIP_REF_SEPARATORS",
+      "declared_at": "00-BOOK/tools/config.py",
+      "population": 3,
+      "closing_invariant": "UMB-IMP-002 — the punctuation the traceability-spine reference parser treats as a boundary between native identifiers (ukb.py:235). Three members because three is what a reference cell uses: semicolon, comma and the middle dot. The parser hard-codes no artifact: it recognises the UCOS native-ID SHAPE only and resolves each fragment against the live registry (config.py:1165), so this set is the parser's punctuation rather than its vocabulary.",
+      "admission": "Append the separator character and re-parse. Data alone: the tuple feeds re.split at ukb.py:235 and re-derives its alternation on each run; no identifier changes, because resolution is against the registry and not against this list.",
+      "intentional": true,
+      "$what_it_is": "how a reference cell separates the identifiers it names"
+    },
+    {
+      "id": "ISD-CE-21",
+      "enumeration": "RELATIONSHIP_NULL_TOKENS",
+      "declared_at": "00-BOOK/tools/config.py",
+      "population": 6,
+      "closing_invariant": "UMB-IMP-002 — the spellings of an empty reference the parser must recognise before it can distinguish an absent reference from a malformed one (ukb.py:196). Six members because six is what the corpus writes when a cell means nothing: NONE, N/A, the em dash, a bare hyphen, TBD and the empty string. Closure is what makes the distinction decidable: an open set of null spellings is a set in which every malformed reference is silently read as null.",
+      "admission": "Append the token and re-parse. Data alone: read by membership test at ukb.py:196; no engine change and no schema change, and the traceability graph is re-derived from the corpus on each build.",
+      "intentional": true,
+      "$what_it_is": "how a reference cell says it names nothing"
     }
   ],
   "$disclosure_completeness": "This list is itself open: it enumerates the closed enumerations located at baseline bb9c27d2 and is extended by appending an entry. ISD-L-01 measures that each entry names a closing invariant and an admission path, not that the list is exhaustive — a claim of exhaustiveness would be the very finite assumption the principle prohibits.",
