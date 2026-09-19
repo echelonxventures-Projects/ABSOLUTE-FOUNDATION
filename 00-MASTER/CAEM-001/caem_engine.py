@@ -135,13 +135,12 @@ def named_for(label: str, files: list[str]) -> list[str]:
     words = {w.rstrip("s") for w in norm(label).replace("-", " ").split()}
     if not words:
         return []
-    return [
-        f for f in files
-        if f.endswith(CODE_EXT) and words <= _path_words(f)
-    ]
+    return [f for f in files if f.endswith(CODE_EXT) and words <= _path_words(f)]
 
 
-def classify(label: str, hits: int, kinds: dict, anchored: bool, owned: list[str] | None = None) -> str:
+def classify(
+    label: str, hits: int, kinds: dict, anchored: bool, owned: list[str] | None = None
+) -> str:
     """Seven outcomes, each a different KIND of knowledge or ignorance.
 
     ANCHORED is the one that carries the weight. A bare word like `Governance` occurs in
@@ -833,8 +832,13 @@ def render(data: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def gate(data: dict) -> int:
-    """Fail closed. Each check refuses a way this register could quietly become false."""
+def gate(data: dict, *, quiet: bool = False) -> int:
+    """Fail closed. Each check refuses a way this register could quietly become false.
+
+    ``quiet`` suppresses only the passing banner. Failures always print, so a green run
+    stays quiet in the certification log while a refusing one still names itself — the
+    same contract every other gate engine in this repository honours with the same flag.
+    """
     corpus = json.loads(CORPUS.read_text(encoding="utf-8"))
     concepts = data["concepts"]
     failures: list[str] = []
@@ -879,6 +883,8 @@ def gate(data: dict) -> int:
     if failures:
         print(f"GATE FAILED — {len(failures)} blocking finding(s).")
         return 1
+    if quiet:
+        return 0
     print(f"  [PASS] CAEM-INV-01 EVERY_MANDATE_DISPOSITIONED  (measured={len(declared)})")
     print(f"  [PASS] CAEM-INV-02 NO_MANDATE_INVENTED          (measured={len(carried)})")
     print(f"  [PASS] CAEM-INV-03 EVERY_DISPOSITION_DECLARED   (measured={len(concepts)})")
@@ -901,6 +907,11 @@ def main() -> int:
     )
     parser.add_argument("--render", action="store_true", help="render output 08 from 07")
     parser.add_argument("--gate", action="store_true", help="fail-closed invariant checks")
+    parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help="suppress the passing banner; a refusing gate still prints",
+    )
     parser.add_argument("--workers", type=int, default=12)
     args = parser.parse_args()
 
@@ -933,7 +944,7 @@ def main() -> int:
         print(f"wrote {REGISTER.relative_to(REPO)}")
 
     if args.gate:
-        return gate(data)
+        return gate(data, quiet=args.quiet)
     return 0
 
 

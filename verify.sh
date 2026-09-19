@@ -944,6 +944,41 @@ run_stage "universal recursive knowledge foundation (URKE-000001, every unknown 
 run_stage "mutation governance boundary decidability (EX-018, every classification rule implemented, reachable and claiming subjects)" \
   "$PY" -m platform.repository_intelligence.mutation_gate --gate --quiet
 
+# --- Stage 6m (MAIN): mandate disposition closure (CAEM-001) ----------------------
+# THE MEASUREMENT THAT PROVED THE INSTRUMENTS WERE LYING, AND THEN RAN NOTHING. This
+# engine is what found the thirty concepts the disposition register reported as
+# implemented while the conformance suites proved them absent: IMPLEMENTED now requires
+# a code file whose PATH names the concept word for word. It discharges all 1,449
+# mandates across six source documents to one of seven dispositions, and it sat invoked
+# by nothing — no Makefile target, no workflow, no stage here, and no row in UEC-000001's
+# governed inventory. A protection nothing invokes is indistinguishable from a protection
+# that does not exist, which is the observable state UEC-L-04 exists to refuse.
+#
+# WHAT IT MEASURES. Four fail-closed invariants over the committed register, not the
+# corpus: CAEM-INV-01 every one of the 1,449 mandates carries a disposition;
+# CAEM-INV-02 the register invents no mandate the corpus does not hold; CAEM-INV-03 every
+# disposition is one the register declares; CAEM-INV-04 every disposition naming an owner
+# names a file that exists. The slow half — --measure, ~5k repository greps that WRITE the
+# register — is an explicit regeneration, never a stage, because a stage that writes the
+# artifact it measures cannot drift from it and cannot be satisfied by regenerating its
+# own expectation. The stage reads what --measure produced and refuses if the two disagree.
+#
+# WHY IT BELONGS IN THE CONTRACT AND NOT BEHIND A FLAG. The register is committed state
+# derived from the corpus, so a mandate added without re-running --measure is drift this
+# stage detects at the next commit rather than at the next programme audit. It costs 0.07s
+# and reads no clock, no network and no environment.
+#
+# TWO OTHER PLANES INVOKE THE SAME GATE — `make caem-gate` — as UEC-L-06 requires; with
+# two, deleting either leaves a signal rather than silently unbinding 1,449 dispositions.
+# Removing this line now fails UEC-L-02 and UEC-L-04 rather than passing unnoticed.
+#
+# OBSERVE MODE. Reads the corpus and the committed register; writes nothing, takes no
+# clock and no subprocess. Exit 1 means an invariant was measured and refused; exit 2
+# means the register was absent so no verdict could be reached — deliberately a different
+# answer, because a missing register is a regeneration debt and not a compliance verdict.
+run_stage "mandate disposition closure (CAEM-001, every mandate disposed and no disposition invented)" \
+  "$PY" 00-MASTER/CAEM-001/caem_engine.py --gate --quiet
+
 # --- Stage 7 (POST): coverage report (explicit coverage tool invocation) ---------
 # The pytest stage already produced .coverage + coverage.xml; re-summarize with the
 # coverage CLI to prove the coverage tool itself resolves and to surface the total.

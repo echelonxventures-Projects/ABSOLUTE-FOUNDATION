@@ -2442,6 +2442,41 @@ mutation-json: bootstrap-quiet
 
 
 # ===========================================================================
+# CAEM-001 — Mandate disposition closure.
+#
+# THE MEASUREMENT THAT PROVED THE DISPOSITION INSTRUMENT WAS LYING, AND THEN RAN
+# NOTHING. caem_engine.py is what found the thirty concepts the register reported as
+# IMPLEMENTED while the conformance suites proved them absent — substring collisions
+# made `vr` inside `srv` and `web` inside `webhook` read as owners. It discharges all
+# 1,449 mandates across six source documents to one of seven dispositions, and it sat
+# invoked by no plane: a protection outside UEC-000001's governed inventory is one
+# nothing knows it depends on (UEC-L-03), and a protection nothing invokes is one that
+# cannot have refused anything (UEC-L-04).
+#
+# TWO PLANES, ONE COMMAND. This target and the ./verify.sh stage run identical argv, so
+# they measure one thing rather than two; deleting either leaves the other still
+# refusing, which is what UEC-L-06 requires. The slow half — `make caem-measure`, ~5k
+# repository greps that WRITE 07-MANDATE-DISPOSITION.json — is an explicit regeneration
+# and never a gate, because a gate that writes the artifact it measures cannot drift
+# from it.
+# ===========================================================================
+.PHONY: caem-gate caem-measure
+
+# caem-gate: fail-closed over the committed register. The same command ./verify.sh runs
+# as its mandate disposition closure stage.
+caem-gate: bootstrap-quiet
+	@$(PY) 00-MASTER/CAEM-001/caem_engine.py --gate --quiet \
+	  || { echo "CAEM GATE CLOSED — every mandate must carry a disposition; run 'make caem-measure'" >&2; exit 1; }
+	@echo "caem-gate: every mandate disposed and no disposition invented"
+
+# caem-measure: regenerate 07-MANDATE-DISPOSITION.json from the corpus. Slow (~5k greps)
+# and writes; run it when a mandate or an owner changes, then commit the register.
+caem-measure: bootstrap-quiet
+	@$(PY) 00-MASTER/CAEM-001/caem_engine.py --measure
+	@$(PY) 00-MASTER/CAEM-001/caem_engine.py --render
+
+
+# ===========================================================================
 # UCI-000001 — Universal Certification Integrity.
 #
 # WHAT THIS PROGRAMME MEASURES, AND WHY IT DID NOT EXIST BEFORE.

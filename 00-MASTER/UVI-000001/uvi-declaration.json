@@ -912,6 +912,28 @@
         "$not_reusable": "EX-018 measures that every classification rule is implemented, reachable and claims subjects. Reachability and subject-claiming are properties of the tracked corpus, so a key naming the classifier would not cover the classified."
       },
       {
+        "depends_on": [],
+        "id": "mandate-disposition-closure",
+        "label": "mandate disposition closure (CAEM-001, every mandate disposed and no disposition invented)",
+        "modes": [
+          "change",
+          "integration",
+          "full"
+        ],
+        "owner": "CAEM-001",
+        "phase": "MAIN",
+        "plane": "READ_ONLY",
+        "read_set": [
+          "**"
+        ],
+        "reusable": false,
+        "shardable": false,
+        "$not_reusable": "The verdict is a function of the WHOLE tracked tree, not of any prefix set. CAEM-INV-04 requires that every disposition naming an owner resolves to a file that exists, and IMPLEMENTED is decided by a path-word test over the code files a concept's owners live in -- so a change anywhere in the repository can move a concept between PARTIAL and IMPLEMENTED without touching the register. A reuse key computed from the register alone would be reused across exactly the change that mattered. Same construction as the universal-enforcement-closure stage, and for the same reason. The stage costs 0.07s, so paying it on every run is cheaper than arguing a narrower key.",
+        "$read_set": "The mandate corpus, the committed disposition register and this capability's own source. The stage additionally greps the whole tree to confirm that every owner a disposition names still exists, and that is deliberately declared as '**' rather than enumerated: UVI-L-11 requires each declared prefix to resolve to a registered object, and 00-MASTER/ is outside the registration boundary by construction, so naming it would fault the law that keeps read-sets honest. '**' is the honest declaration of a whole-tree subject, the same one the omega stage uses.",
+        "$phase": "MAIN rather than POST. It reads the committed register, not any artifact the pytest stage writes, so it has no data dependency on the tests -- which is what lets it run concurrently with every other MAIN gate.",
+        "$modes": "Admitted by change, integration and full and excluded from fast. Its subject is the committed disposition register derived from the whole corpus, so a selection-based run that skipped it could add an undispositioned mandate and report success. Fast runs lint and test only, and carry no claim about mandates."
+      },
+      {
         "$modes": "Excluded from fast and change because those modes run --no-cov: there is no coverage data to summarise and a stale total is worse than none.",
         "depends_on": [
           "pytest"
