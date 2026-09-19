@@ -481,7 +481,6 @@ def test_a_traceability_stage_carried_as_a_bare_string_adds_no_references(engine
     The projection must skip str and bytes: without the skip arm one hand-written string
     would inflate a real artifact's reference set to four invented ones.
     """
-    from platform.universal_control_plane.truth import RepositoryTruthEngine
 
     record = dict(FIXTURE_ARTIFACTS[0])
     record["universal_id"] = "UCOS-REG-STRACE-1"

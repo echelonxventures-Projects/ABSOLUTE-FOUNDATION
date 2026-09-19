@@ -504,8 +504,6 @@ def test_an_unreadable_declared_composition_is_a_fault_and_never_a_pass(capsys) 
 
 
 def test_an_unknown_command_is_refused_by_the_parser() -> None:
-    import pytest
-
     with pytest.raises(SystemExit):
         cli_main(["not-a-command"])
 

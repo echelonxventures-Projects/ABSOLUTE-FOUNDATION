@@ -128,8 +128,6 @@ def test_health_ignores_non_terminal_states_defensively(composition):
     # (unreachable in a normal terminal run — exercised by injecting 'pending').
     import dataclasses
 
-    from engine.runtime.execution.health import HEALTHY
-
     run = coordinate(composition)
     injected = dataclasses.replace(
         run,

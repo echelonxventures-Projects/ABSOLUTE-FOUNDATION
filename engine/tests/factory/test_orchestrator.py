@@ -89,7 +89,6 @@ def test_classification_prefers_registry_metadata(
 ):
     # When the blueprint id resolves to a registered artifact, its registry
     # metadata drives classification — even over the document's declared family.
-    import json
 
     from engine.factory import GenerationOrchestrator
     from engine.registry.adapter import RegistryAdapter

@@ -1762,7 +1762,6 @@ def test_observation_and_evidence_are_held_apart() -> None:
     of that separation is sharper: an observation may never enter canonical identity. If the
     two universes were one register, the chain from observation to truth would have no step
     in it."""
-    import json
 
     observation = json.loads(
         (repo_root() / TRUTH_STEP["UAKP-TRUTH/TR-01"]).read_text(encoding="utf-8")
@@ -1797,7 +1796,6 @@ def test_truth_is_revisable_and_this_register_is_the_demonstration() -> None:
     rejects. That is truth held revisably. A register that promoted rows to final
     automatically would satisfy the six steps above and contradict the seventh.
     """
-    import json
 
     disposition = json.loads(
         (repo_root() / "00-MASTER" / "CAEM-001" / "07-MANDATE-DISPOSITION.json").read_text(

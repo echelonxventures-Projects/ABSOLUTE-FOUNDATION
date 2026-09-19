@@ -1190,7 +1190,6 @@ def test_the_workload_rendering_prints_every_counted_section(capsys) -> None:
     open work; the renderer is exercised against one directly, exactly the shape the engine
     emits before ratification.
     """
-    from platform.universal_ownership.cli import _print_summary
 
     payload = {
         "counts": {

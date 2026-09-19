@@ -53,6 +53,19 @@ REPO = HERE.parent.parent
 PROGRAM = "CAEM-001"
 AUTHORITY = "NONE (DERIVED TRUTH)"
 
+# This engine is invoked as a script (verify.sh stage 6m, `make caem-gate`), so sys.path[0] is
+# its own directory and `engine` does not resolve. The repository root must lead the path before
+# the classifier below is importable -- the same insertion mcos_engine and lifecycle_closure_engine
+# perform. Guarded, so an already-imported caller (the test that loads this by path) is unaffected.
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+# Structured data is recognised by the classifier, never by the filename. ZX-02 refuses a new
+# `path.endswith(...)` decision: the type is derived through the four ordered rules with the
+# suffix consulted last, so renaming an artifact cannot change what it is.
+from engine.omega_infinite.artifact import DATASET, Artifact, Location  # noqa: E402
+from engine.omega_infinite.classification import default_pipeline  # noqa: E402
+
 CORPUS = HERE / "06-MANDATE-CORPUS.json"
 DISPOSITION = HERE / "07-MANDATE-DISPOSITION.json"
 REGISTER = HERE / "08-MANDATE-DISPOSITION-REGISTER.md"
@@ -323,6 +336,24 @@ def _file_text(path: str) -> str | None:
         return None
 
 
+#: The one classifier instance. Built once, reused for every scored file.
+_CLASSIFIER = default_pipeline()
+
+
+@lru_cache(maxsize=512)
+def _is_structured_data(path: str) -> bool:
+    """Whether `path` is serialised structured data, asked of the classifier and not the name.
+
+    The scored population is every tracked file that names a mandate, so this decides between a
+    key lookup and a prose scan. Asking the classifier keeps that decision out of the caller and
+    makes it follow the same four ordered rules every other consumer uses, with the suffix last.
+    The file text is the classifier's content evidence and is already cached by ``_file_text``;
+    where it is absent the suffix alone still answers, which is the case the caller returns before.
+    """
+    artifact = Artifact(identifier=path, location=Location(provider="filesystem", locator=path))
+    return _CLASSIFIER.classify(artifact, _file_text(path)).artifact_type == DATASET
+
+
 def owner_score(path: str, label: str) -> int:
     """How strongly does `path` OWN `label`, as opposed to merely mentioning it?
 
@@ -355,7 +386,7 @@ def owner_score(path: str, label: str) -> int:
         return score
     target = norm(label)
 
-    if path.endswith(".json"):
+    if _is_structured_data(path):
         if f'"{target}"' in lowered:
             score += 2
         else:

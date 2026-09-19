@@ -949,7 +949,6 @@ def test_the_measurement_gap_is_the_behavioural_one_arch_valid_already_found() -
     unmeasured. The overlap is not a coincidence -- you cannot validate what you do not
     measure -- so the two are asserted together and neither reads as a lone gap.
     """
-    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
     from engine.tests.conformance.test_mandates_arch import VALIDATION_ABSENT
 
     assert_named_by_nothing("LYR-L11", MEASUREMENT_ABSENT)
@@ -1138,7 +1137,6 @@ def test_product_is_refused_and_distribution_has_nothing_to_distribute() -> None
     is no transaction for a distribution to follow.
     """
     from engine.kernel.compliance import PROHIBITED_TOKENS
-    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
     from engine.tests.conformance.test_mandates_prd import ECONOMIC_FACULTY_ABSENT
 
     assert "product" in PROHIBITED_TOKENS

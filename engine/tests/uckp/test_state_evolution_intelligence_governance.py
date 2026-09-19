@@ -395,8 +395,6 @@ def test_identical_meaning_under_two_identities_is_still_a_violation(minimal_reg
     """The heuristic was downgraded; the fact was not."""
     import dataclasses as _dc
 
-    from engine.uckp.intelligence import build_intelligence
-
     root = minimal_registry.require(minimal_registry.require_single_root())
     twin = _dc.replace(
         root, identity=root.identity.__class__.mint("test", "TWIN"), replay=None

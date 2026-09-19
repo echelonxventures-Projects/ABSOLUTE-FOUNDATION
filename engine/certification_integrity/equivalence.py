@@ -272,7 +272,6 @@ def shard_equivalence(
     Runs the whole suite once, then the same suite split ``shards`` ways with one coverage data
     file per shard, combines them with ``coverage combine`` and compares the two line sets.
     """
-    from engine.certification_integrity import immutable
     from engine.certification_integrity import surface as surface_module
 
     finding = EquivalenceFinding(

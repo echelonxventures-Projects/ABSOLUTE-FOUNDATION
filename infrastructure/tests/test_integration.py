@@ -245,7 +245,6 @@ def test_duplicated_meta_class_ownership_is_reported_by_the_disjointness_check()
     The shipped registry is disjoint, so the refusal arm is forced — a check that only
     ever answers True has not been shown to see a collision.
     """
-    import pytest
 
     from infrastructure import integration_meta as meta
 

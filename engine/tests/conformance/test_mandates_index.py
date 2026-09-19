@@ -1361,7 +1361,6 @@ def test_design_is_mandated_by_three_documents_and_performed_by_nothing() -> Non
     architecture generator that emits a description of what was decided, and no stage where
     the deciding happens. If a design instrument ever lands, all three rows move together.
     """
-    from engine.tests.conformance.mandate_corpus import assert_named_by_nothing
 
     assert_named_by_nothing("MI-remainder", MASTER_INDEX_ABSENT)
     design_rows = [m for m, concept in MASTER_INDEX_ABSENT.items() if concept == "design"]

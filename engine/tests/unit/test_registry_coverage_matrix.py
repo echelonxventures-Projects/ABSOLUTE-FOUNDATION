@@ -514,7 +514,6 @@ def test_a_list_populated_registry_is_projected_whole(declarations, tmp_path) ->
     The build path reads both; the list arm had never fired, so a plane that records
     ``[{"path": ...}, ...]`` would have registered as holding nothing while holding all.
     """
-    import json
 
     repo = tmp_path / "listy"
     os.makedirs(repo / "registries")

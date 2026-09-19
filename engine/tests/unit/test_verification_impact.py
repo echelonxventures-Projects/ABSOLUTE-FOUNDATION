@@ -491,8 +491,6 @@ def _scratch_repo(tmp_path):
 
 
 def test_explicit_base_diffs_against_it(scratch_repo) -> None:
-    from engine.verification_impact.changes import changed_paths
-
     root, git = scratch_repo
     (root / "b.py").write_text("y = 2\n")
     git("add", "b.py")
@@ -501,8 +499,6 @@ def test_explicit_base_diffs_against_it(scratch_repo) -> None:
 
 
 def test_working_tree_changes_include_staged_unstaged_and_untracked(scratch_repo) -> None:
-    from engine.verification_impact.changes import working_tree_changes
-
     root, git = scratch_repo
     (root / "a.py").write_text("x = 2\n")  # unstaged modification
     (root / "staged.py").write_text("z = 3\n")
@@ -513,16 +509,12 @@ def test_working_tree_changes_include_staged_unstaged_and_untracked(scratch_repo
 
 
 def test_working_tree_changes_take_priority_over_history(scratch_repo) -> None:
-    from engine.verification_impact.changes import changed_paths
-
     root, _ = scratch_repo
     (root / "dirty.py").write_text("d = 1\n")
     assert changed_paths(root=str(root)) == ("dirty.py",)
 
 
 def test_head_parent_is_used_when_the_tree_is_clean(scratch_repo) -> None:
-    from engine.verification_impact.changes import changed_paths
-
     root, git = scratch_repo
     (root / "c.py").write_text("c = 1\n")
     git("add", "c.py")
@@ -534,7 +526,6 @@ def test_a_clean_single_commit_repo_refuses_rather_than_reporting_nothing(
     scratch_repo,
 ) -> None:
     """The dangerous case: no base, clean tree. Must raise, never return ()."""
-    from engine.verification_impact.changes import changed_paths
 
     root, _ = scratch_repo  # one commit, no HEAD^, no upstream, clean
     with pytest.raises(ImpactError, match="no diff base could be resolved"):
@@ -542,14 +533,10 @@ def test_a_clean_single_commit_repo_refuses_rather_than_reporting_nothing(
 
 
 def test_working_tree_changes_outside_a_repository_returns_empty(tmp_path) -> None:
-    from engine.verification_impact.changes import working_tree_changes
-
     assert working_tree_changes(root=str(tmp_path)) == ()
 
 
 def test_changed_paths_outside_a_repository_refuses(tmp_path) -> None:
-    from engine.verification_impact.changes import changed_paths
-
     with pytest.raises(ImpactError):
         changed_paths(root=str(tmp_path))
 
@@ -587,7 +574,6 @@ def _assert_unescaped(paths) -> None:
 
 def test_a_non_ascii_changed_file_is_detected_under_its_real_path(scratch_repo) -> None:
     """A — unstaged non-ASCII change reaches the selector as `UCOS-Ω∞-DOC.md`."""
-    from engine.verification_impact.changes import working_tree_changes
 
     root, git = scratch_repo
     (root / OMEGA_DOC).write_text("# first\n", encoding="utf-8")
@@ -602,7 +588,6 @@ def test_a_non_ascii_changed_file_is_detected_under_its_real_path(scratch_repo) 
 
 def test_a_staged_non_ascii_file_is_detected_under_its_real_path(scratch_repo) -> None:
     """B — the `--cached` branch, which is the pre-commit reality."""
-    from engine.verification_impact.changes import working_tree_changes
 
     root, git = scratch_repo
     (root / OMEGA_MODULE).write_text("y = 1\n", encoding="utf-8")
@@ -615,7 +600,6 @@ def test_a_staged_non_ascii_file_is_detected_under_its_real_path(scratch_repo) -
 
 def test_an_untracked_non_ascii_file_is_detected_under_its_real_path(scratch_repo) -> None:
     """C — the `ls-files --others` branch."""
-    from engine.verification_impact.changes import working_tree_changes
 
     root, _ = scratch_repo
     (root / OMEGA_NEW).write_text("# new\n", encoding="utf-8")
@@ -633,7 +617,6 @@ def test_a_non_ascii_path_survives_every_diff_base_branch(scratch_repo) -> None:
     unsafe way. A fix covering only the working tree would leave CI — which supplies a
     base — still reading escaped names.
     """
-    from engine.verification_impact.changes import changed_paths
 
     root, git = scratch_repo
     (root / OMEGA_MODULE).write_text("y = 1\n", encoding="utf-8")
@@ -652,7 +635,6 @@ def test_a_non_ascii_path_survives_every_diff_base_branch(scratch_repo) -> None:
 
 def test_ascii_change_detection_is_unchanged(scratch_repo) -> None:
     """D — the correction is path spelling only; ASCII behaviour must be identical."""
-    from engine.verification_impact.changes import changed_paths, working_tree_changes
 
     root, git = scratch_repo
     (root / "a.py").write_text("x = 2\n", encoding="utf-8")
