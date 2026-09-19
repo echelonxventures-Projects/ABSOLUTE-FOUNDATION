@@ -312,3 +312,21 @@ coverage_gap_inventory.json
 **/.claude/agent-memory-local
 **/.claude/first-run
 **/.claude/assistant-daemon-state.json
+
+# ---------------------------------------------------------------------------
+# .kilo/ — the Kiro IDE's per-clone operational state.
+#
+# Same class and same reasoning as the .claude runtime state above: worktrees it
+# materialises, agent-manager state, lockfiles. None of it is repository truth, none
+# of it is shared, none of it is reproducible across machines — TOOL_OPERATIONAL.
+#
+# WHY THE DIRECTORY AND NOT JUST THE WORKTREES. `.kilo/worktrees/` was already covered
+# by .git/info/exclude, but the context gate (INV-CTX-12) tests the top-level directory
+# itself with `git check-ignore -q .kilo`. A rule covering only the subtree leaves the
+# root un-ignored, so the gate walked the tree, found instruction-shaped .md files inside
+# the worktree copy, and failed closed on an undeclared agent surface. Matching the
+# directory is what makes the exclusion register's existing classification visible to
+# the discovery leg that looks for it.
+# ---------------------------------------------------------------------------
+.kilo/
+

@@ -99,7 +99,49 @@ def is_assertion(label: str) -> bool:
     return any(m in f" {n} " for m in NEG)
 
 
-def classify(label: str, hits: int, kinds: dict, anchored: bool) -> str:
+def _path_words(path: str) -> set[str]:
+    """The words a path is made of, singularised.
+
+    A concept is OWNED by a path only when the path carries every word of the concept as a
+    WORD, not as a substring. `vr` occurs inside `srv`, `over`, and `vrm`, so a substring
+    test reports seven owners for a concept nothing owns; `web` occurs inside `webhook` and
+    `network`. The same rule the conformance suites use in `assert_named_by_nothing` —
+    splitting the path into words and comparing word to word — because it is the only form
+    under which an absence claim can be falsified in either direction.
+    """
+    word = ""
+    words: set[str] = set()
+    for char in path.lower():
+        if char.isalnum():
+            word += char
+        elif word:
+            words.add(word.rstrip("s"))
+            word = ""
+    if word:
+        words.add(word.rstrip("s"))
+    return words
+
+
+def named_for(label: str, files: list[str]) -> list[str]:
+    """The code files whose PATH names the concept, word for word.
+
+    This is the ownership test `classify` rests IMPLEMENTED on. Counting files that merely
+    CONTAIN the token inflates implementation: substring collisions and incidental mentions
+    read as owners. Measured against the conformance suites, that inflation moved 30
+    concepts the suites prove ABSENT — web, voice, vr, billing, taxation and 25 others —
+    into IMPLEMENTED, and the register then reported them as paid while the executable
+    evidence said nothing carried them.
+    """
+    words = {w.rstrip("s") for w in norm(label).replace("-", " ").split()}
+    if not words:
+        return []
+    return [
+        f for f in files
+        if f.endswith(CODE_EXT) and words <= _path_words(f)
+    ]
+
+
+def classify(label: str, hits: int, kinds: dict, anchored: bool, owned: list[str] | None = None) -> str:
     """Seven outcomes, each a different KIND of knowledge or ignorance.
 
     ANCHORED is the one that carries the weight. A bare word like `Governance` occurs in
@@ -108,6 +150,12 @@ def classify(label: str, hits: int, kinds: dict, anchored: bool) -> str:
     established is whether the repository NAMES an owner for the concept — true, checkable,
     and honestly weaker than "implemented", so it gets its own status instead of being
     folded into one.
+
+    IMPLEMENTED requires the stronger test passed in as `owned`: a code file whose PATH
+    names the concept word-for-word. `kinds` counts files containing the token, and
+    containing is not owning — `vr` is inside `srv`, so a containment test pays thirty
+    concepts the conformance suites prove unowned. A concept with hits, tests and no
+    named owner is SPECIFIED with test coverage, not IMPLEMENTED.
     """
     if is_assertion(label):
         return "ASSERTION"
@@ -115,7 +163,7 @@ def classify(label: str, hits: int, kinds: dict, anchored: bool) -> str:
         return "ABSENT"
     if len(norm(label).split()) == 1 and hits > GENERIC_HITS:
         return "ANCHORED" if anchored else "UNDECIDABLE"
-    if kinds["code"] and (kinds["test"] or kinds["gate"]):
+    if owned and kinds["code"] and (kinds["test"] or kinds["gate"]):
         return "IMPLEMENTED"
     if kinds["code"]:
         return "PARTIAL"
@@ -436,9 +484,10 @@ def measure(workers: int = 12) -> dict:
             kinds = Counter(file_kind(f) for f in files)
             kinds = {k: kinds.get(k, 0) for k in ("code", "test", "gate", "decl", "doc")}
             anc = anchored(label, anchors, by_word)
+            owned = named_for(label, files)
             concepts[key] = {
                 "label": label,
-                "status": classify(label, len(files), kinds, anc),
+                "status": classify(label, len(files), kinds, anc, owned),
                 "mandates": [a["atom_id"] for a in by_label[key]],
                 "hits": len(files),
                 "anchored": anc,
@@ -451,6 +500,7 @@ def measure(workers: int = 12) -> dict:
                     "CONSTRUCT",
                 ),
                 "kinds": kinds,
+                "owned_code_files": owned,
                 "owner_files": owners_of_concept(label, files),
                 "code_files": [f for f in files if authority_rank(f) == 3][:4],
                 "gate_files": [f for f in files if authority_rank(f) == 4][:2],

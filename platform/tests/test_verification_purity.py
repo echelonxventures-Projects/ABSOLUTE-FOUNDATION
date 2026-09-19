@@ -53,6 +53,23 @@ def _git(*args: str) -> str:
     ).stdout
 
 
+def _git_ignores(rel: str) -> bool:
+    """True when the ignore authority covers this path.
+
+    The exclusion register classifies every ignored path, so an ignored file is governed
+    — just not by the filesystem walk that found it. Used to keep a purity scan reading
+    version control rather than whatever a tool materialised next to it.
+    """
+    return (
+        subprocess.run(  # noqa: S603 - fixed argv, no shell
+            ["git", "-C", str(REPO), "check-ignore", "-q", rel],  # noqa: S607
+            capture_output=True,
+            check=False,
+        ).returncode
+        == 0
+    )
+
+
 def _digest(path: Path) -> str:
     """Content digest of a state artifact, or a sentinel when absent."""
     if not path.exists():
@@ -126,6 +143,14 @@ def test_no_verification_path_invokes_the_minting_flag() -> None:
             continue
         rel = path.relative_to(REPO).as_posix()
         if rel.startswith((".ec1-venv/", ".git/")):
+            continue
+        # The filesystem is not Repository Truth. A tool may materialise a worktree copy
+        # of the whole tree under .kilo/worktrees/ — untracked, per-clone, TOOL_OPERATIONAL
+        # — and a raw rglob reads that copy as though it were a second repository file
+        # invoking --mint. The question this test actually asks is what the REPOSITORY
+        # invokes, which is the version-controlled set. Counting an ignored duplicate
+        # reports a violation in a file nobody owns, against a rule nobody wrote.
+        if _git_ignores(rel):
             continue
         source = path.read_text(encoding="utf-8", errors="ignore")
         if any(re.search(r"\bbuild\s+--mint\b", ln) for ln in _invocation_lines(source)):

@@ -378,6 +378,13 @@
       "rationale": "Per-developer operational state of the local agent runtime — the agent's own record of worktrees it created. Never shared, never repository truth, and never an input to canonical identity. Declared here because it was previously excluded ONLY by .git/info/exclude, which no clone carries: the path was ignored on one machine and untracked-and-unignored on every other. UCOS-UCTX-001 INV-CTX-12 walks agent directories ignored-inclusive and refuses an unclassified file, so the missing declaration made the context gate fail for a reason that had nothing to do with governance. Same class the register already assigns to settings.local.json; distinct from GENERATED_DETERMINISTIC because nothing produces these from a declared input and no command reproduces them."
     },
     {
+      "rule": ".kilo/",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "developer workstation",
+      "producer": "Kiro IDE",
+      "rationale": "Per-developer operational state of the Kiro IDE — worktrees it materialises under .kilo/worktrees/, agent-manager state and lockfiles. Never shared, never repository truth, never an input to canonical identity. Same defect and same fix as the .claude/worktrees/ entry directly above it: .kilo/worktrees/ was covered only by .git/info/exclude, which no clone carries, while the top-level .kilo/ directory matched no rule at all. UCOS-UCTX-001 INV-CTX-12 tests the directory itself with `git check-ignore -q .kilo`, so the un-ignored root was walked, instruction-shaped .md files inside the worktree copy were found, and the context gate refused on an undeclared agent surface (C-10) — closing the prerequisite-generation stage and with it ./verify.sh. Declaring the directory here and matching it in .gitignore makes the classification visible to the discovery leg. Distinct from GENERATED_DETERMINISTIC: nothing produces these from a declared input and no command reproduces them."
+    },
+    {
       "rule": "**/.claude/checkpoints/",
       "class": "TOOL_OPERATIONAL",
       "owner": "developer workstation",
