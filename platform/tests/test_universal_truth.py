@@ -24,9 +24,18 @@ from platform.universal_truth import (
     truth_service_descriptor,
 )
 from platform.universal_truth.cli import main as truth_main
-from platform.universal_truth.eligibility import CanonicalHomePolicy, EligibilityLedger
+from platform.universal_truth.eligibility import (
+    REASON_ELIGIBLE,
+    REASON_NOT_REGISTERED,
+    REASON_ZONE_INELIGIBLE,
+    CanonicalHomePolicy,
+    EligibilityLedger,
+    load_eligibility_ledger,
+    open_ledger,
+)
 from platform.universal_truth.errors import (
     TruthContractError,
+    TruthEligibilityError,
     TruthPolicyError,
     TruthProjectionError,
 )
@@ -588,3 +597,138 @@ def test_a_duplicate_or_unnameable_locator_is_counted_once() -> None:
             "eligible": verdicts[0].eligible,
             "reason": verdicts[0].reason,
         }
+
+
+# -- the composition: CanonicalHomePolicy ---------------------------------------
+
+
+def test_canonical_home_policy_rejects_a_non_policy() -> None:
+    """The composition guard fires on both sides: a policy is a policy, a ledger is a ledger."""
+    with pytest.raises(TruthEligibilityError):
+        CanonicalHomePolicy("not-a-policy")  # type: ignore[arg-type]
+    with pytest.raises(TruthEligibilityError):
+        CanonicalHomePolicy(default_truth_policy(), "not-a-ledger")  # type: ignore[arg-type]
+
+
+def test_canonical_home_policy_defaults_to_the_open_ledger() -> None:
+    """With no ledger declared, every zone-eligible locator may own — and says so honestly."""
+    composed = CanonicalHomePolicy(default_truth_policy())
+    assert composed.ledger.enforces_anything is False
+    # A canonical zone under the default policy admits its own locators.
+    assert composed.admits("00-BOOK/DATA/id-ledger.json") is True
+    assert composed.authority("00-BOOK/DATA/id-ledger.json") != ""
+
+
+def test_canonical_home_policy_zone_loses_before_the_ledger_is_asked() -> None:
+    """A non-owning class is refused by the zone alone; the ledger never gets a vote."""
+    policy = TruthPolicy([_zone("evid", "evidence", "04-EVIDENCE")])
+    composed = CanonicalHomePolicy(policy)
+    verdict = composed.verdict("04-EVIDENCE/anything.md")
+    assert verdict.eligible is False
+    assert verdict.reason == REASON_ZONE_INELIGIBLE
+    # A locator the zone never declares at all is also refused, not guessed about.
+    assert composed.authority("nowhere/x.md") == ""
+
+
+def test_canonical_home_policy_ledger_loses_after_the_zone_passes() -> None:
+    """A zone-eligible locator can still be refused by the artifact eligibility ledger."""
+    policy = TruthPolicy(
+        [
+            TruthZone.create(
+                "book",
+                "canonical",
+                [{"kind": "root", "value": "00-BOOK"}],
+                authority="UCKP-LAW-0001",
+                canonical_home_eligible=True,
+            )
+        ]
+    )
+    ledger = EligibilityLedger.create(require_registration=True, registered=("00-BOOK/known.json",))
+    composed = CanonicalHomePolicy(policy, ledger)
+
+    known = composed.verdict("00-BOOK/known.json")
+    unknown = composed.verdict("00-BOOK/other.json")
+    assert known.eligible is True
+    assert unknown.eligible is False
+    assert unknown.reason == REASON_NOT_REGISTERED
+
+
+def test_canonical_home_policy_triages_by_reason() -> None:
+    """by_reason groups a mixed population so each cause of refusal is visible on its own."""
+    policy = TruthPolicy(
+        [
+            TruthZone.create(
+                "book",
+                "canonical",
+                [{"kind": "root", "value": "00-BOOK"}],
+                authority="UCKP-LAW-0001",
+                canonical_home_eligible=True,
+            ),
+            _zone("evid", "evidence", "04-EVIDENCE"),
+        ]
+    )
+    ledger = EligibilityLedger.create(require_registration=True, registered=("00-BOOK/kept.md",))
+    composed = CanonicalHomePolicy(policy, ledger)
+
+    grouped = composed.by_reason(
+        ["00-BOOK/kept.md", "00-BOOK/dropped.md", "04-EVIDENCE/any.md", ""]
+    )
+    assert grouped[REASON_ELIGIBLE] == ["00-BOOK/kept.md"]
+    assert grouped[REASON_NOT_REGISTERED] == ["00-BOOK/dropped.md"]
+    assert grouped[REASON_ZONE_INELIGIBLE] == ["04-EVIDENCE/any.md"]
+    # The empty locator was dropped, not given a verdict about nothing.
+    assert "" not in grouped.get(REASON_ELIGIBLE, [])
+
+
+def test_canonical_home_policy_round_trips_and_is_stable() -> None:
+    """to_dict is a projection of both declarations and fingerprint is deterministic."""
+    policy = TruthPolicy(
+        [
+            TruthZone.create(
+                "book",
+                "canonical",
+                [{"kind": "root", "value": "00-BOOK"}],
+                authority="UCKP-LAW-0001",
+                canonical_home_eligible=True,
+            )
+        ]
+    )
+    ledger = EligibilityLedger.create(
+        require_registration=True, registered=("00-BOOK/a.md",), description="kept"
+    )
+    composed = CanonicalHomePolicy(policy, ledger)
+
+    projection = composed.to_dict()
+    assert (
+        projection["policy"]["zones"] and projection["eligibility"]["require_registration"] is True
+    )
+    assert composed.fingerprint() == CanonicalHomePolicy(policy, ledger).fingerprint()
+    assert composed.fingerprint() != CanonicalHomePolicy(policy, open_ledger()).fingerprint()
+
+
+def test_load_eligibility_ledger_fails_closed_on_bad_input(tmp_path: Path) -> None:
+    """An unreadable or malformed eligibility document is refused, never treated as open."""
+    missing = tmp_path / "nope.json"
+    with pytest.raises(TruthEligibilityError):
+        load_eligibility_ledger(missing)
+
+    malformed = tmp_path / "bad.json"
+    malformed.write_text("{not json", encoding="utf-8")
+    with pytest.raises(TruthEligibilityError):
+        load_eligibility_ledger(malformed)
+
+    wrong_shape = tmp_path / "wrong.json"
+    wrong_shape.write_text(json.dumps({"admitted_suffixes": "not-a-sequence"}), encoding="utf-8")
+    with pytest.raises(TruthEligibilityError):
+        load_eligibility_ledger(wrong_shape)
+
+
+def test_eligibility_ledger_reports_its_own_enforcement_state() -> None:
+    """A ledger states whether it imposes anything, which is how an open one is told apart."""
+    assert open_ledger().enforces_anything is False
+    assert EligibilityLedger.create(admitted_suffixes=(".json",)).enforces_anything is True
+
+    requiring = EligibilityLedger.create(require_registration=True, registered=("a.json",))
+    with pytest.raises(TruthEligibilityError):
+        EligibilityLedger.create(require_registration=True).verdict("a.json")
+    assert requiring.verdict("a.json").eligible is True
