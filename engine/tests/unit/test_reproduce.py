@@ -205,3 +205,41 @@ def test_double_build_strict_raises_on_divergence(compiler_registry, monkeypatch
     with pytest.raises(NonDeterministicOutputError) as exc:
         double_build("BP-DATA-0001", registry=compiler_registry, strict=True)
     assert exc.value.code == "DET-DIVERGENCE-001"
+
+
+# -- BC-2: initialization-independent detection ---------------------------------
+
+
+def test_double_build_shares_no_mutable_object_between_sides(compiler_registry):
+    """A2-1: the two builds must not share env or signer instances.
+
+    A single reused adapter or signer can carry state from the first build into
+    the second and mask an initialization-order dependence — the exact defect
+    this harness exists to detect. Each side constructs its own env and signer.
+    A caller-supplied ``registry`` is intentionally shared: it is a read-only
+    view of the corpus, and the harness must not silently open a second handle
+    to repository state the caller already owns.
+    """
+    import engine.determinism.reproduce as reproduce
+
+    seen: dict[str, list] = {"signer": [], "env": []}
+    real = reproduce._execute_build
+
+    def _recording(*, registry, signer, env, **kwargs):
+        # keep a reference: id() can be reused once the object is freed, which
+        # would make two distinct instances look like one shared instance.
+        seen["signer"].append(signer)
+        seen["env"].append(env)
+        return real(registry=registry, signer=signer, env=env, **kwargs)
+
+    mp = pytest.MonkeyPatch()
+    mp.setattr(reproduce, "_execute_build", _recording)
+    try:
+        double_build("BP-DATA-0001", registry=compiler_registry)
+    finally:
+        mp.undo()
+
+    assert len(seen["signer"]) == 2, "expected two signer instances, one per build"
+    assert seen["signer"][0] is not seen["signer"][1], "signer instance was shared across builds"
+    assert len(seen["env"]) == 2, "expected two env instances, one per build"
+    assert seen["env"][0] is not seen["env"][1], "env instance was shared across builds"

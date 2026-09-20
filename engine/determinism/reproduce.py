@@ -286,28 +286,31 @@ def double_build(
     env.verify_toolchain()
     resolver = provider if provider is not None else DirectoryBlueprintProvider()
     document = resolver.get(bp_id)
-    adapter = registry if registry is not None else RegistryAdapter.open()
-    signer = _make_signer(signing_key, key_ref)
+
+    def _isolated_build(side: str, out_dir: Path) -> Path:
+        """Build with env/adapter/signer constructed fresh for this side only.
+
+        BC-2: the two builds must share no mutable object. An adapter and a signer
+        carry their own state (handles, caches, key material), so a single instance
+        reused across env-a and env-b can leak state from the first build into the
+        second and mask exactly the initialization-order dependence this harness
+        exists to detect. Each side gets its own; the environment is frozen and
+        hashable, so it is re-derived rather than shared.
+        """
+        return _execute_build(
+            blueprint_id=bp_id,
+            document=document,
+            registry=registry if registry is not None else RegistryAdapter.open(),
+            signer=_make_signer(signing_key, key_ref),
+            output_dir=out_dir,
+            env=hermetic_env(),
+        )
 
     with trace("determinism.double_build", blueprint=bp_id):
         with tempfile.TemporaryDirectory(prefix="ec1-repro-") as root:
             base = Path(output_root) if output_root is not None else Path(root)
-            base_a = _execute_build(
-                blueprint_id=bp_id,
-                document=document,
-                registry=adapter,
-                signer=signer,
-                output_dir=base / "env-a",
-                env=env,
-            )
-            base_b = _execute_build(
-                blueprint_id=bp_id,
-                document=document,
-                registry=adapter,
-                signer=signer,
-                output_dir=base / "env-b",
-                env=env,
-            )
+            base_a = _isolated_build("a", base / "env-a")
+            base_b = _isolated_build("b", base / "env-b")
             artifact_id_a = json.loads((base_a / "artifact-record.json").read_text())["artifact_id"]
             artifact_id_b = json.loads((base_b / "artifact-record.json").read_text())["artifact_id"]
             diffs, category_identical = compare_builds(base_a, base_b)
