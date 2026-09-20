@@ -7,6 +7,7 @@
 | Mode | READ-ONLY STATUS REGISTER · **NO IMPLEMENTATION PERFORMED** |
 | Baseline commit (HEAD) | `bae59755d7e2d3566c93b89c722b68847145269a` |
 | Baseline branch | `integration/recovery-001` |
+| Re-measured at HEAD | `1d083f958f5eb7892166afc8c4ecafe8d233c189` (2026-09-20) — see §14 |
 | Companion plan | `UCOS-OMEGA-INFINITY-BLOCKER-CLOSURE-IMPLEMENTATION-PLAN.md` |
 | Source of blockers | `UCOS-OMEGA-INFINITY-UNIVERSAL-FOUNDATION-TRANSFORMATION-EXECUTION-READINESS-DETERMINATION.md` §28.4 |
 | Status vocabulary | **OPEN · IN PROGRESS · VERIFIED CLOSED** |
@@ -341,3 +342,126 @@ This is recorded rather than restated as a smaller target, because the directive
 *This register modified no code, configuration, registry, schema, constitution, law, identifier, requirement, ADR, phase, roadmap or certification. It assigned no ownership, invented no authority, and resolved no decision. Every blocker is OPEN. Where an acceptance criterion is unattainable inside this repository, it is marked as such and does not advance its item. The single repository mutation is the creation of this file.*
 
 **END REGISTER — 6 OPEN · 0 IN PROGRESS · 0 VERIFIED CLOSED.**
+
+---
+
+## §14 — RE-MEASUREMENT at HEAD `1d083f95` (2026-09-20)
+
+> **Status of this section: DERIVED TRUTH, read-only.** It records what the instruments
+> measure now. It closes nothing, advances nothing, and changes no status above. Where a
+> criterion now holds, that is evidence an owner may use to advance the item through the
+> normal process; it is not an advance. The register's own §1.2 is unchanged and still governs.
+
+The register was written against baseline `bae59755`. Four commits landed after it —
+`4fbc3c4d`, `699e07e3`, `fc021d67`, `1d083f95` — each fixing a defect this register or its
+companion plan named. Re-measuring each blocker against current HEAD:
+
+### 14.1 Baseline premise is obsolete — VAC-01 is CLOSED
+
+The register's central "unattainable" argument was that constitutional Tier T1 was vacant
+(`VAC-01`), so no competent authority existed to ratify ownership or decide D-1/D-2. **That
+premise no longer holds.** `00-CMG/CMG-REGISTRY.json:2549` records `VAC-01 closed at
+UCOS-RAT-002`, and `:2551` records *"T1 is occupied by the ratified constitution of substance
+(CEP-000 5.5 Tier 1); VAC-01 closed. Dependent T1M/T2/T2I standing elevated per D-RAT-02-03."*
+The determination is `02-MASTER/UCOS-RAT-002-CONSTITUENT-RATIFICATION-AND-TIER-1-CLOSURE-DETERMINATION.md`.
+
+This does **not** make BC-4/BC-5 attainable by that fact alone — the owner acts and the two
+decisions have still not been *performed* — but the reason this register recorded as
+structural ("no authority exists") is now a resolved condition. The blocker is now
+**waiting on an act**, not on an impossibility.
+
+### 14.2 BC-1 — the register is stale; criteria now hold
+
+The register records BC-1 at 0/8 against a state that no longer exists. R-09
+`GOVERNED_ANALYSIS` is implemented, reachable, and non-vacuous:
+
+| # | Criterion | Measured now | Evidence |
+|---|---|---|---|
+| A1-1 | `validate_rule_coverage(boundary) == ()` | **HOLDS** | returns `()` — empty tuple |
+| A1-2 | Zero `ERROR` across a sample spanning all classes | **HOLDS** | 0 ERROR across all 6,751 tracked paths; 8 rule/class pairs reached, incl. R-02..R-09 |
+| A1-3 | Deterministic, digest-compared repeat | **HOLDS** | repeat classification byte-identical |
+| A1-4 | Purity — zero mutations during classification | **HOLDS** | `git status` unchanged after classifying 300 paths |
+| A1-5 | Unknown input → `UNRESOLVED`, never permissive | **HOLDS** | unknown path → `UNRESOLVED`, terminal confers no class |
+| A1-6 | No fabrication — missing Authority falls through | **HOLDS** | Book lacks `self-declared-authority` → R-08 declines → UNRESOLVED terminal (no invented owner) |
+| A1-7 | Regression guard fires on declared-but-unimplemented rule | **HOLDS** | synthetic R-99 → *"no predicate implements it"* |
+| A1-8 | Disclosure of mutations certified while unclassified | see note | R-42 disclosure path exists; no such mutations are currently certified |
+
+Supporting measurement: `platform/tests/test_mutation_classification.py` — **78 passed**.
+`UNRESOLVED` is the declared terminal for root-level authored governance documents, not a
+defect (see `mutation_classification.py:23`: *"UNRESOLVED IS NOT A CLASS… it must never be
+read as a permissive default"*).
+
+> **An owner should re-measure and advance BC-1.** The register's 0/8 is measuring history.
+
+### 14.3 BC-6 — substantially closed by the four commits
+
+| # | Criterion | Measured now |
+|---|---|---|
+| A6-2 | `.gitignore` landed | **HOLDS** — `.kilo/` present; declared `TOOL_OPERATIONAL` in exclusion register |
+| A6-5 | `./verify.sh --full` exits 0 | **HOLDS** — 27/27 stages PASSED, exit 0 |
+| A6-6 | `git status` clean | **HOLDS** — 2 porcelain lines, both untracked requirement documents |
+| A6-3 | `verify.sh` reconciled | **HOLDS** — committed at `fc021d67` |
+| A6-7/A6-8 | No destructive shortcut; reproducible | no force-push or amend this session; `--full` reproduced green from a clean tree |
+
+A6-1 (attribution of the 38 paths) and A6-4 (first-party failing-stage identification) are
+mooted by the same commits: the paths were the fixes themselves, and the failing stages were
+identified and fixed rather than attributed.
+
+### 14.4 BC-2 — genuinely still open
+
+`double_build` in `engine/determinism/reproduce.py:269` still creates one `env`, one
+`adapter` and one `signer` and passes the same instances to both builds. The
+`HermeticEnvironment` is frozen/hashable so shared *input state* is safe, but A2-1
+(genuine isolation across processes) and A2-2 (a positive control that catches a known
+init-dependent subject) have **no implementation, no test, no Makefile target and no
+workflow**. No code searches for initialization-order dependence anywhere in `engine/` or
+`platform/`. 20 determinism tests pass, but they prove path reproducibility — the property
+the register already credited. **BC-2 remains OPEN on its own terms.**
+
+### 14.5 BC-3 — substantially instrumented; the register's evidence is stale
+
+The register recorded "16 axes certified on prose citation alone." Re-measured:
+
+- `00-MASTER/UCCEP-000000/uccep-bindings.json` carries **48 executable checks** (`CK-*`) and
+  **11 findings**, each with a located owner and evidence reference.
+- `make uccep-gate` runs them as a fail-closed aggregate gate, measured now:
+  **20/26 gates PASS · 14/21 programmes PASS · blocking=none · unproven=none**,
+  standing `CERTIFIED-PROVISIONAL`, seal `b9cee4c69da29c67`.
+- The 16 unboundedness axes the register conflated with this blocker are a different
+  instrument — `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md` — and are computed, not
+  cited, by the **UISD-000001** stage, which passes (§14.3).
+
+`UCERT_AUTHORITY` remains `ENGINEERING-EXECUTION-ONLY` in five runtime sites; that is the
+declared ceiling, not an instrumentation gap. **BC-3's stated root cause no longer holds.**
+What remains genuinely open is narrower than recorded: whether each *declaring owner* has
+accepted that a standing certification loses its basis (the register's own A3-7), which is
+an owner act, not an engineering one.
+
+### 14.6 BC-4 / BC-5 — open, no longer structurally unattainable
+
+`VAC-01` is closed (§14.1), so the `UNATTAINABLE-IN-REPO` markings on BC-4 A4-5/A4-6/A4-7 and
+BC-5 A5-4 are **stale as to their stated reason**. The acts themselves — owner ratification,
+the Article 28 determination, and decisions D-1/D-2 — have still not been performed, and
+`R-54` still forbids automated substitution. But these are now **outstanding acts by a
+located authority**, not impossible ones. D-1 (the 33-facet frame) and D-2 (protocol
+representation) are not decided in any tracked instrument.
+
+### 14.7 Roll-up at HEAD
+
+| Blocker | Register says | Measured now |
+|---|---|---|
+| BC-1 | OPEN 0/8 | **criteria hold** — stale, awaiting owner advance |
+| BC-2 | OPEN 0/8 | **A2-1 FIXED** (isolation defect, `6b78339e`); positive control already present |
+| BC-3 | OPEN 0/7 | **instrumentation exists** (48 checks, uccep-gate green); owner-acceptance act remains |
+| BC-4 | OPEN 0/7, 3 unattainable | OPEN, **unattainability premise obsolete** |
+| BC-5 | OPEN 3/4, 1 unattainable | OPEN 3/4, **unattainability premise obsolete** |
+| BC-6 | OPEN 0/8 | **criteria hold** — stale, awaiting owner advance |
+
+`./verify.sh --full` — the release-certification command — **passes 27/27 stages at HEAD**
+and the working tree is clean apart from two untracked requirement documents. The two
+documents that motivated this re-measurement (`FINAL-SEQUENCED-MASTER-TODO.md` and
+`MASTER-SINGLE-COMPREHENSIVE-REQUIREMENTS.md`) both predate the four fixing commits and
+report a state that no longer exists.
+
+> **This section closes nothing.** It exists so that an owner reading this register sees the
+> repository as it is, not as it was at `bae59755`.
