@@ -210,7 +210,7 @@ def test_double_build_strict_raises_on_divergence(compiler_registry, monkeypatch
 # -- BC-2: initialization-independent detection ---------------------------------
 
 
-def test_double_build_shares_no_mutable_object_between_sides(compiler_registry):
+def test_double_build_shares_no_mutable_object_between_sides(compiler_registry, monkeypatch):
     """A2-1: the two builds must not share env or signer instances.
 
     A single reused adapter or signer can carry state from the first build into
@@ -220,7 +220,7 @@ def test_double_build_shares_no_mutable_object_between_sides(compiler_registry):
     view of the corpus, and the harness must not silently open a second handle
     to repository state the caller already owns.
     """
-    import engine.determinism.reproduce as reproduce
+    reproduce = __import__("engine.determinism.reproduce", fromlist=["_execute_build"])
 
     seen: dict[str, list] = {"signer": [], "env": []}
     real = reproduce._execute_build
@@ -232,12 +232,8 @@ def test_double_build_shares_no_mutable_object_between_sides(compiler_registry):
         seen["env"].append(env)
         return real(registry=registry, signer=signer, env=env, **kwargs)
 
-    mp = pytest.MonkeyPatch()
-    mp.setattr(reproduce, "_execute_build", _recording)
-    try:
-        double_build("BP-DATA-0001", registry=compiler_registry)
-    finally:
-        mp.undo()
+    monkeypatch.setattr(reproduce, "_execute_build", _recording)
+    double_build("BP-DATA-0001", registry=compiler_registry)
 
     assert len(seen["signer"]) == 2, "expected two signer instances, one per build"
     assert seen["signer"][0] is not seen["signer"][1], "signer instance was shared across builds"
