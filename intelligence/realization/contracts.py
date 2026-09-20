@@ -44,7 +44,14 @@ class RealizationStage(str, Enum):
 
 
 class ArtifactFamily(str, Enum):
-    """The seven artifact families a realization target is realized into."""
+    """The seven artifact families a realization target is realized into.
+
+    OPEN BY REGISTRATION (LYR-L14/IF-08 — "Future Interface"). The seven members are the
+    families this substrate ships generators for. Adding another was once a code edit to
+    this enum, which is exactly what "Future Interface" promises it will not be; the set
+    of *families* is therefore open the same way every other open set in this repository is
+    open — a new one is registered, not compiled in. See :func:`register_family`.
+    """
 
     ARCHITECTURE = "architecture"
     API = "api"
@@ -59,8 +66,71 @@ class ArtifactFamily(str, Enum):
         """Return the member for ``value`` or fail loudly (no silent defaulting)."""
         try:
             return cls(str(value))
-        except ValueError as exc:  # pragma: no cover - defensive
+        except ValueError as exc:
+            # A registered family is reachable by its value before this is called; if it
+            # is not a member and not registered, nothing admits it and the refusal stands.
+            registered = _REGISTERED_FAMILIES.get(str(value))
+            if registered is not None:
+                return registered
             raise PlanningError("unknown artifact family", value=value) from exc
+
+
+#: Families admitted since the substrate was sealed, keyed by value. A registration is an
+#: append-only act: an existing value is never overwritten, so a shipped family cannot be
+#: redefined and a registered one cannot be shadowed.
+_REGISTERED_FAMILIES: dict[str, ArtifactFamily] = {}
+
+
+def register_family(value: str, *, name: str = "") -> ArtifactFamily:
+    """Admit a new artifact family by registration rather than by editing the enum.
+
+    This is the mechanism LYR-L14/IF-08 asks for: "Future Interface" is satisfied by
+    registration, the same way metatypes, context kinds, lifecycle stages and capability
+    categories are. A family is registered once; a duplicate value is refused rather than
+    silently re-bound, and a value the enum already ships is refused rather than shadowed.
+
+    Registration does not create a generator. A registered family still needs a generator
+    bound in :func:`intelligence.realization.generators.register_generator`, and the
+    registry's own completeness check refuses a family with no generator. So admitting a
+    family is open, and realizing it is governed — the two are separate acts on purpose.
+    """
+    key = str(value)
+    if not key:
+        raise PlanningError("an artifact family value cannot be empty")
+    try:
+        existing = ArtifactFamily(key)
+    except ValueError:
+        existing = None
+    if existing is not None:
+        raise PlanningError("artifact family is already shipped by the substrate", value=key)
+    if key in _REGISTERED_FAMILIES:
+        raise PlanningError(
+            "artifact family is already registered",
+            value=key,
+            registered_as=_REGISTERED_FAMILIES[key].name,
+        )
+    family = _make_family(key, name or key)
+    _REGISTERED_FAMILIES[key] = family
+    return family
+
+
+def registered_families() -> tuple[ArtifactFamily, ...]:
+    """Every family admitted by registration since the substrate was sealed."""
+    return tuple(_REGISTERED_FAMILIES[k] for k in sorted(_REGISTERED_FAMILIES))
+
+
+def _make_family(value: str, name: str) -> ArtifactFamily:
+    """Construct an ArtifactFamily instance for a registered value.
+
+    ``ArtifactFamily`` subclasses ``str``, so a plain ``__new__`` runs the enum's own value
+    validation and refuses anything it does not already know. Assigning ``_value_`` after
+    construction is the documented way to create an instance whose value is not a declared
+    member, and the caller has already established the value is admissible.
+    """
+    member = str.__new__(ArtifactFamily, value)
+    member._name_ = name
+    member._value_ = value
+    return member
 
 
 class MediaKind(str, Enum):
@@ -110,6 +180,18 @@ FAMILY_ORDER: tuple[ArtifactFamily, ...] = (
     ArtifactFamily.TEST,
     ArtifactFamily.DOCUMENTATION,
 )
+
+
+def family_order() -> tuple[ArtifactFamily, ...]:
+    """FAMILY_ORDER extended by any registered families, in a stable order.
+
+    A registered family declares no dependency edges (nothing depends on it and it depends
+    on nothing), so it realizes after the shipped families and in the sorted order of its
+    own value. The shipped order is untouched: a registration appends, exactly as an
+    evolution appends.
+    """
+    registered = tuple(family for family in registered_families() if family not in FAMILY_ORDER)
+    return FAMILY_ORDER + tuple(sorted(registered, key=lambda f: f.value))
 
 
 def _seal(core: Mapping[str, Any]) -> str:

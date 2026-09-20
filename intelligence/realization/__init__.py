@@ -64,6 +64,9 @@ from intelligence.realization.contracts import (
     RealizationStage,
     RealizationTarget,
     TraceEdge,
+    family_order,
+    register_family,
+    registered_families,
 )
 from intelligence.realization.engine import (
     RealizationIntelligenceEngine,
@@ -103,6 +106,7 @@ from intelligence.realization.generators import (
     SchemaGenerator,
     TestGenerator,
     generator_for,
+    register_generator,
     registry_manifest,
 )
 from intelligence.realization.governance import (
@@ -176,6 +180,10 @@ __all__ = [
     "GenerationContext",
     "Generator",
     "generator_for",
+    "register_family",
+    "register_generator",
+    "registered_families",
+    "family_order",
     "registry_manifest",
     # value types
     "ArtifactFamily",

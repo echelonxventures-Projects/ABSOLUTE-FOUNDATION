@@ -13,7 +13,11 @@ import rather than silently skipping an artifact family at generation time.
 
 from __future__ import annotations
 
-from intelligence.realization.contracts import FAMILY_ORDER, ArtifactFamily
+from intelligence.realization.contracts import (
+    _REGISTERED_FAMILIES,
+    FAMILY_ORDER,
+    ArtifactFamily,
+)
 from intelligence.realization.errors import GenerationError
 from intelligence.realization.generators.api import ApiGenerator
 from intelligence.realization.generators.architecture import ArchitectureGenerator
@@ -52,15 +56,47 @@ def _build_registry() -> dict[ArtifactFamily, Generator]:
     return registry
 
 
-#: Family → generator. Complete and unambiguous by construction.
+#: Family → generator. Complete and unambiguous by construction over the shipped families.
 REGISTRY: dict[ArtifactFamily, Generator] = _build_registry()
+
+
+def register_generator(generator: Generator) -> Generator:
+    """Bind a generator to a registered artifact family (LYR-L14/IF-08).
+
+    The inverse of :func:`register_family`: admitting a family is open, realizing it is
+    governed. A generator may only bind a family the substrate shipped or one that has been
+    registered, and a family may only be claimed once. A registration that leaves a family
+    without a generator is caught at lookup time, so the completeness property holds over
+    the registered set too rather than only over the shipped one.
+    """
+    family = generator.family
+    shipped = family in FAMILY_ORDER
+    registered = family in _REGISTERED_FAMILIES.values()
+    if not shipped and not registered:
+        raise GenerationError(
+            "generator claims an artifact family nothing admits",
+            family=family.value,
+            hint="register the family before binding a generator to it",
+        )
+    if family in REGISTRY:
+        raise GenerationError(
+            "artifact family claimed by more than one generator",
+            family=family.value,
+            generator=generator.name,
+        )
+    REGISTRY[family] = generator
+    return generator
 
 
 def generator_for(family: ArtifactFamily) -> Generator:
     """Return the single generator bound to ``family``."""
     generator = REGISTRY.get(family)
-    if generator is None:  # pragma: no cover - _build_registry guarantees completeness
-        raise GenerationError("no generator for artifact family", family=family.value)
+    if generator is None:
+        raise GenerationError(
+            "no generator for artifact family",
+            family=family.value,
+            hint="register_family admits a family; register_generator realizes it",
+        )
     return generator
 
 

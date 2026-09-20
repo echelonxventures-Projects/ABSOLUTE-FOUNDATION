@@ -26,7 +26,9 @@ from pathlib import Path
 
 import pytest
 
+import intelligence.realization.contracts as contracts
 import intelligence.realization.engine as engine_module
+import intelligence.realization.generators as generator_registry
 import intelligence.realization.governance as governance_module
 from engine.knowledge import KnowledgeError
 from engine.knowledge.cko import CanonicalKnowledgeObject, DecisionRecord, RejectedOption
@@ -52,7 +54,11 @@ from intelligence.realization import (
     TraceabilityEngine,
     build_evidence,
     enforce_realization,
+    family_order,
     materialize_artifacts,
+    register_family,
+    register_generator,
+    registered_families,
     registry_manifest,
     verify_bundle,
 )
@@ -92,7 +98,7 @@ from intelligence.realization.evidence import (
 from intelligence.realization.generation import artifact_index, generate_artifacts
 from intelligence.realization.generators import GENERATORS, _build_registry, generator_for
 from intelligence.realization.generators.architecture import ArchitectureGenerator
-from intelligence.realization.generators.base import GenerationContext
+from intelligence.realization.generators.base import GenerationContext, Generator
 from intelligence.realization.generators.deployment import _yaml_lines, _yaml_scalar
 from intelligence.realization.generators.schema import SchemaGenerator, _json_type
 from intelligence.realization.governance import RealizationGovernor as _Governor
@@ -1207,7 +1213,6 @@ def test_a_generator_that_emits_nothing_or_the_wrong_family_is_refused(pipeline)
     canonical object. Each would leave the manifest describing a realization that did not
     happen."""
 
-    from intelligence.realization.contracts import ArtifactFamily
     from intelligence.realization.generation import GenerationEngine
 
     _intake, _plan, composition, _findings, manifest = pipeline
@@ -1441,7 +1446,6 @@ def test_a_generation_context_projects_its_target_and_finds_no_absent_upstream(p
     """`upstream_artifact` answers None for a family this target produced nothing in, which is
     an ordinary state during the first waves. Raising instead would make every generator that
     cross-references an upstream family unusable before that family had run."""
-    from intelligence.realization.contracts import ArtifactFamily
 
     intake, plan, composition, _findings, _manifest = pipeline
     unit = composition.units[0]
@@ -1655,7 +1659,6 @@ def test_materializing_into_the_frozen_corpus_is_refused(tmp_path, pipeline) -> 
 def test_an_artifact_family_coerces_from_its_own_value(pipeline) -> None:
     """`coerce` is how a family arrives from a serialized manifest. One that defaulted silently
     would read an unknown family as a known one and generate into the wrong place."""
-    from intelligence.realization.contracts import ArtifactFamily
 
     for family in ArtifactFamily:
         assert ArtifactFamily.coerce(family.value) is family
@@ -1821,3 +1824,98 @@ def test_the_sql_projection_indexes_only_the_columns_the_record_carries(pipeline
     assert "CREATE INDEX" not in ddl
     full = "\n".join(SchemaGenerator()._ddl(context, SchemaGenerator()._infer_fields(context)))
     assert "CREATE INDEX" in full
+
+
+# -- LYR-L14/IF-08: a future interface is registered, not compiled in -------------
+
+#: A registered family is process-global and append-only, so each test that registers one
+#: uses a value no other test names, and the module is restored between tests.
+_REGISTERED_FIXTURE = "uri-test-interface"
+
+
+@pytest.fixture
+def fresh_registration():
+    """Restore the registered-family set and generator registry after each test."""
+
+    saved = dict(contracts._REGISTERED_FAMILIES)
+    saved_registry = dict(generator_registry.REGISTRY)
+    contracts._REGISTERED_FAMILIES.clear()
+    try:
+        yield
+    finally:
+        contracts._REGISTERED_FAMILIES.clear()
+        contracts._REGISTERED_FAMILIES.update(saved)
+        generator_registry.REGISTRY.clear()
+        generator_registry.REGISTRY.update(saved_registry)
+
+
+def test_a_new_interface_family_is_admitted_by_registration(fresh_registration) -> None:
+    """LYR-L14/IF-08: 'Future Interface' is satisfied by registration, not by an enum edit.
+
+    `ArtifactFamily` shipped seven members and adding an eighth was a code change, which is
+    exactly what the openness claim promises it will not be. A registration admits one."""
+
+    family = register_family(_REGISTERED_FIXTURE)
+
+    assert family.value == _REGISTERED_FIXTURE
+    assert family == _REGISTERED_FIXTURE  # str-enum equality, as a manifest serializes it
+    assert isinstance(family, str)
+    assert family not in tuple(ArtifactFamily)  # not a compiled member
+    assert family in registered_families()
+    assert family in family_order()
+    assert ArtifactFamily.coerce(_REGISTERED_FIXTURE) is family
+
+
+def test_registration_refuses_a_duplicate_and_a_shipped_family(fresh_registration) -> None:
+    """Append-only: a value registered twice is refused, and a shipped value cannot be shadowed."""
+
+    register_family(_REGISTERED_FIXTURE)
+    with pytest.raises(PlanningError, match="already registered"):
+        register_family(_REGISTERED_FIXTURE)
+    with pytest.raises(PlanningError, match="already shipped"):
+        register_family(ArtifactFamily.API.value)
+    with pytest.raises(PlanningError):
+        register_family("")
+
+
+def test_a_registered_family_has_no_generator_until_one_is_bound(fresh_registration) -> None:
+    """Admitting a family is open; realizing it is governed. The two are separate acts."""
+
+    family = register_family(_REGISTERED_FIXTURE)
+    with pytest.raises(GenerationError, match="no generator"):
+        generator_for(family)
+
+
+def test_a_generator_for_an_unadmitted_family_is_refused(fresh_registration) -> None:
+    """A generator may not bind a family nothing admits, so the registry cannot drift."""
+
+    # Build the family, then drop it from the register, so the generator points at a
+    # family nothing admits -- the exact state the refusal exists for.
+    family = register_family(_REGISTERED_FIXTURE)
+
+    contracts._REGISTERED_FAMILIES.clear()
+    with pytest.raises(GenerationError, match="nothing admits"):
+        register_generator(_RegisteredStub(family))
+
+
+def test_a_registered_family_is_realized_once_a_generator_is_bound(fresh_registration) -> None:
+    """The full path: register a family, bind a generator, resolve it through the registry."""
+
+    family = register_family(_REGISTERED_FIXTURE)
+    stub = _RegisteredStub(family)
+    assert register_generator(stub) is stub
+    assert generator_for(family) is stub
+    # A second generator for the same family is refused, not silently re-bound.
+    with pytest.raises(GenerationError, match="more than one generator"):
+        register_generator(_RegisteredStub(family))
+
+
+class _RegisteredStub(Generator):
+    """A minimal generator used only to prove a registered family can be realized."""
+
+    def __init__(self, family: ArtifactFamily) -> None:
+        self.family = family
+        self.name = f"uri.test.{family.value}"
+
+    def generate(self, context: GenerationContext) -> tuple[GeneratedArtifact, ...]:
+        return ()
